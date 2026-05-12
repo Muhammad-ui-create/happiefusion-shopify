@@ -7,10 +7,15 @@
   --green-dark:  #1B4332;
   --green-light: #D8F3DC;
   --green-mid:   #52B788;
-  --cream:       #F8F4EE;
+  --cream:       #FFE6CB;
   --black:       #111111;
   --gray:        #6B6B6B;
   --white:       #ffffff;
+  --yellow:      #FFCB05;
+  --teal:        #50B2BD;
+  --purple:      #6260AE;
+  --mauve:       #5B414A;
+  --purple-dark: #A42384;
   --nav-h:       96px;
   --font:        'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
@@ -26,17 +31,18 @@ input, select { font-family: var(--font); }
 
 /* ── Announcement Bar ── */
 .announcement-bar {
-  background: #5B414A;
-  color: #FFE6CB;
+  background: var(--teal);
+  color: #fff;
   padding: 10px 24px;
   text-align: center;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
+  overflow: hidden;
 }
-.announcement-inner { display: flex; gap: 24px; justify-content: center; align-items: center; flex-wrap: wrap; }
-.ann-item { display: flex; align-items: center; gap: 7px; }
-.ann-divider { opacity: 0.35; color: #FFE6CB; }
+.announcement-inner { display: flex; gap: 32px; justify-content: center; align-items: center; flex-wrap: wrap; }
+.ann-item { display: flex; align-items: center; gap: 8px; }
+.ann-divider { opacity: 0.4; color: #fff; }
 
 /* ── Nav ── */
 .nav {
@@ -85,15 +91,16 @@ input, select { font-family: var(--font); }
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  background: var(--green);
-  color: #fff;
+  background: var(--yellow);
+  color: #000;
   border-radius: 50px;
   padding: 14px 32px;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.01em;
   transition: background 0.15s, transform 0.1s;
 }
-.btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+.btn-primary:hover { background: #e6b800; transform: translateY(-1px); }
 .btn-primary.btn-lg { padding: 18px 40px; font-size: 17px; }
 .btn-ghost {
   display: inline-flex;
@@ -150,6 +157,7 @@ input, select { font-family: var(--font); }
 }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
 .hero-trust { display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px; color: var(--gray); font-weight: 500; }
+.hero-trust span { display: flex; align-items: center; gap: 6px; }
 
 /* Hero Visual */
 .hero-visual { display: flex; flex-direction: column; align-items: center; gap: 24px; }
@@ -241,7 +249,7 @@ input, select { font-family: var(--font); }
 .product-card-price { font-size: 20px; font-weight: 900; }
 .price-per { font-size: 13px; font-weight: 500; color: var(--gray); }
 .btn-add-to-cart {
-  background: var(--black);
+  background: var(--teal);
   color: #fff;
   border-radius: 50px;
   padding: 10px 20px;
@@ -249,28 +257,30 @@ input, select { font-family: var(--font); }
   font-weight: 700;
   transition: background 0.15s;
 }
-.btn-add-to-cart:hover { background: var(--green); }
+.btn-add-to-cart:hover { background: #3a9aa6; }
 
 /* ── Mushroom Benefits ── */
-.mushroom-benefits { background: #FFE6CB; color: #000; }
-.mushroom-benefits .section-eyebrow { color: #5B414A; }
+.mushroom-benefits { background: var(--yellow); color: #000; }
+.mushroom-benefits .section-eyebrow { color: var(--purple); }
 .mushroom-benefits .section-title { color: #000; }
-.benefits-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+.benefits-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
 .benefit-card {
-  background: #EEECE7;
+  background: #fff;
   border-radius: 20px;
   padding: 32px 24px;
-  border: 1px solid rgba(91,65,74,0.1);
+  border: 1.5px solid rgba(255,255,255,0.8);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 .benefit-icon-wrap {
-  width: 60px; height: 60px;
-  border-radius: 16px;
+  width: 56px; height: 56px;
+  border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 18px;
+  background: rgba(98,96,174,0.08);
 }
-.benefit-card h3 { font-size: 20px; font-weight: 800; color: #000; margin-bottom: 6px; }
-.benefit-dose { font-size: 12px; font-weight: 700; color: #5B414A; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
-.benefit-card p { font-size: 14px; color: #50463E; line-height: 1.6; }
+.benefit-card h3 { font-size: 18px; font-weight: 800; color: #000; margin-bottom: 4px; }
+.benefit-dose { font-size: 11px; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+.benefit-card p { font-size: 14px; color: #555; line-height: 1.65; }
 
 /* ── Reviews ── */
 .reviews-section { background: #fff; }
@@ -309,12 +319,12 @@ input, select { font-family: var(--font); }
 .cta-banner h2 { font-size: clamp(28px,4vw,46px); font-weight: 900; margin-bottom: 14px; }
 .cta-banner p { font-size: 17px; opacity: 0.85; margin-bottom: 36px; }
 .cta-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.cta-banner .btn-primary { background: #fff; color: var(--green-dark); }
-.cta-banner .btn-primary:hover { background: var(--green-light); }
+.cta-banner .btn-primary { background: var(--yellow); color: #000; }
+.cta-banner .btn-primary:hover { background: #e6b800; }
 .cta-sub { font-size: 13px; opacity: 0.75; }
 
 /* ── Footer ── */
-.site-footer { background: var(--black); color: rgba(255,255,255,0.8); padding: 60px 24px 0; }
+.site-footer { background: var(--purple-dark); color: rgba(255,255,255,0.85); padding: 60px 24px 0; }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 .footer-logo { height: 80px; width: auto; object-fit: contain; margin-bottom: 16px; filter: brightness(0) invert(1); }
 .footer-brand p { font-size: 14px; line-height: 1.65; opacity: 0.7; max-width: 280px; }
