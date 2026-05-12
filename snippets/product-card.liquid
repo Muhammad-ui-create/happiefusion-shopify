@@ -13,7 +13,7 @@
 <div class="product-card">
 
   <!-- Colored image panel -->
-  <a href="{{ product.url }}" class="product-card-img-wrap" style="background:{{ card_bg }};">
+  <a href="{{ product.url }}" class="product-card-img-wrap">
     {% if product.tags contains 'bestseller' or product.tags contains 'top-seller' %}
       <span class="card-top-badge">TOP SELLER</span>
     {% endif %}
