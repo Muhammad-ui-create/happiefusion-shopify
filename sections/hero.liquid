@@ -25,12 +25,7 @@
         <div class="hero-ring-outer"></div>
         <div class="hero-ring-mid"></div>
         <div class="hero-ring-inner"></div>
-        {% assign hero_product = collections['all'].products | first %}
-        {% if hero_product and hero_product.featured_image %}
-          <img src="{{ hero_product.featured_image | image_url: width: 600 }}" alt="{{ hero_product.title }}" class="hero-can-img" />
-        {% else %}
-          <div class="hero-can-placeholder"></div>
-        {% endif %}
+        <img src="{{ 'can-hero.png' | asset_url }}" alt="Happie Fungi Fusion Blue Razzberry" class="hero-can-img" />
       </div>
       <div class="hero-pills">
         <div class="hero-pill">
