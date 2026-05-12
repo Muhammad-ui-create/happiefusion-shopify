@@ -26,16 +26,17 @@ input, select { font-family: var(--font); }
 
 /* ── Announcement Bar ── */
 .announcement-bar {
-  background: var(--green-dark);
-  color: var(--white);
+  background: #5B414A;
+  color: #FFE6CB;
   padding: 10px 24px;
   text-align: center;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
-.announcement-inner { display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap; }
-.ann-divider { opacity: 0.4; }
+.announcement-inner { display: flex; gap: 24px; justify-content: center; align-items: center; flex-wrap: wrap; }
+.ann-item { display: flex; align-items: center; gap: 7px; }
+.ann-divider { opacity: 0.35; color: #FFE6CB; }
 
 /* ── Nav ── */
 .nav {
@@ -251,20 +252,25 @@ input, select { font-family: var(--font); }
 .btn-add-to-cart:hover { background: var(--green); }
 
 /* ── Mushroom Benefits ── */
-.mushroom-benefits { background: var(--green-dark); color: #fff; }
-.mushroom-benefits .section-eyebrow { color: var(--green-mid); }
-.mushroom-benefits .section-title { color: #fff; }
+.mushroom-benefits { background: #FFE6CB; color: #000; }
+.mushroom-benefits .section-eyebrow { color: #5B414A; }
+.mushroom-benefits .section-title { color: #000; }
 .benefits-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
 .benefit-card {
-  background: rgba(255,255,255,0.07);
+  background: #EEECE7;
   border-radius: 20px;
   padding: 32px 24px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(91,65,74,0.1);
 }
-.benefit-icon { font-size: 36px; margin-bottom: 14px; }
-.benefit-card h3 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-.benefit-dose { font-size: 12px; font-weight: 700; color: var(--green-mid); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
-.benefit-card p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+.benefit-icon-wrap {
+  width: 60px; height: 60px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.benefit-card h3 { font-size: 20px; font-weight: 800; color: #000; margin-bottom: 6px; }
+.benefit-dose { font-size: 12px; font-weight: 700; color: #5B414A; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+.benefit-card p { font-size: 14px; color: #50463E; line-height: 1.6; }
 
 /* ── Reviews ── */
 .reviews-section { background: #fff; }
