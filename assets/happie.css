@@ -228,26 +228,108 @@ input, select { font-family: var(--font); }
 @keyframes spin-ccw { from{transform:rotate(0deg)} to{transform:rotate(-360deg)} }
 
 /* ── Product Grid ── */
-.products-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.products-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+
+/* Product Card */
 .product-card {
   background: #fff;
-  border-radius: 20px;
+  border-radius: 22px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
   overflow: hidden;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-  transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-.product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
-.product-card-img-link { display: block; aspect-ratio: 1/1; overflow: hidden; background: var(--green-light); }
-.product-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-.product-card:hover .product-card-img { transform: scale(1.04); }
-.product-card-body { padding: 20px 20px 0; flex: 1; }
-.product-card-title { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
-.product-card-desc { font-size: 14px; color: var(--gray); line-height: 1.5; }
-.product-card-footer { padding: 16px 20px 20px; display: flex; justify-content: space-between; align-items: center; }
-.product-card-price { font-size: 20px; font-weight: 900; }
-.price-per { font-size: 13px; font-weight: 500; color: var(--gray); }
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(0,0,0,0.13); }
+
+/* Colored image panel */
+.product-card-img-wrap {
+  display: block;
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: 18px 18px 0 0;
+}
+.product-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  transition: transform 0.35s;
+  padding: 12px 12px 0;
+}
+.product-card:hover .product-card-img { transform: scale(1.05); }
+
+/* Top seller badge on image */
+.card-top-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(255,255,255,0.92);
+  color: var(--purple);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 50px;
+  z-index: 2;
+}
+
+/* Card body */
+.product-card-body {
+  padding: 20px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+.product-card-title {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 6px;
+  line-height: 1.2;
+  color: var(--black);
+}
+.product-card-desc {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.5;
+  font-style: italic;
+  margin-bottom: 16px;
+  flex: 1;
+}
+.product-card-pricing { margin-bottom: 18px; }
+.starting-at-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 3px;
+}
+.product-card-price { font-size: 24px; font-weight: 900; color: var(--black); }
+
+/* Shop Now button */
+.btn-shop-now {
+  display: block;
+  width: 100%;
+  background: var(--teal);
+  color: #fff;
+  border-radius: 50px;
+  padding: 13px 0;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-shop-now:hover { background: #3a9aa6; transform: translateY(-1px); }
+
+/* Keep btn-add-to-cart for other uses */
 .btn-add-to-cart {
   background: var(--teal);
   color: #fff;
@@ -743,7 +825,7 @@ input, select { font-family: var(--font); }
   .hero-visual { order: -1; }
   .hero-ring-wrap { width: 320px; height: 320px; }
   .hero-can-img { height: 280px; }
-  .products-grid { grid-template-columns: 1fr 1fr; }
+  .products-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
   .reviews-grid { grid-template-columns: 1fr; }
   .benefits-grid { grid-template-columns: 1fr; }
   .product-layout { grid-template-columns: 1fr; }

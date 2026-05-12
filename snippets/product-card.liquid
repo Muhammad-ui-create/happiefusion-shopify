@@ -1,25 +1,43 @@
+{% comment %} Assign a background color per flavor handle {% endcomment %}
+{% assign card_bg = '#6260AE' %}
+{% if product.handle contains 'blue-razz' %}
+  {% assign card_bg = '#3B6FF0' %}
+{% elsif product.handle contains 'mango' %}
+  {% assign card_bg = '#F5A623' %}
+{% elsif product.handle contains 'watermelon' %}
+  {% assign card_bg = '#E84C6B' %}
+{% elsif product.handle contains 'variety' %}
+  {% assign card_bg = '#52B788' %}
+{% endif %}
+
 <div class="product-card">
-  <a href="{{ product.url }}" class="product-card-img-link">
+
+  <!-- Colored image panel -->
+  <a href="{{ product.url }}" class="product-card-img-wrap" style="background:{{ card_bg }};">
+    {% if product.tags contains 'bestseller' or product.tags contains 'top-seller' %}
+      <span class="card-top-badge">TOP SELLER</span>
+    {% endif %}
     {% if product.featured_image %}
-      <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" loading="lazy" class="product-card-img" />
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.title }}"
+        loading="lazy"
+        class="product-card-img"
+      />
     {% endif %}
   </a>
+
+  <!-- Card body -->
   <div class="product-card-body">
     <h3 class="product-card-title">{{ product.title }}</h3>
-    <p class="product-card-desc">{{ product.description | strip_html | truncate: 80 }}</p>
-  </div>
-  <div class="product-card-footer">
-    <div class="product-card-price">
-      {{ product.price_min | money }}
-      <span class="price-per">/ {{ product.selected_or_first_available_variant.title }}</span>
+    <p class="product-card-desc">{{ product.description | strip_html | truncate: 72 }}</p>
+
+    <div class="product-card-pricing">
+      <span class="starting-at-label">Starting At</span>
+      <div class="product-card-price">{{ product.price_min | money }}</div>
     </div>
-    <button
-      class="btn-add-to-cart"
-      data-product-id="{{ product.id }}"
-      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-      data-product-title="{{ product.title }}"
-    >
-      + Add to Cart
-    </button>
+
+    <a href="{{ product.url }}" class="btn-shop-now">Shop Now</a>
   </div>
+
 </div>
