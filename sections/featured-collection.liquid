@@ -7,7 +7,7 @@
     </div>
     <div class="products-grid">
       {% assign featured = collections['all'].products %}
-      {% for product in featured limit: 3 %}
+      {% for product in featured %}
         {% render 'product-card', product: product %}
       {% endfor %}
     </div>
