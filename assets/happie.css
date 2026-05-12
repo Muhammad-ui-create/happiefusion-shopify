@@ -41,7 +41,7 @@ input, select { font-family: var(--font); }
   overflow: hidden;
 }
 .announcement-inner { display: flex; gap: 32px; justify-content: center; align-items: center; flex-wrap: wrap; }
-.ann-item { display: flex; align-items: center; gap: 8px; }
+.ann-item { display: flex; align-items: center; gap: 8px; white-space: nowrap; flex-shrink: 0; }
 .ann-divider { opacity: 0.4; color: #fff; }
 
 /* ── Nav ── */
@@ -906,7 +906,8 @@ input, select { font-family: var(--font); }
 
   /* Footer */
   .footer-inner  { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .site-footer   { padding: 48px 0 0; }
+  .site-footer   { padding: 48px 20px 0; }
+  .footer-bottom { padding: 20px 0; }
 
   /* Inner pages (Shipping / Terms / Contact) */
   .page-hero     { padding: 48px 16px; }
@@ -932,6 +933,7 @@ input, select { font-family: var(--font); }
   .btn-shop-now   { font-size: 11px; padding: 10px 0; }
 
   .footer-inner   { grid-template-columns: 1fr; }
+  .site-footer    { padding: 40px 16px 0; }
   .section-inner  { padding: 40px 14px; }
 
   /* Comparison table — hide right column label on tiny screens */
