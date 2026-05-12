@@ -1,11 +1,15 @@
+{% comment %} Flavor → swatch color map {% endcomment %}
+{% assign flavor_colors = 'Blue Razzberry:#3B6FF0,Mango Mimosa:#F5A623,Watermelon:#E84C6B,Variety Pack:#6260AE' | split: ',' %}
+
 <div class="product-page">
   <div class="breadcrumb">
     <a href="/">Home</a> /
-    <a href="/collections/all">Shop</a> /
+    <a href="/collections/all">Our Complete Collection</a> /
     <span>{{ product.title }}</span>
   </div>
 
   <div class="product-layout">
+
     <!-- ======= LEFT: Image Gallery ======= -->
     <div class="product-gallery">
       <div class="gallery-main">
@@ -17,8 +21,12 @@
           class="gallery-main-img"
         />
         {% if product.images.size > 1 %}
-          <button class="gallery-arrow gallery-prev" id="gallery-prev">‹</button>
-          <button class="gallery-arrow gallery-next" id="gallery-next">›</button>
+          <button class="gallery-arrow gallery-prev" id="gallery-prev" aria-label="Previous image">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="gallery-arrow gallery-next" id="gallery-next" aria-label="Next image">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         {% endif %}
       </div>
       {% if product.images.size > 1 %}
@@ -29,7 +37,7 @@
               data-index="{{ forloop.index0 }}"
               data-src="{{ image | image_url: width: 900 }}"
             >
-              <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt | default: product.title }}" loading="lazy" />
+              <img src="{{ image | image_url: width: 160 }}" alt="{{ image.alt | default: product.title }}" loading="lazy" />
             </div>
           {% endfor %}
         </div>
@@ -38,17 +46,14 @@
 
     <!-- ======= RIGHT: Product Info ======= -->
     <div class="product-info">
-      <!-- Rating + Badge -->
+
+      <!-- Rating + Badge row -->
       <div class="product-top-row">
         <div class="product-rating">
           <span class="stars">★★★★★</span>
-          <span class="rating-val">4.9/5.0</span>
+          <span class="rating-count">4.9 (200+ reviews)</span>
         </div>
-        {% if product.tags contains 'bestseller' or product.tags contains 'top-seller' %}
-          <span class="top-seller-badge">TOP-SELLER</span>
-        {% else %}
-          <span class="top-seller-badge">BESTSELLER</span>
-        {% endif %}
+        <span class="top-seller-badge">TOP SELLER</span>
       </div>
 
       <h1 class="product-title">{{ product.title }}</h1>
@@ -69,30 +74,34 @@
         {{ product.description }}
       </div>
 
-      <!-- Mushroom dose tags -->
-      <div class="dose-tags">
-        <span class="dose-tag">900mg Lion's Mane</span>
-        <span class="dose-tag">700mg Cordyceps</span>
-        <span class="dose-tag">400mg Reishi</span>
-      </div>
-
       <!-- Form -->
       {% form 'product', product, id: 'product-form', class: 'product-form' %}
         <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}" />
 
-        <!-- Variant: Flavor -->
+        <!-- Flavor swatch selector -->
         {% for option in product.options_with_values %}
           {% if option.name == 'Flavor' or option.name == 'flavor' %}
             <div class="variant-group">
-              <div class="variant-label">Flavor: <strong>{{ option.selected_value }}</strong></div>
-              <div class="variant-pills" data-option-index="{{ forloop.index0 }}">
+              <div class="variant-label">Flavor: <strong id="selected-flavor-label">{{ option.selected_value }}</strong></div>
+              <div class="variant-swatches" data-option-index="{{ forloop.index0 }}">
                 {% for value in option.values %}
+                  {% assign swatch_color = '#6260AE' %}
+                  {% for entry in flavor_colors %}
+                    {% assign pair = entry | split: ':' %}
+                    {% if pair[0] == value %}
+                      {% assign swatch_color = pair[1] %}
+                    {% endif %}
+                  {% endfor %}
                   <button
                     type="button"
-                    class="variant-pill {% if value == option.selected_value %}active{% endif %}"
+                    class="flavor-swatch {% if value == option.selected_value %}active{% endif %}"
                     data-value="{{ value }}"
                     data-option-index="{{ forloop.parentloop.index0 }}"
-                  >{{ value }}</button>
+                    data-color="{{ swatch_color }}"
+                    style="background:{{ swatch_color }};"
+                    aria-label="{{ value }}"
+                    title="{{ value }}"
+                  ></button>
                 {% endfor %}
               </div>
             </div>
@@ -114,6 +123,16 @@
             </div>
           {% endif %}
         {% endfor %}
+
+        <!-- Quantity -->
+        <div class="qty-row">
+          <div class="qty-label">Quantity</div>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn" id="qty-minus">−</button>
+            <input type="number" name="quantity" id="qty-input" value="1" min="1" class="qty-input" />
+            <button type="button" class="qty-btn" id="qty-plus">+</button>
+          </div>
+        </div>
 
         <!-- Purchase Options: One-time vs Subscribe -->
         {% if product.selling_plan_groups.size > 0 %}
@@ -156,30 +175,29 @@
           </div>
         {% endif %}
 
-        <!-- Quantity -->
-        <div class="qty-row">
-          <div class="qty-label">Quantity</div>
-          <div class="qty-stepper">
-            <button type="button" class="qty-btn" id="qty-minus">−</button>
-            <input type="number" name="quantity" id="qty-input" value="1" min="1" class="qty-input" />
-            <button type="button" class="qty-btn" id="qty-plus">+</button>
-          </div>
-        </div>
-
         <!-- Add to Cart -->
         <button type="submit" class="btn-atc" id="add-to-cart-btn">
           <span id="atc-text">ADD TO CART – <span id="atc-price">{{ product.selected_or_first_available_variant.price | money }}</span></span>
         </button>
 
-        <!-- Trust badges -->
-        <div class="product-trust">
-          <span>📦 Ships 1 Business Day</span>
-          <span>🚚 Free Shipping $75+</span>
-        </div>
-        <div class="product-trust-row2">
-          <span>✅ 30-Day Guarantee</span>
-          <span>🔬 Lab Tested</span>
-          <span>🌱 Vegan</span>
+        <!-- Trust pills -->
+        <div class="product-trust-pills">
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="11" rx="2"/><path d="M16 10h4l3 3v4h-7"/><circle cx="5.5" cy="19.5" r="1.5"/><circle cx="20.5" cy="19.5" r="1.5"/></svg>
+            Ships 1 Business Day
+          </span>
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 1 9 9c0 4-2 7.5-5 9.5l-1-1.5c2-1.5 3.5-4 3.5-8C18.5 7.5 15.5 4.5 12 4.5S5.5 7.5 5.5 11c0 4 1.5 6.5 3.5 8L8 20.5C5 18.5 3 15 3 11a9 9 0 0 1 9-9z"/><path d="M12 7v6l3 2"/></svg>
+            Free Shipping $75+
+          </span>
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg>
+            100% Vegan
+          </span>
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 4H8L9 3z"/><path d="M8 7v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7"/><path d="M12 11v3M11 13h2"/></svg>
+            3rd-Party Lab Tested
+          </span>
         </div>
       {% endform %}
 
@@ -187,8 +205,11 @@
       <div class="accordions">
         <div class="accordion">
           <button class="accordion-trigger" type="button">
-            <span>🌿 What's Inside?</span>
-            <span class="acc-icon">+</span>
+            <span class="acc-label">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg>
+              What's Inside?
+            </span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="accordion-body">
             <p><strong>Functional Mushroom Blend (2,000mg total):</strong></p>
@@ -204,8 +225,11 @@
 
         <div class="accordion">
           <button class="accordion-trigger" type="button">
-            <span>⚡ How It Works</span>
-            <span class="acc-icon">+</span>
+            <span class="acc-label">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11L10 22l9.5-11.5H13L13 2z"/></svg>
+              How It Works
+            </span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="accordion-body">
             <p>Dual-extraction pulls both water-soluble beta-glucans and fat-soluble triterpenes from each mushroom — the full spectrum of active compounds.</p>
@@ -216,8 +240,11 @@
 
         <div class="accordion">
           <button class="accordion-trigger" type="button">
-            <span>✅ Lab Tested &amp; Quality Assured</span>
-            <span class="acc-icon">+</span>
+            <span class="acc-label">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M9 3h6l1 4H8L9 3z"/><path d="M8 7v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7"/><circle cx="12" cy="11" r="1"/></svg>
+              Lab Tested &amp; Quality Assured
+            </span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="accordion-body">
             <p>Every batch is third-party tested for:</p>
@@ -231,6 +258,87 @@
           </div>
         </div>
       </div>
+
+    </div><!-- /product-info -->
+  </div><!-- /product-layout -->
+
+  <!-- ======= COMPARISON SECTION ======= -->
+  <div class="comparison-section">
+    <div class="comparison-inner">
+      <div class="comparison-left">
+        <h2 class="comparison-heading">Why happie<br>hits different</h2>
+        <p class="comparison-sub">Non-alcoholic, low-calorie, and always third-party tested for purity and safety.</p>
+        <a href="/collections/all" class="btn-comparison">Shop Happie Now</a>
+      </div>
+      <div class="comparison-right">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th class="comp-feature-head"></th>
+              <th class="comp-happie-head">
+                <span class="comp-brand-logo">happie</span>
+              </th>
+              <th class="comp-other-head">Other<br>Brands</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="comp-feature">Fast-Acting Functionals</td>
+              <td class="comp-check">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="#6260AE" stroke="none"/><path d="M8 12l3 3 5-5" stroke="#fff"/></svg>
+              </td>
+              <td class="comp-x">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="comp-feature">American Sourced Ingredients</td>
+              <td class="comp-check">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="#6260AE" stroke="none"/><path d="M8 12l3 3 5-5" stroke="#fff"/></svg>
+              </td>
+              <td class="comp-x">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="comp-feature">Mineral-Infused Formula</td>
+              <td class="comp-check">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="#6260AE" stroke="none"/><path d="M8 12l3 3 5-5" stroke="#fff"/></svg>
+              </td>
+              <td class="comp-x">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="comp-feature">Alcohol Free</td>
+              <td class="comp-check">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="#6260AE" stroke="none"/><path d="M8 12l3 3 5-5" stroke="#fff"/></svg>
+              </td>
+              <td class="comp-x">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="comp-feature">3rd-Party Lab Tested</td>
+              <td class="comp-check">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="#6260AE" stroke="none"/><path d="M8 12l3 3 5-5" stroke="#fff"/></svg>
+              </td>
+              <td class="comp-x">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="comp-feature">Nothing Fake</td>
+              <td class="comp-check">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="#6260AE" stroke="none"/><path d="M8 12l3 3 5-5" stroke="#fff"/></svg>
+              </td>
+              <td class="comp-x">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -240,7 +348,7 @@
     <div class="related-products">
       <h2 class="related-title">You Might Also Like</h2>
       <div class="products-grid">
-        {% for p in related limit: 3 %}
+        {% for p in related limit: 4 %}
           {% unless p.id == product.id %}
             {% render 'product-card', product: p %}
           {% endunless %}
@@ -276,6 +384,14 @@
       {% endfor %}
     ]
   };
+
+  // Flavor swatch — update label on hover/click
+  document.querySelectorAll('.flavor-swatch').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      const label = document.getElementById('selected-flavor-label');
+      if (label) label.textContent = btn.dataset.value;
+    });
+  });
 </script>
 
 {% schema %}

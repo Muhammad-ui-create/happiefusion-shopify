@@ -373,26 +373,25 @@ input, select { font-family: var(--font); }
 .gallery-arrow:hover { background: #fff; }
 .gallery-prev { left: 12px; }
 .gallery-next { right: 12px; }
-.gallery-thumbs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+.gallery-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
 .gallery-thumb {
-  width: 80px;
-  height: 80px;
-  flex-shrink: 0;
-  border-radius: 12px;
+  aspect-ratio: 1/1;
+  border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
   border: 2.5px solid transparent;
   transition: border-color 0.15s;
+  background: #f5f5f5;
 }
-.gallery-thumb.active { border-color: var(--green); }
+.gallery-thumb.active { border-color: var(--purple); }
 .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
 /* Product Info */
 .product-top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .product-rating { display: flex; align-items: center; gap: 6px; }
-.stars { color: #F5A623; font-size: 16px; }
-.rating-val { font-size: 14px; font-weight: 600; color: var(--gray); }
-.top-seller-badge { background: #F5A623; color: #fff; border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; }
+.stars { color: #F5A623; font-size: 16px; letter-spacing: 1px; }
+.rating-count { font-size: 13px; font-weight: 600; color: var(--gray); }
+.top-seller-badge { background: var(--teal); color: #fff; border-radius: 50px; padding: 4px 14px; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
 .product-title { font-size: clamp(32px,4vw,52px); font-weight: 900; line-height: 1.05; margin-bottom: 6px; }
 .product-subtitle { font-size: 15px; color: var(--gray); margin-bottom: 20px; }
 .product-price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
@@ -402,9 +401,10 @@ input, select { font-family: var(--font); }
 .dose-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
 .dose-tag { background: var(--green-light); border-radius: 50px; padding: 5px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--green-dark); }
 
-/* Variant Pills */
-.variant-group { margin-bottom: 20px; }
-.variant-label { font-size: 14px; font-weight: 600; margin-bottom: 10px; color: var(--gray); }
+/* Variant Pills + Flavor Swatches */
+.variant-group { margin-bottom: 22px; }
+.variant-label { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--gray); }
+.variant-label strong { color: var(--black); }
 .variant-pills { display: flex; gap: 10px; flex-wrap: wrap; }
 .variant-pill {
   border: 2px solid rgba(0,0,0,0.15);
@@ -415,8 +415,23 @@ input, select { font-family: var(--font); }
   background: #fff;
   transition: all 0.15s;
 }
-.variant-pill:hover { border-color: var(--green); color: var(--green); }
-.variant-pill.active { border-color: var(--green); background: var(--green); color: #fff; }
+.variant-pill:hover { border-color: var(--purple); color: var(--purple); }
+.variant-pill.active { border-color: var(--purple); background: var(--purple); color: #fff; }
+
+/* Flavor color swatches */
+.variant-swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+.flavor-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  outline: 2px solid transparent;
+  transition: outline-color 0.15s, transform 0.15s;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+.flavor-swatch:hover { transform: scale(1.12); }
+.flavor-swatch.active { outline: 2.5px solid var(--purple); outline-offset: 3px; }
 
 /* Purchase Options */
 .purchase-options { margin-bottom: 24px; }
@@ -453,7 +468,7 @@ input, select { font-family: var(--font); }
 .btn-atc {
   display: block;
   width: 100%;
-  background: var(--green);
+  background: var(--purple);
   color: #fff;
   border-radius: 14px;
   padding: 18px;
@@ -462,12 +477,30 @@ input, select { font-family: var(--font); }
   text-align: center;
   letter-spacing: 0.02em;
   transition: background 0.15s, transform 0.1s;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   cursor: pointer;
 }
-.btn-atc:hover { background: var(--green-dark); transform: translateY(-1px); }
-.product-trust { display: flex; gap: 20px; font-size: 13px; color: var(--gray); font-weight: 600; flex-wrap: wrap; }
-.product-trust-row2 { display: flex; gap: 20px; font-size: 13px; color: var(--gray); font-weight: 600; flex-wrap: wrap; margin-top: 8px; }
+.btn-atc:hover { background: #4f4d9a; transform: translateY(-1px); }
+
+/* Trust pills row */
+.product-trust-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.trust-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f5f5f7;
+  border-radius: 50px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--black);
+  white-space: nowrap;
+}
 
 /* Accordions */
 .accordions { margin-top: 32px; border-top: 1px solid rgba(0,0,0,0.08); }
@@ -481,12 +514,14 @@ input, select { font-family: var(--font); }
   font-size: 15px;
   font-weight: 700;
   text-align: left;
+  color: var(--black);
 }
-.acc-icon { font-size: 20px; font-weight: 300; transition: transform 0.2s; }
-.accordion.open .acc-icon { transform: rotate(45deg); }
+.acc-label { display: flex; align-items: center; gap: 10px; }
+.acc-chevron { transition: transform 0.25s; flex-shrink: 0; color: var(--gray); }
+.accordion.open .acc-chevron { transform: rotate(180deg); }
 .accordion-body {
   display: none;
-  padding: 0 0 20px;
+  padding: 0 0 22px;
   font-size: 14px;
   color: var(--gray);
   line-height: 1.7;
@@ -496,6 +531,103 @@ input, select { font-family: var(--font); }
 .accordion-body li { margin-bottom: 4px; }
 .accordion-body p { margin-bottom: 10px; }
 .accordion-body strong { color: var(--black); }
+
+/* ── Comparison Section ── */
+.comparison-section {
+  background: var(--cream);
+  border-radius: 28px;
+  margin: 0 0 80px;
+  overflow: hidden;
+}
+.comparison-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 60px;
+  align-items: center;
+  padding: 72px 48px;
+}
+.comparison-heading {
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  color: var(--black);
+}
+.comparison-sub {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.65;
+  margin-bottom: 28px;
+  max-width: 340px;
+}
+.btn-comparison {
+  display: inline-block;
+  background: var(--teal);
+  color: #fff;
+  border-radius: 50px;
+  padding: 14px 30px;
+  font-size: 15px;
+  font-weight: 800;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-comparison:hover { background: #3a9aa6; transform: translateY(-1px); }
+
+/* Comparison Table */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+}
+.comp-feature-head { width: 55%; padding: 18px 20px; }
+.comp-happie-head {
+  background: var(--purple);
+  color: #fff;
+  text-align: center;
+  padding: 18px 20px;
+  width: 22.5%;
+  font-weight: 900;
+  font-size: 13px;
+}
+.comp-brand-logo {
+  display: block;
+  font-size: 18px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.5px;
+}
+.comp-other-head {
+  text-align: center;
+  padding: 18px 20px;
+  width: 22.5%;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--gray);
+  background: #f9f9f9;
+}
+.comparison-table tbody tr { border-bottom: 1px solid rgba(0,0,0,0.06); }
+.comparison-table tbody tr:last-child { border-bottom: none; }
+.comparison-table tbody tr:nth-child(even) .comp-feature { background: #fafafa; }
+.comp-feature {
+  padding: 16px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+}
+.comp-check {
+  text-align: center;
+  padding: 14px;
+  background: rgba(98,96,174,0.06);
+}
+.comp-x {
+  text-align: center;
+  padding: 14px;
+  background: #fafafa;
+}
 
 /* Related Products */
 .related-products { margin-top: 80px; }
@@ -615,6 +747,12 @@ input, select { font-family: var(--font); }
   .reviews-grid { grid-template-columns: 1fr; }
   .benefits-grid { grid-template-columns: 1fr; }
   .product-layout { grid-template-columns: 1fr; }
+  .gallery-thumbs { grid-template-columns: repeat(4, 1fr); }
+  .comparison-inner { grid-template-columns: 1fr; padding: 48px 24px; gap: 36px; }
+  .comparison-section { border-radius: 20px; }
+  .comp-feature { font-size: 12px; padding: 14px 12px; }
+  .product-trust-pills { gap: 8px; }
+  .trust-pill { font-size: 11px; padding: 6px 12px; }
   .cart-layout { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
