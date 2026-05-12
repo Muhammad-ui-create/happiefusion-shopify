@@ -6,8 +6,19 @@
       <p class="section-sub">Same 2,000mg functional mushroom dose in every can. Pick by flavor, not by feel.</p>
     </div>
     <div class="products-grid">
+      {% assign priority_handles = 'blue-razzberry-fungi-powered-seltzer,mango-mimosa-fungi-powered-seltzer,watermelon-fungi-powered-seltzer' | split: ',' %}
+      {% assign shown = '' %}
+      {% for handle in priority_handles %}
+        {% assign product = all_products[handle] %}
+        {% if product.id != blank %}
+          {% render 'product-card', product: product %}
+          {% assign shown = shown | append: handle | append: ',' %}
+        {% endif %}
+      {% endfor %}
       {% for product in collections['all'].products %}
-        {% render 'product-card', product: product %}
+        {% unless shown contains product.handle %}
+          {% render 'product-card', product: product %}
+        {% endunless %}
       {% endfor %}
     </div>
     <div class="section-cta-center">
