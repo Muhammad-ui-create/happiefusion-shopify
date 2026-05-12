@@ -11,7 +11,7 @@
   <div class="product-card-footer">
     <div class="product-card-price">
       {{ product.price_min | money }}
-      <span class="price-per">/ 6-pack</span>
+      <span class="price-per">/ {{ product.selected_or_first_available_variant.title }}</span>
     </div>
     <button
       class="btn-add-to-cart"
