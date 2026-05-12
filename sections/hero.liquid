@@ -1,0 +1,58 @@
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Functional Mushroom Drink</div>
+      <h1 class="hero-headline">Focus. Energy.<br>Calm. In a Can.</h1>
+      <p class="hero-sub">2,000mg of dual-extracted Lion's Mane, Cordyceps &amp; Reishi. Zero alcohol. Zero jitters. Actually delicious.</p>
+      <div class="hero-badges">
+        <span class="no-alc-badge">No Alcohol</span>
+        <span class="no-alc-badge">No Sugar</span>
+        <span class="no-alc-badge">No Jitters</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="/collections/all" class="btn-primary">Shop Now →</a>
+        <a href="/pages/the-science" class="btn-ghost">The Science ↗</a>
+      </div>
+      <div class="hero-trust">
+        <span>🔬 Third-party tested</span>
+        <span>🌱 Vegan &amp; Non-GMO</span>
+        <span>🚚 Ships in 1–2 days</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-ring-wrap">
+        <div class="hero-glow"></div>
+        <div class="hero-ring-outer"></div>
+        <div class="hero-ring-mid"></div>
+        <div class="hero-ring-inner"></div>
+        {% assign hero_product = collections['all'].products | first %}
+        {% if hero_product and hero_product.featured_image %}
+          <img src="{{ hero_product.featured_image | image_url: width: 600 }}" alt="{{ hero_product.title }}" class="hero-can-img" />
+        {% else %}
+          <div class="hero-can-placeholder"></div>
+        {% endif %}
+      </div>
+      <div class="hero-pills">
+        <div class="hero-pill">
+          <span class="pill-label">FOCUS</span>
+          <span class="pill-val">900mg Lion's Mane</span>
+        </div>
+        <div class="hero-pill">
+          <span class="pill-label">ENERGY</span>
+          <span class="pill-val">700mg Cordyceps</span>
+        </div>
+        <div class="hero-pill">
+          <span class="pill-label">CALM</span>
+          <span class="pill-val">400mg Reishi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": []
+}
+{% endschema %}

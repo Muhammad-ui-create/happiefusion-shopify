@@ -1,0 +1,40 @@
+<nav class="nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo-link">
+      <img src="{{ 'happie-logo.png' | asset_url }}" alt="{{ shop.name }}" class="nav-logo-img" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="/collections/all">Shop</a></li>
+      <li><a href="/pages/mushrooms">Mushrooms</a></li>
+      <li><a href="/pages/the-science">The Science</a></li>
+      <li><a href="/pages/reviews">Reviews</a></li>
+      <li><a href="/pages/about">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/pages/sign-in" class="nav-signin">Sign in</a>
+      <button class="cart-trigger" id="cart-trigger" aria-label="Open cart">
+        Cart · <span class="cart-count-badge">{{ cart.item_count }}</span>
+      </button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <ul>
+      <li><a href="/collections/all">Shop</a></li>
+      <li><a href="/pages/mushrooms">Mushrooms</a></li>
+      <li><a href="/pages/the-science">The Science</a></li>
+      <li><a href="/pages/reviews">Reviews</a></li>
+      <li><a href="/pages/about">About</a></li>
+      <li><a href="/cart">Cart ({{ cart.item_count }})</a></li>
+    </ul>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": []
+}
+{% endschema %}

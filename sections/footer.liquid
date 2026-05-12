@@ -1,0 +1,51 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="{{ 'happie-logo.png' | asset_url }}" alt="{{ shop.name }}" class="footer-logo" />
+      <p>Functional mushroom drinks for focus, energy &amp; calm. No alcohol. No jitters. Just real results.</p>
+      <div class="footer-socials">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="TikTok">TK</a>
+        <a href="#" aria-label="Facebook">FB</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="/collections/all">All Products</a></li>
+        <li><a href="/products/blue-razzberry">Blue Razzberry</a></li>
+        <li><a href="/products/mango-mimosa">Mango Mimosa</a></li>
+        <li><a href="/products/watermelon">Watermelon</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="/pages/mushrooms">Mushrooms</a></li>
+        <li><a href="/pages/the-science">The Science</a></li>
+        <li><a href="/pages/faq">FAQ</a></li>
+        <li><a href="/pages/reviews">Reviews</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/pages/about">About</a></li>
+        <li><a href="/pages/contact">Contact</a></li>
+        <li><a href="/policies/shipping-policy">Shipping</a></li>
+        <li><a href="/policies/privacy-policy">Privacy</a></li>
+        <li><a href="/policies/terms-of-service">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved. These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}

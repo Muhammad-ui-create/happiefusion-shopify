@@ -1,0 +1,25 @@
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card-img-link">
+    {% if product.featured_image %}
+      <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" loading="lazy" class="product-card-img" />
+    {% endif %}
+  </a>
+  <div class="product-card-body">
+    <h3 class="product-card-title">{{ product.title }}</h3>
+    <p class="product-card-desc">{{ product.description | strip_html | truncate: 80 }}</p>
+  </div>
+  <div class="product-card-footer">
+    <div class="product-card-price">
+      {{ product.price_min | money }}
+      <span class="price-per">/ 6-pack</span>
+    </div>
+    <button
+      class="btn-add-to-cart"
+      data-product-id="{{ product.id }}"
+      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+      data-product-title="{{ product.title }}"
+    >
+      + Add to Cart
+    </button>
+  </div>
+</div>

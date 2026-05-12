@@ -1,0 +1,286 @@
+<div class="product-page">
+  <div class="breadcrumb">
+    <a href="/">Home</a> /
+    <a href="/collections/all">Shop</a> /
+    <span>{{ product.title }}</span>
+  </div>
+
+  <div class="product-layout">
+    <!-- ======= LEFT: Image Gallery ======= -->
+    <div class="product-gallery">
+      <div class="gallery-main">
+        {% assign first_image = product.images | first %}
+        <img
+          id="gallery-main-img"
+          src="{{ first_image | image_url: width: 900 }}"
+          alt="{{ first_image.alt | default: product.title }}"
+          class="gallery-main-img"
+        />
+        {% if product.images.size > 1 %}
+          <button class="gallery-arrow gallery-prev" id="gallery-prev">‹</button>
+          <button class="gallery-arrow gallery-next" id="gallery-next">›</button>
+        {% endif %}
+      </div>
+      {% if product.images.size > 1 %}
+        <div class="gallery-thumbs">
+          {% for image in product.images %}
+            <div
+              class="gallery-thumb {% if forloop.first %}active{% endif %}"
+              data-index="{{ forloop.index0 }}"
+              data-src="{{ image | image_url: width: 900 }}"
+            >
+              <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt | default: product.title }}" loading="lazy" />
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- ======= RIGHT: Product Info ======= -->
+    <div class="product-info">
+      <!-- Rating + Badge -->
+      <div class="product-top-row">
+        <div class="product-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-val">4.9/5.0</span>
+        </div>
+        {% if product.tags contains 'bestseller' or product.tags contains 'top-seller' %}
+          <span class="top-seller-badge">TOP-SELLER</span>
+        {% else %}
+          <span class="top-seller-badge">BESTSELLER</span>
+        {% endif %}
+      </div>
+
+      <h1 class="product-title">{{ product.title }}</h1>
+      <p class="product-subtitle">Fungi-Powered Seltzer</p>
+
+      <!-- Price -->
+      <div class="product-price-row">
+        <span class="product-price" id="product-price">
+          {{ product.selected_or_first_available_variant.price | money }}
+        </span>
+        {% if product.compare_at_price_max > product.price_min %}
+          <span class="product-compare-price">{{ product.compare_at_price_max | money }}</span>
+        {% endif %}
+      </div>
+
+      <!-- Description -->
+      <div class="product-desc">
+        {{ product.description }}
+      </div>
+
+      <!-- Mushroom dose tags -->
+      <div class="dose-tags">
+        <span class="dose-tag">900mg Lion's Mane</span>
+        <span class="dose-tag">700mg Cordyceps</span>
+        <span class="dose-tag">400mg Reishi</span>
+      </div>
+
+      <!-- Form -->
+      {% form 'product', product, id: 'product-form', class: 'product-form' %}
+        <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}" />
+
+        <!-- Variant: Flavor -->
+        {% for option in product.options_with_values %}
+          {% if option.name == 'Flavor' or option.name == 'flavor' %}
+            <div class="variant-group">
+              <div class="variant-label">Flavor: <strong>{{ option.selected_value }}</strong></div>
+              <div class="variant-pills" data-option-index="{{ forloop.index0 }}">
+                {% for value in option.values %}
+                  <button
+                    type="button"
+                    class="variant-pill {% if value == option.selected_value %}active{% endif %}"
+                    data-value="{{ value }}"
+                    data-option-index="{{ forloop.parentloop.index0 }}"
+                  >{{ value }}</button>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+
+          {% if option.name == 'Size' or option.name == 'Pack' or option.name == 'Pack Size' %}
+            <div class="variant-group">
+              <div class="variant-label">Pack Size: <strong>{{ option.selected_value }}</strong></div>
+              <div class="variant-pills" data-option-index="{{ forloop.index0 }}">
+                {% for value in option.values %}
+                  <button
+                    type="button"
+                    class="variant-pill {% if value == option.selected_value %}active{% endif %}"
+                    data-value="{{ value }}"
+                    data-option-index="{{ forloop.parentloop.index0 }}"
+                  >{{ value }}</button>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        <!-- Purchase Options: One-time vs Subscribe -->
+        {% if product.selling_plan_groups.size > 0 %}
+          <div class="purchase-options">
+            <div class="purchase-label">Purchase Options</div>
+            <label class="purchase-option {% if product.selected_selling_plan_allocation == nil %}active{% endif %}" id="opt-onetime">
+              <input type="radio" name="selling_plan" value="" id="selling-plan-onetime" {% if product.selected_selling_plan_allocation == nil %}checked{% endif %} />
+              <div class="opt-inner">
+                <div class="opt-title">One Time Purchase</div>
+                <div class="opt-price" id="onetime-price">{{ product.selected_or_first_available_variant.price | money }}</div>
+              </div>
+            </label>
+            {% for group in product.selling_plan_groups %}
+              {% for plan in group.selling_plans %}
+                <label class="purchase-option subscribe-opt" id="opt-subscribe">
+                  <input type="radio" name="selling_plan" value="{{ plan.id }}" id="selling-plan-{{ plan.id }}" />
+                  <div class="opt-inner">
+                    <div class="opt-title">
+                      Subscribe &amp; Save
+                      {% for adjustment in plan.price_adjustments %}
+                        {% if adjustment.value_type == 'percentage' %}
+                          <span class="save-badge">SAVE {{ adjustment.value }}%</span>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                    <div class="opt-price subscribe-price" id="subscribe-price">
+                      {% assign variant = product.selected_or_first_available_variant %}
+                      {% for allocation in variant.selling_plan_allocations %}
+                        {% if allocation.selling_plan.id == plan.id %}
+                          <span class="price-discounted">{{ allocation.price | money }}</span>
+                          <span class="price-original-crossed">{{ variant.price | money }}</span>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                    <div class="opt-sub">{{ plan.description }}</div>
+                  </div>
+                </label>
+              {% endfor %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- Quantity -->
+        <div class="qty-row">
+          <div class="qty-label">Quantity</div>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn" id="qty-minus">−</button>
+            <input type="number" name="quantity" id="qty-input" value="1" min="1" class="qty-input" />
+            <button type="button" class="qty-btn" id="qty-plus">+</button>
+          </div>
+        </div>
+
+        <!-- Add to Cart -->
+        <button type="submit" class="btn-atc" id="add-to-cart-btn">
+          <span id="atc-text">ADD TO CART – <span id="atc-price">{{ product.selected_or_first_available_variant.price | money }}</span></span>
+        </button>
+
+        <!-- Trust badges -->
+        <div class="product-trust">
+          <span>📦 Ships 1 Business Day</span>
+          <span>🚚 Free Shipping $75+</span>
+        </div>
+        <div class="product-trust-row2">
+          <span>✅ 30-Day Guarantee</span>
+          <span>🔬 Lab Tested</span>
+          <span>🌱 Vegan</span>
+        </div>
+      {% endform %}
+
+      <!-- Accordions -->
+      <div class="accordions">
+        <div class="accordion">
+          <button class="accordion-trigger" type="button">
+            <span>🌿 What's Inside?</span>
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p><strong>Functional Mushroom Blend (2,000mg total):</strong></p>
+            <ul>
+              <li>Lion's Mane Extract (fruiting body) — 900mg</li>
+              <li>Cordyceps militaris Extract (fruiting body) — 700mg</li>
+              <li>Reishi Extract (fruiting body) — 400mg</li>
+            </ul>
+            <p><strong>Other Ingredients:</strong> Carbonated Water, Organic Light Blue Agave Nectar, Citric Acid, Natural Flavor, Ocean Derived Magnesium, Ocean Derived Calcium Citrate, Potassium Sorbate, Benzoic Acid.</p>
+            <p>Vegan · Gluten-Free · Non-GMO · No Artificial Flavors</p>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion-trigger" type="button">
+            <span>⚡ How It Works</span>
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Dual-extraction pulls both water-soluble beta-glucans and fat-soluble triterpenes from each mushroom — the full spectrum of active compounds.</p>
+            <p>Most products use mycelium on grain (mostly starch, low actives). Happie uses <strong>fruiting body extracts</strong> — the real mushroom, standardized for potency.</p>
+            <p>Drink one daily. Most customers notice improved focus and energy within 1–2 weeks of consistent use.</p>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion-trigger" type="button">
+            <span>✅ Lab Tested &amp; Quality Assured</span>
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Every batch is third-party tested for:</p>
+            <ul>
+              <li>Heavy metals &amp; contaminants</li>
+              <li>Microbial safety</li>
+              <li>Potency verification (beta-glucan content)</li>
+              <li>Pesticides &amp; herbicides</li>
+            </ul>
+            <p>Each can is QR-coded to the full lab report. You deserve to know exactly what you're drinking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Products -->
+  {% assign related = collections['all'].products %}
+  {% if related.size > 1 %}
+    <div class="related-products">
+      <h2 class="related-title">You Might Also Like</h2>
+      <div class="products-grid">
+        {% for p in related limit: 3 %}
+          {% unless p.id == product.id %}
+            {% render 'product-card', product: p %}
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<!-- Product JSON for JS -->
+<script>
+  window.productData = {
+    variants: [
+      {% for variant in product.variants %}
+      {
+        id: {{ variant.id }},
+        title: {{ variant.title | json }},
+        price: {{ variant.price }},
+        available: {{ variant.available }},
+        option1: {{ variant.option1 | json }},
+        option2: {{ variant.option2 | json }},
+        option3: {{ variant.option3 | json }},
+        selling_plan_allocations: [
+          {% for allocation in variant.selling_plan_allocations %}
+          {
+            selling_plan_id: {{ allocation.selling_plan.id }},
+            price: {{ allocation.price }},
+            compare_at_price: {{ allocation.compare_at_price }}
+          }{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ]
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  };
+</script>
+
+{% schema %}
+{
+  "name": "Main Product",
+  "settings": []
+}
+{% endschema %}

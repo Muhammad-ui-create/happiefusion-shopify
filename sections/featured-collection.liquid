@@ -1,0 +1,25 @@
+<section class="featured-collection">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">The Lineup</div>
+      <h2 class="section-title">Pick Your Flavor</h2>
+      <p class="section-sub">Same 2,000mg functional mushroom dose in every can. Pick by flavor, not by feel.</p>
+    </div>
+    <div class="products-grid">
+      {% assign featured = collections['all'].products %}
+      {% for product in featured limit: 3 %}
+        {% render 'product-card', product: product %}
+      {% endfor %}
+    </div>
+    <div class="section-cta-center">
+      <a href="/collections/all" class="btn-primary">View All Products →</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": []
+}
+{% endschema %}

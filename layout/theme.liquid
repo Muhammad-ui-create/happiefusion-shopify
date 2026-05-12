@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}</title>
+  <meta name="description" content="{{ page_description | escape }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {{ content_for_header }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  {{ 'happie.css' | asset_url | stylesheet_tag }}
+</head>
+<body class="template-{{ template.name }}">
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+  <main id="main-content">
+    {{ content_for_layout }}
+  </main>
+  {% section 'footer' %}
+  <div id="cart-drawer" class="cart-drawer">
+    <div class="cart-drawer-overlay"></div>
+    <div class="cart-drawer-panel">
+      <div class="cart-drawer-header">
+        <h3>Your Cart</h3>
+        <button class="cart-drawer-close" aria-label="Close cart">✕</button>
+      </div>
+      <div class="cart-drawer-body" id="cart-drawer-body">
+        <p class="cart-empty-msg">Your cart is empty.</p>
+      </div>
+      <div class="cart-drawer-footer">
+        <div class="cart-subtotal">
+          <span>Subtotal</span>
+          <span id="cart-subtotal-price">$0.00</span>
+        </div>
+        <p class="cart-free-ship-note">Free shipping on orders over $75</p>
+        <a href="/checkout" class="btn-cart-checkout">Checkout →</a>
+        <a href="/cart" class="btn-cart-view">View Cart</a>
+      </div>
+    </div>
+  </div>
+  <script>window.cartItemCount = {{ cart.item_count }};</script>
+  {{ 'happie.js' | asset_url | script_tag }}
+</body>
+</html>

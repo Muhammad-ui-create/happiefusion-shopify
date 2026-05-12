@@ -1,0 +1,21 @@
+<div class="collection-page">
+  <div class="collection-banner">
+    <div class="section-eyebrow">The Lineup</div>
+    <h1>{{ collection.title }}</h1>
+    <p>{{ collection.description }}</p>
+  </div>
+  <div class="section-inner">
+    <div class="products-grid">
+      {% for product in collection.products %}
+        {% render 'product-card', product: product %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Collection",
+  "settings": []
+}
+{% endschema %}
