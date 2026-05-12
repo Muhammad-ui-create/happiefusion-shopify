@@ -1,0 +1,84 @@
+<div class="inner-page">
+
+  <div style="background:linear-gradient(135deg,#f5f0e8 0%,#d8f3dc 100%);padding:90px 48px;text-align:center;">
+    <div style="max-width:700px;margin:0 auto;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2D6A4F;margin-bottom:14px;">Join the Club</div>
+      <h1 style="font-size:clamp(34px,5vw,52px);font-weight:900;line-height:1.05;margin:0 0 16px;">Create Account</h1>
+      <p style="color:#6B6B6B;font-size:16px;line-height:1.65;max-width:420px;margin:0 auto;">Track orders, manage subscriptions, and get early access to new flavors.</p>
+    </div>
+  </div>
+
+  <section style="padding:72px 24px 96px;background:#fff;">
+    <div style="max-width:440px;margin:0 auto;">
+
+      {% form 'create_customer' %}
+        {% if form.errors %}
+          <div style="background:#fff0f0;border-radius:12px;padding:16px;margin-bottom:24px;border:1px solid #f5a5a5;font-size:14px;color:#c0392b;">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        <div style="display:flex;flex-direction:column;gap:18px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#444;">First Name</label>
+              <input type="text" name="customer[first_name]" autocomplete="given-name" placeholder="Jamie"
+                style="width:100%;padding:13px 16px;border:2px solid rgba(0,0,0,0.12);border-radius:12px;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;"
+                onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'" />
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#444;">Last Name</label>
+              <input type="text" name="customer[last_name]" autocomplete="family-name" placeholder="Smith"
+                style="width:100%;padding:13px 16px;border:2px solid rgba(0,0,0,0.12);border-radius:12px;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;"
+                onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'" />
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#444;">Email <span style="color:#e74c3c;">*</span></label>
+            <input type="email" name="customer[email]" autocomplete="email" required placeholder="you@example.com"
+              style="width:100%;padding:13px 16px;border:2px solid rgba(0,0,0,0.12);border-radius:12px;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;"
+              onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'" />
+          </div>
+
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#444;">Password <span style="color:#e74c3c;">*</span></label>
+            <input type="password" name="customer[password]" autocomplete="new-password" required placeholder="At least 8 characters"
+              style="width:100%;padding:13px 16px;border:2px solid rgba(0,0,0,0.12);border-radius:12px;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;"
+              onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'" />
+          </div>
+
+          <div style="background:var(--cream);border-radius:12px;padding:14px 16px;display:flex;align-items:flex-start;gap:10px;">
+            <input type="checkbox" id="accepts_marketing" name="customer[accepts_marketing]" value="1"
+              style="margin-top:2px;width:16px;height:16px;flex-shrink:0;accent-color:#2D6A4F;" />
+            <label for="accepts_marketing" style="font-size:13px;color:#555;line-height:1.5;cursor:pointer;">
+              Send me exclusive offers, new flavor drops, and wellness tips. Unsubscribe anytime.
+            </label>
+          </div>
+
+          <button type="submit"
+            style="background:#2D6A4F;color:#fff;border-radius:12px;padding:16px 32px;font-size:16px;font-weight:800;width:100%;cursor:pointer;border:none;font-family:inherit;margin-top:4px;"
+            onmouseover="this.style.background='#1B4332'" onmouseout="this.style.background='#2D6A4F'">
+            Create Account →
+          </button>
+
+          <p style="font-size:12px;color:#999;text-align:center;line-height:1.5;margin:0;">
+            By creating an account you agree to our <a href="/pages/terms-of-service" style="color:#2D6A4F;">Terms of Service</a> and <a href="/policies/privacy-policy" style="color:#2D6A4F;">Privacy Policy</a>.
+          </p>
+        </div>
+      {% endform %}
+
+      <div style="text-align:center;margin-top:32px;padding-top:32px;border-top:1px solid rgba(0,0,0,0.08);">
+        <p style="font-size:14px;color:#666;">Already have an account?
+          <a href="/account/login" style="color:#2D6A4F;font-weight:700;">Sign in →</a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{ "name": "Customer Register", "settings": [] }
+{% endschema %}

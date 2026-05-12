@@ -1,0 +1,90 @@
+<div class="inner-page">
+
+  <div style="background:linear-gradient(135deg,#f5f0e8 0%,#d8f3dc 100%);padding:90px 48px;text-align:center;">
+    <div style="max-width:700px;margin:0 auto;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2D6A4F;margin-bottom:14px;">Welcome Back</div>
+      <h1 style="font-size:clamp(34px,5vw,52px);font-weight:900;line-height:1.05;margin:0 0 16px;">Sign In</h1>
+      <p style="color:#6B6B6B;font-size:16px;line-height:1.65;max-width:420px;margin:0 auto;">Access your orders, subscriptions, and account details.</p>
+    </div>
+  </div>
+
+  <section style="padding:72px 24px 96px;background:#fff;">
+    <div style="max-width:440px;margin:0 auto;">
+
+      {% form 'customer_login' %}
+        {% if form.errors %}
+          <div style="background:#fff0f0;border-radius:12px;padding:16px;margin-bottom:24px;border:1px solid #f5a5a5;font-size:14px;color:#c0392b;">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        <div style="display:flex;flex-direction:column;gap:18px;">
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#444;">Email</label>
+            <input type="email" name="customer[email]" autocomplete="email" required placeholder="you@example.com"
+              style="width:100%;padding:13px 16px;border:2px solid rgba(0,0,0,0.12);border-radius:12px;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;"
+              onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'" />
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <label style="font-size:13px;font-weight:700;color:#444;">Password</label>
+              <a href="/account/login#recover" style="font-size:13px;color:#2D6A4F;font-weight:600;">Forgot password?</a>
+            </div>
+            <input type="password" name="customer[password]" autocomplete="current-password" required placeholder="••••••••"
+              style="width:100%;padding:13px 16px;border:2px solid rgba(0,0,0,0.12);border-radius:12px;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;"
+              onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'" />
+          </div>
+
+          <button type="submit"
+            style="background:#2D6A4F;color:#fff;border-radius:12px;padding:16px 32px;font-size:16px;font-weight:800;width:100%;cursor:pointer;border:none;font-family:inherit;margin-top:4px;"
+            onmouseover="this.style.background='#1B4332'" onmouseout="this.style.background='#2D6A4F'">
+            Sign In →
+          </button>
+        </div>
+      {% endform %}
+
+      <!-- Password recovery -->
+      <div id="recover" style="display:none;margin-top:40px;padding-top:40px;border-top:1px solid rgba(0,0,0,0.08);">
+        <h2 style="font-size:20px;font-weight:800;margin-bottom:8px;">Reset your password</h2>
+        <p style="font-size:14px;color:#666;margin-bottom:20px;">We'll send you an email with a link to reset your password.</p>
+        {% form 'recover_customer_password' %}
+          {% if form.posted_successfully? %}
+            <div style="background:var(--green-light);border-radius:12px;padding:16px;border:1px solid var(--green);font-size:14px;color:var(--green-dark);font-weight:600;">
+              ✅ Check your email — we sent you a reset link.
+            </div>
+          {% else %}
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <input type="email" name="email" required placeholder="your@email.com"
+                style="width:100%;padding:13px 16px;border:2px solid rgba(0,0,0,0.12);border-radius:12px;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;"
+                onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'" />
+              <button type="submit"
+                style="background:#2D6A4F;color:#fff;border-radius:12px;padding:14px 24px;font-size:15px;font-weight:700;cursor:pointer;border:none;font-family:inherit;">
+                Send Reset Email
+              </button>
+            </div>
+          {% endif %}
+        {% endform %}
+      </div>
+
+      <div style="text-align:center;margin-top:32px;padding-top:32px;border-top:1px solid rgba(0,0,0,0.08);">
+        <p style="font-size:14px;color:#666;">Don't have an account?
+          <a href="/account/register" style="color:#2D6A4F;font-weight:700;">Create one →</a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Show recover form if hash is #recover
+  if (window.location.hash === '#recover') {
+    document.getElementById('recover').style.display = 'block';
+  }
+</script>
+
+{% schema %}
+{ "name": "Customer Login", "settings": [] }
+{% endschema %}

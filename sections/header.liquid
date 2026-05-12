@@ -11,7 +11,11 @@
       <li><a href="/pages/about">About</a></li>
     </ul>
     <div class="nav-right">
-      <a href="/pages/sign-in" class="nav-signin">Sign in</a>
+      {% if customer %}
+        <a href="/account" class="nav-signin">{{ customer.first_name | default: 'Account' }}</a>
+      {% else %}
+        <a href="/account/login" class="nav-signin">Sign in</a>
+      {% endif %}
       <button class="cart-trigger" id="cart-trigger" aria-label="Open cart">
         Cart · <span class="cart-count-badge">{{ cart.item_count }}</span>
       </button>
@@ -28,6 +32,13 @@
       <li><a href="/pages/reviews">Reviews</a></li>
       <li><a href="/pages/about">About</a></li>
       <li><a href="/cart">Cart ({{ cart.item_count }})</a></li>
+      {% if customer %}
+        <li><a href="/account">My Account ({{ customer.first_name }})</a></li>
+        <li><a href="/account/logout">Sign Out</a></li>
+      {% else %}
+        <li><a href="/account/login">Sign In</a></li>
+        <li><a href="/account/register">Create Account</a></li>
+      {% endif %}
     </ul>
   </div>
 </nav>
