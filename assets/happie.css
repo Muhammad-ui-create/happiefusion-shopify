@@ -427,8 +427,19 @@ input, select { font-family: var(--font); }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 .footer-logo { height: 80px; width: auto; object-fit: contain; margin-bottom: 16px; filter: brightness(0) invert(1); }
 .footer-brand p { font-size: 14px; line-height: 1.65; opacity: 0.7; max-width: 280px; }
-.footer-socials { display: flex; gap: 14px; margin-top: 16px; }
-.footer-socials a { font-size: 13px; font-weight: 700; background: rgba(255,255,255,0.1); border-radius: 8px; padding: 6px 12px; }
+.footer-socials { display: flex; gap: 12px; margin-top: 16px; }
+.footer-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  color: #fff;
+  transition: background 0.15s, transform 0.1s;
+}
+.footer-socials a:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
 .footer-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
 .footer-col li { margin-bottom: 10px; }
 .footer-col a { font-size: 14px; opacity: 0.8; transition: opacity 0.15s; }
