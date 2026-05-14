@@ -1,6 +1,501 @@
+{% doc %}
+  @prompt
+    discount code box for the cart and checkout page, make the discount code box more fluid and match the theme colors of the website
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-discount-code-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ai-discount-code__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 12px 0;
+    font-weight: 500;
+  }
+
+  .ai-discount-code__form-{{ ai_gen_id }} {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .ai-discount-code__input-wrapper-{{ ai_gen_id }} {
+    flex: 1;
+  }
+
+  .ai-discount-code__input-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    padding: 14px 16px;
+    border: 1px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: {{ block.settings.input_font_size }}px;
+    background-color: {{ block.settings.input_background_color }};
+    color: {{ block.settings.input_text_color }};
+    transition: border-color 0.2s ease;
+  }
+
+  .ai-discount-code__input-{{ ai_gen_id }}:focus {
+    outline: none;
+    border-color: {{ block.settings.button_color }};
+  }
+
+  .ai-discount-code__button-{{ ai_gen_id }} {
+    padding: 14px 28px;
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .ai-discount-code__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+    transform: translateY(-1px);
+  }
+
+  .ai-discount-code__button-{{ ai_gen_id }}:active {
+    transform: translateY(0);
+  }
+
+  .ai-discount-code__button-{{ ai_gen_id }}:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .ai-discount-code__message-{{ ai_gen_id }} {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: 14px;
+  }
+
+  .ai-discount-code__message--success-{{ ai_gen_id }} {
+    background-color: {{ block.settings.success_background }};
+    color: {{ block.settings.success_text_color }};
+    border: 1px solid {{ block.settings.success_border_color }};
+  }
+
+  .ai-discount-code__message--error-{{ ai_gen_id }} {
+    background-color: {{ block.settings.error_background }};
+    color: {{ block.settings.error_text_color }};
+    border: 1px solid {{ block.settings.error_border_color }};
+  }
+
+  .ai-discount-code__applied-{{ ai_gen_id }} {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: {{ block.settings.success_background }};
+    border: 1px solid {{ block.settings.success_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+  }
+
+  .ai-discount-code__applied-text-{{ ai_gen_id }} {
+    color: {{ block.settings.success_text_color }};
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .ai-discount-code__remove-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    color: {{ block.settings.success_text_color }};
+    cursor: pointer;
+    padding: 4px 8px;
+    text-decoration: underline;
+    font-size: 14px;
+    transition: opacity 0.2s ease;
+  }
+
+  .ai-discount-code__remove-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-discount-code__form-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ai-discount-code__button-{{ ai_gen_id }} {
+      width: 100%;
+      padding: 14px 20px;
+    }
+  }
+{% endstyle %}
+
+<discount-code-{{ ai_gen_id }} class="ai-discount-code-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.heading != blank %}
+    <h3 class="ai-discount-code__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h3>
+  {% endif %}
+
+  <div class="ai-discount-code__form-{{ ai_gen_id }}">
+    <div class="ai-discount-code__input-wrapper-{{ ai_gen_id }}">
+      <input
+        type="text"
+        class="ai-discount-code__input-{{ ai_gen_id }}"
+        placeholder="{{ block.settings.input_placeholder }}"
+        aria-label="Discount code"
+        data-discount-input
+      >
+    </div>
+    <button
+      type="button"
+      class="ai-discount-code__button-{{ ai_gen_id }}"
+      data-apply-button
+    >
+      {{ block.settings.button_text }}
+    </button>
+  </div>
+
+  <div class="ai-discount-code__message-{{ ai_gen_id }}" data-message style="display: none;"></div>
+  <div class="ai-discount-code__applied-{{ ai_gen_id }}" data-applied style="display: none;">
+    <span class="ai-discount-code__applied-text-{{ ai_gen_id }}" data-applied-code></span>
+    <button
+      type="button"
+      class="ai-discount-code__remove-{{ ai_gen_id }}"
+      data-remove-button
+    >
+      {{ block.settings.remove_text }}
+    </button>
+  </div>
+</discount-code-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class DiscountCode{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.input = this.querySelector('[data-discount-input]');
+        this.applyButton = this.querySelector('[data-apply-button]');
+        this.removeButton = this.querySelector('[data-remove-button]');
+        this.messageEl = this.querySelector('[data-message]');
+        this.appliedEl = this.querySelector('[data-applied]');
+        this.appliedCodeEl = this.querySelector('[data-applied-code]');
+      }
+
+      connectedCallback() {
+        this.checkExistingDiscount();
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.applyButton.addEventListener('click', () => this.applyDiscount());
+        this.removeButton.addEventListener('click', () => this.removeDiscount());
+        this.input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            this.applyDiscount();
+          }
+        });
+      }
+
+      checkExistingDiscount() {
+        fetch('/cart.js')
+          .then(response => response.json())
+          .then(cart => {
+            if (cart.cart_level_discount_applications && cart.cart_level_discount_applications.length > 0) {
+              const discount = cart.cart_level_discount_applications[0];
+              this.showAppliedDiscount(discount.title);
+            }
+          })
+          .catch(error => {
+            console.error('Error checking discount:', error);
+          });
+      }
+
+      applyDiscount() {
+        const code = this.input.value.trim();
+        
+        if (!code) {
+          this.showMessage('Please enter a discount code', 'error');
+          return;
+        }
+
+        this.applyButton.disabled = true;
+        this.applyButton.textContent = 'Applying...';
+
+        fetch('/checkout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `discount=${encodeURIComponent(code)}`
+        })
+        .then(response => {
+          if (response.redirected) {
+            window.location.href = response.url;
+          } else {
+            return fetch('/cart.js').then(res => res.json());
+          }
+        })
+        .then(cart => {
+          if (cart && cart.cart_level_discount_applications && cart.cart_level_discount_applications.length > 0) {
+            this.showAppliedDiscount(code);
+            this.showMessage('Discount code applied successfully!', 'success');
+            this.input.value = '';
+          } else {
+            this.showMessage('Invalid discount code', 'error');
+          }
+          this.applyButton.disabled = false;
+          this.applyButton.textContent = '{{ block.settings.button_text }}';
+        })
+        .catch(error => {
+          console.error('Error applying discount:', error);
+          this.showMessage('Error applying discount code', 'error');
+          this.applyButton.disabled = false;
+          this.applyButton.textContent = '{{ block.settings.button_text }}';
+        });
+      }
+
+      removeDiscount() {
+        this.removeButton.disabled = true;
+
+        fetch('/cart/update.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ attributes: { discount: '' } })
+        })
+        .then(() => {
+          this.hideAppliedDiscount();
+          this.showMessage('Discount code removed', 'success');
+          this.removeButton.disabled = false;
+          window.location.reload();
+        })
+        .catch(error => {
+          console.error('Error removing discount:', error);
+          this.showMessage('Error removing discount code', 'error');
+          this.removeButton.disabled = false;
+        });
+      }
+
+      showAppliedDiscount(code) {
+        this.appliedCodeEl.textContent = code.toUpperCase();
+        this.appliedEl.style.display = 'flex';
+        this.input.style.display = 'none';
+        this.applyButton.style.display = 'none';
+      }
+
+      hideAppliedDiscount() {
+        this.appliedEl.style.display = 'none';
+        this.input.style.display = 'block';
+        this.applyButton.style.display = 'block';
+      }
+
+      showMessage(text, type) {
+        this.messageEl.textContent = text;
+        this.messageEl.className = `ai-discount-code__message-{{ ai_gen_id }} ai-discount-code__message--${type}-{{ ai_gen_id }}`;
+        this.messageEl.style.display = 'block';
+        
+        setTimeout(() => {
+          this.messageEl.style.display = 'none';
+        }, 5000);
+      }
+    }
+
+    customElements.define('discount-code-{{ ai_gen_id }}', DiscountCode{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Discount code",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Have a discount code?"
+    },
+    {
+      "type": "text",
+      "id": "input_placeholder",
+      "label": "Input placeholder",
+      "default": "Enter discount code"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Apply"
+    },
+    {
+      "type": "text",
+      "id": "remove_text",
+      "label": "Remove button text",
+      "default": "Remove"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "input_font_size",
+      "label": "Input font size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "input_background_color",
+      "label": "Input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Input text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input border",
+      "default": "#d1d1d1"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Border radius"
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Input and messages",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Success message"
+    },
+    {
+      "type": "color",
+      "id": "success_background",
+      "label": "Background",
+      "default": "#d4edda"
+    },
+    {
+      "type": "color",
+      "id": "success_text_color",
+      "label": "Text",
+      "default": "#155724"
+    },
+    {
+      "type": "color",
+      "id": "success_border_color",
+      "label": "Border",
+      "default": "#c3e6cb"
+    },
+    {
+      "type": "header",
+      "content": "Error message"
+    },
+    {
+      "type": "color",
+      "id": "error_background",
+      "label": "Background",
+      "default": "#f8d7da"
+    },
+    {
+      "type": "color",
+      "id": "error_text_color",
+      "label": "Text",
+      "default": "#721c24"
+    },
+    {
+      "type": "color",
+      "id": "error_border_color",
+      "label": "Border",
+      "default": "#f5c6cb"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Discount code"
+    }
+  ]
+}
 {% endschema %}
