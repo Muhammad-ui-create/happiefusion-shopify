@@ -1,6 +1,58 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": { "type": "main-cart", "settings": {} }
+    "main": {
+      "type": "main-cart",
+      "settings": {}
+    },
+    "1778752897569a55e2": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_1b1da9b_ch3P9n": {
+          "type": "ai_gen_block_1b1da9b",
+          "settings": {
+            "heading": "Have a discount code?",
+            "input_placeholder": "Enter discount code",
+            "button_text": "Apply",
+            "remove_text": "Remove",
+            "heading_size": 14,
+            "input_font_size": 14,
+            "button_font_size": 14,
+            "text_color": "#1a1a1a",
+            "input_background_color": "#ffffff",
+            "input_text_color": "#1a1a1a",
+            "input_border_color": "#d1d1d1",
+            "button_color": "#1a1a1a",
+            "button_hover_color": "#000000",
+            "button_text_color": "#ffffff",
+            "input_border_radius": 4,
+            "button_border_radius": 4,
+            "success_background": "#d4edda",
+            "success_text_color": "#155724",
+            "success_border_color": "#c3e6cb",
+            "error_background": "#f8d7da",
+            "error_text_color": "#721c24",
+            "error_border_color": "#f5c6cb"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_1b1da9b_ch3P9n"
+      ],
+      "settings": {}
+    }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "1778752897569a55e2"
+  ]
 }
