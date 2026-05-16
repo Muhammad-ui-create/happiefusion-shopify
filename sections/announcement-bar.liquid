@@ -1,81 +1,48 @@
+{% comment %} Single set of items — repeated via liquid to fill any screen width {% endcomment %}
+{% capture ann_items %}
+  <span class="ann-item">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2L4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z"/>
+      <path d="M8.5 12l2.5 2.5 4.5-4.5"/>
+    </svg>
+    Yep! Legal
+  </span>
+  <span class="ann-divider">✦</span>
+  <span class="ann-item">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 3h6l1 5H8L9 3z"/>
+      <path d="M8 8v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V8"/>
+      <path d="M12 12v4M10 14h4"/>
+    </svg>
+    3rd-Party Lab Tested
+  </span>
+  <span class="ann-divider">✦</span>
+  <span class="ann-item">
+    <svg width="18" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="1" y="6" width="15" height="11" rx="2"/>
+      <path d="M16 10h4l3 3v4h-7"/>
+      <circle cx="5.5" cy="19.5" r="1.5"/>
+      <circle cx="20.5" cy="19.5" r="1.5"/>
+    </svg>
+    Ships to All 50 States
+  </span>
+  <span class="ann-divider">✦</span>
+  <span class="ann-item">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2a9 9 0 0 1 9 9c0 4-2 7.5-5 9.5l-1-1.5c2-1.5 3.5-4 3.5-8C18.5 7.5 15.5 4.5 12 4.5S5.5 7.5 5.5 11c0 4 1.5 6.5 3.5 8L8 20.5C5 18.5 3 15 3 11a9 9 0 0 1 9-9z"/>
+      <path d="M12 7v6l3 2"/>
+    </svg>
+    Free Shipping on Orders $75+
+  </span>
+  <span class="ann-divider">✦</span>
+{% endcapture %}
+
 <div class="announcement-bar">
   <div class="announcement-track">
-    <!-- Original set -->
-    <div class="announcement-inner">
-      <span class="ann-item">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z"/>
-          <path d="M8.5 12l2.5 2.5 4.5-4.5"/>
-        </svg>
-        Yep! Legal
-      </span>
-      <span class="ann-divider">✦</span>
-      <span class="ann-item">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 3h6l1 5H8L9 3z"/>
-          <path d="M8 8v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V8"/>
-          <path d="M12 12v4M10 14h4"/>
-        </svg>
-        3rd-Party Lab Tested
-      </span>
-      <span class="ann-divider">✦</span>
-      <span class="ann-item">
-        <svg width="18" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="1" y="6" width="15" height="11" rx="2"/>
-          <path d="M16 10h4l3 3v4h-7"/>
-          <circle cx="5.5" cy="19.5" r="1.5"/>
-          <circle cx="20.5" cy="19.5" r="1.5"/>
-        </svg>
-        Ships to All 50 States
-      </span>
-      <span class="ann-divider">✦</span>
-      <span class="ann-item">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2a9 9 0 0 1 9 9c0 4-2 7.5-5 9.5l-1-1.5c2-1.5 3.5-4 3.5-8C18.5 7.5 15.5 4.5 12 4.5S5.5 7.5 5.5 11c0 4 1.5 6.5 3.5 8L8 20.5C5 18.5 3 15 3 11a9 9 0 0 1 9-9z"/>
-          <path d="M12 7v6l3 2"/>
-        </svg>
-        Free Shipping on Orders $75+
-      </span>
-      <span class="ann-divider">✦</span>
-    </div>
-    <!-- Duplicate set for seamless loop -->
-    <div class="announcement-inner" aria-hidden="true">
-      <span class="ann-item">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z"/>
-          <path d="M8.5 12l2.5 2.5 4.5-4.5"/>
-        </svg>
-        Yep! Legal
-      </span>
-      <span class="ann-divider">✦</span>
-      <span class="ann-item">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 3h6l1 5H8L9 3z"/>
-          <path d="M8 8v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V8"/>
-          <path d="M12 12v4M10 14h4"/>
-        </svg>
-        3rd-Party Lab Tested
-      </span>
-      <span class="ann-divider">✦</span>
-      <span class="ann-item">
-        <svg width="18" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="1" y="6" width="15" height="11" rx="2"/>
-          <path d="M16 10h4l3 3v4h-7"/>
-          <circle cx="5.5" cy="19.5" r="1.5"/>
-          <circle cx="20.5" cy="19.5" r="1.5"/>
-        </svg>
-        Ships to All 50 States
-      </span>
-      <span class="ann-divider">✦</span>
-      <span class="ann-item">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2a9 9 0 0 1 9 9c0 4-2 7.5-5 9.5l-1-1.5c2-1.5 3.5-4 3.5-8C18.5 7.5 15.5 4.5 12 4.5S5.5 7.5 5.5 11c0 4 1.5 6.5 3.5 8L8 20.5C5 18.5 3 15 3 11a9 9 0 0 1 9-9z"/>
-          <path d="M12 7v6l3 2"/>
-        </svg>
-        Free Shipping on Orders $75+
-      </span>
-      <span class="ann-divider">✦</span>
-    </div>
+    <div class="announcement-inner">{{ ann_items }}</div>
+    <div class="announcement-inner" aria-hidden="true">{{ ann_items }}</div>
+    <div class="announcement-inner" aria-hidden="true">{{ ann_items }}</div>
+    <div class="announcement-inner" aria-hidden="true">{{ ann_items }}</div>
   </div>
 </div>
 
