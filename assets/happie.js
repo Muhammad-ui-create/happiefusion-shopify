@@ -309,4 +309,113 @@
     });
   });
 
+  /* ── Scroll Reveal ── */
+  function initScrollReveal() {
+    // Auto-tag elements for reveal
+    var selectors = [
+      '.product-card',
+      '.benefit-card',
+      '.review-card',
+      '.section-header',
+      '.sci-stat',
+      '.sci-compound-card',
+      '.sci-extract-card',
+      '.comparison-left',
+      '.comparison-table',
+      '.hero-pill',
+      '.mush-benefit',
+      '.accordion'
+    ];
+    selectors.forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--reveal-delay', (i * 80) + 'ms');
+      });
+    });
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      io.observe(el);
+    });
+  }
+
+  /* ── Hero Parallax ── */
+  function initParallax() {
+    var can = document.querySelector('.hero-can-img');
+    if (!can) return;
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          var scrollY = window.scrollY;
+          can.style.transform = 'translateY(' + (scrollY * 0.18) + 'px)';
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+  /* ── Smooth Accordion ── */
+  function initSmoothAccordions() {
+    document.querySelectorAll('.accordion-trigger').forEach(function(btn) {
+      var acc = btn.closest('.accordion');
+      var body = acc.querySelector('.accordion-body');
+      if (!body) return;
+      // Set initial state
+      body.style.maxHeight = '0px';
+      body.style.overflow = 'hidden';
+      body.style.display = 'block';
+
+      btn.addEventListener('click', function() {
+        var isOpen = acc.classList.contains('open');
+        // Close all siblings
+        var parent = acc.parentElement;
+        parent.querySelectorAll('.accordion.open').forEach(function(openAcc) {
+          if (openAcc !== acc) {
+            openAcc.classList.remove('open');
+            var ob = openAcc.querySelector('.accordion-body');
+            if (ob) ob.style.maxHeight = '0px';
+          }
+        });
+        // Toggle current
+        acc.classList.toggle('open', !isOpen);
+        body.style.maxHeight = isOpen ? '0px' : body.scrollHeight + 'px';
+      });
+    });
+  }
+
+  /* ── Flavor Swatch active update ── */
+  document.querySelectorAll('.flavor-swatch').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btn.closest('.variant-swatches').querySelectorAll('.flavor-swatch').forEach(function(s) {
+        s.classList.remove('active');
+      });
+      btn.classList.add('active');
+      var label = document.getElementById('selected-flavor-label');
+      if (label) label.textContent = btn.dataset.value;
+    });
+  });
+
+  /* ── Nav scroll shadow ── */
+  var nav = document.querySelector('.nav');
+  if (nav) {
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+  }
+
+  /* ── Init ── */
+  initScrollReveal();
+  initParallax();
+  initSmoothAccordions();
+
 })();
