@@ -35,13 +35,15 @@
   function openCart() {
     if (!cartDrawer) return;
     cartDrawer.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    if (window.lenis) window.lenis.stop();
+    else document.body.style.overflow = 'hidden';
     fetchCart();
   }
   function closeCart() {
     if (!cartDrawer) return;
     cartDrawer.classList.remove('open');
-    document.body.style.overflow = '';
+    if (window.lenis) window.lenis.start();
+    else document.body.style.overflow = '';
   }
 
   if (cartTrigger) cartTrigger.addEventListener('click', openCart);
@@ -141,7 +143,6 @@
     var variants  = (window.productData && window.productData.variants) || [];
     var mainImg   = document.getElementById('gallery-main-img');
     var priceEl   = document.getElementById('product-price');
-    var atcPriceEl = document.getElementById('atc-price');
     var variantInput = document.getElementById('variant-id');
     var atcBtn    = document.getElementById('add-to-cart-btn');
     var atcText   = document.getElementById('atc-text');
@@ -150,16 +151,15 @@
     var qtyPlus   = document.getElementById('qty-plus');
     var onetimePrice = document.getElementById('onetime-price');
 
-    var selectedOptions = [];
     var selectedSellingPlanId = null;
 
     /* Gallery thumbnails */
     var thumbs = document.querySelectorAll('.gallery-thumb');
     var allSrcs = [];
-    thumbs.forEach(function(t, i) {
+    thumbs.forEach(function(t) {
       allSrcs.push(t.dataset.src);
       t.addEventListener('click', function() {
-        if (mainImg) mainImg.src = t.dataset.src;
+        if (mainImg) { mainImg.style.opacity = '0'; setTimeout(function() { mainImg.src = t.dataset.src; mainImg.style.opacity = '1'; }, 150); }
         thumbs.forEach(function(x) { x.classList.remove('active'); });
         t.classList.add('active');
       });
@@ -172,14 +172,14 @@
     if (prevBtn) {
       prevBtn.addEventListener('click', function() {
         currentImgIdx = (currentImgIdx - 1 + allSrcs.length) % allSrcs.length;
-        if (mainImg) mainImg.src = allSrcs[currentImgIdx];
+        if (mainImg) { mainImg.style.opacity = '0'; setTimeout(function() { mainImg.src = allSrcs[currentImgIdx]; mainImg.style.opacity = '1'; }, 150); }
         thumbs.forEach(function(t,i) { t.classList.toggle('active', i === currentImgIdx); });
       });
     }
     if (nextBtn) {
       nextBtn.addEventListener('click', function() {
         currentImgIdx = (currentImgIdx + 1) % allSrcs.length;
-        if (mainImg) mainImg.src = allSrcs[currentImgIdx];
+        if (mainImg) { mainImg.style.opacity = '0'; setTimeout(function() { mainImg.src = allSrcs[currentImgIdx]; mainImg.style.opacity = '1'; }, 150); }
         thumbs.forEach(function(t,i) { t.classList.toggle('active', i === currentImgIdx); });
       });
     }
@@ -187,17 +187,10 @@
     /* Variant pills */
     document.querySelectorAll('.variant-pill').forEach(function(pill) {
       pill.addEventListener('click', function() {
-        var optionIdx = parseInt(pill.dataset.optionIndex);
-        var value = pill.dataset.value;
-        // Update active state within same group
-        pill.closest('.variant-pills').querySelectorAll('.variant-pill').forEach(function(p) {
-          p.classList.remove('active');
-        });
+        pill.closest('.variant-pills').querySelectorAll('.variant-pill').forEach(function(p) { p.classList.remove('active'); });
         pill.classList.add('active');
-        // Update label
         var label = pill.closest('.variant-group').querySelector('.variant-label strong');
-        if (label) label.textContent = value;
-        // Find matching variant
+        if (label) label.textContent = pill.dataset.value;
         updateSelectedVariant();
       });
     });
@@ -222,16 +215,14 @@
       });
       if (match) {
         if (variantInput) variantInput.value = match.id;
-        var price = selectedSellingPlanId
-          ? getSellingPlanPrice(match, selectedSellingPlanId)
-          : match.price;
-        updatePriceDisplay(price, match.price);
+        var price = selectedSellingPlanId ? getSellingPlanPrice(match, selectedSellingPlanId) : match.price;
+        if (priceEl) priceEl.textContent = formatMoney(price);
         if (!match.available) {
           if (atcBtn) atcBtn.disabled = true;
           if (atcText) atcText.innerHTML = 'Sold Out';
         } else {
           if (atcBtn) atcBtn.disabled = false;
-          updateAtcText(price);
+          if (atcText) atcText.innerHTML = 'ADD TO CART – ' + formatMoney(price);
         }
         if (onetimePrice) onetimePrice.textContent = formatMoney(match.price);
       }
@@ -243,20 +234,10 @@
       return alloc ? alloc.price : variant.price;
     }
 
-    function updatePriceDisplay(price, comparePrice) {
-      if (priceEl) priceEl.textContent = formatMoney(price);
-    }
-
-    function updateAtcText(price) {
-      if (atcText) atcText.innerHTML = 'ADD TO CART – ' + formatMoney(price);
-    }
-
-    /* Selling plan (subscribe & save) */
+    /* Selling plan */
     document.querySelectorAll('input[name="selling_plan"]').forEach(function(radio) {
       radio.addEventListener('change', function() {
-        var planId = radio.value || null;
-        selectedSellingPlanId = planId;
-        // Update option label active state
+        selectedSellingPlanId = radio.value || null;
         document.querySelectorAll('.purchase-option').forEach(function(opt) {
           opt.classList.toggle('active', opt.contains(radio));
         });
@@ -265,18 +246,8 @@
     });
 
     /* Qty stepper */
-    if (qtyMinus) {
-      qtyMinus.addEventListener('click', function() {
-        var val = parseInt(qtyInput.value) || 1;
-        if (val > 1) qtyInput.value = val - 1;
-      });
-    }
-    if (qtyPlus) {
-      qtyPlus.addEventListener('click', function() {
-        var val = parseInt(qtyInput.value) || 1;
-        qtyInput.value = val + 1;
-      });
-    }
+    if (qtyMinus) qtyMinus.addEventListener('click', function() { var v = parseInt(qtyInput.value)||1; if (v>1) qtyInput.value = v-1; });
+    if (qtyPlus)  qtyPlus.addEventListener('click',  function() { var v = parseInt(qtyInput.value)||1; qtyInput.value = v+1; });
 
     /* Add to cart submit */
     var form = document.getElementById('product-form');
@@ -285,137 +256,121 @@
         e.preventDefault();
         var varId = variantInput ? variantInput.value : null;
         var qty   = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
-        var planId = selectedSellingPlanId;
         if (!varId) return;
         if (atcBtn) atcBtn.disabled = true;
         if (atcText) atcText.innerHTML = 'Adding…';
-        addToCart(varId, qty, planId, function() {
+        addToCart(varId, qty, selectedSellingPlanId, function() {
           if (atcText) atcText.innerHTML = '✓ Added to Cart!';
-          setTimeout(function() {
-            if (atcBtn) atcBtn.disabled = false;
-            updateSelectedVariant();
-          }, 1500);
+          setTimeout(function() { if (atcBtn) atcBtn.disabled = false; updateSelectedVariant(); }, 1500);
           openCart();
         });
       });
     }
   }
 
-  /* ── Accordions ── */
-  document.querySelectorAll('.accordion-trigger').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var acc = btn.closest('.accordion');
-      acc.classList.toggle('open');
-    });
-  });
-
-  /* ── Scroll Reveal ── */
-  function initScrollReveal() {
-    // Auto-tag elements for reveal
-    var selectors = [
-      '.product-card',
-      '.benefit-card',
-      '.review-card',
-      '.section-header',
-      '.sci-stat',
-      '.sci-compound-card',
-      '.sci-extract-card',
-      '.comparison-left',
-      '.comparison-table',
-      '.hero-pill',
-      '.mush-benefit',
-      '.accordion'
-    ];
-    selectors.forEach(function(sel) {
-      document.querySelectorAll(sel).forEach(function(el, i) {
-        el.classList.add('reveal');
-        el.style.setProperty('--reveal-delay', (i * 80) + 'ms');
-      });
-    });
-
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(function(el) {
-      io.observe(el);
-    });
-  }
-
-  /* ── Hero Parallax ── */
-  function initParallax() {
-    var can = document.querySelector('.hero-can-img');
-    if (!can) return;
-    var ticking = false;
-    window.addEventListener('scroll', function() {
-      if (!ticking) {
-        requestAnimationFrame(function() {
-          var scrollY = window.scrollY;
-          can.style.transform = 'translateY(' + (scrollY * 0.18) + 'px)';
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
-  }
-
-  /* ── Smooth Accordion ── */
+  /* ── Smooth Accordions ── */
   function initSmoothAccordions() {
     document.querySelectorAll('.accordion-trigger').forEach(function(btn) {
-      var acc = btn.closest('.accordion');
+      var acc  = btn.closest('.accordion');
       var body = acc.querySelector('.accordion-body');
       if (!body) return;
-      // Set initial state
-      body.style.maxHeight = '0px';
-      body.style.overflow = 'hidden';
-      body.style.display = 'block';
+      body.style.maxHeight  = '0px';
+      body.style.overflow   = 'hidden';
+      body.style.display    = 'block';
+      body.style.transition = 'max-height 0.5s cubic-bezier(0.16,1,0.3,1)';
 
       btn.addEventListener('click', function() {
         var isOpen = acc.classList.contains('open');
-        // Close all siblings
-        var parent = acc.parentElement;
-        parent.querySelectorAll('.accordion.open').forEach(function(openAcc) {
-          if (openAcc !== acc) {
-            openAcc.classList.remove('open');
-            var ob = openAcc.querySelector('.accordion-body');
-            if (ob) ob.style.maxHeight = '0px';
-          }
+        acc.parentElement.querySelectorAll('.accordion.open').forEach(function(o) {
+          if (o !== acc) { o.classList.remove('open'); o.querySelector('.accordion-body').style.maxHeight = '0px'; }
         });
-        // Toggle current
         acc.classList.toggle('open', !isOpen);
         body.style.maxHeight = isOpen ? '0px' : body.scrollHeight + 'px';
       });
     });
   }
 
-  /* ── Flavor Swatch active update ── */
+  /* ── Flavor Swatches ── */
   document.querySelectorAll('.flavor-swatch').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      btn.closest('.variant-swatches').querySelectorAll('.flavor-swatch').forEach(function(s) {
-        s.classList.remove('active');
-      });
+      btn.closest('.variant-swatches').querySelectorAll('.flavor-swatch').forEach(function(s) { s.classList.remove('active'); });
       btn.classList.add('active');
       var label = document.getElementById('selected-flavor-label');
       if (label) label.textContent = btn.dataset.value;
     });
   });
 
-  /* ── Nav scroll shadow ── */
-  var nav = document.querySelector('.nav');
-  if (nav) {
-    window.addEventListener('scroll', function() {
-      nav.classList.toggle('scrolled', window.scrollY > 10);
-    }, { passive: true });
+  /* ── Scroll Reveal ── */
+  function initScrollReveal() {
+    var selectors = [
+      '.product-card', '.benefit-card', '.review-card', '.section-header',
+      '.sci-stat', '.sci-compound-card', '.sci-extract-card',
+      '.comparison-left', '.comparison-table', '.hero-pill', '.mush-benefit'
+    ];
+    selectors.forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--reveal-delay', (i * 70) + 'ms');
+      });
+    });
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+  }
+
+  /* ══════════════════════════════════════════
+     LENIS PREMIUM SMOOTH SCROLL
+  ══════════════════════════════════════════ */
+  function initLenis() {
+    if (typeof Lenis === 'undefined') return;
+
+    var lenis = new Lenis({
+      duration: 1.4,
+      easing: function(t) {
+        // Expo ease-out — snappy start, silky deceleration
+        return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+      },
+      smoothWheel: true,
+      smoothTouch: false,   // native touch scroll is already smooth
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.5,
+      infinite: false,
+    });
+
+    window.lenis = lenis;
+
+    /* RAF loop */
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    /* Scroll-driven effects */
+    var can = document.querySelector('.hero-can-img');
+    var nav = document.querySelector('.nav');
+
+    lenis.on('scroll', function(e) {
+      var s = e.scroll;
+
+      // Hero parallax
+      if (can) can.style.transform = 'translateY(' + (s * 0.14) + 'px)';
+
+      // Nav shadow
+      if (nav) nav.classList.toggle('scrolled', s > 10);
+    });
+
+    /* Pause during modal/cart */
+    document.addEventListener('cart:open',  function() { lenis.stop(); });
+    document.addEventListener('cart:close', function() { lenis.start(); });
   }
 
   /* ── Init ── */
-  initScrollReveal();
-  initParallax();
   initSmoothAccordions();
+  initScrollReveal();
+  initLenis();
 
 })();

@@ -1060,3 +1060,9 @@ input, select { font-family: var(--font); }
   .hero-can-img { animation: none !important; }
   * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+/* ── Lenis smooth scroll ── */
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.gallery-main-img { transition: opacity 0.2s cubic-bezier(0.16,1,0.3,1); }
