@@ -1,1 +1,9 @@
-{ "sections": { "main": { "type": "lp-sober-curious", "settings": {} } }, "order": ["main"] }
+{
+  "sections": {
+    "main": {
+      "type": "lp-sober-curious",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
