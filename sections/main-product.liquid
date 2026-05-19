@@ -180,6 +180,27 @@
           <span id="atc-text">ADD TO CART – <span id="atc-price">{{ product.selected_or_first_available_variant.price | money }}</span></span>
         </button>
 
+        {% if product.selling_plan_groups.size > 0 %}
+          {% assign first_plan = product.selling_plan_groups.first.selling_plans.first %}
+          {% assign first_variant = product.selected_or_first_available_variant %}
+          {% assign plan_discount = 20 %}
+          {% for adj in first_plan.price_adjustments %}
+            {% if adj.value_type == 'percentage' %}
+              {% assign plan_discount = adj.value %}
+            {% endif %}
+          {% endfor %}
+          {% assign sub_price = first_variant.price %}
+          {% for alloc in first_variant.selling_plan_allocations %}
+            {% if alloc.selling_plan.id == first_plan.id %}
+              {% assign sub_price = alloc.price %}
+            {% endif %}
+          {% endfor %}
+          <button type="button" class="btn-subscribe" id="subscribe-save-btn" data-plan-id="{{ first_plan.id }}" data-discount="{{ plan_discount }}">
+            <span class="subscribe-label">SUBSCRIBE & SAVE {{ plan_discount }}%</span>
+            <span class="subscribe-sub">{{ sub_price | money }} / delivery · Cancel anytime</span>
+          </button>
+        {% endif %}
+
         <!-- Trust pills -->
         <div class="product-trust-pills">
           <span class="trust-pill">

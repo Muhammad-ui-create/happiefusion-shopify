@@ -591,6 +591,25 @@ input, select { font-family: var(--font); }
   cursor: pointer;
 }
 .btn-atc:hover { background: #4f4d9a; transform: translateY(-1px); }
+.btn-subscribe {
+  display: block;
+  width: 100%;
+  background: transparent;
+  color: var(--green);
+  border: 2.5px solid var(--green);
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background 0.15s, color 0.15s, transform 0.1s;
+}
+.btn-subscribe:hover { background: var(--green); color: #fff; transform: translateY(-1px); }
+.subscribe-label { display: block; }
+.subscribe-sub { display: block; font-size: 12px; font-weight: 500; opacity: 0.75; margin-top: 2px; }
 
 /* Trust pills row */
 .product-trust-pills {

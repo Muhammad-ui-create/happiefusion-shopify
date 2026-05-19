@@ -249,6 +249,29 @@
     if (qtyMinus) qtyMinus.addEventListener('click', function() { var v = parseInt(qtyInput.value)||1; if (v>1) qtyInput.value = v-1; });
     if (qtyPlus)  qtyPlus.addEventListener('click',  function() { var v = parseInt(qtyInput.value)||1; qtyInput.value = v+1; });
 
+    /* Subscribe & Save shortcut button */
+    var subBtn = document.getElementById('subscribe-save-btn');
+    if (subBtn) {
+      subBtn.addEventListener('click', function() {
+        var planId = subBtn.dataset.planId;
+        var planRadio = document.getElementById('selling-plan-' + planId);
+        if (planRadio) {
+          planRadio.checked = true;
+          planRadio.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        var varId = variantInput ? variantInput.value : null;
+        var qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+        if (!varId) return;
+        subBtn.disabled = true;
+        subBtn.querySelector('.subscribe-label').textContent = 'Adding…';
+        addToCart(varId, qty, planId, function() {
+          subBtn.querySelector('.subscribe-label').textContent = '✓ Added to Cart!';
+          setTimeout(function() { subBtn.disabled = false; subBtn.querySelector('.subscribe-label').textContent = 'SUBSCRIBE & SAVE ' + subBtn.dataset.discount + '%'; }, 1500);
+          openCart();
+        });
+      });
+    }
+
     /* Add to cart submit */
     var form = document.getElementById('product-form');
     if (form) {
