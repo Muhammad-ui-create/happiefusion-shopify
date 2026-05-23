@@ -1,0 +1,28 @@
+{% layout none %}<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+  <channel>
+    <title>{{ shop.name }}</title>
+    <link>{{ shop.url }}</link>
+    <description>{{ shop.name }} Product Feed</description>
+    {% paginate collections.all.products by 250 %}
+    {% for product in collections.all.products %}
+      {% for variant in product.variants %}
+      <item>
+        <g:id>{{ variant.id }}</g:id>
+        <g:title>{{ product.title | xml_escape }}{% unless product.has_only_default_variant %} - {{ variant.title | xml_escape }}{% endunless %}</g:title>
+        <g:description>{{ product.description | strip_html | xml_escape | truncatewords: 300 }}</g:description>
+        <g:link>{{ shop.url }}/products/{{ product.handle }}{% unless product.has_only_default_variant %}?variant={{ variant.id }}{% endunless %}</g:link>
+        {% if product.featured_image %}<g:image_link>https:{{ product.featured_image | image_url: width: 800 }}</g:image_link>{% endif %}
+        <g:price>{{ variant.price | money_without_currency }} USD</g:price>
+        <g:availability>{% if variant.available %}in stock{% else %}out of stock{% endif %}</g:availability>
+        <g:condition>new</g:condition>
+        <g:brand>Happie Fusion</g:brand>
+        <g:google_product_category>Food, Beverages &amp; Tobacco &gt; Beverages</g:google_product_category>
+        {% if product.type != blank %}<g:product_type>{{ product.type | xml_escape }}</g:product_type>{% endif %}
+        {% if variant.sku != blank %}<g:mpn>{{ variant.sku | xml_escape }}</g:mpn>{% endif %}
+      </item>
+      {% endfor %}
+    {% endfor %}
+    {% endpaginate %}
+  </channel>
+</rss>
