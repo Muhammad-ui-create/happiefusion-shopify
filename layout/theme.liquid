@@ -27,6 +27,11 @@
     <meta name="description" content="{{ page_description | default: 'Happie Fusion — functional mushroom seltzers with Lion\'s Mane, Cordyceps & Reishi. No alcohol, no caffeine. Real adaptogenic results.' | escape }}">
   {%- endif -%}
 
+  {%- comment -%} ── FAVICON ── {%- endcomment -%}
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'happie-favicon.png' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ 'happie-favicon.png' | asset_url }}">
+  <link rel="apple-touch-icon" href="{{ 'happie-favicon.png' | asset_url }}">
+
   {%- comment -%} ── PINTEREST VERIFICATION ── {%- endcomment -%}
   <meta name="p:domain_verify" content="f0abad25c419105077cd60ebf30f11db"/>
 
