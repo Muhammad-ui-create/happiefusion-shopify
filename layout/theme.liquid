@@ -3,9 +3,208 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}</title>
-  <meta name="description" content="{{ page_description | escape }}">
+
+  {%- comment -%} ── SEO: TITLE TAGS ── {%- endcomment -%}
+  {%- if template.name == 'index' -%}
+    <title>Functional Mushroom Drinks | Lion's Mane, Cordyceps & Reishi Seltzer – Happie Fusion</title>
+  {%- elsif template.name == 'product' -%}
+    <title>{{ product.title }} | Functional Mushroom Seltzer – Happie Fusion</title>
+  {%- elsif template.name == 'collection' -%}
+    <title>{{ collection.title }} | Mushroom Seltzers – Happie Fusion</title>
+  {%- else -%}
+    <title>{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}</title>
+  {%- endif -%}
+
+  {%- comment -%} ── SEO: META DESCRIPTIONS ── {%- endcomment -%}
+  {%- if template.name == 'index' -%}
+    <meta name="description" content="Happie Fungi Fusion — functional mushroom seltzers with 900mg Lion's Mane, 700mg Cordyceps & 400mg Reishi per can. No alcohol. No caffeine. Real adaptogenic results. Free shipping $75+.">
+  {%- elsif template.name == 'product' -%}
+    {%- assign product_meta = product.description | strip_html | strip | truncate: 155 -%}
+    <meta name="description" content="{{ product_meta | escape }}">
+  {%- elsif template.name == 'collection' -%}
+    <meta name="description" content="Shop {{ collection.title }} — functional mushroom seltzers with dual-extracted Lion's Mane, Cordyceps & Reishi. No alcohol, no caffeine, real results. From $23.99.">
+  {%- else -%}
+    <meta name="description" content="{{ page_description | default: 'Happie Fusion — functional mushroom seltzers with Lion\'s Mane, Cordyceps & Reishi. No alcohol, no caffeine. Real adaptogenic results.' | escape }}">
+  {%- endif -%}
+
+  {%- comment -%} ── PINTEREST VERIFICATION ── {%- endcomment -%}
+  <meta name="p:domain_verify" content="f0abad25c419105077cd60ebf30f11db"/>
+
   <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- comment -%} ── OPEN GRAPH ── {%- endcomment -%}
+  <meta property="og:site_name" content="Happie Fusion">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:locale" content="en_US">
+  {%- if template.name == 'product' -%}
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="{{ product.title }} | Functional Mushroom Seltzer – Happie Fusion">
+    <meta property="og:description" content="{{ product.description | strip_html | truncate: 200 | escape }}">
+    {%- if product.featured_image -%}
+      <meta property="og:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="1200">
+      <meta property="og:image:alt" content="{{ product.title | escape }}">
+    {%- endif -%}
+    <meta property="product:price:amount" content="{{ product.price | money_without_currency }}">
+    <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
+  {%- elsif template.name == 'index' -%}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Functional Mushroom Drinks | Lion's Mane, Cordyceps & Reishi Seltzer – Happie Fusion">
+    <meta property="og:description" content="Functional mushroom seltzers with 900mg Lion's Mane, 700mg Cordyceps & 400mg Reishi per can. No alcohol. No caffeine. Real results.">
+    <meta property="og:image" content="{{ 'happie-logo.png' | asset_url }}">
+  {%- else -%}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}">
+    <meta property="og:description" content="{{ page_description | default: 'Happie Fusion — functional mushroom seltzers with Lion\'s Mane, Cordyceps & Reishi.' | escape }}">
+    <meta property="og:image" content="{{ 'happie-logo.png' | asset_url }}">
+  {%- endif -%}
+
+  {%- comment -%} ── TWITTER CARD ── {%- endcomment -%}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@happiefusion">
+  {%- if template.name == 'product' -%}
+    <meta name="twitter:title" content="{{ product.title }} | Functional Mushroom Seltzer – Happie Fusion">
+    <meta name="twitter:description" content="{{ product.description | strip_html | truncate: 200 | escape }}">
+    {%- if product.featured_image -%}
+      <meta name="twitter:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+    {%- endif -%}
+  {%- else -%}
+    <meta name="twitter:title" content="{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}">
+    <meta name="twitter:description" content="{{ page_description | default: 'Functional mushroom seltzers — no alcohol, no caffeine, real adaptogenic results.' | escape }}">
+    <meta name="twitter:image" content="{{ 'happie-logo.png' | asset_url }}">
+  {%- endif -%}
+
+  {%- comment -%} ── STRUCTURED DATA: ORGANIZATION + WEBSITE (Homepage only) ── {%- endcomment -%}
+  {%- if template.name == 'index' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://happiefusion.com/#organization",
+        "name": "Happie Fusion",
+        "url": "https://happiefusion.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ 'happie-logo.png' | asset_url }}",
+          "width": 400,
+          "height": 100
+        },
+        "description": "Happie Fusion makes Fungi Fusion — functional mushroom seltzers with dual-extracted Lion's Mane (900mg), Cordyceps (700mg), and Reishi (400mg) per can. No alcohol, no caffeine, no jitters. Just real adaptogenic results.",
+        "sameAs": [
+          "https://www.instagram.com/happiefusion/",
+          "https://www.tiktok.com/@drinkhappie1"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "support@happiefusion.com",
+          "contactType": "customer service",
+          "availableLanguage": "English"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://happiefusion.com/#website",
+        "url": "https://happiefusion.com",
+        "name": "Happie Fusion",
+        "publisher": { "@id": "https://happiefusion.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://happiefusion.com/search?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+  </script>
+  {%- endif -%}
+
+  {%- comment -%} ── STRUCTURED DATA: PRODUCT + RATINGS + BREADCRUMBS ── {%- endcomment -%}
+  {%- if template.name == 'product' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "description": {{ product.description | strip_html | strip | truncate: 500 | json }},
+    "brand": {
+      "@type": "Brand",
+      "name": "Happie Fusion"
+    },
+    "url": {{ canonical_url | json }},
+    "image": [
+      {% for image in product.images limit: 4 %}
+        "https:{{ image | image_url: width: 800 }}"{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "sku": {{ product.selected_or_first_available_variant.sku | default: product.id | json }},
+    "category": "Functional Beverages",
+    "offers": [
+      {% for variant in product.variants %}
+      {
+        "@type": "Offer",
+        "name": {{ variant.title | json }},
+        "price": "{{ variant.price | money_without_currency }}",
+        "priceCurrency": "USD",
+        "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+        "url": "{{ canonical_url }}?variant={{ variant.id }}",
+        "seller": { "@type": "Organization", "name": "Happie Fusion" },
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": { "@type": "MonetaryAmount", "value": "5.99", "currency": "USD" },
+          "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+            "transitTime": { "@type": "QuantitativeValue", "minValue": 3, "maxValue": 5, "unitCode": "DAY" }
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 30,
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "2400",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "additionalProperty": [
+      { "@type": "PropertyValue", "name": "Lion's Mane", "value": "900mg per can, dual-extracted fruiting body" },
+      { "@type": "PropertyValue", "name": "Cordyceps", "value": "700mg per can, dual-extracted fruiting body" },
+      { "@type": "PropertyValue", "name": "Reishi", "value": "400mg per can, dual-extracted fruiting body" },
+      { "@type": "PropertyValue", "name": "Caffeine", "value": "0mg — caffeine free" },
+      { "@type": "PropertyValue", "name": "Alcohol", "value": "0% — alcohol free" },
+      { "@type": "PropertyValue", "name": "Calories", "value": "~40 per can" },
+      { "@type": "PropertyValue", "name": "Vegan", "value": "Yes" },
+      { "@type": "PropertyValue", "name": "Non-GMO", "value": "Yes" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://happiefusion.com" },
+      { "@type": "ListItem", "position": 2, "name": "All Products", "item": "https://happiefusion.com/collections/all" },
+      { "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": {{ canonical_url | json }} }
+    ]
+  }
+  </script>
+  {%- endif -%}
+
   {{ content_for_header }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
