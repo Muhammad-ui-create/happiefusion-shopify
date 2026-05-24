@@ -6,11 +6,12 @@
     <description>{{ shop.name }} Product Feed</description>
     {% paginate collections.all.products by 250 %}
     {% for product in collections.all.products %}
+      {% assign clean_desc = product.description | strip_html | strip | truncatewords: 150 %}
       {% for variant in product.variants %}
       <item>
         <g:id>{{ variant.id }}</g:id>
         <g:title>{{ product.title | xml_escape }}{% unless product.has_only_default_variant %} - {{ variant.title | xml_escape }}{% endunless %}</g:title>
-        <g:description>{{ product.description | strip_html | xml_escape | truncatewords: 300 }}</g:description>
+        <g:description><![CDATA[{{ clean_desc }}]]></g:description>
         <g:link>{{ shop.url }}/products/{{ product.handle }}{% unless product.has_only_default_variant %}?variant={{ variant.id }}{% endunless %}</g:link>
         {% if product.featured_image %}<g:image_link>https:{{ product.featured_image | image_url: width: 800 }}</g:image_link>{% endif %}
         <g:price>{{ variant.price | money_without_currency }} USD</g:price>
