@@ -1,137 +1,514 @@
+<style>
+  /* ============================================================
+     PRIVACY POLICY — PREMIUM REDESIGN
+     Matches Terms of Service page style
+  ============================================================ */
+
+  .pp-hero {
+    background: linear-gradient(135deg, #0B3D2E 0%, #1B5E42 50%, #2D6A4F 100%);
+    padding: 100px 48px 80px;
+    text-align: center;
+  }
+  .pp-hero__inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .pp-hero__badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50px;
+    padding: 6px 18px;
+    margin-bottom: 22px;
+  }
+  .pp-hero__title {
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: #fff;
+    margin: 0 0 18px;
+  }
+  .pp-hero__subtitle {
+    color: rgba(255,255,255,0.75);
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 520px;
+    margin: 0 auto 16px;
+  }
+  .pp-hero__date {
+    color: rgba(255,255,255,0.45);
+    font-size: 13px;
+    margin: 0;
+  }
+
+  /* Layout */
+  .pp-body {
+    background: #fff;
+    padding: 72px 48px 80px;
+  }
+  .pp-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  /* Sidebar */
+  .pp-sidebar {
+    position: sticky;
+    top: 32px;
+    background: #F5F0E8;
+    border-radius: 20px;
+    padding: 28px 24px 24px;
+  }
+  .pp-sidebar__label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .pp-sidebar__nav {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+  }
+  .pp-sidebar__nav li {
+    margin-bottom: 2px;
+  }
+  .pp-sidebar__nav a {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+    text-decoration: none;
+    padding: 7px 12px;
+    border-radius: 8px;
+    transition: background 0.18s, color 0.18s;
+    line-height: 1.4;
+  }
+  .pp-sidebar__nav a:hover {
+    background: #2D6A4F;
+    color: #fff;
+  }
+  .pp-sidebar__cta {
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding-top: 20px;
+    text-align: center;
+  }
+  .pp-sidebar__cta p {
+    font-size: 12px;
+    color: #888;
+    margin: 0 0 12px;
+    line-height: 1.5;
+  }
+  .pp-sidebar__cta a {
+    display: inline-block;
+    background: #0B3D2E;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    padding: 9px 18px;
+    transition: background 0.18s;
+  }
+  .pp-sidebar__cta a:hover {
+    background: #2D6A4F;
+  }
+
+  /* Main content */
+  .pp-main {
+    min-width: 0;
+  }
+
+  /* Sections */
+  .pp-section {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 24px;
+    padding: 44px 0;
+    border-bottom: 1px solid #F0EDE6;
+  }
+  .pp-section:first-child {
+    padding-top: 0;
+  }
+  .pp-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .pp-section__num {
+    font-size: 13px;
+    font-weight: 800;
+    color: #C8D8C0;
+    letter-spacing: 0.05em;
+    padding-top: 4px;
+    flex-shrink: 0;
+  }
+  .pp-section__content h2 {
+    font-size: 20px;
+    font-weight: 900;
+    color: #1A1A1A;
+    margin: 0 0 16px;
+  }
+  .pp-section__content h3 {
+    font-size: 15px;
+    font-weight: 800;
+    color: #1A1A1A;
+    margin: 22px 0 10px;
+  }
+  .pp-section__content p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.85;
+    margin: 0 0 14px;
+  }
+  .pp-section__content p:last-child {
+    margin-bottom: 0;
+  }
+  .pp-section__content ul {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.85;
+    padding-left: 22px;
+    margin: 0 0 14px;
+  }
+  .pp-section__content ul li {
+    margin-bottom: 6px;
+  }
+  .pp-section__content a {
+    color: #2D6A4F;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .pp-section__content a:hover {
+    text-decoration: underline;
+  }
+
+  /* "We do not sell your data" callout */
+  .pp-callout {
+    background: #F0FDF4;
+    border-left: 4px solid #2D6A4F;
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 18px 0;
+    font-size: 15px;
+    color: #1B5E42;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  /* Contact CTA card */
+  .pp-contact-card {
+    background: #F5F0E8;
+    border-radius: 20px;
+    padding: 40px 36px;
+    text-align: center;
+    margin-top: 56px;
+  }
+  .pp-contact-card__icon {
+    width: 52px;
+    height: 52px;
+    background: #0B3D2E;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+  }
+  .pp-contact-card__icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .pp-contact-card h3 {
+    font-size: 22px;
+    font-weight: 900;
+    color: #1A1A1A;
+    margin: 0 0 10px;
+  }
+  .pp-contact-card p {
+    font-size: 15px;
+    color: #777;
+    margin: 0 0 22px;
+    line-height: 1.6;
+  }
+  .pp-contact-card a {
+    display: inline-block;
+    background: #0B3D2E;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    padding: 13px 32px;
+    transition: background 0.18s;
+  }
+  .pp-contact-card a:hover {
+    background: #2D6A4F;
+  }
+
+  /* Responsive */
+  @media (max-width: 860px) {
+    .pp-layout {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .pp-sidebar {
+      position: static;
+      margin-bottom: 48px;
+    }
+    .pp-body {
+      padding: 48px 24px 64px;
+    }
+    .pp-hero {
+      padding: 72px 24px 60px;
+    }
+  }
+  @media (max-width: 540px) {
+    .pp-section {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .pp-section__num {
+      padding-top: 0;
+    }
+  }
+</style>
+
 <div class="inner-page">
 
-  <div style="background:linear-gradient(135deg,#f5f0e8 0%,#d8f3dc 100%);padding:90px 48px;text-align:center;">
-    <div style="max-width:700px;margin:0 auto;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2D6A4F;margin-bottom:14px;">Your Data, Your Rights</div>
-      <h1 style="font-size:clamp(34px,5vw,56px);font-weight:900;line-height:1.05;margin:0 0 18px;">Privacy Policy</h1>
-      <p style="color:#6B6B6B;font-size:17px;line-height:1.65;max-width:520px;margin:0 auto;">We respect your privacy and are committed to protecting your personal information. Here's exactly how we handle your data.</p>
-      <p style="color:#999;font-size:13px;margin-top:16px;">Last updated: {{ 'now' | date: '%B %d, %Y' }}</p>
+  <!-- ── HERO ── -->
+  <div class="pp-hero">
+    <div class="pp-hero__inner">
+      <div class="pp-hero__badge">Your Data, Your Rights</div>
+      <h1 class="pp-hero__title">Privacy Policy</h1>
+      <p class="pp-hero__subtitle">We respect your privacy and are committed to protecting your personal information. Here's exactly how we handle your data.</p>
+      <p class="pp-hero__date">Last updated: {{ 'now' | date: '%B %d, %Y' }}</p>
     </div>
   </div>
 
-  <section style="padding:72px 48px;background:#fff;">
-    <div style="max-width:800px;margin:0 auto;">
+  <!-- ── BODY ── -->
+  <section class="pp-body">
+    <div class="pp-layout">
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Who We Are</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;">Happie Fusion ("we," "us," or "our") operates happiefusion.com. We sell functional mushroom beverages online and ship to all 50 US states. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website or purchase from us.</p>
-        <p style="font-size:16px;color:#444;line-height:1.8;margin-top:14px;">Questions? Email us at <a href="mailto:support@happiefusion.com" style="color:var(--green);font-weight:600;">support@happiefusion.com</a></p>
-      </div>
+      <!-- ── SIDEBAR ── -->
+      <aside class="pp-sidebar">
+        <span class="pp-sidebar__label">On this page</span>
+        <ul class="pp-sidebar__nav">
+          <li><a href="#pp-who-we-are">Who We Are</a></li>
+          <li><a href="#pp-information-we-collect">Information We Collect</a></li>
+          <li><a href="#pp-how-we-use">How We Use</a></li>
+          <li><a href="#pp-sharing">Sharing</a></li>
+          <li><a href="#pp-cookies">Cookies</a></li>
+          <li><a href="#pp-your-rights">Your Rights</a></li>
+          <li><a href="#pp-ccpa">California (CCPA)</a></li>
+          <li><a href="#pp-data-security">Data Security</a></li>
+          <li><a href="#pp-data-retention">Data Retention</a></li>
+          <li><a href="#pp-childrens-privacy">Children's Privacy</a></li>
+          <li><a href="#pp-changes">Changes</a></li>
+          <li><a href="#pp-contact">Contact</a></li>
+        </ul>
+        <div class="pp-sidebar__cta">
+          <p>Privacy questions? We're here to help.</p>
+          <a href="mailto:support@happiefusion.com">Email Us →</a>
+        </div>
+      </aside>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Information We Collect</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:20px;">We collect information you provide directly and information collected automatically when you use our site.</p>
+      <!-- ── MAIN ── -->
+      <main class="pp-main">
 
-        <div style="margin-bottom:24px;">
-          <h3 style="font-size:17px;font-weight:800;color:#1A1A2E;margin-bottom:12px;">Information You Provide</h3>
-          <ul style="font-size:15px;color:#444;line-height:1.9;padding-left:24px;">
-            <li><strong>Account & Order Info:</strong> Name, email address, shipping address, billing address, phone number</li>
-            <li><strong>Payment Info:</strong> Credit/debit card details processed securely via Shopify Payments (we never store full card numbers)</li>
-            <li><strong>Communications:</strong> Messages you send us via email or contact forms</li>
-            <li><strong>Subscription Info:</strong> If you subscribe to recurring orders, your subscription preferences and history</li>
-          </ul>
+        <!-- 01 Who We Are -->
+        <div class="pp-section" id="pp-who-we-are">
+          <div class="pp-section__num">01</div>
+          <div class="pp-section__content">
+            <h2>Who We Are</h2>
+            <p>Happie Fusion ("we," "us," or "our") operates happiefusion.com. We sell functional mushroom beverages online and ship to all 50 US states. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website or purchase from us.</p>
+            <p>Questions? Email us at <a href="mailto:support@happiefusion.com">support@happiefusion.com</a></p>
+          </div>
         </div>
 
-        <div>
-          <h3 style="font-size:17px;font-weight:800;color:#1A1A2E;margin-bottom:12px;">Information Collected Automatically</h3>
-          <ul style="font-size:15px;color:#444;line-height:1.9;padding-left:24px;">
-            <li><strong>Device & Browser Data:</strong> IP address, browser type, operating system, referring URLs</li>
-            <li><strong>Usage Data:</strong> Pages visited, time spent, clicks, and navigation patterns</li>
-            <li><strong>Cookies & Tracking:</strong> We use cookies to keep you logged in, remember cart contents, and analyze traffic</li>
-          </ul>
+        <!-- 02 Information We Collect -->
+        <div class="pp-section" id="pp-information-we-collect">
+          <div class="pp-section__num">02</div>
+          <div class="pp-section__content">
+            <h2>Information We Collect</h2>
+            <p>We collect information you provide directly and information collected automatically when you use our site.</p>
+
+            <h3>Information You Provide</h3>
+            <ul>
+              <li><strong>Account &amp; Order Info:</strong> Name, email address, shipping address, billing address, phone number</li>
+              <li><strong>Payment Info:</strong> Credit/debit card details processed securely via Shopify Payments (we never store full card numbers)</li>
+              <li><strong>Communications:</strong> Messages you send us via email or contact forms</li>
+              <li><strong>Subscription Info:</strong> If you subscribe to recurring orders, your subscription preferences and history</li>
+            </ul>
+
+            <h3>Information Collected Automatically</h3>
+            <ul>
+              <li><strong>Device &amp; Browser Data:</strong> IP address, browser type, operating system, referring URLs</li>
+              <li><strong>Usage Data:</strong> Pages visited, time spent, clicks, and navigation patterns</li>
+              <li><strong>Cookies &amp; Tracking:</strong> We use cookies to keep you logged in, remember cart contents, and analyze traffic</li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">How We Use Your Information</h2>
-        <ul style="font-size:15px;color:#444;line-height:1.9;padding-left:24px;">
-          <li>Process and fulfill your orders and subscriptions</li>
-          <li>Send order confirmations, shipping updates, and receipts</li>
-          <li>Respond to your questions and provide customer support</li>
-          <li>Send marketing emails (only with your consent — you can unsubscribe anytime)</li>
-          <li>Improve our website, products, and customer experience</li>
-          <li>Detect and prevent fraud and unauthorized transactions</li>
-          <li>Comply with legal obligations</li>
-        </ul>
-      </div>
+        <!-- 03 How We Use -->
+        <div class="pp-section" id="pp-how-we-use">
+          <div class="pp-section__num">03</div>
+          <div class="pp-section__content">
+            <h2>How We Use Your Information</h2>
+            <ul>
+              <li>Process and fulfill your orders and subscriptions</li>
+              <li>Send order confirmations, shipping updates, and receipts</li>
+              <li>Respond to your questions and provide customer support</li>
+              <li>Send marketing emails (only with your consent — you can unsubscribe anytime)</li>
+              <li>Improve our website, products, and customer experience</li>
+              <li>Detect and prevent fraud and unauthorized transactions</li>
+              <li>Comply with legal obligations</li>
+            </ul>
+          </div>
+        </div>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Sharing Your Information</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:16px;">We do not sell your personal information. We share data only with trusted third parties necessary to run our business:</p>
-        <ul style="font-size:15px;color:#444;line-height:1.9;padding-left:24px;">
-          <li><strong>Shopify:</strong> Our e-commerce platform that processes orders and payments</li>
-          <li><strong>Shipping Carriers:</strong> USPS, UPS, FedEx — to deliver your orders</li>
-          <li><strong>Email Marketing:</strong> Klaviyo — to send order updates and marketing emails (if you opt in)</li>
-          <li><strong>Analytics:</strong> Google Analytics, Meta Pixel — to understand website traffic and ad performance</li>
-          <li><strong>Legal Requirements:</strong> When required by law or to protect our rights</li>
-        </ul>
-        <p style="font-size:15px;color:#666;line-height:1.8;margin-top:16px;">All third-party partners are contractually required to handle your data securely and in compliance with applicable privacy laws.</p>
-      </div>
+        <!-- 04 Sharing -->
+        <div class="pp-section" id="pp-sharing">
+          <div class="pp-section__num">04</div>
+          <div class="pp-section__content">
+            <h2>Sharing Your Information</h2>
+            <div class="pp-callout">We do not sell your personal information — ever. Full stop.</div>
+            <p>We share data only with trusted third parties necessary to run our business:</p>
+            <ul>
+              <li><strong>Shopify:</strong> Our e-commerce platform that processes orders and payments</li>
+              <li><strong>Shipping Carriers:</strong> USPS, UPS, FedEx — to deliver your orders</li>
+              <li><strong>Email Marketing:</strong> Klaviyo — to send order updates and marketing emails (if you opt in)</li>
+              <li><strong>Analytics:</strong> Google Analytics, Meta Pixel — to understand website traffic and ad performance</li>
+              <li><strong>Legal Requirements:</strong> When required by law or to protect our rights</li>
+            </ul>
+            <p>All third-party partners are contractually required to handle your data securely and in compliance with applicable privacy laws.</p>
+          </div>
+        </div>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Cookies</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:14px;">We use cookies and similar tracking technologies to enhance your experience on our site. Cookies are small files stored on your device that help us remember your preferences and analyze how our site is used.</p>
-        <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:14px;">We use:</p>
-        <ul style="font-size:15px;color:#444;line-height:1.9;padding-left:24px;">
-          <li><strong>Essential Cookies:</strong> Required for the site to function (shopping cart, login)</li>
-          <li><strong>Analytics Cookies:</strong> Help us understand how visitors use our site (Google Analytics)</li>
-          <li><strong>Marketing Cookies:</strong> Used for ad targeting and retargeting (Meta Pixel, Pinterest Tag)</li>
-        </ul>
-        <p style="font-size:15px;color:#666;margin-top:14px;">You can manage or disable cookies through your browser settings at any time.</p>
-      </div>
+        <!-- 05 Cookies -->
+        <div class="pp-section" id="pp-cookies">
+          <div class="pp-section__num">05</div>
+          <div class="pp-section__content">
+            <h2>Cookies</h2>
+            <p>We use cookies and similar tracking technologies to enhance your experience on our site. Cookies are small files stored on your device that help us remember your preferences and analyze how our site is used.</p>
+            <p>We use:</p>
+            <ul>
+              <li><strong>Essential Cookies:</strong> Required for the site to function (shopping cart, login)</li>
+              <li><strong>Analytics Cookies:</strong> Help us understand how visitors use our site (Google Analytics)</li>
+              <li><strong>Marketing Cookies:</strong> Used for ad targeting and retargeting (Meta Pixel, Pinterest Tag)</li>
+            </ul>
+            <p>You can manage or disable cookies through your browser settings at any time.</p>
+          </div>
+        </div>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Your Rights</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:16px;">Depending on your location, you may have the following rights regarding your personal data:</p>
-        <ul style="font-size:15px;color:#444;line-height:1.9;padding-left:24px;">
-          <li><strong>Access:</strong> Request a copy of the personal data we hold about you</li>
-          <li><strong>Correction:</strong> Ask us to correct inaccurate or incomplete information</li>
-          <li><strong>Deletion:</strong> Request that we delete your personal data ("right to be forgotten")</li>
-          <li><strong>Opt-Out:</strong> Unsubscribe from marketing emails at any time via the link in any email</li>
-          <li><strong>Data Portability:</strong> Receive your data in a structured, machine-readable format</li>
-          <li><strong>Withdraw Consent:</strong> Where we rely on consent, you may withdraw it at any time</li>
-        </ul>
-        <p style="font-size:15px;color:#666;margin-top:16px;">To exercise any of these rights, email us at <a href="mailto:support@happiefusion.com" style="color:var(--green);font-weight:600;">support@happiefusion.com</a>. We will respond within 30 days.</p>
-      </div>
+        <!-- 06 Your Rights -->
+        <div class="pp-section" id="pp-your-rights">
+          <div class="pp-section__num">06</div>
+          <div class="pp-section__content">
+            <h2>Your Rights</h2>
+            <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+            <ul>
+              <li><strong>Access:</strong> Request a copy of the personal data we hold about you</li>
+              <li><strong>Correction:</strong> Ask us to correct inaccurate or incomplete information</li>
+              <li><strong>Deletion:</strong> Request that we delete your personal data ("right to be forgotten")</li>
+              <li><strong>Opt-Out:</strong> Unsubscribe from marketing emails at any time via the link in any email</li>
+              <li><strong>Data Portability:</strong> Receive your data in a structured, machine-readable format</li>
+              <li><strong>Withdraw Consent:</strong> Where we rely on consent, you may withdraw it at any time</li>
+            </ul>
+            <p>To exercise any of these rights, email us at <a href="mailto:support@happiefusion.com">support@happiefusion.com</a>. We will respond within 30 days.</p>
+          </div>
+        </div>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">California Residents (CCPA)</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:14px;">If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA):</p>
-        <ul style="font-size:15px;color:#444;line-height:1.9;padding-left:24px;">
-          <li>The right to know what personal information we collect, use, and share</li>
-          <li>The right to delete your personal information</li>
-          <li>The right to opt out of the sale of your personal information (we do not sell your data)</li>
-          <li>The right to non-discrimination for exercising your privacy rights</li>
-        </ul>
-        <p style="font-size:15px;color:#666;margin-top:14px;">To submit a CCPA request, email <a href="mailto:support@happiefusion.com" style="color:var(--green);font-weight:600;">support@happiefusion.com</a> with "CCPA Request" in the subject line.</p>
-      </div>
+        <!-- 07 California (CCPA) -->
+        <div class="pp-section" id="pp-ccpa">
+          <div class="pp-section__num">07</div>
+          <div class="pp-section__content">
+            <h2>California Residents (CCPA)</h2>
+            <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA):</p>
+            <ul>
+              <li>The right to know what personal information we collect, use, and share</li>
+              <li>The right to delete your personal information</li>
+              <li>The right to opt out of the sale of your personal information (we do not sell your data)</li>
+              <li>The right to non-discrimination for exercising your privacy rights</li>
+            </ul>
+            <p>To submit a CCPA request, email <a href="mailto:support@happiefusion.com">support@happiefusion.com</a> with "CCPA Request" in the subject line.</p>
+          </div>
+        </div>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Data Security</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;">We use industry-standard security measures to protect your personal information, including SSL encryption, secure payment processing through Shopify Payments, and limited access to customer data. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
-      </div>
+        <!-- 08 Data Security -->
+        <div class="pp-section" id="pp-data-security">
+          <div class="pp-section__num">08</div>
+          <div class="pp-section__content">
+            <h2>Data Security</h2>
+            <p>We use industry-standard security measures to protect your personal information, including SSL encryption, secure payment processing through Shopify Payments, and limited access to customer data. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+          </div>
+        </div>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Data Retention</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;">We retain your personal information for as long as necessary to fulfill the purposes described in this policy, comply with legal obligations, resolve disputes, and enforce our agreements. Order records are typically retained for 7 years for tax and accounting purposes.</p>
-      </div>
+        <!-- 09 Data Retention -->
+        <div class="pp-section" id="pp-data-retention">
+          <div class="pp-section__num">09</div>
+          <div class="pp-section__content">
+            <h2>Data Retention</h2>
+            <p>We retain your personal information for as long as necessary to fulfill the purposes described in this policy, comply with legal obligations, resolve disputes, and enforce our agreements. Order records are typically retained for 7 years for tax and accounting purposes.</p>
+          </div>
+        </div>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Children's Privacy</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;">Our website and products are not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us immediately and we will delete it.</p>
-      </div>
+        <!-- 10 Children's Privacy -->
+        <div class="pp-section" id="pp-childrens-privacy">
+          <div class="pp-section__num">10</div>
+          <div class="pp-section__content">
+            <h2>Children's Privacy</h2>
+            <p>Our website and products are not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us immediately and we will delete it.</p>
+          </div>
+        </div>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Changes to This Policy</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;">We may update this Privacy Policy from time to time. When we do, we'll update the "Last updated" date at the top of this page. For significant changes, we'll notify you by email or by posting a notice on our website. Continued use of our site after changes constitutes your acceptance of the updated policy.</p>
-      </div>
+        <!-- 11 Changes -->
+        <div class="pp-section" id="pp-changes">
+          <div class="pp-section__num">11</div>
+          <div class="pp-section__content">
+            <h2>Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. When we do, we'll update the "Last updated" date at the top of this page. For significant changes, we'll notify you by email or by posting a notice on our website. Continued use of our site after changes constitutes your acceptance of the updated policy.</p>
+          </div>
+        </div>
 
-      <div style="background:var(--green-dark);border-radius:20px;padding:36px;text-align:center;">
-        <h3 style="color:#fff;font-size:20px;font-weight:800;margin-bottom:10px;">Privacy questions?</h3>
-        <p style="color:rgba(255,255,255,0.8);font-size:15px;margin-bottom:20px;">We're committed to transparency. Reach out anytime.</p>
-        <a href="mailto:support@happiefusion.com" style="background:#fff;color:var(--green-dark);border-radius:50px;padding:13px 32px;font-size:15px;font-weight:700;display:inline-block;">Email support@happiefusion.com →</a>
-      </div>
+        <!-- 12 Contact -->
+        <div class="pp-section" id="pp-contact">
+          <div class="pp-section__num">12</div>
+          <div class="pp-section__content">
+            <h2>Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, how we handle your data, or want to exercise your rights, please get in touch. We typically respond within 1–2 business days.</p>
+          </div>
+        </div>
 
+        <!-- Contact CTA Card -->
+        <div class="pp-contact-card">
+          <div class="pp-contact-card__icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <h3>Privacy questions?</h3>
+          <p>We're committed to transparency. Reach out anytime and we'll get back to you promptly.</p>
+          <a href="mailto:support@happiefusion.com">Email support@happiefusion.com →</a>
+        </div>
+
+      </main>
     </div>
   </section>
 
