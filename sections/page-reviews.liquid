@@ -1,75 +1,518 @@
 <div class="inner-page">
 
-  <div style="background:linear-gradient(135deg,#f5f0e8,#d8f3dc);padding:90px 48px;text-align:center;">
-    <div style="max-width:700px;margin:0 auto;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2D6A4F;margin-bottom:14px;">Customer Reviews</div>
-      <h1 style="font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.05;margin:0 0 18px;">Real People. Real Results.</h1>
-      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;">
-        <span style="color:#F5A623;font-size:32px;">★★★★★</span>
-        <span style="font-size:20px;font-weight:800;">4.9 / 5.0</span>
-        <span style="color:#6B6B6B;font-size:16px;">· 1,200+ verified reviews</span>
+  <!-- Hero -->
+  <div class="rev-hero">
+    <div class="rev-hero-inner">
+      <div class="rev-eyebrow">Amazon Verified Reviews</div>
+      <h1 class="rev-hero-title">Real People. Real Results.</h1>
+      <div class="rev-hero-rating">
+        <span class="rev-stars-large">★★★★★</span>
+        <div class="rev-hero-score">
+          <div class="rev-score-num">4.9 <span>/5.0</span></div>
+          <div class="rev-score-sub">1,200+ verified reviews on Amazon</div>
+        </div>
+      </div>
+      <!-- Flavor filter pills -->
+      <div class="rev-filters">
+        <button class="rev-filter active" data-filter="all">All Flavors</button>
+        <button class="rev-filter" data-filter="blue-raspberry">
+          <span class="rev-filter-dot" style="background:#3B6FF0;"></span>Blue Raspberry
+        </button>
+        <button class="rev-filter" data-filter="watermelon">
+          <span class="rev-filter-dot" style="background:#E84C6B;"></span>Watermelon
+        </button>
+        <button class="rev-filter" data-filter="mango">
+          <span class="rev-filter-dot" style="background:#F5A623;"></span>Mango
+        </button>
       </div>
     </div>
   </div>
 
   <!-- Rating breakdown -->
-  <section style="padding:48px 24px;background:#fff;border-bottom:1px solid rgba(0,0,0,0.07);">
-    <div style="max-width:600px;margin:0 auto;">
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <div style="display:flex;align-items:center;gap:12px;font-size:14px;">
-          <span style="width:40px;text-align:right;font-weight:600;">5 ★</span>
-          <div style="flex:1;height:10px;background:#eee;border-radius:10px;overflow:hidden;"><div style="width:89%;height:100%;background:#F5A623;border-radius:10px;"></div></div>
-          <span style="width:32px;color:var(--gray);">89%</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:14px;">
-          <span style="width:40px;text-align:right;font-weight:600;">4 ★</span>
-          <div style="flex:1;height:10px;background:#eee;border-radius:10px;overflow:hidden;"><div style="width:8%;height:100%;background:#F5A623;border-radius:10px;"></div></div>
-          <span style="width:32px;color:var(--gray);">8%</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:14px;">
-          <span style="width:40px;text-align:right;font-weight:600;">3 ★</span>
-          <div style="flex:1;height:10px;background:#eee;border-radius:10px;overflow:hidden;"><div style="width:2%;height:100%;background:#F5A623;border-radius:10px;"></div></div>
-          <span style="width:32px;color:var(--gray);">2%</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:14px;">
-          <span style="width:40px;text-align:right;font-weight:600;">2 ★</span>
-          <div style="flex:1;height:10px;background:#eee;border-radius:10px;overflow:hidden;"><div style="width:1%;height:100%;background:#ddd;border-radius:10px;"></div></div>
-          <span style="width:32px;color:var(--gray);">1%</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:14px;">
-          <span style="width:40px;text-align:right;font-weight:600;">1 ★</span>
-          <div style="flex:1;height:10px;background:#eee;border-radius:10px;overflow:hidden;"><div style="width:0%;height:100%;background:#ddd;border-radius:10px;"></div></div>
-          <span style="width:32px;color:var(--gray);">0%</span>
-        </div>
-      </div>
+  <div class="rev-breakdown">
+    <div class="rev-breakdown-inner">
+      <div class="rev-bar-row"><span class="rev-bar-label">5 ★</span><div class="rev-bar-track"><div class="rev-bar-fill" style="width:89%;background:#F5A623;"></div></div><span class="rev-bar-pct">89%</span></div>
+      <div class="rev-bar-row"><span class="rev-bar-label">4 ★</span><div class="rev-bar-track"><div class="rev-bar-fill" style="width:8%;background:#F5A623;"></div></div><span class="rev-bar-pct">8%</span></div>
+      <div class="rev-bar-row"><span class="rev-bar-label">3 ★</span><div class="rev-bar-track"><div class="rev-bar-fill" style="width:2%;background:#F5A623;"></div></div><span class="rev-bar-pct">2%</span></div>
+      <div class="rev-bar-row"><span class="rev-bar-label">2 ★</span><div class="rev-bar-track"><div class="rev-bar-fill" style="width:1%;background:#ddd;"></div></div><span class="rev-bar-pct">1%</span></div>
+      <div class="rev-bar-row"><span class="rev-bar-label">1 ★</span><div class="rev-bar-track"><div class="rev-bar-fill" style="width:0%;background:#ddd;"></div></div><span class="rev-bar-pct">0%</span></div>
     </div>
-  </section>
+  </div>
 
   <!-- Reviews grid -->
-  <section style="padding:60px 24px 80px;background:var(--cream);">
-    <div style="max-width:1100px;margin:0 auto;">
-      <div class="reviews-grid">
-        <div class="review-card"><div class="review-stars">★★★★★</div><blockquote>"Replaced my afternoon coffee completely. No jitters, just clean focus that lasts 4–5 hours. Blue Razzberry is addictive in the best way possible."</blockquote><div class="reviewer"><div class="reviewer-avatar">JM</div><div><strong>Jamie M.</strong><div class="reviewer-tag">Verified buyer · Blue Razzberry · Subscriber</div></div></div></div>
-        <div class="review-card"><div class="review-stars">★★★★★</div><blockquote>"I keep a 6-pack at work and one at home. The flavor is genuinely good — not like a supplement at all. More like a really good sparkling juice."</blockquote><div class="reviewer"><div class="reviewer-avatar">RC</div><div><strong>Rachel C.</strong><div class="reviewer-tag">Verified buyer · Mango Mimosa</div></div></div></div>
-        <div class="review-card"><div class="review-stars">★★★★★</div><blockquote>"My go-to before morning meetings. I notice a real difference in focus and retention after 2 weeks of daily use. Skeptic turned believer."</blockquote><div class="reviewer"><div class="reviewer-avatar">BT</div><div><strong>Brian T.</strong><div class="reviewer-tag">Verified buyer · Watermelon · Subscriber</div></div></div></div>
-        <div class="review-card"><div class="review-stars">★★★★★</div><blockquote>"The subscribe & save is a no-brainer. 20% off and it just shows up. I haven't run out in 4 months. That consistency is why I actually feel the results."</blockquote><div class="reviewer"><div class="reviewer-avatar">AL</div><div><strong>Alex L.</strong><div class="reviewer-tag">Verified buyer · Blue Razzberry · Subscriber</div></div></div></div>
-        <div class="review-card"><div class="review-stars">★★★★★</div><blockquote>"Watermelon is so clean. Just barely sweet, super refreshing. Drinks like a good sparkling water but with the focus benefits. Genuinely impressed."</blockquote><div class="reviewer"><div class="reviewer-avatar">SK</div><div><strong>Sarah K.</strong><div class="reviewer-tag">Verified buyer · Watermelon</div></div></div></div>
-        <div class="review-card"><div class="review-stars">★★★★★</div><blockquote>"The QR code to the actual lab report sold me. I've tried dozens of supplements that claim potency but can't prove it. Happie puts it front and center."</blockquote><div class="reviewer"><div class="reviewer-avatar">DM</div><div><strong>David M.</strong><div class="reviewer-tag">Verified buyer · Blue Razzberry</div></div></div></div>
-        <div class="review-card"><div class="review-stars">★★★★★</div><blockquote>"As a registered nurse I'm very skeptical of wellness products. But the research behind these specific mushroom doses is solid. And the taste? Actually incredible."</blockquote><div class="reviewer"><div class="reviewer-avatar">LN</div><div><strong>Lauren N., RN</strong><div class="reviewer-tag">Verified buyer · Variety Pack</div></div></div></div>
-        <div class="review-card"><div class="review-stars">★★★★★</div><blockquote>"Mango Mimosa is my flavor. I have one at brunch instead of a mimosa and honestly I feel better than everyone else at the table by noon."</blockquote><div class="reviewer"><div class="reviewer-avatar">TW</div><div><strong>Tara W.</strong><div class="reviewer-tag">Verified buyer · Mango Mimosa · Subscriber</div></div></div></div>
-        <div class="review-card"><div class="review-stars">★★★★★</div><blockquote>"I was having 3 cups of coffee a day. Now I have 1 coffee in the morning and a Happie in the afternoon. Sleep improved. Anxiety dropped. Focus up."</blockquote><div class="reviewer"><div class="reviewer-avatar">MR</div><div><strong>Marcus R.</strong><div class="reviewer-tag">Verified buyer · Blue Razzberry · Subscriber</div></div></div></div>
-      </div>
+  <section class="rev-section">
+    <div class="rev-grid-wrap">
+      <div class="rev-grid" id="reviews-grid">
+
+        <!-- 1 -->
+        <div class="rev-card" data-flavor="blue-raspberry">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-blue">Blue Raspberry</div>
+          </div>
+          <div class="rev-card-title">Tastes great</div>
+          <blockquote class="rev-card-body">"Best adaptogen drink I've tried! Love the mild relaxed feeling from the magnesium. Tastes great without being too sweet or having a fake sugar/stevia taste"</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#3B6FF0;">SB</div>
+            <div class="rev-author-info">
+              <strong>Shannon Brown</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="rev-card" data-flavor="watermelon">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-watermelon">Watermelon</div>
+          </div>
+          <div class="rev-card-title">Great focus/mental drink!</div>
+          <blockquote class="rev-card-body">"This is my favorite flavor — watermelon. Immediately after a few sips, you can feel the effects in your brain. I believe this is the only drink that does this."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#E84C6B;">KM</div>
+            <div class="rev-author-info">
+              <strong>Kristine Manlapaz</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="rev-card" data-flavor="mango">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-mango">Mango</div>
+          </div>
+          <div class="rev-card-title">Happy Fungi!</div>
+          <blockquote class="rev-card-body">"Refreshing mango flavor with light fizz. Not overly sweet, and I felt a smooth boost in focus without caffeine jitters. Great afternoon alternative to soda."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#F5A623;color:#1A1A1A;">NC</div>
+            <div class="rev-author-info">
+              <strong>Natalie Cesare</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="rev-card" data-flavor="watermelon">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-watermelon">Watermelon</div>
+          </div>
+          <div class="rev-card-title">Surprisingly Good Taste and Steady Energy</div>
+          <blockquote class="rev-card-body">"Wasn't sure what to expect, but the watermelon flavor is actually really refreshing. It makes me feel clear, focused, and with smooth energy throughout the day."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#E84C6B;">WR</div>
+            <div class="rev-author-info">
+              <strong>wendolin reyes</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="rev-card" data-flavor="mango">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★☆</div>
+            <div class="rev-flavor-tag rev-flavor-mango">Mango</div>
+          </div>
+          <div class="rev-card-title">Happie refresher — great for mocktails</div>
+          <blockquote class="rev-card-body">"I was a lil scared because it was made with mushrooms but it was really good — tastes like a carbonated mango drink. I've been trying to cut back on alcohol so this was great when I made mango mocktails."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#F5A623;color:#1A1A1A;">SA</div>
+            <div class="rev-author-info">
+              <strong>Shanice Adina</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="rev-card" data-flavor="watermelon">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-watermelon">Watermelon</div>
+          </div>
+          <div class="rev-card-title">Refreshing, Clean Energy Without the Crash!</div>
+          <blockquote class="rev-card-body">"I really enjoyed this Happie Fungi Fusion Watermelon drink! The watermelon flavor is light, refreshing, and not overly sweet — exactly what I like in a functional beverage."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#E84C6B;">L</div>
+            <div class="rev-author-info">
+              <strong>Luciana</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="rev-card" data-flavor="mango">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-mango">Mango</div>
+          </div>
+          <div class="rev-card-title">Love it — replaced morning coffee</div>
+          <blockquote class="rev-card-body">"My wife and I have replaced morning coffee with this drink and we are loving it. Big fan of mango and blueberry flavors."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#F5A623;color:#1A1A1A;">NG</div>
+            <div class="rev-author-info">
+              <strong>Nicole G</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="rev-card" data-flavor="blue-raspberry">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-blue">Blue Raspberry</div>
+          </div>
+          <div class="rev-card-title">Really nice for mood!</div>
+          <blockquote class="rev-card-body">"Very refreshing taste. I could tell it improved my mood and energy almost immediately — felt like a cleaner energy drink if that makes sense."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#3B6FF0;">J</div>
+            <div class="rev-author-info">
+              <strong>jujuklasek</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="rev-card" data-flavor="mango">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-mango">Mango</div>
+          </div>
+          <div class="rev-card-title">More than just a sparkling drink</div>
+          <blockquote class="rev-card-body">"Happie Fungi Fusion Mango is more than just a tasty sparkling drink — it's a smart pick when you want something flavorful and functional."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#F5A623;color:#1A1A1A;">MG</div>
+            <div class="rev-author-info">
+              <strong>Maria Goncalves</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="rev-card" data-flavor="watermelon">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★☆</div>
+            <div class="rev-flavor-tag rev-flavor-watermelon">Watermelon</div>
+          </div>
+          <div class="rev-card-title">Refreshing and energizing</div>
+          <blockquote class="rev-card-body">"Tastes great and gives a clean boost of focus and energy without the crash. Light, refreshing, and easy to drink."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#E84C6B;">M</div>
+            <div class="rev-author-info">
+              <strong>Misoi</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="rev-card" data-flavor="blue-raspberry">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-blue">Blue Raspberry</div>
+          </div>
+          <div class="rev-card-title">Great Flavor! Better than Brez!</div>
+          <blockquote class="rev-card-body">"Excellent! Couldn't taste mushrooms and loved the feel of this drink! Perfect! Better than Brez!"</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#3B6FF0;">A</div>
+            <div class="rev-author-info">
+              <strong>Anonymous</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="rev-card" data-flavor="watermelon">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★☆</div>
+            <div class="rev-flavor-tag rev-flavor-watermelon">Watermelon</div>
+          </div>
+          <div class="rev-card-title">Light watermelon seltzer — with benefits</div>
+          <blockquote class="rev-card-body">"This Happie Fungi Fusion Watermelon sparkling adaptogen drink has a light taste. It reminds of a watermelon-flavored seltzer, but with benefits."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#E84C6B;">BT</div>
+            <div class="rev-author-info">
+              <strong>BookishTechie</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="rev-card" data-flavor="blue-raspberry">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-blue">Blue Raspberry</div>
+          </div>
+          <div class="rev-card-title">Delicious and Fun!</div>
+          <blockquote class="rev-card-body">"I really enjoy this drink. This is truly a Blue Raspberry Delight!! Sooo good!!"</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#3B6FF0;">B</div>
+            <div class="rev-author-info">
+              <strong>Brenda</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14 -->
+        <div class="rev-card" data-flavor="mango">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-mango">Mango</div>
+          </div>
+          <div class="rev-card-title">Love this brand!</div>
+          <blockquote class="rev-card-body">"Delicious! Great for mood! Love the flavor and will purchase again!"</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#F5A623;color:#1A1A1A;">AC</div>
+            <div class="rev-author-info">
+              <strong>Amazon Customer</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15 -->
+        <div class="rev-card" data-flavor="watermelon">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-watermelon">Watermelon</div>
+          </div>
+          <div class="rev-card-title">Feel it in your brain</div>
+          <blockquote class="rev-card-body">"A refreshing drink with a light fruity taste. It's not too sweet and feels unique because of the functional mushroom ingredients."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#E84C6B;">ND</div>
+            <div class="rev-author-info">
+              <strong>Natallia Dzikunska</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16 -->
+        <div class="rev-card" data-flavor="blue-raspberry">
+          <div class="rev-card-top">
+            <div class="rev-card-stars">★★★★★</div>
+            <div class="rev-flavor-tag rev-flavor-blue">Blue Raspberry</div>
+          </div>
+          <div class="rev-card-title">Good stuff</div>
+          <blockquote class="rev-card-body">"Love this stuff. It's like a clean, good-for-you energy drink."</blockquote>
+          <div class="rev-card-footer">
+            <div class="rev-avatar" style="background:#3B6FF0;">KL</div>
+            <div class="rev-author-info">
+              <strong>Kolby Lankford</strong>
+              <div class="rev-verified">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+                Verified Amazon Purchase
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /rev-grid -->
     </div>
   </section>
 
   <!-- CTA -->
-  <section style="padding:80px 24px;background:var(--green-dark);text-align:center;">
-    <h2 style="color:#fff;font-size:clamp(28px,4vw,40px);font-weight:900;margin-bottom:16px;">Join 50,000+ happy customers.</h2>
-    <p style="color:rgba(255,255,255,0.8);font-size:17px;margin-bottom:32px;">Subscribe & save 20% · Free shipping $75+ · Cancel anytime</p>
-    <a href="/collections/all" class="btn-primary" style="background:#fff;color:var(--green-dark);">Shop Now →</a>
+  <section class="rev-cta">
+    <h2>Join 50,000+ happy customers.</h2>
+    <p>Subscribe &amp; save 20% · Free shipping $75+ · Cancel anytime</p>
+    <a href="/collections/all" class="btn-primary rev-cta-btn">Shop Now →</a>
   </section>
 
 </div>
+
+<style>
+/* ── REVIEWS PAGE ── */
+.rev-hero {
+  background: linear-gradient(135deg, #0B3D2E 0%, #1B5E42 50%, #2D6A4F 100%);
+  padding: 100px 24px 70px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.rev-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 20%, rgba(82,183,136,0.18) 0%, transparent 55%);
+  pointer-events: none;
+}
+.rev-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(245,166,35,0.15); border: 1px solid rgba(245,166,35,0.3);
+  color: #F5A623; font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 6px 16px; border-radius: 50px;
+  margin-bottom: 20px;
+}
+.rev-hero-title {
+  font-size: clamp(34px,5vw,58px); font-weight: 900; line-height: 1.05;
+  color: #fff; margin: 0 0 24px;
+}
+.rev-hero-rating {
+  display: inline-flex; align-items: center; gap: 16px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px; padding: 16px 28px; margin-bottom: 32px;
+}
+.rev-stars-large { color: #F5A623; font-size: 28px; letter-spacing: 2px; }
+.rev-score-num { font-size: 26px; font-weight: 900; color: #fff; line-height: 1; }
+.rev-score-num span { font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.6); }
+.rev-score-sub { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+/* Filters */
+.rev-filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+.rev-filter {
+  display: flex; align-items: center; gap: 7px;
+  padding: 9px 20px; border-radius: 50px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.rev-filter:hover, .rev-filter.active {
+  background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.3); color: #fff;
+}
+.rev-filter-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+/* Breakdown */
+.rev-breakdown { background: #fff; padding: 40px 24px; border-bottom: 1px solid rgba(0,0,0,0.07); }
+.rev-breakdown-inner { max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+.rev-bar-row { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+.rev-bar-label { width: 36px; text-align: right; font-weight: 700; color: #333; }
+.rev-bar-track { flex: 1; height: 10px; background: #F0F0F0; border-radius: 10px; overflow: hidden; }
+.rev-bar-fill { height: 100%; border-radius: 10px; transition: width 0.8s ease; }
+.rev-bar-pct { width: 32px; font-size: 12px; color: #888; font-weight: 600; }
+
+/* Reviews grid */
+.rev-section { padding: 64px 24px 80px; background: var(--cream, #F5F0E8); }
+.rev-grid-wrap { max-width: 1200px; margin: 0 auto; }
+.rev-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+/* Review card */
+.rev-card {
+  background: #fff; border-radius: 20px;
+  padding: 24px; border: 1.5px solid rgba(0,0,0,0.06);
+  display: flex; flex-direction: column; gap: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.rev-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.09); }
+.rev-card.hidden { display: none; }
+
+.rev-card-top { display: flex; justify-content: space-between; align-items: center; }
+.rev-card-stars { color: #F5A623; font-size: 15px; letter-spacing: 1px; }
+
+.rev-flavor-tag {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 50px;
+}
+.rev-flavor-blue { background: rgba(59,111,240,0.1); color: #2855D4; }
+.rev-flavor-watermelon { background: rgba(232,76,107,0.1); color: #C03060; }
+.rev-flavor-mango { background: rgba(245,166,35,0.12); color: #B8730A; }
+
+.rev-card-title { font-size: 14px; font-weight: 800; color: #111; line-height: 1.3; }
+.rev-card-body {
+  font-size: 13.5px; color: #555; line-height: 1.75;
+  margin: 0; font-style: italic; flex: 1;
+}
+
+.rev-card-footer { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.05); }
+.rev-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  color: #fff; font-size: 12px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.rev-author-info strong { display: block; font-size: 13px; color: #111; }
+.rev-verified {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 11px; color: #888; margin-top: 2px;
+}
+
+/* CTA */
+.rev-cta {
+  background: var(--green-dark, #2D6A4F);
+  padding: 80px 24px; text-align: center;
+}
+.rev-cta h2 { color: #fff; font-size: clamp(26px,4vw,40px); font-weight: 900; margin-bottom: 12px; }
+.rev-cta p { color: rgba(255,255,255,0.75); font-size: 16px; margin-bottom: 28px; }
+.rev-cta-btn { background: #fff !important; color: var(--green-dark, #2D6A4F) !important; }
+
+/* Responsive */
+@media (max-width: 1100px) { .rev-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px)  { .rev-grid { grid-template-columns: repeat(2, 1fr); } .rev-hero { padding: 80px 20px 60px; } }
+@media (max-width: 480px)  { .rev-grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+document.querySelectorAll('.rev-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.rev-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.rev-card').forEach(card => {
+      if (filter === 'all' || card.dataset.flavor === filter) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+</script>
 
 {% schema %}
 { "name": "Page: Reviews", "settings": [] }
