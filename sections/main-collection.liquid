@@ -1,8 +1,19 @@
-<div class="collection-page">
+<div class="collection-page" itemscope itemtype="https://schema.org/CollectionPage">
   <div class="collection-banner">
-    <div class="section-eyebrow">The Lineup</div>
-    <h1>{{ collection.title }}</h1>
-    <p>{{ collection.description }}</p>
+    <div class="section-eyebrow">Functional Mushroom Seltzers · No Alcohol · No Caffeine</div>
+    <h1 itemprop="name">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p itemprop="description">{{ collection.description }}</p>
+    {%- else -%}
+      <p>Shop Happie Fungi Fusion functional mushroom seltzers — 900mg Lion's Mane, 700mg Cordyceps &amp; 400mg Reishi per can. The best alcohol-free, caffeine-free adaptogenic drink. Free shipping on orders over $75.</p>
+    {%- endif -%}
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:16px;">
+      <span style="background:rgba(82,183,136,0.12);color:var(--green);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;">🍄 2,000mg Per Can</span>
+      <span style="background:rgba(82,183,136,0.12);color:var(--green);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;">✅ 0% Alcohol</span>
+      <span style="background:rgba(82,183,136,0.12);color:var(--green);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;">⚡ 0mg Caffeine</span>
+      <span style="background:rgba(82,183,136,0.12);color:var(--green);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;">🧪 Third-Party Lab Tested</span>
+      <span style="background:rgba(82,183,136,0.12);color:var(--green);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;">🌿 Vegan &amp; Non-GMO</span>
+    </div>
   </div>
   <div class="section-inner">
     <div class="products-grid">
@@ -11,7 +22,41 @@
       {% endfor %}
     </div>
   </div>
+
+  <!-- SEO content block -->
+  <div style="max-width:900px;margin:0 auto;padding:60px 24px;border-top:1px solid rgba(0,0,0,0.07);">
+    <h2 style="font-size:22px;font-weight:900;margin-bottom:16px;color:var(--green-dark);">Why Happie Fungi Fusion is the best functional mushroom drink</h2>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:14px;">Most functional mushroom supplements bury ineffective doses in capsules made from mycelium grown on grain — more grain starch than active compounds. Happie Fungi Fusion is different: we use only <strong>fruiting body extracts</strong>, dual-extracted (hot water + ethanol) for the full spectrum of beta-glucans and triterpenes.</p>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:14px;">Each can delivers <strong>900mg Lion's Mane</strong> for cognitive focus, <strong>700mg Cordyceps</strong> for natural energy, and <strong>400mg Reishi</strong> for stress support and calm — totaling 2,000mg of active mushroom extract per 12oz can. Zero alcohol. Zero caffeine. ~40 calories.</p>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:24px;">Available in three flavors: <a href="/products/watermelon-fungi-powered-seltzer" style="color:var(--green);font-weight:700;">Watermelon</a>, <a href="/products/mango-mimosa-fungi-powered-seltzer" style="color:var(--green);font-weight:700;">Mango Mimosa</a>, and <a href="/products/blue-razzberry-fungi-powered-seltzer" style="color:var(--green);font-weight:700;">Blue Razzberry</a>. Also available as a <a href="/products/happie-fungi-fusion-mushroom-drink-variety-pack" style="color:var(--green);font-weight:700;">12-can Variety Pack</a>.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;">
+      <a href="/pages/the-science" style="font-size:13px;font-weight:700;color:var(--green);text-decoration:underline;">The Science Behind Dual Extraction →</a>
+      <a href="/pages/mushrooms" style="font-size:13px;font-weight:700;color:var(--green);text-decoration:underline;">About Lion's Mane, Cordyceps &amp; Reishi →</a>
+      <a href="/pages/faq" style="font-size:13px;font-weight:700;color:var(--green);text-decoration:underline;">Frequently Asked Questions →</a>
+    </div>
+  </div>
 </div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Happie Fungi Fusion Functional Mushroom Seltzers",
+  "description": "Functional mushroom seltzers with 900mg Lion's Mane, 700mg Cordyceps, and 400mg Reishi per can. Zero alcohol, zero caffeine.",
+  "itemListElement": [
+    {% for product in collection.products %}
+    {
+      "@type": "ListItem",
+      "position": {{ forloop.index }},
+      "name": {{ product.title | json }},
+      "url": "https://happiefusion.com/products/{{ product.handle }}",
+      "image": "https:{{ product.featured_image | image_url: width: 600 }}",
+      "description": {{ product.description | strip_html | truncate: 200 | json }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
 
 {% schema %}
 {
