@@ -1,106 +1,497 @@
-<div class="inner-page">
+<div class="ship-page">
 
-  <div style="background:linear-gradient(135deg,#f5f0e8 0%,#d8f3dc 100%);padding:90px 48px;text-align:center;">
-    <div style="max-width:700px;margin:0 auto;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2D6A4F;margin-bottom:14px;">Delivery Info</div>
-      <h1 style="font-size:clamp(34px,5vw,56px);font-weight:900;line-height:1.05;margin:0 0 18px;">Shipping Policy</h1>
-      <p style="color:#6B6B6B;font-size:17px;line-height:1.65;max-width:520px;margin:0 auto;">Fast, reliable shipping to your door. Here's everything you need to know.</p>
+  <!-- Hero -->
+  <div class="ship-hero">
+    <div class="ship-hero__glow"></div>
+    <div class="ship-hero__inner">
+      <div class="ship-hero__eyebrow">Delivery Info</div>
+      <h1 class="ship-hero__title">Shipping Policy</h1>
+      <p class="ship-hero__sub">Fast, reliable shipping to your door. Here's everything you need to know.</p>
     </div>
   </div>
 
-  <!-- Quick stats -->
-  <div style="background:#fff;padding:48px 24px;border-bottom:1px solid rgba(0,0,0,0.07);">
-    <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:center;">
-      <div style="padding:28px;background:var(--cream);border-radius:20px;">
-        <div style="font-size:36px;margin-bottom:10px;">📦</div>
-        <div style="font-size:20px;font-weight:900;color:var(--green);margin-bottom:4px;">1 Business Day</div>
-        <div style="font-size:14px;color:var(--gray);">Order processing time</div>
+  <!-- Stat cards -->
+  <div class="ship-stats">
+    <div class="ship-stats__grid">
+
+      <div class="ship-stat">
+        <div class="ship-stat__badge">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3" y="7" width="22" height="16" rx="2.5" fill="white" fill-opacity="0.25"/>
+            <path d="M3 10h22" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <rect x="7" y="14" width="6" height="4" rx="1" fill="white"/>
+          </svg>
+        </div>
+        <div class="ship-stat__number">1 Business Day</div>
+        <div class="ship-stat__label">Order processing time</div>
       </div>
-      <div style="padding:28px;background:var(--cream);border-radius:20px;">
-        <div style="font-size:36px;margin-bottom:10px;">🚚</div>
-        <div style="font-size:20px;font-weight:900;color:var(--green);margin-bottom:4px;">3–5 Business Days</div>
-        <div style="font-size:14px;color:var(--gray);">Standard delivery</div>
+
+      <div class="ship-stat">
+        <div class="ship-stat__badge">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 9h14v11H3V9z" rx="1.5" fill="white" fill-opacity="0.25" stroke="white" stroke-width="1.5"/>
+            <path d="M17 13h5l3 4v3h-8V13z" fill="white" fill-opacity="0.25" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="7.5" cy="21.5" r="2" fill="white"/>
+            <circle cx="21.5" cy="21.5" r="2" fill="white"/>
+          </svg>
+        </div>
+        <div class="ship-stat__number">3–5 Business Days</div>
+        <div class="ship-stat__label">Standard delivery</div>
       </div>
-      <div style="padding:28px;background:var(--cream);border-radius:20px;">
-        <div style="font-size:36px;margin-bottom:10px;">✅</div>
-        <div style="font-size:20px;font-weight:900;color:var(--green);margin-bottom:4px;">Free on $75+</div>
-        <div style="font-size:14px;color:var(--gray);">Free standard shipping</div>
+
+      <div class="ship-stat">
+        <div class="ship-stat__badge">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="14" cy="14" r="10" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.8"/>
+            <path d="M9 14l3.5 3.5L19 10.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="ship-stat__number">Free on $75+</div>
+        <div class="ship-stat__label">Free standard shipping</div>
       </div>
+
     </div>
   </div>
 
-  <section style="padding:72px 48px;background:#fff;">
-    <div style="max-width:800px;margin:0 auto;">
+  <!-- Content sections -->
+  <div class="ship-content">
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Processing Time</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:14px;">All orders are processed within <strong>1 business day</strong> (Monday–Friday, excluding holidays) from our Northern California warehouse. Orders placed after 2pm PST may be processed the following business day.</p>
-        <p style="font-size:16px;color:#444;line-height:1.8;">You'll receive a shipping confirmation email with tracking information as soon as your order ships.</p>
+    <!-- 01 Processing Time -->
+    <section class="ship-section ship-section--white">
+      <div class="ship-section__inner">
+        <div class="ship-section__num">01</div>
+        <h2 class="ship-section__h2">Processing Time</h2>
+        <p>All orders are processed within <strong>1 business day</strong> (Monday–Friday, excluding holidays) from our Northern California warehouse. Orders placed after 2pm PST may be processed the following business day.</p>
+        <p>You'll receive a shipping confirmation email with tracking information as soon as your order ships.</p>
       </div>
+    </section>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Shipping Rates</h2>
-        <div style="overflow-x:auto;">
-          <table style="width:100%;border-collapse:collapse;font-size:15px;margin-bottom:20px;">
+    <!-- 02 Shipping Rates -->
+    <section class="ship-section ship-section--cream">
+      <div class="ship-section__inner">
+        <div class="ship-section__num">02</div>
+        <h2 class="ship-section__h2">Shipping Rates</h2>
+        <div class="ship-table-wrap">
+          <table class="ship-table">
             <thead>
-              <tr style="background:var(--green-dark);color:#fff;">
-                <th style="padding:14px 20px;text-align:left;border-radius:10px 0 0 0;">Order Total</th>
-                <th style="padding:14px 20px;text-align:left;">Shipping Method</th>
-                <th style="padding:14px 20px;text-align:left;border-radius:0 10px 0 0;">Cost</th>
+              <tr>
+                <th class="ship-table__th ship-table__th--first">Order Total</th>
+                <th class="ship-table__th">Shipping Method</th>
+                <th class="ship-table__th ship-table__th--last">Cost</th>
               </tr>
             </thead>
             <tbody>
-              <tr style="background:#fff;border-bottom:1px solid rgba(0,0,0,0.06);">
-                <td style="padding:14px 20px;font-weight:600;">Under $75</td>
-                <td style="padding:14px 20px;color:#444;">Standard (3–5 business days)</td>
-                <td style="padding:14px 20px;font-weight:700;">$5.99</td>
+              <tr class="ship-table__row ship-table__row--light">
+                <td class="ship-table__td ship-table__td--bold">Under $75</td>
+                <td class="ship-table__td">Standard (3–5 business days)</td>
+                <td class="ship-table__td ship-table__td--bold">$5.99</td>
               </tr>
-              <tr style="background:#f9f9f9;border-bottom:1px solid rgba(0,0,0,0.06);">
-                <td style="padding:14px 20px;font-weight:600;">$75 and over</td>
-                <td style="padding:14px 20px;color:#444;">Standard (3–5 business days)</td>
-                <td style="padding:14px 20px;font-weight:700;color:var(--green);">FREE</td>
+              <tr class="ship-table__row ship-table__row--alt">
+                <td class="ship-table__td ship-table__td--bold">$75 and over</td>
+                <td class="ship-table__td">Standard (3–5 business days)</td>
+                <td class="ship-table__td ship-table__td--free">FREE</td>
               </tr>
-              <tr style="background:#fff;">
-                <td style="padding:14px 20px;font-weight:600;">Any amount</td>
-                <td style="padding:14px 20px;color:#444;">Expedited (2 business days)</td>
-                <td style="padding:14px 20px;font-weight:700;">$12.99</td>
+              <tr class="ship-table__row ship-table__row--light">
+                <td class="ship-table__td ship-table__td--bold">Any amount</td>
+                <td class="ship-table__td">Expedited (2 business days)</td>
+                <td class="ship-table__td ship-table__td--bold">$12.99</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div style="background:var(--green-light);border-radius:14px;padding:18px 22px;font-size:14px;color:var(--green-dark);border-left:4px solid var(--green);">
-          <strong>Tip:</strong> Two 6-packs ($47.98) get you close — add a third and you unlock free shipping. Subscribe & Save subscribers automatically qualify on recurring orders over $75.
+        <div class="ship-tip">
+          <div class="ship-tip__icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="9" cy="9" r="8" stroke="#2D6A4F" stroke-width="1.6"/>
+              <path d="M9 8v5" stroke="#2D6A4F" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="9" cy="5.5" r="1" fill="#2D6A4F"/>
+            </svg>
+          </div>
+          <div><strong>Tip:</strong> Two 6-packs ($47.98) get you close — add a third and you unlock free shipping. Subscribe &amp; Save subscribers automatically qualify on recurring orders over $75.</div>
         </div>
       </div>
+    </section>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Where We Ship</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:14px;">We ship to <strong>all 50 US states</strong>. Happie Fungi Fusion is legal and available nationwide. Your delivery address at checkout will confirm availability.</p>
-        <p style="font-size:16px;color:#444;line-height:1.8;">We do not currently ship internationally, but are working to expand. Sign up for our email list to be notified when your country becomes available.</p>
+    <!-- 03 Where We Ship -->
+    <section class="ship-section ship-section--white">
+      <div class="ship-section__inner">
+        <div class="ship-section__num">03</div>
+        <h2 class="ship-section__h2">Where We Ship</h2>
+        <p>We ship to <strong>all 50 US states</strong>. Happie Fungi Fusion is legal and available nationwide. Your delivery address at checkout will confirm availability.</p>
+        <p>We do not currently ship internationally, but are working to expand. Sign up for our email list to be notified when your country becomes available.</p>
       </div>
+    </section>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Tracking Your Order</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:14px;">Once your order ships, you'll receive an email with your tracking number. You can track your package directly on the carrier's website or through the link in your shipping confirmation email.</p>
-        <p style="font-size:16px;color:#444;line-height:1.8;">If you haven't received a tracking email within 2 business days of placing your order, please check your spam folder first, then contact us at <a href="mailto:support@happiefusion.com" style="color:var(--green);font-weight:600;">support@happiefusion.com</a>.</p>
+    <!-- 04 Tracking Your Order -->
+    <section class="ship-section ship-section--cream">
+      <div class="ship-section__inner">
+        <div class="ship-section__num">04</div>
+        <h2 class="ship-section__h2">Tracking Your Order</h2>
+        <p>Once your order ships, you'll receive an email with your tracking number. You can track your package directly on the carrier's website or through the link in your shipping confirmation email.</p>
+        <p>If you haven't received a tracking email within 2 business days of placing your order, please check your spam folder first, then contact us at <a href="mailto:support@happiefusion.com" class="ship-link">support@happiefusion.com</a>.</p>
       </div>
+    </section>
 
-      <div style="margin-bottom:48px;">
-        <h2 style="font-size:24px;font-weight:900;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--green-light);">Damaged or Missing Orders</h2>
-        <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:14px;">If your order arrives damaged or goes missing, please contact us within <strong>7 days of the expected delivery date</strong>. We'll reship your order at no charge or issue a full refund — your choice.</p>
-        <p style="font-size:16px;color:#444;line-height:1.8;">Please take photos of any damaged packaging and include them in your email to help us file a carrier claim.</p>
+    <!-- 05 Damaged or Missing Orders -->
+    <section class="ship-section ship-section--white">
+      <div class="ship-section__inner">
+        <div class="ship-section__num">05</div>
+        <h2 class="ship-section__h2">Damaged or Missing Orders</h2>
+        <p>If your order arrives damaged or goes missing, please contact us within <strong>7 days of the expected delivery date</strong>. We'll reship your order at no charge or issue a full refund — your choice.</p>
+        <p>Please take photos of any damaged packaging and include them in your email to help us file a carrier claim.</p>
       </div>
+    </section>
 
-      <div style="background:var(--green-dark);border-radius:20px;padding:36px;text-align:center;">
-        <h3 style="color:#fff;font-size:20px;font-weight:800;margin-bottom:10px;">Questions about your order?</h3>
-        <p style="color:rgba(255,255,255,0.8);font-size:15px;margin-bottom:20px;">Our team responds within 1 business day.</p>
-        <a href="/pages/contact" style="background:#fff;color:var(--green-dark);border-radius:50px;padding:13px 32px;font-size:15px;font-weight:700;display:inline-block;">Contact Us →</a>
+    <!-- Contact CTA -->
+    <div class="ship-cta">
+      <div class="ship-cta__inner">
+        <h3 class="ship-cta__title">Questions about your order?</h3>
+        <p class="ship-cta__sub">Our team responds within 1 business day.</p>
+        <a href="/pages/contact" class="ship-cta__btn">Contact Us</a>
       </div>
-
     </div>
-  </section>
 
-</div>
+  </div><!-- /.ship-content -->
+
+</div><!-- /.ship-page -->
+
+<style>
+/* =============================================
+   SHIPPING PAGE — PREMIUM REDESIGN
+   ============================================= */
+
+.ship-page {
+  font-family: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Hero ---------------------------------- */
+.ship-hero {
+  position: relative;
+  background: linear-gradient(135deg, #0B3D2E 0%, #1B5E42 50%, #2D6A4F 100%);
+  padding: 100px 48px 90px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.ship-hero__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(74, 222, 128, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ship-hero__inner {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.ship-hero__eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 16px;
+}
+
+.ship-hero__title {
+  font-size: clamp(36px, 5.5vw, 60px);
+  font-weight: 900;
+  line-height: 1.04;
+  color: #ffffff;
+  margin: 0 0 20px;
+  letter-spacing: -0.02em;
+}
+
+.ship-hero__sub {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* --- Stat cards ---------------------------- */
+.ship-stats {
+  background: #ffffff;
+  padding: 52px 24px 56px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.ship-stats__grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.ship-stat {
+  background: #ffffff;
+  border: 1px solid rgba(45, 106, 79, 0.12);
+  border-radius: 20px;
+  padding: 32px 24px 28px;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(11, 61, 46, 0.06);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.ship-stat:hover {
+  box-shadow: 0 8px 32px rgba(11, 61, 46, 0.12);
+  transform: translateY(-2px);
+}
+
+.ship-stat__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #1B5E42 0%, #2D6A4F 100%);
+  margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(27, 94, 66, 0.35);
+}
+
+.ship-stat__number {
+  font-size: 19px;
+  font-weight: 900;
+  color: #1B5E42;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.ship-stat__label {
+  font-size: 13.5px;
+  color: #6B6B6B;
+}
+
+/* --- Content layout ------------------------ */
+.ship-content {
+  /* sections inside handle their own bg */
+}
+
+/* --- Section base -------------------------- */
+.ship-section {
+  padding: 72px 48px;
+}
+
+.ship-section--white {
+  background: #ffffff;
+}
+
+.ship-section--cream {
+  background: #F5F0E8;
+}
+
+.ship-section__inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.ship-section__num {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2D6A4F;
+  margin-bottom: 8px;
+}
+
+.ship-section__h2 {
+  font-size: 26px;
+  font-weight: 900;
+  color: #111;
+  margin: 0 0 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid rgba(45, 106, 79, 0.18);
+  letter-spacing: -0.01em;
+}
+
+.ship-section__inner p {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.ship-section__inner p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Shipping rates table ------------------ */
+.ship-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
+
+.ship-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.ship-table__th {
+  background: #0B3D2E;
+  color: #ffffff;
+  padding: 15px 22px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: 0.03em;
+}
+
+.ship-table__th--first {
+  border-radius: 14px 0 0 0;
+}
+
+.ship-table__th--last {
+  border-radius: 0 14px 0 0;
+}
+
+.ship-table__td {
+  padding: 15px 22px;
+  color: #555;
+}
+
+.ship-table__td--bold {
+  font-weight: 700;
+  color: #222;
+}
+
+.ship-table__td--free {
+  font-weight: 800;
+  color: #1B5E42;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+
+.ship-table__row--light {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ship-table__row--alt {
+  background: #f4faf6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* --- Tip callout --------------------------- */
+.ship-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #F0FDF4;
+  border-left: 4px solid #2D6A4F;
+  border-radius: 0 12px 12px 0;
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #1B5E42;
+  line-height: 1.65;
+}
+
+.ship-tip__icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* --- Link ---------------------------------- */
+.ship-link {
+  color: #2D6A4F;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ship-link:hover {
+  color: #1B5E42;
+}
+
+/* --- Contact CTA -------------------------- */
+.ship-cta {
+  background: #2D6A4F;
+  padding: 72px 48px;
+}
+
+.ship-cta__inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ship-cta__title {
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 900;
+  margin: 0 0 12px;
+  letter-spacing: -0.01em;
+}
+
+.ship-cta__sub {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 15px;
+  margin: 0 0 28px;
+}
+
+.ship-cta__btn {
+  display: inline-block;
+  background: #ffffff;
+  color: #0B3D2E;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 36px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.ship-cta__btn:hover {
+  background: #F0FDF4;
+  color: #1B5E42;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Responsive ---------------------------- */
+@media (max-width: 768px) {
+  .ship-hero {
+    padding: 72px 24px 64px;
+  }
+
+  .ship-stats {
+    padding: 40px 20px 44px;
+  }
+
+  .ship-stats__grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    max-width: 420px;
+  }
+
+  .ship-section {
+    padding: 52px 24px;
+  }
+
+  .ship-cta {
+    padding: 56px 24px;
+  }
+
+  .ship-table__th,
+  .ship-table__td {
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .ship-table {
+    font-size: 13.5px;
+  }
+}
+</style>
 
 {% schema %}
 { "name": "Page: Shipping", "settings": [] }
