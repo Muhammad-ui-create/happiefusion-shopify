@@ -1,0 +1,688 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Quit the Coffee Crash — Happie Fungi Fusion</title>
+  <meta name="description" content="900mg Lion's Mane · 700mg Cordyceps · 400mg Reishi. Per can. The morning routine without the crash. Use FUNGI15 for 15% off.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cottage:    #FBF6EA;
+      --cream:      #F2E9D2;
+      --cream-dk:   #E8DCBF;
+      --linen:      #FFFEF7;
+      --sage:       #A8B89A;
+      --sage-dk:    #6B7F5E;
+      --sage-lt:    #D0DBC4;
+      --earth:      #C9A266;
+      --earth-dk:   #8E6F3F;
+      --earth-lt:   #E8D5A3;
+      --mango:      #E89B3C;
+      --mango-dk:   #C97F1F;
+      --brown:      #3D2F22;
+      --brown-lt:   #6B5743;
+      --brown-md:   #8A745E;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--linen);
+      color: var(--brown);
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    .serif { font-family: 'Fraunces', Georgia, serif; }
+
+    /* ── NAV ── */
+    .lp-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 14px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,254,247,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(61,47,34,0.08);
+    }
+    .lp-nav-logo img { height: 44px; width: auto; }
+    .lp-nav-cta {
+      background: var(--brown); color: var(--linen);
+      border-radius: 50px; padding: 9px 22px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 130px 32px 80px;
+      background:
+        radial-gradient(ellipse at 75% 20%, rgba(232,155,60,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 15% 85%, rgba(168,184,154,0.15) 0%, transparent 60%),
+        linear-gradient(165deg, var(--linen) 0%, var(--cream) 60%, var(--cream-dk) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.05fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(107,127,94,0.12);
+      border: 1px solid rgba(107,127,94,0.22);
+      color: var(--sage-dk);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 7px 18px; border-radius: 50px;
+      margin-bottom: 24px;
+    }
+    .hero-headline {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(44px, 7vw, 88px);
+      font-weight: 600;
+      line-height: 0.95;
+      color: var(--brown); margin-bottom: 22px;
+      letter-spacing: -0.02em;
+    }
+    .hero-headline em {
+      font-style: italic; font-weight: 400;
+      color: var(--mango-dk);
+    }
+    .hero-sub {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(18px, 1.8vw, 21px);
+      font-weight: 400;
+      color: var(--brown-lt);
+      line-height: 1.5; margin-bottom: 36px;
+      max-width: 480px;
+    }
+    .hero-doses {
+      display: flex; gap: 0; flex-wrap: wrap;
+      margin-bottom: 36px;
+      border-top: 1px solid rgba(61,47,34,0.1);
+      border-bottom: 1px solid rgba(61,47,34,0.1);
+      padding: 18px 0;
+    }
+    .hero-dose {
+      flex: 1; min-width: 100px;
+      padding: 0 16px;
+      text-align: center;
+    }
+    .hero-dose + .hero-dose { border-left: 1px solid rgba(61,47,34,0.1); }
+    .hero-dose-num {
+      font-family: 'Fraunces', serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--brown); display: block;
+      line-height: 1;
+    }
+    .hero-dose-name {
+      font-size: 10px; letter-spacing: 0.16em;
+      color: var(--brown-md); text-transform: uppercase;
+      font-weight: 700; margin-top: 6px;
+    }
+    .hero-dose-sub {
+      font-size: 11px; font-style: italic;
+      color: var(--sage-dk); margin-top: 2px;
+      font-family: 'Fraunces', serif;
+    }
+
+    .hero-cta-group {
+      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--brown); color: var(--linen);
+      border-radius: 50px; padding: 17px 36px;
+      font-size: 15px; font-weight: 800; letter-spacing: 0.03em;
+      box-shadow: 0 8px 24px rgba(61,47,34,0.18);
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { background: var(--brown-lt); transform: translateY(-2px); }
+    .hero-code {
+      font-size: 13px; color: var(--brown-lt);
+    }
+    .hero-code strong {
+      font-family: monospace;
+      background: var(--earth); color: var(--brown);
+      padding: 3px 9px; border-radius: 6px;
+      font-weight: 800; letter-spacing: 0.06em;
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 520px;
+    }
+    .hero-can-wrap {
+      position: relative;
+      filter: drop-shadow(0 32px 60px rgba(201,162,102,0.3));
+    }
+    .hero-can-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at center, rgba(232,213,163,0.5) 0%, transparent 65%);
+      transform: scale(1.6);
+    }
+    .hero-can {
+      width: 300px; max-width: 80vw; position: relative; z-index: 2;
+      border-radius: 24px;
+    }
+    /* The 3 mushroom proof points floating around */
+    .hero-proof {
+      position: absolute;
+      background: var(--linen);
+      border: 1px solid rgba(61,47,34,0.1);
+      border-radius: 14px;
+      padding: 10px 14px;
+      box-shadow: 0 12px 32px rgba(61,47,34,0.1);
+      font-size: 12px;
+      display: flex; align-items: center; gap: 8px;
+      z-index: 3;
+    }
+    .hero-proof-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+    .hero-proof-info strong {
+      display: block;
+      font-family: 'Fraunces', serif;
+      font-size: 13px; color: var(--brown);
+      font-weight: 700; line-height: 1;
+    }
+    .hero-proof-info span {
+      font-size: 10px; color: var(--brown-md);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .hero-proof-1 { top: 20px; left: -10px; transform: rotate(-3deg); }
+    .hero-proof-1 .hero-proof-dot { background: rgba(168,184,154,0.3); color: var(--sage-dk); }
+    .hero-proof-2 { top: 200px; right: -20px; transform: rotate(2deg); }
+    .hero-proof-2 .hero-proof-dot { background: rgba(232,155,60,0.2); color: var(--mango-dk); }
+    .hero-proof-3 { bottom: 30px; left: 10px; transform: rotate(-1deg); }
+    .hero-proof-3 .hero-proof-dot { background: rgba(184,144,96,0.25); color: var(--earth-dk); }
+
+    /* ── PARALLEL POSITIONING (3 vs 1) ── */
+    .parallel-section {
+      padding: 110px 32px;
+      background: var(--cottage);
+    }
+    .parallel-inner { max-width: 1080px; margin: 0 auto; }
+    .parallel-header { text-align: center; margin-bottom: 56px; }
+    .parallel-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--mango-dk);
+      margin-bottom: 14px;
+    }
+    .parallel-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 600; color: var(--brown);
+      line-height: 1.1; margin-bottom: 18px;
+    }
+    .parallel-title em { font-style: italic; color: var(--mango-dk); }
+    .parallel-sub {
+      font-family: 'Fraunces', serif;
+      font-size: 19px; font-weight: 400;
+      color: var(--brown-lt); max-width: 580px;
+      margin: 0 auto; line-height: 1.5;
+    }
+
+    /* Comparison */
+    .parallel-compare {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px;
+      align-items: stretch;
+    }
+    .compare-card {
+      background: var(--linen);
+      border-radius: 24px;
+      padding: 36px 32px;
+      border: 1px solid rgba(61,47,34,0.06);
+      display: flex; flex-direction: column;
+    }
+    .compare-card.featured {
+      background: linear-gradient(165deg, #FDF4E0, #F4E2B8);
+      border: 2px solid var(--earth);
+      box-shadow: 0 16px 40px rgba(201,162,102,0.2);
+      position: relative;
+    }
+    .compare-card.featured::after {
+      content: 'FUNGI FUSION';
+      position: absolute; top: 16px; right: 18px;
+      font-size: 9px; font-weight: 900; letter-spacing: 0.18em;
+      color: var(--earth-dk); background: var(--linen);
+      padding: 4px 10px; border-radius: 50px;
+    }
+    .compare-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 22px; font-weight: 600;
+      color: var(--brown); margin-bottom: 24px;
+    }
+    .compare-ingredient {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(61,47,34,0.08);
+    }
+    .compare-ingredient:last-child { border-bottom: none; }
+    .compare-ingredient-dose {
+      font-family: 'Fraunces', serif;
+      font-size: 22px; font-weight: 700;
+      min-width: 75px; color: var(--brown);
+    }
+    .compare-card.standard .compare-ingredient-dose { color: var(--brown-md); }
+    .compare-ingredient-info strong {
+      display: block; font-size: 14px; font-weight: 800;
+      color: var(--brown);
+    }
+    .compare-ingredient-info span {
+      font-size: 12px; color: var(--brown-md);
+      font-family: 'Fraunces', serif; font-style: italic;
+    }
+    .compare-empty {
+      padding: 20px 0; text-align: center;
+      font-size: 14px; color: var(--brown-md);
+      font-style: italic;
+    }
+
+    /* ── COFFEE vs HAPPIE ── */
+    .switch-section {
+      padding: 110px 32px;
+      background: var(--linen);
+    }
+    .switch-inner { max-width: 1080px; margin: 0 auto; }
+    .switch-header { text-align: center; margin-bottom: 56px; }
+    .switch-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      background: var(--cottage); border-radius: 24px;
+      overflow: hidden; border: 1px solid rgba(61,47,34,0.07);
+    }
+    .switch-col {
+      padding: 40px 32px;
+      display: flex; flex-direction: column;
+    }
+    .switch-col.coffee {
+      background: linear-gradient(165deg, #F0E5D2, #DDCFB5);
+    }
+    .switch-col.happie {
+      background: linear-gradient(165deg, #FFFEF7, #F5EFE0);
+    }
+    .switch-col-label {
+      display: inline-block;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; padding: 5px 12px;
+      border-radius: 50px; margin-bottom: 16px; align-self: flex-start;
+    }
+    .switch-col.coffee .switch-col-label { background: rgba(61,47,34,0.15); color: var(--brown); }
+    .switch-col.happie .switch-col-label { background: var(--brown); color: var(--linen); }
+    .switch-col h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 26px; font-weight: 600;
+      color: var(--brown); margin-bottom: 8px;
+      line-height: 1.15;
+    }
+    .switch-col p {
+      font-size: 14px; color: var(--brown-lt);
+      line-height: 1.7; margin-bottom: 20px;
+    }
+    .switch-timeline { list-style: none; padding: 0; flex: 1; }
+    .switch-timeline li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 0; font-size: 13.5px; line-height: 1.6;
+    }
+    .switch-time {
+      font-family: 'Fraunces', serif;
+      font-weight: 700; font-size: 13px;
+      color: var(--brown-md); min-width: 60px;
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-section {
+      padding: 110px 32px;
+      background: var(--cream);
+    }
+    .reviews-inner { max-width: 1100px; margin: 0 auto; }
+    .reviews-header { text-align: center; margin-bottom: 52px; }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;
+    }
+    .review-card {
+      background: var(--linen);
+      border-radius: 22px;
+      padding: 30px 28px;
+      border: 1px solid rgba(61,47,34,0.06);
+    }
+    .review-stars {
+      color: var(--mango); font-size: 14px; letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .review-text {
+      font-family: 'Fraunces', serif;
+      font-size: 15px; font-style: italic; font-weight: 400;
+      color: var(--brown-lt); line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .review-by {
+      font-size: 12px; color: var(--sage-dk);
+      font-weight: 800; letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── TRUST BAR ── */
+    .trust-section {
+      padding: 60px 32px;
+      background: var(--brown);
+      color: var(--cream);
+    }
+    .trust-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 0;
+      text-align: center;
+    }
+    .trust-item { padding: 0 16px; }
+    .trust-item + .trust-item { border-left: 1px solid rgba(242,233,210,0.15); }
+    .trust-item svg { stroke: var(--earth-lt); margin-bottom: 10px; }
+    .trust-item strong { display: block; font-size: 13px; margin-bottom: 4px; font-weight: 800; }
+    .trust-item span { font-size: 12px; color: rgba(242,233,210,0.7); }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      padding: 130px 32px;
+      background:
+        radial-gradient(ellipse at 30% 30%, rgba(232,155,60,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 70%, rgba(168,184,154,0.15) 0%, transparent 60%),
+        linear-gradient(165deg, var(--linen) 0%, var(--cream) 100%);
+      text-align: center;
+    }
+    .final-cta-inner { max-width: 720px; margin: 0 auto; }
+    .final-cta h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(40px, 5.5vw, 64px);
+      font-weight: 600; color: var(--brown);
+      line-height: 1.02; margin-bottom: 22px;
+    }
+    .final-cta h2 em { font-style: italic; color: var(--mango-dk); }
+    .final-cta p {
+      font-family: 'Fraunces', serif;
+      font-size: 19px; color: var(--brown-lt);
+      line-height: 1.55; margin-bottom: 40px;
+      max-width: 520px; margin-left: auto; margin-right: auto;
+    }
+    .final-cta-row {
+      display: flex; justify-content: center; gap: 18px;
+      flex-wrap: wrap; align-items: center;
+    }
+    .disclaimer {
+      font-size: 11px; color: var(--brown-md); opacity: 0.7;
+      max-width: 540px; margin: 48px auto 0;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    .lp-footer {
+      padding: 28px 32px;
+      background: var(--brown);
+      color: rgba(242,233,210,0.7);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px;
+    }
+    .lp-footer-links { display: flex; gap: 22px; }
+    .lp-footer-links a:hover { color: var(--linen); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 56px; }
+      .hero { padding: 110px 24px 60px; }
+      .hero-visual { order: -1; min-height: 400px; }
+      .hero-can { width: 230px; }
+      .hero-proof { font-size: 10px; padding: 8px 11px; }
+      .hero-proof-dot { width: 22px; height: 22px; font-size: 11px; }
+      .parallel-compare { grid-template-columns: 1fr; }
+      .switch-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+      .trust-inner { grid-template-columns: repeat(2,1fr); gap: 24px; }
+      .trust-item + .trust-item { border-left: none; }
+      .trust-item:nth-child(odd) { border-right: 1px solid rgba(242,233,210,0.15); }
+      .lp-footer { flex-direction: column; gap: 14px; text-align: center; }
+      section { padding-left: 20px !important; padding-right: 20px !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="lp-nav">
+    <a href="/" class="lp-nav-logo"><img src="{{ 'happie-logo.png' | asset_url }}" alt="Happie Fusion"></a>
+    <a href="/collections/all?discount=FUNGI15" class="lp-nav-cta">Use FUNGI15 →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-eyebrow">A Morning Routine, Reset</div>
+        <h1 class="hero-headline serif">Quit the<br>coffee <em>crash.</em></h1>
+        <p class="hero-sub">Three functional mushrooms in every can. The morning energy you actually want — without the 2pm wall.</p>
+        <div class="hero-doses">
+          <div class="hero-dose">
+            <span class="hero-dose-num">900mg</span>
+            <div class="hero-dose-name">Lion's Mane</div>
+            <div class="hero-dose-sub">focus</div>
+          </div>
+          <div class="hero-dose">
+            <span class="hero-dose-num">700mg</span>
+            <div class="hero-dose-name">Cordyceps</div>
+            <div class="hero-dose-sub">energy</div>
+          </div>
+          <div class="hero-dose">
+            <span class="hero-dose-num">400mg</span>
+            <div class="hero-dose-name">Reishi</div>
+            <div class="hero-dose-sub">calm</div>
+          </div>
+        </div>
+        <div class="hero-cta-group">
+          <a href="/collections/all?discount=FUNGI15" class="btn-primary">Try the Switch — 15% off →</a>
+          <div class="hero-code">code <strong>FUNGI15</strong></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-can-wrap">
+          <div class="hero-can-bg"></div>
+          <img src="{{ 'can-mango-mimosa.png' | asset_url }}" alt="Happie Fungi Fusion Mango Mimosa" class="hero-can">
+          <div class="hero-proof hero-proof-1">
+            <div class="hero-proof-dot">🌿</div>
+            <div class="hero-proof-info">
+              <strong>Lion's Mane</strong>
+              <span>900mg · Focus</span>
+            </div>
+          </div>
+          <div class="hero-proof hero-proof-2">
+            <div class="hero-proof-dot">⚡</div>
+            <div class="hero-proof-info">
+              <strong>Cordyceps</strong>
+              <span>700mg · Energy</span>
+            </div>
+          </div>
+          <div class="hero-proof hero-proof-3">
+            <div class="hero-proof-dot">☀️</div>
+            <div class="hero-proof-info">
+              <strong>Reishi</strong>
+              <span>400mg · Calm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARALLEL POSITIONING: 3 vs 1 -->
+  <section class="parallel-section">
+    <div class="parallel-inner">
+      <div class="parallel-header">
+        <div class="parallel-eyebrow">The Three-Mushroom Stack</div>
+        <h2 class="parallel-title serif">Most adaptogen drinks have <em>one</em> functional ingredient.<br>Fungi Fusion has <em>three.</em></h2>
+        <p class="parallel-sub">One mushroom does one thing. Three mushrooms, dosed correctly, work like a system — and that's the whole point.</p>
+      </div>
+      <div class="parallel-compare">
+        <div class="compare-card standard">
+          <h3>Most Adaptogen Drinks</h3>
+          <div class="compare-ingredient">
+            <div class="compare-ingredient-dose">500mg</div>
+            <div class="compare-ingredient-info">
+              <strong>Lion's Mane</strong>
+              <span>focus only</span>
+            </div>
+          </div>
+          <div class="compare-empty">— No Cordyceps —</div>
+          <div class="compare-empty">— No Reishi —</div>
+          <div class="compare-empty">— Single-extracted, mycelium-on-grain —</div>
+        </div>
+        <div class="compare-card featured">
+          <h3>Happie Fungi Fusion</h3>
+          <div class="compare-ingredient">
+            <div class="compare-ingredient-dose">900mg</div>
+            <div class="compare-ingredient-info">
+              <strong>Lion's Mane</strong>
+              <span>focus &amp; mental clarity</span>
+            </div>
+          </div>
+          <div class="compare-ingredient">
+            <div class="compare-ingredient-dose">700mg</div>
+            <div class="compare-ingredient-info">
+              <strong>Cordyceps</strong>
+              <span>natural cellular energy</span>
+            </div>
+          </div>
+          <div class="compare-ingredient">
+            <div class="compare-ingredient-dose">400mg</div>
+            <div class="compare-ingredient-info">
+              <strong>Reishi</strong>
+              <span>steady calm under load</span>
+            </div>
+          </div>
+          <div class="compare-empty" style="color:var(--earth-dk);font-weight:600;font-style:normal;">
+            ✓ Dual-extracted · Fruiting body only · 2,000mg total
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COFFEE vs HAPPIE TIMELINE -->
+  <section class="switch-section">
+    <div class="switch-inner">
+      <div class="switch-header">
+        <div class="parallel-eyebrow">The 12-Hour Difference</div>
+        <h2 class="parallel-title serif">What your morning <em>actually</em> looks like.</h2>
+      </div>
+      <div class="switch-grid">
+        <div class="switch-col coffee">
+          <div class="switch-col-label">On Coffee</div>
+          <h3 class="serif">The Spike &amp; Crash</h3>
+          <p>Adrenal stimulation. Cortisol spike. Fast onset. Sharp fall.</p>
+          <ul class="switch-timeline">
+            <li><span class="switch-time">7:30 AM</span> Coffee. Instant lift.</li>
+            <li><span class="switch-time">9:00 AM</span> Peak focus. Slight jaw clench.</li>
+            <li><span class="switch-time">11:00 AM</span> Edges. Quick second cup.</li>
+            <li><span class="switch-time">2:00 PM</span> The wall. Brain fog. Snack hunting.</li>
+            <li><span class="switch-time">4:00 PM</span> Third coffee. Or surrender.</li>
+            <li><span class="switch-time">11:00 PM</span> Eyes open. Sleep won't come.</li>
+          </ul>
+        </div>
+        <div class="switch-col happie">
+          <div class="switch-col-label">On Fungi Fusion</div>
+          <h3 class="serif">The Steady Climb</h3>
+          <p>Cellular energy via ATP, not adrenal stress. Compounding benefits. No drop-off.</p>
+          <ul class="switch-timeline">
+            <li><span class="switch-time">7:30 AM</span> Crack a can. Cold and crisp.</li>
+            <li><span class="switch-time">9:00 AM</span> Clear, present, settled.</li>
+            <li><span class="switch-time">11:00 AM</span> Still here. No second can needed.</li>
+            <li><span class="switch-time">2:00 PM</span> Steady. No wall.</li>
+            <li><span class="switch-time">4:00 PM</span> Closing out the day, level.</li>
+            <li><span class="switch-time">11:00 PM</span> Asleep. Full cycle.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews-section">
+    <div class="reviews-inner">
+      <div class="reviews-header">
+        <div class="parallel-eyebrow">Verified · From Amazon Buyers</div>
+        <h2 class="parallel-title serif" style="margin-bottom:0;">The switch is real.</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"My wife and I have replaced morning coffee with this drink and we are loving it."</p>
+          <div class="review-by">— Nicole G.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Refreshing mango flavor with light fizz. Not overly sweet, and I felt a smooth boost in focus without caffeine jitters."</p>
+          <div class="review-by">— Natalie C.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Tastes great and gives a clean boost of focus and energy without the crash. Light, refreshing, and easy to drink."</p>
+          <div class="review-by">— Misoi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-section">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 4H8L9 3z"/><path d="M8 7v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7"/><path d="M12 11v3M11 13h2"/></svg>
+        <strong>Lab Tested</strong>
+        <span>Every batch · QR-coded COA</span>
+      </div>
+      <div class="trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg>
+        <strong>Fruiting Body</strong>
+        <span>No mycelium fillers</span>
+      </div>
+      <div class="trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        <strong>0mg Caffeine</strong>
+        <span>0% Alcohol · Always</span>
+      </div>
+      <div class="trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-16 0 8 8 0 0 1 16 0z"/><path d="M12 8v4l3 2"/></svg>
+        <strong>30-Day Guarantee</strong>
+        <span>Don't love it · Full refund</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <h2 class="serif">Trade the crash for <em>the climb.</em></h2>
+      <p>Three mushrooms. One can. Real morning energy that doesn't borrow from your afternoon.</p>
+      <div class="final-cta-row">
+        <a href="/collections/all?discount=FUNGI15" class="btn-primary">Shop Fungi Fusion →</a>
+        <div class="hero-code">code <strong>FUNGI15</strong> · 15% off</div>
+      </div>
+      <div class="disclaimer">These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="lp-footer">
+    <div>© {{ 'now' | date: '%Y' }} Happie Fusion · Made in Northern California</div>
+    <div class="lp-footer-links">
+      <a href="/policies/privacy-policy">Privacy</a>
+      <a href="/policies/refund-policy">Returns</a>
+      <a href="/pages/contact">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
