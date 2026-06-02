@@ -136,45 +136,83 @@
           </div>
         </div>
 
-        <!-- Purchase Options: One-time vs Subscribe -->
+        <!-- Purchase Options: Subscribe (default) vs One-time -->
         {% if product.selling_plan_groups.size > 0 %}
-          <div class="purchase-options">
-            <div class="purchase-label">Purchase Options</div>
-            <label class="purchase-option {% if product.selected_selling_plan_allocation == nil %}active{% endif %}" id="opt-onetime">
-              <input type="radio" name="selling_plan" value="" id="selling-plan-onetime" {% if product.selected_selling_plan_allocation == nil %}checked{% endif %} />
-              <div class="opt-inner">
-                <div class="opt-title">One Time Purchase</div>
-                <div class="opt-price" id="onetime-price">{{ product.selected_or_first_available_variant.price | money }}</div>
-              </div>
-            </label>
+          <div class="purchase-options purchase-options-v2">
+            <div class="purchase-header">
+              <div class="purchase-label">Choose Your Plan</div>
+              <span class="purchase-best-tag">⚡ MOST POPULAR</span>
+            </div>
+
             {% for group in product.selling_plan_groups %}
               {% for plan in group.selling_plans %}
-                <label class="purchase-option subscribe-opt" id="opt-subscribe">
-                  <input type="radio" name="selling_plan" value="{{ plan.id }}" id="selling-plan-{{ plan.id }}" />
+                <label class="purchase-option subscribe-opt subscribe-opt-v2 active" id="opt-subscribe">
+                  <input type="radio" name="selling_plan" value="{{ plan.id }}" id="selling-plan-{{ plan.id }}" checked />
                   <div class="opt-inner">
-                    <div class="opt-title">
-                      Subscribe &amp; Save
-                      {% for adjustment in plan.price_adjustments %}
-                        {% if adjustment.value_type == 'percentage' %}
-                          <span class="save-badge">SAVE {{ adjustment.value }}%</span>
-                        {% endif %}
-                      {% endfor %}
+                    <div class="opt-top">
+                      <div class="opt-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:-3px;"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7 1 6.3 2.7M21 4v5h-5"/></svg>
+                        Subscribe &amp; Save
+                        {% for adjustment in plan.price_adjustments %}
+                          {% if adjustment.value_type == 'percentage' %}
+                            <span class="save-badge save-badge-v2">SAVE {{ adjustment.value }}%</span>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                      <div class="opt-price subscribe-price" id="subscribe-price">
+                        {% assign variant = product.selected_or_first_available_variant %}
+                        {% for allocation in variant.selling_plan_allocations %}
+                          {% if allocation.selling_plan.id == plan.id %}
+                            <span class="price-discounted">{{ allocation.price | money }}</span>
+                            <span class="price-original-crossed">{{ variant.price | money }}</span>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
                     </div>
-                    <div class="opt-price subscribe-price" id="subscribe-price">
-                      {% assign variant = product.selected_or_first_available_variant %}
-                      {% for allocation in variant.selling_plan_allocations %}
-                        {% if allocation.selling_plan.id == plan.id %}
-                          <span class="price-discounted">{{ allocation.price | money }}</span>
-                          <span class="price-original-crossed">{{ variant.price | money }}</span>
-                        {% endif %}
-                      {% endfor %}
-                    </div>
+                    <ul class="opt-perks">
+                      <li>✓ Free shipping every order</li>
+                      <li>✓ Skip, pause, or cancel anytime</li>
+                      <li>✓ Early access to new flavors</li>
+                    </ul>
                     <div class="opt-sub">{{ plan.description }}</div>
                   </div>
                 </label>
               {% endfor %}
             {% endfor %}
+
+            <label class="purchase-option" id="opt-onetime">
+              <input type="radio" name="selling_plan" value="" id="selling-plan-onetime" />
+              <div class="opt-inner">
+                <div class="opt-top">
+                  <div class="opt-title">One-Time Purchase</div>
+                  <div class="opt-price" id="onetime-price">{{ product.selected_or_first_available_variant.price | money }}</div>
+                </div>
+              </div>
+            </label>
           </div>
+
+          <style>
+          .purchase-options-v2 { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+          .purchase-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+          .purchase-label { font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #666; }
+          .purchase-best-tag { font-size: 10px; font-weight: 900; letter-spacing: 0.12em; background: #F5A623; color: #1A1A1A; padding: 4px 10px; border-radius: 50px; }
+          .subscribe-opt-v2 {
+            background: linear-gradient(135deg, #E8F5EC, #D4EDDE) !important;
+            border: 2.5px solid #2D6A4F !important;
+            box-shadow: 0 8px 24px rgba(45,106,79,0.15);
+            border-radius: 16px !important;
+            padding: 16px 18px !important;
+            position: relative;
+          }
+          .subscribe-opt-v2 .opt-title { color: #2D6A4F; font-weight: 800; }
+          .save-badge-v2 { background: #F5A623 !important; color: #1A1A1A !important; font-weight: 900 !important; }
+          .opt-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+          .opt-perks { list-style: none; padding: 0; margin: 10px 0 4px; font-size: 13px; color: #2D6A4F; display: flex; flex-direction: column; gap: 4px; }
+          .opt-perks li { font-weight: 600; }
+          .opt-sub { font-size: 12px; color: #555; margin-top: 6px; }
+          .purchase-option:not(.subscribe-opt-v2) { padding: 14px 18px !important; border: 1.5px solid rgba(0,0,0,0.1) !important; border-radius: 14px !important; }
+          .purchase-option:not(.subscribe-opt-v2):hover { border-color: rgba(45,106,79,0.4) !important; }
+          </style>
         {% endif %}
 
         <!-- Add to Cart -->

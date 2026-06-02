@@ -4,8 +4,9 @@
     "trust-bar": { "type": "announcement-bar", "settings": {} },
     "featured": { "type": "featured-collection", "settings": {} },
     "mushrooms": { "type": "mushroom-benefits", "settings": {} },
+    "subscribe-save": { "type": "subscribe-save", "settings": {} },
     "reviews": { "type": "reviews-section", "settings": {} },
     "cta": { "type": "cta-banner", "settings": {} }
   },
-  "order": ["hero", "trust-bar", "featured", "mushrooms", "reviews", "cta"]
+  "order": ["hero", "trust-bar", "featured", "mushrooms", "subscribe-save", "reviews", "cta"]
 }

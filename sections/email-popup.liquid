@@ -1,0 +1,301 @@
+{% unless customer %}
+<div id="email-popup-overlay" class="ep-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Get 15% off your first order">
+  <div class="ep-modal">
+
+    <!-- Close button -->
+    <button class="ep-close" id="ep-close" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- Left: visual panel -->
+    <div class="ep-visual">
+      <div class="ep-visual-inner">
+        <div class="ep-badge">LIMITED OFFER</div>
+        <div class="ep-discount-num">15%</div>
+        <div class="ep-discount-label">OFF YOUR FIRST ORDER</div>
+        <img src="{{ 'can-hero.png' | asset_url }}" alt="Happie Fungi Fusion" class="ep-can" width="160" height="240" loading="lazy">
+        <div class="ep-mushroom-stack">
+          <span>🍄 900mg Lion's Mane</span>
+          <span>⚡ 700mg Cordyceps</span>
+          <span>🌙 400mg Reishi</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: form panel -->
+    <div class="ep-form-panel">
+      <div class="ep-eyebrow">Welcome to Happie Fusion</div>
+      <h2 class="ep-headline">Your first can<br>on us — almost.</h2>
+      <p class="ep-sub">Sign up and get <strong>15% off</strong> your first order. Plus early access to new flavors, restocks, and subscriber-only deals.</p>
+
+      {% form 'customer', id: 'ep-email-form', class: 'ep-form' %}
+        <input type="hidden" name="contact[tags]" value="email-popup-subscriber">
+        <div class="ep-input-wrap">
+          <input
+            type="email"
+            name="contact[email]"
+            placeholder="your@email.com"
+            required
+            class="ep-input"
+            id="ep-email-input"
+          />
+          <button type="submit" class="ep-submit">
+            Get 15% Off
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      {% endform %}
+
+      <div id="ep-success" class="ep-success" style="display:none;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#52B788" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div>
+          <strong>You're in!</strong> Check your inbox for your discount code.
+        </div>
+      </div>
+
+      <p class="ep-disclaimer">No spam. Unsubscribe anytime. By signing up you agree to our <a href="/pages/privacy-policy">Privacy Policy</a>.</p>
+
+      <button class="ep-skip" id="ep-skip">No thanks, I'll pay full price</button>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.ep-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.ep-overlay.ep-visible {
+  opacity: 1; pointer-events: all;
+}
+
+.ep-modal {
+  background: #fff;
+  border-radius: 28px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  max-width: 680px; width: 100%;
+  max-height: 90vh;
+  position: relative;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.3);
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.ep-overlay.ep-visible .ep-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* Close */
+.ep-close {
+  position: absolute; top: 16px; right: 16px; z-index: 10;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+  color: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.ep-close:hover { background: rgba(255,255,255,0.25); }
+
+/* Visual panel */
+.ep-visual {
+  background: linear-gradient(160deg, #0B3D2E 0%, #1B5E42 50%, #2D6A4F 100%);
+  position: relative; overflow: hidden;
+}
+.ep-visual::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 20%, rgba(82,183,136,0.2) 0%, transparent 65%);
+}
+.ep-visual-inner {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; height: 100%;
+  padding: 36px 24px; text-align: center;
+  position: relative; z-index: 1;
+}
+.ep-badge {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.18em;
+  color: #F5A623; background: rgba(245,166,35,0.15);
+  border: 1px solid rgba(245,166,35,0.3);
+  padding: 5px 12px; border-radius: 50px; margin-bottom: 8px;
+}
+.ep-discount-num {
+  font-size: 72px; font-weight: 900; color: #fff; line-height: 1;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.ep-discount-label {
+  font-size: 12px; font-weight: 800; letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.65); margin-bottom: 16px;
+}
+.ep-can { filter: drop-shadow(0 16px 32px rgba(0,0,0,0.3)); margin-bottom: 16px; }
+.ep-mushroom-stack {
+  display: flex; flex-direction: column; gap: 4px;
+  font-size: 11px; color: rgba(255,255,255,0.6);
+}
+.ep-mushroom-stack span { display: block; }
+
+/* Form panel */
+.ep-form-panel {
+  padding: 36px 32px;
+  display: flex; flex-direction: column; justify-content: center;
+  overflow-y: auto;
+}
+.ep-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #52B788; margin-bottom: 10px;
+}
+.ep-headline {
+  font-size: clamp(22px, 3vw, 30px); font-weight: 900;
+  color: #111; line-height: 1.1; margin: 0 0 12px;
+}
+.ep-sub {
+  font-size: 14px; color: #666; line-height: 1.65; margin-bottom: 24px;
+}
+.ep-sub strong { color: #2D6A4F; }
+
+.ep-form { margin: 0; }
+.ep-input-wrap {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.ep-input {
+  width: 100%; padding: 14px 18px;
+  border: 2px solid rgba(0,0,0,0.12); border-radius: 14px;
+  font-size: 15px; font-family: inherit; outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.ep-input:focus {
+  border-color: #2D6A4F;
+  box-shadow: 0 0 0 4px rgba(45,106,79,0.1);
+}
+.ep-submit {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 15px 24px;
+  background: #2D6A4F; color: #fff;
+  border: none; border-radius: 14px;
+  font-size: 15px; font-weight: 800; font-family: inherit;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+}
+.ep-submit:hover { background: #1B4332; transform: translateY(-1px); }
+
+.ep-success {
+  display: flex; align-items: center; gap: 12px;
+  background: #F0FDF4; border: 1px solid rgba(82,183,136,0.3);
+  border-radius: 14px; padding: 14px 16px;
+  font-size: 14px; color: #1A4D2E;
+}
+
+.ep-disclaimer {
+  font-size: 11px; color: #aaa; margin: 12px 0 0;
+  line-height: 1.5;
+}
+.ep-disclaimer a { color: #888; }
+
+.ep-skip {
+  background: none; border: none; cursor: pointer;
+  font-size: 12px; color: #bbb; font-family: inherit;
+  margin-top: 10px; text-decoration: underline;
+  transition: color 0.15s;
+}
+.ep-skip:hover { color: #888; }
+
+/* Mobile */
+@media (max-width: 580px) {
+  .ep-modal { grid-template-columns: 1fr; }
+  .ep-visual { display: none; }
+  .ep-form-panel { padding: 32px 24px; }
+  .ep-close { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.1); color: #555; }
+}
+</style>
+
+<script>
+(function() {
+  var COOKIE_KEY = 'hf_popup_dismissed';
+  var COOKIE_DAYS = 30;
+
+  function getCookie(name) {
+    return document.cookie.split(';').some(c => c.trim().startsWith(name + '='));
+  }
+  function setCookie(name, days) {
+    var d = new Date(); d.setTime(d.getTime() + days*24*60*60*1000);
+    document.cookie = name + '=1; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+  }
+
+  if (getCookie(COOKIE_KEY)) return;
+
+  var overlay = document.getElementById('email-popup-overlay');
+  var closeBtn = document.getElementById('ep-close');
+  var skipBtn = document.getElementById('ep-skip');
+  var form = document.getElementById('ep-email-form');
+
+  function showPopup() {
+    overlay.classList.add('ep-visible');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePopup() {
+    overlay.classList.remove('ep-visible');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setCookie(COOKIE_KEY, COOKIE_DAYS);
+  }
+
+  // Show after 5 seconds
+  var timer = setTimeout(showPopup, 5000);
+
+  // Also show on exit intent (desktop)
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY <= 0 && !overlay.classList.contains('ep-visible')) {
+      clearTimeout(timer);
+      showPopup();
+    }
+  }, { once: true });
+
+  closeBtn.addEventListener('click', closePopup);
+  skipBtn.addEventListener('click', closePopup);
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closePopup();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePopup();
+  });
+
+  // Handle form submission
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('ep-email-input').value;
+      if (!email) return;
+
+      // Show success state
+      form.style.display = 'none';
+      document.getElementById('ep-success').style.display = 'flex';
+      setCookie(COOKIE_KEY, COOKIE_DAYS);
+
+      // Submit to Shopify newsletter
+      fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'form_type': 'customer',
+          'utf8': '✓',
+          'contact[email]': email,
+          'contact[tags]': 'newsletter,popup-signup'
+        })
+      });
+
+      // Close after 2.5s
+      setTimeout(closePopup, 2500);
+    });
+  }
+})();
+</script>
+{% endunless %}
+
+{% schema %}
+{ "name": "Email Popup", "settings": [] }
+{% endschema %}
