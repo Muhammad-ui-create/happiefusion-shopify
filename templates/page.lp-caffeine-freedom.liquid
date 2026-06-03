@@ -1,0 +1,770 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Caffeine Free(dom) — Happie Fungi Fusion Watermelon</title>
+  <meta name="description" content="Most functional drinks lean on caffeine. We don't. Three mushrooms. No crash. Use FUNGI15 for 15% off.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream-paper: #F4ECDD;
+      --cream-lt:    #FAF4E6;
+      --cream-dk:    #E8DCC1;
+      --oak:         #C9A572;
+      --oak-dk:      #8C6E45;
+      --oak-lt:      #E0C99A;
+      --forest:      #2B4A34;
+      --forest-dk:   #1B3022;
+      --moss:        #4A7C59;
+      --moss-lt:     #A8C49B;
+      --moss-pale:   #D9E5D0;
+      --watermelon:  #E84C6B;
+      --melon-soft:  #F2A8B7;
+      --brown:       #1F1A12;
+      --brown-md:    #4A3B2A;
+      --brown-lt:    #6E5B42;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream-paper);
+      color: var(--brown);
+      line-height: 1.6;
+      /* Subtle paper texture */
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(201,165,114,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(74,124,89,0.04) 0%, transparent 50%);
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    .editorial { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .sans-mono { font-family: 'Inter', Helvetica, Arial, sans-serif; letter-spacing: 0.15em; text-transform: uppercase; }
+
+    /* ── NAV ── */
+    .lp-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 14px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(244,236,221,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(43,74,52,0.1);
+    }
+    .lp-nav-logo img { height: 44px; width: auto; }
+    .lp-nav-cta {
+      background: var(--forest); color: var(--cream-lt);
+      border-radius: 50px; padding: 9px 22px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 130px 32px 80px;
+      background:
+        linear-gradient(180deg, var(--cream-paper) 0%, var(--cream-paper) 60%, #E8C99A 60%, #C9A572 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-inner {
+      max-width: 1280px; margin: 0 auto;
+      position: relative;
+    }
+
+    /* Editorial caption above headline */
+    .hero-caption {
+      text-align: center; margin-bottom: 32px;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--moss);
+    }
+    .hero-caption::before, .hero-caption::after {
+      content: '·';
+      margin: 0 14px; color: var(--oak-dk);
+    }
+
+    /* The big editorial headline */
+    .hero-headline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(72px, 14vw, 200px);
+      font-style: italic; font-weight: 500;
+      line-height: 0.92; text-align: center;
+      color: var(--forest);
+      letter-spacing: -0.025em;
+      margin: 0 auto 0;
+      max-width: 1100px;
+    }
+    .hero-headline .dom { color: var(--moss); }
+
+    /* Layout: image + badges */
+    .hero-product {
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: 80px; align-items: center;
+      margin-top: 64px;
+      max-width: 1080px; margin-left: auto; margin-right: auto;
+    }
+
+    .hero-product-image {
+      position: relative; display: flex; justify-content: center;
+    }
+    .hero-can {
+      width: 320px; max-width: 80vw;
+      filter: drop-shadow(0 40px 80px rgba(31,26,18,0.25));
+      position: relative; z-index: 2;
+    }
+    /* Cocktail glass illustration via CSS */
+    .hero-glass {
+      position: absolute; bottom: 0; left: -10%;
+      width: 180px; height: 220px;
+      z-index: 1;
+    }
+    .hero-glass-shape {
+      width: 100%; height: 80%;
+      background: linear-gradient(180deg, rgba(242,168,183,0.4) 0%, rgba(232,76,107,0.55) 100%);
+      border: 2px solid rgba(43,74,52,0.15);
+      border-radius: 6px 6px 14px 14px;
+      box-shadow:
+        inset 0 -10px 20px rgba(232,76,107,0.2),
+        inset 4px 0 8px rgba(255,255,255,0.3);
+      position: relative;
+    }
+    .hero-glass-mint {
+      position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+      font-size: 28px; color: var(--moss); line-height: 1;
+    }
+    /* Mushroom dish (small ceramic) */
+    .hero-mushrooms {
+      position: absolute; bottom: 30px; right: -10%;
+      display: flex; gap: 10px;
+      padding: 12px 16px;
+      background: var(--cream-lt);
+      border: 1px solid rgba(43,74,52,0.12);
+      border-radius: 50px;
+      box-shadow: 0 12px 28px rgba(31,26,18,0.12);
+      z-index: 3;
+    }
+    .hero-mushrooms-dot {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--oak); flex-shrink: 0;
+    }
+    .hero-mushrooms-dot:nth-child(2) { background: var(--oak-dk); }
+    .hero-mushrooms-dot:nth-child(3) { background: var(--brown-md); }
+
+    /* Six badges in a 3x2 grid */
+    .hero-badges {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      padding: 28px 0;
+      border-top: 1.5px solid var(--forest);
+      border-bottom: 1.5px solid var(--forest);
+    }
+    .hero-badge {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px;
+      font-size: 10.5px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--forest);
+    }
+    .hero-badge-icon {
+      width: 22px; height: 22px;
+      border: 1.5px solid var(--forest);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .hero-badge-icon svg { stroke: var(--forest); }
+
+    .hero-product-info {
+      display: flex; flex-direction: column;
+    }
+    .hero-product-flavor {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-style: italic; font-weight: 500;
+      color: var(--forest); margin-bottom: 6px;
+    }
+    .hero-product-line {
+      font-size: 11px; letter-spacing: 0.2em;
+      color: var(--brown-md); text-transform: uppercase;
+      font-weight: 500; margin-bottom: 28px;
+    }
+    .hero-cta-row {
+      margin-top: 36px;
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--forest); color: var(--cream-lt);
+      border-radius: 50px; padding: 15px 32px;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { background: var(--forest-dk); transform: translateY(-2px); }
+    .hero-code-line {
+      font-size: 12px; color: var(--brown-md);
+      letter-spacing: 0.05em;
+    }
+    .hero-code-line strong {
+      font-family: monospace; font-weight: 700;
+      background: var(--forest); color: var(--cream-lt);
+      padding: 3px 9px; border-radius: 4px;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── EDITORIAL CALLOUT ── */
+    .editorial-section {
+      padding: 120px 32px;
+      background: var(--cream-lt);
+      text-align: center;
+    }
+    .editorial-inner { max-width: 880px; margin: 0 auto; }
+    .editorial-eyebrow {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--watermelon); margin-bottom: 24px;
+    }
+    .editorial-pull {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 500; font-style: italic;
+      line-height: 1.2; color: var(--forest);
+      margin-bottom: 32px;
+      letter-spacing: -0.01em;
+    }
+    .editorial-pull strong {
+      color: var(--watermelon); font-style: normal;
+      font-weight: 600;
+    }
+    .editorial-byline {
+      font-size: 12px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--brown-md);
+      font-weight: 500;
+    }
+    .editorial-byline::before {
+      content: ''; display: inline-block;
+      width: 30px; height: 1px; background: var(--brown-md);
+      vertical-align: middle; margin-right: 14px;
+    }
+    .editorial-byline::after {
+      content: ''; display: inline-block;
+      width: 30px; height: 1px; background: var(--brown-md);
+      vertical-align: middle; margin-left: 14px;
+    }
+
+    /* ── INGREDIENT STACK ── */
+    .stack-section {
+      padding: 110px 32px;
+      background: var(--cream-paper);
+      border-top: 1px solid rgba(43,74,52,0.1);
+      border-bottom: 1px solid rgba(43,74,52,0.1);
+    }
+    .stack-inner { max-width: 1080px; margin: 0 auto; }
+    .stack-header { text-align: center; margin-bottom: 64px; }
+    .stack-eyebrow {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--moss); margin-bottom: 16px;
+    }
+    .stack-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-style: italic; font-weight: 500;
+      color: var(--forest); line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .stack-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 400;
+      color: var(--brown-md); max-width: 560px;
+      margin: 0 auto; line-height: 1.5;
+    }
+
+    .stack-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+    }
+    .stack-card {
+      background: var(--cream-lt);
+      border: 1px solid rgba(43,74,52,0.12);
+      border-radius: 4px;
+      padding: 40px 32px;
+      position: relative;
+    }
+    .stack-card-num {
+      position: absolute; top: 20px; right: 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px; font-style: italic; font-weight: 500;
+      color: var(--moss);
+    }
+    .stack-card-dose {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px; font-weight: 600; font-style: italic;
+      color: var(--forest); line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stack-card-name {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--brown-md); margin-bottom: 20px;
+    }
+    .stack-card-flavor {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-style: italic; font-weight: 500;
+      color: var(--moss); margin-bottom: 12px;
+    }
+    .stack-card-desc {
+      font-size: 14px; color: var(--brown-md);
+      line-height: 1.7;
+    }
+
+    /* ── 3PM CRASH SECTION ── */
+    .crash-section {
+      padding: 110px 32px;
+      background:
+        linear-gradient(180deg, var(--cream-lt) 0%, var(--moss-pale) 100%);
+    }
+    .crash-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .crash-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 4.5vw, 52px);
+      font-style: italic; font-weight: 500;
+      color: var(--forest); line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .crash-text p {
+      font-size: 16px; color: var(--brown-md);
+      line-height: 1.85; margin-bottom: 14px;
+    }
+    .crash-pill-row {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .crash-pill {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 7px 14px; border-radius: 50px;
+      background: var(--cream-lt); border: 1px solid var(--forest);
+      color: var(--forest);
+    }
+    .crash-pill.cross {
+      background: transparent; border-style: dashed;
+      color: var(--brown-lt); border-color: var(--brown-lt);
+      text-decoration: line-through;
+    }
+
+    .crash-visual {
+      background: var(--cream-lt);
+      border-radius: 4px;
+      padding: 48px 36px;
+      border: 1px solid rgba(43,74,52,0.12);
+      text-align: center;
+    }
+    .crash-clock {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 110px; font-style: italic; font-weight: 500;
+      color: var(--watermelon); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .crash-clock-label {
+      font-size: 11px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--brown-md);
+      font-weight: 600; margin-bottom: 32px;
+    }
+    .crash-divider {
+      width: 40px; height: 1px;
+      background: var(--brown-md); margin: 0 auto 28px;
+    }
+    .crash-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-style: italic;
+      color: var(--brown-md); line-height: 1.55;
+      max-width: 320px; margin: 0 auto;
+    }
+    .crash-quote strong { color: var(--forest); font-style: normal; font-weight: 600; }
+
+    /* ── REVIEWS ── */
+    .reviews-section {
+      padding: 110px 32px;
+      background: var(--cream-paper);
+    }
+    .reviews-inner { max-width: 1100px; margin: 0 auto; }
+    .reviews-header { text-align: center; margin-bottom: 56px; }
+    .reviews-eyebrow {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--moss); margin-bottom: 12px;
+    }
+    .reviews-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4.5vw, 46px);
+      font-style: italic; font-weight: 500;
+      color: var(--forest);
+    }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;
+    }
+    .review-card {
+      background: var(--cream-lt);
+      border: 1px solid rgba(43,74,52,0.1);
+      border-radius: 4px;
+      padding: 32px 28px;
+    }
+    .review-stars {
+      color: var(--watermelon); font-size: 14px; letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+    .review-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-style: italic;
+      color: var(--brown-md); line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .review-by {
+      font-size: 11px; color: var(--moss);
+      font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ── TRUST BAR ── */
+    .trust-section {
+      padding: 56px 32px;
+      background: var(--forest);
+      color: var(--cream-lt);
+    }
+    .trust-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 0;
+      text-align: center;
+    }
+    .trust-item { padding: 0 16px; }
+    .trust-item + .trust-item { border-left: 1px solid rgba(244,236,221,0.15); }
+    .trust-item-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-style: italic; font-weight: 500;
+      color: var(--oak-lt); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .trust-item strong {
+      display: block;
+      font-size: 11px; letter-spacing: 0.16em;
+      text-transform: uppercase; font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .trust-item span { font-size: 11px; color: rgba(244,236,221,0.6); letter-spacing: 0.04em; }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      padding: 140px 32px;
+      background:
+        radial-gradient(ellipse at center, rgba(168,196,155,0.2) 0%, transparent 70%),
+        var(--cream-paper);
+      text-align: center;
+    }
+    .final-cta-inner { max-width: 760px; margin: 0 auto; }
+    .final-cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(56px, 9vw, 120px);
+      font-style: italic; font-weight: 500;
+      color: var(--forest); line-height: 0.95;
+      letter-spacing: -0.025em;
+      margin-bottom: 24px;
+    }
+    .final-cta h2 .dom { color: var(--moss); }
+    .final-cta p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; color: var(--brown-md);
+      line-height: 1.55; margin-bottom: 44px;
+      max-width: 480px; margin-left: auto; margin-right: auto;
+      font-style: italic;
+    }
+    .final-cta-row {
+      display: flex; justify-content: center; gap: 18px;
+      flex-wrap: wrap; align-items: center;
+    }
+    .disclaimer {
+      font-size: 10.5px; color: var(--brown-lt); opacity: 0.7;
+      max-width: 540px; margin: 56px auto 0;
+      line-height: 1.7; font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    .lp-footer {
+      padding: 28px 32px;
+      background: var(--forest-dk);
+      color: rgba(244,236,221,0.65);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; letter-spacing: 0.06em;
+    }
+    .lp-footer-links { display: flex; gap: 22px; }
+    .lp-footer-links a:hover { color: var(--cream-lt); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { padding: 110px 24px 60px; background: linear-gradient(180deg, var(--cream-paper) 0%, var(--cream-paper) 70%, #E8C99A 70%, #C9A572 100%); }
+      .hero-product { grid-template-columns: 1fr; gap: 48px; }
+      .hero-product-image { order: -1; }
+      .hero-can { width: 240px; }
+      .hero-glass { display: none; }
+      .hero-mushrooms { display: none; }
+      .hero-badges { grid-template-columns: repeat(2,1fr); }
+      .stack-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+      .crash-inner { grid-template-columns: 1fr; gap: 48px; }
+      .reviews-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+      .trust-inner { grid-template-columns: repeat(2,1fr); gap: 32px; }
+      .trust-item + .trust-item { border-left: none; }
+      .trust-item:nth-child(odd) { border-right: 1px solid rgba(244,236,221,0.15); }
+      .lp-footer { flex-direction: column; gap: 14px; text-align: center; }
+      section { padding-left: 20px !important; padding-right: 20px !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="lp-nav">
+    <a href="/" class="lp-nav-logo"><img src="{{ 'happie-logo.png' | asset_url }}" alt="Happie Fusion"></a>
+    <a href="/collections/all?discount=FUNGI15" class="lp-nav-cta">FUNGI15 →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+
+      <!-- Editorial label -->
+      <div class="hero-caption">Three mushrooms · No crash</div>
+
+      <!-- The big editorial headline -->
+      <h1 class="hero-headline editorial">Caffeine Free<span class="dom">(dom).</span></h1>
+
+      <!-- Product layout -->
+      <div class="hero-product">
+        <div class="hero-product-image">
+          <!-- Cocktail glass (decorative) -->
+          <div class="hero-glass">
+            <div class="hero-glass-mint">🌿</div>
+            <div class="hero-glass-shape"></div>
+          </div>
+          <!-- Can -->
+          <img src="{{ 'can-watermelon.png' | asset_url }}" alt="Fungi Fusion Watermelon" class="hero-can">
+          <!-- Three mushrooms dish -->
+          <div class="hero-mushrooms" aria-label="Three mushrooms — Lion's Mane, Cordyceps, Reishi">
+            <span class="hero-mushrooms-dot"></span>
+            <span class="hero-mushrooms-dot"></span>
+            <span class="hero-mushrooms-dot"></span>
+          </div>
+        </div>
+
+        <div class="hero-product-info">
+          <div class="hero-product-flavor editorial">Fungi Fusion · Watermelon</div>
+          <div class="hero-product-line">12 oz · Functional Mushroom Seltzer</div>
+
+          <!-- Six badges in 3x2 grid -->
+          <div class="hero-badges">
+            <div class="hero-badge">
+              <div class="hero-badge-icon">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="18" x2="18" y2="6"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </div>
+              Non-alcoholic
+            </div>
+            <div class="hero-badge">
+              <div class="hero-badge-icon">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="18" x2="18" y2="6"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </div>
+              Caffeine-free
+            </div>
+            <div class="hero-badge">
+              <div class="hero-badge-icon">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12"/><path d="M2 12h20"/></svg>
+              </div>
+              Vegan
+            </div>
+            <div class="hero-badge">
+              <div class="hero-badge-icon">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+              </div>
+              Organic Mushrooms
+            </div>
+            <div class="hero-badge">
+              <div class="hero-badge-icon">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2 0 3.9.7 5.4 1.8"/><path d="M21 3v6h-6"/></svg>
+              </div>
+              40 Calories
+            </div>
+            <div class="hero-badge">
+              <div class="hero-badge-icon">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+              </div>
+              Non-GMO
+            </div>
+          </div>
+
+          <div class="hero-cta-row">
+            <a href="/collections/all?discount=FUNGI15" class="btn-primary">Shop Now</a>
+            <div class="hero-code-line">15% off with <strong>FUNGI15</strong></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDITORIAL PULL QUOTE -->
+  <section class="editorial-section">
+    <div class="editorial-inner">
+      <div class="editorial-eyebrow">A Note From The Formulator</div>
+      <p class="editorial-pull editorial">
+        "Most functional drinks lean on caffeine. <strong>We don't.</strong> Fungi Fusion is built around three mushrooms — and it will never owe you a 3pm crash."
+      </p>
+      <div class="editorial-byline">Happie Fungi Fusion · NorCal</div>
+    </div>
+  </section>
+
+  <!-- INGREDIENT STACK -->
+  <section class="stack-section">
+    <div class="stack-inner">
+      <div class="stack-header">
+        <div class="stack-eyebrow">The Three-Mushroom Stack</div>
+        <h2 class="stack-title editorial">No caffeine.<br><em>No compromise.</em></h2>
+        <p class="stack-sub">Each can delivers a complete adaptogenic stack — full doses of all three mushrooms working together. Not a sprinkle. Not a single ingredient. A system.</p>
+      </div>
+      <div class="stack-grid">
+        <div class="stack-card">
+          <div class="stack-card-num editorial">i.</div>
+          <div class="stack-card-dose editorial">900</div>
+          <div class="stack-card-name">mg Lion's Mane</div>
+          <div class="stack-card-flavor editorial">For focus.</div>
+          <p class="stack-card-desc">Hericenones and erinacines support Nerve Growth Factor — the cognitive clarity coffee tries to fake.</p>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-num editorial">ii.</div>
+          <div class="stack-card-dose editorial">700</div>
+          <div class="stack-card-name">mg Cordyceps</div>
+          <div class="stack-card-flavor editorial">For energy.</div>
+          <p class="stack-card-desc">Cellular energy via ATP production. Real fuel — not adrenal stress masquerading as alertness.</p>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-num editorial">iii.</div>
+          <div class="stack-card-dose editorial">400</div>
+          <div class="stack-card-name">mg Reishi</div>
+          <div class="stack-card-flavor editorial">For calm.</div>
+          <p class="stack-card-desc">The queen of mushrooms. Triterpenes regulate your body's stress response — the part caffeine wrecks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3PM CRASH -->
+  <section class="crash-section">
+    <div class="crash-inner">
+      <div class="crash-text">
+        <div class="editorial-eyebrow" style="color:var(--moss);">The 3pm Conversation</div>
+        <h2 class="editorial">A drink you don't have to pay for tomorrow.</h2>
+        <p>Caffeine borrows energy from later in your day. Adrenal stimulation. Sleep interruption. The 11pm second-wind that turns into a 7am headache.</p>
+        <p>Fungi Fusion doesn't borrow. It delivers — through three different mechanisms that compound rather than crash.</p>
+        <div class="crash-pill-row">
+          <span class="crash-pill cross">Adrenal spike</span>
+          <span class="crash-pill cross">2pm wall</span>
+          <span class="crash-pill cross">Sleep debt</span>
+          <span class="crash-pill">ATP-driven</span>
+          <span class="crash-pill">Compounding</span>
+          <span class="crash-pill">All-day clear</span>
+        </div>
+      </div>
+      <div class="crash-visual">
+        <div class="crash-clock editorial">3<span style="font-size:60px;">:00</span></div>
+        <div class="crash-clock-label">The Hour That Never Hits</div>
+        <div class="crash-divider"></div>
+        <p class="crash-quote">
+          Coffee borrows from <strong>tomorrow</strong>.<br>
+          Happie just gives you <strong>today</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews-section">
+    <div class="reviews-inner">
+      <div class="reviews-header">
+        <div class="reviews-eyebrow">Verified Amazon Reviews</div>
+        <h2 class="reviews-title editorial">Real readers. Real results.</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text editorial">"Refreshing watermelon flavor with light fizz. I feel clear, focused, and with smooth energy throughout the day."</p>
+          <div class="review-by">— wendolin reyes</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text editorial">"This is my favorite flavor. Immediately after a few sips, you can feel the effects. I believe this is the only drink that does this."</p>
+          <div class="review-by">— Kristine M.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text editorial">"Tastes great and gives a clean boost of focus and energy without the crash. Light, refreshing, and easy to drink."</p>
+          <div class="review-by">— Misoi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-section">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <div class="trust-item-num editorial">3</div>
+        <strong>Mushrooms</strong>
+        <span>Per can</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-item-num editorial">2,000</div>
+        <strong>mg Total</strong>
+        <span>Dual-extracted</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-item-num editorial">0</div>
+        <strong>Caffeine</strong>
+        <span>0% Alcohol</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-item-num editorial">30</div>
+        <strong>Day Guarantee</strong>
+        <span>Full refund</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <h2 class="editorial">Free<span class="dom">(dom).</span></h2>
+      <p>From caffeine. From the crash. From the 3pm wall. Three mushrooms, one can, all day.</p>
+      <div class="final-cta-row">
+        <a href="/collections/all?discount=FUNGI15" class="btn-primary">Shop Fungi Fusion</a>
+        <div class="hero-code-line">15% off · <strong>FUNGI15</strong></div>
+      </div>
+      <div class="disclaimer">These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="lp-footer">
+    <div>© {{ 'now' | date: '%Y' }} Happie Fusion · Northern California</div>
+    <div class="lp-footer-links">
+      <a href="/policies/privacy-policy">Privacy</a>
+      <a href="/policies/refund-policy">Returns</a>
+      <a href="/pages/contact">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
