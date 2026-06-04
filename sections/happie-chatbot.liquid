@@ -92,7 +92,9 @@
         <input type="text" name="contact[name]" placeholder="Your name" required>
         <input type="email" name="contact[email]" placeholder="Your email" required>
         <textarea name="contact[body]" placeholder="How can we help?" rows="3" required></textarea>
+        <input type="hidden" name="contact[subject]" value="[Happie Chatbot] New customer message — route to support@drinkhappie.com">
         <input type="hidden" name="contact[source]" value="happie-chatbot">
+        <input type="hidden" name="contact[recipient]" value="{{ section.settings.support_email }}">
         <div class="happie-chat__handoff-actions">
           <button type="button" class="happie-chat__handoff-back" id="happie-chat-handoff-back">← Back to chat</button>
           <button type="submit" class="happie-chat__handoff-submit">Send message</button>
@@ -537,7 +539,7 @@
     var workerUrl = widget.dataset.workerUrl || '';
     var supportEmail = widget.dataset.supportEmail || '';
     var botName = widget.dataset.botName || 'Happie Assistant';
-    var greeting = widget.dataset.greeting || "Hey! I'm here to help with products, orders, or any questions. What's up?";
+    var greeting = widget.dataset.greeting || "Hey! I'm the Happie Assistant. Reach our team at support@drinkhappie.com or ask me anything below.";
 
     var openBtn = document.getElementById('happie-chat-open');
     var closeBtn = document.getElementById('happie-chat-close');
@@ -747,7 +749,7 @@
       "type": "text",
       "id": "support_email",
       "label": "Support email",
-      "default": "orders@livehappie.com"
+      "default": "support@drinkhappie.com"
     },
     {
       "type": "text",
@@ -759,7 +761,7 @@
       "type": "textarea",
       "id": "greeting",
       "label": "Greeting message",
-      "default": "Hey there! I'm here to help with products, orders, or any questions about Fungi Fusion. What's up?"
+      "default": "Hey there! I'm the Happie Assistant — here to help with products, orders, and any questions about Fungi Fusion. You can also reach our team directly at support@drinkhappie.com. What can I help with?"
     },
     {
       "type": "image_picker",
