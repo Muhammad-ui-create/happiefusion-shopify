@@ -1,0 +1,805 @@
+{%- comment -%}
+  Happie AI Chatbot Widget
+  Floating chat bubble + panel powered by Claude API via Cloudflare Worker.
+  Includes email handoff form (Shopify /contact endpoint) and mailto fallback.
+{%- endcomment -%}
+
+{%- if section.settings.enabled -%}
+<div
+  id="happie-chatbot"
+  data-worker-url="{{ section.settings.worker_url | default: 'https://happie-chatbot-production.up.railway.app/chat' }}"
+  data-support-email="{{ section.settings.support_email }}"
+  data-bot-name="{{ section.settings.bot_name | escape }}"
+  data-greeting="{{ section.settings.greeting | escape }}"
+  data-position="{{ section.settings.position }}"
+  data-brand-color="{{ section.settings.brand_color }}"
+  data-accent-color="{{ section.settings.accent_color }}"
+>
+  <!-- Floating Chat Button -->
+  <button
+    type="button"
+    class="happie-chat__bubble"
+    aria-label="Open chat with Happie Assistant"
+    id="happie-chat-open"
+  >
+    {%- if section.settings.bubble_icon != blank -%}
+      <img src="{{ section.settings.bubble_icon | image_url: width: 120 }}" alt="Chat" width="40" height="40">
+    {%- else -%}
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    {%- endif -%}
+    <span class="happie-chat__bubble-pulse" aria-hidden="true"></span>
+  </button>
+
+  <!-- Chat Panel -->
+  <div class="happie-chat__panel" id="happie-chat-panel" role="dialog" aria-labelledby="happie-chat-title" aria-hidden="true">
+    <!-- Header -->
+    <header class="happie-chat__header">
+      <div class="happie-chat__header-info">
+        {%- if section.settings.bot_avatar != blank -%}
+          <img src="{{ section.settings.bot_avatar | image_url: width: 80 }}" alt="" class="happie-chat__avatar" width="36" height="36">
+        {%- else -%}
+          <div class="happie-chat__avatar happie-chat__avatar--default">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-7.07 17.07A10 10 0 1 0 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-4-8a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm6 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm-1 4.5c-1.5 0-2.8.85-3.4 2.1.6.25 1.25.4 1.93.4 1.5 0 2.8-.85 3.4-2.1a3.85 3.85 0 0 0-1.93-.4z"/></svg>
+          </div>
+        {%- endif -%}
+        <div>
+          <h3 class="happie-chat__title" id="happie-chat-title">{{ section.settings.bot_name }}</h3>
+          <span class="happie-chat__status"><span class="happie-chat__status-dot"></span>Online</span>
+        </div>
+      </div>
+      <button type="button" class="happie-chat__close" id="happie-chat-close" aria-label="Close chat">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </header>
+
+    <!-- Messages -->
+    <div class="happie-chat__messages" id="happie-chat-messages" role="log" aria-live="polite">
+      <!-- Greeting populated by JS -->
+    </div>
+
+    <!-- Suggested Replies -->
+    <div class="happie-chat__suggestions" id="happie-chat-suggestions">
+      <button type="button" class="happie-chat__suggestion" data-suggest="What's in every can of Fungi Fusion?">What's inside?</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="How fast does shipping take?">Shipping info</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="What's your return policy?">Returns</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="I need help with my order">Talk to human</button>
+    </div>
+
+    <!-- Input -->
+    <form class="happie-chat__input-wrap" id="happie-chat-form">
+      <input
+        type="text"
+        class="happie-chat__input"
+        id="happie-chat-input"
+        placeholder="Type your question..."
+        autocomplete="off"
+        maxlength="500"
+      >
+      <button type="submit" class="happie-chat__send" aria-label="Send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+
+    <!-- Email Handoff Form (hidden by default) -->
+    <div class="happie-chat__handoff" id="happie-chat-handoff" hidden>
+      <h4>Talk to a human</h4>
+      <p>Leave us your details and we'll reply within 24 hours.</p>
+      <form method="post" action="/contact#contact_form" id="happie-chat-handoff-form" accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="text" name="contact[name]" placeholder="Your name" required>
+        <input type="email" name="contact[email]" placeholder="Your email" required>
+        <textarea name="contact[body]" placeholder="How can we help?" rows="3" required></textarea>
+        <input type="hidden" name="contact[source]" value="happie-chatbot">
+        <div class="happie-chat__handoff-actions">
+          <button type="button" class="happie-chat__handoff-back" id="happie-chat-handoff-back">← Back to chat</button>
+          <button type="submit" class="happie-chat__handoff-submit">Send message</button>
+        </div>
+        <p class="happie-chat__handoff-fallback">
+          Or email us directly at <a href="mailto:{{ section.settings.support_email }}">{{ section.settings.support_email }}</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="happie-chat__footer">
+      <span>Powered by AI · Replies may vary</span>
+    </footer>
+  </div>
+</div>
+
+<style>
+  #happie-chatbot {
+    --hc-brand: {{ section.settings.brand_color }};
+    --hc-accent: {{ section.settings.accent_color }};
+    --hc-bg: #ffffff;
+    --hc-text: #1a1a1a;
+    --hc-text-muted: #6b6b6b;
+    --hc-border: rgba(0, 0, 0, 0.08);
+    --hc-bubble-bg: #f4f4f5;
+    --hc-radius: 18px;
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Floating Bubble */
+  .happie-chat__bubble {
+    position: fixed;
+    {% if section.settings.position == 'left' %}left{% else %}right{% endif %}: 24px;
+    bottom: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--hc-brand);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .happie-chat__bubble:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  .happie-chat__bubble img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .happie-chat__bubble-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--hc-brand);
+    opacity: 0.4;
+    animation: hc-pulse 2s infinite;
+    z-index: -1;
+  }
+
+  @keyframes hc-pulse {
+    0% { transform: scale(1); opacity: 0.4; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+
+  /* Panel */
+  .happie-chat__panel {
+    position: fixed;
+    {% if section.settings.position == 'left' %}left{% else %}right{% endif %}: 24px;
+    bottom: 100px;
+    width: 380px;
+    max-width: calc(100vw - 32px);
+    height: 580px;
+    max-height: calc(100vh - 140px);
+    background: var(--hc-bg);
+    border-radius: var(--hc-radius);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .happie-chat__panel.is-open {
+    display: flex;
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  /* Header */
+  .happie-chat__header {
+    background: linear-gradient(135deg, var(--hc-brand) 0%, var(--hc-accent) 100%);
+    color: #fff;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .happie-chat__header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .happie-chat__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .happie-chat__avatar--default {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+
+  .happie-chat__title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .happie-chat__status {
+    font-size: 11px;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .happie-chat__status-dot {
+    width: 7px;
+    height: 7px;
+    background: #4ade80;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .happie-chat__close {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .happie-chat__close:hover { background: rgba(255, 255, 255, 0.28); }
+
+  /* Messages */
+  .happie-chat__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #fafafa;
+    scroll-behavior: smooth;
+  }
+
+  .happie-chat__msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.45;
+    word-wrap: break-word;
+    animation: hc-msg-in 0.3s ease;
+  }
+
+  @keyframes hc-msg-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .happie-chat__msg--bot {
+    background: var(--hc-bubble-bg);
+    color: var(--hc-text);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+
+  .happie-chat__msg--user {
+    background: var(--hc-brand);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  .happie-chat__msg a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .happie-chat__msg strong { font-weight: 600; }
+
+  .happie-chat__msg ul, .happie-chat__msg ol {
+    margin: 6px 0 0;
+    padding-left: 20px;
+  }
+
+  /* Typing indicator */
+  .happie-chat__typing {
+    align-self: flex-start;
+    display: flex;
+    gap: 4px;
+    padding: 12px 14px;
+    background: var(--hc-bubble-bg);
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+  }
+
+  .happie-chat__typing span {
+    width: 7px;
+    height: 7px;
+    background: var(--hc-text-muted);
+    border-radius: 50%;
+    animation: hc-typing 1.2s infinite;
+  }
+
+  .happie-chat__typing span:nth-child(2) { animation-delay: 0.2s; }
+  .happie-chat__typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes hc-typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  /* Suggestions */
+  .happie-chat__suggestions {
+    padding: 0 18px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    background: #fafafa;
+    flex-shrink: 0;
+  }
+
+  .happie-chat__suggestion {
+    background: #fff;
+    border: 1px solid var(--hc-border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--hc-text);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .happie-chat__suggestion:hover {
+    background: var(--hc-brand);
+    color: #fff;
+    border-color: var(--hc-brand);
+  }
+
+  .happie-chat__suggestions.is-hidden { display: none; }
+
+  /* Input */
+  .happie-chat__input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--hc-border);
+    background: #fff;
+    flex-shrink: 0;
+  }
+
+  .happie-chat__input {
+    flex: 1;
+    border: 1px solid var(--hc-border);
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .happie-chat__input:focus { border-color: var(--hc-brand); }
+
+  .happie-chat__send {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--hc-brand);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.15s, background 0.2s;
+  }
+
+  .happie-chat__send:hover { transform: scale(1.06); }
+  .happie-chat__send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  /* Handoff Form */
+  .happie-chat__handoff {
+    position: absolute;
+    inset: 76px 0 0 0;
+    background: #fff;
+    padding: 20px 18px;
+    overflow-y: auto;
+    z-index: 5;
+  }
+
+  .happie-chat__handoff h4 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: var(--hc-text);
+  }
+
+  .happie-chat__handoff > p {
+    font-size: 13px;
+    color: var(--hc-text-muted);
+    margin: 0 0 16px;
+  }
+
+  .happie-chat__handoff input,
+  .happie-chat__handoff textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--hc-border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .happie-chat__handoff input:focus,
+  .happie-chat__handoff textarea:focus { border-color: var(--hc-brand); }
+
+  .happie-chat__handoff textarea { resize: vertical; min-height: 80px; }
+
+  .happie-chat__handoff-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .happie-chat__handoff-back {
+    background: transparent;
+    border: 1px solid var(--hc-border);
+    color: var(--hc-text-muted);
+    padding: 10px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .happie-chat__handoff-submit {
+    flex: 1;
+    background: var(--hc-brand);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .happie-chat__handoff-fallback {
+    font-size: 12px;
+    color: var(--hc-text-muted);
+    margin: 14px 0 0;
+    text-align: center;
+  }
+
+  .happie-chat__handoff-fallback a { color: var(--hc-brand); }
+
+  /* Footer */
+  .happie-chat__footer {
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--hc-text-muted);
+    border-top: 1px solid var(--hc-border);
+    background: #fafafa;
+    flex-shrink: 0;
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .happie-chat__panel {
+      width: calc(100vw - 16px);
+      height: calc(100vh - 90px);
+      bottom: 80px;
+      {% if section.settings.position == 'left' %}left{% else %}right{% endif %}: 8px;
+    }
+    .happie-chat__bubble {
+      width: 54px;
+      height: 54px;
+      bottom: 16px;
+      {% if section.settings.position == 'left' %}left{% else %}right{% endif %}: 16px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var widget = document.getElementById('happie-chatbot');
+    if (!widget) return;
+
+    var workerUrl = widget.dataset.workerUrl || '';
+    var supportEmail = widget.dataset.supportEmail || '';
+    var botName = widget.dataset.botName || 'Happie Assistant';
+    var greeting = widget.dataset.greeting || "Hey! I'm here to help with products, orders, or any questions. What's up?";
+
+    var openBtn = document.getElementById('happie-chat-open');
+    var closeBtn = document.getElementById('happie-chat-close');
+    var panel = document.getElementById('happie-chat-panel');
+    var messagesEl = document.getElementById('happie-chat-messages');
+    var form = document.getElementById('happie-chat-form');
+    var input = document.getElementById('happie-chat-input');
+    var sendBtn = form.querySelector('.happie-chat__send');
+    var suggestionsEl = document.getElementById('happie-chat-suggestions');
+    var suggestionBtns = suggestionsEl.querySelectorAll('.happie-chat__suggestion');
+    var handoffPanel = document.getElementById('happie-chat-handoff');
+    var handoffBackBtn = document.getElementById('happie-chat-handoff-back');
+
+    var conversation = [];
+    var sessionStarted = false;
+
+    function escapeHtml(str) {
+      var div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function renderMarkdown(text) {
+      var html = escapeHtml(text);
+      // Bold
+      html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      // Links [text](url)
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      // Bullets
+      var lines = html.split('\n');
+      var inList = false;
+      var out = [];
+      lines.forEach(function(line) {
+        if (/^[\-\*]\s+/.test(line)) {
+          if (!inList) { out.push('<ul>'); inList = true; }
+          out.push('<li>' + line.replace(/^[\-\*]\s+/, '') + '</li>');
+        } else {
+          if (inList) { out.push('</ul>'); inList = false; }
+          out.push(line);
+        }
+      });
+      if (inList) out.push('</ul>');
+      return out.join('<br>').replace(/<br><(ul|\/ul|li)/g, '<$1');
+    }
+
+    function addMessage(text, role) {
+      var msg = document.createElement('div');
+      msg.className = 'happie-chat__msg happie-chat__msg--' + role;
+      msg.innerHTML = role === 'bot' ? renderMarkdown(text) : escapeHtml(text);
+      messagesEl.appendChild(msg);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function showTyping() {
+      var typing = document.createElement('div');
+      typing.className = 'happie-chat__typing';
+      typing.id = 'happie-chat-typing';
+      typing.innerHTML = '<span></span><span></span><span></span>';
+      messagesEl.appendChild(typing);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function hideTyping() {
+      var t = document.getElementById('happie-chat-typing');
+      if (t) t.remove();
+    }
+
+    function openChat() {
+      panel.classList.add('is-open');
+      panel.setAttribute('aria-hidden', 'false');
+      if (!sessionStarted) {
+        addMessage(greeting, 'bot');
+        sessionStarted = true;
+      }
+      setTimeout(function() { input.focus(); }, 300);
+    }
+
+    function closeChat() {
+      panel.classList.remove('is-open');
+      panel.setAttribute('aria-hidden', 'true');
+      handoffPanel.hidden = true;
+    }
+
+    function showHandoff() {
+      handoffPanel.hidden = false;
+    }
+
+    function hideHandoff() {
+      handoffPanel.hidden = true;
+    }
+
+    async function sendMessage(text) {
+      if (!text || !text.trim()) return;
+      addMessage(text, 'user');
+      conversation.push({ role: 'user', content: text });
+      suggestionsEl.classList.add('is-hidden');
+      input.value = '';
+      sendBtn.disabled = true;
+      showTyping();
+
+      // Trigger human handoff if user explicitly asks
+      var humanKeywords = /talk to (a |)human|speak to (a |)human|customer service|real person|live agent|escalate|email (you|us|support)/i;
+      if (humanKeywords.test(text)) {
+        hideTyping();
+        addMessage("Got it! I'll connect you with our team. Please fill out this quick form below and we'll respond within 24 hours.", 'bot');
+        conversation.push({ role: 'assistant', content: "Showing human handoff form." });
+        sendBtn.disabled = false;
+        setTimeout(showHandoff, 600);
+        return;
+      }
+
+      if (!workerUrl) {
+        hideTyping();
+        addMessage("⚠️ The chatbot isn't fully configured yet. Please email us at " + supportEmail + " and we'll help you out!", 'bot');
+        sendBtn.disabled = false;
+        return;
+      }
+
+      try {
+        var resp = await fetch(workerUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: conversation, page: window.location.pathname })
+        });
+        var data = await resp.json();
+        hideTyping();
+        if (data.reply) {
+          addMessage(data.reply, 'bot');
+          conversation.push({ role: 'assistant', content: data.reply });
+          // If the bot suggests escalation, show handoff
+          if (/contact (our team|support|us)|email (us|our team)|fill out (the |)form/i.test(data.reply)) {
+            setTimeout(showHandoff, 800);
+          }
+        } else {
+          addMessage("Sorry, I had trouble responding. Try again or email us at " + supportEmail, 'bot');
+        }
+      } catch (err) {
+        hideTyping();
+        addMessage("Connection hiccup. Try again, or email us at " + supportEmail, 'bot');
+        console.error('Chatbot error:', err);
+      }
+      sendBtn.disabled = false;
+    }
+
+    openBtn.addEventListener('click', openChat);
+    closeBtn.addEventListener('click', closeChat);
+    handoffBackBtn.addEventListener('click', hideHandoff);
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      sendMessage(input.value);
+    });
+
+    suggestionBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        sendMessage(btn.dataset.suggest);
+      });
+    });
+
+    // Persist conversation in sessionStorage so it survives page navigation
+    try {
+      var saved = sessionStorage.getItem('happie-chat-convo');
+      if (saved) {
+        var parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          conversation = parsed;
+          parsed.forEach(function(m) {
+            if (m.role === 'user' || m.role === 'assistant') {
+              addMessage(m.content, m.role === 'user' ? 'user' : 'bot');
+            }
+          });
+          sessionStarted = true;
+          suggestionsEl.classList.add('is-hidden');
+        }
+      }
+    } catch(e) {}
+
+    // Save conversation on each update
+    var origPush = conversation.push;
+    conversation.push = function() {
+      var r = origPush.apply(this, arguments);
+      try { sessionStorage.setItem('happie-chat-convo', JSON.stringify(conversation)); } catch(e) {}
+      return r;
+    };
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Happie Chatbot",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable chatbot",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "worker_url",
+      "label": "Worker URL (Cloudflare endpoint)",
+      "info": "Paste the URL of your deployed Cloudflare Worker (see setup guide)."
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email",
+      "default": "support@happiefusion.com"
+    },
+    {
+      "type": "text",
+      "id": "bot_name",
+      "label": "Bot name",
+      "default": "Happie Assistant"
+    },
+    {
+      "type": "textarea",
+      "id": "greeting",
+      "label": "Greeting message",
+      "default": "Hey there! I'm here to help with products, orders, or any questions about Fungi Fusion. What's up?"
+    },
+    {
+      "type": "image_picker",
+      "id": "bot_avatar",
+      "label": "Bot avatar (in header)",
+      "info": "Square image works best (recommended: Happie cloud logo)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bubble_icon",
+      "label": "Bubble icon (floating button)",
+      "info": "Leave empty to use default chat icon"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Bubble position",
+      "options": [
+        { "value": "right", "label": "Bottom right" },
+        { "value": "left", "label": "Bottom left" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "color",
+      "id": "brand_color",
+      "label": "Brand color",
+      "default": "#50b2bd"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (gradient)",
+      "default": "#f7cd46"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Happie Chatbot"
+    }
+  ]
+}
+{% endschema %}
