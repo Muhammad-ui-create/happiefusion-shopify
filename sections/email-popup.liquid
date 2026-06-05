@@ -280,60 +280,59 @@
 
   // Handle form submission
   if (form) {
-    // Submit via fetch with the form's FormData — this captures Shopify's
-    // hidden authenticity_token, form_type, and utf8 fields automatically.
-    // Standard Dawn-theme pattern. Shopify will accept the request and fire
-    // the "Customer subscribed to email marketing" automation.
+    // ── NATIVE FORM SUBMIT (so Shopify's hCaptcha can run invisibly) ──
+    // Fetch-based submits get "Missing CAPTCHA token" 400 errors because
+    // Shopify's bot-protection script only runs on real form submissions.
+    // We let the form submit naturally; the page will briefly reload to
+    // /contact?customer_posted=true. We then redirect back to where the
+    // user came from with a marker so we can show a confirmation toast.
+
+    // Add hidden field telling Shopify where to redirect after success
+    var returnUrl = document.createElement('input');
+    returnUrl.type = 'hidden';
+    returnUrl.name = 'return_to';
+    returnUrl.value = window.location.pathname + '?subscribed=1';
+    form.appendChild(returnUrl);
+
     form.addEventListener('submit', function(e) {
-      e.preventDefault();
       var email = document.getElementById('ep-email-input').value;
       if (!email) return;
-
-      console.log('[Happie] Submitting newsletter signup for:', email);
-
-      // Show success state immediately for snappy UX
+      console.log('[Happie] Submitting newsletter signup (native submit) for:', email);
+      // Set cookie so popup doesn't re-show after page reloads
+      setCookie(COOKIE_KEY, COOKIE_DAYS);
+      // Show success state — visible for a split second before reload
       form.style.display = 'none';
       document.getElementById('ep-success').style.display = 'flex';
-      setCookie(COOKIE_KEY, COOKIE_DAYS);
-
-      var formData = new FormData(form);
-
-      // Log every field we're sending — useful for debugging
-      console.log('[Happie] Form fields being sent:');
-      for (var pair of formData.entries()) {
-        console.log('  ' + pair[0] + ' = ' + pair[1]);
-      }
-
-      fetch('/contact#contact_form', {
-        method: 'POST',
-        body: formData,
-        credentials: 'same-origin',
-        redirect: 'follow'
-      })
-      .then(function(resp) {
-        console.log('[Happie] Shopify response status:', resp.status, resp.statusText);
-        console.log('[Happie] Final URL:', resp.url);
-        if (resp.status >= 400) {
-          return resp.text().then(function(text) {
-            console.error('[Happie] Shopify error response (first 500 chars):', text.substring(0, 500));
-          });
-        }
-        return resp.text().then(function(text) {
-          // Look for Shopify's success indicators
-          if (text.indexOf('customer_posted=true') > -1 || resp.url.indexOf('customer_posted=true') > -1) {
-            console.log('[Happie] ✅ Subscription SUCCESS — customer_posted=true');
-          } else if (text.indexOf('errors') > -1) {
-            console.warn('[Happie] ⚠️ Shopify returned errors page — check Customer privacy settings');
-          }
-        });
-      })
-      .catch(function(err) {
-        console.error('[Happie] Signup error:', err);
-      });
-
-      // Close popup after 2.5s
-      setTimeout(closePopup, 2500);
+      // Let the form submit naturally (no preventDefault) — hCaptcha runs,
+      // Shopify accepts the signup, automation fires, page redirects back
+      // to homepage with ?subscribed=1
     });
+
+    // ── On page load, if we see ?subscribed=1, show a confirmation toast ──
+    if (window.location.search.indexOf('subscribed=1') > -1) {
+      console.log('[Happie] ✅ Returning from successful subscription');
+      var toast = document.createElement('div');
+      toast.style.cssText =
+        'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);' +
+        'z-index:10000;background:#2D6A4F;color:#fff;padding:16px 24px;' +
+        'border-radius:50px;font-weight:700;font-size:14px;' +
+        'box-shadow:0 12px 32px rgba(0,0,0,0.3);font-family:Inter,sans-serif;' +
+        'display:flex;align-items:center;gap:10px;';
+      toast.innerHTML =
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
+        'You\'re subscribed! Check your inbox for 15% off + free shipping.';
+      document.body.appendChild(toast);
+      setTimeout(function() {
+        toast.style.transition = 'opacity 0.4s';
+        toast.style.opacity = '0';
+        setTimeout(function() { toast.remove(); }, 400);
+      }, 5000);
+      // Clean the URL so refresh doesn't re-show
+      if (window.history && window.history.replaceState) {
+        var cleanUrl = window.location.pathname + window.location.hash;
+        window.history.replaceState({}, '', cleanUrl);
+      }
+    }
   }
 })();
 </script>
