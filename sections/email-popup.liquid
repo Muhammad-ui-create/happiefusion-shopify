@@ -30,7 +30,10 @@
       <p class="ep-sub">Sign up and get <strong>15% off your first order</strong>, plus <strong>free shipping</strong> automatically applied at checkout. Just for new customers.</p>
 
       {% form 'customer', id: 'ep-email-form', class: 'ep-form' %}
-        <input type="hidden" name="contact[tags]" value="email-popup-subscriber">
+        <input type="hidden" name="contact[tags]" value="newsletter,popup-signup">
+        <input type="hidden" name="contact[accepts_marketing]" value="true">
+        <input type="hidden" name="customer[accepts_marketing]" value="true">
+        <input type="hidden" name="customer[tags]" value="newsletter,popup-signup">
         <div class="ep-input-wrap">
           <input
             type="email"
@@ -282,17 +285,25 @@
       document.getElementById('ep-success').style.display = 'flex';
       setCookie(COOKIE_KEY, COOKIE_DAYS);
 
-      // Submit to Shopify newsletter
+      // ── CRITICAL: subscribe to email marketing so Shopify automation triggers ──
+      // form_type: 'customer' with customer[accepts_marketing]=true is what creates
+      // a real subscription event (not just a contact record). This is what fires
+      // Shopify's "Customer subscribed to email marketing" automation.
+      var body = new URLSearchParams();
+      body.append('form_type', 'customer');
+      body.append('utf8', '✓');
+      body.append('contact[email]', email);
+      body.append('contact[accepts_marketing]', 'true');
+      body.append('customer[email]', email);
+      body.append('customer[accepts_marketing]', 'true');
+      body.append('customer[tags]', 'newsletter,popup-signup');
+
       fetch('/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form_type': 'customer',
-          'utf8': '✓',
-          'contact[email]': email,
-          'contact[tags]': 'newsletter,popup-signup'
-        })
-      });
+        body: body,
+        credentials: 'same-origin'
+      }).catch(function(err) { console.error('Email signup error:', err); });
 
       // Close after 2.5s
       setTimeout(closePopup, 2500);
