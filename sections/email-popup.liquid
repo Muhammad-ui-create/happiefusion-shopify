@@ -30,19 +30,19 @@
       <p class="ep-sub">Sign up and get <strong>15% off your first order</strong>, plus <strong>free shipping</strong> automatically applied at checkout. Just for new customers.</p>
 
       {%- comment -%}
-        Hidden iframe target — lets the form submit natively (with Shopify's auth token,
-        form_type, and accepts_marketing fields handled by Liquid) without navigating
-        the main page. This is the most reliable way to subscribe a customer.
+        Standard Shopify Dawn pattern for newsletter signup:
+        {% form 'customer' %} renders the form with the proper authenticity_token,
+        form_type=customer, and utf8 fields automatically.
+        Use ONLY contact[*] fields (not customer[*]) — that's the Shopify convention
+        for newsletter signups inside a 'customer' form_type.
       {%- endcomment -%}
-      <iframe name="ep-iframe" id="ep-iframe" style="display:none;width:0;height:0;border:0;" aria-hidden="true"></iframe>
-
-      {% form 'customer', id: 'ep-email-form', class: 'ep-form', target: 'ep-iframe' %}
-        <input type="hidden" name="customer[accepts_marketing]" value="true">
-        <input type="hidden" name="customer[tags]" value="newsletter,popup-signup">
+      {% form 'customer', id: 'ep-email-form', class: 'ep-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter,popup-signup">
+        <input type="hidden" name="contact[accepts_marketing]" value="true">
         <div class="ep-input-wrap">
           <input
             type="email"
-            name="customer[email]"
+            name="contact[email]"
             placeholder="your@email.com"
             required
             class="ep-input"
@@ -280,38 +280,60 @@
 
   // Handle form submission
   if (form) {
-    // The form submits natively to a hidden iframe (target="ep-iframe").
-    // This way Shopify processes it like any normal customer signup —
-    // with the proper authenticity_token, accepts_marketing flag, and
-    // the "Customer subscribed to email marketing" event fires correctly.
-    // We just intercept the submit to show our success UI on top.
-    form.addEventListener('submit', function() {
+    // Submit via fetch with the form's FormData — this captures Shopify's
+    // hidden authenticity_token, form_type, and utf8 fields automatically.
+    // Standard Dawn-theme pattern. Shopify will accept the request and fire
+    // the "Customer subscribed to email marketing" automation.
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
       var email = document.getElementById('ep-email-input').value;
       if (!email) return;
+
       console.log('[Happie] Submitting newsletter signup for:', email);
-      // Show success state immediately (form continues submitting to hidden iframe)
+
+      // Show success state immediately for snappy UX
       form.style.display = 'none';
       document.getElementById('ep-success').style.display = 'flex';
       setCookie(COOKIE_KEY, COOKIE_DAYS);
-      // Close after 2.5s
+
+      var formData = new FormData(form);
+
+      // Log every field we're sending — useful for debugging
+      console.log('[Happie] Form fields being sent:');
+      for (var pair of formData.entries()) {
+        console.log('  ' + pair[0] + ' = ' + pair[1]);
+      }
+
+      fetch('/contact#contact_form', {
+        method: 'POST',
+        body: formData,
+        credentials: 'same-origin',
+        redirect: 'follow'
+      })
+      .then(function(resp) {
+        console.log('[Happie] Shopify response status:', resp.status, resp.statusText);
+        console.log('[Happie] Final URL:', resp.url);
+        if (resp.status >= 400) {
+          return resp.text().then(function(text) {
+            console.error('[Happie] Shopify error response (first 500 chars):', text.substring(0, 500));
+          });
+        }
+        return resp.text().then(function(text) {
+          // Look for Shopify's success indicators
+          if (text.indexOf('customer_posted=true') > -1 || resp.url.indexOf('customer_posted=true') > -1) {
+            console.log('[Happie] ✅ Subscription SUCCESS — customer_posted=true');
+          } else if (text.indexOf('errors') > -1) {
+            console.warn('[Happie] ⚠️ Shopify returned errors page — check Customer privacy settings');
+          }
+        });
+      })
+      .catch(function(err) {
+        console.error('[Happie] Signup error:', err);
+      });
+
+      // Close popup after 2.5s
       setTimeout(closePopup, 2500);
     });
-
-    // Optional: log iframe response so you can debug Shopify's reply in DevTools
-    var iframe = document.getElementById('ep-iframe');
-    if (iframe) {
-      iframe.addEventListener('load', function() {
-        try {
-          var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-          if (iframeDoc && iframeDoc.location.href && iframeDoc.location.href !== 'about:blank') {
-            console.log('[Happie] Shopify processed signup. Response URL:', iframeDoc.location.href);
-          }
-        } catch (e) {
-          // Cross-origin guard — Shopify may redirect to a checkout subdomain
-          console.log('[Happie] Signup processed (response cross-origin, success likely)');
-        }
-      });
-    }
   }
 })();
 </script>
