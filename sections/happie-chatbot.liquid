@@ -59,12 +59,20 @@
       <!-- Greeting populated by JS -->
     </div>
 
-    <!-- Suggested Replies -->
+    <!-- Suggested Replies — Category Menu -->
     <div class="happie-chat__suggestions" id="happie-chat-suggestions">
-      <button type="button" class="happie-chat__suggestion" data-suggest="What's in every can of Fungi Fusion?">What's inside?</button>
-      <button type="button" class="happie-chat__suggestion" data-suggest="How fast does shipping take?">Shipping info</button>
-      <button type="button" class="happie-chat__suggestion" data-suggest="What's your return policy?">Returns</button>
-      <button type="button" class="happie-chat__suggestion" data-suggest="I need help with my order">Talk to human</button>
+      <div class="happie-chat__cat-label">Popular topics</div>
+      <button type="button" class="happie-chat__suggestion" data-suggest="What's in every can of Fungi Fusion?">🍄 What's inside</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="Tell me about the three mushrooms">🧪 The science</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="Which flavors do you have?">🥤 Flavors</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="How does Subscribe & Save work?">💸 Subscribe & Save</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="Tell me about shipping">📦 Shipping</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="What's your return policy?">↩️ Returns</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="I need help checking out">🛒 Help with checkout</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="Is there a discount for first-time buyers?">🎁 First-order discount</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="Does it have caffeine or alcohol?">⚡ Caffeine & alcohol?</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="Is it safe to drink daily?">💊 Safety</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="I need help with my order">👤 Talk to a human</button>
     </div>
 
     <!-- Input -->
@@ -350,6 +358,17 @@
     30% { transform: translateY(-6px); opacity: 1; }
   }
 
+  /* Category label */
+  .happie-chat__cat-label {
+    width: 100%;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hc-text-muted);
+    margin-bottom: 4px;
+    padding: 0 4px;
+  }
   /* Suggestions */
   .happie-chat__suggestions {
     padding: 0 18px 12px;
@@ -541,6 +560,170 @@
     var botName = widget.dataset.botName || 'Happie Assistant';
     var greeting = widget.dataset.greeting || "Hey! I'm the Happie Assistant. Reach our team at support@drinkhappie.com or ask me anything below.";
 
+    // ── LOCAL KNOWLEDGE BASE ──────────────────────────────────────────────
+    // Answered instantly without backend calls. Pattern-matched by keyword regex.
+    // Backend is still hit for anything that doesn't match.
+    var KNOWLEDGE = [
+      // ── PRODUCT BASICS ──
+      {
+        match: /what.*(in|inside|is in|contain).*(can|fungi|happie|drink|product)|ingredients|whats? in/i,
+        reply: "**Every can of Happie Fungi Fusion contains 2,000mg total of dual-extracted, fruiting-body mushroom extract:**\n\n- **900mg Lion's Mane** — for focus & mental clarity\n- **700mg Cordyceps** — for natural, caffeine-free energy\n- **400mg Reishi** — for calm & stress support\n\nPlus: Carbonated water, organic light agave nectar, citric acid, natural flavor, ocean-derived magnesium & calcium citrate. **Zero alcohol. Zero caffeine. ~40 calories. Vegan, non-GMO, gluten-free.**\n\nWant to read the full science? Check out our [Science page](/pages/the-science)."
+      },
+      {
+        match: /three mushrooms|3 mushrooms|tell me about (the |)(mushrooms|adaptogens|science)|how (does|do) (it|they|the mushrooms) work|the science/i,
+        reply: "Here's how each mushroom works:\n\n- **Lion's Mane (900mg)** — Contains hericenones & erinacines that support Nerve Growth Factor (NGF). Studied for focus, cognition & mental clarity.\n- **Cordyceps (700mg)** — Supports cellular energy via ATP production (your body's natural energy pathway). Real energy, no caffeine spike or crash.\n- **Reishi (400mg)** — \"The queen of mushrooms.\" Triterpenes regulate your stress response — calm without sedation.\n\nWe use only **fruiting body extracts** (the real mushroom) — never mycelium grown on grain. Each batch is **dual-extracted** (hot water + ethanol) for the full spectrum of beta-glucans and triterpenes, then **third-party lab tested**.\n\nDeep dive: [The Science Behind Happie](/pages/the-science)"
+      },
+      {
+        match: /flavors?|how many flavors|what flavors|which flavors|taste like/i,
+        reply: "We have **three flavors**, all available as 6-packs ($23.99) or a 12-pack Variety Pack ($38.99):\n\n- 🔵 [**Blue Razzberry**](/products/blue-razzberry-fungi-powered-seltzer) — tart, candy-bright\n- 🥭 [**Mango Mimosa**](/products/mango-mimosa-fungi-powered-seltzer) — tropical, lightly sweet\n- 🍉 [**Watermelon**](/products/watermelon-fungi-powered-seltzer) — clean, juicy, refreshing\n\nOr try all three with the [**Variety Pack**](/products/happie-fungi-fusion-mushroom-drink-variety-pack). None taste earthy or medicinal — that was non-negotiable for us."
+      },
+      {
+        match: /caffeine|alcohol|alcoholic|caffeinated|stimulant/i,
+        reply: "**Zero caffeine. Zero alcohol.** Always.\n\nThe energy you feel comes from **Cordyceps** supporting ATP (cellular energy) production — not from stimulants. No crash, no jitters, no dependency.\n\nSafe to drink any time of day, at any age, in any setting. Many customers use it as an **alcohol alternative** for sober-curious evenings or as a **coffee replacement** for clean morning energy."
+      },
+      {
+        match: /calories?|sugar|sweetener|nutrition/i,
+        reply: "**~40 calories per can.**\n\nSweetened with a small amount of **organic light agave nectar**. No refined sugar, no artificial sweeteners, no sugar alcohols (which cause digestive issues for many people)."
+      },
+      {
+        match: /vegan|gluten|gluten[- ]?free|non[- ]?gmo|allergen|dairy/i,
+        reply: "Yes to all of the above:\n\n- ✅ **100% Vegan** — no animal products\n- ✅ **Gluten-free**\n- ✅ **Non-GMO**\n- ✅ **No artificial flavors, colors, or preservatives**\n- ✅ Cultivated mushrooms (not wild-harvested)"
+      },
+      {
+        match: /psychedelic|psilocybin|magic mushroom|trippy|hallucina/i,
+        reply: "**No — absolutely not.** Happie Fungi Fusion contains only **functional / adaptogenic mushrooms** (Lion's Mane, Cordyceps, Reishi). These are completely different from psilocybin mushrooms.\n\n- Legal in all 50 US states ✓\n- Non-psychoactive ✓\n- Backed by decades of peer-reviewed clinical research ✓\n\nYou can drink it any time and stay completely clear-headed."
+      },
+
+      // ── SAFETY / HEALTH ──
+      {
+        match: /safe.*daily|drink (every|each) day|can i (drink|have) (this|happie) (every|each) day/i,
+        reply: "**Yes — Happie is formulated for daily use.**\n\nIn fact, that's when adaptogenic mushrooms work best. The benefits of Lion's Mane and Reishi **compound over time**. Most subscribers notice meaningful changes in focus, energy, and sleep after **2–4 weeks of daily use**.\n\nOne can per day is the sweet spot."
+      },
+      {
+        match: /pregnan|nurs|breastfeed|kids?|child(ren)?|teen/i,
+        reply: "We recommend consulting your **healthcare provider** before consuming any supplement product during pregnancy, while nursing, or for children under 18. Individual circumstances vary, and a medical professional is best positioned to advise you."
+      },
+      {
+        match: /medication|prescription|blood thinner|drug interaction|interact|warfarin/i,
+        reply: "Functional mushrooms are generally well-tolerated, but **please consult your doctor** if you're on:\n\n- Blood thinners (Reishi has mild blood-thinning effects)\n- Immunosuppressants\n- Diabetes medication\n\nWe're not medical professionals — always ask your healthcare provider about supplement interactions with prescriptions."
+      },
+      {
+        match: /lab test|third[- ]?party|coa|certificate of analysis|tested|purity/i,
+        reply: "**Every single batch is third-party tested** for:\n\n- Heavy metals & contaminants\n- Microbial safety\n- Potency verification (beta-glucan content)\n- Pesticides & herbicides\n\nEach can has a **QR code** linking to the full Certificate of Analysis (COA) for that batch. You should always be able to verify what you're consuming."
+      },
+
+      // ── PRICING / SUBSCRIPTION ──
+      {
+        match: /price|cost|how much|how expensive|pricing/i,
+        reply: "**Our pricing:**\n\n- **6-Pack (any single flavor)** — $23.99\n- **12-Pack Variety Pack** — $38.99 (all 3 flavors)\n- **Subscribe & Save** — 20% off every order + free shipping always\n\nWe also offer **15% off + free shipping** on your first order. Use code `WELCOME15` at checkout (new customers only).\n\n[Shop now →](/collections/all)"
+      },
+      {
+        match: /subscribe|subscription|subscribe.*save|recurring|monthly delivery/i,
+        reply: "**Subscribe & Save** is the best deal:\n\n- ✅ **20% off** every single order\n- ✅ **Free shipping**, always (no minimum)\n- ✅ **Cancel anytime** — one click, no fees\n- ✅ **Skip or pause** a delivery from your account\n- ✅ Early access to new flavors\n\nDelivery is once per month (and you can skip a month anytime). Pick your flavor at checkout — switch flavors anytime from your account."
+      },
+      {
+        match: /discount|coupon|promo code|first[- ]?(order|time)|welcome.*code|new customer/i,
+        reply: "**For first-time buyers** we offer:\n\n- **15% off** with code `WELCOME15` at checkout\n- **Free shipping** automatically applied (no minimum, no code needed)\n\nBoth are reserved for new customers. Add anything to cart and you'll see them at checkout.\n\nAlready a customer? Subscribe & Save gets you **20% off every order + free shipping** every time."
+      },
+      {
+        match: /cancel.*subscription|stop subscription|cancel my (account|sub)/i,
+        reply: "You can **cancel anytime** — no fees, no questions asked.\n\n1. Log into your account at [happiefusion.com](/)\n2. Click **Subscriptions**\n3. Click **Cancel**\n\nThat's it. We'd rather earn your business each month than trap you into it. Need help? Email us at support@drinkhappie.com."
+      },
+
+      // ── SHIPPING ──
+      {
+        match: /shipping (cost|rate|price|info|policy|time)|how (fast|long|much) (does )?(it )?(ship|take|cost)|when will (it|my order) arrive/i,
+        reply: "**Shipping breakdown:**\n\n- 📦 **Processing:** 1 business day from our Northern California warehouse\n- 🚚 **Standard delivery:** 3–5 business days\n- ⚡ **Expedited (2-day):** $12.99\n- 💰 **Standard cost:** $5.99 — OR **FREE on $75+**\n- 🎁 **First-time buyers:** FREE shipping automatically\n- 📬 **Subscribers:** Free shipping every order, no minimum\n\nWe ship to **all 50 US states**. Full details: [Shipping Policy](/pages/shipping-policy)."
+      },
+      {
+        match: /where (do you|are you|do they) ship|international|outside (us|usa)|countries|canada|uk/i,
+        reply: "We currently ship to **all 50 US states only**.\n\nWe're working on international shipping — sign up for our email list to be notified when your country is added."
+      },
+      {
+        match: /tracking|track (my )?(order|package|shipment)|hasn'?t (arrived|shipped)|where('?s| is) my order/i,
+        reply: "Once your order ships you'll get an **email with tracking info** automatically.\n\nIf you haven't received it within 2 business days of ordering:\n1. Check your spam folder\n2. Email us at **support@drinkhappie.com** with your order number — we'll track it down\n3. Or click 'Talk to a human' below and we'll handle it"
+      },
+      {
+        match: /free shipping|when.*free.*ship|free delivery/i,
+        reply: "**Free shipping** is available 3 ways:\n\n1. 🎁 **First-time buyers** — automatic on your first order, no minimum\n2. 💰 **Orders $75+** — automatic at checkout\n3. ✨ **Subscribe & Save** — every order, every time, no minimum\n\nTwo 6-packs ($47.98) gets you most of the way to $75 — adding a third unlocks free shipping for any order."
+      },
+
+      // ── RETURNS ──
+      {
+        match: /return|refund|money back|guarantee|don'?t like it|not happy|unhappy/i,
+        reply: "**30-day satisfaction guarantee.**\n\nIf you're not happy for *any* reason within 30 days of delivery, just email **support@drinkhappie.com** and we'll issue a **full refund** — no questions asked.\n\n**You don't even need to return the product.** We'd rather you keep it than deal with the hassle of shipping it back.\n\nFor damaged or wrong items, email us within 7 days with a photo and we'll send a replacement or refund immediately."
+      },
+
+      // ── CHECKOUT / ORDER HELP ──
+      {
+        match: /checkout|payment|how (do i|to) (order|pay|buy|purchase)|having trouble|can'?t (check|order|pay)|error.*(checkout|cart|payment)/i,
+        reply: "Need help checking out? Here's the quick path:\n\n1. 🛒 [Add items to cart](/collections/all)\n2. Click the cart icon (top right)\n3. Click **Checkout**\n4. Enter your shipping address & payment\n5. Add code `WELCOME15` for 15% off (first-time buyers)\n6. Review and click **Pay now**\n\nWe accept all major credit cards, Apple Pay, Google Pay, and Shop Pay.\n\n**Having a problem?** Click 'Talk to a human' below and we'll fix it for you within an hour during business hours."
+      },
+      {
+        match: /payment method|credit card|apple pay|google pay|shop pay|paypal|afterpay/i,
+        reply: "We accept:\n\n- ✅ All major credit cards (Visa, MC, Amex, Discover)\n- ✅ Apple Pay\n- ✅ Google Pay\n- ✅ Shop Pay (with installments available)\n- ✅ Meta Pay\n\nAll payments processed securely through Shopify Payments. We never store your full card details."
+      },
+      {
+        match: /forgot password|reset password|can'?t log in|account access|locked out/i,
+        reply: "**To reset your password:**\n\n1. Go to the [account login page](/account/login)\n2. Click **Forgot password?**\n3. Enter your email — we'll send a reset link\n\nStill stuck? Email **support@drinkhappie.com** and we'll get you back in within an hour."
+      },
+      {
+        match: /change.*address|update.*shipping|wrong address|moved/i,
+        reply: "**To change your shipping address:**\n\n- **For an unshipped order:** Email **support@drinkhappie.com** ASAP with your order number — we'll update it before it ships.\n- **For a subscription:** Log into your account → Subscriptions → Update shipping address.\n- **For your account:** Log in → Addresses → Edit."
+      },
+
+      // ── COMPANY / POLICIES ──
+      {
+        match: /privacy|data|gdpr|ccpa|personal information/i,
+        reply: "We take privacy seriously. We **never sell your personal data**.\n\nRead our full [Privacy Policy](/pages/privacy-policy) for details on what we collect, how we use it, and your rights (including CCPA opt-out for California residents)."
+      },
+      {
+        match: /terms (of service|of use)|conditions|legal/i,
+        reply: "Our full [Terms of Service](/pages/terms-of-service) covers acceptance, products, orders, subscriptions, shipping, returns, and more.\n\nThe short version: we're a small NorCal company that stands behind every can. 30-day guarantee, no fine-print tricks."
+      },
+      {
+        match: /about|who (are|is) (you|happie)|company|founders?|story/i,
+        reply: "**Happie Fusion** is a small team based in **Northern California**. We started Happie because we wanted a functional drink that actually worked — clinically meaningful doses, fruiting body extracts, full transparency.\n\n- 1,200+ verified Amazon reviews ★ 4.9 avg\n- Every batch lab tested\n- All ingredients sourced & made in the USA\n\nMore: [About Us](/pages/about)"
+      },
+      {
+        match: /contact|email|phone|reach you|customer service/i,
+        reply: "**Reach our team:**\n\n- 📧 Email: **support@drinkhappie.com**\n- 📞 Phone: **(833) 374-6567** (Mon–Fri 9am–5pm PST)\n- 💬 Or click **'Talk to a human'** below to send us a message right now\n\nWe respond within **1 business day** — usually faster."
+      },
+      {
+        match: /reviews?|testimonials?|what (do|are) (customers|people) say/i,
+        reply: "**4.9 stars from 1,200+ verified Amazon reviews.** Here's a sample:\n\n- ⭐⭐⭐⭐⭐ *\"Best adaptogen drink I've tried. Tastes great without being too sweet.\"* — Shannon B.\n- ⭐⭐⭐⭐⭐ *\"My wife and I replaced morning coffee with this. Smooth, no jitters.\"* — Nicole G.\n- ⭐⭐⭐⭐⭐ *\"Immediately after a few sips, you can feel the effects in your brain.\"* — Kristine M.\n\nRead them all: [Customer Reviews](/pages/reviews)"
+      },
+      {
+        match: /wholesale|bulk|retail|stock.*store|carry.*store/i,
+        reply: "Interested in wholesale or stocking Happie at your store?\n\nEmail us at **support@drinkhappie.com** with the subject **\"Wholesale Inquiry\"** and we'll send over our wholesale deck and pricing within 1 business day."
+      },
+
+      // ── BENEFITS / USE CASES ──
+      {
+        match: /focus|concentrat|study|brain|mental clarity|productivity/i,
+        reply: "For **focus & mental clarity**, the star ingredient is **Lion's Mane (900mg per can)**. It contains hericenones and erinacines that support Nerve Growth Factor (NGF) — your brain's natural growth signal.\n\nMost people notice sharper focus and better word recall within 2–4 weeks of daily use. Try **Mango Mimosa** or **Blue Razzberry** for a clean afternoon focus boost.\n\n[Shop Lion's Mane drinks →](/collections/all)"
+      },
+      {
+        match: /energy|tired|fatigue|coffee.*alternative|replace.*coffee|morning/i,
+        reply: "For **natural energy** without the crash, the magic is **Cordyceps (700mg per can)** — it supports ATP production (cellular energy) rather than spiking adrenaline like caffeine.\n\nResult: steady all-day energy without the 2pm wall or 11pm wired-but-tired feeling.\n\nMany customers replace morning coffee with Happie. Try [Mango Mimosa](/products/mango-mimosa-fungi-powered-seltzer) — light, bright, perfect for mornings."
+      },
+      {
+        match: /stress|anxi|calm|relax|wind ?down|sleep|insomnia/i,
+        reply: "For **calm & stress relief**, **Reishi (400mg per can)** is your friend. Triterpenes in Reishi regulate your body's natural stress response — calm without sedation.\n\nMany customers use Happie as an **alcohol alternative** for evening wind-downs — supports calm without the next-day cost.\n\nTry [Watermelon](/products/watermelon-fungi-powered-seltzer) for an evening ritual."
+      },
+      {
+        match: /alcohol.*alternative|sober.*curious|replace.*wine|non[- ]?alcoholic/i,
+        reply: "Happie is one of the **best alcohol alternatives** for sober-curious people:\n\n- ✅ **0% alcohol**\n- ✅ **The ritual** — a cold can on the couch, no compromise\n- ✅ **Reishi (400mg)** for genuine calm\n- ✅ **No next-day hangover, anxiety, or interrupted sleep**\n- ✅ Tastes like a real drink, not a kombucha or seltzer\n\nMost customers say [Watermelon](/products/watermelon-fungi-powered-seltzer) or [Mango Mimosa](/products/mango-mimosa-fungi-powered-seltzer) feel most cocktail-like."
+      }
+    ];
+
+    function findLocalAnswer(query) {
+      for (var i = 0; i < KNOWLEDGE.length; i++) {
+        if (KNOWLEDGE[i].match.test(query)) return KNOWLEDGE[i].reply;
+      }
+      return null;
+    }
+
     var openBtn = document.getElementById('happie-chat-open');
     var closeBtn = document.getElementById('happie-chat-close');
     var panel = document.getElementById('happie-chat-panel');
@@ -651,9 +834,23 @@
         return;
       }
 
+      // ── LOCAL KNOWLEDGE BASE — answer common questions instantly ──
+      var localAnswer = findLocalAnswer(text);
+      if (localAnswer) {
+        // Brief typing delay for natural feel
+        setTimeout(function() {
+          hideTyping();
+          addMessage(localAnswer, 'bot');
+          conversation.push({ role: 'assistant', content: localAnswer });
+          sendBtn.disabled = false;
+        }, 600);
+        return;
+      }
+
+      // Fall through to backend AI for anything we don't have a canned answer for
       if (!workerUrl) {
         hideTyping();
-        addMessage("⚠️ The chatbot isn't fully configured yet. Please email us at " + supportEmail + " and we'll help you out!", 'bot');
+        addMessage("I'm not sure about that one yet. Email us at **" + supportEmail + "** or click 'Talk to a human' below and we'll help you out!", 'bot');
         sendBtn.disabled = false;
         return;
       }
