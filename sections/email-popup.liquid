@@ -277,33 +277,39 @@
   if (form) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      var email = document.getElementById('ep-email-input').value;
+      var emailInput = document.getElementById('ep-email-input');
+      var email = emailInput.value;
       if (!email) return;
 
-      // Show success state
+      // Show success state immediately for snappy UX
       form.style.display = 'none';
       document.getElementById('ep-success').style.display = 'flex';
       setCookie(COOKIE_KEY, COOKIE_DAYS);
 
-      // ── CRITICAL: subscribe to email marketing so Shopify automation triggers ──
-      // form_type: 'customer' with customer[accepts_marketing]=true is what creates
-      // a real subscription event (not just a contact record). This is what fires
-      // Shopify's "Customer subscribed to email marketing" automation.
-      var body = new URLSearchParams();
-      body.append('form_type', 'customer');
-      body.append('utf8', '✓');
-      body.append('contact[email]', email);
-      body.append('contact[accepts_marketing]', 'true');
-      body.append('customer[email]', email);
-      body.append('customer[accepts_marketing]', 'true');
-      body.append('customer[tags]', 'newsletter,popup-signup');
+      // ── Use FormData(form) so we automatically pick up Shopify's hidden ──
+      // ── authenticity_token + form_type='customer' from {% form 'customer' %} ──
+      // ── This is what Shopify requires to ACCEPT the subscription and fire ──
+      // ── the "Customer subscribed to email marketing" automation trigger. ──
+      var formData = new FormData(form);
+      // Ensure both contact[*] and customer[*] variants are set
+      formData.set('contact[email]', email);
+      formData.set('customer[email]', email);
+      formData.set('contact[accepts_marketing]', 'true');
+      formData.set('customer[accepts_marketing]', 'true');
+      if (!formData.get('form_type')) formData.set('form_type', 'customer');
 
       fetch('/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body,
-        credentials: 'same-origin'
-      }).catch(function(err) { console.error('Email signup error:', err); });
+        body: formData,
+        credentials: 'same-origin',
+        headers: { 'Accept': 'application/json, text/html' }
+      })
+      .then(function(resp) {
+        console.log('[Happie] Subscription response status:', resp.status);
+      })
+      .catch(function(err) {
+        console.error('[Happie] Email signup error:', err);
+      });
 
       // Close after 2.5s
       setTimeout(closePopup, 2500);
