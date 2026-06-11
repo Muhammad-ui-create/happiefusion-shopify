@@ -1,0 +1,868 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Happie Affiliate Program — Earn 20% Commission on Every Sale</title>
+  <meta name="description" content="Become a Happie Fusion affiliate. Earn 20% commission promoting the #1 functional mushroom seltzer. 4.9★ from 1,200+ customers. Free product, real money.">
+  <link rel="icon" type="image/png" href="{{ 'happie-favicon.png' | asset_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #FBFAF5;
+      --bg-2:      #F2EFE5;
+      --ink:       #0F1714;
+      --ink-2:     #2D3A35;
+      --ink-3:     #5C6C66;
+      --ink-4:     #A7B1AC;
+      --green:     #2D6A4F;
+      --green-dk:  #1B4332;
+      --green-lt:  #D8F3DC;
+      --gold:      #C9A84C;
+      --gold-lt:   #F4E5B4;
+      --line:      rgba(15,23,20,0.08);
+      --white:     #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    .serif { font-family: 'Newsreader', Georgia, serif; }
+
+    /* ── NAV ── */
+    .aff-nav {
+      position: sticky; top: 0; z-index: 100;
+      padding: 14px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(251,250,245,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .aff-nav-logo img { height: 42px; width: auto; }
+    .aff-nav-cta {
+      background: var(--green-dk); color: var(--white);
+      border-radius: 50px; padding: 10px 22px;
+      font-size: 13px; font-weight: 700;
+      transition: all 0.2s;
+    }
+    .aff-nav-cta:hover { background: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 32px 100px;
+      background:
+        radial-gradient(ellipse at 70% 20%, rgba(45,106,79,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 50%);
+      position: relative; overflow: hidden;
+    }
+    .hero-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.2fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-lt);
+      border: 1px solid rgba(45,106,79,0.2);
+      color: var(--green-dk);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 7px 14px; border-radius: 50px;
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .hero-headline {
+      font-family: 'Newsreader', serif;
+      font-size: clamp(38px, 6vw, 72px);
+      font-weight: 600; line-height: 1.0;
+      color: var(--ink); margin-bottom: 24px;
+      letter-spacing: -0.025em;
+    }
+    .hero-headline em {
+      font-style: italic; color: var(--green-dk);
+      position: relative;
+    }
+    .hero-headline em::after {
+      content: ''; position: absolute;
+      left: 0; right: 0; bottom: 8px;
+      height: 12px; background: var(--gold-lt);
+      z-index: -1; opacity: 0.7;
+    }
+    .hero-body {
+      font-size: 18px; color: var(--ink-3);
+      line-height: 1.7; margin-bottom: 36px;
+      max-width: 480px;
+    }
+    .hero-body strong { color: var(--ink); font-weight: 700; }
+
+    .hero-cta-row {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--ink); color: var(--white);
+      border-radius: 14px; padding: 18px 32px;
+      font-size: 15px; font-weight: 800;
+      transition: all 0.2s;
+      box-shadow: 0 8px 24px rgba(15,23,20,0.18);
+    }
+    .btn-primary:hover { background: var(--green-dk); transform: translateY(-2px); }
+    .btn-primary svg { transition: transform 0.2s; }
+    .btn-primary:hover svg { transform: translateX(3px); }
+    .hero-cta-note {
+      font-size: 13px; color: var(--ink-3);
+    }
+
+    /* Hero stats card */
+    .hero-stats {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 36px 32px;
+      box-shadow: 0 24px 60px rgba(15,23,20,0.08);
+    }
+    .hero-stats-label {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-4);
+      margin-bottom: 24px;
+    }
+    .hero-stat {
+      padding: 18px 0; border-bottom: 1px solid var(--line);
+    }
+    .hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
+    .hero-stat:first-child { padding-top: 0; }
+    .hero-stat-num {
+      font-family: 'Newsreader', serif;
+      font-size: 38px; font-weight: 600;
+      color: var(--green-dk); line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero-stat-num.gold { color: var(--gold); }
+    .hero-stat-label {
+      font-size: 12px; font-weight: 600;
+      color: var(--ink-3); letter-spacing: 0.04em;
+    }
+
+    /* ── WHY PARTNER ── */
+    .why-section {
+      padding: 100px 32px;
+      background: var(--white);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .why-inner { max-width: 1120px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Newsreader', serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 600; color: var(--ink);
+      line-height: 1.15; letter-spacing: -0.02em;
+    }
+    .section-title em { font-style: italic; color: var(--green-dk); }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;
+    }
+    .why-card {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 32px 28px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .why-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(45,106,79,0.3);
+    }
+    .why-card-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--green-lt), #B7E4C7);
+      color: var(--green-dk);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px;
+    }
+    .why-card h3 {
+      font-family: 'Newsreader', serif;
+      font-size: 22px; font-weight: 600;
+      color: var(--ink); margin-bottom: 10px;
+      line-height: 1.25;
+    }
+    .why-card p {
+      font-size: 14.5px; color: var(--ink-3);
+      line-height: 1.7;
+    }
+
+    /* ── COMMISSION TIERS ── */
+    .tiers-section {
+      padding: 100px 32px;
+      background: var(--ink);
+      color: var(--white);
+    }
+    .tiers-inner { max-width: 1080px; margin: 0 auto; }
+    .tiers-header { text-align: center; margin-bottom: 56px; }
+    .tiers-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .tiers-title {
+      font-family: 'Newsreader', serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 600; color: var(--white);
+      line-height: 1.15;
+    }
+    .tiers-title em { font-style: italic; color: var(--gold-lt); }
+    .tiers-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 18px;
+    }
+    .tier-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 22px;
+      padding: 36px 30px;
+      position: relative;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .tier-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.07);
+    }
+    .tier-card.featured {
+      background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04));
+      border: 2px solid var(--gold);
+    }
+    .tier-card.featured::after {
+      content: 'MOST POPULAR';
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: var(--ink);
+      padding: 5px 14px; border-radius: 50px;
+      font-size: 10px; font-weight: 900; letter-spacing: 0.14em;
+    }
+    .tier-card-name {
+      font-family: 'Newsreader', serif;
+      font-size: 14px; font-weight: 600; font-style: italic;
+      color: var(--gold); margin-bottom: 8px;
+      letter-spacing: 0.04em;
+    }
+    .tier-card-rate {
+      font-family: 'Newsreader', serif;
+      font-size: 64px; font-weight: 600;
+      color: var(--white); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .tier-card-rate-unit {
+      font-size: 14px; font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 24px;
+    }
+    .tier-card-criteria {
+      font-size: 12px; color: rgba(255,255,255,0.6);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 20px; font-weight: 700;
+    }
+    .tier-card-perks {
+      list-style: none; padding: 0;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .tier-card-perks li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: rgba(255,255,255,0.8);
+      line-height: 1.55;
+    }
+    .tier-card-perks svg { flex-shrink: 0; margin-top: 3px; stroke: var(--gold); }
+
+    /* ── HOW IT WORKS ── */
+    .how-section {
+      padding: 100px 32px;
+      background: var(--bg);
+    }
+    .how-inner { max-width: 980px; margin: 0 auto; }
+    .how-steps {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+      margin-top: 56px;
+    }
+    .how-step {
+      text-align: center;
+      position: relative;
+    }
+    .how-step-num {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--green);
+      color: var(--green-dk);
+      font-family: 'Newsreader', serif;
+      font-size: 26px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 8px 20px rgba(45,106,79,0.12);
+    }
+    .how-step h3 {
+      font-family: 'Newsreader', serif;
+      font-size: 20px; font-weight: 600;
+      color: var(--ink); margin-bottom: 10px;
+    }
+    .how-step p {
+      font-size: 14.5px; color: var(--ink-3);
+      line-height: 1.7; max-width: 240px; margin: 0 auto;
+    }
+
+    /* ── WHO ── */
+    .who-section {
+      padding: 100px 32px;
+      background: var(--white);
+      border-top: 1px solid var(--line);
+    }
+    .who-inner { max-width: 1080px; margin: 0 auto; }
+    .who-grid {
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 18px;
+      margin-top: 48px;
+    }
+    .who-card {
+      background: var(--bg);
+      border-radius: 18px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      display: flex; align-items: center; gap: 20px;
+    }
+    .who-card-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: var(--green-lt);
+      color: var(--green-dk);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .who-card-text strong {
+      display: block;
+      font-family: 'Newsreader', serif;
+      font-size: 19px; font-weight: 600;
+      color: var(--ink); margin-bottom: 4px;
+    }
+    .who-card-text span {
+      font-size: 13.5px; color: var(--ink-3); line-height: 1.55;
+    }
+
+    /* ── FAQ ── */
+    .faq-section {
+      padding: 100px 32px;
+      background: var(--bg);
+    }
+    .faq-inner { max-width: 760px; margin: 0 auto; }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 48px; }
+    .faq-item {
+      background: var(--white);
+      border: 1.5px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .faq-item[open] {
+      border-color: var(--green);
+      box-shadow: 0 4px 24px rgba(45,106,79,0.1);
+    }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      font-size: 16px; font-weight: 700;
+      color: var(--ink);
+    }
+    .faq-question::-webkit-details-marker { display: none; }
+    .faq-chevron {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--bg-2);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s, transform 0.3s;
+      color: var(--ink-3); flex-shrink: 0;
+    }
+    .faq-item[open] .faq-chevron {
+      background: var(--green); color: var(--white);
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      padding: 0 24px 22px;
+      border-top: 1px solid rgba(45,106,79,0.12);
+    }
+    .faq-answer p {
+      font-size: 14.5px; color: var(--ink-3);
+      line-height: 1.75; margin-top: 14px;
+    }
+    .faq-answer strong { color: var(--ink); }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      padding: 120px 32px;
+      background: linear-gradient(135deg, var(--green-dk), var(--ink));
+      color: var(--white);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .final-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 30%, rgba(201,168,76,0.18) 0%, transparent 60%);
+    }
+    .final-cta-inner { max-width: 680px; margin: 0 auto; position: relative; }
+    .final-cta h2 {
+      font-family: 'Newsreader', serif;
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 600; color: var(--white);
+      line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 22px;
+    }
+    .final-cta h2 em { font-style: italic; color: var(--gold-lt); }
+    .final-cta p {
+      font-size: 17px; color: rgba(255,255,255,0.75);
+      line-height: 1.65; margin-bottom: 36px;
+      max-width: 480px; margin-left: auto; margin-right: auto;
+    }
+    .final-cta .btn-primary {
+      background: var(--gold); color: var(--ink);
+      box-shadow: 0 12px 32px rgba(201,168,76,0.4);
+    }
+    .final-cta .btn-primary:hover { background: var(--gold-lt); }
+    .final-cta-note {
+      font-size: 13px; color: rgba(255,255,255,0.55);
+      margin-top: 20px;
+    }
+
+    /* ── FOOTER ── */
+    .aff-footer {
+      padding: 28px 32px;
+      background: var(--ink);
+      color: rgba(255,255,255,0.55);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .aff-footer-links { display: flex; gap: 22px; }
+    .aff-footer-links a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner, .why-grid, .tiers-grid, .how-steps, .who-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding: 60px 22px 70px; }
+      .hero-stats { order: -1; }
+      .why-grid, .tiers-grid, .who-grid { gap: 14px; }
+      .how-steps { gap: 32px; }
+      .aff-footer { flex-direction: column; gap: 14px; text-align: center; }
+      section { padding-left: 20px !important; padding-right: 20px !important; }
+    }
+  </style>
+</head>
+<body>
+
+  {%- comment -%}
+    UpPromote signup URL — change this to your actual UpPromote registration link.
+    To find it: UpPromote dashboard → Settings → General → "Registration form URL"
+    Or use the embedded signup form by replacing this anchor with the Referral signup form block.
+  {%- endcomment -%}
+  {%- assign signup_url = 'https://uppromote.com/affiliate/happiefusion/register' -%}
+
+  <!-- NAV -->
+  <nav class="aff-nav">
+    <a href="/" class="aff-nav-logo"><img src="{{ 'happie-logo.png' | asset_url }}" alt="Happie Fusion"></a>
+    <a href="#apply" class="aff-nav-cta">Apply Now →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <span class="dot"></span>
+          Affiliate Program · Now Accepting Partners
+        </div>
+        <h1 class="hero-headline serif">Earn <em>20%</em> on every Happie sale.</h1>
+        <p class="hero-body">Promote a <strong>4.9-star functional mushroom seltzer</strong> that converts. We handle product, shipping, and customer support — you bring the audience and pocket 20% of every order you drive.</p>
+        <div class="hero-cta-row">
+          <a href="#apply" class="btn-primary">
+            Apply to Become an Affiliate
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <span class="hero-cta-note">Free to join · Approval in 24–48 hours</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stats-label">What you get</div>
+        <div class="hero-stat">
+          <div class="hero-stat-num serif">20%</div>
+          <div class="hero-stat-label">Base commission on every sale</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num serif gold">$4.80+</div>
+          <div class="hero-stat-label">Earned per 6-pack sold</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num serif">4.9★</div>
+          <div class="hero-stat-label">From 1,200+ verified reviews</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num serif gold">30-Day</div>
+          <div class="hero-stat-label">Cookie tracking window</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY PARTNER -->
+  <section class="why-section">
+    <div class="why-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">Why Happie</div>
+        <h2 class="section-title serif">A brand that <em>actually converts.</em></h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3 class="serif">Proven product</h3>
+          <p>4.9 average from 1,200+ verified Amazon reviews. People genuinely love this — your audience will too. Conversion-tested copy and creative provided.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3 class="serif">Recurring revenue</h3>
+          <p>Many customers subscribe (20% Subscribe & Save). When they reorder, <strong>you keep earning</strong> for the lifetime of that subscription.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72M10.48 21.24c1.94-9.38 5.15-13.84 8.1-18.68"/></svg>
+          </div>
+          <h3 class="serif">Real ingredients</h3>
+          <p>2,000mg dual-extracted fruiting body mushrooms. No mycelium fillers, no fake claims. The science backs you up — easy to recommend authentically.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3 class="serif">Ready-made assets</h3>
+          <p>Free creative kit: high-res product shots, vetted social captions, brand guidelines, sample copy. No design work needed — post and earn.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3 class="serif">30-day attribution</h3>
+          <p>Generous cookie window. If your audience clicks today and buys 3 weeks later, you still get credit. No shady same-session-only rules.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+          </div>
+          <h3 class="serif">Real-time dashboard</h3>
+          <p>Live tracking. See clicks, conversions, and commissions update in real time. Get paid monthly via PayPal or direct deposit — no minimum threshold.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMISSION TIERS -->
+  <section class="tiers-section">
+    <div class="tiers-inner">
+      <div class="tiers-header">
+        <div class="tiers-eyebrow">Commission Structure</div>
+        <h2 class="tiers-title serif">The more you sell, <em>the more you earn.</em></h2>
+      </div>
+      <div class="tiers-grid">
+
+        <div class="tier-card">
+          <div class="tier-card-name">Starter</div>
+          <div class="tier-card-rate serif">15%</div>
+          <div class="tier-card-rate-unit">commission per sale</div>
+          <div class="tier-card-criteria">For 0 – 9 monthly sales</div>
+          <ul class="tier-card-perks">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Personal affiliate link
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              30-day attribution window
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Creative asset library
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Monthly PayPal payouts
+            </li>
+          </ul>
+        </div>
+
+        <div class="tier-card featured">
+          <div class="tier-card-name">Partner</div>
+          <div class="tier-card-rate serif">20%</div>
+          <div class="tier-card-rate-unit">commission per sale</div>
+          <div class="tier-card-criteria">For 10 – 49 monthly sales</div>
+          <ul class="tier-card-perks">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Everything in Starter
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Free product to review
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Custom discount code for followers
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Direct line to our team
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Co-marketing opportunities
+            </li>
+          </ul>
+        </div>
+
+        <div class="tier-card">
+          <div class="tier-card-name">Top Affiliate</div>
+          <div class="tier-card-rate serif">25%</div>
+          <div class="tier-card-rate-unit">commission per sale</div>
+          <div class="tier-card-criteria">For 50+ monthly sales</div>
+          <ul class="tier-card-perks">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Everything in Partner
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Free monthly product care package
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Featured on our website
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Sponsored content opportunities
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Brand ambassador access
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="how-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">How it works</div>
+        <h2 class="section-title serif">Three steps to your <em>first commission.</em></h2>
+      </div>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="how-step-num serif">1</div>
+          <h3 class="serif">Apply &amp; get approved</h3>
+          <p>Fill out our 2-minute application. We review and approve serious creators within 24–48 hours.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num serif">2</div>
+          <h3 class="serif">Get your link &amp; assets</h3>
+          <p>Receive your personal tracking link, custom discount code, and a full creative kit. Start sharing immediately.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num serif">3</div>
+          <h3 class="serif">Earn on every sale</h3>
+          <p>Anyone who buys through your link earns you commission. Track everything live. Get paid monthly via PayPal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="who-section">
+    <div class="who-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">Who's a good fit?</div>
+        <h2 class="section-title serif">Built for creators who get <em>functional wellness.</em></h2>
+      </div>
+      <div class="who-grid">
+        <div class="who-card">
+          <div class="who-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <div class="who-card-text">
+            <strong>Wellness content creators</strong>
+            <span>Anyone making content about adaptogens, biohacking, sober curiosity, focus, or daily rituals.</span>
+          </div>
+        </div>
+        <div class="who-card">
+          <div class="who-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          </div>
+          <div class="who-card-text">
+            <strong>Newsletter writers</strong>
+            <span>Substacks, newsletters, blogs covering wellness, productivity, or lifestyle topics. Your audience trusts you.</span>
+          </div>
+        </div>
+        <div class="who-card">
+          <div class="who-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+          <div class="who-card-text">
+            <strong>TikTok &amp; Instagram creators</strong>
+            <span>Short-form video creators in wellness, alcohol-free, fitness, or focus niches. We provide the b-roll.</span>
+          </div>
+        </div>
+        <div class="who-card">
+          <div class="who-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="who-card-text">
+            <strong>Podcasters</strong>
+            <span>Wellness, business, productivity, sober podcasts. Our drink fits genuinely into your daily ritual stories.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">Got questions?</div>
+        <h2 class="section-title serif">Affiliate FAQ.</h2>
+      </div>
+      <div class="faq-list">
+
+        <details class="faq-item" open>
+          <summary class="faq-question">How much can I realistically earn?
+            <div class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </summary>
+          <div class="faq-answer">
+            <p>It depends on your audience, but here's the math: at <strong>20% commission on a $23.99 6-pack</strong>, you earn <strong>~$4.80 per sale</strong>. Drive 10 sales/month → $48. Drive 100 sales/month → $480. Top affiliates earn $2,000+/month, especially with recurring subscription commissions.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">When and how do I get paid?
+            <div class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </summary>
+          <div class="faq-answer">
+            <p>Commissions are paid <strong>monthly</strong> via PayPal or direct deposit on the 15th of each month (for the prior month's earnings). There's a <strong>30-day return hold</strong> on commissions to account for refunds, then they unlock automatically.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">What's the attribution window?
+            <div class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </summary>
+          <div class="faq-answer">
+            <p><strong>30 days.</strong> If someone clicks your link today, they can buy any time in the next 30 days and you still get credit. Last-click attribution — meaning the most recent affiliate link wins if they click multiple.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Do I earn commission on subscription renewals?
+            <div class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </summary>
+          <div class="faq-answer">
+            <p><strong>Yes — for the lifetime of the subscription.</strong> If someone subscribes through your link, you earn commission on every recurring order they place, every month. This is where top affiliates make serious money.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Can I create a discount code for my audience?
+            <div class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </summary>
+          <div class="faq-answer">
+            <p>Yes — once you reach the <strong>Partner tier (10+ monthly sales)</strong>, we'll set up a custom branded discount code (like <code>SARAH10</code>) for your audience. They get 10% off, you still earn full commission.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Can I run paid ads with my affiliate link?
+            <div class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </summary>
+          <div class="faq-answer">
+            <p><strong>Yes</strong>, but please bid only on long-tail keywords (not "Happie Fusion" branded terms — we run those ourselves and competing drives up our CPCs). Email us for full paid traffic guidelines before launching.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">How do I sign up?
+            <div class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </summary>
+          <div class="faq-answer">
+            <p>Click the "Apply Now" button below. Fill out the short form (2 mins). Tell us about your audience and where you'll promote. We review every application personally and approve serious creators within <strong>24–48 hours</strong>.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta" id="apply">
+    <div class="final-cta-inner">
+      <h2 class="serif">Ready to earn <em>20%</em> on every Happie sale?</h2>
+      <p>Free to join. Approval in 24–48 hours. Start earning by the end of the week.</p>
+      <a href="{{ signup_url }}" target="_blank" rel="noopener" class="btn-primary">
+        Apply to the Program →
+      </a>
+      <div class="final-cta-note">Already an affiliate? <a href="https://uppromote.com/affiliate/login" target="_blank" rel="noopener" style="color:var(--gold-lt);text-decoration:underline;">Log in to your dashboard</a></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="aff-footer">
+    <div>© {{ 'now' | date: '%Y' }} Happie Fusion · Affiliate Program · Northern California</div>
+    <div class="aff-footer-links">
+      <a href="/policies/privacy-policy">Privacy</a>
+      <a href="/policies/refund-policy">Returns</a>
+      <a href="mailto:support@drinkhappie.com">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
