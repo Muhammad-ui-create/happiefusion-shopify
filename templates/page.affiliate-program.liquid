@@ -1,695 +1,173 @@
-{% layout none %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Happie Affiliate Program — Earn 10% Commission on Every Sale</title>
-  <meta name="description" content="Become a Happie Fusion affiliate. Earn 10% commission promoting the #1 functional mushroom seltzer. 4.9★ from 1,200+ customers. Free product, real money.">
-  <link rel="icon" type="image/png" href="{{ 'happie-favicon.png' | asset_url }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
-  <style>
-    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:        #FBFAF5;
-      --bg-2:      #F2EFE5;
-      --ink:       #0F1714;
-      --ink-2:     #2D3A35;
-      --ink-3:     #5C6C66;
-      --ink-4:     #A7B1AC;
-      --green:     #2D6A4F;
-      --green-dk:  #1B4332;
-      --green-lt:  #D8F3DC;
-      --gold:      #C9A84C;
-      --gold-lt:   #F4E5B4;
-      --line:      rgba(15,23,20,0.08);
-      --white:     #FFFFFF;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
-    }
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; color: inherit; }
-    .serif { font-family: 'Newsreader', Georgia, serif; }
+<div class="aff-page">
 
-    /* ── NAV ── */
-    .aff-nav {
-      position: sticky; top: 0; z-index: 100;
-      padding: 14px 32px;
-      display: flex; justify-content: space-between; align-items: center;
-      background: rgba(251,250,245,0.94);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-    .aff-nav-logo img { height: 42px; width: auto; }
-    .aff-nav-cta {
-      background: var(--green-dk); color: var(--white);
-      border-radius: 50px; padding: 10px 22px;
-      font-size: 13px; font-weight: 700;
-      transition: all 0.2s;
-    }
-    .aff-nav-cta:hover { background: var(--ink); }
-
-    /* ── HERO ── */
-    .hero {
-      padding: 80px 32px 100px;
-      background:
-        radial-gradient(ellipse at 70% 20%, rgba(45,106,79,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 50%);
-      position: relative; overflow: hidden;
-    }
-    .hero-inner {
-      max-width: 1120px; margin: 0 auto;
-      display: grid; grid-template-columns: 1.2fr 1fr;
-      gap: 64px; align-items: center;
-    }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--green-lt);
-      border: 1px solid rgba(45,106,79,0.2);
-      color: var(--green-dk);
-      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 7px 14px; border-radius: 50px;
-      margin-bottom: 24px;
-    }
-    .hero-eyebrow .dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--green); animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-    .hero-headline {
-      font-family: 'Newsreader', serif;
-      font-size: clamp(38px, 6vw, 72px);
-      font-weight: 600; line-height: 1.0;
-      color: var(--ink); margin-bottom: 24px;
-      letter-spacing: -0.025em;
-    }
-    .hero-headline em {
-      font-style: italic; color: var(--green-dk);
-      position: relative;
-    }
-    .hero-headline em::after {
-      content: ''; position: absolute;
-      left: 0; right: 0; bottom: 8px;
-      height: 12px; background: var(--gold-lt);
-      z-index: -1; opacity: 0.7;
-    }
-    .hero-body {
-      font-size: 18px; color: var(--ink-3);
-      line-height: 1.7; margin-bottom: 36px;
-      max-width: 480px;
-    }
-    .hero-body strong { color: var(--ink); font-weight: 700; }
-
-    .hero-cta-row {
-      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--ink); color: var(--white);
-      border-radius: 14px; padding: 18px 32px;
-      font-size: 15px; font-weight: 800;
-      transition: all 0.2s;
-      box-shadow: 0 8px 24px rgba(15,23,20,0.18);
-    }
-    .btn-primary:hover { background: var(--green-dk); transform: translateY(-2px); }
-    .btn-primary svg { transition: transform 0.2s; }
-    .btn-primary:hover svg { transform: translateX(3px); }
-    .hero-cta-note {
-      font-size: 13px; color: var(--ink-3);
-    }
-
-    /* Hero stats card */
-    .hero-stats {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 36px 32px;
-      box-shadow: 0 24px 60px rgba(15,23,20,0.08);
-    }
-    .hero-stats-label {
-      font-size: 11px; font-weight: 800; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--ink-4);
-      margin-bottom: 24px;
-    }
-    .hero-stat {
-      padding: 18px 0; border-bottom: 1px solid var(--line);
-    }
-    .hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
-    .hero-stat:first-child { padding-top: 0; }
-    .hero-stat-num {
-      font-family: 'Newsreader', serif;
-      font-size: 38px; font-weight: 600;
-      color: var(--green-dk); line-height: 1;
-      margin-bottom: 4px;
-    }
-    .hero-stat-num.gold { color: var(--gold); }
-    .hero-stat-label {
-      font-size: 12px; font-weight: 600;
-      color: var(--ink-3); letter-spacing: 0.04em;
-    }
-
-    /* ── WHY PARTNER ── */
-    .why-section {
-      padding: 100px 32px;
-      background: var(--white);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-    .why-inner { max-width: 1120px; margin: 0 auto; }
-    .section-header { text-align: center; margin-bottom: 56px; }
-    .section-eyebrow {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--green);
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-family: 'Newsreader', serif;
-      font-size: clamp(28px, 4vw, 44px);
-      font-weight: 600; color: var(--ink);
-      line-height: 1.15; letter-spacing: -0.02em;
-    }
-    .section-title em { font-style: italic; color: var(--green-dk); }
-    .why-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;
-    }
-    .why-card {
-      background: var(--bg);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 32px 28px;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .why-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(45,106,79,0.3);
-    }
-    .why-card-icon {
-      width: 48px; height: 48px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--green-lt), #B7E4C7);
-      color: var(--green-dk);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 18px;
-    }
-    .why-card h3 {
-      font-family: 'Newsreader', serif;
-      font-size: 22px; font-weight: 600;
-      color: var(--ink); margin-bottom: 10px;
-      line-height: 1.25;
-    }
-    .why-card p {
-      font-size: 14.5px; color: var(--ink-3);
-      line-height: 1.7;
-    }
-
-    /* ── COMMISSION TIERS ── */
-    .tiers-section {
-      padding: 100px 32px;
-      background: var(--ink);
-      color: var(--white);
-    }
-    .tiers-inner { max-width: 1080px; margin: 0 auto; }
-    .tiers-header { text-align: center; margin-bottom: 56px; }
-    .tiers-eyebrow {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 12px;
-    }
-    .tiers-title {
-      font-family: 'Newsreader', serif;
-      font-size: clamp(28px, 4vw, 44px);
-      font-weight: 600; color: var(--white);
-      line-height: 1.15;
-    }
-    .tiers-title em { font-style: italic; color: var(--gold-lt); }
-    .tiers-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 18px;
-    }
-    .tier-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 22px;
-      padding: 36px 30px;
-      position: relative;
-      transition: transform 0.2s, background 0.2s;
-    }
-    .tier-card:hover {
-      transform: translateY(-4px);
-      background: rgba(255,255,255,0.07);
-    }
-    .tier-card.featured {
-      background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04));
-      border: 2px solid var(--gold);
-    }
-    .tier-card.featured::after {
-      content: 'MOST POPULAR';
-      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--gold); color: var(--ink);
-      padding: 5px 14px; border-radius: 50px;
-      font-size: 10px; font-weight: 900; letter-spacing: 0.14em;
-    }
-    .tier-card-name {
-      font-family: 'Newsreader', serif;
-      font-size: 14px; font-weight: 600; font-style: italic;
-      color: var(--gold); margin-bottom: 8px;
-      letter-spacing: 0.04em;
-    }
-    .tier-card-rate {
-      font-family: 'Newsreader', serif;
-      font-size: 64px; font-weight: 600;
-      color: var(--white); line-height: 1;
-      margin-bottom: 6px;
-    }
-    .tier-card-rate-unit {
-      font-size: 14px; font-weight: 600;
-      color: rgba(255,255,255,0.55);
-      margin-bottom: 24px;
-    }
-    .tier-card-criteria {
-      font-size: 12px; color: rgba(255,255,255,0.6);
-      letter-spacing: 0.06em; text-transform: uppercase;
-      margin-bottom: 20px; font-weight: 700;
-    }
-    .tier-card-perks {
-      list-style: none; padding: 0;
-      display: flex; flex-direction: column; gap: 10px;
-    }
-    .tier-card-perks li {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 14px; color: rgba(255,255,255,0.8);
-      line-height: 1.55;
-    }
-    .tier-card-perks svg { flex-shrink: 0; margin-top: 3px; stroke: var(--gold); }
-
-    /* ── HOW IT WORKS ── */
-    .how-section {
-      padding: 100px 32px;
-      background: var(--bg);
-    }
-    .how-inner { max-width: 980px; margin: 0 auto; }
-    .how-steps {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
-      margin-top: 56px;
-    }
-    .how-step {
-      text-align: center;
-      position: relative;
-    }
-    .how-step-num {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: var(--white);
-      border: 2px solid var(--green);
-      color: var(--green-dk);
-      font-family: 'Newsreader', serif;
-      font-size: 26px; font-weight: 600;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px;
-      box-shadow: 0 8px 20px rgba(45,106,79,0.12);
-    }
-    .how-step h3 {
-      font-family: 'Newsreader', serif;
-      font-size: 20px; font-weight: 600;
-      color: var(--ink); margin-bottom: 10px;
-    }
-    .how-step p {
-      font-size: 14.5px; color: var(--ink-3);
-      line-height: 1.7; max-width: 240px; margin: 0 auto;
-    }
-
-    /* ── WHO ── */
-    .who-section {
-      padding: 100px 32px;
-      background: var(--white);
-      border-top: 1px solid var(--line);
-    }
-    .who-inner { max-width: 1080px; margin: 0 auto; }
-    .who-grid {
-      display: grid; grid-template-columns: repeat(2,1fr); gap: 18px;
-      margin-top: 48px;
-    }
-    .who-card {
-      background: var(--bg);
-      border-radius: 18px;
-      padding: 28px;
-      border: 1px solid var(--line);
-      display: flex; align-items: center; gap: 20px;
-    }
-    .who-card-icon {
-      width: 56px; height: 56px; border-radius: 14px;
-      background: var(--green-lt);
-      color: var(--green-dk);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .who-card-text strong {
-      display: block;
-      font-family: 'Newsreader', serif;
-      font-size: 19px; font-weight: 600;
-      color: var(--ink); margin-bottom: 4px;
-    }
-    .who-card-text span {
-      font-size: 13.5px; color: var(--ink-3); line-height: 1.55;
-    }
-
-    /* ── FAQ ── */
-    .faq-section {
-      padding: 100px 32px;
-      background: var(--bg);
-    }
-    .faq-inner { max-width: 760px; margin: 0 auto; }
-    .faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 48px; }
-    .faq-item {
-      background: var(--white);
-      border: 1.5px solid var(--line);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: border-color 0.25s, box-shadow 0.25s;
-    }
-    .faq-item[open] {
-      border-color: var(--green);
-      box-shadow: 0 4px 24px rgba(45,106,79,0.1);
-    }
-    .faq-question {
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 16px;
-      padding: 20px 24px;
-      cursor: pointer;
-      list-style: none;
-      user-select: none;
-      font-size: 16px; font-weight: 700;
-      color: var(--ink);
-    }
-    .faq-question::-webkit-details-marker { display: none; }
-    .faq-chevron {
-      width: 30px; height: 30px; border-radius: 50%;
-      background: var(--bg-2);
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.25s, transform 0.3s;
-      color: var(--ink-3); flex-shrink: 0;
-    }
-    .faq-item[open] .faq-chevron {
-      background: var(--green); color: var(--white);
-      transform: rotate(180deg);
-    }
-    .faq-answer {
-      padding: 0 24px 22px;
-      border-top: 1px solid rgba(45,106,79,0.12);
-    }
-    .faq-answer p {
-      font-size: 14.5px; color: var(--ink-3);
-      line-height: 1.75; margin-top: 14px;
-    }
-    .faq-answer strong { color: var(--ink); }
-
-    /* ── FINAL CTA ── */
-    .final-cta {
-      padding: 120px 32px;
-      background: linear-gradient(135deg, var(--green-dk), var(--ink));
-      color: var(--white);
-      text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .final-cta::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 30% 30%, rgba(201,168,76,0.18) 0%, transparent 60%);
-    }
-    .final-cta-inner { max-width: 680px; margin: 0 auto; position: relative; }
-    .final-cta h2 {
-      font-family: 'Newsreader', serif;
-      font-size: clamp(34px, 5vw, 56px);
-      font-weight: 600; color: var(--white);
-      line-height: 1.05; letter-spacing: -0.02em;
-      margin-bottom: 22px;
-    }
-    .final-cta h2 em { font-style: italic; color: var(--gold-lt); }
-    .final-cta p {
-      font-size: 17px; color: rgba(255,255,255,0.75);
-      line-height: 1.65; margin-bottom: 36px;
-      max-width: 480px; margin-left: auto; margin-right: auto;
-    }
-    .final-cta .btn-primary {
-      background: var(--gold); color: var(--ink);
-      box-shadow: 0 12px 32px rgba(201,168,76,0.4);
-    }
-    .final-cta .btn-primary:hover { background: var(--gold-lt); }
-    .final-cta-note {
-      font-size: 13px; color: rgba(255,255,255,0.55);
-      margin-top: 20px;
-    }
-
-    /* ── FOOTER ── */
-    .aff-footer {
-      padding: 28px 32px;
-      background: var(--ink);
-      color: rgba(255,255,255,0.55);
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 12px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .aff-footer-links { display: flex; gap: 22px; }
-    .aff-footer-links a:hover { color: var(--white); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .hero-inner, .why-grid, .tiers-grid, .how-steps, .who-grid {
-        grid-template-columns: 1fr;
-      }
-      .hero { padding: 60px 22px 70px; }
-      .hero-stats { order: -1; }
-      .why-grid, .tiers-grid, .who-grid { gap: 14px; }
-      .how-steps { gap: 32px; }
-      .aff-footer { flex-direction: column; gap: 14px; text-align: center; }
-      section { padding-left: 20px !important; padding-right: 20px !important; }
-    }
-  </style>
-</head>
-<body>
-
-  {%- comment -%}
-    UpPromote signup URL — change this to your actual UpPromote registration link.
-    To find it: UpPromote dashboard → Settings → General → "Registration form URL"
-    Or use the embedded signup form by replacing this anchor with the Referral signup form block.
-  {%- endcomment -%}
-  {%- assign signup_url = 'https://uppromote.com/affiliate/happiefusion/register' -%}
-
-  <!-- NAV -->
-  <nav class="aff-nav">
-    <a href="/" class="aff-nav-logo"><img src="{{ 'happie-logo.png' | asset_url }}" alt="Happie Fusion"></a>
-    <a href="#apply" class="aff-nav-cta">Apply Now →</a>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <div class="hero-eyebrow">
-          <span class="dot"></span>
+  <!-- ── HERO ── -->
+  <div class="aff-hero">
+    <div class="aff-hero-inner">
+      <div class="aff-hero-text">
+        <div class="aff-eyebrow">
+          <span class="aff-eyebrow-dot"></span>
           Affiliate Program · Now Accepting Partners
         </div>
-        <h1 class="hero-headline serif">Earn <em>10%</em> on every Happie sale.</h1>
-        <p class="hero-body">Promote a <strong>4.9-star functional mushroom seltzer</strong> that converts. We handle product, shipping, and customer support — you bring the audience and pocket 10% of every order you drive, including recurring subscriptions.</p>
-        <div class="hero-cta-row">
-          <a href="#apply" class="btn-primary">
+        <h1 class="aff-hero-title">Earn <span class="aff-gold">10%</span> on every Happie sale.</h1>
+        <p class="aff-hero-sub">Promote a 4.9-star functional mushroom seltzer that actually converts. We handle product, shipping, and customer support — you bring the audience and earn <strong>10% of every order</strong>, including recurring subscriptions.</p>
+        <div class="aff-hero-cta">
+          <a href="#apply" class="aff-btn-primary">
             Apply to Become an Affiliate
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
-          <span class="hero-cta-note">Free to join · Approval in 24–48 hours</span>
+          <div class="aff-hero-note">Free to join · Approval in 24–48 hours</div>
         </div>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stats-label">What you get</div>
-        <div class="hero-stat">
-          <div class="hero-stat-num serif">10%</div>
-          <div class="hero-stat-label">Commission on every sale</div>
+
+      <!-- Hero stats card -->
+      <div class="aff-stats-card">
+        <div class="aff-stats-label">What You Get</div>
+        <div class="aff-stat-row">
+          <div class="aff-stat-num">10%</div>
+          <div class="aff-stat-text">Commission on every sale</div>
         </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num serif gold">$2.40+</div>
-          <div class="hero-stat-label">Earned per 6-pack sold</div>
+        <div class="aff-stat-row">
+          <div class="aff-stat-num gold">$2.40+</div>
+          <div class="aff-stat-text">Earned per 6-pack sold</div>
         </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num serif">4.9★</div>
-          <div class="hero-stat-label">From 1,200+ verified reviews</div>
+        <div class="aff-stat-row">
+          <div class="aff-stat-num">4.9★</div>
+          <div class="aff-stat-text">From 1,200+ verified reviews</div>
         </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num serif gold">30-Day</div>
-          <div class="hero-stat-label">Cookie tracking window</div>
+        <div class="aff-stat-row aff-stat-last">
+          <div class="aff-stat-num gold">30-Day</div>
+          <div class="aff-stat-text">Cookie tracking window</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- WHY PARTNER -->
-  <section class="why-section">
-    <div class="why-inner">
-      <div class="section-header">
-        <div class="section-eyebrow">Why Happie</div>
-        <h2 class="section-title serif">A brand that <em>actually converts.</em></h2>
+  <!-- ── WHY HAPPIE ── -->
+  <section class="aff-section aff-section-cream">
+    <div class="aff-section-inner">
+      <div class="aff-section-header">
+        <div class="aff-section-eyebrow">Why Happie</div>
+        <h2 class="aff-section-title">A brand that actually converts.</h2>
       </div>
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-card-icon">
+      <div class="aff-why-grid">
+        <div class="aff-why-card">
+          <div class="aff-why-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </div>
-          <h3 class="serif">Proven product</h3>
-          <p>4.9 average from 1,200+ verified Amazon reviews. People genuinely love this — your audience will too. Conversion-tested copy and creative provided.</p>
+          <h3>Proven product</h3>
+          <p>4.9 average from 1,200+ verified Amazon reviews. Your audience will love it — conversion-tested copy and creative included.</p>
         </div>
-        <div class="why-card">
-          <div class="why-card-icon">
+        <div class="aff-why-card">
+          <div class="aff-why-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
-          <h3 class="serif">Recurring revenue</h3>
-          <p>Many customers subscribe (20% Subscribe & Save). When they reorder, <strong>you keep earning</strong> for the lifetime of that subscription.</p>
+          <h3>Recurring revenue</h3>
+          <p>Many customers subscribe (20% Subscribe &amp; Save). When they reorder, <strong>you keep earning</strong> for the lifetime of that subscription.</p>
         </div>
-        <div class="why-card">
-          <div class="why-card-icon">
+        <div class="aff-why-card">
+          <div class="aff-why-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72M10.48 21.24c1.94-9.38 5.15-13.84 8.1-18.68"/></svg>
           </div>
-          <h3 class="serif">Real ingredients</h3>
-          <p>2,000mg dual-extracted fruiting body mushrooms. No mycelium fillers, no fake claims. The science backs you up — easy to recommend authentically.</p>
+          <h3>Real ingredients</h3>
+          <p>2,000mg dual-extracted fruiting body mushrooms. No mycelium fillers. The science backs you up — easy to recommend authentically.</p>
         </div>
-        <div class="why-card">
-          <div class="why-card-icon">
+        <div class="aff-why-card">
+          <div class="aff-why-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
-          <h3 class="serif">Ready-made assets</h3>
-          <p>Free creative kit: high-res product shots, vetted social captions, brand guidelines, sample copy. No design work needed — post and earn.</p>
+          <h3>Ready-made assets</h3>
+          <p>Free creative kit: high-res product shots, vetted social captions, brand guidelines. No design work needed — post and earn.</p>
         </div>
-        <div class="why-card">
-          <div class="why-card-icon">
+        <div class="aff-why-card">
+          <div class="aff-why-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
-          <h3 class="serif">30-day attribution</h3>
-          <p>Generous cookie window. If your audience clicks today and buys 3 weeks later, you still get credit. No shady same-session-only rules.</p>
+          <h3>30-day attribution</h3>
+          <p>Generous cookie window. If your audience clicks today and buys 3 weeks later, you still get credit. No shady same-session rules.</p>
         </div>
-        <div class="why-card">
-          <div class="why-card-icon">
+        <div class="aff-why-card">
+          <div class="aff-why-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
           </div>
-          <h3 class="serif">Real-time dashboard</h3>
-          <p>Live tracking. See clicks, conversions, and commissions update in real time. Get paid monthly via PayPal or direct deposit — no minimum threshold.</p>
+          <h3>Real-time dashboard</h3>
+          <p>Live tracking. See clicks, conversions, and commissions update in real time. Get paid monthly via PayPal — no minimum threshold.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- COMMISSION + MILESTONE PERKS -->
-  <section class="tiers-section">
-    <div class="tiers-inner">
-      <div class="tiers-header">
-        <div class="tiers-eyebrow">Commission Structure</div>
-        <h2 class="tiers-title serif">Simple. <em>10% on every sale.</em></h2>
-        <p style="font-size:17px;color:rgba(255,255,255,0.7);margin-top:18px;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.65;">No tiers to climb, no quotas to hit. Every order you drive — including recurring subscriptions — pays you 10% for life.</p>
+  <!-- ── COMMISSION: 10% ── -->
+  <section class="aff-section aff-section-green">
+    <div class="aff-section-inner">
+      <div class="aff-section-header">
+        <div class="aff-section-eyebrow aff-eyebrow-light">Commission Structure</div>
+        <h2 class="aff-section-title aff-title-light">Simple. <span class="aff-gold">10% on every sale.</span></h2>
+        <p class="aff-section-sub-light">No tiers to climb, no quotas to hit. Every order you drive — including recurring subscriptions — pays you 10% for life.</p>
       </div>
 
-      <!-- Big flat-rate hero card -->
-      <div style="background:linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.04));border:2px solid var(--gold);border-radius:24px;padding:48px;text-align:center;margin-bottom:32px;">
-        <div style="font-family:'Newsreader',serif;font-size:clamp(72px,12vw,140px);font-weight:600;color:var(--gold);line-height:1;margin-bottom:8px;">10%</div>
-        <div style="font-size:14px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:32px;">Flat commission · Every sale · Forever</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:680px;margin:0 auto;padding-top:32px;border-top:1px solid rgba(255,255,255,0.12);">
+      <!-- Big 10% hero card -->
+      <div class="aff-rate-card">
+        <div class="aff-rate-num">10%</div>
+        <div class="aff-rate-label">Flat Commission · Every Sale · Forever</div>
+        <div class="aff-rate-breakdown">
           <div>
-            <div style="font-family:'Newsreader',serif;font-size:32px;font-weight:600;color:#fff;">$2.40</div>
-            <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:4px;">per 6-pack</div>
+            <div class="aff-rate-bd-num">$2.40</div>
+            <div class="aff-rate-bd-label">per 6-pack</div>
           </div>
           <div>
-            <div style="font-family:'Newsreader',serif;font-size:32px;font-weight:600;color:#fff;">$3.80</div>
-            <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:4px;">per variety pack</div>
+            <div class="aff-rate-bd-num">$3.80</div>
+            <div class="aff-rate-bd-label">per variety pack</div>
           </div>
           <div>
-            <div style="font-family:'Newsreader',serif;font-size:32px;font-weight:600;color:#fff;">$7.50+</div>
-            <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:4px;">on $75+ orders</div>
+            <div class="aff-rate-bd-num">$7.50+</div>
+            <div class="aff-rate-bd-label">on $75+ orders</div>
           </div>
         </div>
       </div>
 
-      <!-- Milestone Perks (unlock as you grow) -->
-      <div style="text-align:center;margin:64px 0 32px;">
-        <div class="tiers-eyebrow" style="color:var(--gold-lt);">Milestone Perks</div>
-        <h3 style="font-family:'Newsreader',serif;font-size:clamp(24px,3vw,34px);font-weight:600;color:#fff;line-height:1.2;">The commission stays at 10%.<br>The perks <em style="font-style:italic;color:var(--gold-lt);">unlock as you grow.</em></h3>
+      <!-- Milestone perks intro -->
+      <div class="aff-perks-header">
+        <div class="aff-section-eyebrow aff-eyebrow-light">Milestone Perks</div>
+        <h3 class="aff-perks-title">The commission stays at 10%.<br>The perks <span class="aff-gold">unlock as you grow.</span></h3>
       </div>
-      <div class="tiers-grid">
 
-        <div class="tier-card">
-          <div class="tier-card-name">Day One</div>
-          <div style="font-family:'Newsreader',serif;font-size:36px;font-weight:600;color:#fff;line-height:1;margin-bottom:8px;">All affiliates</div>
-          <div class="tier-card-criteria">Active from your first sale</div>
-          <ul class="tier-card-perks">
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Personal affiliate link
-            </li>
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              30-day attribution window
-            </li>
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Creative asset library
-            </li>
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Monthly PayPal payouts
-            </li>
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Recurring on subscriptions
-            </li>
+      <div class="aff-perks-grid">
+
+        <div class="aff-perk-card">
+          <div class="aff-perk-name">Day One</div>
+          <div class="aff-perk-headline">All affiliates</div>
+          <div class="aff-perk-criteria">Active from your first sale</div>
+          <ul class="aff-perk-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Personal affiliate link</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>30-day attribution window</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Creative asset library</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly PayPal payouts</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Recurring on subscriptions</li>
           </ul>
         </div>
 
-        <div class="tier-card featured">
-          <div class="tier-card-name">10+ Sales</div>
-          <div style="font-family:'Newsreader',serif;font-size:36px;font-weight:600;color:#fff;line-height:1;margin-bottom:8px;">Free product</div>
-          <div class="tier-card-criteria">After your first 10 monthly sales</div>
-          <ul class="tier-card-perks">
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Everything above
-            </li>
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Free 12-pack variety to review
-            </li>
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Custom discount code for your audience
-            </li>
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Direct Slack line to our team
-            </li>
+        <div class="aff-perk-card aff-perk-featured">
+          <div class="aff-perk-tag">MOST POPULAR</div>
+          <div class="aff-perk-name">10+ Sales</div>
+          <div class="aff-perk-headline">Free product</div>
+          <div class="aff-perk-criteria">After your first 10 monthly sales</div>
+          <ul class="aff-perk-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything above</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Free 12-pack variety to review</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom discount code for your audience</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Direct Slack line to our team</li>
           </ul>
         </div>
 
-        <div class="tier-card">
-          <div class="tier-card-name">50+ Sales</div>
-          <div style="font-family:'Newsreader',serif;font-size:36px;font-weight:600;color:#fff;line-height:1;margin-bottom:8px;">Ambassador</div>
-          <div class="tier-card-criteria">After 50 monthly sales</div>
-          <ul class="tier-card-perks">
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Everything above
-            </li>
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Free monthly product care package
-            </li>
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Featured on our website
-            </li>
-            <li>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Sponsored content opportunities
-            </li>
+        <div class="aff-perk-card">
+          <div class="aff-perk-name">50+ Sales</div>
+          <div class="aff-perk-headline">Ambassador</div>
+          <div class="aff-perk-criteria">After 50 monthly sales</div>
+          <ul class="aff-perk-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything above</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Free monthly product care package</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Featured on our website</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Sponsored content opportunities</li>
           </ul>
         </div>
 
@@ -697,73 +175,73 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section class="how-section">
-    <div class="how-inner">
-      <div class="section-header">
-        <div class="section-eyebrow">How it works</div>
-        <h2 class="section-title serif">Three steps to your <em>first commission.</em></h2>
+  <!-- ── HOW IT WORKS ── -->
+  <section class="aff-section aff-section-white">
+    <div class="aff-section-inner aff-section-inner-narrow">
+      <div class="aff-section-header">
+        <div class="aff-section-eyebrow">How It Works</div>
+        <h2 class="aff-section-title">Three steps to your first commission.</h2>
       </div>
-      <div class="how-steps">
-        <div class="how-step">
-          <div class="how-step-num serif">1</div>
-          <h3 class="serif">Apply &amp; get approved</h3>
+      <div class="aff-steps">
+        <div class="aff-step">
+          <div class="aff-step-num">1</div>
+          <h3>Apply &amp; get approved</h3>
           <p>Fill out our 2-minute application. We review and approve serious creators within 24–48 hours.</p>
         </div>
-        <div class="how-step">
-          <div class="how-step-num serif">2</div>
-          <h3 class="serif">Get your link &amp; assets</h3>
+        <div class="aff-step">
+          <div class="aff-step-num">2</div>
+          <h3>Get your link &amp; assets</h3>
           <p>Receive your personal tracking link, custom discount code, and a full creative kit. Start sharing immediately.</p>
         </div>
-        <div class="how-step">
-          <div class="how-step-num serif">3</div>
-          <h3 class="serif">Earn on every sale</h3>
+        <div class="aff-step">
+          <div class="aff-step-num">3</div>
+          <h3>Earn on every sale</h3>
           <p>Anyone who buys through your link earns you commission. Track everything live. Get paid monthly via PayPal.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WHO -->
-  <section class="who-section">
-    <div class="who-inner">
-      <div class="section-header">
-        <div class="section-eyebrow">Who's a good fit?</div>
-        <h2 class="section-title serif">Built for creators who get <em>functional wellness.</em></h2>
+  <!-- ── WHO'S A FIT ── -->
+  <section class="aff-section aff-section-cream">
+    <div class="aff-section-inner">
+      <div class="aff-section-header">
+        <div class="aff-section-eyebrow">Who's a Good Fit?</div>
+        <h2 class="aff-section-title">Built for creators who get functional wellness.</h2>
       </div>
-      <div class="who-grid">
-        <div class="who-card">
-          <div class="who-card-icon">
+      <div class="aff-who-grid">
+        <div class="aff-who-card">
+          <div class="aff-who-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           </div>
-          <div class="who-card-text">
+          <div class="aff-who-text">
             <strong>Wellness content creators</strong>
             <span>Anyone making content about adaptogens, biohacking, sober curiosity, focus, or daily rituals.</span>
           </div>
         </div>
-        <div class="who-card">
-          <div class="who-card-icon">
+        <div class="aff-who-card">
+          <div class="aff-who-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
           </div>
-          <div class="who-card-text">
+          <div class="aff-who-text">
             <strong>Newsletter writers</strong>
-            <span>Substacks, newsletters, blogs covering wellness, productivity, or lifestyle topics. Your audience trusts you.</span>
+            <span>Substacks, newsletters, blogs covering wellness, productivity, or lifestyle. Your audience trusts you.</span>
           </div>
         </div>
-        <div class="who-card">
-          <div class="who-card-icon">
+        <div class="aff-who-card">
+          <div class="aff-who-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
           </div>
-          <div class="who-card-text">
+          <div class="aff-who-text">
             <strong>TikTok &amp; Instagram creators</strong>
             <span>Short-form video creators in wellness, alcohol-free, fitness, or focus niches. We provide the b-roll.</span>
           </div>
         </div>
-        <div class="who-card">
-          <div class="who-card-icon">
+        <div class="aff-who-card">
+          <div class="aff-who-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
-          <div class="who-card-text">
+          <div class="aff-who-text">
             <strong>Podcasters</strong>
             <span>Wellness, business, productivity, sober podcasts. Our drink fits genuinely into your daily ritual stories.</span>
           </div>
@@ -772,88 +250,81 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="faq-section">
-    <div class="faq-inner">
-      <div class="section-header">
-        <div class="section-eyebrow">Got questions?</div>
-        <h2 class="section-title serif">Affiliate FAQ.</h2>
+  <!-- ── FAQ ── -->
+  <section class="aff-section aff-section-white">
+    <div class="aff-section-inner aff-section-inner-narrow">
+      <div class="aff-section-header">
+        <div class="aff-section-eyebrow">Got Questions?</div>
+        <h2 class="aff-section-title">Affiliate FAQ.</h2>
       </div>
-      <div class="faq-list">
+      <div class="aff-faq-list">
 
-        <details class="faq-item" open>
-          <summary class="faq-question">How much can I realistically earn?
-            <div class="faq-chevron">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
+        <details class="aff-faq-item" open>
+          <summary class="aff-faq-q">
+            <span>How much can I realistically earn?</span>
+            <div class="aff-faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
-          <div class="faq-answer">
+          <div class="aff-faq-a">
             <p>It depends on your audience, but here's the math: at <strong>10% commission on a $23.99 6-pack</strong>, you earn <strong>~$2.40 per sale</strong>. Variety packs and bigger carts pay more. The real money is in <strong>recurring subscriptions</strong> — when someone subscribes through your link, you keep earning every month for the lifetime of that subscription. Top affiliates with engaged audiences earn $500–$2,000+/month.</p>
           </div>
         </details>
 
-        <details class="faq-item">
-          <summary class="faq-question">When and how do I get paid?
-            <div class="faq-chevron">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
+        <details class="aff-faq-item">
+          <summary class="aff-faq-q">
+            <span>When and how do I get paid?</span>
+            <div class="aff-faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
-          <div class="faq-answer">
+          <div class="aff-faq-a">
             <p>Commissions are paid <strong>monthly</strong> via PayPal or direct deposit on the 15th of each month (for the prior month's earnings). There's a <strong>30-day return hold</strong> on commissions to account for refunds, then they unlock automatically.</p>
           </div>
         </details>
 
-        <details class="faq-item">
-          <summary class="faq-question">What's the attribution window?
-            <div class="faq-chevron">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
+        <details class="aff-faq-item">
+          <summary class="aff-faq-q">
+            <span>What's the attribution window?</span>
+            <div class="aff-faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
-          <div class="faq-answer">
+          <div class="aff-faq-a">
             <p><strong>30 days.</strong> If someone clicks your link today, they can buy any time in the next 30 days and you still get credit. Last-click attribution — meaning the most recent affiliate link wins if they click multiple.</p>
           </div>
         </details>
 
-        <details class="faq-item">
-          <summary class="faq-question">Do I earn commission on subscription renewals?
-            <div class="faq-chevron">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
+        <details class="aff-faq-item">
+          <summary class="aff-faq-q">
+            <span>Do I earn commission on subscription renewals?</span>
+            <div class="aff-faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
-          <div class="faq-answer">
-            <p><strong>Yes — for the lifetime of the subscription.</strong> If someone subscribes through your link, you earn commission on every recurring order they place, every month. This is where top affiliates make serious money.</p>
+          <div class="aff-faq-a">
+            <p><strong>Yes — for the lifetime of the subscription.</strong> If someone subscribes through your link, you earn 10% commission on every recurring order they place, every month. This is where top affiliates make serious money.</p>
           </div>
         </details>
 
-        <details class="faq-item">
-          <summary class="faq-question">Can I create a discount code for my audience?
-            <div class="faq-chevron">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
+        <details class="aff-faq-item">
+          <summary class="aff-faq-q">
+            <span>Can I create a discount code for my audience?</span>
+            <div class="aff-faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
-          <div class="faq-answer">
-            <p>Yes — after <strong>your first 10 monthly sales</strong>, we'll set up a custom branded discount code (like <code>SARAH10</code>) for your audience. They get 10% off, you still earn full commission. Branded codes typically increase conversion 2–3x for your audience.</p>
+          <div class="aff-faq-a">
+            <p>Yes — after <strong>your first 10 monthly sales</strong>, we'll set up a custom branded discount code (like <code>SARAH10</code>) for your audience. They get 10% off, you still earn full commission. Branded codes typically increase conversion 2–3× for your audience.</p>
           </div>
         </details>
 
-        <details class="faq-item">
-          <summary class="faq-question">Can I run paid ads with my affiliate link?
-            <div class="faq-chevron">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
+        <details class="aff-faq-item">
+          <summary class="aff-faq-q">
+            <span>Can I run paid ads with my affiliate link?</span>
+            <div class="aff-faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
-          <div class="faq-answer">
-            <p><strong>Yes</strong>, but please bid only on long-tail keywords (not "Happie Fusion" branded terms — we run those ourselves and competing drives up our CPCs). Email us for full paid traffic guidelines before launching.</p>
+          <div class="aff-faq-a">
+            <p><strong>Yes</strong>, but please bid only on long-tail keywords (not "Happie Fusion" branded terms — we run those ourselves and competing drives up our CPCs). Email us for full paid-traffic guidelines before launching.</p>
           </div>
         </details>
 
-        <details class="faq-item">
-          <summary class="faq-question">How do I sign up?
-            <div class="faq-chevron">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
+        <details class="aff-faq-item">
+          <summary class="aff-faq-q">
+            <span>How do I sign up?</span>
+            <div class="aff-faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
-          <div class="faq-answer">
+          <div class="aff-faq-a">
             <p>Click the "Apply Now" button below. Fill out the short form (2 mins). Tell us about your audience and where you'll promote. We review every application personally and approve serious creators within <strong>24–48 hours</strong>.</p>
           </div>
         </details>
@@ -862,27 +333,479 @@
     </div>
   </section>
 
-  <!-- FINAL CTA -->
-  <section class="final-cta" id="apply">
-    <div class="final-cta-inner">
-      <h2 class="serif">Ready to earn <em>10%</em> on every Happie sale?</h2>
+  <!-- ── FINAL CTA ── -->
+  <section class="aff-final-cta" id="apply">
+    <div class="aff-final-cta-inner">
+      <h2>Ready to earn <span class="aff-gold">10%</span> on every Happie sale?</h2>
       <p>Free to join. Approval in 24–48 hours. Start earning by the end of the week.</p>
-      <a href="{{ signup_url }}" target="_blank" rel="noopener" class="btn-primary">
+      <a href="https://uppromote.com/affiliate/happiefusion/register" target="_blank" rel="noopener" class="aff-btn-gold">
         Apply to the Program →
       </a>
-      <div class="final-cta-note">Already an affiliate? <a href="https://uppromote.com/affiliate/login" target="_blank" rel="noopener" style="color:var(--gold-lt);text-decoration:underline;">Log in to your dashboard</a></div>
+      <div class="aff-final-cta-note">Already an affiliate? <a href="https://uppromote.com/affiliate/login" target="_blank" rel="noopener">Log in to your dashboard</a></div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="aff-footer">
-    <div>© {{ 'now' | date: '%Y' }} Happie Fusion · Affiliate Program · Northern California</div>
-    <div class="aff-footer-links">
-      <a href="/policies/privacy-policy">Privacy</a>
-      <a href="/policies/refund-policy">Returns</a>
-      <a href="mailto:support@drinkhappie.com">Contact</a>
-    </div>
-  </footer>
+</div>
 
-</body>
-</html>
+<style>
+/* ── AFFILIATE PROGRAM — matches Happie brand: Poppins + green/cream wellness palette ── */
+
+.aff-page {
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  color: var(--black, #1A1A2E);
+  -webkit-font-smoothing: antialiased;
+}
+.aff-page * { box-sizing: border-box; }
+.aff-page h1, .aff-page h2, .aff-page h3, .aff-page h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+.aff-page p { line-height: 1.7; }
+.aff-page a { text-decoration: none; }
+
+/* ── HERO ── */
+.aff-hero {
+  background: linear-gradient(135deg, #0B3D2E 0%, #1B5E42 50%, #2D6A4F 100%);
+  padding: 100px 32px 90px;
+  position: relative; overflow: hidden;
+}
+.aff-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 20%, rgba(82,183,136,0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+.aff-hero-inner {
+  max-width: 1120px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  gap: 64px; align-items: center;
+  position: relative;
+}
+
+.aff-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(82,183,136,0.2);
+  border: 1px solid rgba(82,183,136,0.35);
+  color: #74D4A0;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 50px;
+  margin-bottom: 24px;
+}
+.aff-eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #74D4A0; animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.aff-hero-title {
+  font-size: clamp(36px, 5.5vw, 64px);
+  font-weight: 900; color: #fff;
+  line-height: 1.05; margin-bottom: 22px;
+}
+.aff-gold {
+  color: #F5A623;
+  background: linear-gradient(120deg, transparent 30%, rgba(245,166,35,0.25) 30%, rgba(245,166,35,0.25) 90%, transparent 90%);
+  padding: 0 6px;
+}
+.aff-hero-sub {
+  font-size: 17px; color: rgba(255,255,255,0.75);
+  line-height: 1.7; max-width: 500px; margin-bottom: 32px;
+}
+.aff-hero-sub strong { color: #fff; font-weight: 700; }
+
+.aff-hero-cta {
+  display: flex; flex-direction: column; gap: 14px;
+  align-items: flex-start;
+}
+.aff-btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #fff; color: #1B4332;
+  border-radius: 50px; padding: 16px 30px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px; font-weight: 800;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.aff-btn-primary:hover { background: #F5F0E8; transform: translateY(-2px); }
+.aff-btn-primary svg { transition: transform 0.2s; }
+.aff-btn-primary:hover svg { transform: translateX(3px); }
+.aff-hero-note {
+  font-size: 13px; color: rgba(255,255,255,0.55);
+}
+
+/* Hero stats card */
+.aff-stats-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 24px;
+  padding: 32px 30px;
+  backdrop-filter: blur(12px);
+}
+.aff-stats-label {
+  font-size: 11px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 24px;
+}
+.aff-stat-row {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.aff-stat-last { border-bottom: none; padding-bottom: 0; }
+.aff-stat-row:first-of-type { padding-top: 0; }
+.aff-stat-num {
+  font-size: 30px; font-weight: 900;
+  color: #fff; line-height: 1; min-width: 100px;
+}
+.aff-stat-num.gold { color: #F5A623; }
+.aff-stat-text {
+  font-size: 13px; color: rgba(255,255,255,0.7);
+  font-weight: 500;
+}
+
+/* ── SECTIONS ── */
+.aff-section { padding: 90px 32px; }
+.aff-section-white { background: #fff; }
+.aff-section-cream { background: var(--cream, #F5F0E8); }
+.aff-section-green {
+  background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+  color: #fff;
+  position: relative; overflow: hidden;
+}
+.aff-section-green::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 30%, rgba(82,183,136,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.aff-section-inner {
+  max-width: 1120px; margin: 0 auto; position: relative;
+}
+.aff-section-inner-narrow { max-width: 800px; }
+
+.aff-section-header {
+  text-align: center; margin-bottom: 56px;
+}
+.aff-section-eyebrow {
+  display: inline-block;
+  font-size: 11px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--green, #52B788);
+  margin-bottom: 12px;
+}
+.aff-eyebrow-light { color: #F5A623 !important; }
+.aff-section-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900; color: var(--black, #1A1A2E);
+  line-height: 1.15;
+}
+.aff-title-light { color: #fff !important; }
+.aff-section-sub-light {
+  font-size: 17px; color: rgba(255,255,255,0.75);
+  max-width: 560px; margin: 18px auto 0; line-height: 1.65;
+}
+
+/* ── WHY GRID ── */
+.aff-why-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+}
+.aff-why-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 20px;
+  padding: 32px 28px;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.aff-why-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(82,183,136,0.35);
+  box-shadow: 0 16px 40px rgba(45,106,79,0.1);
+}
+.aff-why-icon {
+  width: 50px; height: 50px; border-radius: 14px;
+  background: linear-gradient(135deg, #D8F3DC, #B7E4C7);
+  color: var(--green-dark, #2D6A4F);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.aff-why-card h3 {
+  font-size: 18px; font-weight: 800;
+  color: #1A1A2E; margin-bottom: 10px;
+}
+.aff-why-card p {
+  font-size: 14px; color: #555;
+  line-height: 1.7;
+}
+.aff-why-card strong { color: #1A1A2E; font-weight: 700; }
+
+/* ── RATE CARD ── */
+.aff-rate-card {
+  background: linear-gradient(135deg, rgba(245,166,35,0.18), rgba(245,166,35,0.06));
+  border: 2px solid #F5A623;
+  border-radius: 28px;
+  padding: 48px 36px;
+  text-align: center;
+  margin-bottom: 64px;
+  position: relative;
+  box-shadow: 0 16px 40px rgba(245,166,35,0.15);
+}
+.aff-rate-num {
+  font-size: clamp(72px, 12vw, 130px);
+  font-weight: 900; color: #F5A623;
+  line-height: 1; margin-bottom: 8px;
+  letter-spacing: -0.03em;
+}
+.aff-rate-label {
+  font-size: 13px; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.7); margin-bottom: 32px;
+}
+.aff-rate-breakdown {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 24px; max-width: 680px; margin: 0 auto;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+.aff-rate-bd-num {
+  font-size: 26px; font-weight: 900;
+  color: #fff; line-height: 1; margin-bottom: 6px;
+}
+.aff-rate-bd-label {
+  font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── PERKS GRID ── */
+.aff-perks-header { text-align: center; margin-bottom: 36px; }
+.aff-perks-title {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 900; color: #fff;
+  line-height: 1.25;
+}
+.aff-perks-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 18px;
+}
+.aff-perk-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 32px 28px;
+  transition: transform 0.2s, background 0.2s;
+  position: relative;
+}
+.aff-perk-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.08);
+}
+.aff-perk-featured {
+  background: linear-gradient(135deg, rgba(245,166,35,0.12), rgba(245,166,35,0.04));
+  border: 2px solid #F5A623;
+}
+.aff-perk-tag {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: #F5A623; color: #1A1A2E;
+  font-size: 10px; font-weight: 900;
+  letter-spacing: 0.14em;
+  padding: 5px 14px; border-radius: 50px;
+}
+.aff-perk-name {
+  font-size: 11px; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: #F5A623;
+  margin-bottom: 10px;
+}
+.aff-perk-headline {
+  font-size: 28px; font-weight: 900;
+  color: #fff; line-height: 1.1;
+  margin-bottom: 8px;
+}
+.aff-perk-criteria {
+  font-size: 12px; color: rgba(255,255,255,0.55);
+  letter-spacing: 0.04em; margin-bottom: 22px;
+}
+.aff-perk-list {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.aff-perk-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 14px; color: rgba(255,255,255,0.85);
+  line-height: 1.55;
+}
+.aff-perk-list svg { flex-shrink: 0; margin-top: 3px; stroke: #74D4A0; }
+.aff-perk-featured .aff-perk-list svg { stroke: #F5A623; }
+
+/* ── HOW IT WORKS ── */
+.aff-steps {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 32px;
+  margin-top: 48px;
+}
+.aff-step { text-align: center; }
+.aff-step-num {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--green, #52B788); color: #fff;
+  font-size: 24px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 22px;
+  box-shadow: 0 8px 20px rgba(82,183,136,0.3);
+}
+.aff-step h3 {
+  font-size: 18px; font-weight: 800;
+  color: #1A1A2E; margin-bottom: 10px;
+}
+.aff-step p {
+  font-size: 14.5px; color: #555;
+  line-height: 1.7; max-width: 240px; margin: 0 auto;
+}
+
+/* ── WHO GRID ── */
+.aff-who-grid {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 18px;
+}
+.aff-who-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 18px;
+  padding: 28px;
+  display: flex; align-items: center; gap: 20px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.aff-who-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(82,183,136,0.3);
+}
+.aff-who-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: linear-gradient(135deg, #D8F3DC, #B7E4C7);
+  color: var(--green-dark, #2D6A4F);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.aff-who-text strong {
+  display: block;
+  font-size: 16px; font-weight: 800;
+  color: #1A1A2E; margin-bottom: 4px;
+}
+.aff-who-text span {
+  font-size: 13.5px; color: #666; line-height: 1.6;
+}
+
+/* ── FAQ ── */
+.aff-faq-list {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 40px;
+}
+.aff-faq-item {
+  background: var(--cream, #F5F0E8);
+  border: 1.5px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.aff-faq-item[open] {
+  background: #fff;
+  border-color: var(--green, #52B788);
+  box-shadow: 0 4px 24px rgba(82,183,136,0.1);
+}
+.aff-faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  font-size: 15px; font-weight: 700;
+  color: #1A1A2E;
+}
+.aff-faq-q::-webkit-details-marker { display: none; }
+.aff-faq-chevron {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.25s, transform 0.3s;
+  color: #777; flex-shrink: 0;
+}
+.aff-faq-item[open] .aff-faq-chevron {
+  background: var(--green, #52B788); color: #fff;
+  transform: rotate(180deg);
+}
+.aff-faq-a {
+  padding: 0 24px 20px;
+  border-top: 1px solid rgba(82,183,136,0.15);
+}
+.aff-faq-a p {
+  font-size: 14.5px; color: #555;
+  line-height: 1.75; margin-top: 14px;
+}
+.aff-faq-a strong { color: #1A1A2E; }
+.aff-faq-a code {
+  background: var(--green-light, #D8F3DC);
+  color: var(--green-dark, #2D6A4F);
+  padding: 2px 8px; border-radius: 6px;
+  font-family: 'Poppins', monospace;
+  font-size: 13px; font-weight: 700;
+}
+
+/* ── FINAL CTA ── */
+.aff-final-cta {
+  background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+  padding: 110px 32px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.aff-final-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(245,166,35,0.15) 0%, transparent 60%);
+}
+.aff-final-cta-inner {
+  max-width: 680px; margin: 0 auto; position: relative;
+}
+.aff-final-cta h2 {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 900; color: #fff;
+  line-height: 1.1; margin-bottom: 20px;
+}
+.aff-final-cta p {
+  font-size: 17px; color: rgba(255,255,255,0.75);
+  line-height: 1.65; margin-bottom: 36px;
+  max-width: 480px; margin-left: auto; margin-right: auto;
+}
+.aff-btn-gold {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #F5A623; color: #1A1A2E;
+  border-radius: 50px; padding: 18px 36px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px; font-weight: 800;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+  box-shadow: 0 12px 32px rgba(245,166,35,0.4);
+}
+.aff-btn-gold:hover { background: #F8C158; transform: translateY(-2px); }
+.aff-final-cta-note {
+  font-size: 13px; color: rgba(255,255,255,0.6);
+  margin-top: 20px;
+}
+.aff-final-cta-note a {
+  color: #F5C97A; text-decoration: underline;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .aff-hero { padding: 70px 22px 70px; }
+  .aff-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .aff-section { padding: 60px 22px; }
+  .aff-why-grid, .aff-perks-grid, .aff-who-grid, .aff-steps {
+    grid-template-columns: 1fr;
+  }
+  .aff-rate-breakdown { grid-template-columns: 1fr; gap: 18px; }
+  .aff-rate-card { padding: 36px 24px; }
+  .aff-who-card { padding: 22px; }
+}
+</style>
+
+{% schema %}
+{ "name": "Page: Affiliate", "settings": [] }
+{% endschema %}
