@@ -1,3 +1,52 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "current": {}
+  "current": {
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {}
+      },
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      },
+      "email-popup": {
+        "type": "email-popup",
+        "settings": {}
+      },
+      "happie-chatbot": {
+        "type": "happie-chatbot",
+        "settings": {
+          "enabled": true,
+          "worker_url": "",
+          "support_email": "support@drinkhappie.com",
+          "bot_name": "Happie Assistant",
+          "greeting": "Hey there! I'm the Happie Assistant — here to help with products, orders, and any questions about Fungi Fusion. You can also reach our team directly at support@drinkhappie.com. What can I help with?",
+          "position": "right",
+          "brand_color": "#50b2bd",
+          "accent_color": "#f7cd46"
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "3138269044488530766": {
+        "type": "shopify://apps/uppromote-affiliate/blocks/core-script/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  }
 }
