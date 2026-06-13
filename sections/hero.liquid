@@ -41,6 +41,10 @@
           auto-rotate-delay="0"
           rotation-per-second="20deg"
           camera-controls
+          camera-orbit="0deg 75deg 105%"
+          min-camera-orbit="auto auto 90%"
+          max-camera-orbit="auto auto 130%"
+          disable-pan
           touch-action="pan-y"
           interaction-prompt="none"
           shadow-intensity="1.2"
@@ -52,9 +56,8 @@
           poster="{{ 'can-hero.png' | asset_url }}"
           ar
           ar-modes="webxr scene-viewer quick-look"
-          ar-scale="fixed"
+          ar-scale="auto"
           ar-placement="floor"
-          ios-src="{{ 'happie-can-3d.glb' | asset_url }}"
         >
           <!-- Loading state -->
           <div slot="progress-bar" class="hero-3d-loader">
@@ -75,7 +78,7 @@
         <!-- Drag hint -->
         <div class="hero-3d-hint">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7 1 6.3 2.7M21 4v5h-5"/></svg>
-          Drag to spin · Tap AR on mobile
+          Drag to spin
         </div>
       </div>
       <div class="hero-pills">
@@ -105,6 +108,8 @@
       --poster-color: transparent;
       position: relative; z-index: 5;
       cursor: grab;
+      /* prevent overflow on tight containers */
+      display: block;
     }
     .hero-can-3d:active { cursor: grabbing; }
 
@@ -173,37 +178,68 @@
     }
     .hero-ar-btn svg { flex-shrink: 0; }
 
-    /* Hide AR button on non-AR-capable devices (model-viewer handles this) */
-    model-viewer:not([ar-status]) .hero-ar-btn,
-    model-viewer[ar-status="failed"] .hero-ar-btn {
-      display: none;
-    }
+    /* AR button hidden by default; JS shows it on Android only */
+    .hero-ar-btn { display: none; }
 
     @media (max-width: 768px) {
-      .hero-can-3d { width: 260px; height: 380px; }
-      .hero-ar-btn { font-size: 11px; padding: 8px 14px; top: 12px; right: 12px; }
+      .hero-can-3d { width: 200px; height: 300px; }
+      .hero-ar-btn { font-size: 10px; padding: 7px 12px; top: 8px; right: 8px; gap: 5px; }
+      .hero-ar-btn svg { width: 13px; height: 13px; }
+      .hero-3d-hint { font-size: 9px; padding: 5px 10px; gap: 4px; }
+    }
+    @media (max-width: 420px) {
+      .hero-can-3d { width: 170px; height: 260px; }
     }
   </style>
 
   <script>
-    // Listen for first interaction, then update the loader and hide hint
     document.addEventListener('DOMContentLoaded', function() {
       var mv = document.querySelector('.hero-can-3d');
       if (!mv) return;
+
+      // Loader progress
       var fill = mv.querySelector('.hero-3d-loader-fill');
       mv.addEventListener('progress', function(e) {
         if (fill) fill.style.width = (e.detail.totalProgress * 100) + '%';
       });
-      var hideHint = function() {
-        mv.classList.add('user-interacted');
-        mv.removeEventListener('camera-change', hideHint);
-        mv.removeEventListener('pointerdown', hideHint);
-      };
-      mv.addEventListener('camera-change', function() {
-        // Only hide on user-driven changes (not auto-rotate)
-        if (event.detail && event.detail.source === 'user-interaction') hideHint();
-      });
+
+      // Hide hint on user interaction
+      var hideHint = function() { mv.classList.add('user-interacted'); };
       mv.addEventListener('pointerdown', hideHint);
+
+      // ── AR button — show/hide based on real AR capability ──
+      var arBtn = mv.querySelector('.hero-ar-btn');
+      var ua = navigator.userAgent;
+      var isAndroid = /Android/i.test(ua);
+      var isIOS = /iPad|iPhone|iPod/i.test(ua);
+      var isMobile = isAndroid || isIOS;
+
+      // Wait for model-viewer to load + check AR capability
+      mv.addEventListener('load', function() {
+        // Hide the AR button on desktop (AR is mobile-only experience)
+        if (!isMobile) {
+          if (arBtn) arBtn.style.display = 'none';
+          return;
+        }
+        // iOS without USDZ → Quick Look will silently fail. Hide button on iOS
+        // until we have a USDZ file (Apple requires .usdz for AR Quick Look).
+        if (isIOS) {
+          if (arBtn) arBtn.style.display = 'none';
+          return;
+        }
+        // Android — Scene Viewer works great with GLB. Show button.
+        if (arBtn) arBtn.style.display = 'inline-flex';
+      });
+
+      // Wire the button manually so it always triggers AR on supported devices
+      if (arBtn) {
+        arBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (mv.activateAR) {
+            mv.activateAR();
+          }
+        });
+      }
     });
   </script>
 </section>
