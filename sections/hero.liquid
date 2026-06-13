@@ -58,6 +58,7 @@
           ar-modes="webxr scene-viewer quick-look"
           ar-scale="auto"
           ar-placement="floor"
+          ios-src="{{ 'happie-can-3d.usdz' | asset_url }}"
         >
           <!-- Loading state -->
           <div slot="progress-bar" class="hero-3d-loader">
@@ -216,18 +217,11 @@
 
       // Wait for model-viewer to load + check AR capability
       mv.addEventListener('load', function() {
-        // Hide the AR button on desktop (AR is mobile-only experience)
+        // AR is mobile-only — both Android (Scene Viewer w/ GLB) and iOS (Quick Look w/ USDZ) work
         if (!isMobile) {
           if (arBtn) arBtn.style.display = 'none';
           return;
         }
-        // iOS without USDZ → Quick Look will silently fail. Hide button on iOS
-        // until we have a USDZ file (Apple requires .usdz for AR Quick Look).
-        if (isIOS) {
-          if (arBtn) arBtn.style.display = 'none';
-          return;
-        }
-        // Android — Scene Viewer works great with GLB. Show button.
         if (arBtn) arBtn.style.display = 'inline-flex';
       });
 
