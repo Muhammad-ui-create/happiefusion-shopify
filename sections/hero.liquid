@@ -32,10 +32,10 @@
         <div class="hero-ring-mid"></div>
         <div class="hero-ring-inner"></div>
 
-        <!-- Interactive 3D can — rotates automatically, drag to spin -->
+        <!-- Interactive 3D can — rotates automatically, drag to spin, AR-enabled -->
         <model-viewer
           src="{{ 'happie-can-3d.glb' | asset_url }}"
-          alt="Happie Fungi Fusion Blue Raspberry — interactive 3D can. Drag to rotate."
+          alt="Happie Fungi Fusion Blue Raspberry — interactive 3D can. Drag to rotate, or tap to view in AR."
           class="hero-can-3d"
           auto-rotate
           auto-rotate-delay="0"
@@ -50,17 +50,32 @@
           loading="eager"
           reveal="auto"
           poster="{{ 'can-hero.png' | asset_url }}"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          ar-scale="fixed"
+          ar-placement="floor"
+          ios-src="{{ 'happie-can-3d.glb' | asset_url }}"
         >
           <!-- Loading state -->
           <div slot="progress-bar" class="hero-3d-loader">
             <div class="hero-3d-loader-fill"></div>
           </div>
+
+          <!-- Custom AR button (overrides default) -->
+          <button slot="ar-button" class="hero-ar-btn" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+            View in your space
+          </button>
         </model-viewer>
 
         <!-- Drag hint -->
         <div class="hero-3d-hint">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7 1 6.3 2.7M21 4v5h-5"/></svg>
-          Drag to spin
+          Drag to spin · Tap AR on mobile
         </div>
       </div>
       <div class="hero-pills">
@@ -132,8 +147,41 @@
       opacity: 0; transition: opacity 0.4s; pointer-events: none;
     }
 
+    /* AR button — appears at top of 3D viewer on AR-capable devices */
+    .hero-ar-btn {
+      position: absolute; top: 16px; right: 16px;
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.96);
+      color: var(--green-dark, #2D6A4F);
+      border: 1.5px solid rgba(45,106,79,0.2);
+      border-radius: 50px;
+      padding: 9px 16px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      transition: all 0.2s;
+      backdrop-filter: blur(8px);
+      z-index: 20;
+    }
+    .hero-ar-btn:hover {
+      background: var(--green-dark, #2D6A4F);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(45,106,79,0.3);
+    }
+    .hero-ar-btn svg { flex-shrink: 0; }
+
+    /* Hide AR button on non-AR-capable devices (model-viewer handles this) */
+    model-viewer:not([ar-status]) .hero-ar-btn,
+    model-viewer[ar-status="failed"] .hero-ar-btn {
+      display: none;
+    }
+
     @media (max-width: 768px) {
       .hero-can-3d { width: 260px; height: 380px; }
+      .hero-ar-btn { font-size: 11px; padding: 8px 14px; top: 12px; right: 12px; }
     }
   </style>
 
