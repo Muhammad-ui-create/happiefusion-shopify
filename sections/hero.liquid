@@ -41,10 +41,9 @@
           auto-rotate-delay="0"
           rotation-per-second="20deg"
           camera-controls
-          camera-orbit="180deg 85deg 105%"
+          camera-orbit="0deg 85deg 105%"
           min-camera-orbit="auto 85deg 105%"
           max-camera-orbit="auto 85deg 105%"
-          orientation="0deg 0deg 90deg"
           disable-zoom
           disable-pan
           touch-action="pan-y"
@@ -66,17 +65,17 @@
           <div slot="progress-bar" class="hero-3d-loader">
             <div class="hero-3d-loader-fill"></div>
           </div>
-
-          <!-- Custom AR button (overrides default) -->
-          <button slot="ar-button" class="hero-ar-btn" type="button">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-              <line x1="12" y1="22.08" x2="12" y2="12"/>
-            </svg>
-            View in your space
-          </button>
         </model-viewer>
+
+        <!-- AR button — OUTSIDE the model-viewer so it can be positioned freely without overflow clipping -->
+        <button class="hero-ar-btn" type="button" id="hero-ar-trigger">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+          View in your space
+        </button>
 
         <!-- Drag hint -->
         <div class="hero-3d-hint">
@@ -240,7 +239,8 @@
       mv.addEventListener('pointerdown', hideHint);
 
       // ── AR button — show/hide based on real AR capability ──
-      var arBtn = mv.querySelector('.hero-ar-btn');
+      // AR button is now OUTSIDE the model-viewer (sibling), so look in parent
+      var arBtn = document.getElementById('hero-ar-trigger');
       var ua = navigator.userAgent;
       var isAndroid = /Android/i.test(ua);
       var isIOS = /iPad|iPhone|iPod/i.test(ua);
