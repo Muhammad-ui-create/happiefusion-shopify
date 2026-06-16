@@ -128,22 +128,24 @@
       }
       .hero-3d-hint svg { width: 10px !important; height: 10px !important; }
 
-      /* AR button — pin to upper-right corner of viewport (just under sticky header) */
+      /* AR button — pin to upper-LEFT corner of viewport (just under header logo) */
       .hero-ar-btn {
         position: fixed !important;
         top: 78px !important;
-        right: 12px !important;
-        font-size: 11px;
-        padding: 7px 13px;
-        gap: 6px;
+        left: 12px !important;
+        right: auto !important;
+        font-size: 10px;
+        padding: 6px 11px;
+        gap: 5px;
         z-index: 95;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.18);
       }
-      .hero-ar-btn svg { width: 13px; height: 13px; }
+      .hero-ar-btn svg { width: 11px; height: 11px; }
     }
     @media (max-width: 420px) {
       .hero-can-3d { width: 180px; height: 270px; }
-      .hero-ar-btn { top: 70px !important; right: 10px !important; font-size: 10px; padding: 6px 11px; }
+      .hero-ar-btn { top: 70px !important; left: 10px !important; font-size: 9px; padding: 5px 10px; gap: 4px; }
+      .hero-ar-btn svg { width: 10px; height: 10px; }
     }
 
     /* Custom progress loader */
