@@ -32,13 +32,7 @@
         <div class="hero-ring-mid"></div>
         <div class="hero-ring-inner"></div>
 
-        <!-- Static image fallback for mobile (faster, no jank on paid traffic) -->
-        <img src="{{ 'can-hero.png' | asset_url }}"
-             alt="Happie Fungi Fusion functional mushroom seltzer"
-             class="hero-can-static"
-             width="320" height="480" loading="eager" />
-
-        <!-- Interactive 3D can — desktop only. Defaults camera-orbit to 180deg so the FRONT label faces the camera, not the back nutrition panel. -->
+        <!-- Interactive 3D can — front label faces camera. Zoom locked, rotation only. -->
         <model-viewer
           src="{{ 'happie-can-3d.glb' | asset_url }}"
           alt="Happie Fungi Fusion Blue Raspberry — interactive 3D can. Drag to rotate, or tap to view in AR."
@@ -48,9 +42,10 @@
           rotation-per-second="20deg"
           camera-controls
           camera-orbit="180deg 85deg 105%"
-          min-camera-orbit="auto 75deg 90%"
-          max-camera-orbit="auto 95deg 130%"
+          min-camera-orbit="auto 85deg 105%"
+          max-camera-orbit="auto 85deg 105%"
           orientation="0deg 0deg 90deg"
+          disable-zoom
           disable-pan
           touch-action="pan-y"
           interaction-prompt="none"
@@ -108,16 +103,7 @@
   </div>
 
   <style>
-    /* Static can image — mobile/tablet only, for performance on paid traffic */
-    .hero-can-static {
-      display: none;
-      width: 100%;
-      max-width: 240px;
-      height: auto;
-      position: relative; z-index: 5;
-    }
-
-    /* 3D can — desktop only. Sized to match the static image footprint. */
+    /* 3D can — sized to match the previous <img> footprint */
     .hero-can-3d {
       width: 320px;
       height: 480px;
@@ -130,15 +116,13 @@
     }
     .hero-can-3d:active { cursor: grabbing; }
 
-    /* ── MOBILE / TABLET: swap 3D for static image ── */
-    @media (max-width: 900px) {
-      .hero-can-3d { display: none !important; }
-      .hero-can-static { display: block; max-width: 200px; }
-      .hero-3d-hint { display: none; }
-      .hero-ar-btn { display: none !important; }
+    /* Mobile sizing */
+    @media (max-width: 768px) {
+      .hero-can-3d { width: 220px; height: 330px; }
+      .hero-3d-hint { font-size: 9px; padding: 5px 10px; gap: 4px; }
     }
     @media (max-width: 420px) {
-      .hero-can-static { max-width: 170px; }
+      .hero-can-3d { width: 180px; height: 270px; }
     }
 
     /* Custom progress loader */
