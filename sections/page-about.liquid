@@ -12,14 +12,55 @@
 
   <!-- Origin story -->
   <section class="about-origin">
+    <div class="about-origin__bg-deco" aria-hidden="true"></div>
     <div class="about-origin__inner">
-      <div class="about-section-eyebrow">The Origin</div>
-      <h2 class="about-section-title">Why Happie exists</h2>
+      <div class="about-origin__header">
+        <div class="about-section-eyebrow">
+          <span class="about-eyebrow-dot"></span>
+          The Origin
+        </div>
+        <h2 class="about-section-title">Why Happie exists</h2>
+        <div class="about-origin__divider" aria-hidden="true"></div>
+      </div>
+
       <div class="about-origin__prose">
-        <p>The energy drink market is a paradox. Products engineered to make you feel good — packed with synthetic stimulants, artificial colors, and enough sugar to spike your cortisol before your morning meeting even starts. We used them anyway, because the alternative was nothing.</p>
-        <p>Meanwhile, functional mushrooms had decades of legitimate science behind them. Lion's Mane studied for cognitive support. Cordyceps used by Olympic athletes. Reishi prescribed in traditional medicine for immune balance and stress. All of it locked away in capsules that tasted like dirt and required remembering to take them.</p>
-        <p class="about-origin__key-quote">Happie Fungi Fusion started with a simple question: <strong>What if the thing you reached for tasted incredible and actually did something?</strong></p>
-        <p>Two years of formulation. Dozens of flavor iterations. A commitment to fruiting body extracts, dual-extraction, and third-party testing on every batch. The result is a drink we're proud of — and one that's earned the trust of 1,200+ verified buyers who've made it part of their daily routine.</p>
+        <p class="about-origin__lead">
+          <span class="about-origin__dropcap">T</span>he energy drink market is a paradox. Products engineered to make you feel good — packed with <em>synthetic stimulants, artificial colors, and enough sugar</em> to spike your cortisol before your morning meeting even starts. We used them anyway, because the alternative was nothing.
+        </p>
+
+        <p>Meanwhile, functional mushrooms had decades of legitimate science behind them. <strong>Lion's Mane</strong> studied for cognitive support. <strong>Cordyceps</strong> used by Olympic athletes. <strong>Reishi</strong> prescribed in traditional medicine for immune balance and stress. All of it locked away in capsules that tasted like dirt and required remembering to take them.</p>
+
+        <blockquote class="about-origin__pullquote">
+          <svg class="about-origin__quote-icon" width="42" height="32" viewBox="0 0 42 32" fill="none" aria-hidden="true">
+            <path d="M0 32V19.2C0 13.6 1.4 8.9 4.3 5.3 7.2 1.8 11.4 0 17 0V6.4C13.2 6.4 10.5 7.6 8.9 9.9 7.3 12.2 6.5 14.9 6.5 18.1H17V32H0zm25 0V19.2c0-5.6 1.4-10.3 4.3-13.9C32.2 1.8 36.4 0 42 0v6.4c-3.8 0-6.5 1.2-8.1 3.5C32.3 12.2 31.5 14.9 31.5 18.1H42V32H25z" fill="#2D6A4F" opacity="0.18"/>
+          </svg>
+          <p>Happie Fungi Fusion started with a simple question:</p>
+          <p class="about-origin__pullquote-strong">What if the thing you reached for tasted incredible — <em>and actually did something?</em></p>
+        </blockquote>
+
+        <p>Two years of formulation. Dozens of flavor iterations. A commitment to <strong>fruiting body extracts</strong>, <strong>dual-extraction</strong>, and <strong>third-party testing</strong> on every batch.</p>
+
+        <!-- Numbers strip -->
+        <div class="about-origin__numbers">
+          <div class="about-origin__num-card">
+            <div class="about-origin__num">2</div>
+            <div class="about-origin__num-label">Years of formulation</div>
+          </div>
+          <div class="about-origin__num-card">
+            <div class="about-origin__num">2,000<span>mg</span></div>
+            <div class="about-origin__num-label">Mushroom extract per can</div>
+          </div>
+          <div class="about-origin__num-card">
+            <div class="about-origin__num">1,200<span>+</span></div>
+            <div class="about-origin__num-label">Verified buyers · 4.9★</div>
+          </div>
+          <div class="about-origin__num-card">
+            <div class="about-origin__num">100<span>%</span></div>
+            <div class="about-origin__num-label">Fruiting body, no fillers</div>
+          </div>
+        </div>
+
+        <p class="about-origin__closer">The result is a drink we're proud of — and one that's earned the trust of <strong>1,200+ verified buyers</strong> who've made it part of their daily routine.</p>
       </div>
     </div>
   </section>
@@ -239,29 +280,185 @@
 
 /* --- Origin --- */
 .about-origin {
-  padding: 88px 24px;
+  padding: 100px 24px 110px;
   background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+.about-origin__bg-deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 12% 18%, rgba(82,183,136,0.10) 0%, transparent 38%),
+    radial-gradient(ellipse at 88% 80%, rgba(245,166,35,0.08) 0%, transparent 42%);
+}
+.about-origin__inner {
+  max-width: 880px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
-.about-origin__inner {
-  max-width: 860px;
-  margin: 0 auto;
+.about-origin__header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.about-origin__header .about-section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #2D6A4F;
+  margin-bottom: 16px;
+}
+.about-eyebrow-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #52B788;
+  box-shadow: 0 0 0 4px rgba(82,183,136,0.18);
+}
+.about-origin__header .about-section-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 900;
+  color: #0F1714;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.about-origin__divider {
+  width: 60px; height: 3px;
+  background: linear-gradient(90deg, #52B788, #F5A623);
+  margin: 24px auto 0;
+  border-radius: 2px;
 }
 
 .about-origin__prose {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 26px;
+  font-family: 'Poppins', sans-serif;
   font-size: 17px;
-  color: #444;
+  color: #475569;
   line-height: 1.85;
 }
+.about-origin__prose strong { color: #0F1714; font-weight: 700; }
+.about-origin__prose em { font-style: italic; color: #1E2734; }
 
-.about-origin__key-quote {
-  border-left: 4px solid #2D6A4F;
-  padding-left: 22px;
-  color: #1a1a1a;
+/* Lead paragraph with drop cap */
+.about-origin__lead {
   font-size: 18px;
+  color: #2D3A35;
+}
+.about-origin__dropcap {
+  float: left;
+  font-family: 'Poppins', sans-serif;
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 0.85;
+  color: #2D6A4F;
+  margin: 6px 14px 0 0;
+  padding: 0;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #2D6A4F, #52B788);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pull quote — magazine-style */
+.about-origin__pullquote {
+  position: relative;
+  margin: 12px 0;
+  padding: 36px 36px 32px;
+  background: linear-gradient(135deg, #F5F8F2 0%, #ECF6EE 100%);
+  border-radius: 24px;
+  border-left: 4px solid #2D6A4F;
+}
+.about-origin__quote-icon {
+  position: absolute;
+  top: 24px; right: 28px;
+}
+.about-origin__pullquote p {
+  font-size: 18px;
+  color: #475569;
+  margin: 0;
+  line-height: 1.6;
+}
+.about-origin__pullquote-strong {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(22px, 2.6vw, 28px) !important;
+  font-weight: 800 !important;
+  color: #0F1714 !important;
+  letter-spacing: -0.01em;
+  line-height: 1.3 !important;
+  margin-top: 10px !important;
+}
+.about-origin__pullquote-strong em {
+  color: #2D6A4F !important;
+  font-style: italic;
+}
+
+/* Numbers strip */
+.about-origin__numbers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 20px 0 4px;
+}
+.about-origin__num-card {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(15,23,20,0.07);
+  border-radius: 18px;
+  padding: 22px 18px;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.about-origin__num-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(45,106,79,0.3);
+  box-shadow: 0 12px 28px rgba(45,106,79,0.08);
+}
+.about-origin__num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: #2D6A4F;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.about-origin__num span {
+  font-size: 18px;
+  color: #52B788;
+}
+.about-origin__num-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6B5743;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.about-origin__closer {
+  margin-top: 6px;
+  text-align: center;
+  font-size: 17px;
+  color: #2D3A35;
+  font-style: italic;
+}
+.about-origin__closer strong { font-style: normal; }
+
+@media (max-width: 700px) {
+  .about-origin { padding: 70px 20px 80px; }
+  .about-origin__header { margin-bottom: 36px; }
+  .about-origin__numbers { grid-template-columns: 1fr 1fr; }
+  .about-origin__num { font-size: 28px; }
+  .about-origin__dropcap { font-size: 56px; margin-right: 10px; }
+  .about-origin__pullquote { padding: 28px 22px; }
+  .about-origin__quote-icon { width: 30px; height: 24px; top: 16px; right: 18px; }
 }
 
 /* --- Values --- */
