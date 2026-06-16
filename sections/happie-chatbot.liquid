@@ -537,7 +537,10 @@
   @media (max-width: 480px) {
     .happie-chat__panel {
       width: calc(100vw - 16px);
-      height: calc(100vh - 90px);
+      /* Use dvh so the panel doesn't extend behind the mobile browser address bar */
+      height: calc(100vh - 180px);          /* fallback for older browsers */
+      height: calc(100dvh - 120px);         /* dvh = the actually visible viewport */
+      max-height: calc(100dvh - 120px);
       bottom: 80px;
       {% if section.settings.position == 'left' %}left{% else %}right{% endif %}: 8px;
     }
@@ -546,6 +549,12 @@
       height: 54px;
       bottom: 16px;
       {% if section.settings.position == 'left' %}left{% else %}right{% endif %}: 16px;
+    }
+    /* Make the X button bigger and more tappable on mobile */
+    .happie-chat__close {
+      width: 36px !important;
+      height: 36px !important;
+      font-size: 18px !important;
     }
   }
 </style>
