@@ -128,24 +128,24 @@
       }
       .hero-3d-hint svg { width: 10px !important; height: 10px !important; }
 
-      /* AR button — pin to upper-LEFT corner of viewport (just under header logo) */
+      /* AR button — same position as desktop, just below the 3D can */
       .hero-ar-btn {
-        position: fixed !important;
-        top: 78px !important;
-        left: 12px !important;
-        right: auto !important;
-        font-size: 10px;
-        padding: 6px 11px;
+        font-size: 11px;
+        padding: 8px 14px;
         gap: 5px;
-        z-index: 95;
-        box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+        bottom: -48px;
       }
-      .hero-ar-btn svg { width: 11px; height: 11px; }
+      .hero-ar-btn svg { width: 12px; height: 12px; }
     }
     @media (max-width: 420px) {
       .hero-can-3d { width: 180px; height: 270px; }
-      .hero-ar-btn { top: 70px !important; left: 10px !important; font-size: 9px; padding: 5px 10px; gap: 4px; }
-      .hero-ar-btn svg { width: 10px; height: 10px; }
+      .hero-ar-btn {
+        font-size: 10px;
+        padding: 7px 12px;
+        gap: 4px;
+        bottom: -44px;
+      }
+      .hero-ar-btn svg { width: 11px; height: 11px; }
     }
 
     /* Custom progress loader */
@@ -187,15 +187,18 @@
       opacity: 0; transition: opacity 0.4s; pointer-events: none;
     }
 
-    /* AR button — appears at top of 3D viewer on AR-capable devices */
+    /* AR button — positioned BELOW the 3D viewer (outside can area, doesn't cover label) */
     .hero-ar-btn {
-      position: absolute; top: 16px; right: 16px;
+      position: absolute;
+      bottom: -52px;
+      left: 50%;
+      transform: translateX(-50%);
       display: inline-flex; align-items: center; gap: 7px;
       background: rgba(255,255,255,0.96);
       color: var(--green-dark, #2D6A4F);
-      border: 1.5px solid rgba(45,106,79,0.2);
+      border: 1.5px solid rgba(45,106,79,0.25);
       border-radius: 50px;
-      padding: 9px 16px;
+      padding: 9px 18px;
       font-family: 'Poppins', sans-serif;
       font-size: 12px; font-weight: 700;
       letter-spacing: 0.04em;
@@ -204,11 +207,14 @@
       transition: all 0.2s;
       backdrop-filter: blur(8px);
       z-index: 20;
+      white-space: nowrap;
+    }
+    .hero-ar-btn:hover {
+      transform: translateX(-50%) translateY(-2px);
     }
     .hero-ar-btn:hover {
       background: var(--green-dark, #2D6A4F);
       color: #fff;
-      transform: translateY(-1px);
       box-shadow: 0 12px 28px rgba(45,106,79,0.3);
     }
     .hero-ar-btn svg { flex-shrink: 0; }
