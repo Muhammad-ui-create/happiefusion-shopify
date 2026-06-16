@@ -119,10 +119,32 @@
     /* Mobile sizing */
     @media (max-width: 768px) {
       .hero-can-3d { width: 220px; height: 330px; }
-      .hero-3d-hint { font-size: 9px; padding: 5px 10px; gap: 4px; }
+
+      /* Smaller "Drag to spin" pill on mobile */
+      .hero-3d-hint {
+        font-size: 8.5px !important;
+        padding: 4px 9px !important;
+        gap: 4px !important;
+        bottom: -4px !important;
+      }
+      .hero-3d-hint svg { width: 10px !important; height: 10px !important; }
+
+      /* AR button — pin to upper-right corner of viewport (just under sticky header) */
+      .hero-ar-btn {
+        position: fixed !important;
+        top: 78px !important;
+        right: 12px !important;
+        font-size: 11px;
+        padding: 7px 13px;
+        gap: 6px;
+        z-index: 95;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+      }
+      .hero-ar-btn svg { width: 13px; height: 13px; }
     }
     @media (max-width: 420px) {
       .hero-can-3d { width: 180px; height: 270px; }
+      .hero-ar-btn { top: 70px !important; right: 10px !important; font-size: 10px; padding: 6px 11px; }
     }
 
     /* Custom progress loader */
