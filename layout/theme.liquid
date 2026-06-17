@@ -22,7 +22,7 @@
     {%- assign product_meta = product.description | strip_html | strip | truncate: 155 -%}
     <meta name="description" content="{{ product_meta | escape }}">
   {%- elsif template.name == 'collection' -%}
-    <meta name="description" content="Shop {{ collection.title }} — functional mushroom seltzers with dual-extracted Lion's Mane, Cordyceps & Reishi. No alcohol, no caffeine, real results. From $23.99.">
+    <meta name="description" content="Shop {{ collection.title }} — functional mushroom seltzers with dual-extracted Lion's Mane (900mg), Cordyceps (700mg) & Reishi (400mg). Zero caffeine, zero alcohol. From $25.99. Free shipping $75+.">
   {%- else -%}
     <meta name="description" content="{{ page_description | default: 'Happie Fusion — functional mushroom seltzers with Lion\'s Mane, Cordyceps & Reishi. No alcohol, no caffeine. Real adaptogenic results.' | escape }}">
   {%- endif -%}
@@ -34,6 +34,28 @@
 
   {%- comment -%} ── PINTEREST VERIFICATION ── {%- endcomment -%}
   <meta name="p:domain_verify" content="f0abad25c419105077cd60ebf30f11db"/>
+
+  {%- comment -%} ── SEO + GEO META TAGS ── {%- endcomment -%}
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="bingbot" content="index, follow">
+  <meta name="theme-color" content="#2D6A4F">
+  <meta name="author" content="Happie Fusion">
+  <meta name="publisher" content="Happie Fusion">
+  <meta name="geo.region" content="US-CA">
+  <meta name="geo.placename" content="Northern California">
+  <meta name="format-detection" content="telephone=yes">
+
+  {%- comment -%} ── GEO / AI SEARCH KEYWORDS — helps AI assistants understand the page ── {%- endcomment -%}
+  {%- if template.name == 'index' -%}
+    <meta name="keywords" content="functional mushroom drinks, mushroom seltzer, Lion's Mane drink, Cordyceps drink, Reishi drink, adaptogen beverage, caffeine-free energy drink, alcohol alternative, sober curious drink, sparkling mushroom water, Happie Fungi Fusion">
+  {%- elsif template.name == 'product' -%}
+    <meta name="keywords" content="{{ product.title }}, mushroom seltzer, functional beverage, Lion's Mane, Cordyceps, Reishi, adaptogen drink, Happie Fungi Fusion">
+  {%- endif -%}
+
+  {%- comment -%} ── Performance hints for faster LCP ── {%- endcomment -%}
+  <link rel="dns-prefetch" href="https://cdn.shopify.com">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
   <link rel="canonical" href="{{ canonical_url }}">
 
@@ -98,9 +120,24 @@
           "height": 100
         },
         "description": "Happie Fusion makes Fungi Fusion — functional mushroom seltzers with dual-extracted Lion's Mane (900mg), Cordyceps (700mg), and Reishi (400mg) per can. No alcohol, no caffeine, no jitters. Just real adaptogenic results.",
+        "foundingDate": "2024",
+        "foundingLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressRegion": "California", "addressCountry": "US" } },
+        "areaServed": { "@type": "Country", "name": "United States" },
+        "knowsAbout": [
+          "Functional mushrooms",
+          "Adaptogens",
+          "Lion's Mane mushroom",
+          "Cordyceps mushroom",
+          "Reishi mushroom",
+          "Mushroom seltzer",
+          "Sober curious beverages",
+          "Caffeine-free energy drinks",
+          "Dual-extracted mushroom supplements"
+        ],
         "sameAs": [
           "https://www.instagram.com/happiefusion/",
-          "https://www.tiktok.com/@drinkhappie1"
+          "https://www.tiktok.com/@drinkhappie1",
+          "https://www.amazon.com/stores/Happie-Fusion"
         ],
         "contactPoint": {
           "@type": "ContactPoint",
@@ -108,6 +145,20 @@
           "telephone": "+1-833-374-6567",
           "contactType": "customer service",
           "availableLanguage": "English"
+        },
+        "brand": { "@id": "https://happiefusion.com/#brand" }
+      },
+      {
+        "@type": "Brand",
+        "@id": "https://happiefusion.com/#brand",
+        "name": "Happie Fungi Fusion",
+        "logo": "{{ 'happie-logo.png' | asset_url }}",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "1200",
+          "bestRating": "5",
+          "worstRating": "1"
         }
       },
       {
@@ -116,6 +167,7 @@
         "url": "https://happiefusion.com",
         "name": "Happie Fusion",
         "publisher": { "@id": "https://happiefusion.com/#organization" },
+        "inLanguage": "en-US",
         "potentialAction": {
           "@type": "SearchAction",
           "target": {
@@ -124,8 +176,74 @@
           },
           "query-input": "required name=search_term_string"
         }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://happiefusion.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Happie Fungi Fusion?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Happie Fungi Fusion is a functional mushroom sparkling seltzer containing 2,000mg of dual-extracted fruiting body mushrooms per 12oz can: 900mg Lion's Mane for focus, 700mg Cordyceps for natural energy, and 400mg Reishi for calm. It contains zero alcohol, zero caffeine, and only 40 calories. Available in Blue Razzberry, Mango Mimosa, and Watermelon flavors."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Happie Fungi Fusion have caffeine?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Happie Fungi Fusion is 100% caffeine-free. The energy benefits come from Cordyceps mushroom, which supports cellular ATP production naturally — no stimulants, no crash."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Happie Fungi Fusion safe to drink every day?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Happie Fungi Fusion is formulated for daily use. The adaptogenic benefits of Lion's Mane, Cordyceps, and Reishi build over time with consistent daily consumption. Most customers report noticeable improvements in focus, energy, and sleep quality within 2 to 4 weeks."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does Happie Fungi Fusion cost?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A 6-pack costs $25.99. A 12-can Variety Pack costs $38.99. Subscribe and Save members get 20% off every order plus free shipping. New customers get 15% off their first order with code WELCOME15. Free shipping on all orders over $75."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Happie Fungi Fusion psychedelic?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Happie Fungi Fusion contains only functional (adaptogenic) mushrooms — Lion's Mane, Cordyceps, and Reishi. These are completely different from psilocybin mushrooms. They are legal in all 50 US states, non-psychoactive, and backed by decades of peer-reviewed research."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where can I buy Happie Fungi Fusion?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Happie Fungi Fusion is available directly at happiefusion.com with free shipping on orders over $75 to all 50 US states, and on Amazon. New customers get 15% off their first order with code WELCOME15."
+            }
+          }
+        ]
       }
     ]
+  }
+  </script>
+
+  {%- comment -%} ── SPEAKABLE schema for voice assistants ── {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [".hero-headline", ".hero-sub", ".section-title"]
+    }
   }
   </script>
   {%- endif -%}
