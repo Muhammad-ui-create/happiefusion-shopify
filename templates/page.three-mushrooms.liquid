@@ -96,36 +96,19 @@
     }
     .hero-microcopy span::before { content: '✓ '; color: var(--green); font-weight: 800; }
 
-    /* Hero visual: split frame — left=1 mushroom, right=3 mushrooms */
+    /* Hero visual: hero ad image */
     .hero-visual {
       position: relative;
       border-radius: 28px; overflow: hidden;
-      background: var(--white);
-      box-shadow: 0 30px 70px rgba(27,42,31,0.12);
+      box-shadow: 0 30px 70px rgba(27,42,31,0.18);
       aspect-ratio: 1/1;
+      background: #ECE6D8;
     }
-    .hero-split { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
-    .hero-side {
-      padding: 36px 28px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 14px; text-align: center; position: relative;
+    .hero-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .hero-side-them { background: #F2F2EE; border-right: 1px dashed rgba(0,0,0,0.08); }
-    .hero-side-us   { background: linear-gradient(135deg, var(--green-soft), var(--tan-soft)); }
-    .hero-side-label {
-      position: absolute; top: 16px; left: 16px;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--gray);
-    }
-    .hero-side-us .hero-side-label { color: var(--green-dark); }
-    .hero-shrooms { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; align-items: flex-end; }
-    .shroom { font-size: 64px; line-height: 1; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12)); }
-    .shroom-sm { font-size: 44px; }
-    .hero-side-count {
-      font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
-      color: var(--ink); text-align: center; margin-top: 6px;
-    }
-    .hero-side-count strong { color: var(--green-dark); font-size: 22px; display: block; }
 
     /* ─── THREE COLUMNS ─── */
     .three { padding: 96px 32px; background: var(--white); }
@@ -457,24 +440,7 @@
         </div>
       </div>
       <div class="hero-visual">
-        <div class="hero-split">
-          <div class="hero-side hero-side-them">
-            <div class="hero-side-label">Typical adaptogen drink</div>
-            <div class="hero-shrooms">
-              <span class="shroom">🍄</span>
-            </div>
-            <div class="hero-side-count"><strong>1</strong>mushroom</div>
-          </div>
-          <div class="hero-side hero-side-us">
-            <div class="hero-side-label">Fungi Fusion</div>
-            <div class="hero-shrooms">
-              <span class="shroom-sm shroom">🍄</span>
-              <span class="shroom-sm shroom">🍄</span>
-              <span class="shroom-sm shroom">🍄</span>
-            </div>
-            <div class="hero-side-count"><strong>3</strong>mushrooms</div>
-          </div>
-        </div>
+        <img src="{{ 'three-mushrooms-hero.jpg' | asset_url }}" alt="One mushroom isn't enough — most adaptogen drinks use one mushroom, Fungi Fusion has three (Lion's Mane, Cordyceps, Reishi)" loading="eager" fetchpriority="high">
       </div>
     </div>
   </section>
