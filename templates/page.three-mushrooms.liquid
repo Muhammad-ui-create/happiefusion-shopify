@@ -133,10 +133,40 @@
     }
     .shroom-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(27,42,31,0.08); }
     .shroom-icon {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: var(--green-soft);
+      width: 180px; height: 180px;
+      margin: 0 auto 24px; position: relative;
       display: flex; align-items: center; justify-content: center;
-      font-size: 40px; margin-bottom: 22px;
+    }
+    .shroom-icon::after {
+      content: ''; position: absolute;
+      bottom: 6px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 14px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(27,42,31,0.22) 0%, rgba(27,42,31,0) 70%);
+      animation: shadowPulse 4s ease-in-out infinite;
+      z-index: 0;
+    }
+    .shroom-icon img {
+      max-width: 100%; max-height: 100%; object-fit: contain;
+      position: relative; z-index: 1;
+      filter: drop-shadow(0 6px 12px rgba(27,42,31,0.12));
+      animation: floatY 4s ease-in-out infinite;
+    }
+    .shroom-card:nth-child(1) .shroom-icon img { animation-delay: 0s; }
+    .shroom-card:nth-child(2) .shroom-icon img { animation-delay: 1.3s; }
+    .shroom-card:nth-child(3) .shroom-icon img { animation-delay: 2.6s; }
+    .shroom-card:nth-child(1) .shroom-icon::after { animation-delay: 0s; }
+    .shroom-card:nth-child(2) .shroom-icon::after { animation-delay: 1.3s; }
+    .shroom-card:nth-child(3) .shroom-icon::after { animation-delay: 2.6s; }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-14px); }
+    }
+    @keyframes shadowPulse {
+      0%, 100% { transform: translateX(-50%) scale(1);   opacity: 0.7; }
+      50%      { transform: translateX(-50%) scale(0.82); opacity: 0.35; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .shroom-icon img, .shroom-icon::after { animation: none !important; }
     }
     .shroom-job {
       display: inline-block;
@@ -454,7 +484,7 @@
     <div class="three-grid">
 
       <div class="shroom-card">
-        <div class="shroom-icon">🧠</div>
+        <div class="shroom-icon"><img src="{{ 'lions-mane.png' | asset_url }}" alt="Lion's Mane fruiting body" loading="lazy"></div>
         <span class="shroom-job">Focus</span>
         <div class="shroom-name">Lion's Mane</div>
         <div class="shroom-dose">900mg</div>
@@ -463,7 +493,7 @@
       </div>
 
       <div class="shroom-card">
-        <div class="shroom-icon">⚡</div>
+        <div class="shroom-icon"><img src="{{ 'cordyceps.png' | asset_url }}" alt="Cordyceps fruiting body" loading="lazy"></div>
         <span class="shroom-job">Energy</span>
         <div class="shroom-name">Cordyceps</div>
         <div class="shroom-dose">700mg</div>
@@ -472,7 +502,7 @@
       </div>
 
       <div class="shroom-card">
-        <div class="shroom-icon">🌿</div>
+        <div class="shroom-icon"><img src="{{ 'reishi.png' | asset_url }}" alt="Reishi fruiting body" loading="lazy"></div>
         <span class="shroom-job">Calm</span>
         <div class="shroom-name">Reishi</div>
         <div class="shroom-dose">400mg</div>
