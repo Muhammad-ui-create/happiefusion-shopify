@@ -1,0 +1,782 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Three Mushrooms. Three Jobs. One Can. — Happie Fungi Fusion</title>
+  <meta name="description" content="Most adaptogen drinks have one functional mushroom. We have three — 900mg Lion's Mane, 700mg Cordyceps, 400mg Reishi — and we tell you exactly how much.">
+  <link rel="icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #2D6A4F;
+      --green:      #52B788;
+      --green-soft: #D8F3DC;
+      --cream:      #FAF7F0;
+      --tan:        #F7E9C9;
+      --tan-soft:   #FBF3DE;
+      --ink:        #1B2A1F;
+      --gray:       #5A6B5E;
+      --gray-lt:    #E8EDE8;
+      --white:      #FFFFFF;
+      --red:        #C44545;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--cream); color: var(--ink);
+      line-height: 1.55; -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─── */
+    .lp-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,247,240,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(45,106,79,0.10);
+      padding: 14px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .lp-nav-logo img { height: 80px; width: auto; }
+    .lp-nav-cta {
+      background: var(--green-dark); color: #fff;
+      border-radius: 50px; padding: 11px 22px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .lp-nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,106,79,0.3); }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 80px 32px 96px;
+      background: linear-gradient(180deg, var(--green-soft) 0%, var(--cream) 100%);
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(45,106,79,0.10); color: var(--green-dark);
+      border-radius: 50px; padding: 7px 16px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .hero-headline {
+      font-size: clamp(40px, 5.8vw, 72px);
+      font-weight: 900; line-height: 1.02;
+      color: var(--ink); letter-spacing: -0.025em;
+      margin-bottom: 22px;
+    }
+    .hero-headline .green { color: var(--green-dark); }
+    .hero-sub {
+      font-size: 18px; color: var(--gray); line-height: 1.65;
+      margin-bottom: 36px; max-width: 520px;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--green-dark); color: #fff;
+      border-radius: 56px; padding: 18px 32px;
+      font-size: 16px; font-weight: 800; letter-spacing: 0.02em;
+      box-shadow: 0 14px 32px rgba(45,106,79,0.28);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(45,106,79,0.4); }
+    .hero-cta .arrow { transition: transform .2s; }
+    .hero-cta:hover .arrow { transform: translateX(4px); }
+    .hero-microcopy {
+      display: flex; gap: 18px; margin-top: 18px;
+      font-size: 12px; color: var(--gray); font-weight: 500;
+    }
+    .hero-microcopy span::before { content: '✓ '; color: var(--green); font-weight: 800; }
+
+    /* Hero visual: split frame — left=1 mushroom, right=3 mushrooms */
+    .hero-visual {
+      position: relative;
+      border-radius: 28px; overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 30px 70px rgba(27,42,31,0.12);
+      aspect-ratio: 1/1;
+    }
+    .hero-split { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
+    .hero-side {
+      padding: 36px 28px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; text-align: center; position: relative;
+    }
+    .hero-side-them { background: #F2F2EE; border-right: 1px dashed rgba(0,0,0,0.08); }
+    .hero-side-us   { background: linear-gradient(135deg, var(--green-soft), var(--tan-soft)); }
+    .hero-side-label {
+      position: absolute; top: 16px; left: 16px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gray);
+    }
+    .hero-side-us .hero-side-label { color: var(--green-dark); }
+    .hero-shrooms { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; align-items: flex-end; }
+    .shroom { font-size: 64px; line-height: 1; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12)); }
+    .shroom-sm { font-size: 44px; }
+    .hero-side-count {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+      color: var(--ink); text-align: center; margin-top: 6px;
+    }
+    .hero-side-count strong { color: var(--green-dark); font-size: 22px; display: block; }
+
+    /* ─── THREE COLUMNS ─── */
+    .three { padding: 96px 32px; background: var(--white); }
+    .three-head { text-align: center; max-width: 760px; margin: 0 auto 64px; }
+    .three-eyebrow {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--green-dark); margin-bottom: 14px;
+    }
+    .three-title {
+      font-size: clamp(32px, 4vw, 52px); font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.08; color: var(--ink);
+    }
+    .three-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+    }
+    .shroom-card {
+      background: var(--cream); border-radius: 24px;
+      padding: 36px 28px;
+      border: 1px solid rgba(45,106,79,0.08);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .shroom-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(27,42,31,0.08); }
+    .shroom-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--green-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px; margin-bottom: 22px;
+    }
+    .shroom-job {
+      display: inline-block;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--green-dark);
+      background: rgba(45,106,79,0.10);
+      padding: 5px 12px; border-radius: 20px; margin-bottom: 12px;
+    }
+    .shroom-name {
+      font-size: 24px; font-weight: 800; color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .shroom-dose {
+      font-size: 28px; font-weight: 900; color: var(--green-dark);
+      margin-bottom: 14px; letter-spacing: -0.02em;
+    }
+    .shroom-claim {
+      font-size: 14.5px; color: var(--gray); line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .shroom-disclaimer {
+      font-size: 10px; color: #999; line-height: 1.5;
+      padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* ─── COMPARISON TABLE ─── */
+    .compare { padding: 96px 32px; background: var(--cream); }
+    .compare-inner { max-width: 980px; margin: 0 auto; }
+    .compare-head { text-align: center; margin-bottom: 56px; }
+    .compare-title {
+      font-size: clamp(30px, 3.6vw, 46px); font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.1; color: var(--ink); margin-bottom: 12px;
+    }
+    .compare-sub { font-size: 17px; color: var(--gray); max-width: 580px; margin: 0 auto; }
+    .compare-table {
+      background: var(--white); border-radius: 24px; overflow: hidden;
+      box-shadow: 0 20px 50px rgba(27,42,31,0.08);
+    }
+    .compare-row {
+      display: grid; grid-template-columns: 1.2fr 1fr 1fr;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .compare-row:last-child { border-bottom: 0; }
+    .compare-cell {
+      padding: 22px 24px;
+      display: flex; align-items: center;
+      font-size: 16px;
+    }
+    .compare-row.head .compare-cell {
+      background: #FAFAF7; font-weight: 800;
+      font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--gray); padding: 18px 24px;
+    }
+    .compare-row.head .cell-us { background: var(--tan); color: var(--ink); }
+    .compare-cell.cell-label { font-weight: 700; color: var(--ink); font-style: italic; }
+    .compare-cell.cell-them { color: var(--gray); }
+    .compare-cell.cell-us {
+      background: var(--tan-soft); color: var(--ink); font-weight: 700;
+    }
+    .check { color: var(--green); font-weight: 900; margin-right: 8px; }
+    .cross { color: var(--red); font-weight: 900; margin-right: 8px; }
+
+    /* ─── READ THE LABEL ─── */
+    .label-block {
+      padding: 96px 32px;
+      background: var(--white);
+    }
+    .label-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .label-image {
+      position: relative; border-radius: 24px; overflow: hidden;
+      background: linear-gradient(135deg, var(--green-soft), var(--tan-soft));
+      aspect-ratio: 1/1.1;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 24px 60px rgba(27,42,31,0.14);
+    }
+    .label-image img {
+      max-width: 70%; max-height: 90%; object-fit: contain;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.18));
+    }
+    .label-highlight {
+      position: absolute;
+      bottom: 16%; left: 50%; transform: translateX(-50%);
+      background: var(--ink); color: var(--white);
+      padding: 12px 18px; border-radius: 12px;
+      font-size: 12px; font-weight: 700; line-height: 1.4;
+      max-width: 70%; text-align: center;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.3);
+    }
+    .label-highlight::before {
+      content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+      border-left: 8px solid transparent; border-right: 8px solid transparent;
+      border-bottom: 8px solid var(--ink);
+    }
+    .label-text-eyebrow {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--green-dark); margin-bottom: 16px;
+    }
+    .label-text-title {
+      font-size: clamp(30px, 3.6vw, 46px); font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.1; color: var(--ink);
+      margin-bottom: 20px; font-style: italic;
+    }
+    .label-text-body {
+      font-size: 17px; color: var(--gray); line-height: 1.7; margin-bottom: 24px;
+    }
+    .label-bullet { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
+    .label-bullet .dot {
+      flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+      background: var(--green-soft); color: var(--green-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 13px;
+    }
+    .label-bullet-text { font-size: 15px; color: var(--ink); font-weight: 600; }
+
+    /* ─── REVIEWS ─── */
+    .reviews { padding: 96px 32px; background: var(--cream); }
+    .reviews-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+    .reviews-stars {
+      font-size: 22px; color: #F5B82E; letter-spacing: 4px; margin-bottom: 14px;
+    }
+    .reviews-title {
+      font-size: clamp(28px, 3.4vw, 42px); font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.15;
+    }
+    .reviews-sub { font-size: 15px; color: var(--gray); margin-top: 10px; }
+    .reviews-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .review-card {
+      background: var(--white); border-radius: 20px;
+      padding: 28px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .review-stars { font-size: 14px; color: #F5B82E; letter-spacing: 2px; margin-bottom: 12px; }
+    .review-quote {
+      font-size: 15px; color: var(--ink); line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    .review-quote em { background: var(--tan); padding: 1px 6px; border-radius: 4px; font-style: normal; font-weight: 600; }
+    .review-author {
+      display: flex; align-items: center; gap: 12px;
+      padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .review-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--green-soft); color: var(--green-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 13px;
+    }
+    .review-name { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .review-verified { font-size: 11px; color: var(--green); font-weight: 700; }
+    .review-verified::before { content: '✓ '; }
+
+    /* ─── COA / SCAN ─── */
+    .coa { padding: 96px 32px; background: var(--ink); color: var(--cream); }
+    .coa-inner {
+      max-width: 980px; margin: 0 auto;
+      display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: center;
+    }
+    .qr-mock {
+      width: 200px; height: 200px;
+      background: #fff; border-radius: 18px; padding: 14px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .qr-mock svg { width: 100%; height: 100%; }
+    .coa-eyebrow {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 14px;
+    }
+    .coa-title {
+      font-size: clamp(28px, 3.4vw, 42px); font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px;
+      color: var(--white); font-style: italic;
+    }
+    .coa-body { font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 24px; }
+    .coa-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--green); font-weight: 700; font-size: 14px;
+      border-bottom: 1px solid currentColor; padding-bottom: 2px;
+    }
+
+    /* ─── SUBSCRIBE & SAVE ─── */
+    .ss { padding: 96px 32px; background: linear-gradient(135deg, var(--green-soft), var(--tan-soft)); }
+    .ss-inner {
+      max-width: 880px; margin: 0 auto; text-align: center;
+      background: var(--white); border-radius: 28px;
+      padding: 64px 48px;
+      box-shadow: 0 30px 70px rgba(27,42,31,0.10);
+    }
+    .ss-badge {
+      display: inline-block;
+      background: var(--green-dark); color: #fff;
+      padding: 6px 14px; border-radius: 50px;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .ss-title {
+      font-size: clamp(30px, 3.8vw, 46px); font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 14px;
+    }
+    .ss-sub { font-size: 17px; color: var(--gray); margin-bottom: 28px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .ss-price {
+      display: inline-flex; align-items: baseline; gap: 14px;
+      margin-bottom: 28px;
+    }
+    .ss-price-old { font-size: 22px; color: var(--gray); text-decoration: line-through; }
+    .ss-price-new { font-size: 44px; font-weight: 900; color: var(--green-dark); letter-spacing: -0.02em; }
+    .ss-price-note { font-size: 13px; color: var(--gray); }
+    .ss-cta {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--green-dark); color: #fff;
+      border-radius: 56px; padding: 18px 36px;
+      font-size: 16px; font-weight: 800; letter-spacing: 0.02em;
+      box-shadow: 0 14px 32px rgba(45,106,79,0.28);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .ss-cta:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(45,106,79,0.4); }
+    .ss-perks { display: flex; justify-content: center; gap: 28px; margin-top: 20px; font-size: 12px; color: var(--gray); }
+    .ss-perks span::before { content: '✓ '; color: var(--green); font-weight: 800; }
+
+    /* ─── FOOTER DISCLAIMER ─── */
+    .lp-foot {
+      background: var(--ink); color: rgba(255,255,255,0.55);
+      padding: 48px 32px;
+    }
+    .lp-foot-inner { max-width: 1100px; margin: 0 auto; font-size: 12px; line-height: 1.65; }
+    .lp-foot-disclaimer { margin-bottom: 20px; }
+    .lp-foot-links {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 12px;
+    }
+    .lp-foot-links a { color: rgba(255,255,255,0.7); margin-right: 18px; }
+    .lp-foot-links a:hover { color: var(--green); }
+
+    /* ─── STICKY ADD TO CART ─── */
+    .sticky-cta {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      background: var(--white); border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 14px 24px;
+      display: none; justify-content: space-between; align-items: center; gap: 16px;
+      box-shadow: 0 -8px 24px rgba(0,0,0,0.08);
+    }
+    .sticky-cta.visible { display: flex; }
+    .sticky-cta-text { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .sticky-cta-text small { display: block; color: var(--gray); font-weight: 500; font-size: 12px; }
+    .sticky-cta-btn {
+      background: var(--green-dark); color: #fff;
+      border-radius: 50px; padding: 12px 24px;
+      font-size: 14px; font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 860px) {
+      .hero-inner, .label-inner, .coa-inner { grid-template-columns: 1fr; gap: 40px; }
+      .three-grid, .reviews-grid { grid-template-columns: 1fr; }
+      .compare-row { grid-template-columns: 1.2fr 1fr 1fr; }
+      .compare-cell { padding: 16px 14px; font-size: 14px; }
+      .hero { padding: 56px 20px 72px; }
+      .three, .compare, .label-block, .reviews, .coa, .ss { padding: 64px 20px; }
+      .ss-inner { padding: 44px 24px; }
+      .ss-perks { flex-direction: column; gap: 8px; }
+      .lp-nav { padding: 12px 18px; }
+      .lp-nav-logo img { height: 60px; }
+      .lp-foot-links { flex-direction: column; gap: 12px; align-items: flex-start; }
+      .qr-mock { width: 160px; height: 160px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="lp-nav">
+    <a href="/" class="lp-nav-logo">
+      <img src="{{ 'happie-logo.png' | asset_url }}" alt="Happie Fungi Fusion" onerror="this.style.display='none'; this.insertAdjacentText('afterend', 'happie');">
+    </a>
+    <a href="/discount/FUNGI15?redirect=/products/happie-fungi-fusion-mushroom-drink-variety-pack" class="lp-nav-cta">Shop 15% Off →</a>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-eyebrow">Functional Mushroom Seltzer</span>
+        <h1 class="hero-headline">Three mushrooms.<br>Three jobs.<br><span class="green">One can.</span></h1>
+        <p class="hero-sub">Most adaptogen drinks have one functional mushroom. We have three — each with a specific job, and we tell you exactly how much.</p>
+        <a href="/discount/FUNGI15?redirect=/products/happie-fungi-fusion-mushroom-drink-variety-pack" class="hero-cta">
+          Shop the Variety Pack — 15% Off
+          <span class="arrow">→</span>
+        </a>
+        <div class="hero-microcopy">
+          <span>2,000mg total per can</span>
+          <span>Zero caffeine</span>
+          <span>Zero alcohol</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-split">
+          <div class="hero-side hero-side-them">
+            <div class="hero-side-label">Typical adaptogen drink</div>
+            <div class="hero-shrooms">
+              <span class="shroom">🍄</span>
+            </div>
+            <div class="hero-side-count"><strong>1</strong>mushroom</div>
+          </div>
+          <div class="hero-side hero-side-us">
+            <div class="hero-side-label">Fungi Fusion</div>
+            <div class="hero-shrooms">
+              <span class="shroom-sm shroom">🍄</span>
+              <span class="shroom-sm shroom">🍄</span>
+              <span class="shroom-sm shroom">🍄</span>
+            </div>
+            <div class="hero-side-count"><strong>3</strong>mushrooms</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── THREE MUSHROOMS ─── -->
+  <section class="three">
+    <div class="three-head">
+      <div class="three-eyebrow">What's in every can</div>
+      <h2 class="three-title">Three working ingredients — labeled, dosed, and disclosed.</h2>
+    </div>
+    <div class="three-grid">
+
+      <div class="shroom-card">
+        <div class="shroom-icon">🧠</div>
+        <span class="shroom-job">Focus</span>
+        <div class="shroom-name">Lion's Mane</div>
+        <div class="shroom-dose">900mg</div>
+        <p class="shroom-claim">A dual-extracted fruiting-body mushroom traditionally used to support cognitive function. Studied for its role in nerve growth factor (NGF) production, which is associated with neuron maintenance. At 900mg per can, this is the working dose — not a "fairy dust" sprinkle.</p>
+        <p class="shroom-disclaimer">These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+      </div>
+
+      <div class="shroom-card">
+        <div class="shroom-icon">⚡</div>
+        <span class="shroom-job">Energy</span>
+        <div class="shroom-name">Cordyceps</div>
+        <div class="shroom-dose">700mg</div>
+        <p class="shroom-claim">A fruiting-body adaptogen traditionally used by Sherpas and Chinese herbalists for endurance and stamina. Studied for its support of cellular ATP production — the body's natural energy currency. 700mg is a meaningful, lab-relevant dose, not a trace amount on the back of the can.</p>
+        <p class="shroom-disclaimer">These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+      </div>
+
+      <div class="shroom-card">
+        <div class="shroom-icon">🌿</div>
+        <span class="shroom-job">Calm</span>
+        <div class="shroom-name">Reishi</div>
+        <div class="shroom-dose">400mg</div>
+        <p class="shroom-claim">Called the "Queen of Mushrooms," Reishi is a traditional adaptogen used for relaxation and immune support. Studied for cortisol modulation, which is associated with how the body responds to everyday stress. 400mg is a real, considered dose — and we list it on the front of the can.</p>
+        <p class="shroom-disclaimer">These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── COMPARISON TABLE ─── -->
+  <section class="compare">
+    <div class="compare-inner">
+      <div class="compare-head">
+        <h2 class="compare-title">One mushroom vs. three.</h2>
+        <p class="compare-sub">The typical adaptogen drink leans on a single mushroom. We disclose all three — with milligrams listed on the front of the can.</p>
+      </div>
+      <div class="compare-table">
+        <div class="compare-row head">
+          <div class="compare-cell"></div>
+          <div class="compare-cell cell-them">The typical adaptogen drink</div>
+          <div class="compare-cell cell-us">Fungi Fusion</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell cell-label">Lion's Mane</div>
+          <div class="compare-cell cell-them"><span class="check">✓</span> "Contains Lion's Mane"</div>
+          <div class="compare-cell cell-us"><span class="check">✓</span> 900mg disclosed</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell cell-label">Cordyceps</div>
+          <div class="compare-cell cell-them"><span class="cross">✗</span> Not included</div>
+          <div class="compare-cell cell-us"><span class="check">✓</span> 700mg disclosed</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell cell-label">Reishi</div>
+          <div class="compare-cell cell-them"><span class="cross">✗</span> Not included</div>
+          <div class="compare-cell cell-us"><span class="check">✓</span> 400mg disclosed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── READ THE LABEL ─── -->
+  <section class="label-block">
+    <div class="label-inner">
+      <div class="label-image">
+        <img src="{{ 'happie-can-fungi-fusion.png' | asset_url }}" alt="Happie Fungi Fusion can label" onerror="this.style.display='none';">
+        <div class="label-highlight">
+          <strong>Lion's Mane 900mg · Cordyceps 700mg · Reishi 400mg</strong><br>
+          <span style="color: var(--green); font-size: 11px;">Listed right on the front. Every milligram.</span>
+        </div>
+      </div>
+      <div>
+        <div class="label-text-eyebrow">Radical transparency</div>
+        <h2 class="label-text-title">"We list every milligram. The other guys won't."</h2>
+        <p class="label-text-body">Adaptogen drinks have a labeling problem. Most brands wave a generic "proprietary blend" sticker and hope you don't ask questions. We took the opposite path.</p>
+        <div class="label-bullet"><span class="dot">1</span><span class="label-bullet-text">Exact milligrams listed on the front of every can</span></div>
+        <div class="label-bullet"><span class="dot">2</span><span class="label-bullet-text">100% fruiting-body extract — no fillers, no mycelium-on-grain</span></div>
+        <div class="label-bullet"><span class="dot">3</span><span class="label-bullet-text">Third-party lab tested — COA available with every batch</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── REVIEWS ─── -->
+  <section class="reviews">
+    <div class="reviews-head">
+      <div class="reviews-stars">★★★★★</div>
+      <h2 class="reviews-title">4.9 from 1,200+ verified customers</h2>
+      <p class="reviews-sub">Three-mushroom blend reviews from real Happie drinkers.</p>
+    </div>
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"Most adaptogen seltzers just stick <em>one mushroom</em> on the label. Happie actually lists three — with the milligrams. That alone made me try it. The Lion's Mane focus is real."</p>
+        <div class="review-author">
+          <div class="review-avatar">JM</div>
+          <div>
+            <div class="review-name">Jordan M.</div>
+            <div class="review-verified">Verified buyer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"I was tired of brands hiding behind a 'proprietary blend.' Happie shows <em>900mg Lion's Mane, 700mg Cordyceps, 400mg Reishi</em> right on the can. Refreshing — literally and figuratively."</p>
+        <div class="review-author">
+          <div class="review-avatar">RK</div>
+          <div>
+            <div class="review-name">Rachel K.</div>
+            <div class="review-verified">Verified buyer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"The combo of three mushrooms is what sold me — focus from Lion's Mane, clean energy from Cordyceps, calm from Reishi. Other drinks I tried only had one and the effect was forgettable."</p>
+        <div class="review-author">
+          <div class="review-avatar">DT</div>
+          <div>
+            <div class="review-name">Devin T.</div>
+            <div class="review-verified">Verified buyer</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── COA / SCAN ─── -->
+  <section class="coa">
+    <div class="coa-inner">
+      <div class="qr-mock">
+        <!-- QR Code Mock -->
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="white"/>
+          <g fill="black">
+            <rect x="6" y="6" width="22" height="22"/>
+            <rect x="10" y="10" width="14" height="14" fill="white"/>
+            <rect x="13" y="13" width="8" height="8"/>
+            <rect x="72" y="6" width="22" height="22"/>
+            <rect x="76" y="10" width="14" height="14" fill="white"/>
+            <rect x="79" y="13" width="8" height="8"/>
+            <rect x="6" y="72" width="22" height="22"/>
+            <rect x="10" y="76" width="14" height="14" fill="white"/>
+            <rect x="13" y="79" width="8" height="8"/>
+            <rect x="34" y="6" width="4" height="4"/>
+            <rect x="42" y="6" width="4" height="4"/>
+            <rect x="50" y="10" width="4" height="4"/>
+            <rect x="58" y="6" width="4" height="4"/>
+            <rect x="34" y="14" width="4" height="4"/>
+            <rect x="46" y="14" width="4" height="4"/>
+            <rect x="54" y="14" width="4" height="4"/>
+            <rect x="62" y="14" width="4" height="4"/>
+            <rect x="34" y="22" width="4" height="4"/>
+            <rect x="42" y="22" width="4" height="4"/>
+            <rect x="50" y="22" width="4" height="4"/>
+            <rect x="6" y="34" width="4" height="4"/>
+            <rect x="14" y="34" width="4" height="4"/>
+            <rect x="22" y="34" width="4" height="4"/>
+            <rect x="34" y="34" width="4" height="4"/>
+            <rect x="42" y="34" width="4" height="4"/>
+            <rect x="54" y="34" width="4" height="4"/>
+            <rect x="62" y="34" width="4" height="4"/>
+            <rect x="70" y="34" width="4" height="4"/>
+            <rect x="78" y="34" width="4" height="4"/>
+            <rect x="86" y="34" width="4" height="4"/>
+            <rect x="10" y="42" width="4" height="4"/>
+            <rect x="18" y="42" width="4" height="4"/>
+            <rect x="30" y="42" width="4" height="4"/>
+            <rect x="38" y="42" width="4" height="4"/>
+            <rect x="50" y="42" width="4" height="4"/>
+            <rect x="58" y="42" width="4" height="4"/>
+            <rect x="74" y="42" width="4" height="4"/>
+            <rect x="82" y="42" width="4" height="4"/>
+            <rect x="6" y="50" width="4" height="4"/>
+            <rect x="22" y="50" width="4" height="4"/>
+            <rect x="30" y="50" width="4" height="4"/>
+            <rect x="42" y="50" width="4" height="4"/>
+            <rect x="54" y="50" width="4" height="4"/>
+            <rect x="66" y="50" width="4" height="4"/>
+            <rect x="78" y="50" width="4" height="4"/>
+            <rect x="14" y="58" width="4" height="4"/>
+            <rect x="26" y="58" width="4" height="4"/>
+            <rect x="38" y="58" width="4" height="4"/>
+            <rect x="50" y="58" width="4" height="4"/>
+            <rect x="62" y="58" width="4" height="4"/>
+            <rect x="74" y="58" width="4" height="4"/>
+            <rect x="86" y="58" width="4" height="4"/>
+            <rect x="6" y="66" width="4" height="4"/>
+            <rect x="18" y="66" width="4" height="4"/>
+            <rect x="30" y="66" width="4" height="4"/>
+            <rect x="42" y="66" width="4" height="4"/>
+            <rect x="54" y="66" width="4" height="4"/>
+            <rect x="66" y="66" width="4" height="4"/>
+            <rect x="78" y="66" width="4" height="4"/>
+            <rect x="34" y="74" width="4" height="4"/>
+            <rect x="46" y="74" width="4" height="4"/>
+            <rect x="58" y="74" width="4" height="4"/>
+            <rect x="70" y="74" width="4" height="4"/>
+            <rect x="82" y="74" width="4" height="4"/>
+            <rect x="34" y="82" width="4" height="4"/>
+            <rect x="42" y="82" width="4" height="4"/>
+            <rect x="54" y="82" width="4" height="4"/>
+            <rect x="62" y="82" width="4" height="4"/>
+            <rect x="78" y="82" width="4" height="4"/>
+            <rect x="86" y="82" width="4" height="4"/>
+            <rect x="34" y="90" width="4" height="4"/>
+            <rect x="50" y="90" width="4" height="4"/>
+            <rect x="58" y="90" width="4" height="4"/>
+            <rect x="70" y="90" width="4" height="4"/>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <div class="coa-eyebrow">Third-party lab tested</div>
+        <h2 class="coa-title">Scan a can. See the science.</h2>
+        <p class="coa-body">Every Happie Fungi Fusion can carries a QR code linking to its third-party Certificate of Analysis. Verify the milligrams, the purity, and the heavy-metals screen — for the exact batch you're drinking.</p>
+        <a href="/pages/lab-results" class="coa-link">View the COA library →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SUBSCRIBE & SAVE ─── -->
+  <section class="ss">
+    <div class="ss-inner">
+      <span class="ss-badge">Save 20% Every Month</span>
+      <h2 class="ss-title">Get Fungi Fusion delivered.</h2>
+      <p class="ss-sub">Skip the re-order. Set your cadence, save 20% every month, cancel anytime.</p>
+      <div class="ss-price">
+        <span class="ss-price-old">$25.99</span>
+        <span class="ss-price-new">$20.79</span>
+        <span class="ss-price-note">/ 6-pack</span>
+      </div>
+      <a href="/products/happie-fungi-fusion-mushroom-drink-variety-pack" class="ss-cta">
+        Start My Subscription <span>→</span>
+      </a>
+      <div class="ss-perks">
+        <span>Free shipping on $75+</span>
+        <span>Skip or cancel anytime</span>
+        <span>20% off every order</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER DISCLAIMER ─── -->
+  <footer class="lp-foot">
+    <div class="lp-foot-inner">
+      <p class="lp-foot-disclaimer">
+        † These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult your healthcare provider before use, especially if pregnant, nursing, or taking medication. Keep out of reach of children. Individual results may vary. Happie Fungi Fusion is a functional beverage and is not a substitute for a balanced diet or medical care.
+      </p>
+      <div class="lp-foot-links">
+        <div>
+          <a href="/pages/about">About</a>
+          <a href="/pages/lab-results">Lab Results</a>
+          <a href="/policies/privacy-policy">Privacy</a>
+          <a href="/policies/terms-of-service">Terms</a>
+          <a href="/pages/contact">Contact</a>
+        </div>
+        <div>© {{ 'now' | date: '%Y' }} Happie Beverages, LLC.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── STICKY ADD TO CART ─── -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta-text">
+      Variety Pack — 15% Off
+      <small>Code FUNGI15 · 6-pack · $25.99</small>
+    </div>
+    <a href="/discount/FUNGI15?redirect=/products/happie-fungi-fusion-mushroom-drink-variety-pack" class="sticky-cta-btn">Add to Cart →</a>
+  </div>
+
+  <script>
+    (function() {
+      var sticky = document.getElementById('stickyCta');
+      var hero = document.querySelector('.hero');
+      if (!sticky || !hero) return;
+      var heroBottom = hero.offsetTop + hero.offsetHeight;
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > heroBottom - 100) {
+          sticky.classList.add('visible');
+        } else {
+          sticky.classList.remove('visible');
+        }
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
