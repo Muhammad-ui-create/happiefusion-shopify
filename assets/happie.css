@@ -613,34 +613,102 @@ input, select { font-family: var(--font); }
 }
 
 /* Accordions */
-.accordions { margin-top: 32px; border-top: 1px solid rgba(0,0,0,0.08); }
-.accordion { border-bottom: 1px solid rgba(0,0,0,0.08); }
+/* ── Beautiful card-style accordions ── */
+.accordions { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+.accordion {
+  background: #fff;
+  border: 1.5px solid rgba(45,106,79,0.10);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.accordion:hover {
+  border-color: rgba(45,106,79,0.25);
+  box-shadow: 0 6px 18px rgba(27,42,31,0.06);
+}
+.accordion.open {
+  border-color: var(--green, #2D6A4F);
+  box-shadow: 0 10px 30px rgba(45,106,79,0.10);
+}
 .accordion-trigger {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 0;
+  gap: 16px;
+  padding: 18px 22px;
   font-size: 15px;
   font-weight: 700;
   text-align: left;
-  color: var(--black);
+  color: var(--black, #1A1A1A);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: padding-bottom 0.25s ease;
 }
-.acc-label { display: flex; align-items: center; gap: 10px; }
-.acc-chevron { transition: transform 0.25s; flex-shrink: 0; color: var(--gray); }
+.acc-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  letter-spacing: -0.005em;
+}
+.acc-label svg {
+  width: 38px; height: 38px;
+  padding: 9px;
+  border-radius: 50%;
+  background: rgba(45,106,79,0.08);
+  color: var(--green, #2D6A4F);
+  flex-shrink: 0;
+  transition: background-color 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.accordion:hover .acc-label svg {
+  background: rgba(45,106,79,0.14);
+}
+.accordion.open .acc-label svg {
+  background: var(--green, #2D6A4F);
+  color: #fff;
+  transform: rotate(-6deg) scale(1.05);
+}
+.acc-chevron {
+  flex-shrink: 0;
+  color: var(--green, #2D6A4F);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
 .accordion.open .acc-chevron { transform: rotate(180deg); }
 .accordion-body {
-  display: none;
-  padding: 0 0 22px;
-  font-size: 14px;
-  color: var(--gray);
-  line-height: 1.7;
+  padding: 0 22px;
+  font-size: 14.5px;
+  color: var(--gray, #5A6B5E);
+  line-height: 1.75;
 }
-.accordion.open .accordion-body { display: block; }
-.accordion-body ul { padding-left: 20px; list-style: disc; margin: 8px 0; }
-.accordion-body li { margin-bottom: 4px; }
-.accordion-body p { margin-bottom: 10px; }
-.accordion-body strong { color: var(--black); }
+.accordion.open .accordion-body { padding-bottom: 22px; }
+.accordion-body > *:first-child { margin-top: 4px; }
+.accordion-body p { margin-bottom: 12px; }
+.accordion-body p:last-child { margin-bottom: 0; }
+.accordion-body strong { color: var(--black, #1A1A1A); font-weight: 700; }
+.accordion-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.accordion-body li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.accordion-body li::before {
+  content: '';
+  position: absolute;
+  left: 4px; top: 0.7em;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green, #2D6A4F);
+}
 
 /* ── Comparison Section ── */
 .comparison-section {
