@@ -40,13 +40,36 @@
         <input type="hidden" name="contact[tags]" value="newsletter,popup-signup">
         <input type="hidden" name="contact[accepts_marketing]" value="true">
         <div class="ep-input-wrap">
+          <div class="ep-name-row">
+            <input
+              type="text"
+              name="contact[first_name]"
+              placeholder="First name"
+              autocomplete="given-name"
+              required
+              class="ep-input"
+              id="ep-first-name-input"
+              aria-label="First name"
+            />
+            <input
+              type="text"
+              name="contact[last_name]"
+              placeholder="Last name (optional)"
+              autocomplete="family-name"
+              class="ep-input"
+              id="ep-last-name-input"
+              aria-label="Last name"
+            />
+          </div>
           <input
             type="email"
             name="contact[email]"
             placeholder="your@email.com"
+            autocomplete="email"
             required
             class="ep-input"
             id="ep-email-input"
+            aria-label="Email address"
           />
           <button type="submit" class="ep-submit">
             Claim 15% Off + Free Shipping
@@ -176,6 +199,12 @@
 .ep-input-wrap {
   display: flex; flex-direction: column; gap: 10px;
 }
+.ep-name-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+@media (max-width: 420px) {
+  .ep-name-row { grid-template-columns: 1fr; }
+}
 .ep-input {
   width: 100%; padding: 14px 18px;
   border: 2px solid rgba(0,0,0,0.12); border-radius: 14px;
@@ -295,14 +324,17 @@
     form.appendChild(returnUrl);
 
     form.addEventListener('submit', function(e) {
-      var email = document.getElementById('ep-email-input').value;
-      if (!email) return;
-      console.log('[Happie] Submitting newsletter signup (native submit) for:', email);
+      var email = document.getElementById('ep-email-input').value.trim();
+      var firstName = document.getElementById('ep-first-name-input').value.trim();
+      if (!email || !firstName) return;
+      console.log('[Happie] Submitting newsletter signup (native submit) for:', firstName, email);
       // Set cookie so popup doesn't re-show after page reloads
       setCookie(COOKIE_KEY, COOKIE_DAYS);
       // Show success state — visible for a split second before reload
       form.style.display = 'none';
-      document.getElementById('ep-success').style.display = 'flex';
+      var successEl = document.getElementById('ep-success');
+      successEl.querySelector('strong').textContent = "Nice to meet you, " + firstName + "!";
+      successEl.style.display = 'flex';
       // Let the form submit naturally (no preventDefault) — hCaptcha runs,
       // Shopify accepts the signup, automation fires, page redirects back
       // to homepage with ?subscribed=1
