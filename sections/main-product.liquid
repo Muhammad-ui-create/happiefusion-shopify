@@ -17,10 +17,8 @@
         <img
           id="gallery-main-img"
           src="{{ first_image | image_url: width: 900 }}"
-          alt="{{ first_image.alt | default: product.title | append: ' — functional mushroom seltzer with Lion\'s Mane, Cordyceps & Reishi' }}"
+          alt="{{ first_image.alt | default: product.title }}"
           class="gallery-main-img"
-          width="900" height="900"
-          loading="eager"
         />
         {% if product.images.size > 1 %}
           <button class="gallery-arrow gallery-prev" id="gallery-prev" aria-label="Previous image">
@@ -39,7 +37,7 @@
               data-index="{{ forloop.index0 }}"
               data-src="{{ image | image_url: width: 900 }}"
             >
-              <img src="{{ image | image_url: width: 160 }}" alt="{{ image.alt | default: product.title | append: ' — Happie Fungi Fusion' }}" loading="lazy" width="160" height="160" />
+              <img src="{{ image | image_url: width: 160 }}" alt="{{ image.alt | default: product.title }}" loading="lazy" />
             </div>
           {% endfor %}
         </div>
@@ -53,7 +51,7 @@
       <div class="product-top-row">
         <div class="product-rating">
           <span class="stars">★★★★★</span>
-          <span class="rating-count">4.9 (1,200+ reviews)</span>
+          <span class="rating-count">4.9 (200+ reviews)</span>
         </div>
         <span class="top-seller-badge">TOP SELLER</span>
       </div>
@@ -136,88 +134,47 @@
           </div>
         </div>
 
-        <!-- Purchase Options: Subscribe (default) vs One-time -->
+        <!-- Purchase Options: One-time vs Subscribe -->
         {% if product.selling_plan_groups.size > 0 %}
-          <div class="purchase-options purchase-options-v2">
-            <div class="purchase-header">
-              <div class="purchase-label">Choose Your Plan</div>
-              <span class="purchase-best-tag">⚡ MOST POPULAR</span>
-            </div>
-
+          <div class="purchase-options">
+            <div class="purchase-label">Purchase Options</div>
+            <label class="purchase-option {% if product.selected_selling_plan_allocation == nil %}active{% endif %}" id="opt-onetime">
+              <input type="radio" name="selling_plan" value="" id="selling-plan-onetime" {% if product.selected_selling_plan_allocation == nil %}checked{% endif %} />
+              <div class="opt-inner">
+                <div class="opt-title">One Time Purchase</div>
+                <div class="opt-price" id="onetime-price">{{ product.selected_or_first_available_variant.price | money }}</div>
+              </div>
+            </label>
             {% for group in product.selling_plan_groups %}
               {% for plan in group.selling_plans %}
-                <label class="purchase-option subscribe-opt subscribe-opt-v2 active" id="opt-subscribe">
-                  <input type="radio" name="selling_plan" value="{{ plan.id }}" id="selling-plan-{{ plan.id }}" checked />
+                <label class="purchase-option subscribe-opt" id="opt-subscribe">
+                  <input type="radio" name="selling_plan" value="{{ plan.id }}" id="selling-plan-{{ plan.id }}" />
                   <div class="opt-inner">
-                    <div class="opt-top">
-                      <div class="opt-title">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:-3px;"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7 1 6.3 2.7M21 4v5h-5"/></svg>
-                        Subscribe &amp; Save
-                        {% for adjustment in plan.price_adjustments %}
-                          {% if adjustment.value_type == 'percentage' %}
-                            <span class="save-badge save-badge-v2">SAVE {{ adjustment.value }}%</span>
-                          {% endif %}
-                        {% endfor %}
-                      </div>
-                      <div class="opt-price subscribe-price" id="subscribe-price">
-                        {% assign variant = product.selected_or_first_available_variant %}
-                        {% for allocation in variant.selling_plan_allocations %}
-                          {% if allocation.selling_plan.id == plan.id %}
-                            <span class="price-discounted">{{ allocation.price | money }}</span>
-                            <span class="price-original-crossed">{{ variant.price | money }}</span>
-                          {% endif %}
-                        {% endfor %}
-                      </div>
+                    <div class="opt-title">
+                      Subscribe &amp; Save
+                      {% for adjustment in plan.price_adjustments %}
+                        {% if adjustment.value_type == 'percentage' %}
+                          <span class="save-badge">SAVE {{ adjustment.value }}%</span>
+                        {% endif %}
+                      {% endfor %}
                     </div>
-                    <ul class="opt-perks">
-                      <li>✓ Free shipping every order</li>
-                      <li>✓ Skip, pause, or cancel anytime</li>
-                      <li>✓ Early access to new flavors</li>
-                    </ul>
+                    <div class="opt-price subscribe-price" id="subscribe-price">
+                      {% assign variant = product.selected_or_first_available_variant %}
+                      {% for allocation in variant.selling_plan_allocations %}
+                        {% if allocation.selling_plan.id == plan.id %}
+                          <span class="price-discounted">{{ allocation.price | money }}</span>
+                          <span class="price-original-crossed">{{ variant.price | money }}</span>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
                     <div class="opt-sub">{{ plan.description }}</div>
                   </div>
                 </label>
               {% endfor %}
             {% endfor %}
-
-            <label class="purchase-option" id="opt-onetime">
-              <input type="radio" name="selling_plan" value="" id="selling-plan-onetime" />
-              <div class="opt-inner">
-                <div class="opt-top">
-                  <div class="opt-title">One-Time Purchase</div>
-                  <div class="opt-price" id="onetime-price">{{ product.selected_or_first_available_variant.price | money }}</div>
-                </div>
-              </div>
-            </label>
           </div>
-
-          <style>
-          .purchase-options-v2 { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
-          .purchase-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-          .purchase-label { font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #666; }
-          .purchase-best-tag { font-size: 10px; font-weight: 900; letter-spacing: 0.12em; background: #F5A623; color: #1A1A1A; padding: 4px 10px; border-radius: 50px; }
-          .subscribe-opt-v2 {
-            background: linear-gradient(135deg, #E8F5EC, #D4EDDE) !important;
-            border: 2.5px solid #2D6A4F !important;
-            box-shadow: 0 8px 24px rgba(45,106,79,0.15);
-            border-radius: 16px !important;
-            padding: 16px 18px !important;
-            position: relative;
-          }
-          .subscribe-opt-v2 .opt-title { color: #2D6A4F; font-weight: 800; }
-          .save-badge-v2 { background: #F5A623 !important; color: #1A1A1A !important; font-weight: 900 !important; }
-          .opt-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
-          .opt-perks { list-style: none; padding: 0; margin: 10px 0 4px; font-size: 13px; color: #2D6A4F; display: flex; flex-direction: column; gap: 4px; }
-          .opt-perks li { font-weight: 600; }
-          .opt-sub { font-size: 12px; color: #555; margin-top: 6px; }
-          .purchase-option:not(.subscribe-opt-v2) { padding: 14px 18px !important; border: 1.5px solid rgba(0,0,0,0.1) !important; border-radius: 14px !important; }
-          .purchase-option:not(.subscribe-opt-v2):hover { border-color: rgba(45,106,79,0.4) !important; }
-          </style>
         {% endif %}
-
-        <!-- Shopify Subscriptions widget — renders Subscribe & Save vs One-time purchase options -->
-        <div class="subscriptions_app_embed_block product-subscriptions-widget"></div>
-
+<div class="subscriptions_app_embed_block"></div>
         <!-- Add to Cart -->
         <button type="submit" class="btn-atc" id="add-to-cart-btn">
           <span id="atc-text">ADD TO CART – <span id="atc-price">{{ product.selected_or_first_available_variant.price | money }}</span></span>
@@ -231,7 +188,7 @@
           </span>
           <span class="trust-pill">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 1 9 9c0 4-2 7.5-5 9.5l-1-1.5c2-1.5 3.5-4 3.5-8C18.5 7.5 15.5 4.5 12 4.5S5.5 7.5 5.5 11c0 4 1.5 6.5 3.5 8L8 20.5C5 18.5 3 15 3 11a9 9 0 0 1 9-9z"/><path d="M12 7v6l3 2"/></svg>
-            Free Shipping $40+
+            Free Shipping $75+
           </span>
           <span class="trust-pill">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg>
@@ -385,25 +342,11 @@
     </div>
   </div>
 
-  <!-- SEO: Internal Links Hub -->
-  <div style="background:var(--cream);padding:48px 24px;border-top:1px solid rgba(0,0,0,0.07);">
-    <div style="max-width:1100px;margin:0 auto;">
-      <h2 style="font-size:18px;font-weight:800;margin-bottom:20px;color:var(--green-dark);">Learn more about Happie Fungi Fusion</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;">
-        <a href="/pages/the-science" style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(0,0,0,0.1);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--green);text-decoration:none;">🔬 The Science Behind Dual Extraction</a>
-        <a href="/pages/mushrooms" style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(0,0,0,0.1);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--green);text-decoration:none;">🍄 About Lion's Mane, Cordyceps &amp; Reishi</a>
-        <a href="/pages/faq" style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(0,0,0,0.1);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--green);text-decoration:none;">❓ Frequently Asked Questions</a>
-        <a href="/pages/reviews" style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(0,0,0,0.1);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--green);text-decoration:none;">⭐ Customer Reviews</a>
-        <a href="/pages/shipping-policy" style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(0,0,0,0.1);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--green);text-decoration:none;">📦 Shipping Info</a>
-      </div>
-    </div>
-  </div>
-
   <!-- Related Products -->
   {% assign related = collections['all'].products %}
   {% if related.size > 1 %}
     <div class="related-products">
-      <h2 class="related-title">More Functional Mushroom Seltzers</h2>
+      <h2 class="related-title">You Might Also Like</h2>
       <div class="products-grid">
         {% for p in related limit: 4 %}
           {% unless p.id == product.id %}
@@ -457,36 +400,3 @@
   "settings": []
 }
 {% endschema %}
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to use Happie Fungi Fusion functional mushroom seltzer",
-  "description": "Get the most out of your Happie Fungi Fusion functional mushroom drink with 900mg Lion's Mane, 700mg Cordyceps, and 400mg Reishi per can.",
-  "totalTime": "PT5M",
-  "supply": [
-    { "@type": "HowToSupply", "name": "Happie Fungi Fusion can (any flavor)" }
-  ],
-  "step": [
-    {
-      "@type": "HowToStep",
-      "name": "Crack open a can",
-      "text": "Serve chilled or over ice. Shelf-stable — no refrigeration required until opened. Best enjoyed cold.",
-      "position": 1
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Drink daily for best results",
-      "text": "One can per day is ideal. The adaptogenic mushrooms — Lion's Mane, Cordyceps, and Reishi — build in effectiveness with consistent daily use. Most people notice improved focus and energy within 1–2 weeks.",
-      "position": 2
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Use as an alcohol or energy drink alternative",
-      "text": "Happie Fungi Fusion is perfect for social situations, work sessions, workouts, or evening wind-downs. Zero alcohol, zero caffeine — just real functional mushroom benefits.",
-      "position": 3
-    }
-  ]
-}
-</script>
