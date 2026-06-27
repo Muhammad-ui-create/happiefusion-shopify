@@ -328,9 +328,11 @@
         },
         "hasMerchantReturnPolicy": {
           "@type": "MerchantReturnPolicy",
+          "applicableCountry": "US",
           "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
           "merchantReturnDays": 30,
-          "returnMethod": "https://schema.org/ReturnByMail"
+          "returnMethod": "https://schema.org/ReturnByMail",
+          "returnFees": "https://schema.org/FreeReturn"
         }
       }{% unless forloop.last %},{% endunless %}
       {% endfor %}
