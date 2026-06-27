@@ -63,16 +63,6 @@
           ar-placement="floor"
           ios-src="{{ 'happie-can-3d.usdz' | asset_url }}"
         >
-          <!-- Fallback img: rendered by browser before model-viewer script defines the custom element.
-               Same image as the poster, so the visual is instant from first paint. -->
-          <img
-            src="{{ 'can-hero-popup.webp' | asset_url }}"
-            alt="Happie Fungi Fusion Blue Raspberry can"
-            width="300" height="600"
-            loading="eager"
-            fetchpriority="high"
-            style="width:100%;height:100%;object-fit:contain;"
-          />
           <!-- Loading state -->
           <div slot="progress-bar" class="hero-3d-loader">
             <div class="hero-3d-loader-fill"></div>
