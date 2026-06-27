@@ -37,7 +37,7 @@
       <div class="product-card-price">{{ product.price_min | money }}</div>
     </div>
 
-    <a href="{{ product.url }}" class="btn-shop-now">Shop Now</a>
+    <a href="{{ product.url }}" class="btn-shop-now" aria-label="Shop {{ product.title | escape }}">Shop Now</a>
   </div>
 
 </div>
