@@ -370,11 +370,14 @@
   {%- endif -%}
 
   {{ content_for_header }}
+  {%- comment -%} Fonts: preconnect + async-loaded stylesheet to avoid render-blocking {%- endcomment -%}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
   {{ 'happie.css' | asset_url | stylesheet_tag }}
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  {%- comment -%} Lenis smooth-scroll: defer so it doesn't block first paint (it's a UX nicety, not critical) {%- endcomment -%}
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
 </head>
 <body class="template-{{ template.name }}">
   {% section 'announcement-bar' %}
