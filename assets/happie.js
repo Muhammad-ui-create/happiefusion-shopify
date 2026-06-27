@@ -159,11 +159,27 @@
     thumbs.forEach(function(t) {
       allSrcs.push(t.dataset.src);
       t.addEventListener('click', function() {
-        if (mainImg) { mainImg.style.opacity = '0'; setTimeout(function() { mainImg.src = t.dataset.src; mainImg.style.opacity = '1'; }, 150); }
+        if (mainImg) { mainImg.style.opacity = '0'; setTimeout(function() { mainImg.src = t.dataset.src; mainImg.style.opacity = '1'; }, 80); }
         thumbs.forEach(function(x) { x.classList.remove('active'); });
         t.classList.add('active');
       });
     });
+
+    /* Preload all full-size gallery images after page is idle so thumbnail clicks swap instantly */
+    function preloadGallery() {
+      allSrcs.forEach(function(src) {
+        var img = new Image();
+        img.decoding = 'async';
+        img.src = src;
+      });
+    }
+    if (document.readyState === 'complete') {
+      ('requestIdleCallback' in window) ? requestIdleCallback(preloadGallery, {timeout: 1500}) : setTimeout(preloadGallery, 300);
+    } else {
+      window.addEventListener('load', function() {
+        ('requestIdleCallback' in window) ? requestIdleCallback(preloadGallery, {timeout: 1500}) : setTimeout(preloadGallery, 300);
+      }, {once: true});
+    }
 
     /* Gallery arrows */
     var currentImgIdx = 0;
