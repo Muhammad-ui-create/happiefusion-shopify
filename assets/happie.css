@@ -611,6 +611,19 @@ input, select { font-family: var(--font); }
   color: var(--black);
   white-space: nowrap;
 }
+.trust-pill-link {
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.trust-pill-link:hover {
+  background: rgba(45,106,79,0.08);
+  border-color: rgba(45,106,79,0.25);
+  color: var(--green, #2D6A4F);
+}
+.trust-pill-link svg:last-child { opacity: 0.6; transition: opacity 0.2s, transform 0.2s; }
+.trust-pill-link:hover svg:last-child { opacity: 1; transform: translate(1px, -1px); }
 
 /* Accordions */
 /* ── Beautiful card-style accordions ── */
