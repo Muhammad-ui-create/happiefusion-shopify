@@ -1,25 +1,5 @@
-<!-- model-viewer 3D component: load AFTER first paint to keep mobile LCP fast.
-     The <model-viewer> element renders its `poster` (static image) until the script
-     activates, so users see something instantly. ~200KB JS deferred until idle. -->
-<script>
-  (function() {
-    function loadModelViewer() {
-      if (window.__mvLoaded) return;
-      window.__mvLoaded = true;
-      var s = document.createElement('script');
-      s.type = 'module';
-      s.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js';
-      document.head.appendChild(s);
-    }
-    if (document.readyState === 'complete') {
-      ('requestIdleCallback' in window) ? requestIdleCallback(loadModelViewer, {timeout: 2000}) : setTimeout(loadModelViewer, 800);
-    } else {
-      window.addEventListener('load', function() {
-        ('requestIdleCallback' in window) ? requestIdleCallback(loadModelViewer, {timeout: 2000}) : setTimeout(loadModelViewer, 800);
-      }, {once: true});
-    }
-  })();
-</script>
+<!-- Google's model-viewer web component for 3D GLB rendering -->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 
 <section class="hero" itemscope itemtype="https://schema.org/Product">
   <meta itemprop="name" content="Happie Fungi Fusion Functional Mushroom Seltzer">
@@ -75,8 +55,8 @@
           exposure="0.95"
           tone-mapping="commerce"
           environment-image="neutral"
-          loading="lazy"
-          reveal="interaction"
+          loading="eager"
+          reveal="auto"
           ar
           ar-modes="webxr scene-viewer quick-look"
           ar-scale="auto"
