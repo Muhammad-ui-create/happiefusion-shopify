@@ -17,7 +17,7 @@
 
   {%- comment -%} ── SEO: META DESCRIPTIONS ── {%- endcomment -%}
   {%- if template.name == 'index' -%}
-    <meta name="description" content="Happie Fungi Fusion — functional mushroom seltzers with 900mg Lion's Mane, 700mg Cordyceps & 400mg Reishi per can. No alcohol. No caffeine. Real adaptogenic results. Free shipping $35+.">
+    <meta name="description" content="Happie Fungi Fusion — functional mushroom seltzers with 900mg Lion's Mane, 700mg Cordyceps & 400mg Reishi per can. No alcohol. No caffeine. Real adaptogenic results. Free shipping $30+.">
   {%- elsif template.name == 'product' -%}
     {%- comment -%} Prefer the Shopify-managed SEO description; fall back to body if not set. {%- endcomment -%}
     {%- assign seo_meta = product.metafields.global.description_tag -%}
@@ -28,7 +28,7 @@
   {%- elsif template.name == 'collection' -%}
     {%- assign seo_meta = collection.metafields.global.description_tag -%}
     {%- if seo_meta == blank -%}
-      {%- assign seo_meta = 'Shop ' | append: collection.title | append: ' — functional mushroom seltzers with dual-extracted Lion''s Mane (900mg), Cordyceps (700mg) & Reishi (400mg). Zero caffeine, zero alcohol. From $23.99. Free shipping $35+.' -%}
+      {%- assign seo_meta = 'Shop ' | append: collection.title | append: ' — functional mushroom seltzers with dual-extracted Lion''s Mane (900mg), Cordyceps (700mg) & Reishi (400mg). Zero caffeine, zero alcohol. From $23.99. Free shipping $30+.' -%}
     {%- endif -%}
     <meta name="description" content="{{ seo_meta | escape }}">
   {%- else -%}
@@ -248,7 +248,7 @@
             "name": "How much does Happie Fungi Fusion cost?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A 6-pack costs $23.99. A 12-can Variety Pack costs $38.99. Subscribe and Save members get 20% off every order plus free shipping. New customers get 15% off their first order with code WELCOME15. Free shipping on all orders over $35."
+              "text": "A 6-pack costs $23.99. A 12-can Variety Pack costs $38.99. Subscribe and Save members get 20% off every order plus free shipping. New customers get 15% off their first order with code WELCOME15. Free shipping on all orders over $30."
             }
           },
           {
@@ -264,7 +264,7 @@
             "name": "Where can I buy Happie Fungi Fusion?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Happie Fungi Fusion is available directly at happiefusion.com with free shipping on orders over $35 to all 50 US states, and on Amazon. New customers get 15% off their first order with code WELCOME15."
+              "text": "Happie Fungi Fusion is available directly at happiefusion.com with free shipping on orders over $30 to all 50 US states, and on Amazon. New customers get 15% off their first order with code WELCOME15."
             }
           }
         ]
@@ -402,7 +402,7 @@
           <span>Subtotal</span>
           <span id="cart-subtotal-price">$0.00</span>
         </div>
-        <p class="cart-free-ship-note">Free shipping on orders over $35</p>
+        <p class="cart-free-ship-note">Free shipping on orders over $30</p>
         <a href="/checkout" class="btn-cart-checkout">Checkout →</a>
         <a href="/cart" class="btn-cart-view">View Cart</a>
       </div>
