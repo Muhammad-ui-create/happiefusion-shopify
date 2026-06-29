@@ -8,10 +8,6 @@
 {%- assign product = all_products['blue-razzberry-fungi-powered-seltzer'] -%}
 {%- assign variant = product.selected_or_first_available_variant -%}
 {%- assign price = variant.price -%}
-{%- assign discount_pct = 10 -%}
-{%- assign discounted_price = price | times: 100 | minus: price | times: discount_pct | divided_by: 100 -%}
-{%- assign discounted_price = price | minus: discounted_price -%}
-{%- comment -%} cleaner inline math {%- endcomment -%}
 {%- assign discounted_price = price | times: 90 | divided_by: 100 -%}
 {%- assign savings = price | minus: discounted_price -%}
 
@@ -185,7 +181,6 @@
 
 </div><!-- /lp-july4 -->
 
-<!-- ── Custom styles for this landing page ── -->
 <style>
   .lp-promo {
     background: linear-gradient(90deg, #B22234 0%, #1A2761 50%, #B22234 100%);
@@ -217,9 +212,7 @@
     font-family: 'Poppins', monospace;
     font-weight: 800; letter-spacing: 0.06em;
   }
-
   .lp-product-page { padding-top: 32px; }
-
   .lp-offer-tag {
     display: inline-flex; align-items: center; gap: 8px;
     background: linear-gradient(135deg, #B22234, #DC143C);
@@ -235,7 +228,6 @@
     0%, 100% { box-shadow: 0 6px 18px rgba(178,34,52,0.25); }
     50%      { box-shadow: 0 6px 24px rgba(178,34,52,0.45); }
   }
-
   .lp-price-row { position: relative; }
   .lp-price-new { color: var(--green-dark, #2D6A4F) !important; }
   .lp-price-old { text-decoration: line-through; opacity: 0.7; }
@@ -245,11 +237,9 @@
     font-size: 12px; font-weight: 800; letter-spacing: 0.04em;
     margin-left: auto;
   }
-
   .lp-desc-list { list-style: none; padding: 0; margin: 14px 0 0; }
   .lp-desc-list li { padding: 6px 0; font-size: 14.5px; }
   .lp-desc-list li + li { border-top: 1px dashed rgba(0,0,0,0.06); }
-
   .lp-atc {
     background: linear-gradient(135deg, var(--green-dark, #2D6A4F), #1B4332) !important;
     color: #fff !important;
@@ -266,9 +256,7 @@
     color: var(--gray, #5A6B5E); margin: 10px 0 18px;
   }
   .lp-atc-note strong { color: var(--green-dark, #2D6A4F); }
-
   .lp-faq { background: linear-gradient(180deg, var(--cream, #FFE6CB) 0%, #FDF3E0 100%); }
-
   @media (max-width: 768px) {
     .lp-promo { padding: 12px 14px; }
     .lp-promo-text strong { font-size: 13px; }
@@ -277,7 +265,6 @@
   }
 </style>
 
-<!-- ── Custom ATC: add to cart, then redirect to /discount/USA10?redirect=/checkout for auto-apply ── -->
 <script>
 (function() {
   var btn = document.getElementById('lp-atc-btn');
@@ -312,7 +299,6 @@
       return r.json();
     }).then(function() {
       if (txtEl) txtEl.textContent = '✓ Added — applying USA10…';
-      // Redirect via /discount/CODE which sets the discount cookie + redirects to checkout
       window.location.href = '/discount/' + encodeURIComponent(discount) + '?redirect=/checkout';
     }).catch(function() {
       btn.disabled = false;
@@ -322,4 +308,3 @@
   });
 })();
 </script>
-
