@@ -147,6 +147,18 @@
           <h2 class="lp-reviews-title">What sober-curious drinkers are saying.</h2>
         </div>
 
+        <div class="lp-video-row">
+          <video class="lp-video" autoplay muted loop playsinline preload="metadata" poster="" aria-label="Customer video review — Kimberly">
+            <source src="{{ 'review-kimberly.mp4' | asset_url }}" type="video/mp4">
+          </video>
+          <video class="lp-video" autoplay muted loop playsinline preload="metadata" poster="" aria-label="Customer video review — Alex">
+            <source src="{{ 'review-alex.mp4' | asset_url }}" type="video/mp4">
+          </video>
+          <video class="lp-video" autoplay muted loop playsinline preload="metadata" poster="" aria-label="Customer video review — Erica">
+            <source src="{{ 'review-erica.mp4' | asset_url }}" type="video/mp4">
+          </video>
+        </div>
+
         <div class="lp-reviews-grid">
 
           <div class="lp-rev">
@@ -458,6 +470,16 @@
     color: var(--ink, #1A1A1A); margin: 0;
     max-width: 720px; margin-left: auto; margin-right: auto;
   }
+  .lp-video-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-bottom: 36px;
+  }
+  .lp-video {
+    width: 100%; aspect-ratio: 9 / 16;
+    object-fit: cover; border-radius: 16px;
+    background: #000; display: block;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
   .lp-reviews-grid {
     display: grid; grid-template-columns: repeat(2, 1fr);
     gap: 22px; margin-bottom: 40px;
@@ -550,6 +572,8 @@
   @media (max-width: 768px) {
     .lp-reviews { padding: 56px 16px; }
     .lp-reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+    .lp-video-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .lp-video { border-radius: 12px; }
     .lp-rev { padding: 24px 22px 20px; }
     .lp-rev::after { font-size: 80px; top: 4px; right: 16px; }
   }
