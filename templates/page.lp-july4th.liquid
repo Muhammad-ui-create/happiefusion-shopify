@@ -609,9 +609,29 @@
     var v = parseInt(qtyInput.value) || 1; if (v < 20) qtyInput.value = v + 1;
   });
 
+  /* ── Silently apply the discount on page load via hidden iframe ──
+       Loads /discount/CODE in a 1×1 iframe. Shopify's redirect endpoint
+       sets the discount cookie on the customer's session (cookies are
+       domain-scoped, not iframe-scoped, so the parent page inherits).
+       When the customer eventually hits /checkout, the code is already applied. */
+  function applyDiscountSilently(code) {
+    if (!code || window.__lpDiscountApplied === code) return;
+    window.__lpDiscountApplied = code;
+    var iframe = document.createElement('iframe');
+    iframe.style.cssText = 'position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none;left:-9999px;';
+    iframe.setAttribute('aria-hidden', 'true');
+    iframe.setAttribute('tabindex', '-1');
+    iframe.src = '/discount/' + encodeURIComponent(code) + '?redirect=%2Fcart.js';
+    document.body.appendChild(iframe);
+    setTimeout(function() { try { iframe.remove(); } catch(e) {} }, 4000);
+  }
+  applyDiscountSilently(btn.dataset.discount);
+
+  /* Original ATC text — restored after the success flash */
+  var originalText = txtEl ? txtEl.innerHTML : 'ADD TO CART';
+
   btn.addEventListener('click', function() {
     var variantId = btn.dataset.variantId;
-    var discount  = btn.dataset.discount;
     var qty = Math.max(1, Math.min(20, parseInt(qtyInput.value) || 1));
     if (!variantId) return;
 
@@ -626,11 +646,17 @@
       if (!r.ok) throw new Error('Sorry — we couldn\'t add that to your cart.');
       return r.json();
     }).then(function() {
-      if (txtEl) txtEl.textContent = '✓ Added — applying USA10…';
-      window.location.href = '/discount/' + encodeURIComponent(discount) + '?redirect=/checkout';
+      if (txtEl) txtEl.textContent = '✓ Added to Cart!';
+      /* Open the existing cart drawer — happie.js binds openCart() to this click */
+      var cartTrigger = document.getElementById('cart-trigger');
+      if (cartTrigger) cartTrigger.click();
+      setTimeout(function() {
+        btn.disabled = false;
+        if (txtEl) txtEl.innerHTML = originalText;
+      }, 1800);
     }).catch(function() {
       btn.disabled = false;
-      if (txtEl) txtEl.textContent = 'ADD TO CART';
+      if (txtEl) txtEl.innerHTML = originalText;
       alert('Couldn\'t add to cart. Please refresh and try again.');
     });
   });
