@@ -1152,10 +1152,10 @@ input, select { font-family: var(--font); }
 .btn-cart-view { display: block; text-align: center; font-size: 13px; color: var(--gray); text-decoration: underline; margin-bottom: 14px; }
 .cart-trust-row {
   display: flex; justify-content: center; align-items: center;
-  gap: 6px; flex-wrap: wrap; padding-top: 14px;
+  gap: 5px; flex-wrap: wrap; padding-top: 14px;
   border-top: 1px dashed rgba(0,0,0,0.08);
 }
-.cart-trust-row svg { display: block; }
+.cart-trust-row svg { display: block; flex-shrink: 0; }
 
 /* ── Cart line item polish ── */
 .cart-item {
