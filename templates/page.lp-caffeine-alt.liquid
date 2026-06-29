@@ -1,0 +1,336 @@
+{%- comment -%}
+  Landing page: Caffeine Alternative angle
+  Code: FUNGI15 (15% off)
+  Auto-applies the discount when the user clicks Add to Cart
+  Target SKU: Blue Razzberry 6-Pack ($23.99)
+{%- endcomment -%}
+
+{%- assign product = all_products['blue-razzberry-fungi-powered-seltzer'] -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+{%- assign price = variant.price -%}
+{%- assign discounted_price = price | times: 85 | divided_by: 100 -%}
+{%- assign savings = price | minus: discounted_price -%}
+
+<div class="lp-caff">
+
+  <!-- ── PROMO BANNER ── -->
+  <div class="lp-promo lp-promo-caff">
+    <div class="lp-promo-inner">
+      <span class="lp-promo-icon" aria-hidden="true">⚡</span>
+      <div class="lp-promo-text">
+        <strong>Quit the Crash. Keep the Energy.</strong>
+        <span>15% Off — Code <code>FUNGI15</code> applied automatically at checkout</span>
+      </div>
+      <span class="lp-promo-icon" aria-hidden="true">🍄</span>
+    </div>
+  </div>
+
+  <div class="product-page lp-product-page">
+    <div class="breadcrumb">
+      <a href="/">Home</a> /
+      <span>Caffeine-Free Alternative — {{ product.title }}</span>
+    </div>
+
+    <div class="product-layout">
+
+      <!-- ======= LEFT: Image Gallery ======= -->
+      <div class="product-gallery">
+        <div class="gallery-main">
+          {%- assign first_image = product.images | first -%}
+          <img
+            id="gallery-main-img"
+            src="{{ first_image | image_url: width: 900 }}"
+            alt="{{ first_image.alt | default: product.title }}"
+            class="gallery-main-img"
+            width="900" height="900"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="gallery-thumbs">
+            {%- for image in product.images -%}
+              <div
+                class="gallery-thumb {% if forloop.first %}active{% endif %}"
+                data-index="{{ forloop.index0 }}"
+                data-src="{{ image | image_url: width: 900 }}"
+              >
+                <img src="{{ image | image_url: width: 160 }}" alt="{{ image.alt | default: product.title }}" loading="lazy" width="160" height="160" />
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- ======= RIGHT: Product Info ======= -->
+      <div class="product-info">
+
+        <!-- Limited offer badge -->
+        <div class="lp-offer-tag lp-offer-tag-caff">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>15% OFF — LIMITED TIME</span>
+        </div>
+
+        <h1 class="product-title">Real Energy. No Caffeine. No Crash.</h1>
+        <p class="product-subtitle">Blue Razzberry · Functional Mushroom Drink · 6-Pack</p>
+
+        <!-- Price with cut-off + savings -->
+        <div class="product-price-row lp-price-row">
+          <span class="product-price lp-price-new">{{ discounted_price | money }}</span>
+          <span class="product-compare-price lp-price-old">{{ price | money }}</span>
+          <span class="lp-price-save lp-price-save-caff">Save {{ savings | money }} with FUNGI15</span>
+        </div>
+
+        <!-- Angle-specific description -->
+        <div class="product-desc lp-desc">
+          <p><strong>Coffee gives you 90 minutes of focus and 4 hours of anxiety.</strong></p>
+          <p>Happie Fungi Fusion delivers a smoother trade. <strong>700mg Cordyceps</strong> supports your body's natural ATP energy. <strong>900mg Lion's Mane</strong> sharpens focus through nerve growth, not adrenal stress. <strong>400mg Reishi</strong> keeps cortisol in check — so you don't crash at 3pm.</p>
+          <ul class="lp-desc-list">
+            <li>✓ <strong>0mg caffeine.</strong> No jitters, no shakes, no 3pm crash.</li>
+            <li>✓ <strong>Steady energy</strong> from Cordyceps + Lion's Mane — feels like a calm second wind.</li>
+            <li>✓ <strong>Won't disrupt sleep.</strong> Drink one at 4pm. Sleep at 10pm.</li>
+            <li>✓ <strong>No adrenal fatigue.</strong> Adaptogens build resilience over time.</li>
+          </ul>
+        </div>
+
+        <!-- Quantity -->
+        <div class="qty-row">
+          <div class="qty-label">Quantity</div>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn" id="lp-qty-minus" aria-label="Decrease quantity">−</button>
+            <input type="number" id="lp-qty-input" value="1" min="1" max="20" step="1" inputmode="numeric" pattern="[0-9]*" class="qty-input" />
+            <button type="button" class="qty-btn" id="lp-qty-plus" aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+
+        <!-- Add to Cart — auto-applies FUNGI15 at checkout -->
+        <button type="button" class="btn-atc lp-atc" id="lp-atc-btn" data-variant-id="{{ variant.id }}" data-discount="FUNGI15">
+          <span id="lp-atc-text">ADD TO CART — <s style="opacity:0.55;">{{ price | money }}</s> {{ discounted_price | money }}</span>
+        </button>
+        <p class="lp-atc-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:4px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <strong>FUNGI15 auto-applied at checkout.</strong> No code needed.
+        </p>
+
+        <!-- Trust pills -->
+        <div class="product-trust-pills">
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="11" rx="2"/><path d="M16 10h4l3 3v4h-7"/><circle cx="5.5" cy="19.5" r="1.5"/><circle cx="20.5" cy="19.5" r="1.5"/></svg>
+            Free Shipping — No Minimum
+          </span>
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg>
+            100% Vegan
+          </span>
+          <a href="/pages/the-science#lab-results" class="trust-pill trust-pill-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 4H8L9 3z"/><path d="M8 7v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7"/><path d="M12 11v3M11 13h2"/></svg>
+            3rd-Party Lab Tested
+          </a>
+        </div>
+
+      </div><!-- /product-info -->
+    </div><!-- /product-layout -->
+
+    <!-- ── TRUST FAQ ── -->
+    <section class="pdp-faq lp-faq">
+      <div class="pdp-faq-inner">
+        <div class="pdp-faq-head">
+          <span class="pdp-faq-eyebrow">First-Time Buyer Questions</span>
+          <h2 class="pdp-faq-title">Real energy without the stimulant tax.</h2>
+        </div>
+        <div class="pdp-faq-grid">
+
+          <details class="pdp-faq-item" open>
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg></span>
+              <span>If there's no caffeine, will I really feel energy?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Yes — but different from caffeine.</strong> Cordyceps doesn't stimulate your adrenals like coffee does; it supports your body's natural ATP production at the cellular level. The result is steady, even energy — no peak, no crash, no jitters. Most customers describe it as "a calm second wind."</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              <span>How fast will I feel it?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>20–40 minutes after the first sip.</strong> The Lion's Mane focus is the first thing most people notice — a quieter, clearer headspace. Cordyceps energy builds over the next hour. Daily use compounds: 2–4 weeks in, you'll notice better sleep, less afternoon fog, more even moods.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+              <span>Can I drink it later in the day without ruining sleep?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Yes.</strong> Zero caffeine means zero half-life problem. Drink one at 4pm and sleep normally at 10pm. The Reishi actually supports the GABA pathways that promote restful sleep — opposite of coffee.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+              <span>What if it doesn't work for me?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>30-day full refund. No return required.</strong> Email <a href="mailto:orders@livehappie.com">orders@livehappie.com</a> within 30 days for a full refund. Zero risk to try.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /product-page -->
+
+</div><!-- /lp-caff -->
+
+<!-- ── Custom styles for this landing page ── -->
+<style>
+  .lp-promo {
+    background: linear-gradient(90deg, #0F2027 0%, #1B4332 50%, #2D6A4F 100%);
+    color: #fff;
+    padding: 14px 20px;
+    text-align: center;
+    border-bottom: 3px solid #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .lp-promo-caff::before, .lp-promo-caff::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 80px;
+    background: radial-gradient(circle, rgba(82,183,136,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .lp-promo-caff::before { left: 0; }
+  .lp-promo-caff::after { right: 0; }
+  .lp-promo-inner {
+    display: inline-flex; align-items: center; gap: 14px;
+    position: relative; z-index: 1;
+  }
+  .lp-promo-icon { font-size: 22px; line-height: 1; }
+  .lp-promo-text { display: flex; flex-direction: column; line-height: 1.3; text-align: left; }
+  .lp-promo-text strong { font-size: 15px; font-weight: 900; letter-spacing: 0.04em; }
+  .lp-promo-text span { font-size: 12px; opacity: 0.92; }
+  .lp-promo-text code {
+    background: rgba(255,255,255,0.18);
+    padding: 1px 8px; border-radius: 4px;
+    font-family: 'Poppins', monospace;
+    font-weight: 800; letter-spacing: 0.06em;
+  }
+
+  .lp-product-page { padding-top: 32px; }
+
+  .lp-offer-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; border-radius: 50px;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .lp-offer-tag-caff {
+    background: linear-gradient(135deg, var(--green-dark, #2D6A4F), var(--green, #52B788));
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(45,106,79,0.30);
+    animation: lpOfferPulseCaff 2.4s ease-in-out infinite;
+  }
+  @keyframes lpOfferPulseCaff {
+    0%, 100% { box-shadow: 0 6px 18px rgba(45,106,79,0.30); }
+    50%      { box-shadow: 0 6px 24px rgba(82,183,136,0.50); }
+  }
+
+  .lp-price-row { position: relative; }
+  .lp-price-new { color: var(--green-dark, #2D6A4F) !important; }
+  .lp-price-old { text-decoration: line-through; opacity: 0.7; }
+  .lp-price-save-caff {
+    background: var(--green-dark, #2D6A4F); color: #fff;
+    padding: 5px 12px; border-radius: 50px;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.04em;
+    margin-left: auto;
+  }
+
+  .lp-desc-list { list-style: none; padding: 0; margin: 14px 0 0; }
+  .lp-desc-list li { padding: 6px 0; font-size: 14.5px; }
+  .lp-desc-list li + li { border-top: 1px dashed rgba(0,0,0,0.06); }
+
+  .lp-atc {
+    background: linear-gradient(135deg, var(--green-dark, #2D6A4F), #1B4332) !important;
+    color: #fff !important;
+    padding: 20px !important;
+    font-size: 16px !important;
+    letter-spacing: 0.04em;
+    box-shadow: 0 14px 32px rgba(45,106,79,0.30);
+    transition: transform .2s, box-shadow .2s, background .2s !important;
+  }
+  .lp-atc:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(45,106,79,0.42); }
+  .lp-atc:disabled { opacity: 0.7; cursor: wait; }
+  .lp-atc-note {
+    text-align: center; font-size: 12.5px;
+    color: var(--gray, #5A6B5E); margin: 10px 0 18px;
+  }
+  .lp-atc-note strong { color: var(--green-dark, #2D6A4F); }
+
+  .lp-faq { background: linear-gradient(180deg, var(--cream, #FFE6CB) 0%, #FDF3E0 100%); }
+
+  @media (max-width: 768px) {
+    .lp-promo { padding: 12px 14px; }
+    .lp-promo-text strong { font-size: 13px; }
+    .lp-promo-text span { font-size: 11px; }
+    .lp-price-save-caff { width: 100%; margin-left: 0; margin-top: 8px; text-align: center; }
+  }
+</style>
+
+<!-- ── Custom ATC: add to cart, then redirect to /discount/FUNGI15?redirect=/checkout for auto-apply ── -->
+<script>
+(function() {
+  var btn = document.getElementById('lp-atc-btn');
+  if (!btn) return;
+  var qtyInput = document.getElementById('lp-qty-input');
+  var qtyMinus = document.getElementById('lp-qty-minus');
+  var qtyPlus  = document.getElementById('lp-qty-plus');
+  var txtEl    = document.getElementById('lp-atc-text');
+
+  if (qtyMinus) qtyMinus.addEventListener('click', function() {
+    var v = parseInt(qtyInput.value) || 1; if (v > 1) qtyInput.value = v - 1;
+  });
+  if (qtyPlus)  qtyPlus.addEventListener('click', function() {
+    var v = parseInt(qtyInput.value) || 1; if (v < 20) qtyInput.value = v + 1;
+  });
+
+  btn.addEventListener('click', function() {
+    var variantId = btn.dataset.variantId;
+    var discount  = btn.dataset.discount;
+    var qty = Math.max(1, Math.min(20, parseInt(qtyInput.value) || 1));
+    if (!variantId) return;
+
+    btn.disabled = true;
+    if (txtEl) txtEl.textContent = 'Adding…';
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: variantId, quantity: qty })
+    }).then(function(r) {
+      if (!r.ok) throw new Error('Sorry — we couldn\'t add that to your cart.');
+      return r.json();
+    }).then(function() {
+      if (txtEl) txtEl.textContent = '✓ Added — applying FUNGI15…';
+      window.location.href = '/discount/' + encodeURIComponent(discount) + '?redirect=/checkout';
+    }).catch(function() {
+      btn.disabled = false;
+      if (txtEl) txtEl.textContent = 'ADD TO CART';
+      alert('Couldn\'t add to cart. Please refresh and try again.');
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{ "name": "Landing — Caffeine Alternative (FUNGI15)", "settings": [] }
+{% endschema %}
