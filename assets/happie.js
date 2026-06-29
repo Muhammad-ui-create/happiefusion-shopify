@@ -72,23 +72,59 @@
     }
     var html = '';
     cart.items.forEach(function(item) {
-      html += '<div class="cart-item" style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,0.07);">'
-        + '<img src="' + item.image + '" style="width:72px;height:72px;object-fit:cover;border-radius:10px;flex-shrink:0;" />'
-        + '<div style="flex:1;">'
-        + '<div style="font-weight:700;font-size:14px;">' + item.product_title + '</div>'
-        + '<div style="font-size:12px;color:#888;">' + item.variant_title + '</div>'
-        + (item.selling_plan_allocation ? '<div style="font-size:12px;color:#2D6A4F;font-weight:600;">Subscribe & Save</div>' : '')
-        + '<div style="display:flex;align-items:center;gap:10px;margin-top:8px;">'
-        + '<button onclick="changeCartQty(\'' + item.key + '\',' + (item.quantity - 1) + ')" style="width:26px;height:26px;border-radius:50%;background:#d8f3dc;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;">−</button>'
-        + '<span style="font-weight:700;">' + item.quantity + '</span>'
-        + '<button onclick="changeCartQty(\'' + item.key + '\',' + (item.quantity + 1) + ')" style="width:26px;height:26px;border-radius:50%;background:#d8f3dc;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;">+</button>'
+      html += '<div class="cart-item">'
+        + '<img src="' + item.image + '" alt="" class="cart-item-img" />'
+        + '<div class="cart-item-info">'
+        + '<div class="cart-item-title">' + item.product_title + '</div>'
+        + '<div class="cart-item-variant">' + (item.variant_title || '') + '</div>'
+        + (item.selling_plan_allocation ? '<div class="cart-item-sub">Subscribe &amp; Save</div>' : '')
+        + '<div class="cart-item-qty">'
+        + '<button type="button" onclick="changeCartQty(\'' + item.key + '\',' + (item.quantity - 1) + ')" aria-label="Decrease quantity">−</button>'
+        + '<span>' + item.quantity + '</span>'
+        + '<button type="button" onclick="changeCartQty(\'' + item.key + '\',' + (item.quantity + 1) + ')" aria-label="Increase quantity">+</button>'
+        + '<button type="button" class="cart-item-remove" onclick="changeCartQty(\'' + item.key + '\',0)" aria-label="Remove item" title="Remove">×</button>'
         + '</div>'
         + '</div>'
-        + '<div style="font-weight:800;font-size:14px;flex-shrink:0;">' + formatMoney(item.line_price) + '</div>'
+        + '<div class="cart-item-price">' + formatMoney(item.line_price) + '</div>'
         + '</div>';
     });
     cartBody.innerHTML = html;
     if (cartSubtotal) cartSubtotal.textContent = formatMoney(cart.total_price);
+    renderCartUpsell(cart);
+  }
+
+  /* ── Cart upsell: suggest a product the customer doesn't already have in cart ── */
+  function renderCartUpsell(cart) {
+    if (!cartBody) return;
+    var existing = document.getElementById('cart-upsell');
+    if (existing) existing.remove();
+    // Catalog of suggestion candidates — variety pack is the AOV win, singles fill gaps.
+    var candidates = [
+      { handle: 'happie-fungi-fusion-mushroom-drink-variety-pack', title: 'Variety Pack — 12 Cans', price: 3899, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/PT06_2.png?v=1778545064&width=200', tag: 'BEST VALUE' },
+      { handle: 'blue-razzberry-fungi-powered-seltzer', title: 'Blue Razzberry — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main.webp?v=1778542878&width=200', tag: 'TOP SELLER' },
+      { handle: 'mango-mimosa-fungi-powered-seltzer', title: 'Mango Mimosa — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main_1.webp?v=1778543565&width=200', tag: 'TROPICAL' },
+      { handle: 'watermelon-fungi-powered-seltzer', title: 'Watermelon — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main_1_336f10d5-6961-4495-ba14-55ab4fb89e12.webp?v=1778544523&width=200', tag: 'SUMMER' }
+    ];
+    var inCart = {};
+    cart.items.forEach(function(it) { if (it.handle) inCart[it.handle] = true; });
+    var suggestion = candidates.find(function(c) { return !inCart[c.handle]; });
+    if (!suggestion) return;
+
+    var up = document.createElement('div');
+    up.id = 'cart-upsell';
+    up.className = 'cart-upsell';
+    up.innerHTML =
+      '<div class="cart-upsell-label">You might also like</div>' +
+      '<div class="cart-upsell-card">' +
+        '<img src="' + suggestion.img + '" alt="" class="cart-upsell-img" />' +
+        '<div class="cart-upsell-info">' +
+          '<span class="cart-upsell-tag">' + suggestion.tag + '</span>' +
+          '<div class="cart-upsell-title">' + suggestion.title + '</div>' +
+          '<div class="cart-upsell-price">' + formatMoney(suggestion.price) + '</div>' +
+        '</div>' +
+        '<a href="/products/' + suggestion.handle + '" class="cart-upsell-btn" aria-label="View ' + suggestion.title + '">+</a>' +
+      '</div>';
+    cartBody.appendChild(up);
   }
 
   window.changeCartQty = function(key, qty) {
@@ -111,7 +147,12 @@
     if (!variantId) return;
     btn.textContent = 'Adding…';
     btn.disabled = true;
-    addToCart(variantId, 1, null, function() {
+    addToCart(variantId, 1, null, function(err) {
+      if (err) {
+        btn.textContent = '+ Add to Cart';
+        btn.disabled = false;
+        return;
+      }
       btn.textContent = '✓ Added!';
       setTimeout(function() {
         btn.textContent = '+ Add to Cart';
@@ -126,12 +167,50 @@
     if (sellingPlanId) body.selling_plan = sellingPlanId;
     fetch('/cart/add.js', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(body)
-    }).then(function(r) { return r.json(); }).then(function() {
+    }).then(function(r) {
+      if (!r.ok) {
+        return r.json().then(function(err) {
+          throw new Error(err && err.description ? err.description : 'Sorry — we couldn\'t add that to your cart. Please try again.');
+        }, function() {
+          throw new Error('Network error. Please check your connection and try again.');
+        });
+      }
+      return r.json();
+    }).then(function() {
       fetchCart();
-      if (cb) cb();
+      if (cb) cb(null);
+    }).catch(function(err) {
+      showCartToast(err.message || 'Couldn\'t add to cart. Try again.', 'error');
+      if (cb) cb(err);
     });
+  }
+
+  /* Lightweight toast for ATC feedback / errors */
+  function showCartToast(message, kind) {
+    var existing = document.getElementById('happie-cart-toast');
+    if (existing) existing.remove();
+    var t = document.createElement('div');
+    t.id = 'happie-cart-toast';
+    t.setAttribute('role', 'status');
+    t.style.cssText =
+      'position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);' +
+      'background:' + (kind === 'error' ? '#C44545' : '#2D6A4F') + ';color:#fff;' +
+      'padding:14px 22px;border-radius:50px;font-weight:700;font-size:14px;' +
+      'box-shadow:0 12px 32px rgba(0,0,0,0.25);font-family:Inter,sans-serif;' +
+      'z-index:10001;opacity:0;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),opacity 0.25s;';
+    t.textContent = message;
+    document.body.appendChild(t);
+    requestAnimationFrame(function() {
+      t.style.transform = 'translateX(-50%) translateY(0)';
+      t.style.opacity = '1';
+    });
+    setTimeout(function() {
+      t.style.opacity = '0';
+      t.style.transform = 'translateX(-50%) translateY(80px)';
+      setTimeout(function() { t.remove(); }, 400);
+    }, 3800);
   }
 
   /* ── Product Page ── */
@@ -275,7 +354,13 @@
         if (!varId) return;
         if (atcBtn) atcBtn.disabled = true;
         if (atcText) atcText.innerHTML = 'Adding…';
-        addToCart(varId, qty, selectedSellingPlanId, function() {
+        addToCart(varId, qty, selectedSellingPlanId, function(err) {
+          if (err) {
+            if (atcText) atcText.innerHTML = 'ADD TO CART';
+            if (atcBtn) atcBtn.disabled = false;
+            updateSelectedVariant();
+            return;
+          }
           if (atcText) atcText.innerHTML = '✓ Added to Cart!';
           setTimeout(function() { if (atcBtn) atcBtn.disabled = false; updateSelectedVariant(); }, 1500);
           openCart();
