@@ -565,6 +565,40 @@
 
 <script>
 (function() {
+  /* ════════════════════════════════════════════════
+     DISCOUNT INTERCEPTOR — hoisted ABOVE any bailouts.
+     Hard-coded constant so it can NEVER pull the wrong code.
+     ════════════════════════════════════════════════ */
+  var LP_DISCOUNT = 'USA10';
+
+  /* Persist in sessionStorage so the right code applies even if user
+     navigates away (e.g. clicks the upsell card) and comes back to checkout */
+  try { sessionStorage.setItem('happieLpDiscount', LP_DISCOUNT); } catch(e) {}
+
+  /* Silent iframe — pre-warms the cookie for express checkout (Shop Pay / Apple Pay / Google Pay) */
+  (function() {
+    var iframe = document.createElement('iframe');
+    iframe.style.cssText = 'position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none;left:-9999px;';
+    iframe.setAttribute('aria-hidden', 'true');
+    iframe.setAttribute('tabindex', '-1');
+    iframe.src = '/discount/' + encodeURIComponent(LP_DISCOUNT) + '?redirect=%2Fcart.js';
+    (document.body || document.documentElement).appendChild(iframe);
+    setTimeout(function() { try { iframe.remove(); } catch(e) {} }, 4000);
+  })();
+
+  /* Capture-phase click on the cart drawer Checkout button — runs first, beats
+     happie.js handlers and default link nav. Re-routes through /discount/CODE
+     so the correct LP code is ALWAYS applied, overwriting any stale cookie. */
+  document.addEventListener('click', function(e) {
+    var target = e.target.closest('.btn-cart-checkout, a[href="/checkout"], a[href^="/checkout?"]');
+    if (!target) return;
+    var code = sessionStorage.getItem('happieLpDiscount') || LP_DISCOUNT;
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    window.location.href = '/discount/' + encodeURIComponent(code) + '?redirect=' + encodeURIComponent('/checkout');
+  }, true);
+
   /* ── Gallery thumbnail click handler (LPs don't run initProductPage() in happie.js) ── */
   var mainImg = document.getElementById('gallery-main-img');
   var thumbs  = document.querySelectorAll('.gallery-thumb');
@@ -609,40 +643,8 @@
     var v = parseInt(qtyInput.value) || 1; if (v < 20) qtyInput.value = v + 1;
   });
 
-  /* ── Discount auto-apply strategy ──
-       Two layers so the RIGHT code always applies, even if a stale cookie from
-       a previous LP visit (e.g. FUNGI15) is sitting in the session:
-
-       Layer A — Silent iframe on page load: prefills the cookie so express
-                 checkout buttons (Shop Pay / Apple Pay / Google Pay) inherit it.
-
-       Layer B — Click-time interception of the cart drawer's "Secure Checkout"
-                 button: explicitly re-routes through /discount/CODE the moment
-                 the user clicks checkout. This OVERWRITES any stale discount,
-                 guaranteeing THIS LP's code wins. */
-  var DISCOUNT_CODE = btn.dataset.discount;
-
-  function applyDiscountSilently(code) {
-    if (!code) return;
-    var iframe = document.createElement('iframe');
-    iframe.style.cssText = 'position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none;left:-9999px;';
-    iframe.setAttribute('aria-hidden', 'true');
-    iframe.setAttribute('tabindex', '-1');
-    iframe.src = '/discount/' + encodeURIComponent(code) + '?redirect=%2Fcart.js';
-    document.body.appendChild(iframe);
-    setTimeout(function() { try { iframe.remove(); } catch(e) {} }, 4000);
-  }
-  applyDiscountSilently(DISCOUNT_CODE);
-
-  /* Capture-phase click on the cart drawer Checkout button — beats happie.js handlers
-     and any default link nav. Re-routes through /discount/CODE every time. */
-  document.addEventListener('click', function(e) {
-    var target = e.target.closest('.btn-cart-checkout');
-    if (!target || !DISCOUNT_CODE) return;
-    e.preventDefault();
-    e.stopPropagation();
-    window.location.href = '/discount/' + encodeURIComponent(DISCOUNT_CODE) + '?redirect=' + encodeURIComponent('/checkout');
-  }, true);
+  /* Discount interceptor lives at the top of this IIFE so it survives any bailouts.
+     This block kept as a no-op marker to preserve the script structure. */
 
   /* Original ATC text — restored after the success flash */
   var originalText = txtEl ? txtEl.innerHTML : 'ADD TO CART';
