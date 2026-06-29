@@ -1,3 +1,15 @@
+{% comment %} Promo varies per LP so the bar matches the discount that auto-applies at checkout {% endcomment %}
+{%- assign tpl = template.name | append: '.' | append: template.suffix -%}
+{%- if template.suffix == 'lp-caffeine-alt' -%}
+  {%- assign promo_label = 'LIMITED TIME:' -%}
+  {%- assign promo_text = '15% Off with Code' -%}
+  {%- assign promo_code = 'FUNGI15' -%}
+{%- else -%}
+  {%- assign promo_label = 'LIMITED TIME:' -%}
+  {%- assign promo_text = '10% Off with Code' -%}
+  {%- assign promo_code = 'USA10' -%}
+{%- endif -%}
+
 {% comment %} Single set of items — repeated via liquid to fill any screen width {% endcomment %}
 {% capture ann_items %}
   <span class="ann-item">
@@ -40,7 +52,7 @@
       <circle cx="12" cy="12" r="10"/>
       <polyline points="12 6 12 12 16 14"/>
     </svg>
-    <strong style="font-weight:800;letter-spacing:0.06em;">LIMITED TIME:</strong>&nbsp;10% Off with Code <strong style="font-weight:800;letter-spacing:0.04em;">USA10</strong>
+    <strong style="font-weight:800;letter-spacing:0.06em;">{{ promo_label }}</strong>&nbsp;{{ promo_text }} <strong style="font-weight:800;letter-spacing:0.04em;">{{ promo_code }}</strong>
   </span>
   <span class="ann-divider">✦</span>
 {% endcapture %}
