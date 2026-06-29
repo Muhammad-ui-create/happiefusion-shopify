@@ -386,7 +386,9 @@
     {{ content_for_layout }}
   </main>
   {% section 'footer' %}
-  {% section 'email-popup' %}
+  {%- comment -%} Email popup (WELCOME15 / 15% off) hidden site-wide per merchant request.
+       To re-enable: uncomment the line below. Section template itself is untouched. {%- endcomment -%}
+  {%- comment -%} {% section 'email-popup' %} {%- endcomment -%}
   <div id="cart-drawer" class="cart-drawer">
     <div class="cart-drawer-overlay"></div>
     <div class="cart-drawer-panel">
