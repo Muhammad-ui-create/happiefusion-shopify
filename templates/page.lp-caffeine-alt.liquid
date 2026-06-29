@@ -631,14 +631,21 @@
     var v = parseInt(qtyInput.value) || 1; if (v < 20) qtyInput.value = v + 1;
   });
 
-  /* ── Silently apply the discount on page load via hidden iframe ──
-       Loads /discount/CODE in a 1×1 iframe. Shopify's redirect endpoint
-       sets the discount cookie on the customer's session (cookies are
-       domain-scoped, not iframe-scoped, so the parent page inherits).
-       When the customer eventually hits /checkout, the code is already applied. */
+  /* ── Discount auto-apply strategy ──
+       Two layers so the RIGHT code always applies, even if a stale cookie from
+       a previous LP visit (e.g. USA10) is sitting in the session:
+
+       Layer A — Silent iframe on page load: prefills the cookie so express
+                 checkout buttons (Shop Pay / Apple Pay / Google Pay) inherit it.
+
+       Layer B — Click-time interception of the cart drawer's "Secure Checkout"
+                 button: explicitly re-routes through /discount/CODE the moment
+                 the user clicks checkout. This OVERWRITES any stale discount,
+                 guaranteeing THIS LP's code wins. */
+  var DISCOUNT_CODE = btn.dataset.discount;
+
   function applyDiscountSilently(code) {
-    if (!code || window.__lpDiscountApplied === code) return;
-    window.__lpDiscountApplied = code;
+    if (!code) return;
     var iframe = document.createElement('iframe');
     iframe.style.cssText = 'position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none;left:-9999px;';
     iframe.setAttribute('aria-hidden', 'true');
@@ -647,7 +654,17 @@
     document.body.appendChild(iframe);
     setTimeout(function() { try { iframe.remove(); } catch(e) {} }, 4000);
   }
-  applyDiscountSilently(btn.dataset.discount);
+  applyDiscountSilently(DISCOUNT_CODE);
+
+  /* Capture-phase click on the cart drawer Checkout button — beats happie.js handlers
+     and any default link nav. Re-routes through /discount/CODE every time. */
+  document.addEventListener('click', function(e) {
+    var target = e.target.closest('.btn-cart-checkout');
+    if (!target || !DISCOUNT_CODE) return;
+    e.preventDefault();
+    e.stopPropagation();
+    window.location.href = '/discount/' + encodeURIComponent(DISCOUNT_CODE) + '?redirect=' + encodeURIComponent('/checkout');
+  }, true);
 
   /* Original ATC text — restored after the success flash */
   var originalText = txtEl ? txtEl.innerHTML : 'ADD TO CART';
