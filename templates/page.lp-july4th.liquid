@@ -620,7 +620,28 @@
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
-    window.location.href = '/discount/' + encodeURIComponent(code) + '?redirect=' + encodeURIComponent('/checkout');
+    var fireAndGo = function() {
+      window.location.href = '/discount/' + encodeURIComponent(code) + '?redirect=' + encodeURIComponent('/checkout');
+    };
+    try {
+      if (window.fbq) {
+        fetch('/cart.js', { headers: { 'Accept': 'application/json' } })
+          .then(function(r) { return r.json(); })
+          .then(function(cart) {
+            fbq('track', 'InitiateCheckout', {
+              content_ids: (cart.items || []).map(function(i) { return String(i.variant_id); }),
+              content_type: 'product',
+              num_items: cart.item_count,
+              value: (cart.total_price || 0) / 100,
+              currency: (cart.currency || 'USD')
+            });
+            fireAndGo();
+          })
+          .catch(fireAndGo);
+        return;
+      }
+    } catch(e2) {}
+    fireAndGo();
   }, true);
 
   /* ── Gallery thumbnail click handler (LPs don't run initProductPage() in happie.js) ── */
@@ -690,6 +711,19 @@
       return r.json();
     }).then(function() {
       if (txtEl) txtEl.textContent = '✓ Added to Cart!';
+      /* Fire Meta Pixel AddToCart so Meta's optimizer gets the mid-funnel signal */
+      try {
+        if (window.fbq) {
+          fbq('track', 'AddToCart', {
+            content_ids: [String(variantId)],
+            content_type: 'product',
+            content_name: {{ product.title | json }},
+            value: {{ product.price | divided_by: 100.0 }},
+            currency: 'USD',
+            num_items: qty
+          });
+        }
+      } catch(e) {}
       /* Open the existing cart drawer — happie.js binds openCart() to this click */
       var cartTrigger = document.getElementById('cart-trigger');
       if (cartTrigger) cartTrigger.click();
