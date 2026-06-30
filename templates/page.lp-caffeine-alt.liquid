@@ -37,9 +37,9 @@
           {%- assign first_image = product.images | first -%}
           <img
             id="gallery-main-img"
-            src="{{ first_image | image_url: width: 900 }}"
-            srcset="{{ first_image | image_url: width: 480 }} 480w, {{ first_image | image_url: width: 720 }} 720w, {{ first_image | image_url: width: 900 }} 900w"
-            sizes="(max-width: 600px) 92vw, 480px"
+            src="{{ first_image | image_url: width: 720, format: 'webp' }}"
+            srcset="{{ first_image | image_url: width: 360, format: 'webp' }} 360w, {{ first_image | image_url: width: 540, format: 'webp' }} 540w, {{ first_image | image_url: width: 720, format: 'webp' }} 720w"
+            sizes="(max-width: 480px) 92vw, (max-width: 768px) 60vw, 480px"
             alt="{{ first_image.alt | default: product.title }}"
             class="gallery-main-img"
             width="900" height="900"
