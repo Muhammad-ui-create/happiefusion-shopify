@@ -617,13 +617,77 @@
      the button or any other element fails to render on the page.
      ════════════════════════════════════════════════ */
   var LP_DISCOUNT = 'FUNGI15';
+  var LP_DISCOUNT_PCT = 15; /* keep in sync with the discount above */
+  var LP_DISCOUNT_LABEL = LP_DISCOUNT_PCT + '% OFF (' + LP_DISCOUNT + ')';
 
   /* Persist in sessionStorage so the right code applies even if user
      navigates away (e.g. clicks the upsell card) and comes back to checkout */
   try { sessionStorage.setItem('happieLpDiscount', LP_DISCOUNT); } catch(e) {}
 
-  /* (Removed broken pre-warm iframe — Shopify CSP frame-ancestors 'none' blocks it.
-     The capture-phase checkout interceptor below still applies the discount via top-level nav.) */
+  /* ── Cart drawer discount preview ──
+     Shopify only applies the discount at /checkout, so the drawer subtotal
+     shows the pre-discount total by default. Inject a discount preview line
+     + an updated grand total so the user sees the price they'll actually pay. */
+  function fmtMoney(cents) {
+    return '$' + (cents / 100).toFixed(2);
+  }
+  function refreshDrawerDiscountPreview() {
+    var subtotalEl = document.getElementById('cart-subtotal-price');
+    if (!subtotalEl) return;
+    var subtotalText = subtotalEl.textContent || '';
+    var raw = subtotalText.replace(/[^0-9.]/g, '');
+    var subtotalCents = Math.round(parseFloat(raw) * 100) || 0;
+    if (subtotalCents <= 0) {
+      var existing = document.getElementById('lp-discount-line');
+      if (existing) existing.remove();
+      var existingNew = document.getElementById('lp-discount-newtotal');
+      if (existingNew) existingNew.remove();
+      return;
+    }
+    var discountCents = Math.round(subtotalCents * LP_DISCOUNT_PCT / 100);
+    var newTotalCents = subtotalCents - discountCents;
+
+    var subtotalRow = subtotalEl.closest('.cart-subtotal');
+    if (!subtotalRow) return;
+
+    var discountLine = document.getElementById('lp-discount-line');
+    if (!discountLine) {
+      discountLine = document.createElement('div');
+      discountLine.id = 'lp-discount-line';
+      discountLine.className = 'cart-subtotal';
+      discountLine.style.cssText = 'color:#2D6A4F;font-weight:700;';
+      subtotalRow.insertAdjacentElement('afterend', discountLine);
+    }
+    discountLine.innerHTML = '<span>' + LP_DISCOUNT_LABEL + '</span><span>− ' + fmtMoney(discountCents) + '</span>';
+
+    var newTotalRow = document.getElementById('lp-discount-newtotal');
+    if (!newTotalRow) {
+      newTotalRow = document.createElement('div');
+      newTotalRow.id = 'lp-discount-newtotal';
+      newTotalRow.className = 'cart-subtotal';
+      newTotalRow.style.cssText = 'font-size:16px;font-weight:800;padding-top:6px;border-top:1px dashed rgba(0,0,0,0.12);margin-top:6px;';
+      discountLine.insertAdjacentElement('afterend', newTotalRow);
+    }
+    newTotalRow.innerHTML = '<span>Total at checkout</span><span>' + fmtMoney(newTotalCents) + '</span>';
+  }
+  /* Watch the existing subtotal element — happie.js rewrites its text on every
+     cart fetch / qty change / drawer open, which fires the observer. */
+  (function() {
+    var target = document.getElementById('cart-subtotal-price');
+    if (!target) {
+      document.addEventListener('DOMContentLoaded', function() {
+        target = document.getElementById('cart-subtotal-price');
+        if (target) bindObs(target);
+      });
+      return;
+    }
+    bindObs(target);
+    function bindObs(el) {
+      var mo = new MutationObserver(refreshDrawerDiscountPreview);
+      mo.observe(el, { childList: true, characterData: true, subtree: true });
+      refreshDrawerDiscountPreview();
+    }
+  })();
 
   /* Capture-phase click on the cart drawer Checkout button — runs first, beats
      happie.js handlers and default link nav. Re-routes through /discount/CODE
