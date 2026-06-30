@@ -80,11 +80,9 @@
     {%- assign lp_hero = lp_product.images | first -%}
     {%- if lp_hero != blank -%}
       <link rel="preload" as="image"
-        imagesrcset="{{ lp_hero | image_url: width: 360, format: 'webp' }} 360w, {{ lp_hero | image_url: width: 540, format: 'webp' }} 540w, {{ lp_hero | image_url: width: 720, format: 'webp' }} 720w"
+        imagesrcset="{{ lp_hero | image_url: width: 360 }} 360w, {{ lp_hero | image_url: width: 540 }} 540w, {{ lp_hero | image_url: width: 720 }} 720w"
         imagesizes="(max-width: 480px) 92vw, (max-width: 768px) 60vw, 480px"
         fetchpriority="high">
-      <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {%- endif -%}
   {%- endif -%}
 
