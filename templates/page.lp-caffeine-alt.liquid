@@ -622,16 +622,8 @@
      navigates away (e.g. clicks the upsell card) and comes back to checkout */
   try { sessionStorage.setItem('happieLpDiscount', LP_DISCOUNT); } catch(e) {}
 
-  /* Silent iframe — pre-warms the cookie for express checkout (Shop Pay / Apple Pay / Google Pay) */
-  (function() {
-    var iframe = document.createElement('iframe');
-    iframe.style.cssText = 'position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none;left:-9999px;';
-    iframe.setAttribute('aria-hidden', 'true');
-    iframe.setAttribute('tabindex', '-1');
-    iframe.src = '/discount/' + encodeURIComponent(LP_DISCOUNT) + '?redirect=%2Fcart.js';
-    (document.body || document.documentElement).appendChild(iframe);
-    setTimeout(function() { try { iframe.remove(); } catch(e) {} }, 4000);
-  })();
+  /* (Removed broken pre-warm iframe — Shopify CSP frame-ancestors 'none' blocks it.
+     The capture-phase checkout interceptor below still applies the discount via top-level nav.) */
 
   /* Capture-phase click on the cart drawer Checkout button — runs first, beats
      happie.js handlers and default link nav. Re-routes through /discount/CODE
