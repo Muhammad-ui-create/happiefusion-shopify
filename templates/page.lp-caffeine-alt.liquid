@@ -38,11 +38,14 @@
           <img
             id="gallery-main-img"
             src="{{ first_image | image_url: width: 900 }}"
+            srcset="{{ first_image | image_url: width: 480 }} 480w, {{ first_image | image_url: width: 720 }} 720w, {{ first_image | image_url: width: 900 }} 900w"
+            sizes="(max-width: 600px) 92vw, 480px"
             alt="{{ first_image.alt | default: product.title }}"
             class="gallery-main-img"
             width="900" height="900"
             loading="eager"
             fetchpriority="high"
+            decoding="async"
           />
         </div>
         {%- if product.images.size > 1 -%}
@@ -148,15 +151,12 @@
         </div>
 
         <div class="lp-video-row">
-          <video class="lp-video" autoplay muted loop playsinline preload="metadata" poster="" aria-label="Customer video review — Kimberly">
-            <source src="{{ 'review-kimberly.mp4' | asset_url }}" type="video/mp4">
-          </video>
-          <video class="lp-video" autoplay muted loop playsinline preload="metadata" poster="" aria-label="Customer video review — Alex">
-            <source src="{{ 'review-alex.mp4' | asset_url }}" type="video/mp4">
-          </video>
-          <video class="lp-video" autoplay muted loop playsinline preload="metadata" poster="" aria-label="Customer video review — Erica">
-            <source src="{{ 'review-erica.mp4' | asset_url }}" type="video/mp4">
-          </video>
+          <video class="lp-video" muted loop playsinline preload="none" poster="{{ 'review-kimberly-poster.jpg' | asset_url }}"
+                 data-src="{{ 'review-kimberly.mp4' | asset_url }}" aria-label="Customer video review — Kimberly"></video>
+          <video class="lp-video" muted loop playsinline preload="none" poster="{{ 'review-alex-poster.jpg' | asset_url }}"
+                 data-src="{{ 'review-alex.mp4' | asset_url }}" aria-label="Customer video review — Alex"></video>
+          <video class="lp-video" muted loop playsinline preload="none" poster="{{ 'review-erica-poster.jpg' | asset_url }}"
+                 data-src="{{ 'review-erica.mp4' | asset_url }}" aria-label="Customer video review — Erica"></video>
         </div>
 
         <div class="lp-reviews-grid">
@@ -762,6 +762,26 @@
       alert('Couldn\'t add to cart. Please refresh and try again.');
     });
   });
+
+  /* ── Lazy-load review videos: only fetch + autoplay when scrolled into viewport ── */
+  var videos = document.querySelectorAll('.lp-video[data-src]');
+  if (videos.length && 'IntersectionObserver' in window) {
+    var vIO = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (!en.isIntersecting) return;
+        var v = en.target;
+        if (!v.src) {
+          v.src = v.dataset.src;
+          v.load();
+          var p = v.play(); if (p && p.catch) p.catch(function(){});
+        }
+        vIO.unobserve(v);
+      });
+    }, { rootMargin: '200px 0px' });
+    videos.forEach(function(v) { vIO.observe(v); });
+  } else {
+    videos.forEach(function(v) { v.src = v.dataset.src; v.load(); v.play && v.play(); });
+  }
 })();
 </script>
 

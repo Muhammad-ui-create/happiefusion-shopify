@@ -74,6 +74,18 @@
   <link rel="dns-prefetch" href="https://cdn.shopify.com">
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
+  {%- comment -%} ── LP hero preload: the LP product image is the LCP element, preload it responsively ── {%- endcomment -%}
+  {%- if _ts contains 'lp-' -%}
+    {%- assign lp_product = all_products['blue-razzberry-fungi-powered-seltzer'] -%}
+    {%- assign lp_hero = lp_product.images | first -%}
+    {%- if lp_hero != blank -%}
+      <link rel="preload" as="image"
+        imagesrcset="{{ lp_hero | image_url: width: 480 }} 480w, {{ lp_hero | image_url: width: 720 }} 720w, {{ lp_hero | image_url: width: 900 }} 900w"
+        imagesizes="(max-width: 600px) 92vw, 480px"
+        fetchpriority="high">
+    {%- endif -%}
+  {%- endif -%}
+
   <link rel="canonical" href="{{ canonical_url }}">
 
   {%- comment -%} ── OPEN GRAPH ── {%- endcomment -%}
