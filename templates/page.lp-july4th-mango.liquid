@@ -1,0 +1,817 @@
+{%- comment -%}
+  Landing page: July 4th — Alcohol Alternative angle (MANGO MIMOSA variant)
+  Code: USA10 (10% off)  ·  Live in Shopify Discounts through Jul 6
+  Auto-applies the discount when the user clicks Add to Cart
+  Target SKU: Mango Mimosa 6-Pack ($23.99)
+{%- endcomment -%}
+
+{%- assign product = all_products['mango-mimosa-fungi-powered-seltzer'] -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+{%- assign price = variant.price -%}
+{%- assign discounted_price = price | times: 90 | divided_by: 100 -%}
+{%- assign savings = price | minus: discounted_price -%}
+
+<div class="lp-july4">
+
+  <!-- ── PROMO BANNER ── -->
+  <div class="lp-promo">
+    <div class="lp-promo-inner">
+      <div class="lp-promo-text">
+        <strong>July 4th Independence Day Sale</strong>
+        <span>10% Off Sitewide — Code <code>USA10</code> applied automatically at checkout</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-page lp-product-page">
+    <div class="breadcrumb">
+      <a href="/">Home</a> /
+      <span>July 4th Special — {{ product.title }}</span>
+    </div>
+
+    <div class="product-layout">
+
+      <!-- ======= LEFT: Image Gallery ======= -->
+      <div class="product-gallery">
+        <div class="gallery-main">
+          {%- assign first_image = product.images | first -%}
+          <img
+            id="gallery-main-img"
+            src="{{ first_image | image_url: width: 720 }}"
+            srcset="{{ first_image | image_url: width: 360 }} 360w, {{ first_image | image_url: width: 540 }} 540w, {{ first_image | image_url: width: 720 }} 720w"
+            sizes="(max-width: 480px) 92vw, (max-width: 768px) 60vw, 480px"
+            alt="{{ first_image.alt | default: product.title }}"
+            class="gallery-main-img"
+            width="900" height="900"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="gallery-thumbs">
+            {%- for image in product.images -%}
+              <div
+                class="gallery-thumb {% if forloop.first %}active{% endif %}"
+                data-index="{{ forloop.index0 }}"
+                data-src="{{ image | image_url: width: 900 }}"
+              >
+                <img src="{{ image | image_url: width: 160 }}" alt="{{ image.alt | default: product.title }}" loading="lazy" width="160" height="160" />
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- ======= RIGHT: Product Info ======= -->
+      <div class="product-info">
+
+        <!-- Limited offer badge -->
+        <div class="lp-offer-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>LIMITED — Sale Ends July 6</span>
+        </div>
+
+        <!-- Rating proof strip — Amazon reviews -->
+        <a href="#lp-reviews" class="lp-rating-strip" aria-label="See all reviews">
+          <span class="lp-rating-stars">★★★★★</span>
+          <strong>4.9</strong>
+          <span class="lp-rating-count">· 1,200+ verified Amazon reviews</span>
+        </a>
+
+        <h1 class="product-title">Mango Mimosa Functional Mushroom Drink — 6-Pack</h1>
+        <p class="lp-hook">The Sober-Curious Alternative to Mimosas &amp; Cocktails</p>
+
+        <!-- Price with cut-off + savings -->
+        <div class="product-price-row lp-price-row">
+          <span class="product-price lp-price-new">{{ discounted_price | money }}</span>
+          <span class="product-compare-price lp-price-old">{{ price | money }}</span>
+          <span class="lp-price-save">Save {{ savings | money }} with USA10</span>
+        </div>
+
+        <!-- Angle-specific description -->
+        <div class="product-desc lp-desc">
+          <p><strong>This July 4th, raise something that lifts you — not slows you down.</strong></p>
+          <p>Happie Fungi Fusion is the alcohol-free can you bring to the cookout. Three functional mushrooms — 900mg Lion's Mane, 700mg Cordyceps, 400mg Reishi — deliver focus, energy, and calm without the next-morning fog.</p>
+          <ul class="lp-desc-list">
+            <li>✓ <strong>Zero alcohol.</strong> Drive home, host the BBQ, watch the fireworks — clear-headed.</li>
+            <li>✓ <strong>Zero caffeine.</strong> No jitters, no 3 AM stare at the ceiling.</li>
+            <li>✓ <strong>40 calories</strong> per can. Lightly sweetened with organic agave.</li>
+            <li>✓ <strong>Real effects from real mushrooms.</strong> Not a placebo seltzer.</li>
+          </ul>
+        </div>
+
+        <!-- Quantity -->
+        <div class="qty-row">
+          <div class="qty-label">Quantity</div>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn" id="lp-qty-minus" aria-label="Decrease quantity">−</button>
+            <input type="number" id="lp-qty-input" value="1" min="1" max="20" step="1" inputmode="numeric" pattern="[0-9]*" class="qty-input" />
+            <button type="button" class="qty-btn" id="lp-qty-plus" aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+
+        <!-- Add to Cart — auto-applies USA10 at checkout -->
+        <button type="button" class="btn-atc lp-atc" id="lp-atc-btn" data-variant-id="{{ variant.id }}" data-discount="USA10">
+          <span id="lp-atc-text">ADD TO CART — <s style="opacity:0.55;">{{ price | money }}</s> {{ discounted_price | money }}</span>
+        </button>
+        <p class="lp-atc-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:4px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <strong>USA10 auto-applied at checkout.</strong> No code needed.
+        </p>
+
+        <!-- Trust pills -->
+        <div class="product-trust-pills">
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="11" rx="2"/><path d="M16 10h4l3 3v4h-7"/><circle cx="5.5" cy="19.5" r="1.5"/><circle cx="20.5" cy="19.5" r="1.5"/></svg>
+            Free Shipping — No Minimum
+          </span>
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg>
+            100% Vegan
+          </span>
+          <a href="/pages/the-science#lab-results" class="trust-pill trust-pill-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 4H8L9 3z"/><path d="M8 7v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7"/><path d="M12 11v3M11 13h2"/></svg>
+            3rd-Party Lab Tested
+          </a>
+        </div>
+
+      </div><!-- /product-info -->
+    </div><!-- /product-layout -->
+
+    <!-- ── REAL AMAZON REVIEWS — sober-curious / alcohol-alternative angle ── -->
+    <section class="lp-reviews" id="lp-reviews">
+      <div class="lp-reviews-inner">
+        <div class="lp-reviews-head">
+          <div class="lp-reviews-stars">★★★★★</div>
+          <div class="lp-reviews-score">
+            <strong>4.9</strong> from <strong>1,200+</strong> verified Amazon reviews
+          </div>
+          <h2 class="lp-reviews-title">What sober-curious drinkers are saying.</h2>
+        </div>
+
+        <div class="lp-video-row">
+          <video class="lp-video" muted loop playsinline preload="none" poster="{{ 'review-kimberly-poster.jpg' | asset_url }}"
+                 data-src="{{ 'review-kimberly.mp4' | asset_url }}" aria-label="Customer video review — Kimberly"></video>
+          <video class="lp-video" muted loop playsinline preload="none" poster="{{ 'review-alex-poster.jpg' | asset_url }}"
+                 data-src="{{ 'review-alex.mp4' | asset_url }}" aria-label="Customer video review — Alex"></video>
+          <video class="lp-video" muted loop playsinline preload="none" poster="{{ 'review-erica-poster.jpg' | asset_url }}"
+                 data-src="{{ 'review-erica.mp4' | asset_url }}" aria-label="Customer video review — Erica"></video>
+        </div>
+
+        <div class="lp-reviews-grid">
+
+          <div class="lp-rev">
+            <div class="lp-rev-top">
+              <span class="lp-rev-stars">★★★★★</span>
+              <span class="lp-rev-flavor lp-rev-flavor-mango">Mango Mimosa</span>
+            </div>
+            <div class="lp-rev-title">Happie refresher — great for mocktails</div>
+            <blockquote class="lp-rev-body">"I was a lil scared because it was made with mushrooms but it was really good — tastes like a carbonated mango drink. I've been trying to cut back on alcohol so this was great when I made mango mocktails."</blockquote>
+            <div class="lp-rev-foot">
+              <div class="lp-rev-avatar" style="background:#F5A623;">SA</div>
+              <div class="lp-rev-author">
+                <strong>Shanice Adina</strong>
+                <span class="lp-rev-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>Verified Amazon Purchase</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lp-rev">
+            <div class="lp-rev-top">
+              <span class="lp-rev-stars">★★★★★</span>
+              <span class="lp-rev-flavor lp-rev-flavor-mango">Mango Mimosa</span>
+            </div>
+            <div class="lp-rev-title">Bright, juicy, and clean</div>
+            <blockquote class="lp-rev-body">"Refreshing mango flavor with light fizz. Not overly sweet, and I felt a smooth boost in focus without caffeine jitters. Great afternoon alternative to soda."</blockquote>
+            <div class="lp-rev-foot">
+              <div class="lp-rev-avatar" style="background:#F5A623;color:#1A1A1A;">NC</div>
+              <div class="lp-rev-author">
+                <strong>Natalie Cesare</strong>
+                <span class="lp-rev-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>Verified Amazon Purchase</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lp-rev">
+            <div class="lp-rev-top">
+              <span class="lp-rev-stars">★★★★★</span>
+              <span class="lp-rev-flavor lp-rev-flavor-mango">Mango Mimosa</span>
+            </div>
+            <div class="lp-rev-title">Love it — replaced morning coffee</div>
+            <blockquote class="lp-rev-body">"My wife and I have replaced morning coffee with this drink and we are loving it. Big fan of mango and blueberry flavors."</blockquote>
+            <div class="lp-rev-foot">
+              <div class="lp-rev-avatar" style="background:#F5A623;color:#1A1A1A;">NG</div>
+              <div class="lp-rev-author">
+                <strong>Nicole G</strong>
+                <span class="lp-rev-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>Verified Amazon Purchase</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lp-rev">
+            <div class="lp-rev-top">
+              <span class="lp-rev-stars">★★★★★</span>
+              <span class="lp-rev-flavor lp-rev-flavor-blue">Blue Raspberry</span>
+            </div>
+            <div class="lp-rev-title">Great Flavor! Better than Brez!</div>
+            <blockquote class="lp-rev-body">"Excellent! Couldn't taste mushrooms and loved the feel of this drink! Perfect! Better than Brez!"</blockquote>
+            <div class="lp-rev-foot">
+              <div class="lp-rev-avatar" style="background:#3B6FF0;">A</div>
+              <div class="lp-rev-author">
+                <strong>Anonymous</strong>
+                <span class="lp-rev-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>Verified Amazon Purchase</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="lp-reviews-foot">
+          <a href="/pages/reviews">Read all 1,200+ reviews →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TRUST FAQ ── -->
+    <section class="pdp-faq lp-faq">
+      <div class="pdp-faq-inner">
+        <div class="pdp-faq-head">
+          <span class="pdp-faq-eyebrow">First-Time Buyer Questions</span>
+          <h2 class="pdp-faq-title">Why this beats a beer at the BBQ.</h2>
+        </div>
+        <div class="pdp-faq-grid">
+
+          <details class="pdp-faq-item" open>
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><circle cx="12" cy="12" r="10"/></svg></span>
+              <span>Is this actually 0% alcohol?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Yes — completely non-alcoholic.</strong> 0.0% ABV. Safe to drink while driving, at work, around the kids, or pregnant (always check with your doctor on the last one). Looks like a craft cocktail, tastes refreshing, but won't put you on the couch.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></span>
+              <span>Will I feel anything at all?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>20–40 minutes in.</strong> Lion's Mane brings clear, calm focus. Cordyceps adds steady energy. Reishi takes the edge off without sedating you. It's a present, sociable feeling — not a buzz, not a stimulant rush.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+              <span>What if I don't like the taste?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>30-day full refund, no return needed.</strong> Email <a href="mailto:orders@livehappie.com">orders@livehappie.com</a> within 30 days. Tastes like sparkling juice — Mango Mimosa is bright, juicy, and lightly tropical. No earthy mushroom flavor.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="M5.6 5.6a9 9 0 1 0 12.8 0"/></svg></span>
+              <span>How is this different from non-alcoholic beer?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>NA beer mimics beer; Happie actually does something.</strong> Most non-alcoholic beers are dealcoholized regular beer — same taste, zero effect. Happie has <strong>2,000mg of functional mushrooms</strong> per can that deliver real focus, energy, and calm. It's the difference between "fake beer" and "real wellness drink that happens to fit the alcohol-free occasion."</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="11" rx="2"/><path d="M16 10h4l3 3v4h-7"/><circle cx="5.5" cy="19.5" r="1.5"/><circle cx="20.5" cy="19.5" r="1.5"/></svg></span>
+              <span>Will it arrive in time for July 4th?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Order by June 30 for guaranteed July 4th delivery.</strong> Standard shipping is 3–5 business days and ships within 1 business day from our Northern California warehouse. Need it faster? Express is $15 at checkout (2 business days). Free shipping on every order — no minimum.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/></svg></span>
+              <span>Is it actually safe? Has it been tested?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Every batch is third-party tested at KCA Laboratories</strong> (ISO/IEC 17025:2017 accredited, Nicholasville KY). We test for heavy metals, 66 pesticides, microbials, mycotoxins, and residual solvents. <a href="/pages/the-science#lab-results">Download the COA for the batch in your fridge →</a></p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
+              <span>One can or one 6-pack — what's the right amount for a BBQ?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>One can per person, per ~2 hours.</strong> The effects of one can last 3–4 hours. For a 4-hour BBQ with 4 sober-curious adults, a 6-pack gets you through with extras. If you're hosting and want a stocked fridge for friends, grab the <a href="/products/happie-fungi-fusion-mushroom-drink-variety-pack">12-pack Variety Pack</a> — better value and lets guests pick their flavor.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+              <span>Will I get a hangover? Can I drink it before driving?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Zero hangover. Zero impairment.</strong> 0.0% ABV means it's legally a soft drink — same as a sparkling water. Safe to drink and drive home, safe before work, safe while operating machinery. The Lion's Mane focus actually <em>improves</em> reaction time vs nothing. The next morning, no fog, no regret.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /product-page -->
+
+</div><!-- /lp-july4 -->
+
+<style>
+  .lp-promo {
+    background: linear-gradient(90deg, #B22234 0%, #1A2761 50%, #B22234 100%);
+    color: #fff;
+    padding: 14px 20px;
+    text-align: center;
+    border-bottom: 3px solid #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .lp-promo::before, .lp-promo::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 80px;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.08), rgba(255,255,255,0.08) 6px, transparent 6px, transparent 12px);
+    pointer-events: none;
+  }
+  .lp-promo::before { left: 0; }
+  .lp-promo::after { right: 0; }
+  .lp-promo-inner {
+    display: inline-flex; align-items: center; gap: 14px;
+    position: relative; z-index: 1;
+  }
+  .lp-promo-flag { font-size: 22px; line-height: 1; }
+  .lp-promo-text { display: flex; flex-direction: column; line-height: 1.3; text-align: left; }
+  .lp-promo-text strong { font-size: 15px; font-weight: 900; letter-spacing: 0.04em; }
+  .lp-promo-text span { font-size: 12px; opacity: 0.92; }
+  .lp-promo-text code {
+    background: rgba(255,255,255,0.18);
+    padding: 1px 8px; border-radius: 4px;
+    font-family: 'Poppins', monospace;
+    font-weight: 800; letter-spacing: 0.06em;
+  }
+  .lp-product-page { padding-top: 32px; }
+  .lp-hook {
+    font-size: clamp(20px, 2.6vw, 26px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--green-dark, #2D6A4F);
+    margin: 8px 0 22px;
+  }
+  .lp-offer-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, #B22234, #DC143C);
+    color: #fff;
+    padding: 8px 16px; border-radius: 50px;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 18px rgba(178,34,52,0.25);
+    animation: lpOfferPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes lpOfferPulse {
+    0%, 100% { box-shadow: 0 6px 18px rgba(178,34,52,0.25); }
+    50%      { box-shadow: 0 6px 24px rgba(178,34,52,0.45); }
+  }
+  .lp-price-row { position: relative; }
+  .lp-price-new { color: var(--green-dark, #2D6A4F) !important; }
+  .lp-price-old { text-decoration: line-through; opacity: 0.7; }
+  .lp-price-save {
+    background: var(--green-dark, #2D6A4F); color: #fff;
+    padding: 5px 12px; border-radius: 50px;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.04em;
+    margin-left: auto;
+  }
+  .lp-desc-list { list-style: none; padding: 0; margin: 14px 0 0; }
+  .lp-desc-list li { padding: 6px 0; font-size: 14.5px; }
+  .lp-desc-list li + li { border-top: 1px dashed rgba(0,0,0,0.06); }
+  .lp-atc {
+    background: linear-gradient(135deg, var(--green-dark, #2D6A4F), #1B4332) !important;
+    color: #fff !important;
+    padding: 20px !important;
+    font-size: 16px !important;
+    letter-spacing: 0.04em;
+    box-shadow: 0 14px 32px rgba(45,106,79,0.30);
+    transition: transform .2s, box-shadow .2s, background .2s !important;
+  }
+  .lp-atc:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(45,106,79,0.42); }
+  .lp-atc:disabled { opacity: 0.7; cursor: wait; }
+  .lp-atc-note {
+    text-align: center; font-size: 12.5px;
+    color: var(--gray, #5A6B5E); margin: 10px 0 18px;
+  }
+  .lp-atc-note strong { color: var(--green-dark, #2D6A4F); }
+  /* ── Rating strip (above H1) ── */
+  .lp-rating-strip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,166,35,0.08);
+    border: 1px solid rgba(245,166,35,0.25);
+    padding: 7px 14px; border-radius: 50px;
+    margin-bottom: 14px;
+    font-size: 13px; color: var(--ink, #1A1A1A);
+    text-decoration: none; cursor: pointer;
+    transition: background .2s, transform .15s, border-color .2s;
+  }
+  .lp-rating-strip:hover {
+    background: rgba(245,166,35,0.14);
+    border-color: rgba(245,166,35,0.45);
+    transform: translateY(-1px);
+  }
+  .lp-rating-stars { color: #F5A623; font-size: 15px; letter-spacing: 2px; line-height: 1; }
+  .lp-rating-strip strong { font-weight: 900; color: var(--ink, #1A1A1A); }
+  .lp-rating-count { color: var(--gray, #5A6B5E); font-weight: 600; }
+
+  /* ── Amazon reviews section ── */
+  .lp-reviews {
+    padding: 80px 24px;
+    background: linear-gradient(180deg, transparent 0%, #FAF4E7 60%, #FFF8EE 100%);
+    position: relative;
+  }
+  .lp-reviews-inner { max-width: 1100px; margin: 0 auto; }
+  .lp-reviews-head { text-align: center; margin-bottom: 48px; }
+  .lp-reviews-stars {
+    font-size: 32px; letter-spacing: 6px;
+    color: #F5A623;
+    text-shadow: 0 2px 6px rgba(245,166,35,0.20);
+    margin-bottom: 16px;
+  }
+  .lp-reviews-score {
+    display: inline-flex; align-items: baseline; gap: 6px;
+    background: #fff;
+    padding: 10px 20px; border-radius: 50px;
+    box-shadow: 0 6px 18px rgba(27,42,31,0.08);
+    font-size: 14px; color: var(--gray, #5A6B5E);
+    margin-bottom: 24px;
+  }
+  .lp-reviews-score strong { color: var(--ink, #1A1A1A); font-weight: 900; font-size: 18px; }
+  .lp-reviews-title {
+    font-size: clamp(28px, 3.6vw, 40px); font-weight: 900;
+    line-height: 1.12; letter-spacing: -0.025em;
+    color: var(--ink, #1A1A1A); margin: 0;
+    max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  .lp-video-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-bottom: 36px;
+  }
+  .lp-video {
+    width: 100%; aspect-ratio: 9 / 16;
+    object-fit: cover; border-radius: 16px;
+    background: #000; display: block;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  .lp-reviews-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 22px; margin-bottom: 40px;
+  }
+  .lp-rev {
+    background: #fff;
+    border: 0;
+    border-radius: 22px;
+    padding: 28px 28px 22px;
+    display: flex; flex-direction: column;
+    box-shadow: 0 10px 36px rgba(27,42,31,0.08), 0 2px 6px rgba(27,42,31,0.04);
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s cubic-bezier(0.34,1.56,0.64,1), box-shadow .3s ease;
+  }
+  .lp-rev::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--green-mid, #52B788), var(--green-dark, #2D6A4F));
+  }
+  .lp-rev::after {
+    content: '"';
+    position: absolute;
+    top: 8px; right: 22px;
+    font-family: 'Times New Roman', Georgia, serif;
+    font-size: 110px; line-height: 1;
+    color: rgba(45,106,79,0.10);
+    pointer-events: none; font-weight: 700;
+  }
+  .lp-rev:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 28px 56px rgba(27,42,31,0.15), 0 4px 12px rgba(27,42,31,0.06);
+  }
+  .lp-rev-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; position: relative; z-index: 1; }
+  .lp-rev-stars { color: #F5A623; font-size: 16px; letter-spacing: 3px; }
+  .lp-rev-flavor {
+    font-size: 10px; font-weight: 900; letter-spacing: 0.10em; text-transform: uppercase;
+    padding: 5px 11px; border-radius: 50px;
+  }
+  .lp-rev-flavor-blue       { background: rgba(59,111,240,0.12);  color: #2855D4; }
+  .lp-rev-flavor-watermelon { background: rgba(232,76,107,0.12); color: #C03060; }
+  .lp-rev-flavor-mango      { background: rgba(245,166,35,0.14); color: #B8730A; }
+  .lp-rev-title {
+    font-size: 16px; font-weight: 800; color: var(--ink, #1A1A1A);
+    line-height: 1.3; margin-bottom: 12px;
+    letter-spacing: -0.005em;
+    position: relative; z-index: 1;
+  }
+  .lp-rev-body {
+    font-size: 14.5px; color: #333; line-height: 1.65;
+    margin: 0 0 22px;
+    font-style: normal; font-weight: 500;
+    position: relative; z-index: 1;
+  }
+  .lp-rev-foot {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: auto; padding-top: 16px;
+    border-top: 1px dashed rgba(0,0,0,0.10);
+    position: relative; z-index: 1;
+  }
+  .lp-rev-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    color: #fff; font-weight: 800; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  }
+  .lp-rev-author { display: flex; flex-direction: column; line-height: 1.35; min-width: 0; }
+  .lp-rev-author strong { font-size: 13.5px; color: var(--ink, #1A1A1A); font-weight: 700; }
+  .lp-rev-verified {
+    font-size: 11px; color: #B8730A; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .lp-reviews-foot { text-align: center; }
+  .lp-reviews-foot a {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-dark, #2D6A4F); color: #fff;
+    padding: 14px 28px; border-radius: 50px;
+    font-weight: 800; font-size: 14px; letter-spacing: 0.02em;
+    text-decoration: none;
+    box-shadow: 0 8px 22px rgba(45,106,79,0.25);
+    transition: transform .2s, box-shadow .2s, background .2s;
+  }
+  .lp-reviews-foot a:hover {
+    transform: translateY(-2px);
+    background: #1B4332;
+    box-shadow: 0 14px 32px rgba(45,106,79,0.40);
+  }
+  @media (max-width: 768px) {
+    .lp-reviews { padding: 56px 16px; }
+    .lp-reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+    .lp-video-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .lp-video { border-radius: 12px; }
+    .lp-rev { padding: 24px 22px 20px; }
+    .lp-rev::after { font-size: 80px; top: 4px; right: 16px; }
+  }
+
+  .lp-faq { background: linear-gradient(180deg, var(--cream, #FFE6CB) 0%, #FDF3E0 100%); }
+  @media (max-width: 768px) {
+    .lp-promo { padding: 12px 14px; }
+    .lp-promo-text strong { font-size: 13px; }
+    .lp-promo-text span { font-size: 11px; }
+    .lp-price-save { width: 100%; margin-left: 0; margin-top: 8px; text-align: center; }
+  }
+</style>
+
+<script>
+(function() {
+  /* ════════════════════════════════════════════════
+     DISCOUNT INTERCEPTOR — hoisted ABOVE any bailouts.
+     Hard-coded constant so it can NEVER pull the wrong code.
+     ════════════════════════════════════════════════ */
+  var LP_DISCOUNT = 'USA10';
+  var LP_DISCOUNT_PCT = 10; /* keep in sync with the discount above */
+  var LP_DISCOUNT_LABEL = LP_DISCOUNT_PCT + '% OFF (' + LP_DISCOUNT + ')';
+
+  /* Persist in sessionStorage so the right code applies even if user
+     navigates away (e.g. clicks the upsell card) and comes back to checkout */
+  try { sessionStorage.setItem('happieLpDiscount', LP_DISCOUNT); } catch(e) {}
+
+  /* ── Cart drawer discount preview ──
+     Shopify only applies the discount at /checkout, so the drawer subtotal
+     shows the pre-discount total by default. Inject a discount preview line
+     + an updated grand total so the user sees the price they'll actually pay. */
+  function fmtMoney(cents) {
+    return '$' + (cents / 100).toFixed(2);
+  }
+  function refreshDrawerDiscountPreview() {
+    var subtotalEl = document.getElementById('cart-subtotal-price');
+    if (!subtotalEl) return;
+    var subtotalText = subtotalEl.textContent || '';
+    var raw = subtotalText.replace(/[^0-9.]/g, '');
+    var subtotalCents = Math.round(parseFloat(raw) * 100) || 0;
+    if (subtotalCents <= 0) {
+      var existing = document.getElementById('lp-discount-line');
+      if (existing) existing.remove();
+      var existingNew = document.getElementById('lp-discount-newtotal');
+      if (existingNew) existingNew.remove();
+      return;
+    }
+    var discountCents = Math.round(subtotalCents * LP_DISCOUNT_PCT / 100);
+    var newTotalCents = subtotalCents - discountCents;
+
+    var subtotalRow = subtotalEl.closest('.cart-subtotal');
+    if (!subtotalRow) return;
+
+    var discountLine = document.getElementById('lp-discount-line');
+    if (!discountLine) {
+      discountLine = document.createElement('div');
+      discountLine.id = 'lp-discount-line';
+      discountLine.className = 'cart-subtotal';
+      discountLine.style.cssText = 'color:#2D6A4F;font-weight:700;';
+      subtotalRow.insertAdjacentElement('afterend', discountLine);
+    }
+    discountLine.innerHTML = '<span>' + LP_DISCOUNT_LABEL + '</span><span>− ' + fmtMoney(discountCents) + '</span>';
+
+    var newTotalRow = document.getElementById('lp-discount-newtotal');
+    if (!newTotalRow) {
+      newTotalRow = document.createElement('div');
+      newTotalRow.id = 'lp-discount-newtotal';
+      newTotalRow.className = 'cart-subtotal';
+      newTotalRow.style.cssText = 'font-size:16px;font-weight:800;padding-top:6px;border-top:1px dashed rgba(0,0,0,0.12);margin-top:6px;';
+      discountLine.insertAdjacentElement('afterend', newTotalRow);
+    }
+    newTotalRow.innerHTML = '<span>Total at checkout</span><span>' + fmtMoney(newTotalCents) + '</span>';
+  }
+  /* Watch the existing subtotal element — happie.js rewrites its text on every
+     cart fetch / qty change / drawer open, which fires the observer. */
+  (function() {
+    var target = document.getElementById('cart-subtotal-price');
+    if (!target) {
+      document.addEventListener('DOMContentLoaded', function() {
+        target = document.getElementById('cart-subtotal-price');
+        if (target) bindObs(target);
+      });
+      return;
+    }
+    bindObs(target);
+    function bindObs(el) {
+      var mo = new MutationObserver(refreshDrawerDiscountPreview);
+      mo.observe(el, { childList: true, characterData: true, subtree: true });
+      refreshDrawerDiscountPreview();
+    }
+  })();
+
+  /* Capture-phase click on the cart drawer Checkout button — runs first, beats
+     happie.js handlers and default link nav. Re-routes through /discount/CODE
+     so the correct LP code is ALWAYS applied, overwriting any stale cookie. */
+  document.addEventListener('click', function(e) {
+    var target = e.target.closest('.btn-cart-checkout, a[href="/checkout"], a[href^="/checkout?"]');
+    if (!target) return;
+    var code = sessionStorage.getItem('happieLpDiscount') || LP_DISCOUNT;
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    var fireAndGo = function() {
+      window.location.href = '/discount/' + encodeURIComponent(code) + '?redirect=' + encodeURIComponent('/checkout');
+    };
+    try {
+      if (window.fbq) {
+        fetch('/cart.js', { headers: { 'Accept': 'application/json' } })
+          .then(function(r) { return r.json(); })
+          .then(function(cart) {
+            fbq('track', 'InitiateCheckout', {
+              content_ids: (cart.items || []).map(function(i) { return String(i.variant_id); }),
+              content_type: 'product',
+              num_items: cart.item_count,
+              value: (cart.total_price || 0) / 100,
+              currency: (cart.currency || 'USD')
+            });
+            fireAndGo();
+          })
+          .catch(fireAndGo);
+        return;
+      }
+    } catch(e2) {}
+    fireAndGo();
+  }, true);
+
+  /* ── Gallery thumbnail click handler (LPs don't run initProductPage() in happie.js) ── */
+  var mainImg = document.getElementById('gallery-main-img');
+  var thumbs  = document.querySelectorAll('.gallery-thumb');
+  var srcs = [];
+  thumbs.forEach(function(t) {
+    srcs.push(t.dataset.src);
+    t.addEventListener('click', function() {
+      if (!mainImg) return;
+      mainImg.style.transition = 'opacity 0.18s ease';
+      mainImg.style.opacity = '0';
+      setTimeout(function() {
+        mainImg.src = t.dataset.src;
+        mainImg.style.opacity = '1';
+      }, 80);
+      thumbs.forEach(function(x) { x.classList.remove('active'); });
+      t.classList.add('active');
+    });
+  });
+  /* Preload all full-size gallery images after page is idle so swaps are instant */
+  function preloadGallery() {
+    srcs.forEach(function(s) { var i = new Image(); i.decoding = 'async'; i.src = s; });
+  }
+  if (document.readyState === 'complete') {
+    ('requestIdleCallback' in window) ? requestIdleCallback(preloadGallery, {timeout: 1500}) : setTimeout(preloadGallery, 300);
+  } else {
+    window.addEventListener('load', function() {
+      ('requestIdleCallback' in window) ? requestIdleCallback(preloadGallery, {timeout: 1500}) : setTimeout(preloadGallery, 300);
+    }, {once: true});
+  }
+
+  var btn = document.getElementById('lp-atc-btn');
+  if (!btn) return;
+  var qtyInput = document.getElementById('lp-qty-input');
+  var qtyMinus = document.getElementById('lp-qty-minus');
+  var qtyPlus  = document.getElementById('lp-qty-plus');
+  var txtEl    = document.getElementById('lp-atc-text');
+
+  if (qtyMinus) qtyMinus.addEventListener('click', function() {
+    var v = parseInt(qtyInput.value) || 1; if (v > 1) qtyInput.value = v - 1;
+  });
+  if (qtyPlus)  qtyPlus.addEventListener('click', function() {
+    var v = parseInt(qtyInput.value) || 1; if (v < 20) qtyInput.value = v + 1;
+  });
+
+  /* Discount interceptor lives at the top of this IIFE so it survives any bailouts.
+     This block kept as a no-op marker to preserve the script structure. */
+
+  /* Original ATC text — restored after the success flash */
+  var originalText = txtEl ? txtEl.innerHTML : 'ADD TO CART';
+
+  btn.addEventListener('click', function() {
+    var variantId = btn.dataset.variantId;
+    var qty = Math.max(1, Math.min(20, parseInt(qtyInput.value) || 1));
+    if (!variantId) return;
+
+    btn.disabled = true;
+    if (txtEl) txtEl.textContent = 'Adding…';
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: variantId, quantity: qty })
+    }).then(function(r) {
+      if (!r.ok) throw new Error('Sorry — we couldn\'t add that to your cart.');
+      return r.json();
+    }).then(function() {
+      if (txtEl) txtEl.textContent = '✓ Added to Cart!';
+      /* Fire Meta Pixel AddToCart so Meta's optimizer gets the mid-funnel signal */
+      try {
+        if (window.fbq) {
+          fbq('track', 'AddToCart', {
+            content_ids: [String(variantId)],
+            content_type: 'product',
+            content_name: {{ product.title | json }},
+            value: {{ product.price | divided_by: 100.0 }},
+            currency: 'USD',
+            num_items: qty
+          });
+        }
+      } catch(e) {}
+      /* Open the existing cart drawer — happie.js binds openCart() to this click */
+      var cartTrigger = document.getElementById('cart-trigger');
+      if (cartTrigger) cartTrigger.click();
+      setTimeout(function() {
+        btn.disabled = false;
+        if (txtEl) txtEl.innerHTML = originalText;
+      }, 1800);
+    }).catch(function() {
+      btn.disabled = false;
+      if (txtEl) txtEl.innerHTML = originalText;
+      alert('Couldn\'t add to cart. Please refresh and try again.');
+    });
+  });
+
+  /* ── Lazy-load review videos: only fetch + autoplay when scrolled into viewport ── */
+  var videos = document.querySelectorAll('.lp-video[data-src]');
+  if (videos.length && 'IntersectionObserver' in window) {
+    var vIO = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (!en.isIntersecting) return;
+        var v = en.target;
+        if (!v.src) {
+          v.src = v.dataset.src;
+          v.load();
+          var p = v.play(); if (p && p.catch) p.catch(function(){});
+        }
+        vIO.unobserve(v);
+      });
+    }, { rootMargin: '200px 0px' });
+    videos.forEach(function(v) { vIO.observe(v); });
+  } else {
+    videos.forEach(function(v) { v.src = v.dataset.src; v.load(); v.play && v.play(); });
+  }
+})();
+</script>

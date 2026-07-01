@@ -76,7 +76,15 @@
 
   {%- comment -%} ── LP hero preload: the LP product image is the LCP element, preload it responsively ── {%- endcomment -%}
   {%- if _ts contains 'lp-' -%}
-    {%- assign lp_product = all_products['blue-razzberry-fungi-powered-seltzer'] -%}
+    {%- comment -%} Map each LP template suffix to the product it features so preload matches the rendered hero. {%- endcomment -%}
+    {%- if _ts contains 'mango' -%}
+      {%- assign lp_handle = 'mango-mimosa-fungi-powered-seltzer' -%}
+    {%- elsif _ts contains 'watermelon' -%}
+      {%- assign lp_handle = 'watermelon-fungi-powered-seltzer' -%}
+    {%- else -%}
+      {%- assign lp_handle = 'blue-razzberry-fungi-powered-seltzer' -%}
+    {%- endif -%}
+    {%- assign lp_product = all_products[lp_handle] -%}
     {%- assign lp_hero = lp_product.images | first -%}
     {%- if lp_hero != blank -%}
       <link rel="preload" as="image"
