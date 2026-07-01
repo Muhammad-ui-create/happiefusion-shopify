@@ -733,6 +733,8 @@
     srcs.push(t.dataset.src);
     t.addEventListener('click', function() {
       if (!mainImg) return;
+      mainImg.removeAttribute('srcset');
+      mainImg.removeAttribute('sizes');
       mainImg.style.transition = 'opacity 0.18s ease';
       mainImg.style.opacity = '0';
       setTimeout(function() {

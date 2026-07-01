@@ -80,7 +80,7 @@
         </a>
 
         <h1 class="product-title">Blue Razzberry Functional Mushroom Drink — 6-Pack</h1>
-        <p class="lp-hook">The Sober-Curious Alternative to Beer &amp; Cocktails</p>
+        <p class="lp-hook">The Alcohol-Free, Caffeine-Free 4th of July Drink</p>
 
         <!-- Price with cut-off + savings -->
         <div class="product-price-row lp-price-row">
@@ -91,11 +91,11 @@
 
         <!-- Angle-specific description -->
         <div class="product-desc lp-desc">
-          <p><strong>This July 4th, raise something that lifts you — not slows you down.</strong></p>
-          <p>Happie Fungi Fusion is the alcohol-free can you bring to the cookout. Three functional mushrooms — 900mg Lion's Mane, 700mg Cordyceps, 400mg Reishi — deliver focus, energy, and calm without the next-morning fog.</p>
+          <p><strong>This July 4th, raise something that lifts you — no alcohol, no caffeine, no crash.</strong></p>
+          <p>Happie Fungi Fusion is the alcohol-free, caffeine-free can you bring to the cookout. Three functional mushrooms — 900mg Lion's Mane, 700mg Cordyceps, 400mg Reishi — deliver focus, energy, and calm without the beer buzz, the coffee jitters, or the 3 AM crash.</p>
           <ul class="lp-desc-list">
             <li>✓ <strong>Zero alcohol.</strong> Drive home, host the BBQ, watch the fireworks — clear-headed.</li>
-            <li>✓ <strong>Zero caffeine.</strong> No jitters, no 3 AM stare at the ceiling.</li>
+            <li>✓ <strong>Zero caffeine.</strong> Steady clean energy from Cordyceps — no jitters, no crash, no 3 AM stare at the ceiling.</li>
             <li>✓ <strong>40 calories</strong> per can. Lightly sweetened with organic agave.</li>
             <li>✓ <strong>Real effects from real mushrooms.</strong> Not a placebo seltzer.</li>
           </ul>
@@ -122,6 +122,10 @@
 
         <!-- Trust pills -->
         <div class="product-trust-pills">
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            Zero Caffeine
+          </span>
           <span class="trust-pill">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="11" rx="2"/><path d="M16 10h4l3 3v4h-7"/><circle cx="5.5" cy="19.5" r="1.5"/><circle cx="20.5" cy="19.5" r="1.5"/></svg>
             Free Shipping — No Minimum
@@ -708,6 +712,10 @@
     srcs.push(t.dataset.src);
     t.addEventListener('click', function() {
       if (!mainImg) return;
+      /* Kill the responsive srcset — otherwise the browser keeps re-picking
+         the originally-preloaded hero and ignores our new src. */
+      mainImg.removeAttribute('srcset');
+      mainImg.removeAttribute('sizes');
       mainImg.style.transition = 'opacity 0.18s ease';
       mainImg.style.opacity = '0';
       setTimeout(function() {
