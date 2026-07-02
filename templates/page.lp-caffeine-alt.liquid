@@ -701,11 +701,17 @@
     e.stopImmediatePropagation();
     /* Fire InitiateCheckout BEFORE the redirect so Meta receives the signal —
        cart value pulled live from /cart.js so the number matches what's actually checking out */
+    /* Navigation must NEVER depend on the pixel fetch finishing — a hung /cart.js
+       on a bad connection would otherwise eat the click and strand the user. */
+    var navigated = false;
     var fireAndGo = function() {
+      if (navigated) return;
+      navigated = true;
       window.location.href = '/discount/' + encodeURIComponent(code) + '?redirect=' + encodeURIComponent('/checkout');
     };
     try {
       if (window.fbq) {
+        setTimeout(fireAndGo, 1500); /* hard fallback: go to checkout with or without the pixel event */
         fetch('/cart.js', { headers: { 'Accept': 'application/json' } })
           .then(function(r) { return r.json(); })
           .then(function(cart) {
