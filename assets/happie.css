@@ -807,11 +807,13 @@ input, select { font-family: var(--font); }
 }
 .btn-atc:hover { background: #1B4332; transform: translateY(-1px); box-shadow: 0 14px 30px rgba(45,106,79,0.35); }
 
-/* Trust pills row */
+/* Trust pills row — clear margin-top so it doesn't crowd the 'More payment options'
+   link that Shopify's payment_button injects directly above it */
 .product-trust-pills {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  margin-top: 22px;
   margin-bottom: 8px;
 }
 .trust-pill {
@@ -1367,6 +1369,9 @@ input, select { font-family: var(--font); }
   font-size: 14px;
   color: var(--gray, #5A6B5E);
 }
+/* Roomy line-height: the underlined links wrap to a second line, and with the
+   3px underline offset the two lines were visually colliding */
+.pdp-faq-foot p { line-height: 2.1; margin: 0; }
 .pdp-faq-foot a {
   color: var(--green-dark, #2D6A4F);
   font-weight: 700;
