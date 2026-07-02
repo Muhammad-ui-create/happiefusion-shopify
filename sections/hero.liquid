@@ -1,5 +1,10 @@
-<!-- Google's model-viewer web component for 3D GLB rendering -->
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+{% comment %}
+  model-viewer (a full WebGL engine, ~1MB parsed JS) used to load eagerly here — it alone
+  cost ~25s of main-thread blocking on a mid-range phone (Lighthouse TBT 24,910ms).
+  It is now lazy-injected by the facade script at the bottom of this section:
+  a plain <img> poster paints instantly, and 3D boots on first touch/drag (mobile)
+  or after window.load + idle (desktop).
+{% endcomment %}
 
 <section class="hero" itemscope itemtype="https://schema.org/Product">
   <meta itemprop="name" content="Happie Fungi Fusion Functional Mushroom Seltzer">
@@ -32,42 +37,57 @@
         <div class="hero-ring-mid"></div>
         <div class="hero-ring-inner"></div>
 
-        <!-- Interactive 3D can — front label faces camera. Zoom locked, rotation only.
-             Poster image renders instantly (no script needed) — 3D activates after first paint. -->
-        <model-viewer
-          src="{{ 'happie-can-3d.glb' | asset_url }}"
-          alt="Happie Fungi Fusion Blue Raspberry — interactive 3D can. Drag to rotate, or tap to view in AR."
-          poster="{{ 'can-hero-popup.webp' | asset_url }}"
+        <!-- Facade: instant poster image. Zero JS cost, becomes the LCP element.
+             The real 3D viewer swaps in from the <template> below on first interaction. -->
+        <img
+          id="hero-can-facade"
+          src="{{ 'can-hero-popup.webp' | asset_url }}"
+          alt="Happie Fungi Fusion Blue Raspberry — interactive 3D can. Tap to spin, or view in AR."
           class="hero-can-3d"
-          auto-rotate
-          auto-rotate-delay="1200"
-          rotation-per-second="18deg"
-          camera-controls
-          camera-orbit="71deg 85deg 105%"
-          min-camera-orbit="auto 85deg 105%"
-          max-camera-orbit="auto 85deg 105%"
-          disable-zoom
-          disable-pan
-          touch-action="pan-y"
-          interaction-prompt="none"
-          shadow-intensity="1.0"
-          shadow-softness="0.8"
-          exposure="0.95"
-          tone-mapping="commerce"
-          environment-image="neutral"
+          width="320" height="480"
           loading="eager"
-          reveal="auto"
-          ar
-          ar-modes="webxr scene-viewer quick-look"
-          ar-scale="auto"
-          ar-placement="floor"
-          ios-src="{{ 'happie-can-3d.usdz' | asset_url }}"
-        >
-          <!-- Loading state -->
-          <div slot="progress-bar" class="hero-3d-loader">
-            <div class="hero-3d-loader-fill"></div>
-          </div>
-        </model-viewer>
+          fetchpriority="high"
+          decoding="async"
+          style="object-fit:contain;"
+        />
+
+        <!-- Inert until instantiated: nothing inside a <template> loads or executes -->
+        <template id="hero-can-3d-template">
+          <model-viewer
+            src="{{ 'happie-can-3d.glb' | asset_url }}"
+            alt="Happie Fungi Fusion Blue Raspberry — interactive 3D can. Drag to rotate, or tap to view in AR."
+            poster="{{ 'can-hero-popup.webp' | asset_url }}"
+            class="hero-can-3d"
+            auto-rotate
+            auto-rotate-delay="1200"
+            rotation-per-second="18deg"
+            camera-controls
+            camera-orbit="71deg 85deg 105%"
+            min-camera-orbit="auto 85deg 105%"
+            max-camera-orbit="auto 85deg 105%"
+            disable-zoom
+            disable-pan
+            touch-action="pan-y"
+            interaction-prompt="none"
+            shadow-intensity="1.0"
+            shadow-softness="0.8"
+            exposure="0.95"
+            tone-mapping="commerce"
+            environment-image="neutral"
+            loading="eager"
+            reveal="auto"
+            ar
+            ar-modes="webxr scene-viewer quick-look"
+            ar-scale="auto"
+            ar-placement="floor"
+            ios-src="{{ 'happie-can-3d.usdz' | asset_url }}"
+          >
+            <!-- Loading state -->
+            <div slot="progress-bar" class="hero-3d-loader">
+              <div class="hero-3d-loader-fill"></div>
+            </div>
+          </model-viewer>
+        </template>
 
         <!-- AR button — OUTSIDE the model-viewer so it can be positioned freely without overflow clipping -->
         <button class="hero-ar-btn" type="button" id="hero-ar-trigger">
@@ -231,45 +251,78 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var mv = document.querySelector('.hero-can-3d');
-      if (!mv) return;
+      var facade = document.getElementById('hero-can-facade');
+      var tpl = document.getElementById('hero-can-3d-template');
+      if (!facade || !tpl) return;
 
-      // Loader progress
-      var fill = mv.querySelector('.hero-3d-loader-fill');
-      mv.addEventListener('progress', function(e) {
-        if (fill) fill.style.width = (e.detail.totalProgress * 100) + '%';
-      });
-
-      // Hide hint on user interaction
-      var hideHint = function() { mv.classList.add('user-interacted'); };
-      mv.addEventListener('pointerdown', hideHint);
-
-      // ── AR button — show/hide based on real AR capability ──
-      // AR button is now OUTSIDE the model-viewer (sibling), so look in parent
+      var MV_SRC = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js';
       var arBtn = document.getElementById('hero-ar-trigger');
       var ua = navigator.userAgent;
-      var isAndroid = /Android/i.test(ua);
-      var isIOS = /iPad|iPhone|iPod/i.test(ua);
-      var isMobile = isAndroid || isIOS;
+      var isMobile = /Android|iPad|iPhone|iPod/i.test(ua);
+      var upgraded = false;
+      var pendingAR = false;
 
-      // Wait for model-viewer to load + check AR capability
-      mv.addEventListener('load', function() {
-        // AR is mobile-only — both Android (Scene Viewer w/ GLB) and iOS (Quick Look w/ USDZ) work
-        if (!isMobile) {
-          if (arBtn) arBtn.style.display = 'none';
-          return;
+      // On mobile the AR button can show right away — tapping it boots 3D, then launches AR
+      if (arBtn && isMobile) arBtn.style.display = 'inline-flex';
+
+      function upgradeTo3D() {
+        if (upgraded) return;
+        upgraded = true;
+
+        // Inject the model-viewer engine only now
+        if (!document.querySelector('script[data-mv-engine]')) {
+          var s = document.createElement('script');
+          s.type = 'module';
+          s.src = MV_SRC;
+          s.setAttribute('data-mv-engine', '');
+          document.head.appendChild(s);
         }
-        if (arBtn) arBtn.style.display = 'inline-flex';
+
+        // Swap facade for the real viewer
+        var mv = tpl.content.firstElementChild.cloneNode(true);
+        facade.replaceWith(mv);
+
+        var fill = mv.querySelector('.hero-3d-loader-fill');
+        mv.addEventListener('progress', function(e) {
+          if (fill) fill.style.width = (e.detail.totalProgress * 100) + '%';
+        });
+        mv.addEventListener('pointerdown', function() { mv.classList.add('user-interacted'); });
+
+        mv.addEventListener('load', function() {
+          if (!isMobile && arBtn) { arBtn.style.display = 'none'; }
+          if (pendingAR && mv.activateAR) { pendingAR = false; mv.activateAR(); }
+        });
+
+        if (arBtn) {
+          arBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (mv.activateAR) mv.activateAR();
+          });
+        }
+      }
+
+      // ── Upgrade triggers ──
+      // 1. Any touch/click/drag on the can facade (mobile + desktop)
+      ['pointerdown', 'touchstart'].forEach(function(evt) {
+        facade.addEventListener(evt, upgradeTo3D, { once: true, passive: true });
       });
 
-      // Wire the button manually so it always triggers AR on supported devices
+      // 2. AR button tap before 3D exists — boot 3D, then auto-launch AR when ready
       if (arBtn) {
-        arBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          if (mv.activateAR) {
-            mv.activateAR();
-          }
+        arBtn.addEventListener('click', function() {
+          if (!upgraded) { pendingAR = true; upgradeTo3D(); }
         });
+      }
+
+      // 3. Desktop only: auto-upgrade after full load + idle so the can spins
+      //    without interaction — but never during the initial-load metrics window.
+      //    Mobile stays poster-only until touched (keeps main thread free).
+      var finePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+      if (finePointer) {
+        window.addEventListener('load', function() {
+          var kick = function() { setTimeout(upgradeTo3D, 2000); };
+          ('requestIdleCallback' in window) ? requestIdleCallback(kick, { timeout: 6000 }) : kick();
+        }, { once: true });
       }
     });
   </script>
