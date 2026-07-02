@@ -36,11 +36,8 @@
             <span>Subtotal</span>
             <span>{{ cart.total_price | money }}</span>
           </div>
-          {% if cart.total_price < 7500 %}
-            <p class="free-ship-msg">Add {{ 7500 | minus: cart.total_price | money }} more for free shipping!</p>
-          {% else %}
-            <p class="free-ship-msg free-ship-unlocked">🚚 You've unlocked free shipping!</p>
-          {% endif %}
+          {% comment %} Shipping is free on every order — no threshold. {% endcomment %}
+          <p class="free-ship-msg free-ship-unlocked">🚚 Free shipping — no minimum</p>
           <a href="/checkout" class="btn-atc">Checkout →</a>
           <a href="/collections/all" class="btn-keep-shopping">← Continue Shopping</a>
         </div>
