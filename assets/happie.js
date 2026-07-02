@@ -232,13 +232,24 @@
 
     var selectedSellingPlanId = null;
 
+    /* Swap the main gallery image. Must drop srcset/sizes first — while they're
+       present the browser keeps re-resolving the responsive source and ignores
+       the src we assign, so thumbnail/arrow swaps silently do nothing. */
+    function setMainImg(src, fadeMs) {
+      if (!mainImg) return;
+      mainImg.removeAttribute('srcset');
+      mainImg.removeAttribute('sizes');
+      mainImg.style.opacity = '0';
+      setTimeout(function() { mainImg.src = src; mainImg.style.opacity = '1'; }, fadeMs);
+    }
+
     /* Gallery thumbnails */
     var thumbs = document.querySelectorAll('.gallery-thumb');
     var allSrcs = [];
     thumbs.forEach(function(t) {
       allSrcs.push(t.dataset.src);
       t.addEventListener('click', function() {
-        if (mainImg) { mainImg.style.opacity = '0'; setTimeout(function() { mainImg.src = t.dataset.src; mainImg.style.opacity = '1'; }, 80); }
+        setMainImg(t.dataset.src, 80);
         thumbs.forEach(function(x) { x.classList.remove('active'); });
         t.classList.add('active');
       });
@@ -267,14 +278,14 @@
     if (prevBtn) {
       prevBtn.addEventListener('click', function() {
         currentImgIdx = (currentImgIdx - 1 + allSrcs.length) % allSrcs.length;
-        if (mainImg) { mainImg.style.opacity = '0'; setTimeout(function() { mainImg.src = allSrcs[currentImgIdx]; mainImg.style.opacity = '1'; }, 150); }
+        setMainImg(allSrcs[currentImgIdx], 150);
         thumbs.forEach(function(t,i) { t.classList.toggle('active', i === currentImgIdx); });
       });
     }
     if (nextBtn) {
       nextBtn.addEventListener('click', function() {
         currentImgIdx = (currentImgIdx + 1) % allSrcs.length;
-        if (mainImg) { mainImg.style.opacity = '0'; setTimeout(function() { mainImg.src = allSrcs[currentImgIdx]; mainImg.style.opacity = '1'; }, 150); }
+        setMainImg(allSrcs[currentImgIdx], 150);
         thumbs.forEach(function(t,i) { t.classList.toggle('active', i === currentImgIdx); });
       });
     }

@@ -17,8 +17,14 @@
         <img
           id="gallery-main-img"
           src="{{ first_image | image_url: width: 900 }}"
+          srcset="{{ first_image | image_url: width: 360 }} 360w, {{ first_image | image_url: width: 540 }} 540w, {{ first_image | image_url: width: 720 }} 720w, {{ first_image | image_url: width: 900 }} 900w"
+          sizes="(max-width: 768px) 92vw, 600px"
           alt="{{ first_image.alt | default: product.title }}"
           class="gallery-main-img"
+          width="900" height="900"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
         />
         {% if product.images.size > 1 %}
           <button class="gallery-arrow gallery-prev" id="gallery-prev" aria-label="Previous image">
