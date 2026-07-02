@@ -255,15 +255,29 @@
       });
     });
 
-    /* Preload all full-size gallery images after page is idle so thumbnail clicks swap instantly */
+    /* Preload full-size gallery images so thumbnail clicks swap instantly.
+       Desktop: after load + idle, like before. Mobile (coarse pointer): only on the
+       first gallery touch — blind-preloading 8 × 900px images (~1.5MB) on a phone
+       burns data and competes with everything else still loading on slow connections. */
+    var galleryPreloaded = false;
     function preloadGallery() {
+      if (galleryPreloaded) return;
+      galleryPreloaded = true;
       allSrcs.forEach(function(src) {
         var img = new Image();
         img.decoding = 'async';
         img.src = src;
       });
     }
-    if (document.readyState === 'complete') {
+    var coarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    if (coarsePointer) {
+      var gallery = document.querySelector('.product-gallery');
+      if (gallery) {
+        ['touchstart', 'pointerdown'].forEach(function(evt) {
+          gallery.addEventListener(evt, preloadGallery, { once: true, passive: true });
+        });
+      }
+    } else if (document.readyState === 'complete') {
       ('requestIdleCallback' in window) ? requestIdleCallback(preloadGallery, {timeout: 1500}) : setTimeout(preloadGallery, 300);
     } else {
       window.addEventListener('load', function() {
