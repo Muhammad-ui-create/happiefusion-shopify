@@ -31,9 +31,9 @@
         "settings": {
           "enabled": true,
           "worker_url": "",
-          "support_email": "support@drinkhappie.com",
+          "support_email": "orders@livehappie.com",
           "bot_name": "Happie Assistant",
-          "greeting": "Hey there! I'm the Happie Assistant — here to help with products, orders, and any questions about Fungi Fusion. You can also reach our team directly at support@drinkhappie.com. What can I help with?",
+          "greeting": "Hey there! I'm the Happie Assistant — here to help with products, orders, and any questions about Fungi Fusion. You can also reach our team directly at orders@livehappie.com. What can I help with?",
           "position": "right",
           "brand_color": "#50b2bd",
           "accent_color": "#f7cd46"
