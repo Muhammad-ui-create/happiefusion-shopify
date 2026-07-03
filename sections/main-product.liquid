@@ -144,13 +144,6 @@
         {% if product.selling_plan_groups.size > 0 %}
           <div class="purchase-options">
             <div class="purchase-label">Purchase Options</div>
-            <label class="purchase-option {% if product.selected_selling_plan_allocation == nil %}active{% endif %}" id="opt-onetime">
-              <input type="radio" name="selling_plan" value="" id="selling-plan-onetime" {% if product.selected_selling_plan_allocation == nil %}checked{% endif %} />
-              <div class="opt-inner">
-                <div class="opt-title">One Time Purchase</div>
-                <div class="opt-price" id="onetime-price">{{ product.selected_or_first_available_variant.price | money }}</div>
-              </div>
-            </label>
             {% for group in product.selling_plan_groups %}
               {% for plan in group.selling_plans %}
                 <label class="purchase-option subscribe-opt" id="opt-subscribe">
@@ -178,6 +171,13 @@
                 </label>
               {% endfor %}
             {% endfor %}
+            <label class="purchase-option {% if product.selected_selling_plan_allocation == nil %}active{% endif %}" id="opt-onetime">
+              <input type="radio" name="selling_plan" value="" id="selling-plan-onetime" {% if product.selected_selling_plan_allocation == nil %}checked{% endif %} />
+              <div class="opt-inner">
+                <div class="opt-title">One Time Purchase</div>
+                <div class="opt-price" id="onetime-price">{{ product.selected_or_first_available_variant.price | money }}</div>
+              </div>
+            </label>
           </div>
         {% endif %}
 
