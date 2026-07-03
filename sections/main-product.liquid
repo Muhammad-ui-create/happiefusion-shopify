@@ -596,6 +596,13 @@
         // Only tag the innermost element that matches, to avoid hiding big wrappers
         if (DISCLOSURE_RX.test(el.textContent || '') && !el.querySelector('p, div, span, small')) {
           disclosureNodes.push(el);
+          // Shopify injects the disclosure above our payment-icons row — move it below
+          var payRow = document.querySelector('.pdp-pay-row');
+          if (payRow && payRow.nextElementSibling !== el) {
+            payRow.insertAdjacentElement('afterend', el);
+            el.style.marginTop = '10px';
+            el.style.fontSize = '12px';
+          }
         }
       });
       applyVisibility();
