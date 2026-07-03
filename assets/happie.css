@@ -1179,8 +1179,10 @@ input, select { font-family: var(--font); }
   border-top: 1px dashed rgba(0,0,0,0.08);
 }
 .cart-trust-row svg { display: block; flex-shrink: 0; }
-/* Same icon row reused on the PDP under the payment buttons — no divider there */
-.pdp-pay-row { border-top: 0; padding-top: 0; margin-top: 10px; }
+/* Same icon row reused on the PDP under the payment buttons — no divider there.
+   Larger badges than the drawer: this row is a primary trust signal on the PDP. */
+.pdp-pay-row { border-top: 0; padding-top: 0; margin-top: 12px; gap: 8px; }
+.pdp-pay-row svg { width: 48px; height: 31px; }
 
 /* ── Cart line item polish ── */
 .cart-item {
