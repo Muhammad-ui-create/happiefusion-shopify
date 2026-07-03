@@ -133,13 +133,14 @@
   <style>
     /* ── Hero reviews button ── */
     .hero-reviews-btn {
-      display: inline-flex; align-items: center; gap: 7px;
-      margin-top: 14px;
+      display: inline-flex; align-items: center; gap: 8px;
+      margin: 0 0 22px; /* CTAs above give 28px; this clears the trust row below */
       background: rgba(245,166,35,0.10);
       border: 1px solid rgba(245,166,35,0.30);
-      padding: 9px 18px; border-radius: 50px;
-      font-size: 14px; color: var(--black, #1A1A1A);
+      padding: 10px 18px; border-radius: 50px;
+      font-size: 14px; line-height: 1; color: var(--black, #1A1A1A);
       text-decoration: none; cursor: pointer;
+      white-space: nowrap;
       transition: background .2s, transform .15s, border-color .2s, box-shadow .2s;
     }
     .hero-reviews-btn:hover {
@@ -148,13 +149,15 @@
       transform: translateY(-1px);
       box-shadow: 0 6px 18px rgba(245,166,35,0.18);
     }
-    .hero-reviews-stars { color: #F5A623; font-size: 15px; letter-spacing: 2px; line-height: 1; }
-    .hero-reviews-btn strong { font-weight: 900; }
-    .hero-reviews-count { color: var(--gray, #5A6B5E); font-weight: 600; }
-    .hero-reviews-btn svg { color: var(--green-dark, #2D6A4F); }
+    .hero-reviews-btn > * { line-height: 1; }
+    .hero-reviews-stars { color: #F5A623; font-size: 13px; letter-spacing: 3px; }
+    .hero-reviews-btn strong { font-weight: 900; font-size: 14px; }
+    .hero-reviews-count { color: var(--gray, #5A6B5E); font-weight: 600; font-size: 13px; }
+    .hero-reviews-btn svg { color: var(--green-dark, #2D6A4F); flex-shrink: 0; }
     @media (max-width: 480px) {
-      .hero-reviews-btn { font-size: 12.5px; padding: 8px 14px; }
-      .hero-reviews-stars { font-size: 13px; }
+      .hero-reviews-btn { font-size: 12.5px; padding: 8px 14px; gap: 6px; }
+      .hero-reviews-stars { font-size: 11px; letter-spacing: 2px; }
+      .hero-reviews-count { font-size: 12px; }
     }
 
     /* 3D can — sized to match the previous <img> footprint */
