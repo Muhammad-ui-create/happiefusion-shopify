@@ -24,6 +24,14 @@
         <a href="/products/happie-fungi-fusion-mushroom-drink-variety-pack" class="btn-primary">Shop Variety Pack — $38.99 →</a>
         <a href="/collections/all" class="btn-ghost">See All Flavors ↗</a>
       </div>
+
+      <!-- Reviews button — social proof right under the CTAs -->
+      <a href="/pages/reviews" class="hero-reviews-btn" aria-label="Read customer reviews">
+        <span class="hero-reviews-stars" aria-hidden="true">★★★★★</span>
+        <strong>4.9</strong>
+        <span class="hero-reviews-count">· Amazon-verified reviews</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
       <div class="hero-trust">
         <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 4H8L9 3z"/><path d="M8 7v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7"/><path d="M12 11v3M11 13h2"/></svg> Third-party lab tested</span>
         <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg> 100% Fruiting body extract</span>
@@ -123,6 +131,32 @@
   </div>
 
   <style>
+    /* ── Hero reviews button ── */
+    .hero-reviews-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin-top: 14px;
+      background: rgba(245,166,35,0.10);
+      border: 1px solid rgba(245,166,35,0.30);
+      padding: 9px 18px; border-radius: 50px;
+      font-size: 14px; color: var(--black, #1A1A1A);
+      text-decoration: none; cursor: pointer;
+      transition: background .2s, transform .15s, border-color .2s, box-shadow .2s;
+    }
+    .hero-reviews-btn:hover {
+      background: rgba(245,166,35,0.18);
+      border-color: rgba(245,166,35,0.55);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(245,166,35,0.18);
+    }
+    .hero-reviews-stars { color: #F5A623; font-size: 15px; letter-spacing: 2px; line-height: 1; }
+    .hero-reviews-btn strong { font-weight: 900; }
+    .hero-reviews-count { color: var(--gray, #5A6B5E); font-weight: 600; }
+    .hero-reviews-btn svg { color: var(--green-dark, #2D6A4F); }
+    @media (max-width: 480px) {
+      .hero-reviews-btn { font-size: 12.5px; padding: 8px 14px; }
+      .hero-reviews-stars { font-size: 13px; }
+    }
+
     /* 3D can — sized to match the previous <img> footprint */
     .hero-can-3d {
       width: 320px;
