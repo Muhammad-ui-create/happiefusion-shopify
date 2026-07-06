@@ -1184,6 +1184,45 @@ input, select { font-family: var(--font); }
 .pdp-pay-row { border-top: 0; padding-top: 0; margin-top: 12px; gap: 8px; }
 .pdp-pay-row svg { width: 48px; height: 31px; }
 
+/* ── Drawer mini review — one-line social proof above the payment icons ── */
+.cart-mini-review {
+  display: flex; align-items: flex-start; gap: 7px;
+  font-size: 11.5px; color: var(--gray, #5A6B5E); line-height: 1.5;
+  margin-bottom: 12px; justify-content: center; text-align: left;
+}
+.cart-mini-review-stars { color: #F5A623; font-size: 12px; letter-spacing: 1.5px; line-height: 1.4; flex-shrink: 0; }
+
+/* ── Cart page: review card + trust trio under the Checkout button ── */
+.cart-review-card {
+  background: rgba(245,166,35,0.07);
+  border: 1px solid rgba(245,166,35,0.22);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 18px 0 14px;
+}
+.cart-review-stars { color: #F5A623; font-size: 15px; letter-spacing: 3px; margin-bottom: 8px; }
+.cart-review-card blockquote { margin: 0 0 8px; font-size: 13.5px; line-height: 1.6; color: #333; font-style: normal; }
+.cart-review-card cite { font-size: 11.5px; color: var(--gray, #5A6B5E); font-style: normal; font-weight: 600; }
+.cart-trust-trio {
+  display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 10px; text-align: center;
+}
+.cart-trust-item {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 12px;
+  padding: 12px 8px;
+}
+.cart-trust-item svg { color: var(--green, #2D6A4F); margin-bottom: 3px; }
+.cart-trust-item strong { font-size: 11.5px; font-weight: 800; color: #1A1A1A; line-height: 1.25; }
+.cart-trust-item span { font-size: 10px; color: var(--gray, #5A6B5E); line-height: 1.35; }
+@media (max-width: 480px) {
+  .cart-trust-trio { grid-template-columns: 1fr; gap: 8px; }
+  .cart-trust-item { flex-direction: row; text-align: left; gap: 10px; padding: 10px 14px; }
+  .cart-trust-item svg { margin-bottom: 0; flex-shrink: 0; }
+  .cart-trust-item strong { font-size: 12px; }
+  .cart-trust-item span { margin-left: auto; text-align: right; }
+}
+
 /* ── Cart line item polish ── */
 .cart-item {
   display: flex; gap: 14px; padding: 16px 0;
