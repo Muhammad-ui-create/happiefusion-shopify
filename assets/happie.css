@@ -1184,13 +1184,23 @@ input, select { font-family: var(--font); }
 .pdp-pay-row { border-top: 0; padding-top: 0; margin-top: 12px; gap: 8px; }
 .pdp-pay-row svg { width: 48px; height: 31px; }
 
-/* ── Drawer mini review — one-line social proof above the payment icons ── */
+/* ── Drawer mini review — auto-rotating social proof above the payment icons ── */
 .cart-mini-review {
   display: flex; align-items: flex-start; gap: 7px;
   font-size: 11.5px; color: var(--gray, #5A6B5E); line-height: 1.5;
   margin-bottom: 12px; justify-content: center; text-align: left;
 }
 .cart-mini-review-stars { color: #F5A623; font-size: 12px; letter-spacing: 1.5px; line-height: 1.4; flex-shrink: 0; }
+.cart-mini-review-track { position: relative; display: block; flex: 1; min-height: 35px; }
+.cart-mini-slide {
+  position: absolute; inset: 0;
+  opacity: 0; transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+.cart-mini-slide.is-active { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .cart-mini-slide { transition: none; }
+}
 
 /* ── Cart page: review card + trust trio under the Checkout button ── */
 .cart-review-card {

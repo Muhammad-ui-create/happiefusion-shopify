@@ -50,6 +50,24 @@
   if (cartClose)   cartClose.addEventListener('click', closeCart);
   if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
 
+  /* ── Drawer mini-review rotator: crossfade through the review slides while
+     the drawer is open. Only ticks when the drawer is visible — no idle work. ── */
+  (function() {
+    var track = document.querySelector('#cart-mini-review .cart-mini-review-track');
+    if (!track) return;
+    var slides = track.querySelectorAll('.cart-mini-slide');
+    if (slides.length < 2) return;
+    var idx = 0;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setInterval(function() {
+      if (reduceMotion) return;
+      if (!cartDrawer || !cartDrawer.classList.contains('open')) return;
+      slides[idx].classList.remove('is-active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('is-active');
+    }, 4000);
+  })();
+
   function formatMoney(cents) {
     return '$' + (cents / 100).toFixed(2);
   }
