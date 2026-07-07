@@ -14,7 +14,9 @@
 
   <!-- Colored image panel -->
   <a href="{{ product.url }}" class="product-card-img-wrap">
-    {% if product.tags contains 'bestseller' or product.tags contains 'top-seller' %}
+    {% if product.available == false %}
+      <span class="card-top-badge card-badge-soldout">SOLD OUT</span>
+    {% elsif product.tags contains 'bestseller' or product.tags contains 'top-seller' %}
       <span class="card-top-badge">TOP SELLER</span>
     {% endif %}
     {% if product.featured_image %}

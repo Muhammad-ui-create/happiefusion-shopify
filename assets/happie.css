@@ -559,6 +559,16 @@ input, select { font-family: var(--font); }
 .stars { color: #F5A623; font-size: 16px; letter-spacing: 1px; }
 .rating-count { font-size: 13px; font-weight: 600; color: var(--gray); }
 .top-seller-badge { background: var(--teal); color: #fff; border-radius: 50px; padding: 4px 14px; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+/* Sold-out states — PDP badge, card badge, dead ATC button */
+.badge-soldout, .card-badge-soldout { background: #C44545 !important; }
+.btn-atc-soldout,
+.btn-atc-soldout:hover {
+  background: #9aa39c !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.9;
+}
 .product-title { font-size: clamp(32px,4vw,52px); font-weight: 900; line-height: 1.05; margin-bottom: 6px; }
 /* ── Subtitle: pill badge with pulsing dot ── */
 .product-subtitle {
