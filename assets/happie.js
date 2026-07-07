@@ -126,9 +126,9 @@
     if (!cartBody) return;
     var existing = document.getElementById('cart-upsell');
     if (existing) existing.remove();
-    // Catalog of suggestion candidates — variety pack is the AOV win, singles fill gaps.
+    // Catalog of suggestion candidates — the custom 18-pack is the AOV win, singles fill gaps.
     var candidates = [
-      { handle: 'happie-fungi-fusion-mushroom-drink-variety-pack', title: 'Variety Pack — 12 Cans', price: 3899, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/PT06_2.png?v=1778545064&width=200', tag: 'BEST VALUE' },
+      { handle: 'build-your-own-fungi-fusion-18-pack', title: 'Build Your Own 18-Pack', price: 4399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/hf_20260707_185319_dd3ac4cb-1de8-44cc-89ee-8c2692763dca.png?v=1783450693&width=200', tag: 'BEST VALUE' },
       { handle: 'blue-razzberry-fungi-powered-seltzer', title: 'Blue Razzberry — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main.webp?v=1778542878&width=200', tag: 'TOP SELLER' },
       { handle: 'mango-mimosa-fungi-powered-seltzer', title: 'Mango Mimosa — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main_1.webp?v=1778543565&width=200', tag: 'TROPICAL' },
       { handle: 'watermelon-fungi-powered-seltzer', title: 'Watermelon — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main_1_336f10d5-6961-4495-ba14-55ab4fb89e12.webp?v=1778544523&width=200', tag: 'SUMMER' }
