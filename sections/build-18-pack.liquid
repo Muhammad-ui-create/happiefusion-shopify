@@ -336,11 +336,15 @@
 
   .byo-sub { font-size: 16px; color: var(--gray, #5A6B5E); margin-bottom: 20px; max-width: 560px; margin-left: auto; margin-right: auto; }
 
-  /* ── Size switcher ── */
-  .byo-sizes { display: inline-flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+  /* ── Size switcher — its own centered row, equal-height cards ── */
+  .byo-sizes {
+    display: flex; align-items: stretch; gap: 12px; margin: 0 auto 20px;
+    flex-wrap: wrap; justify-content: center;
+  }
   .byo-size {
     position: relative;
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    min-width: 170px;
     background: #fff; border: 2px solid rgba(0,0,0,0.08); border-radius: 18px;
     padding: 14px 26px 12px; cursor: pointer;
     font-family: inherit;
