@@ -1,0 +1,284 @@
+{% comment %}
+  Build Your Own 18-Pack — custom bundle builder.
+  Assign template "product.build-18" to the Build Your Own 18-Pack product.
+  The chosen mix is stored as line item properties on the single 18-pack variant,
+  so it shows on the cart, checkout, and the order for fulfillment.
+{% endcomment %}
+
+{%- assign variant = product.selected_or_first_available_variant -%}
+{%- assign p_blue  = all_products['blue-razzberry-fungi-powered-seltzer'] -%}
+{%- assign p_mango = all_products['mango-mimosa-fungi-powered-seltzer'] -%}
+{%- assign p_water = all_products['watermelon-fungi-powered-seltzer'] -%}
+
+<div class="byo-page">
+  <div class="byo-inner">
+
+    <div class="byo-head">
+      <div class="byo-eyebrow">Custom Pack Builder</div>
+      <h1 class="byo-title">{{ product.title }}</h1>
+      <p class="byo-sub">Pick any mix of our three flavors — <strong>18 cans total</strong>, built exactly how you like it.</p>
+      <div class="byo-price-row">
+        <span class="byo-price">{{ variant.price | money }}</span>
+        <span class="byo-price-note">$2.44 per can</span>
+        <span class="byo-save">Save {{ 7197 | minus: variant.price | money }} vs three 6-packs</span>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="byo-progress-wrap" aria-live="polite">
+      <div class="byo-progress-label">
+        <span><strong id="byo-count">0</strong> / 18 cans</span>
+        <span id="byo-progress-hint">Pick your flavors below</span>
+      </div>
+      <div class="byo-progress-bar"><div class="byo-progress-fill" id="byo-progress-fill"></div></div>
+    </div>
+
+    <!-- Quick presets -->
+    <div class="byo-presets">
+      <button type="button" class="byo-preset" data-mix="6,6,6">Even Mix · 6 each</button>
+      <button type="button" class="byo-preset" data-mix="18,0,0">All Blue Razz</button>
+      <button type="button" class="byo-preset" data-mix="0,18,0">All Mango</button>
+      <button type="button" class="byo-preset" data-mix="0,0,18">All Watermelon</button>
+    </div>
+
+    <!-- Flavor cards -->
+    <div class="byo-grid">
+
+      <div class="byo-card byo-card-blue" data-flavor="Blue Razzberry">
+        <div class="byo-card-img">
+          {%- if p_blue.featured_image -%}
+            <img src="{{ p_blue.featured_image | image_url: width: 400 }}" alt="Blue Razzberry can" width="200" height="200" loading="lazy" />
+          {%- endif -%}
+        </div>
+        <div class="byo-card-name">Blue Razzberry</div>
+        <div class="byo-card-note">Tart &amp; candy-bright</div>
+        <div class="byo-stepper">
+          <button type="button" class="byo-btn byo-minus" aria-label="Remove one Blue Razzberry">−</button>
+          <span class="byo-qty" data-count>0</span>
+          <button type="button" class="byo-btn byo-plus" aria-label="Add one Blue Razzberry">+</button>
+        </div>
+      </div>
+
+      <div class="byo-card byo-card-mango" data-flavor="Mango Mimosa">
+        <div class="byo-card-img">
+          {%- if p_mango.featured_image -%}
+            <img src="{{ p_mango.featured_image | image_url: width: 400 }}" alt="Mango Mimosa can" width="200" height="200" loading="lazy" />
+          {%- endif -%}
+        </div>
+        <div class="byo-card-name">Mango Mimosa</div>
+        <div class="byo-card-note">Tropical &amp; lightly sweet</div>
+        <div class="byo-stepper">
+          <button type="button" class="byo-btn byo-minus" aria-label="Remove one Mango Mimosa">−</button>
+          <span class="byo-qty" data-count>0</span>
+          <button type="button" class="byo-btn byo-plus" aria-label="Add one Mango Mimosa">+</button>
+        </div>
+      </div>
+
+      <div class="byo-card byo-card-water" data-flavor="Watermelon">
+        <div class="byo-card-img">
+          {%- if p_water.featured_image -%}
+            <img src="{{ p_water.featured_image | image_url: width: 400 }}" alt="Watermelon can" width="200" height="200" loading="lazy" />
+          {%- endif -%}
+        </div>
+        <div class="byo-card-name">Watermelon</div>
+        <div class="byo-card-note">Crisp, clean &amp; juicy</div>
+        <div class="byo-stepper">
+          <button type="button" class="byo-btn byo-minus" aria-label="Remove one Watermelon">−</button>
+          <span class="byo-qty" data-count>0</span>
+          <button type="button" class="byo-btn byo-plus" aria-label="Add one Watermelon">+</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ATC -->
+    <button type="button" class="btn-atc byo-atc" id="byo-atc" data-variant-id="{{ variant.id }}" disabled>
+      <span id="byo-atc-text">PICK 18 CANS TO CONTINUE</span>
+    </button>
+    <p class="byo-atc-note">Every can: 900mg Lion's Mane · 700mg Cordyceps · 400mg Reishi · Zero alcohol · Zero caffeine</p>
+
+    <!-- Trust pills -->
+    <div class="product-trust-pills byo-pills">
+      <span class="trust-pill">Free Shipping — No Minimum</span>
+      <span class="trust-pill">30-Day Full Refund</span>
+      <span class="trust-pill">3rd-Party Lab Tested</span>
+    </div>
+
+    <div class="byo-desc">{{ product.description }}</div>
+
+  </div>
+</div>
+
+<style>
+  .byo-page { padding: 40px 16px 72px; }
+  .byo-inner { max-width: 860px; margin: 0 auto; }
+  .byo-head { text-align: center; margin-bottom: 28px; }
+  .byo-eyebrow {
+    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--green, #2D6A4F);
+    background: rgba(45,106,79,0.08); border-radius: 50px; padding: 6px 16px; margin-bottom: 14px;
+  }
+  .byo-title { font-size: clamp(30px, 5vw, 48px); font-weight: 900; line-height: 1.05; margin-bottom: 10px; }
+  .byo-sub { font-size: 16px; color: var(--gray, #5A6B5E); margin-bottom: 18px; }
+  .byo-price-row { display: inline-flex; align-items: baseline; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .byo-price { font-size: 36px; font-weight: 900; color: var(--green, #2D6A4F); }
+  .byo-price-note { font-size: 13px; color: var(--gray, #5A6B5E); font-weight: 600; }
+  .byo-save {
+    background: var(--green, #2D6A4F); color: #fff; font-size: 12px; font-weight: 800;
+    padding: 5px 12px; border-radius: 50px; letter-spacing: 0.03em;
+  }
+
+  .byo-progress-wrap { margin-bottom: 18px; }
+  .byo-progress-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 7px; color: var(--gray, #5A6B5E); }
+  .byo-progress-label strong { color: #1A1A1A; font-size: 15px; }
+  .byo-progress-bar { height: 10px; background: rgba(45,106,79,0.10); border-radius: 50px; overflow: hidden; }
+  .byo-progress-fill {
+    height: 100%; width: 0%; border-radius: 50px;
+    background: linear-gradient(90deg, var(--green-mid, #52B788), var(--green, #2D6A4F));
+    transition: width 0.25s ease;
+  }
+  .byo-progress-fill.full { background: linear-gradient(90deg, #F5A623, var(--green, #2D6A4F)); }
+
+  .byo-presets { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 22px; }
+  .byo-preset {
+    background: #fff; border: 1.5px solid rgba(45,106,79,0.25); color: var(--green, #2D6A4F);
+    border-radius: 50px; padding: 8px 16px; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    transition: all .15s;
+  }
+  .byo-preset:hover { background: var(--green, #2D6A4F); color: #fff; }
+
+  .byo-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; margin-bottom: 26px; }
+  .byo-card {
+    background: #fff; border: 2px solid rgba(0,0,0,0.06); border-radius: 20px;
+    padding: 20px 14px 18px; text-align: center;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .byo-card.has-cans { box-shadow: 0 10px 28px rgba(27,42,31,0.10); }
+  .byo-card-blue.has-cans  { border-color: #3B6FF0; }
+  .byo-card-mango.has-cans { border-color: #F5A623; }
+  .byo-card-water.has-cans { border-color: #E84C6B; }
+  .byo-card-img img { width: 130px; height: 130px; object-fit: contain; margin: 0 auto 10px; }
+  .byo-card-name { font-weight: 900; font-size: 15px; margin-bottom: 2px; }
+  .byo-card-note { font-size: 12px; color: var(--gray, #5A6B5E); margin-bottom: 14px; }
+  .byo-stepper { display: inline-flex; align-items: center; gap: 14px; }
+  .byo-btn {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1.5px solid rgba(45,106,79,0.30); background: #fff; color: var(--green, #2D6A4F);
+    font-size: 20px; font-weight: 700; cursor: pointer; line-height: 1;
+    transition: all .15s;
+  }
+  .byo-btn:hover:not(:disabled) { background: var(--green, #2D6A4F); color: #fff; }
+  .byo-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .byo-qty { font-size: 20px; font-weight: 900; min-width: 28px; }
+
+  .byo-atc { max-width: 480px; margin: 0 auto 12px; display: block; }
+  .byo-atc:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; }
+  .byo-atc-note { text-align: center; font-size: 12px; color: var(--gray, #5A6B5E); margin-bottom: 18px; }
+  .byo-pills { justify-content: center; margin-top: 0; }
+  .byo-desc { max-width: 640px; margin: 32px auto 0; font-size: 14.5px; color: #444; line-height: 1.75; }
+
+  @media (max-width: 640px) {
+    .byo-grid { grid-template-columns: 1fr; gap: 12px; }
+    .byo-card { display: grid; grid-template-columns: 84px 1fr auto; align-items: center; text-align: left; gap: 4px 14px; padding: 14px; }
+    .byo-card-img img { width: 84px; height: 84px; margin: 0; grid-row: span 3; }
+    .byo-card-note { margin-bottom: 0; }
+    .byo-stepper { grid-column: 3; grid-row: span 3; flex-direction: column; gap: 8px; }
+  }
+</style>
+
+<script>
+(function() {
+  var TARGET = 18;
+  var cards    = Array.prototype.slice.call(document.querySelectorAll('.byo-card'));
+  var atc      = document.getElementById('byo-atc');
+  var atcText  = document.getElementById('byo-atc-text');
+  var countEl  = document.getElementById('byo-count');
+  var hintEl   = document.getElementById('byo-progress-hint');
+  var fillEl   = document.getElementById('byo-progress-fill');
+  if (!cards.length || !atc) return;
+
+  var counts = cards.map(function() { return 0; });
+
+  function total() { return counts.reduce(function(a, b) { return a + b; }, 0); }
+
+  function render() {
+    var t = total();
+    cards.forEach(function(card, i) {
+      card.querySelector('[data-count]').textContent = counts[i];
+      card.classList.toggle('has-cans', counts[i] > 0);
+      card.querySelector('.byo-minus').disabled = counts[i] === 0;
+      card.querySelector('.byo-plus').disabled  = t >= TARGET;
+    });
+    countEl.textContent = t;
+    fillEl.style.width = (t / TARGET * 100) + '%';
+    fillEl.classList.toggle('full', t === TARGET);
+    if (t === 0)            hintEl.textContent = 'Pick your flavors below';
+    else if (t < TARGET)    hintEl.textContent = 'Add ' + (TARGET - t) + ' more can' + (TARGET - t === 1 ? '' : 's');
+    else                    hintEl.textContent = 'Pack complete! 🎉';
+    atc.disabled = t !== TARGET;
+    atcText.textContent = t === TARGET
+      ? 'ADD MY 18-PACK — {{ variant.price | money }}'
+      : 'PICK ' + (TARGET - t) + ' MORE CAN' + (TARGET - t === 1 ? '' : 'S') + ' TO CONTINUE';
+  }
+
+  cards.forEach(function(card, i) {
+    card.querySelector('.byo-plus').addEventListener('click', function() {
+      if (total() < TARGET) { counts[i]++; render(); }
+    });
+    card.querySelector('.byo-minus').addEventListener('click', function() {
+      if (counts[i] > 0) { counts[i]--; render(); }
+    });
+  });
+
+  document.querySelectorAll('.byo-preset').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      counts = btn.dataset.mix.split(',').map(Number);
+      render();
+    });
+  });
+
+  atc.addEventListener('click', function() {
+    if (total() !== TARGET) return;
+    var properties = {};
+    cards.forEach(function(card, i) {
+      if (counts[i] > 0) properties[card.dataset.flavor] = counts[i] + ' cans';
+    });
+    atc.disabled = true;
+    atcText.textContent = 'Adding…';
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: atc.dataset.variantId, quantity: 1, properties: properties })
+    }).then(function(r) {
+      if (!r.ok) throw new Error('add failed');
+      return r.json();
+    }).then(function() {
+      atcText.textContent = '✓ Added to Cart!';
+      try {
+        if (window.fbq) {
+          fbq('track', 'AddToCart', {
+            content_ids: [String(atc.dataset.variantId)],
+            content_type: 'product',
+            content_name: {{ product.title | json }},
+            value: {{ variant.price | divided_by: 100.0 }},
+            currency: 'USD',
+            num_items: 1
+          });
+        }
+      } catch(e) {}
+      var trigger = document.getElementById('cart-trigger');
+      if (trigger) trigger.click();
+      setTimeout(render, 1800);
+    }).catch(function() {
+      render();
+      alert("Couldn't add to cart. Please refresh and try again.");
+    });
+  });
+
+  render();
+})();
+</script>
+
+{% schema %}
+{ "name": "Build 18-Pack", "settings": [] }
+{% endschema %}

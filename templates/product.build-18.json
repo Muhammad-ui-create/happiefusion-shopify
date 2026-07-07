@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "build-18-pack",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -90,11 +90,21 @@
     }
     var html = '';
     cart.items.forEach(function(item) {
+      /* Line item properties (e.g. Build-Your-Own 18-Pack flavor mix) — show
+         everything except _underscore-prefixed internals */
+      var propsHtml = '';
+      if (item.properties) {
+        Object.keys(item.properties).forEach(function(k) {
+          if (k.charAt(0) === '_' || !item.properties[k]) return;
+          propsHtml += '<div class="cart-item-variant">' + k + ': ' + item.properties[k] + '</div>';
+        });
+      }
       html += '<div class="cart-item">'
         + '<img src="' + item.image + '" alt="" class="cart-item-img" />'
         + '<div class="cart-item-info">'
         + '<div class="cart-item-title">' + item.product_title + '</div>'
         + '<div class="cart-item-variant">' + (item.variant_title || '') + '</div>'
+        + propsHtml
         + (item.selling_plan_allocation ? '<div class="cart-item-sub">Subscribe &amp; Save</div>' : '')
         + '<div class="cart-item-qty">'
         + '<button type="button" onclick="changeCartQty(\'' + item.key + '\',' + (item.quantity - 1) + ')" aria-label="Decrease quantity">−</button>'
