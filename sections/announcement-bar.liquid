@@ -1,13 +1,15 @@
-{% comment %} Promo varies per LP so the bar matches the discount that auto-applies at checkout {% endcomment %}
-{%- assign tpl = template.name | append: '.' | append: template.suffix -%}
+{% comment %}
+  Promo item only renders on the caffeine LP (FUNGI15, which that page auto-applies).
+  The site-wide USA10 promo was removed 2026-07-02 — the ads no longer carry a
+  discount and the code expires Jul 6; an unfulfillable bar promise was hurting
+  checkout trust.
+{% endcomment %}
+{%- assign show_promo = false -%}
 {%- if template.suffix == 'lp-caffeine-alt' -%}
+  {%- assign show_promo = true -%}
   {%- assign promo_label = 'LIMITED TIME:' -%}
   {%- assign promo_text = '15% Off with Code' -%}
   {%- assign promo_code = 'FUNGI15' -%}
-{%- else -%}
-  {%- assign promo_label = 'LIMITED TIME:' -%}
-  {%- assign promo_text = '10% Off with Code' -%}
-  {%- assign promo_code = 'USA10' -%}
 {%- endif -%}
 
 {% comment %} Single set of items — repeated via liquid to fill any screen width {% endcomment %}
@@ -47,6 +49,7 @@
     Free Shipping — No Minimum
   </span>
   <span class="ann-divider">✦</span>
+  {%- if show_promo -%}
   <span class="ann-item">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"/>
@@ -55,6 +58,7 @@
     <strong style="font-weight:800;letter-spacing:0.06em;">{{ promo_label }}</strong>&nbsp;{{ promo_text }} <strong style="font-weight:800;letter-spacing:0.04em;">{{ promo_code }}</strong>
   </span>
   <span class="ann-divider">✦</span>
+  {%- endif -%}
 {% endcapture %}
 
 <div class="announcement-bar">
