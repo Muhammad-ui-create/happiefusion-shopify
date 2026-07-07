@@ -142,7 +142,46 @@
       </span>
     </div>
 
-    <div class="byo-desc">{{ product.description }}</div>
+    {% comment %} Product description rendered as a designed feature grid —
+       the raw description stays on the product for SEO/channels. {% endcomment %}
+    <div class="byo-features">
+      <h2 class="byo-features-title">Your flavors. Your ratios. <em>One box.</em></h2>
+      <div class="byo-features-grid">
+
+        <div class="byo-feature">
+          <span class="byo-feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg>
+          </span>
+          <strong>Dual-Extracted Trio</strong>
+          <p>Lion's Mane, Cordyceps &amp; Reishi in every can — fruiting body only, never mycelium on grain.</p>
+        </div>
+
+        <div class="byo-feature">
+          <span class="byo-feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </span>
+          <strong>2,000mg Per Can</strong>
+          <p>Real functional doses — zero caffeine, zero alcohol, 40 calories. No crash, no jitters.</p>
+        </div>
+
+        <div class="byo-feature">
+          <span class="byo-feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </span>
+          <strong>18 Cans, Your Way</strong>
+          <p>Any mix of three flavors — and the best per-can price we offer, at just $2.44 a can.</p>
+        </div>
+
+        <div class="byo-feature">
+          <span class="byo-feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 4H8L9 3z"/><path d="M8 7v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7"/><path d="M12 11v3M11 13h2"/></svg>
+          </span>
+          <strong>Lab Tested, Every Batch</strong>
+          <p>Third-party verified for heavy metals, pesticides, and microbials. COA available for every batch.</p>
+        </div>
+
+      </div>
+    </div>
 
   </div>
 </div>
@@ -305,7 +344,33 @@
   }
   .byo-pill svg { color: var(--green, #2D6A4F); }
 
-  .byo-desc { max-width: 640px; margin: 36px auto 0; font-size: 14.5px; color: #444; line-height: 1.75; text-align: center; }
+  /* ── Feature grid (replaces raw description) ── */
+  .byo-features { margin-top: 52px; }
+  .byo-features-title {
+    text-align: center; font-size: clamp(22px, 3.2vw, 30px); font-weight: 900;
+    letter-spacing: -0.015em; margin-bottom: 26px;
+  }
+  .byo-features-title em { font-style: normal; color: var(--green, #2D6A4F); }
+  .byo-features-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; max-width: 720px; margin: 0 auto; }
+  .byo-feature {
+    background: #fff; border: 1px solid rgba(0,0,0,0.05); border-radius: 18px;
+    padding: 20px 22px;
+    box-shadow: 0 4px 16px rgba(27,42,31,0.05);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .byo-feature:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(27,42,31,0.09); }
+  .byo-feature-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 12px;
+    background: rgba(45,106,79,0.09); color: var(--green, #2D6A4F);
+    margin-bottom: 11px;
+  }
+  .byo-feature strong { display: block; font-size: 14.5px; font-weight: 800; margin-bottom: 5px; letter-spacing: -0.005em; }
+  .byo-feature p { font-size: 13px; color: var(--gray, #5A6B5E); line-height: 1.6; margin: 0; }
+  @media (max-width: 560px) {
+    .byo-features-grid { grid-template-columns: 1fr; }
+    .byo-features { margin-top: 40px; }
+  }
 
   /* ── Mobile ── */
   @media (max-width: 640px) {
