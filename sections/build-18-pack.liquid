@@ -1,6 +1,7 @@
 {% comment %}
   Build Your Own 18-Pack — custom bundle builder.
   Assign template "product.build-18" to the Build Your Own 18-Pack product.
+  Flavors are picked as whole 6-packs; hard cap of 3 six-packs = exactly 18 cans.
   The chosen mix is stored as line item properties on the single 18-pack variant,
   so it shows on the cart, checkout, and the order for fulfillment.
 {% endcomment %}
@@ -9,49 +10,70 @@
 {%- assign p_blue  = all_products['blue-razzberry-fungi-powered-seltzer'] -%}
 {%- assign p_mango = all_products['mango-mimosa-fungi-powered-seltzer'] -%}
 {%- assign p_water = all_products['watermelon-fungi-powered-seltzer'] -%}
+{%- assign compare = variant.compare_at_price | default: 7197 -%}
+{%- assign savings = compare | minus: variant.price -%}
 
 <div class="byo-page">
   <div class="byo-inner">
 
     <div class="byo-head">
-      <div class="byo-eyebrow">Custom Pack Builder</div>
+      <div class="byo-eyebrow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+        Custom Pack Builder
+      </div>
       <h1 class="byo-title">{{ product.title }}</h1>
       <p class="byo-sub">Pick any mix of our three flavors in 6-packs — <strong>3 six-packs, 18 cans total</strong>, built exactly how you like it.</p>
-      <div class="byo-price-row">
-        <span class="byo-price">{{ variant.price | money }}</span>
-        <span class="byo-price-note">$2.44 per can</span>
-        <span class="byo-save">Save {{ 7197 | minus: variant.price | money }} vs three 6-packs</span>
+
+      <div class="byo-price-card">
+        <div class="byo-price-row">
+          <span class="byo-price">{{ variant.price | money }}</span>
+          <span class="byo-compare">{{ compare | money }}</span>
+          <span class="byo-save">SAVE {{ savings | money }}</span>
+        </div>
+        <div class="byo-price-meta">
+          <span>$2.44 per can</span>
+          <span class="byo-price-dot">·</span>
+          <span>39% off vs three 6-packs</span>
+          <span class="byo-price-dot">·</span>
+          <span>Free shipping</span>
+        </div>
       </div>
     </div>
 
-    <!-- Progress -->
+    <!-- Progress: three pack slots -->
     <div class="byo-progress-wrap" aria-live="polite">
       <div class="byo-progress-label">
-        <span><strong id="byo-count">0</strong> / 3 six-packs <span style="font-weight:500;color:inherit;">(18 cans)</span></span>
+        <span class="byo-progress-count"><strong id="byo-count">0</strong>&nbsp;/ 3 six-packs <em>(18 cans)</em></span>
         <span id="byo-progress-hint">Pick your 6-packs below</span>
       </div>
-      <div class="byo-progress-bar"><div class="byo-progress-fill" id="byo-progress-fill"></div></div>
+      <div class="byo-progress-bar">
+        <div class="byo-seg" data-seg></div>
+        <div class="byo-seg" data-seg></div>
+        <div class="byo-seg" data-seg></div>
+      </div>
     </div>
 
     <!-- Quick presets -->
     <div class="byo-presets">
-      <button type="button" class="byo-preset" data-mix="1,1,1">Even Mix · 1 of each</button>
-      <button type="button" class="byo-preset" data-mix="3,0,0">All Blue Razz</button>
-      <button type="button" class="byo-preset" data-mix="0,3,0">All Mango</button>
-      <button type="button" class="byo-preset" data-mix="0,0,3">All Watermelon</button>
+      <button type="button" class="byo-preset" data-mix="1,1,1"><span class="byo-dots"><i style="background:#3B6FF0;"></i><i style="background:#F5A623;"></i><i style="background:#E84C6B;"></i></span>Even Mix · 1 of each</button>
+      <button type="button" class="byo-preset" data-mix="3,0,0"><span class="byo-dots"><i style="background:#3B6FF0;"></i></span>All Blue Razz</button>
+      <button type="button" class="byo-preset" data-mix="0,3,0"><span class="byo-dots"><i style="background:#F5A623;"></i></span>All Mango</button>
+      <button type="button" class="byo-preset" data-mix="0,0,3"><span class="byo-dots"><i style="background:#E84C6B;"></i></span>All Watermelon</button>
     </div>
 
     <!-- Flavor cards -->
     <div class="byo-grid">
 
       <div class="byo-card byo-card-blue" data-flavor="Blue Razzberry">
+        <div class="byo-card-accent" aria-hidden="true"></div>
         <div class="byo-card-img">
           {%- if p_blue.featured_image -%}
-            <img src="{{ p_blue.featured_image | image_url: width: 400 }}" alt="Blue Razzberry can" width="200" height="200" loading="lazy" />
+            <img src="{{ p_blue.featured_image | image_url: width: 400 }}" alt="Blue Razzberry 6-pack" width="200" height="200" loading="lazy" />
           {%- endif -%}
         </div>
         <div class="byo-card-name">Blue Razzberry</div>
-        <div class="byo-card-note">Tart &amp; candy-bright · 6-pack</div>
+        <div class="byo-card-note">Tart &amp; candy-bright</div>
+        <div class="byo-card-unit">6-pack · 6 cans</div>
         <div class="byo-stepper">
           <button type="button" class="byo-btn byo-minus" aria-label="Remove one Blue Razzberry 6-pack">−</button>
           <span class="byo-qty" data-count>0</span>
@@ -60,13 +82,15 @@
       </div>
 
       <div class="byo-card byo-card-mango" data-flavor="Mango Mimosa">
+        <div class="byo-card-accent" aria-hidden="true"></div>
         <div class="byo-card-img">
           {%- if p_mango.featured_image -%}
-            <img src="{{ p_mango.featured_image | image_url: width: 400 }}" alt="Mango Mimosa can" width="200" height="200" loading="lazy" />
+            <img src="{{ p_mango.featured_image | image_url: width: 400 }}" alt="Mango Mimosa 6-pack" width="200" height="200" loading="lazy" />
           {%- endif -%}
         </div>
         <div class="byo-card-name">Mango Mimosa</div>
-        <div class="byo-card-note">Tropical &amp; lightly sweet · 6-pack</div>
+        <div class="byo-card-note">Tropical &amp; lightly sweet</div>
+        <div class="byo-card-unit">6-pack · 6 cans</div>
         <div class="byo-stepper">
           <button type="button" class="byo-btn byo-minus" aria-label="Remove one Mango Mimosa 6-pack">−</button>
           <span class="byo-qty" data-count>0</span>
@@ -75,13 +99,15 @@
       </div>
 
       <div class="byo-card byo-card-water" data-flavor="Watermelon">
+        <div class="byo-card-accent" aria-hidden="true"></div>
         <div class="byo-card-img">
           {%- if p_water.featured_image -%}
-            <img src="{{ p_water.featured_image | image_url: width: 400 }}" alt="Watermelon can" width="200" height="200" loading="lazy" />
+            <img src="{{ p_water.featured_image | image_url: width: 400 }}" alt="Watermelon 6-pack" width="200" height="200" loading="lazy" />
           {%- endif -%}
         </div>
         <div class="byo-card-name">Watermelon</div>
-        <div class="byo-card-note">Crisp, clean &amp; juicy · 6-pack</div>
+        <div class="byo-card-note">Crisp, clean &amp; juicy</div>
+        <div class="byo-card-unit">6-pack · 6 cans</div>
         <div class="byo-stepper">
           <button type="button" class="byo-btn byo-minus" aria-label="Remove one Watermelon 6-pack">−</button>
           <span class="byo-qty" data-count>0</span>
@@ -92,16 +118,28 @@
     </div>
 
     <!-- ATC -->
-    <button type="button" class="btn-atc byo-atc" id="byo-atc" data-variant-id="{{ variant.id }}" disabled>
+    <button type="button" class="byo-atc" id="byo-atc" data-variant-id="{{ variant.id }}" disabled>
       <span id="byo-atc-text">PICK 3 SIX-PACKS TO CONTINUE</span>
     </button>
-    <p class="byo-atc-note">Every can: 900mg Lion's Mane · 700mg Cordyceps · 400mg Reishi · Zero alcohol · Zero caffeine</p>
+    <p class="byo-atc-note">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:4px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Every can: 900mg Lion's Mane · 700mg Cordyceps · 400mg Reishi · Zero alcohol · Zero caffeine
+    </p>
 
     <!-- Trust pills -->
-    <div class="product-trust-pills byo-pills">
-      <span class="trust-pill">Free Shipping — No Minimum</span>
-      <span class="trust-pill">30-Day Full Refund</span>
-      <span class="trust-pill">3rd-Party Lab Tested</span>
+    <div class="byo-pills">
+      <span class="byo-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="11" rx="2"/><path d="M16 10h4l3 3v4h-7"/><circle cx="5.5" cy="19.5" r="1.5"/><circle cx="20.5" cy="19.5" r="1.5"/></svg>
+        Free Shipping — No Minimum
+      </span>
+      <span class="byo-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/><path d="M9 12l2 2 4-4"/></svg>
+        30-Day Full Refund
+      </span>
+      <span class="byo-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 4H8L9 3z"/><path d="M8 7v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7"/><path d="M12 11v3M11 13h2"/></svg>
+        3rd-Party Lab Tested
+      </span>
     </div>
 
     <div class="byo-desc">{{ product.description }}</div>
@@ -110,79 +148,185 @@
 </div>
 
 <style>
-  .byo-page { padding: 40px 16px 72px; }
-  .byo-inner { max-width: 860px; margin: 0 auto; }
-  .byo-head { text-align: center; margin-bottom: 28px; }
+  .byo-page {
+    padding: 48px 16px 80px;
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 0%, rgba(82,183,136,0.10), transparent 65%),
+      radial-gradient(ellipse 60% 40% at 85% 10%, rgba(245,166,35,0.10), transparent 65%);
+  }
+  .byo-inner { max-width: 880px; margin: 0 auto; }
+
+  /* ── Header ── */
+  .byo-head { text-align: center; margin-bottom: 30px; }
   .byo-eyebrow {
-    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--green, #2D6A4F);
-    background: rgba(45,106,79,0.08); border-radius: 50px; padding: 6px 16px; margin-bottom: 14px;
+    background: rgba(45,106,79,0.09); border: 1px solid rgba(45,106,79,0.15);
+    border-radius: 50px; padding: 7px 16px; margin-bottom: 16px;
   }
-  .byo-title { font-size: clamp(30px, 5vw, 48px); font-weight: 900; line-height: 1.05; margin-bottom: 10px; }
-  .byo-sub { font-size: 16px; color: var(--gray, #5A6B5E); margin-bottom: 18px; }
-  .byo-price-row { display: inline-flex; align-items: baseline; gap: 12px; flex-wrap: wrap; justify-content: center; }
-  .byo-price { font-size: 36px; font-weight: 900; color: var(--green, #2D6A4F); }
-  .byo-price-note { font-size: 13px; color: var(--gray, #5A6B5E); font-weight: 600; }
+  .byo-title { font-size: clamp(32px, 5vw, 52px); font-weight: 900; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .byo-sub { font-size: 16px; color: var(--gray, #5A6B5E); margin-bottom: 22px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+  .byo-price-card {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid rgba(45,106,79,0.14);
+    border-radius: 20px;
+    padding: 18px 30px 15px;
+    box-shadow: 0 10px 32px rgba(27,42,31,0.08);
+  }
+  .byo-price-row { display: flex; align-items: baseline; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .byo-price { font-size: 42px; font-weight: 900; color: var(--green, #2D6A4F); letter-spacing: -0.02em; line-height: 1; }
+  .byo-compare { font-size: 20px; font-weight: 600; color: #9aa39c; text-decoration: line-through; text-decoration-thickness: 2px; }
   .byo-save {
-    background: var(--green, #2D6A4F); color: #fff; font-size: 12px; font-weight: 800;
-    padding: 5px 12px; border-radius: 50px; letter-spacing: 0.03em;
+    background: linear-gradient(135deg, #E84C6B, #C03060); color: #fff;
+    font-size: 12px; font-weight: 900; letter-spacing: 0.06em;
+    padding: 6px 13px; border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(232,76,107,0.30);
   }
+  .byo-price-meta {
+    display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+    margin-top: 9px; font-size: 12.5px; font-weight: 600; color: var(--gray, #5A6B5E);
+  }
+  .byo-price-dot { opacity: 0.4; }
 
-  .byo-progress-wrap { margin-bottom: 18px; }
-  .byo-progress-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 7px; color: var(--gray, #5A6B5E); }
-  .byo-progress-label strong { color: #1A1A1A; font-size: 15px; }
-  .byo-progress-bar { height: 10px; background: rgba(45,106,79,0.10); border-radius: 50px; overflow: hidden; }
-  .byo-progress-fill {
-    height: 100%; width: 0%; border-radius: 50px;
+  /* ── Progress: 3 pack slots ── */
+  .byo-progress-wrap { margin: 30px 0 18px; }
+  .byo-progress-label {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 13px; margin-bottom: 9px; color: var(--gray, #5A6B5E);
+  }
+  .byo-progress-count strong { color: #1A1A1A; font-size: 17px; }
+  .byo-progress-count em { font-style: normal; opacity: 0.75; }
+  #byo-progress-hint { font-weight: 600; }
+  .byo-progress-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .byo-seg {
+    height: 12px; border-radius: 50px;
+    background: rgba(45,106,79,0.10);
+    border: 1px solid rgba(45,106,79,0.10);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .byo-seg.filled {
     background: linear-gradient(90deg, var(--green-mid, #52B788), var(--green, #2D6A4F));
-    transition: width 0.25s ease;
+    box-shadow: 0 3px 10px rgba(45,106,79,0.30);
+    border-color: transparent;
   }
-  .byo-progress-fill.full { background: linear-gradient(90deg, #F5A623, var(--green, #2D6A4F)); }
 
-  .byo-presets { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 22px; }
+  /* ── Presets ── */
+  .byo-presets { display: flex; gap: 9px; flex-wrap: wrap; justify-content: center; margin-bottom: 26px; }
   .byo-preset {
-    background: #fff; border: 1.5px solid rgba(45,106,79,0.25); color: var(--green, #2D6A4F);
-    border-radius: 50px; padding: 8px 16px; font-size: 12.5px; font-weight: 700; cursor: pointer;
-    transition: all .15s;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #fff; border: 1.5px solid rgba(45,106,79,0.20); color: #1A1A1A;
+    border-radius: 50px; padding: 9px 17px; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(27,42,31,0.05);
+    transition: all .18s;
   }
-  .byo-preset:hover { background: var(--green, #2D6A4F); color: #fff; }
+  .byo-preset:hover { border-color: var(--green, #2D6A4F); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(27,42,31,0.10); }
+  .byo-dots { display: inline-flex; gap: 3px; }
+  .byo-dots i { width: 8px; height: 8px; border-radius: 50%; display: block; }
 
-  .byo-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; margin-bottom: 26px; }
+  /* ── Flavor cards ── */
+  .byo-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-bottom: 30px; }
   .byo-card {
-    background: #fff; border: 2px solid rgba(0,0,0,0.06); border-radius: 20px;
-    padding: 20px 14px 18px; text-align: center;
-    transition: border-color .2s, box-shadow .2s;
+    position: relative;
+    background: #fff; border: 2px solid rgba(0,0,0,0.05); border-radius: 22px;
+    padding: 0 16px 22px; text-align: center;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(27,42,31,0.05);
+    transition: border-color .25s, box-shadow .25s, transform .25s;
   }
-  .byo-card.has-cans { box-shadow: 0 10px 28px rgba(27,42,31,0.10); }
+  .byo-card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(27,42,31,0.11); }
+  .byo-card-accent { height: 6px; margin: 0 -16px 18px; }
+  .byo-card-blue  .byo-card-accent { background: linear-gradient(90deg, #3B6FF0, #7EA0F7); }
+  .byo-card-mango .byo-card-accent { background: linear-gradient(90deg, #F5A623, #FBCB77); }
+  .byo-card-water .byo-card-accent { background: linear-gradient(90deg, #E84C6B, #F58CA1); }
+  .byo-card.has-cans { box-shadow: 0 14px 36px rgba(27,42,31,0.13); }
   .byo-card-blue.has-cans  { border-color: #3B6FF0; }
   .byo-card-mango.has-cans { border-color: #F5A623; }
   .byo-card-water.has-cans { border-color: #E84C6B; }
-  .byo-card-img img { width: 130px; height: 130px; object-fit: contain; margin: 0 auto 10px; }
-  .byo-card-name { font-weight: 900; font-size: 15px; margin-bottom: 2px; }
-  .byo-card-note { font-size: 12px; color: var(--gray, #5A6B5E); margin-bottom: 14px; }
-  .byo-stepper { display: inline-flex; align-items: center; gap: 14px; }
+
+  .byo-card-img {
+    width: 152px; height: 152px; margin: 0 auto 12px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .byo-card-blue  .byo-card-img { background: radial-gradient(circle, rgba(59,111,240,0.12), transparent 72%); }
+  .byo-card-mango .byo-card-img { background: radial-gradient(circle, rgba(245,166,35,0.14), transparent 72%); }
+  .byo-card-water .byo-card-img { background: radial-gradient(circle, rgba(232,76,107,0.12), transparent 72%); }
+  .byo-card-img img { width: 140px; height: 140px; object-fit: contain; transition: transform .3s; }
+  .byo-card:hover .byo-card-img img { transform: scale(1.06) rotate(-1.5deg); }
+
+  .byo-card-name { font-weight: 900; font-size: 16.5px; letter-spacing: -0.01em; margin-bottom: 3px; }
+  .byo-card-note { font-size: 12.5px; color: var(--gray, #5A6B5E); margin-bottom: 6px; }
+  .byo-card-unit {
+    display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--green, #2D6A4F); background: rgba(45,106,79,0.08);
+    padding: 4px 11px; border-radius: 50px; margin-bottom: 15px;
+  }
+
+  .byo-stepper { display: inline-flex; align-items: center; gap: 16px; }
   .byo-btn {
-    width: 38px; height: 38px; border-radius: 50%;
-    border: 1.5px solid rgba(45,106,79,0.30); background: #fff; color: var(--green, #2D6A4F);
-    font-size: 20px; font-weight: 700; cursor: pointer; line-height: 1;
+    width: 42px; height: 42px; border-radius: 14px;
+    border: 1.5px solid rgba(45,106,79,0.25); background: #fff; color: var(--green, #2D6A4F);
+    font-size: 22px; font-weight: 700; cursor: pointer; line-height: 1;
+    box-shadow: 0 2px 8px rgba(27,42,31,0.06);
     transition: all .15s;
   }
-  .byo-btn:hover:not(:disabled) { background: var(--green, #2D6A4F); color: #fff; }
-  .byo-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-  .byo-qty { font-size: 20px; font-weight: 900; min-width: 28px; }
+  .byo-btn:hover:not(:disabled) { background: var(--green, #2D6A4F); color: #fff; transform: translateY(-1px); }
+  .byo-btn:active:not(:disabled) { transform: translateY(0) scale(0.96); }
+  .byo-btn:disabled { opacity: 0.30; cursor: not-allowed; box-shadow: none; }
+  .byo-qty { font-size: 24px; font-weight: 900; min-width: 30px; transition: color .2s; }
+  .byo-card-blue.has-cans  .byo-qty { color: #3B6FF0; }
+  .byo-card-mango.has-cans .byo-qty { color: #D98A0F; }
+  .byo-card-water.has-cans .byo-qty { color: #E84C6B; }
 
-  .byo-atc { max-width: 480px; margin: 0 auto 12px; display: block; }
-  .byo-atc:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; }
-  .byo-atc-note { text-align: center; font-size: 12px; color: var(--gray, #5A6B5E); margin-bottom: 18px; }
-  .byo-pills { justify-content: center; margin-top: 0; }
-  .byo-desc { max-width: 640px; margin: 32px auto 0; font-size: 14.5px; color: #444; line-height: 1.75; }
+  /* ── ATC ── */
+  .byo-atc {
+    display: block; width: 100%; max-width: 520px; margin: 0 auto 12px;
+    background: linear-gradient(135deg, var(--green, #2D6A4F), var(--green-dark, #1B4332));
+    color: #fff; border: 0; border-radius: 16px;
+    padding: 20px; font-size: 16px; font-weight: 800; letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 0 14px 32px rgba(45,106,79,0.30);
+    transition: transform .2s, box-shadow .2s, opacity .2s;
+  }
+  .byo-atc:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(45,106,79,0.42); }
+  .byo-atc:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: 0 6px 18px rgba(45,106,79,0.15); }
+  .byo-atc-note { text-align: center; font-size: 12px; color: var(--gray, #5A6B5E); margin-bottom: 20px; }
 
+  .byo-pills { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .byo-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fff; border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 50px; padding: 8px 15px;
+    font-size: 12px; font-weight: 700; color: #1A1A1A;
+    box-shadow: 0 2px 8px rgba(27,42,31,0.04);
+  }
+  .byo-pill svg { color: var(--green, #2D6A4F); }
+
+  .byo-desc { max-width: 640px; margin: 36px auto 0; font-size: 14.5px; color: #444; line-height: 1.75; text-align: center; }
+
+  /* ── Mobile ── */
   @media (max-width: 640px) {
+    .byo-page { padding: 32px 14px 64px; }
+    .byo-price { font-size: 34px; }
+    .byo-compare { font-size: 17px; }
+    .byo-price-card { padding: 15px 20px 13px; }
     .byo-grid { grid-template-columns: 1fr; gap: 12px; }
-    .byo-card { display: grid; grid-template-columns: 84px 1fr auto; align-items: center; text-align: left; gap: 4px 14px; padding: 14px; }
-    .byo-card-img img { width: 84px; height: 84px; margin: 0; grid-row: span 3; }
-    .byo-card-note { margin-bottom: 0; }
-    .byo-stepper { grid-column: 3; grid-row: span 3; flex-direction: column; gap: 8px; }
+    .byo-card {
+      display: grid; grid-template-columns: 96px 1fr auto; align-items: center;
+      text-align: left; gap: 2px 14px; padding: 14px 14px 14px 10px;
+    }
+    .byo-card-accent { grid-column: 1 / -1; margin: -14px -14px 10px -10px; }
+    .byo-card-img { width: 96px; height: 96px; margin: 0; grid-row: span 4; }
+    .byo-card-img img { width: 88px; height: 88px; }
+    .byo-card-note { margin-bottom: 2px; }
+    .byo-card-unit { margin-bottom: 0; justify-self: start; }
+    .byo-stepper { grid-column: 3; grid-row: 2 / span 3; flex-direction: column; gap: 7px; }
+    .byo-btn { width: 38px; height: 38px; font-size: 20px; }
+    .byo-qty { font-size: 20px; }
+    #byo-progress-hint { font-size: 12px; }
   }
 </style>
 
@@ -194,7 +338,7 @@
   var atcText  = document.getElementById('byo-atc-text');
   var countEl  = document.getElementById('byo-count');
   var hintEl   = document.getElementById('byo-progress-hint');
-  var fillEl   = document.getElementById('byo-progress-fill');
+  var segs     = Array.prototype.slice.call(document.querySelectorAll('[data-seg]'));
   if (!cards.length || !atc) return;
 
   var counts = cards.map(function() { return 0; });
@@ -210,8 +354,7 @@
       card.querySelector('.byo-plus').disabled  = t >= TARGET;
     });
     countEl.textContent = t;
-    fillEl.style.width = (t / TARGET * 100) + '%';
-    fillEl.classList.toggle('full', t === TARGET);
+    segs.forEach(function(seg, i) { seg.classList.toggle('filled', i < t); });
     if (t === 0)            hintEl.textContent = 'Pick your 6-packs below';
     else if (t < TARGET)    hintEl.textContent = 'Add ' + (TARGET - t) + ' more 6-pack' + (TARGET - t === 1 ? '' : 's');
     else                    hintEl.textContent = '18 cans — pack complete! 🎉';
