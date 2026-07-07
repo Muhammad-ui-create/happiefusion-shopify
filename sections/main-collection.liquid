@@ -17,8 +17,11 @@
   </div>
   <div class="section-inner">
     <div class="products-grid">
+      {% comment %} Sold-out products are skipped so the grid stays one clean row {% endcomment %}
       {% for product in collection.products %}
-        {% render 'product-card', product: product %}
+        {% if product.available %}
+          {% render 'product-card', product: product %}
+        {% endif %}
       {% endfor %}
     </div>
   </div>

@@ -517,10 +517,13 @@
     <div class="related-products">
       <h2 class="related-title">You Might Also Like</h2>
       <div class="products-grid">
-        {% for p in related limit: 4 %}
-          {% unless p.id == product.id %}
+        {% comment %} Skip the current product and anything sold out; cap at 4 rendered cards {% endcomment %}
+        {% assign rendered = 0 %}
+        {% for p in related %}
+          {% if p.id != product.id and p.available and rendered < 4 %}
             {% render 'product-card', product: p %}
-          {% endunless %}
+            {% assign rendered = rendered | plus: 1 %}
+          {% endif %}
         {% endfor %}
       </div>
     </div>

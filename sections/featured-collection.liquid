@@ -8,16 +8,19 @@
     <div class="products-grid">
       {% assign priority_handles = 'blue-razzberry-fungi-powered-seltzer,mango-mimosa-fungi-powered-seltzer,watermelon-fungi-powered-seltzer' | split: ',' %}
       {% assign shown = '' %}
+      {% comment %} Sold-out products are skipped so the grid stays one clean row {% endcomment %}
       {% for handle in priority_handles %}
         {% assign product = all_products[handle] %}
-        {% if product.id != blank %}
+        {% if product.id != blank and product.available %}
           {% render 'product-card', product: product %}
           {% assign shown = shown | append: handle | append: ',' %}
         {% endif %}
       {% endfor %}
       {% for product in collections['all'].products %}
         {% unless shown contains product.handle %}
-          {% render 'product-card', product: product %}
+          {% if product.available %}
+            {% render 'product-card', product: product %}
+          {% endif %}
         {% endunless %}
       {% endfor %}
     </div>
