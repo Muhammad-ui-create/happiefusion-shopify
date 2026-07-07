@@ -22,6 +22,14 @@
         Custom Pack Builder
       </div>
       <h1 class="byo-title">{{ product.title }}</h1>
+
+      <a href="/pages/reviews" class="byo-rating" aria-label="Read customer reviews">
+        <span class="byo-rating-stars" aria-hidden="true">★★★★★</span>
+        <strong>4.9</strong>
+        <span class="byo-rating-count">· Amazon-verified reviews</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
       <p class="byo-sub">Pick any mix of our three flavors in 6-packs — <strong>3 six-packs, 18 cans total</strong>, built exactly how you like it.</p>
 
       <div class="byo-price-card">
@@ -183,6 +191,85 @@
       </div>
     </div>
 
+    <!-- ── FAQ — builder-specific questions ── -->
+    <section class="pdp-faq byo-faq" aria-labelledby="byo-faq-title">
+      <div class="pdp-faq-inner">
+        <div class="pdp-faq-head">
+          <span class="pdp-faq-eyebrow">Custom Pack Questions</span>
+          <h2 class="pdp-faq-title" id="byo-faq-title">Everything about building your box.</h2>
+        </div>
+        <div class="pdp-faq-grid">
+
+          <details class="pdp-faq-item" open>
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
+              <span>How does the custom pack work?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Pick any three 6-packs — that's your 18-pack.</strong> All one flavor, one of each, or any combo in between. One price ($43.99), one box, and your exact mix is printed on your order confirmation so you know exactly what's coming.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+              <span>Can I change my mix after ordering?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Yes — before it ships.</strong> We process orders within 1 business day, so email <a href="mailto:orders@livehappie.com">orders@livehappie.com</a> with your order number ASAP and we'll swap your flavors before the box leaves the warehouse.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+              <span>What if I don't like one of my flavors?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>30-day full refund, no return needed.</strong> If any part of your pack isn't for you, email <a href="mailto:orders@livehappie.com">orders@livehappie.com</a> within 30 days of delivery and we'll refund your order in full. You keep the cans.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="11" rx="2"/><path d="M16 10h4l3 3v4h-7"/><circle cx="5.5" cy="19.5" r="1.5"/><circle cx="20.5" cy="19.5" r="1.5"/></svg></span>
+              <span>How fast does it ship?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Ships within 1 business day, free.</strong> Standard delivery is 3–5 business days from our Northern California warehouse to all 50 states. Need it faster? Express 2-day is $15 at checkout.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              <span>Is this cheaper than buying 6-packs separately?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Yes — by a lot.</strong> Three 6-packs bought separately cost $71.97. The custom 18-pack is $43.99 — that's $27.98 saved (39% off) and the best per-can price we offer at $2.44.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.2v-2a4 4 0 0 1 4-4h12.8"/><path d="M7 21.9l-4-4 4-4"/><path d="M21 11.8v2a4 4 0 0 1-4 4H4.2"/></svg></span>
+              <span>Can I subscribe to a custom pack?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Not yet — the custom 18-pack is one-time purchase for now.</strong> If you want recurring delivery with 20% off, our individual 6-packs and the 12-can Variety Pack all offer Subscribe &amp; Save. Custom pack subscriptions are on our roadmap.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
   </div>
 </div>
 
@@ -205,6 +292,24 @@
     border-radius: 50px; padding: 7px 16px; margin-bottom: 16px;
   }
   .byo-title { font-size: clamp(32px, 5vw, 52px); font-weight: 900; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: 12px; }
+
+  /* Rating strip under the title */
+  .byo-rating {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(245,166,35,0.10);
+    border: 1px solid rgba(245,166,35,0.30);
+    padding: 8px 16px; border-radius: 50px;
+    font-size: 13px; line-height: 1; color: #1A1A1A;
+    text-decoration: none; white-space: nowrap;
+    margin-bottom: 14px;
+    transition: background .2s, transform .15s, border-color .2s;
+  }
+  .byo-rating:hover { background: rgba(245,166,35,0.18); border-color: rgba(245,166,35,0.55); transform: translateY(-1px); }
+  .byo-rating > * { line-height: 1; }
+  .byo-rating-stars { color: #F5A623; font-size: 12px; letter-spacing: 3px; }
+  .byo-rating strong { font-weight: 900; font-size: 13.5px; }
+  .byo-rating-count { color: var(--gray, #5A6B5E); font-weight: 600; }
+  .byo-rating svg { color: var(--green, #2D6A4F); flex-shrink: 0; }
   .byo-sub { font-size: 16px; color: var(--gray, #5A6B5E); margin-bottom: 22px; max-width: 560px; margin-left: auto; margin-right: auto; }
 
   .byo-price-card {
@@ -370,6 +475,12 @@
   @media (max-width: 560px) {
     .byo-features-grid { grid-template-columns: 1fr; }
     .byo-features { margin-top: 40px; }
+  }
+
+  /* FAQ spacing within the builder page (base .pdp-faq styles come from happie.css) */
+  .byo-faq { margin-top: 56px; border-radius: 28px; }
+  @media (max-width: 640px) {
+    .byo-faq { margin-top: 44px; border-radius: 20px; }
   }
 
   /* ── Mobile ── */
