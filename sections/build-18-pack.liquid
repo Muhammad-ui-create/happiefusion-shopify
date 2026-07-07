@@ -1,17 +1,20 @@
 {% comment %}
-  Build Your Own 18-Pack — custom bundle builder.
-  Assign template "product.build-18" to the Build Your Own 18-Pack product.
-  Flavors are picked as whole 6-packs; hard cap of 3 six-packs = exactly 18 cans.
-  The chosen mix is stored as line item properties on the single 18-pack variant,
-  so it shows on the cart, checkout, and the order for fulfillment.
+  Build Your Own pack — custom bundle builder with two sizes:
+  18-Pack = 3 six-packs ($43.99, compare $71.97) · 24-Pack = 4 six-packs ($57.99, compare $95.96).
+  Assign template "product.build-18" to the Build Your Own product.
+  Flavors are picked as whole 6-packs; the hard cap tracks the selected size so the
+  can count can never exceed the box. The mix is stored as line item properties on
+  the selected size variant, so it rides cart -> checkout -> order for fulfillment.
 {% endcomment %}
 
-{%- assign variant = product.selected_or_first_available_variant -%}
+{%- assign v18 = blank -%}
+{%- assign v24 = blank -%}
+{%- for v in product.variants -%}
+  {%- if v.title contains '24' -%}{%- assign v24 = v -%}{%- else -%}{%- assign v18 = v -%}{%- endif -%}
+{%- endfor -%}
 {%- assign p_blue  = all_products['blue-razzberry-fungi-powered-seltzer'] -%}
 {%- assign p_mango = all_products['mango-mimosa-fungi-powered-seltzer'] -%}
 {%- assign p_water = all_products['watermelon-fungi-powered-seltzer'] -%}
-{%- assign compare = variant.compare_at_price | default: 7197 -%}
-{%- assign savings = compare | minus: variant.price -%}
 
 <div class="byo-page">
   <div class="byo-inner">
@@ -33,44 +36,55 @@
         <span class="byo-topseller">TOP SELLER</span>
       </div>
 
-      <p class="byo-sub">Pick any mix of our three flavors in 6-packs — <strong>3 six-packs, 18 cans total</strong>, built exactly how you like it.</p>
+      <p class="byo-sub">Pick your box size, then fill it with any mix of our three flavors in 6-packs.</p>
+
+      <!-- Size switcher -->
+      <div class="byo-sizes" role="radiogroup" aria-label="Pack size">
+        <button type="button" class="byo-size is-active" data-size="18" aria-pressed="true">
+          <span class="byo-size-cans">18 Cans</span>
+          <span class="byo-size-packs">3 six-packs</span>
+          <span class="byo-size-price">{{ v18.price | money }} <s>{{ v18.compare_at_price | money }}</s></span>
+        </button>
+        <button type="button" class="byo-size" data-size="24" aria-pressed="false">
+          <span class="byo-size-cans">24 Cans</span>
+          <span class="byo-size-packs">4 six-packs</span>
+          <span class="byo-size-price">{{ v24.price | money }} <s>{{ v24.compare_at_price | money }}</s></span>
+          <span class="byo-size-flag">BEST RATE</span>
+        </button>
+      </div>
 
       <div class="byo-price-card">
         <div class="byo-price-row">
-          <span class="byo-price">{{ variant.price | money }}</span>
-          <span class="byo-compare">{{ compare | money }}</span>
-          <span class="byo-save">SAVE {{ savings | money }}</span>
+          <span class="byo-price" id="byo-price">{{ v18.price | money }}</span>
+          <span class="byo-compare" id="byo-compare">{{ v18.compare_at_price | money }}</span>
+          <span class="byo-save" id="byo-save">SAVE $27.98</span>
         </div>
         <div class="byo-price-meta">
-          <span>$2.44 per can</span>
+          <span id="byo-percan">$2.44 per can</span>
           <span class="byo-price-dot">·</span>
-          <span>39% off vs three 6-packs</span>
+          <span id="byo-pct">39% off vs three 6-packs</span>
           <span class="byo-price-dot">·</span>
           <span>Free shipping</span>
         </div>
       </div>
     </div>
 
-    <!-- Progress: three pack slots -->
+    <!-- Progress: pack slots (4th slot only in 24-can mode) -->
     <div class="byo-progress-wrap" aria-live="polite">
       <div class="byo-progress-label">
-        <span class="byo-progress-count"><strong id="byo-count">0</strong>&nbsp;/ 3 six-packs <em>(18 cans)</em></span>
+        <span class="byo-progress-count"><strong id="byo-count">0</strong>&nbsp;/ <span id="byo-target">3</span> six-packs <em id="byo-cans">(18 cans)</em></span>
         <span id="byo-progress-hint">Pick your 6-packs below</span>
       </div>
-      <div class="byo-progress-bar">
+      <div class="byo-progress-bar" id="byo-progress-bar">
         <div class="byo-seg" data-seg></div>
         <div class="byo-seg" data-seg></div>
         <div class="byo-seg" data-seg></div>
+        <div class="byo-seg byo-seg-hidden" data-seg></div>
       </div>
     </div>
 
-    <!-- Quick presets -->
-    <div class="byo-presets">
-      <button type="button" class="byo-preset" data-mix="1,1,1"><span class="byo-dots"><i style="background:#3B6FF0;"></i><i style="background:#F5A623;"></i><i style="background:#E84C6B;"></i></span>Even Mix · 1 of each</button>
-      <button type="button" class="byo-preset" data-mix="3,0,0"><span class="byo-dots"><i style="background:#3B6FF0;"></i></span>All Blue Razz</button>
-      <button type="button" class="byo-preset" data-mix="0,3,0"><span class="byo-dots"><i style="background:#F5A623;"></i></span>All Mango</button>
-      <button type="button" class="byo-preset" data-mix="0,0,3"><span class="byo-dots"><i style="background:#E84C6B;"></i></span>All Watermelon</button>
-    </div>
+    <!-- Quick presets (rebuilt by JS per size) -->
+    <div class="byo-presets" id="byo-presets"></div>
 
     <!-- Flavor cards -->
     <div class="byo-grid">
@@ -129,7 +143,7 @@
     </div>
 
     <!-- ATC -->
-    <button type="button" class="byo-atc" id="byo-atc" data-variant-id="{{ variant.id }}" disabled>
+    <button type="button" class="byo-atc" id="byo-atc" disabled>
       <span id="byo-atc-text">PICK 3 SIX-PACKS TO CONTINUE</span>
     </button>
     <p class="byo-atc-note">
@@ -179,8 +193,8 @@
           <span class="byo-feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
           </span>
-          <strong>18 Cans, Your Way</strong>
-          <p>Any mix of three flavors — and the best per-can price we offer, at just $2.44 a can.</p>
+          <strong>18 or 24 Cans, Your Way</strong>
+          <p>Any mix of three flavors — and our best per-can prices, from $2.42 a can on the 24-pack.</p>
         </div>
 
         <div class="byo-feature">
@@ -210,7 +224,7 @@
               <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
             </summary>
             <div class="pdp-faq-a">
-              <p><strong>Pick any three 6-packs — that's your 18-pack.</strong> All one flavor, one of each, or any combo in between. One price ($43.99), one box, and your exact mix is printed on your order confirmation so you know exactly what's coming.</p>
+              <p><strong>Pick your box size, then fill it with 6-packs.</strong> The 18-pack holds three 6-packs ($43.99); the 24-pack holds four ($57.99). All one flavor, one of each, or any combo — one price, one box, and your exact mix is printed on your order confirmation so you know exactly what's coming.</p>
             </div>
           </details>
 
@@ -254,7 +268,7 @@
               <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
             </summary>
             <div class="pdp-faq-a">
-              <p><strong>Yes — by a lot.</strong> Three 6-packs bought separately cost $71.97. The custom 18-pack is $43.99 — that's $27.98 saved (39% off) and the best per-can price we offer at $2.44.</p>
+              <p><strong>Yes — by a lot.</strong> Three 6-packs bought separately cost $71.97; the 18-pack is $43.99 (save $27.98, 39% off). Four 6-packs cost $95.96; the 24-pack is $57.99 (save $37.97, 40% off) — the best per-can price we offer at $2.42.</p>
             </div>
           </details>
 
@@ -265,7 +279,7 @@
               <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
             </summary>
             <div class="pdp-faq-a">
-              <p><strong>Not yet — the custom 18-pack is one-time purchase for now.</strong> If you want recurring delivery with 20% off, each of our individual 6-packs offers Subscribe &amp; Save. Custom pack subscriptions are on our roadmap.</p>
+              <p><strong>Not yet — the custom packs are one-time purchase for now.</strong> If you want recurring delivery with 20% off, each of our individual 6-packs offers Subscribe &amp; Save. Custom pack subscriptions are on our roadmap.</p>
             </div>
           </details>
 
@@ -319,7 +333,37 @@
   .byo-rating strong { font-weight: 900; font-size: 13.5px; }
   .byo-rating-count { color: var(--gray, #5A6B5E); font-weight: 600; }
   .byo-rating svg { color: var(--green, #2D6A4F); flex-shrink: 0; }
-  .byo-sub { font-size: 16px; color: var(--gray, #5A6B5E); margin-bottom: 22px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+  .byo-sub { font-size: 16px; color: var(--gray, #5A6B5E); margin-bottom: 20px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+  /* ── Size switcher ── */
+  .byo-sizes { display: inline-flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+  .byo-size {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    background: #fff; border: 2px solid rgba(0,0,0,0.08); border-radius: 18px;
+    padding: 14px 26px 12px; cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 3px 12px rgba(27,42,31,0.05);
+    transition: border-color .2s, box-shadow .2s, transform .15s;
+  }
+  .byo-size:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(27,42,31,0.09); }
+  .byo-size.is-active {
+    border-color: var(--green, #2D6A4F);
+    background: rgba(45,106,79,0.05);
+    box-shadow: 0 8px 24px rgba(45,106,79,0.14);
+  }
+  .byo-size-cans { font-size: 17px; font-weight: 900; letter-spacing: -0.01em; }
+  .byo-size-packs { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray, #5A6B5E); }
+  .byo-size-price { font-size: 13px; font-weight: 800; color: var(--green, #2D6A4F); }
+  .byo-size-price s { color: #9aa39c; font-weight: 600; font-size: 11.5px; margin-left: 3px; }
+  .byo-size-flag {
+    position: absolute; top: -9px; right: -8px;
+    background: linear-gradient(135deg, #E84C6B, #C03060); color: #fff;
+    font-size: 9px; font-weight: 900; letter-spacing: 0.08em;
+    padding: 4px 9px; border-radius: 50px;
+    box-shadow: 0 3px 8px rgba(232,76,107,0.35);
+  }
 
   .byo-price-card {
     display: inline-block;
@@ -344,7 +388,7 @@
   }
   .byo-price-dot { opacity: 0.4; }
 
-  /* ── Progress: 3 pack slots ── */
+  /* ── Progress: pack slots ── */
   .byo-progress-wrap { margin: 30px 0 18px; }
   .byo-progress-label {
     display: flex; justify-content: space-between; align-items: baseline;
@@ -354,12 +398,15 @@
   .byo-progress-count em { font-style: normal; opacity: 0.75; }
   #byo-progress-hint { font-weight: 600; }
   .byo-progress-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .byo-progress-bar.is-24 { grid-template-columns: repeat(4, 1fr); }
   .byo-seg {
     height: 12px; border-radius: 50px;
     background: rgba(45,106,79,0.10);
     border: 1px solid rgba(45,106,79,0.10);
     transition: background 0.3s ease, box-shadow 0.3s ease;
   }
+  .byo-seg-hidden { display: none; }
+  .byo-progress-bar.is-24 .byo-seg-hidden { display: block; }
   .byo-seg.filled {
     background: linear-gradient(90deg, var(--green-mid, #52B788), var(--green, #2D6A4F));
     box-shadow: 0 3px 10px rgba(45,106,79,0.30);
@@ -372,6 +419,7 @@
     display: inline-flex; align-items: center; gap: 8px;
     background: #fff; border: 1.5px solid rgba(45,106,79,0.20); color: #1A1A1A;
     border-radius: 50px; padding: 9px 17px; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    font-family: inherit;
     box-shadow: 0 2px 8px rgba(27,42,31,0.05);
     transition: all .18s;
   }
@@ -458,7 +506,7 @@
   }
   .byo-pill svg { color: var(--green, #2D6A4F); }
 
-  /* ── Feature grid (replaces raw description) ── */
+  /* ── Feature grid ── */
   .byo-features { margin-top: 52px; }
   .byo-features-title {
     text-align: center; font-size: clamp(22px, 3.2vw, 30px); font-weight: 900;
@@ -498,6 +546,8 @@
     .byo-price { font-size: 34px; }
     .byo-compare { font-size: 17px; }
     .byo-price-card { padding: 15px 20px 13px; }
+    .byo-size { padding: 12px 18px 10px; }
+    .byo-size-cans { font-size: 15px; }
     .byo-grid { grid-template-columns: 1fr; gap: 12px; }
     .byo-card {
       display: grid; grid-template-columns: 96px 1fr auto; align-items: center;
@@ -517,20 +567,64 @@
 
 <script>
 (function() {
-  var TARGET = 3; /* six-packs — 3 x 6 = 18 cans; hard cap so an order can never exceed 18 cans */
+  /* Two box sizes; per-size config drives every label and the hard cap.
+     Money strings mirror the variant prices set in Shopify. */
+  var SIZES = {
+    "18": { target: 3, variantId: "{{ v18.id }}", cents: {{ v18.price }}, price: "{{ v18.price | money }}", compare: "{{ v18.compare_at_price | money }}", save: "SAVE {{ v18.compare_at_price | minus: v18.price | money }}", percan: "$2.44 per can", pct: "39% off vs three 6-packs",
+      presets: [
+        { mix: [1,1,1], label: "Even Mix · 1 of each", dots: ["#3B6FF0","#F5A623","#E84C6B"] },
+        { mix: [3,0,0], label: "All Blue Razz", dots: ["#3B6FF0"] },
+        { mix: [0,3,0], label: "All Mango", dots: ["#F5A623"] },
+        { mix: [0,0,3], label: "All Watermelon", dots: ["#E84C6B"] }
+      ] },
+    "24": { target: 4, variantId: "{{ v24.id }}", cents: {{ v24.price }}, price: "{{ v24.price | money }}", compare: "{{ v24.compare_at_price | money }}", save: "SAVE {{ v24.compare_at_price | minus: v24.price | money }}", percan: "$2.42 per can", pct: "40% off vs four 6-packs",
+      presets: [
+        { mix: [2,1,1], label: "Blue-Heavy Mix", dots: ["#3B6FF0","#3B6FF0","#F5A623","#E84C6B"] },
+        { mix: [1,1,2], label: "Melon-Heavy Mix", dots: ["#E84C6B","#E84C6B","#3B6FF0","#F5A623"] },
+        { mix: [4,0,0], label: "All Blue Razz", dots: ["#3B6FF0"] },
+        { mix: [0,4,0], label: "All Mango", dots: ["#F5A623"] },
+        { mix: [0,0,4], label: "All Watermelon", dots: ["#E84C6B"] }
+      ] }
+  };
+
+  var size     = "18";
   var cards    = Array.prototype.slice.call(document.querySelectorAll('.byo-card'));
   var atc      = document.getElementById('byo-atc');
   var atcText  = document.getElementById('byo-atc-text');
   var countEl  = document.getElementById('byo-count');
+  var targetEl = document.getElementById('byo-target');
+  var cansEl   = document.getElementById('byo-cans');
   var hintEl   = document.getElementById('byo-progress-hint');
   var segs     = Array.prototype.slice.call(document.querySelectorAll('[data-seg]'));
+  var barEl    = document.getElementById('byo-progress-bar');
+  var presetsEl= document.getElementById('byo-presets');
+  var priceEl  = document.getElementById('byo-price');
+  var compEl   = document.getElementById('byo-compare');
+  var saveEl   = document.getElementById('byo-save');
+  var percanEl = document.getElementById('byo-percan');
+  var pctEl    = document.getElementById('byo-pct');
   if (!cards.length || !atc) return;
 
   var counts = cards.map(function() { return 0; });
 
+  function cfg() { return SIZES[size]; }
   function total() { return counts.reduce(function(a, b) { return a + b; }, 0); }
 
+  function renderPresets() {
+    presetsEl.innerHTML = '';
+    cfg().presets.forEach(function(p) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'byo-preset';
+      var dots = '<span class="byo-dots">' + p.dots.map(function(c) { return '<i style="background:' + c + ';"></i>'; }).join('') + '</span>';
+      btn.innerHTML = dots + p.label;
+      btn.addEventListener('click', function() { counts = p.mix.slice(); render(); });
+      presetsEl.appendChild(btn);
+    });
+  }
+
   function render() {
+    var TARGET = cfg().target;
     var t = total();
     cards.forEach(function(card, i) {
       card.querySelector('[data-count]').textContent = counts[i];
@@ -539,33 +633,55 @@
       card.querySelector('.byo-plus').disabled  = t >= TARGET;
     });
     countEl.textContent = t;
+    targetEl.textContent = TARGET;
+    cansEl.textContent = '(' + (TARGET * 6) + ' cans)';
+    barEl.classList.toggle('is-24', size === '24');
     segs.forEach(function(seg, i) { seg.classList.toggle('filled', i < t); });
     if (t === 0)            hintEl.textContent = 'Pick your 6-packs below';
     else if (t < TARGET)    hintEl.textContent = 'Add ' + (TARGET - t) + ' more 6-pack' + (TARGET - t === 1 ? '' : 's');
-    else                    hintEl.textContent = '18 cans — pack complete! 🎉';
+    else                    hintEl.textContent = (TARGET * 6) + ' cans — pack complete! 🎉';
     atc.disabled = t !== TARGET;
     atcText.textContent = t === TARGET
-      ? 'ADD MY 18-PACK — {{ variant.price | money }}'
+      ? 'ADD MY ' + (TARGET * 6) + '-PACK — ' + cfg().price
       : 'PICK ' + (TARGET - t) + ' MORE 6-PACK' + (TARGET - t === 1 ? '' : 'S') + ' TO CONTINUE';
+    priceEl.textContent  = cfg().price;
+    compEl.textContent   = cfg().compare;
+    saveEl.textContent   = cfg().save;
+    percanEl.textContent = cfg().percan;
+    pctEl.textContent    = cfg().pct;
   }
+
+  /* Size switcher — trims overflow packs when stepping down 24 -> 18 */
+  document.querySelectorAll('.byo-size').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      size = btn.dataset.size;
+      document.querySelectorAll('.byo-size').forEach(function(b) {
+        var on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      var TARGET = cfg().target;
+      while (total() > TARGET) {
+        for (var i = counts.length - 1; i >= 0; i--) {
+          if (counts[i] > 0 && total() > TARGET) { counts[i]--; }
+        }
+      }
+      renderPresets();
+      render();
+    });
+  });
 
   cards.forEach(function(card, i) {
     card.querySelector('.byo-plus').addEventListener('click', function() {
-      if (total() < TARGET) { counts[i]++; render(); }
+      if (total() < cfg().target) { counts[i]++; render(); }
     });
     card.querySelector('.byo-minus').addEventListener('click', function() {
       if (counts[i] > 0) { counts[i]--; render(); }
     });
   });
 
-  document.querySelectorAll('.byo-preset').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      counts = btn.dataset.mix.split(',').map(Number);
-      render();
-    });
-  });
-
   atc.addEventListener('click', function() {
+    var TARGET = cfg().target;
     if (total() !== TARGET) return;
     var properties = {};
     cards.forEach(function(card, i) {
@@ -576,7 +692,7 @@
     fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ id: atc.dataset.variantId, quantity: 1, properties: properties })
+      body: JSON.stringify({ id: cfg().variantId, quantity: 1, properties: properties })
     }).then(function(r) {
       if (!r.ok) throw new Error('add failed');
       return r.json();
@@ -585,10 +701,10 @@
       try {
         if (window.fbq) {
           fbq('track', 'AddToCart', {
-            content_ids: [String(atc.dataset.variantId)],
+            content_ids: [String(cfg().variantId)],
             content_type: 'product',
             content_name: {{ product.title | json }},
-            value: {{ variant.price | divided_by: 100.0 }},
+            value: cfg().cents / 100,
             currency: 'USD',
             num_items: 1
           });
@@ -603,6 +719,7 @@
     });
   });
 
+  renderPresets();
   render();
 })();
 </script>

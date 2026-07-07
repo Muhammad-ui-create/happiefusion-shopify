@@ -99,10 +99,14 @@
           propsHtml += '<div class="cart-item-variant">' + k + ': ' + item.properties[k] + '</div>';
         });
       }
-      /* Custom 18-pack: surface the built-in bundle discount right on the line */
+      /* Custom pack: surface the built-in bundle discount right on the line.
+         Compare-at = the equivalent number of 6-packs (18 cans -> 3, 24 cans -> 4). */
       if (item.handle === 'build-your-own-fungi-fusion-18-pack') {
+        var is24 = (item.variant_title || '').indexOf('24') !== -1;
+        var byoCompare = is24 ? 9596 : 7197;
+        var byoPacks = is24 ? 'four' : 'three';
         propsHtml += '<div class="cart-item-variant" style="color:#2D6A4F;font-weight:800;">'
-          + 'You\'re saving ' + formatMoney(7197 - item.price) + ' vs three 6-packs 🎉</div>';
+          + 'You\'re saving ' + formatMoney(byoCompare - item.price) + ' vs ' + byoPacks + ' 6-packs 🎉</div>';
       }
       html += '<div class="cart-item">'
         + '<img src="' + item.image + '" alt="" class="cart-item-img" />'
@@ -133,7 +137,7 @@
     if (existing) existing.remove();
     // Catalog of suggestion candidates — the custom 18-pack is the AOV win, singles fill gaps.
     var candidates = [
-      { handle: 'build-your-own-fungi-fusion-18-pack', title: 'Build Your Own 18-Pack', price: 4399, compare: 7197, save: 'Save $27.98', img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/hf_20260707_185319_dd3ac4cb-1de8-44cc-89ee-8c2692763dca.png?v=1783450693&width=200', tag: 'BEST VALUE' },
+      { handle: 'build-your-own-fungi-fusion-18-pack', title: 'Build Your Own Pack — 18 or 24 Cans', price: 4399, compare: 7197, save: 'Save up to $37.97', img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/hf_20260707_185319_dd3ac4cb-1de8-44cc-89ee-8c2692763dca.png?v=1783450693&width=200', tag: 'BEST VALUE' },
       { handle: 'blue-razzberry-fungi-powered-seltzer', title: 'Blue Razzberry — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main.webp?v=1778542878&width=200', tag: 'TOP SELLER' },
       { handle: 'mango-mimosa-fungi-powered-seltzer', title: 'Mango Mimosa — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main_1.webp?v=1778543565&width=200', tag: 'TROPICAL' },
       { handle: 'watermelon-fungi-powered-seltzer', title: 'Watermelon — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main_1_336f10d5-6961-4495-ba14-55ab4fb89e12.webp?v=1778544523&width=200', tag: 'SUMMER' }
@@ -153,7 +157,7 @@
     }
     priceHtml += '</div>';
     if (suggestion.save) {
-      priceHtml += '<div class="cart-upsell-save" style="font-size:11px;font-weight:800;color:#2D6A4F;">' + suggestion.save + ' vs three 6-packs</div>';
+      priceHtml += '<div class="cart-upsell-save" style="font-size:11px;font-weight:800;color:#2D6A4F;">' + suggestion.save + ' vs single 6-packs</div>';
     }
     up.innerHTML =
       '<div class="cart-upsell-label">You might also like</div>' +
