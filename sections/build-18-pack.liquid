@@ -16,7 +16,7 @@
     <div class="byo-head">
       <div class="byo-eyebrow">Custom Pack Builder</div>
       <h1 class="byo-title">{{ product.title }}</h1>
-      <p class="byo-sub">Pick any mix of our three flavors — <strong>18 cans total</strong>, built exactly how you like it.</p>
+      <p class="byo-sub">Pick any mix of our three flavors in 6-packs — <strong>3 six-packs, 18 cans total</strong>, built exactly how you like it.</p>
       <div class="byo-price-row">
         <span class="byo-price">{{ variant.price | money }}</span>
         <span class="byo-price-note">$2.44 per can</span>
@@ -27,18 +27,18 @@
     <!-- Progress -->
     <div class="byo-progress-wrap" aria-live="polite">
       <div class="byo-progress-label">
-        <span><strong id="byo-count">0</strong> / 18 cans</span>
-        <span id="byo-progress-hint">Pick your flavors below</span>
+        <span><strong id="byo-count">0</strong> / 3 six-packs <span style="font-weight:500;color:inherit;">(18 cans)</span></span>
+        <span id="byo-progress-hint">Pick your 6-packs below</span>
       </div>
       <div class="byo-progress-bar"><div class="byo-progress-fill" id="byo-progress-fill"></div></div>
     </div>
 
     <!-- Quick presets -->
     <div class="byo-presets">
-      <button type="button" class="byo-preset" data-mix="6,6,6">Even Mix · 6 each</button>
-      <button type="button" class="byo-preset" data-mix="18,0,0">All Blue Razz</button>
-      <button type="button" class="byo-preset" data-mix="0,18,0">All Mango</button>
-      <button type="button" class="byo-preset" data-mix="0,0,18">All Watermelon</button>
+      <button type="button" class="byo-preset" data-mix="1,1,1">Even Mix · 1 of each</button>
+      <button type="button" class="byo-preset" data-mix="3,0,0">All Blue Razz</button>
+      <button type="button" class="byo-preset" data-mix="0,3,0">All Mango</button>
+      <button type="button" class="byo-preset" data-mix="0,0,3">All Watermelon</button>
     </div>
 
     <!-- Flavor cards -->
@@ -51,11 +51,11 @@
           {%- endif -%}
         </div>
         <div class="byo-card-name">Blue Razzberry</div>
-        <div class="byo-card-note">Tart &amp; candy-bright</div>
+        <div class="byo-card-note">Tart &amp; candy-bright · 6-pack</div>
         <div class="byo-stepper">
-          <button type="button" class="byo-btn byo-minus" aria-label="Remove one Blue Razzberry">−</button>
+          <button type="button" class="byo-btn byo-minus" aria-label="Remove one Blue Razzberry 6-pack">−</button>
           <span class="byo-qty" data-count>0</span>
-          <button type="button" class="byo-btn byo-plus" aria-label="Add one Blue Razzberry">+</button>
+          <button type="button" class="byo-btn byo-plus" aria-label="Add one Blue Razzberry 6-pack">+</button>
         </div>
       </div>
 
@@ -66,11 +66,11 @@
           {%- endif -%}
         </div>
         <div class="byo-card-name">Mango Mimosa</div>
-        <div class="byo-card-note">Tropical &amp; lightly sweet</div>
+        <div class="byo-card-note">Tropical &amp; lightly sweet · 6-pack</div>
         <div class="byo-stepper">
-          <button type="button" class="byo-btn byo-minus" aria-label="Remove one Mango Mimosa">−</button>
+          <button type="button" class="byo-btn byo-minus" aria-label="Remove one Mango Mimosa 6-pack">−</button>
           <span class="byo-qty" data-count>0</span>
-          <button type="button" class="byo-btn byo-plus" aria-label="Add one Mango Mimosa">+</button>
+          <button type="button" class="byo-btn byo-plus" aria-label="Add one Mango Mimosa 6-pack">+</button>
         </div>
       </div>
 
@@ -81,11 +81,11 @@
           {%- endif -%}
         </div>
         <div class="byo-card-name">Watermelon</div>
-        <div class="byo-card-note">Crisp, clean &amp; juicy</div>
+        <div class="byo-card-note">Crisp, clean &amp; juicy · 6-pack</div>
         <div class="byo-stepper">
-          <button type="button" class="byo-btn byo-minus" aria-label="Remove one Watermelon">−</button>
+          <button type="button" class="byo-btn byo-minus" aria-label="Remove one Watermelon 6-pack">−</button>
           <span class="byo-qty" data-count>0</span>
-          <button type="button" class="byo-btn byo-plus" aria-label="Add one Watermelon">+</button>
+          <button type="button" class="byo-btn byo-plus" aria-label="Add one Watermelon 6-pack">+</button>
         </div>
       </div>
 
@@ -93,7 +93,7 @@
 
     <!-- ATC -->
     <button type="button" class="btn-atc byo-atc" id="byo-atc" data-variant-id="{{ variant.id }}" disabled>
-      <span id="byo-atc-text">PICK 18 CANS TO CONTINUE</span>
+      <span id="byo-atc-text">PICK 3 SIX-PACKS TO CONTINUE</span>
     </button>
     <p class="byo-atc-note">Every can: 900mg Lion's Mane · 700mg Cordyceps · 400mg Reishi · Zero alcohol · Zero caffeine</p>
 
@@ -188,7 +188,7 @@
 
 <script>
 (function() {
-  var TARGET = 18;
+  var TARGET = 3; /* six-packs — 3 x 6 = 18 cans; hard cap so an order can never exceed 18 cans */
   var cards    = Array.prototype.slice.call(document.querySelectorAll('.byo-card'));
   var atc      = document.getElementById('byo-atc');
   var atcText  = document.getElementById('byo-atc-text');
@@ -212,13 +212,13 @@
     countEl.textContent = t;
     fillEl.style.width = (t / TARGET * 100) + '%';
     fillEl.classList.toggle('full', t === TARGET);
-    if (t === 0)            hintEl.textContent = 'Pick your flavors below';
-    else if (t < TARGET)    hintEl.textContent = 'Add ' + (TARGET - t) + ' more can' + (TARGET - t === 1 ? '' : 's');
-    else                    hintEl.textContent = 'Pack complete! 🎉';
+    if (t === 0)            hintEl.textContent = 'Pick your 6-packs below';
+    else if (t < TARGET)    hintEl.textContent = 'Add ' + (TARGET - t) + ' more 6-pack' + (TARGET - t === 1 ? '' : 's');
+    else                    hintEl.textContent = '18 cans — pack complete! 🎉';
     atc.disabled = t !== TARGET;
     atcText.textContent = t === TARGET
       ? 'ADD MY 18-PACK — {{ variant.price | money }}'
-      : 'PICK ' + (TARGET - t) + ' MORE CAN' + (TARGET - t === 1 ? '' : 'S') + ' TO CONTINUE';
+      : 'PICK ' + (TARGET - t) + ' MORE 6-PACK' + (TARGET - t === 1 ? '' : 'S') + ' TO CONTINUE';
   }
 
   cards.forEach(function(card, i) {
@@ -241,7 +241,7 @@
     if (total() !== TARGET) return;
     var properties = {};
     cards.forEach(function(card, i) {
-      if (counts[i] > 0) properties[card.dataset.flavor] = counts[i] + ' cans';
+      if (counts[i] > 0) properties[card.dataset.flavor] = counts[i] + ' × 6-pack (' + (counts[i] * 6) + ' cans)';
     });
     atc.disabled = true;
     atcText.textContent = 'Adding…';
