@@ -159,17 +159,18 @@
     if (suggestion.save) {
       priceHtml += '<div class="cart-upsell-save" style="font-size:11px;font-weight:800;color:#2D6A4F;">' + suggestion.save + ' vs single 6-packs</div>';
     }
+    /* Whole card is the link — not just the + button */
     up.innerHTML =
       '<div class="cart-upsell-label">You might also like</div>' +
-      '<div class="cart-upsell-card">' +
+      '<a href="/products/' + suggestion.handle + '" class="cart-upsell-card" aria-label="View ' + suggestion.title + '">' +
         '<img src="' + suggestion.img + '" alt="" class="cart-upsell-img" />' +
         '<div class="cart-upsell-info">' +
           '<span class="cart-upsell-tag">' + suggestion.tag + '</span>' +
           '<div class="cart-upsell-title">' + suggestion.title + '</div>' +
           priceHtml +
         '</div>' +
-        '<a href="/products/' + suggestion.handle + '" class="cart-upsell-btn" aria-label="View ' + suggestion.title + '">+</a>' +
-      '</div>';
+        '<span class="cart-upsell-btn" aria-hidden="true">+</span>' +
+      '</a>';
     cartBody.appendChild(up);
   }
 
