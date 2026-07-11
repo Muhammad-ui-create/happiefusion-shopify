@@ -817,6 +817,15 @@ input, select { font-family: var(--font); }
 }
 .btn-atc:hover { background: #1B4332; transform: translateY(-1px); box-shadow: 0 14px 30px rgba(45,106,79,0.35); }
 
+/* Round the Shopify-injected express checkout button (Buy with Shop / Apple Pay / G Pay)
+   to match .btn-atc — the branded button renders in a shadow root, so radius + overflow
+   clip go on the wrapper */
+.shopify-payment-button__button,
+.shopify-payment-button__button--branded {
+  border-radius: 14px !important;
+  overflow: hidden;
+}
+
 /* Trust pills row — clear margin-top so it doesn't crowd the 'More payment options'
    link that Shopify's payment_button injects directly above it */
 .product-trust-pills {
