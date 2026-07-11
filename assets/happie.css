@@ -1483,6 +1483,7 @@ input, select { font-family: var(--font); }
   animation: lowStockPulse 2.4s ease-in-out infinite;
 }
 .low-stock-badge strong { color: #C44545; font-weight: 900; }
+.low-stock-top { margin: 0 0 10px; }
 @keyframes lowStockPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(196,69,69,0.0); }
   50%      { box-shadow: 0 0 0 5px rgba(196,69,69,0.08); }
