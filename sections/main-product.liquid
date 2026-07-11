@@ -402,6 +402,50 @@
     </div>
   </div>
 
+  <!-- ── REVIEWS — real Amazon review excerpts ── -->
+  <section class="pdp-reviews" aria-labelledby="pdp-reviews-title">
+    <div class="pdp-reviews-head">
+      <span class="pdp-reviews-stars" aria-hidden="true">★★★★★</span>
+      <h2 class="pdp-reviews-title" id="pdp-reviews-title">4.9 — what Amazon buyers say</h2>
+      <p class="pdp-reviews-sub">From 1,200+ verified reviews on Amazon</p>
+    </div>
+    <div class="pdp-reviews-track" role="list">
+      <figure class="pdp-review-card" role="listitem">
+        <span class="pdp-review-stars" aria-hidden="true">★★★★★</span>
+        <blockquote>"Best adaptogen drink I've tried!"</blockquote>
+        <figcaption>Shannon B. · <span>Verified Amazon buyer</span></figcaption>
+      </figure>
+      <figure class="pdp-review-card" role="listitem">
+        <span class="pdp-review-stars" aria-hidden="true">★★★★★</span>
+        <blockquote>"Excellent! Couldn't taste mushrooms. Better than Brez!"</blockquote>
+        <figcaption><span>Verified Amazon buyer</span></figcaption>
+      </figure>
+      <figure class="pdp-review-card" role="listitem">
+        <span class="pdp-review-stars" aria-hidden="true">★★★★★</span>
+        <blockquote>"Improved my mood and energy almost immediately."</blockquote>
+        <figcaption>Juju K. · <span>Verified Amazon buyer</span></figcaption>
+      </figure>
+      <figure class="pdp-review-card" role="listitem">
+        <span class="pdp-review-stars" aria-hidden="true">★★★★★</span>
+        <blockquote>"My favorite flavor. You can feel the effects."</blockquote>
+        <figcaption>Kristine M. · <span>Verified Amazon buyer</span></figcaption>
+      </figure>
+      <figure class="pdp-review-card" role="listitem">
+        <span class="pdp-review-stars" aria-hidden="true">★★★★★</span>
+        <blockquote>"We replaced morning coffee with this drink. Loving it!"</blockquote>
+        <figcaption>Nicole G. · <span>Verified Amazon buyer</span></figcaption>
+      </figure>
+      <figure class="pdp-review-card" role="listitem">
+        <span class="pdp-review-stars" aria-hidden="true">★★★★★</span>
+        <blockquote>"Tastes like a carbonated mango drink. Really good!"</blockquote>
+        <figcaption>Shanice A. · <span>Verified Amazon buyer</span></figcaption>
+      </figure>
+    </div>
+    <div class="pdp-reviews-cta">
+      <a href="/pages/reviews">Read all reviews →</a>
+    </div>
+  </section>
+
   <!-- ── TRUST FAQ — first-visitor friction killers ── -->
   <section class="pdp-faq" aria-labelledby="pdp-faq-title">
     <div class="pdp-faq-inner">
@@ -657,6 +701,44 @@
     });
   })();
 </script>
+
+{%- if product.available -%}
+<!-- ── Sticky mobile ATC bar — appears once the buy box scrolls out of view ── -->
+<div class="pdp-sticky-atc" id="pdp-sticky-atc">
+  <div class="pdp-sticky-info">
+    <span class="pdp-sticky-title">{{ product.title | split: ' — ' | first | escape }}</span>
+    <span class="pdp-sticky-price" id="pdp-sticky-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+  </div>
+  <button type="button" class="pdp-sticky-btn" id="pdp-sticky-btn">ADD TO CART</button>
+</div>
+<script>
+  (function() {
+    var bar = document.getElementById('pdp-sticky-atc');
+    var mainBtn = document.getElementById('add-to-cart-btn');
+    if (!bar || !mainBtn) return;
+    // Proxy the real ATC so quantity, selling plan, and the AJAX handler all apply
+    document.getElementById('pdp-sticky-btn').addEventListener('click', function() {
+      mainBtn.click();
+      bar.classList.remove('is-visible');
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries) {
+        var e = entries[0];
+        // Show only after the buy box has scrolled up out of view (not while it's still below the fold)
+        var passed = !e.isIntersecting && e.boundingClientRect.top < 0;
+        bar.classList.toggle('is-visible', passed);
+      }, { threshold: 0 }).observe(mainBtn);
+    }
+    // Keep the sticky price in sync with the main price (variant/plan changes rewrite #atc-price)
+    var priceSrc = document.getElementById('atc-price');
+    var priceDst = document.getElementById('pdp-sticky-price');
+    if (priceSrc && priceDst && 'MutationObserver' in window) {
+      new MutationObserver(function() { priceDst.textContent = priceSrc.textContent; })
+        .observe(priceSrc, { childList: true, characterData: true, subtree: true });
+    }
+  })();
+</script>
+{%- endif -%}
 
 {% schema %}
 {

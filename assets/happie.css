@@ -1501,6 +1501,107 @@ input, select { font-family: var(--font); }
   .low-stock-badge { animation: none; }
 }
 
+/* ── PDP reviews — real Amazon excerpts, scroll-snap carousel on mobile ── */
+.pdp-reviews {
+  max-width: 1100px;
+  margin: 56px auto 0;
+  padding: 0 20px;
+}
+.pdp-reviews-head { text-align: center; margin-bottom: 28px; }
+.pdp-reviews-stars { color: #F5A623; font-size: 22px; letter-spacing: 3px; }
+.pdp-reviews-title {
+  font-size: 28px; font-weight: 900; color: var(--ink, #1F2A22);
+  margin: 8px 0 6px;
+}
+.pdp-reviews-sub { font-size: 14px; color: var(--gray, #5A6B5E); font-weight: 600; }
+.pdp-reviews-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.pdp-review-card {
+  background: #fff;
+  border: 1px solid rgba(31,42,34,0.08);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 0;
+  box-shadow: 0 4px 14px rgba(31,42,34,0.05);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.pdp-review-stars { color: #F5A623; font-size: 14px; letter-spacing: 2px; }
+.pdp-review-card blockquote {
+  margin: 0; font-size: 15px; font-weight: 700; line-height: 1.45;
+  color: var(--ink, #1F2A22);
+}
+.pdp-review-card figcaption { font-size: 12.5px; color: var(--gray, #5A6B5E); font-weight: 600; }
+.pdp-review-card figcaption span { color: #2D6A4F; }
+.pdp-reviews-cta { text-align: center; margin-top: 22px; }
+.pdp-reviews-cta a {
+  font-size: 14px; font-weight: 800; color: var(--green, #2D6A4F);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+@media (max-width: 900px) {
+  .pdp-reviews-track { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .pdp-reviews { margin-top: 40px; }
+  .pdp-reviews-title { font-size: 22px; }
+  .pdp-reviews-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding-bottom: 8px;
+    margin: 0 -20px;
+    padding-left: 20px; padding-right: 20px;
+    scrollbar-width: none;
+  }
+  .pdp-reviews-track::-webkit-scrollbar { display: none; }
+  .pdp-review-card {
+    flex: 0 0 78%;
+    scroll-snap-align: center;
+  }
+}
+
+/* ── Sticky mobile ATC bar ── */
+.pdp-sticky-atc {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 40; /* below the cart drawer/overlay so the drawer covers it */
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -6px 24px rgba(31,42,34,0.14);
+  transform: translateY(110%);
+  transition: transform 0.25s ease;
+}
+.pdp-sticky-atc.is-visible { transform: translateY(0); }
+.pdp-sticky-info { display: flex; flex-direction: column; min-width: 0; }
+.pdp-sticky-title {
+  font-size: 12.5px; font-weight: 800; color: var(--ink, #1F2A22);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 40vw;
+}
+.pdp-sticky-price { font-size: 15px; font-weight: 900; color: var(--green, #2D6A4F); }
+.pdp-sticky-btn {
+  flex: 1;
+  background: linear-gradient(135deg, var(--green, #2D6A4F), var(--green-dark, #1B4332));
+  color: #fff;
+  border: none; border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 15px; font-weight: 800; letter-spacing: 0.02em;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .pdp-sticky-atc { display: flex; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pdp-sticky-atc { transition: none; }
+}
+
 /* ══════════════════════════════════════════
    RESPONSIVE — TABLET (≤1024px)
 ══════════════════════════════════════════ */
