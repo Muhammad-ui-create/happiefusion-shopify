@@ -8,14 +8,17 @@
   .ai-discount-code-{{ ai_gen_id }} {
     display: block;
     width: 100%;
-    max-width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 8px 20px 56px;
+    box-sizing: border-box;
   }
 
   .ai-discount-code__heading-{{ ai_gen_id }} {
     font-size: {{ block.settings.heading_size }}px;
     color: {{ block.settings.text_color }};
     margin: 0 0 12px 0;
-    font-weight: 500;
+    font-weight: 800;
   }
 
   .ai-discount-code__form-{{ ai_gen_id }} {
@@ -47,20 +50,23 @@
 
   .ai-discount-code__button-{{ ai_gen_id }} {
     padding: 14px 28px;
-    background-color: {{ block.settings.button_color }};
+    background: linear-gradient(135deg, var(--green, #2D6A4F), var(--green-dark, #1B4332));
     color: {{ block.settings.button_text_color }};
     border: none;
     border-radius: {{ block.settings.button_border_radius }}px;
     font-size: {{ block.settings.button_font_size }}px;
-    font-weight: 500;
+    font-weight: 800;
+    letter-spacing: 0.02em;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+    box-shadow: 0 6px 16px rgba(45,106,79,0.22);
   }
 
   .ai-discount-code__button-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.button_hover_color }};
+    background: var(--green-dark, #1B4332);
     transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(45,106,79,0.3);
   }
 
   .ai-discount-code__button-{{ ai_gen_id }}:active {
