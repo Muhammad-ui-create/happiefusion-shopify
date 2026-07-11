@@ -57,7 +57,7 @@
       <div class="product-top-row">
         <a href="/pages/reviews" class="product-rating" style="text-decoration:none;color:inherit;">
           <span class="stars">★★★★★</span>
-          <span class="rating-count">4.9 · Amazon-verified reviews</span>
+          <span class="rating-count">4.9 · 1,200+ Amazon-verified reviews</span>
         </a>
         {%- if product.available -%}
           <span class="top-seller-badge">TOP SELLER</span>
@@ -185,6 +185,24 @@
           </div>
         {% endif %}
 
+        {% comment %} Social proof strip — real numbers only: Amazon review count + cumulative volume {% endcomment %}
+        <div class="pdp-proof-row" aria-label="Customer proof">
+          <span class="pdp-proof-item"><span class="pdp-proof-star">★</span> <strong>4.9</strong> from 1,200+ verified Amazon reviews</span>
+          <span class="pdp-proof-dot" aria-hidden="true">·</span>
+          <span class="pdp-proof-item">Thousands of cans shipped nationwide 🇺🇸</span>
+        </div>
+
+        {% comment %} Low-stock urgency — only renders when the selected variant is genuinely under 20 units {% endcomment %}
+        {%- assign _inv = product.selected_or_first_available_variant.inventory_quantity -%}
+        {%- if _inv and _inv > 0 and _inv <= 20 -%}
+          <div class="low-stock-badge" id="low-stock-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+            <span>Only <strong>{{ _inv }}</strong> left in stock — order soon</span>
+          </div>
+        {%- endif -%}
+
         {%- if product.available -%}
           <!-- Add to Cart -->
           <button type="submit" class="btn-atc" id="add-to-cart-btn">
@@ -211,16 +229,6 @@
           <svg viewBox="0 0 34 22" width="34" height="22" role="img" aria-label="Google Pay"><rect width="34" height="22" rx="3" fill="#fff" stroke="#e5e5e5"/><text x="17" y="14.5" font-family="Arial,sans-serif" font-weight="700" font-size="6.5" fill="#5f6368" text-anchor="middle" letter-spacing="0.1">G Pay</text></svg>
         </div>
 
-        {% comment %} Low-stock urgency — shows when inventory drops under 20 on the selected variant {% endcomment %}
-        {%- assign _inv = product.selected_or_first_available_variant.inventory_quantity -%}
-        {%- if _inv and _inv > 0 and _inv <= 20 -%}
-          <div class="low-stock-badge" id="low-stock-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
-            <span>Only <strong>{{ _inv }}</strong> left in stock — order soon</span>
-          </div>
-        {%- endif -%}
 
         <!-- Trust pills -->
         <div class="product-trust-pills">

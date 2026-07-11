@@ -142,6 +142,13 @@
 
     </div>
 
+    <!-- Social proof strip — real numbers only -->
+    <div class="pdp-proof-row byo-proof-row" aria-label="Customer proof">
+      <span class="pdp-proof-item"><span class="pdp-proof-star">★</span> <strong>4.9</strong> from 1,200+ verified Amazon reviews</span>
+      <span class="pdp-proof-dot" aria-hidden="true">·</span>
+      <span class="pdp-proof-item">Thousands of cans shipped nationwide 🇺🇸</span>
+    </div>
+
     <!-- ATC -->
     <button type="button" class="byo-atc" id="byo-atc" disabled>
       <span id="byo-atc-text">PICK 3 SIX-PACKS TO CONTINUE</span>
@@ -485,6 +492,23 @@
   .byo-card-blue.has-cans  .byo-qty { color: #3B6FF0; }
   .byo-card-mango.has-cans .byo-qty { color: #D98A0F; }
   .byo-card-water.has-cans .byo-qty { color: #E84C6B; }
+
+  /* ── Social proof strip ── */
+  .byo-proof-row {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: 4px 8px;
+    font-size: 13px; font-weight: 600;
+    color: var(--gray, #5A6B5E);
+    text-align: center;
+    margin: 0 0 12px;
+    line-height: 1.5;
+  }
+  .byo-proof-row strong { color: var(--ink, #1F2A22); font-weight: 800; }
+  .byo-proof-row .pdp-proof-star { color: #F5A623; }
+  .byo-proof-row .pdp-proof-dot { color: rgba(90,107,94,0.45); font-weight: 800; }
+  @media (max-width: 640px) {
+    .byo-proof-row { font-size: 12px; gap: 2px 7px; }
+  }
 
   /* ── ATC ── */
   .byo-atc {
