@@ -1564,6 +1564,16 @@ input, select { font-family: var(--font); }
   }
 }
 
+/* ── Subscription consent disclosure (#shopify-buyer-consent) ──
+   Hidden for One Time Purchase; shown when a selling plan is selected
+   (required consent). Toggled via body.subscription-selected in main-product. */
+#shopify-buyer-consent { display: none !important; }
+body.subscription-selected #shopify-buyer-consent {
+  display: inline-block !important;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
 /* ── Sticky mobile ATC bar ── */
 .pdp-sticky-atc {
   position: fixed;

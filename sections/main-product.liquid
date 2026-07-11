@@ -650,52 +650,14 @@
      traffic. Hide it unless Subscribe & Save is actually selected; it must stay visible
      when a selling plan IS selected (required consent disclosure). */
   (function() {
-    var DISCLOSURE_RX = /deferred, subscription, or recurring/i;
-    var disclosureNodes = [];
-
-    function subscriptionSelected() {
-      var checked = document.querySelector('input[name="selling_plan"]:checked');
-      return !!(checked && checked.value);
-    }
-
+    // Shopify renders the consent text as <small id="shopify-buyer-consent"> inside
+    // .shopify-payment-button. CSS hides it by default (see happie.css); this toggle
+    // re-shows it whenever a selling plan is actually selected — required consent.
     function applyVisibility() {
-      var show = subscriptionSelected();
-      disclosureNodes.forEach(function(n) { n.style.display = show ? '' : 'none'; });
+      var checked = document.querySelector('input[name="selling_plan"]:checked');
+      document.body.classList.toggle('subscription-selected', !!(checked && checked.value));
     }
-
-    function scanForDisclosure(root) {
-      if (!root || !root.querySelectorAll) return;
-      root.querySelectorAll('p, div, span, small').forEach(function(el) {
-        if (disclosureNodes.indexOf(el) !== -1) return;
-        // Only tag the innermost element that matches, to avoid hiding big wrappers
-        if (DISCLOSURE_RX.test(el.textContent || '') && !el.querySelector('p, div, span, small')) {
-          disclosureNodes.push(el);
-          // Shopify injects the disclosure above our payment-icons row — move it below
-          var payRow = document.querySelector('.pdp-pay-row');
-          if (payRow && payRow.nextElementSibling !== el) {
-            payRow.insertAdjacentElement('afterend', el);
-            el.style.marginTop = '10px';
-            el.style.fontSize = '12px';
-          }
-        }
-      });
-      applyVisibility();
-    }
-
-    scanForDisclosure(document);
-    // The disclosure is injected async by Shopify's payment-button script — watch for it
-    var mo = new MutationObserver(function(muts) {
-      muts.forEach(function(m) {
-        m.addedNodes.forEach(function(node) {
-          if (node.nodeType === 1) {
-            if (DISCLOSURE_RX.test(node.textContent || '')) scanForDisclosure(node.parentNode || node);
-          }
-        });
-      });
-    });
-    mo.observe(document.body, { childList: true, subtree: true });
-    setTimeout(function() { mo.disconnect(); }, 15000); // injection happens well within 15s
-
+    applyVisibility();
     document.querySelectorAll('input[name="selling_plan"]').forEach(function(radio) {
       radio.addEventListener('change', applyVisibility);
     });
