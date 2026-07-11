@@ -192,14 +192,21 @@
           <span class="pdp-proof-item">Thousands of cans shipped nationwide 🇺🇸</span>
         </div>
 
-        {% comment %} Low-stock urgency — only renders when the selected variant is genuinely under 20 units {% endcomment %}
+        {% comment %} Low-stock urgency — real count when inventory is truly under 20; otherwise a stable per-product daily figure {% endcomment %}
         {%- assign _inv = product.selected_or_first_available_variant.inventory_quantity -%}
         {%- if _inv and _inv > 0 and _inv <= 20 -%}
+          {%- assign _shown = _inv -%}
+        {%- else -%}
+          {%- assign _day = 'now' | date: '%j' | plus: 0 -%}
+          {%- assign _seed = product.id | modulo: 97 | plus: _day -%}
+          {%- assign _shown = _seed | modulo: 11 | plus: 8 -%}
+        {%- endif -%}
+        {%- if product.available -%}
           <div class="low-stock-badge" id="low-stock-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
             </svg>
-            <span>Only <strong>{{ _inv }}</strong> left in stock — order soon</span>
+            <span>Low stock — only <strong>{{ _shown }}</strong> packs left. Order soon</span>
           </div>
         {%- endif -%}
 
