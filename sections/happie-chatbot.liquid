@@ -100,7 +100,7 @@
         <input type="text" name="contact[name]" placeholder="Your name" required>
         <input type="email" name="contact[email]" placeholder="Your email" required>
         <textarea name="contact[body]" placeholder="How can we help?" rows="3" required></textarea>
-        <input type="hidden" name="contact[subject]" value="[Happie Chatbot] New customer message — route to orders@drinkhappie.com">
+        <input type="hidden" name="contact[subject]" value="[Happie Chatbot] New customer message — route to orders@livehappie.com">
         <input type="hidden" name="contact[source]" value="happie-chatbot">
         <input type="hidden" name="contact[recipient]" value="{{ section.settings.support_email }}">
         <div class="happie-chat__handoff-actions">
@@ -567,7 +567,7 @@
     var workerUrl = widget.dataset.workerUrl || '';
     var supportEmail = widget.dataset.supportEmail || '';
     var botName = widget.dataset.botName || 'Happie Assistant';
-    var greeting = widget.dataset.greeting || "Hey! I'm the Happie Assistant. Reach our team at orders@drinkhappie.com or ask me anything below.";
+    var greeting = widget.dataset.greeting || "Hey! I'm the Happie Assistant. Reach our team at orders@livehappie.com or ask me anything below.";
 
     // ── LOCAL KNOWLEDGE BASE ──────────────────────────────────────────────
     // Answered instantly without backend calls. Pattern-matched by keyword regex.
@@ -636,7 +636,7 @@
       },
       {
         match: /cancel.*subscription|stop subscription|cancel my (account|sub)/i,
-        reply: "You can **cancel anytime** — no fees, no questions asked.\n\n1. Log into your account at [happiefusion.com](/)\n2. Click **Subscriptions**\n3. Click **Cancel**\n\nThat's it. We'd rather earn your business each month than trap you into it. Need help? Email us at orders@drinkhappie.com."
+        reply: "You can **cancel anytime** — no fees, no questions asked.\n\n1. Log into your account at [happiefusion.com](/)\n2. Click **Subscriptions**\n3. Click **Cancel**\n\nThat's it. We'd rather earn your business each month than trap you into it. Need help? Email us at orders@livehappie.com."
       },
 
       // ── SHIPPING ──
@@ -650,7 +650,7 @@
       },
       {
         match: /tracking|track (my )?(order|package|shipment)|hasn'?t (arrived|shipped)|where('?s| is) my order/i,
-        reply: "Once your order ships you'll get an **email with tracking info** automatically.\n\nIf you haven't received it within 2 business days of ordering:\n1. Check your spam folder\n2. Email us at **orders@drinkhappie.com** with your order number — we'll track it down\n3. Or click 'Talk to a human' below and we'll handle it"
+        reply: "Once your order ships you'll get an **email with tracking info** automatically.\n\nIf you haven't received it within 2 business days of ordering:\n1. Check your spam folder\n2. Email us at **orders@livehappie.com** with your order number — we'll track it down\n3. Or click 'Talk to a human' below and we'll handle it"
       },
       {
         match: /free shipping|when.*free.*ship|free delivery/i,
@@ -660,7 +660,7 @@
       // ── RETURNS ──
       {
         match: /return|refund|money back|guarantee|don'?t like it|not happy|unhappy/i,
-        reply: "**30-day satisfaction guarantee.**\n\nIf you're not happy for *any* reason within 30 days of delivery, just email **orders@drinkhappie.com** and we'll issue a **full refund** — no questions asked.\n\n**You don't even need to return the product.** We'd rather you keep it than deal with the hassle of shipping it back.\n\nFor damaged or wrong items, email us within 7 days with a photo and we'll send a replacement or refund immediately."
+        reply: "**30-day satisfaction guarantee.**\n\nIf you're not happy for *any* reason within 30 days of delivery, just email **orders@livehappie.com** and we'll issue a **full refund** — no questions asked.\n\n**You don't even need to return the product.** We'd rather you keep it than deal with the hassle of shipping it back.\n\nFor damaged or wrong items, email us within 7 days with a photo and we'll send a replacement or refund immediately."
       },
 
       // ── CHECKOUT / ORDER HELP ──
@@ -674,11 +674,11 @@
       },
       {
         match: /forgot password|reset password|can'?t log in|account access|locked out/i,
-        reply: "**To reset your password:**\n\n1. Go to the [account login page](/account/login)\n2. Click **Forgot password?**\n3. Enter your email — we'll send a reset link\n\nStill stuck? Email **orders@drinkhappie.com** and we'll get you back in within an hour."
+        reply: "**To reset your password:**\n\n1. Go to the [account login page](/account/login)\n2. Click **Forgot password?**\n3. Enter your email — we'll send a reset link\n\nStill stuck? Email **orders@livehappie.com** and we'll get you back in within an hour."
       },
       {
         match: /change.*address|update.*shipping|wrong address|moved/i,
-        reply: "**To change your shipping address:**\n\n- **For an unshipped order:** Email **orders@drinkhappie.com** ASAP with your order number — we'll update it before it ships.\n- **For a subscription:** Log into your account → Subscriptions → Update shipping address.\n- **For your account:** Log in → Addresses → Edit."
+        reply: "**To change your shipping address:**\n\n- **For an unshipped order:** Email **orders@livehappie.com** ASAP with your order number — we'll update it before it ships.\n- **For a subscription:** Log into your account → Subscriptions → Update shipping address.\n- **For your account:** Log in → Addresses → Edit."
       },
 
       // ── COMPANY / POLICIES ──
@@ -696,7 +696,7 @@
       },
       {
         match: /contact|email|phone|reach you|customer service/i,
-        reply: "**Reach our team:**\n\n- 📧 Email: **orders@drinkhappie.com**\n- 📞 Phone: **(463) 218-9646** (Mon–Fri 9am–5pm PST)\n- 💬 Or click **'Talk to a human'** below to send us a message right now\n\nWe respond within **1 business day** — usually faster."
+        reply: "**Reach our team:**\n\n- 📧 Email: **orders@livehappie.com**\n- 📞 Phone: **(463) 218-9646** (Mon–Fri 9am–5pm PST)\n- 💬 Or click **'Talk to a human'** below to send us a message right now\n\nWe respond within **1 business day** — usually faster."
       },
       {
         match: /reviews?|testimonials?|what (do|are) (customers|people) say/i,
@@ -704,7 +704,7 @@
       },
       {
         match: /wholesale|bulk|retail|stock.*store|carry.*store/i,
-        reply: "Interested in wholesale or stocking Happie at your store?\n\nEmail us at **orders@drinkhappie.com** with the subject **\"Wholesale Inquiry\"** and we'll send over our wholesale deck and pricing within 1 business day."
+        reply: "Interested in wholesale or stocking Happie at your store?\n\nEmail us at **orders@livehappie.com** with the subject **\"Wholesale Inquiry\"** and we'll send over our wholesale deck and pricing within 1 business day."
       },
 
       // ── BENEFITS / USE CASES ──
@@ -955,7 +955,7 @@
       "type": "text",
       "id": "support_email",
       "label": "Support email",
-      "default": "orders@drinkhappie.com"
+      "default": "orders@livehappie.com"
     },
     {
       "type": "text",
@@ -967,7 +967,7 @@
       "type": "textarea",
       "id": "greeting",
       "label": "Greeting message",
-      "default": "Hey there! I'm the Happie Assistant — here to help with products, orders, and any questions about Fungi Fusion. You can also reach our team directly at orders@drinkhappie.com. What can I help with?"
+      "default": "Hey there! I'm the Happie Assistant — here to help with products, orders, and any questions about Fungi Fusion. You can also reach our team directly at orders@livehappie.com. What can I help with?"
     },
     {
       "type": "image_picker",
