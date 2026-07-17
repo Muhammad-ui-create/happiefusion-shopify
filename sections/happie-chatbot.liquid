@@ -624,15 +624,15 @@
       // ── PRICING / SUBSCRIPTION ──
       {
         match: /price|cost|how much|how expensive|pricing/i,
-        reply: "**Our pricing:**\n\n- **6-Pack (any single flavor)** — $23.99\n- **12-Pack Variety Pack** — $41.99 (all 3 flavors)\n- **Subscribe & Save** — 15% off every order + free shipping always\n\nNew customers also get **15% off their first order** with code `WELCOME15`. And **shipping is free on every order** — no minimum, for everyone.\n\n[Shop now →](/collections/all)"
+        reply: "**Our pricing:**\n\n- **6-Pack (any single flavor)** — $23.99\n- **12-Pack Variety Pack** — $41.99 (all 3 flavors)\n- **Subscribe & Save** — 15% off every order\n\nNew customers also get **15% off their first order** with code `WELCOME15`. **Free shipping on orders over $41.99** — smaller orders ship for a flat $5.99.\n\n[Shop now →](/collections/all)"
       },
       {
         match: /subscribe|subscription|subscribe.*save|recurring|monthly delivery/i,
-        reply: "**Subscribe & Save** is the best deal:\n\n- ✅ **15% off** every single order\n- ✅ **Free shipping**, always (no minimum)\n- ✅ **Cancel anytime** — one click, no fees\n- ✅ **Skip or pause** a delivery from your account\n- ✅ Early access to new flavors\n\nDelivery is once per month (and you can skip a month anytime). Pick your flavor at checkout — switch flavors anytime from your account."
+        reply: "**Subscribe & Save** is the best deal:\n\n- ✅ **15% off** every single order\n- ✅ **Free shipping** on orders over $41.99\n- ✅ **Cancel anytime** — one click, no fees\n- ✅ **Skip or pause** a delivery from your account\n- ✅ Early access to new flavors\n\nDelivery is once per month (and you can skip a month anytime). Pick your flavor at checkout — switch flavors anytime from your account."
       },
       {
         match: /discount|coupon|promo code|first[- ]?(order|time)|welcome.*code|new customer/i,
-        reply: "**For first-time buyers** we offer **15% off** with code `WELCOME15` at checkout — reserved for new customers.\n\nAnd good news for everyone: **shipping is free on every order**, no minimum, no code needed.\n\nAlready a customer? Subscribe & Save gets you **15% off every order**."
+        reply: "**For first-time buyers** we offer **15% off** with code `WELCOME15` at checkout — reserved for new customers.\n\nShipping is **free on orders over $41.99** — smaller orders ship for a flat $5.99.\n\nAlready a customer? Subscribe & Save gets you **15% off every order**."
       },
       {
         match: /cancel.*subscription|stop subscription|cancel my (account|sub)/i,
@@ -642,11 +642,11 @@
       // ── SHIPPING ──
       {
         match: /shipping (cost|rate|price|info|policy|time)|how (fast|long|much) (does )?(it )?(ship|take|cost)|when will (it|my order) arrive/i,
-        reply: "**Shipping breakdown:**\n\n- 📦 **Processing:** 1 business day from our Northern California warehouse\n- 🚚 **Standard delivery:** 3–5 business days — **always FREE, no minimum**\n- ⚡ **Express (2-day):** $15.00\n- 📬 **Subscribers:** Free shipping on every recurring order\n\nWe ship to **all 50 US states**. Full details: [Shipping Policy](/pages/shipping-policy)."
+        reply: "**Shipping breakdown:**\n\n- 📦 **Processing:** 1 business day from our Northern California warehouse\n- 🚚 **Standard delivery:** 3–5 business days — **FREE over $41.99**, flat $5.99 under\n- ⚡ **Express (2-day):** $15.00\n\nWe ship to **all 50 US states**. Full details: [Shipping Policy](/pages/shipping-policy)."
       },
       {
         match: /where (do you|are you|do they) ship|international|outside (us|usa)|countries|canada|uk/i,
-        reply: "We currently ship to **all 50 US states only** — free standard shipping, no minimum.\n\nWe're working on international shipping — sign up for our email list to be notified when your country is added."
+        reply: "We currently ship to **all 50 US states only** — free standard shipping on orders over $41.99, flat $5.99 under that.\n\nWe're working on international shipping — sign up for our email list to be notified when your country is added."
       },
       {
         match: /tracking|track (my )?(order|package|shipment)|hasn'?t (arrived|shipped)|where('?s| is) my order/i,
@@ -654,7 +654,7 @@
       },
       {
         match: /free shipping|when.*free.*ship|free delivery/i,
-        reply: "**Every order ships free — no minimum, no code needed.** Applied automatically at checkout.\n\nWhether you order a single 6-pack ($23.99) or the 12-pack Variety Pack ($41.99), shipping is on us. Standard delivery is 3–5 business days from our Northern California warehouse."
+        reply: "**Orders over $41.99 ship free — automatically, no code needed.** Orders under that ship for a flat $5.99.\n\nThe 12-pack Variety Pack ($41.99), the Build Your Own packs, and any two 6-packs all qualify for free shipping. Standard delivery is 3–5 business days from our Northern California warehouse."
       },
 
       // ── RETURNS ──
