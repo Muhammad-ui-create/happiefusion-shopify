@@ -1,6 +1,6 @@
 {%- comment -%}
   Landing page: Caffeine Alternative angle
-  Code: FUNGI15 (15% off)
+  Code: WELCOME15 (15% off)
   Auto-applies the discount when the user clicks Add to Cart
   Target SKU: Blue Razzberry 6-Pack ($23.99)
 {%- endcomment -%}
@@ -18,7 +18,7 @@
     <div class="lp-promo-inner">
       <div class="lp-promo-text">
         <strong>Quit the Crash. Keep the Energy.</strong>
-        <span>15% Off — Code <code>FUNGI15</code> applied automatically at checkout</span>
+        <span>15% Off — Code <code>WELCOME15</code> applied automatically at checkout</span>
       </div>
     </div>
   </div>
@@ -86,7 +86,7 @@
         <div class="product-price-row lp-price-row">
           <span class="product-price lp-price-new">{{ discounted_price | money }}</span>
           <span class="product-compare-price lp-price-old">{{ price | money }}</span>
-          <span class="lp-price-save lp-price-save-caff">Save {{ savings | money }} with FUNGI15</span>
+          <span class="lp-price-save lp-price-save-caff">Save {{ savings | money }} with WELCOME15</span>
         </div>
 
         <!-- Angle-specific description -->
@@ -111,13 +111,13 @@
           </div>
         </div>
 
-        <!-- Add to Cart — auto-applies FUNGI15 at checkout -->
-        <button type="button" class="btn-atc lp-atc" id="lp-atc-btn" data-variant-id="{{ variant.id }}" data-discount="FUNGI15">
+        <!-- Add to Cart — auto-applies WELCOME15 at checkout -->
+        <button type="button" class="btn-atc lp-atc" id="lp-atc-btn" data-variant-id="{{ variant.id }}" data-discount="WELCOME15">
           <span id="lp-atc-text">ADD TO CART — <s style="opacity:0.55;">{{ price | money }}</s> {{ discounted_price | money }}</span>
         </button>
         <p class="lp-atc-note">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:4px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <strong>FUNGI15 auto-applied at checkout.</strong> No code needed.
+          <strong>WELCOME15 auto-applied at checkout.</strong> No code needed.
         </p>
 
         <!-- Trust pills -->
@@ -608,7 +608,7 @@
   }
 </style>
 
-<!-- ── Custom ATC: add to cart, then redirect to /discount/FUNGI15?redirect=/checkout for auto-apply ── -->
+<!-- ── Custom ATC: add to cart, then redirect to /discount/WELCOME15?redirect=/checkout for auto-apply ── -->
 <script>
 (function() {
   /* ════════════════════════════════════════════════
@@ -616,7 +616,7 @@
      Hard-coded constant so it can NEVER pull the wrong code, even if
      the button or any other element fails to render on the page.
      ════════════════════════════════════════════════ */
-  var LP_DISCOUNT = 'FUNGI15';
+  var LP_DISCOUNT = 'WELCOME15';
   var LP_DISCOUNT_PCT = 15; /* keep in sync with the discount above */
   var LP_DISCOUNT_LABEL = LP_DISCOUNT_PCT + '% OFF (' + LP_DISCOUNT + ')';
 
