@@ -60,9 +60,9 @@
           <span class="byo-save" id="byo-save">SAVE $27.98</span>
         </div>
         <div class="byo-price-meta">
-          <span id="byo-percan">$2.72 per can</span>
+          <span id="byo-percan">$3.17 per can</span>
           <span class="byo-price-dot">·</span>
-          <span id="byo-pct">32% off vs three 6-packs</span>
+          <span id="byo-pct">21% off vs three 6-packs</span>
           <span class="byo-price-dot">·</span>
           <span>Free shipping</span>
         </div>
@@ -211,7 +211,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
           </span>
           <strong>18 or 24 Cans, Your Way</strong>
-          <p>Any mix of three flavors — and our best per-can prices, from $2.54 a can on the 24-pack.</p>
+          <p>Any mix of three flavors — and our best per-can prices, from $3.00 a can on the 24-pack.</p>
         </div>
 
         <div class="byo-feature">
@@ -241,7 +241,7 @@
               <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
             </summary>
             <div class="pdp-faq-a">
-              <p><strong>Pick your box size, then fill it with 6-packs.</strong> The 18-pack holds three 6-packs ($48.99); the 24-pack holds four ($60.99). All one flavor, one of each, or any combo — one price, one box, and your exact mix is printed on your order confirmation so you know exactly what's coming.</p>
+              <p><strong>Pick your box size, then fill it with 6-packs.</strong> The 18-pack holds three 6-packs ($56.99); the 24-pack holds four ($71.99). All one flavor, one of each, or any combo — one price, one box, and your exact mix is printed on your order confirmation so you know exactly what's coming.</p>
             </div>
           </details>
 
@@ -285,7 +285,7 @@
               <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
             </summary>
             <div class="pdp-faq-a">
-              <p><strong>Yes — by a lot.</strong> Three 6-packs bought separately cost $71.97; the 18-pack is $48.99 (save $22.98, 32% off). Four 6-packs cost $95.96; the 24-pack is $60.99 (save $34.97, 36% off) — the best per-can price we offer at $2.54.</p>
+              <p><strong>Yes.</strong> Three 6-packs bought separately cost $71.97; the 18-pack is $56.99 (save $14.98, 21% off). Four 6-packs cost $95.96; the 24-pack is $71.99 (save $23.97, 25% off) — the best per-can price we offer at $3.00.</p>
             </div>
           </details>
 
@@ -611,14 +611,14 @@
   /* Two box sizes; per-size config drives every label and the hard cap.
      Money strings mirror the variant prices set in Shopify. */
   var SIZES = {
-    "18": { target: 3, variantId: "{{ v18.id }}", cents: {{ v18.price }}, price: "{{ v18.price | money }}", compare: "{{ v18.compare_at_price | money }}", save: "SAVE {{ v18.compare_at_price | minus: v18.price | money }}", percan: "$2.72 per can", pct: "32% off vs three 6-packs",
+    "18": { target: 3, variantId: "{{ v18.id }}", cents: {{ v18.price }}, price: "{{ v18.price | money }}", compare: "{{ v18.compare_at_price | money }}", save: "SAVE {{ v18.compare_at_price | minus: v18.price | money }}", percan: "$3.17 per can", pct: "21% off vs three 6-packs",
       presets: [
         { mix: [1,1,1], label: "Even Mix · 1 of each", dots: ["#3B6FF0","#F5A623","#E84C6B"] },
         { mix: [3,0,0], label: "All Blue Razz", dots: ["#3B6FF0"] },
         { mix: [0,3,0], label: "All Mango", dots: ["#F5A623"] },
         { mix: [0,0,3], label: "All Watermelon", dots: ["#E84C6B"] }
       ] },
-    "24": { target: 4, variantId: "{{ v24.id }}", cents: {{ v24.price }}, price: "{{ v24.price | money }}", compare: "{{ v24.compare_at_price | money }}", save: "SAVE {{ v24.compare_at_price | minus: v24.price | money }}", percan: "$2.54 per can", pct: "36% off vs four 6-packs",
+    "24": { target: 4, variantId: "{{ v24.id }}", cents: {{ v24.price }}, price: "{{ v24.price | money }}", compare: "{{ v24.compare_at_price | money }}", save: "SAVE {{ v24.compare_at_price | minus: v24.price | money }}", percan: "$3.00 per can", pct: "25% off vs four 6-packs",
       presets: [
         { mix: [2,1,1], label: "Blue-Heavy Mix", dots: ["#3B6FF0","#3B6FF0","#F5A623","#E84C6B"] },
         { mix: [1,1,2], label: "Melon-Heavy Mix", dots: ["#E84C6B","#E84C6B","#3B6FF0","#F5A623"] },
