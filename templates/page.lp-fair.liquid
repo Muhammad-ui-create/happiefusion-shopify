@@ -1,0 +1,310 @@
+{%- comment -%}
+  Landing page: Cali State Fair — QR code destination
+  Offers: 6-packs BOGO 50% (code FAIRBOGO, auto-applied by CTAs) ·
+          Variety 12-pack 15% (WELCOME15, auto-applied) ·
+          Build Your Own showcased (built-in bundle savings, no code)
+  WELCOME15 is deliberately NOT offered on 6-packs here; codes cannot
+  combine, so the two offers can never stack at checkout.
+{%- endcomment -%}
+
+{%- assign p_blue  = all_products['blue-razzberry-fungi-powered-seltzer'] -%}
+{%- assign p_mango = all_products['mango-mimosa-fungi-powered-seltzer'] -%}
+{%- assign p_water = all_products['watermelon-fungi-powered-seltzer'] -%}
+{%- assign p_var   = all_products['happie-fungi-fusion-mushroom-drink-variety-pack'] -%}
+{%- assign p_byo   = all_products['build-your-own-fungi-fusion-18-pack'] -%}
+{%- assign six_price = p_blue.price -%}
+{%- assign bogo_pair = six_price | times: 150 | divided_by: 100 -%}
+{%- assign bogo_save = six_price | divided_by: 2 -%}
+{%- assign var_price = p_var.price -%}
+{%- assign var_disc  = var_price | times: 85 | divided_by: 100 -%}
+{%- assign var_save  = var_price | minus: var_disc -%}
+
+<div class="lpf">
+
+  <!-- ── HERO ── -->
+  <section class="lpf-hero">
+    <div class="lpf-hero-inner">
+      <div class="lpf-badge">🎡 CALI STATE FAIR EXCLUSIVE</div>
+      <h1 class="lpf-title">You found us at the fair.<br><span>Here's your reward.</span></h1>
+      <p class="lpf-sub">Fungi Fusion — the functional mushroom seltzer with real doses of Lion's Mane, Cordyceps &amp; Reishi. No alcohol. No caffeine. No crash.</p>
+      <div class="lpf-stars-row">
+        <span class="lpf-stars">★★★★★</span>
+        <span class="lpf-stars-label"><strong>4.9</strong> · Amazon-verified reviews</span>
+      </div>
+      <a href="#lpf-offers" class="lpf-cta">See Fair Offers ↓</a>
+      <div class="lpf-hero-pills">
+        <span>⚡ Zero caffeine</span>
+        <span>🍺 Zero alcohol</span>
+        <span>🧪 Lab tested</span>
+        <span>🌱 Vegan</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OFFERS ── -->
+  <section class="lpf-offers" id="lpf-offers">
+    <h2 class="lpf-h2">Fair-only offers, straight from the QR code</h2>
+    <p class="lpf-h2sub">Discounts apply automatically at checkout — no typing codes.</p>
+
+    <div class="lpf-offer-grid">
+
+      <!-- Offer 1: BOGO 6-packs -->
+      <div class="lpf-offer lpf-offer-bogo">
+        <div class="lpf-offer-flag">FAIR SPECIAL</div>
+        <div class="lpf-offer-imgs">
+          {%- if p_blue.featured_image -%}<img src="{{ p_blue.featured_image | image_url: width: 300 }}" alt="Blue Razzberry 6-pack" width="150" height="150" loading="lazy">{%- endif -%}
+          {%- if p_mango.featured_image -%}<img src="{{ p_mango.featured_image | image_url: width: 300 }}" alt="Mango Mimosa 6-pack" width="150" height="150" loading="lazy">{%- endif -%}
+        </div>
+        <h3>6-Packs: Buy One,<br>Get One 50% Off</h3>
+        <p class="lpf-offer-math">Two 6-packs (12 cans) for <strong>{{ bogo_pair | money }}</strong> <s>{{ six_price | times: 2 | money }}</s> — save {{ bogo_save | money }}. Mix any flavors.</p>
+        <div class="lpf-offer-flavors">
+          <a href="/discount/FAIRBOGO?redirect=/products/blue-razzberry-fungi-powered-seltzer" class="lpf-flavor-btn lpf-blue">Blue Razzberry</a>
+          <a href="/discount/FAIRBOGO?redirect=/products/mango-mimosa-fungi-powered-seltzer" class="lpf-flavor-btn lpf-mango">Mango Mimosa</a>
+          <a href="/discount/FAIRBOGO?redirect=/products/watermelon-fungi-powered-seltzer" class="lpf-flavor-btn lpf-water">Watermelon</a>
+        </div>
+        <p class="lpf-offer-note">Add any 2 six-packs — the second rings up half price automatically.</p>
+      </div>
+
+      <!-- Offer 2: Variety pack WELCOME15 -->
+      <div class="lpf-offer">
+        <div class="lpf-offer-flag lpf-flag-purple">TRY ALL 3 FLAVORS</div>
+        <div class="lpf-offer-imgs lpf-offer-imgs-one">
+          {%- if p_var.featured_image -%}<img src="{{ p_var.featured_image | image_url: width: 340 }}" alt="Variety Pack — 12 cans" width="170" height="170" loading="lazy">{%- endif -%}
+        </div>
+        <h3>Variety 12-Pack:<br>15% Off</h3>
+        <p class="lpf-offer-math"><strong>{{ var_disc | money }}</strong> <s>{{ var_price | money }}</s> with code WELCOME15 — save {{ var_save | money }}. Four cans of each flavor.</p>
+        <a href="/discount/WELCOME15?redirect=/products/happie-fungi-fusion-mushroom-drink-variety-pack" class="lpf-offer-cta">Get the Variety Pack →</a>
+        <p class="lpf-offer-note">New customers only · code applies automatically</p>
+      </div>
+
+      <!-- Offer 3: Build Your Own -->
+      <div class="lpf-offer">
+        <div class="lpf-offer-flag lpf-flag-green">BEST VALUE</div>
+        <div class="lpf-offer-imgs lpf-offer-imgs-one">
+          {%- if p_byo.featured_image -%}<img src="{{ p_byo.featured_image | image_url: width: 340 }}" alt="Build Your Own pack" width="170" height="170" loading="lazy">{%- endif -%}
+        </div>
+        <h3>Build Your Own<br>18 or 24-Can Box</h3>
+        <p class="lpf-offer-math">Your flavors, your ratios. From <strong>{{ p_byo.price_min | money }}</strong> <s>{{ p_byo.compare_at_price_max | money }}</s> — bundle savings built in, free shipping included.</p>
+        <a href="/products/build-your-own-fungi-fusion-18-pack" class="lpf-offer-cta lpf-cta-green">Build My Pack →</a>
+        <p class="lpf-offer-note">18-pack $3.17/can · 24-pack $3.00/can — our best rates</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PAIN POINTS ── -->
+  <section class="lpf-pain">
+    <h2 class="lpf-h2">Fair days are long. Your energy doesn't have to quit early.</h2>
+    <div class="lpf-pain-grid">
+      <div class="lpf-pain-card">
+        <span class="lpf-pain-emoji">🍺</span>
+        <h3>The beer buzz that turns into a headache</h3>
+        <p>Fungi Fusion gives you something to sip with the same social ritual — zero alcohol, zero hangover, and you still drive home fine.</p>
+      </div>
+      <div class="lpf-pain-card">
+        <span class="lpf-pain-emoji">⚡</span>
+        <h3>The 2pm energy-drink crash</h3>
+        <p>Cordyceps supports natural ATP energy — no caffeine, no jitters, no crash an hour later while you're still standing in line.</p>
+      </div>
+      <div class="lpf-pain-card">
+        <span class="lpf-pain-emoji">🧠</span>
+        <h3>Brain fog by the end of the day</h3>
+        <p>900mg of dual-extracted Lion's Mane per can supports focus and mental clarity — the real dose, printed right on the label.</p>
+      </div>
+      <div class="lpf-pain-card">
+        <span class="lpf-pain-emoji">😮‍💨</span>
+        <h3>Wired but exhausted</h3>
+        <p>Reishi supports calm without drowsiness. Steady, clear, relaxed — that's the Happie feeling people write reviews about.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BENEFITS ── -->
+  <section class="lpf-benefits">
+    <h2 class="lpf-h2">What's actually in every can</h2>
+    <div class="lpf-benefit-grid">
+      <div class="lpf-benefit"><strong>900mg Lion's Mane</strong><span>Focus &amp; mental clarity</span></div>
+      <div class="lpf-benefit"><strong>700mg Cordyceps</strong><span>Natural, caffeine-free energy</span></div>
+      <div class="lpf-benefit"><strong>400mg Reishi</strong><span>Calm &amp; stress support</span></div>
+      <div class="lpf-benefit"><strong>2,000mg total</strong><span>Dual-extracted fruiting body</span></div>
+    </div>
+    <div class="lpf-benefit-strip">
+      <span>✓ 40 calories</span>
+      <span>✓ No artificial flavors</span>
+      <span>✓ Vegan &amp; gluten-free</span>
+      <span>✓ Third-party lab tested, every batch</span>
+      <span>✓ Tastes like sparkling juice — never earthy</span>
+    </div>
+  </section>
+
+  <!-- ── REVIEWS ── -->
+  <section class="lpf-reviews">
+    <div class="lpf-reviews-head">
+      <span class="lpf-stars lpf-stars-big">★★★★★</span>
+      <h2 class="lpf-h2">4.9 stars — what buyers say</h2>
+    </div>
+    <div class="lpf-review-track">
+      <figure class="lpf-review"><span>★★★★★</span><blockquote>"Best adaptogen drink I've tried!"</blockquote><figcaption>Shannon B. · Verified buyer</figcaption></figure>
+      <figure class="lpf-review"><span>★★★★★</span><blockquote>"Excellent! Couldn't taste mushrooms. Better than Brez!"</blockquote><figcaption>Verified buyer</figcaption></figure>
+      <figure class="lpf-review"><span>★★★★★</span><blockquote>"Improved my mood and energy almost immediately."</blockquote><figcaption>Juju K. · Verified buyer</figcaption></figure>
+      <figure class="lpf-review"><span>★★★★★</span><blockquote>"My favorite flavor. You can feel the effects."</blockquote><figcaption>Kristine M. · Verified buyer</figcaption></figure>
+      <figure class="lpf-review"><span>★★★★★</span><blockquote>"We replaced morning coffee with this drink. Loving it!"</blockquote><figcaption>Nicole G. · Verified buyer</figcaption></figure>
+      <figure class="lpf-review"><span>★★★★★</span><blockquote>"Tastes like a carbonated mango drink. Really good!"</blockquote><figcaption>Shanice A. · Verified buyer</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="lpf-faq">
+    <h2 class="lpf-h2">Quick questions, straight answers</h2>
+    <details class="lpf-faq-item" open>
+      <summary>How does the buy-one-get-one-half-off work?</summary>
+      <p>Tap any flavor above — the FAIRBOGO code attaches automatically. Add any two 6-packs to your cart (same flavor or mixed) and the second one rings up 50% off at checkout. No code typing needed.</p>
+    </details>
+    <details class="lpf-faq-item">
+      <summary>Will this make me feel "high" or trippy?</summary>
+      <p>No. These are functional mushrooms — Lion's Mane, Cordyceps, and Reishi — completely different from psilocybin. Legal in all 50 states, non-psychoactive, supported by decades of research.</p>
+    </details>
+    <details class="lpf-faq-item">
+      <summary>What does it taste like?</summary>
+      <p>Like a premium sparkling juice. Blue Razzberry is tart and candy-bright, Mango Mimosa is tropical, Watermelon is crisp and clean. Zero earthy or "mushroomy" taste — that was non-negotiable.</p>
+    </details>
+    <details class="lpf-faq-item">
+      <summary>Does it have caffeine, alcohol, or sugar?</summary>
+      <p>Zero caffeine, zero alcohol. About 40 calories per can, sweetened with organic light agave — no refined sugar, no artificial sweeteners.</p>
+    </details>
+    <details class="lpf-faq-item">
+      <summary>Can I use WELCOME15 on the 6-packs too?</summary>
+      <p>The 6-packs already have the fair's buy-one-get-one-half-off deal, which is the bigger discount — codes don't stack. WELCOME15 is for the Variety 12-Pack (new customers).</p>
+    </details>
+    <details class="lpf-faq-item">
+      <summary>When do I get it, and what if I don't like it?</summary>
+      <p>Ships within 1 business day from our Northern California warehouse, arrives in 3–5. Orders over $41.99 ship free — both fair bundles qualify. And if it's not for you, email us within 30 days for a full refund. You keep the cans.</p>
+    </details>
+  </section>
+
+  <!-- ── FINAL CTA ── -->
+  <section class="lpf-final">
+    <h2>Take the fair feeling home.</h2>
+    <p>Two 6-packs for {{ bogo_pair | money }} · Variety Pack {{ var_disc | money }} · Custom boxes from {{ p_byo.price_min | money }}</p>
+    <a href="#lpf-offers" class="lpf-cta">Claim a Fair Offer ↑</a>
+  </section>
+
+  <!-- ── STICKY BAR ── -->
+  <div class="lpf-sticky" id="lpf-sticky">
+    <div class="lpf-sticky-txt"><strong>🎡 Fair offer</strong><span>6-packs: buy 1, get 1 half off</span></div>
+    <a href="#lpf-offers" class="lpf-sticky-btn">See Offers</a>
+  </div>
+
+</div>
+
+<style>
+  .lpf { background: #FDF6E9; color: #1F2A22; font-family: 'Poppins', system-ui, sans-serif; overflow-x: clip; }
+  .lpf section { padding: 52px 20px; max-width: 1080px; margin: 0 auto; }
+  .lpf-h2 { font-size: clamp(24px, 4.5vw, 34px); font-weight: 900; text-align: center; margin: 0 0 10px; line-height: 1.2; }
+  .lpf-h2sub { text-align: center; color: #5A6B5E; font-weight: 600; margin: 0 0 30px; }
+
+  /* Hero */
+  .lpf-hero { text-align: center; padding-top: 44px; }
+  .lpf-badge { display: inline-block; background: linear-gradient(135deg, #E84C6B, #F5A623); color: #fff; font-weight: 800; font-size: 13px; letter-spacing: 0.06em; padding: 8px 18px; border-radius: 50px; margin-bottom: 18px; }
+  .lpf-title { font-size: clamp(32px, 7vw, 54px); font-weight: 900; line-height: 1.08; margin: 0 0 14px; }
+  .lpf-title span { color: #2D6A4F; }
+  .lpf-sub { max-width: 560px; margin: 0 auto 16px; font-size: 16.5px; color: #445248; line-height: 1.55; }
+  .lpf-stars { color: #F5A623; letter-spacing: 2px; font-size: 18px; }
+  .lpf-stars-big { font-size: 24px; }
+  .lpf-stars-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 22px; font-size: 14px; color: #5A6B5E; }
+  .lpf-cta { display: inline-block; background: linear-gradient(135deg, #2D6A4F, #1B4332); color: #fff; font-weight: 800; font-size: 17px; padding: 16px 34px; border-radius: 14px; text-decoration: none; box-shadow: 0 10px 26px rgba(45,106,79,0.28); transition: transform 0.12s; }
+  .lpf-cta:hover { transform: translateY(-2px); }
+  .lpf-hero-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 24px; }
+  .lpf-hero-pills span { background: #fff; border: 1px solid rgba(31,42,34,0.1); padding: 7px 14px; border-radius: 50px; font-size: 13px; font-weight: 700; }
+
+  /* Offers */
+  .lpf-offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .lpf-offer { background: #fff; border-radius: 20px; padding: 26px 22px; text-align: center; box-shadow: 0 8px 26px rgba(31,42,34,0.07); border: 1px solid rgba(31,42,34,0.06); position: relative; display: flex; flex-direction: column; }
+  .lpf-offer-bogo { border: 2px solid #E84C6B; }
+  .lpf-offer-flag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #E84C6B; color: #fff; font-size: 11.5px; font-weight: 800; letter-spacing: 0.05em; padding: 5px 14px; border-radius: 50px; white-space: nowrap; }
+  .lpf-flag-purple { background: #6260AE; }
+  .lpf-flag-green { background: #2D6A4F; }
+  .lpf-offer-imgs { display: flex; justify-content: center; gap: 4px; margin: 12px 0 6px; }
+  .lpf-offer-imgs img { width: 130px; height: 130px; object-fit: contain; }
+  .lpf-offer-imgs-one img { width: 160px; height: 160px; }
+  .lpf-offer h3 { font-size: 21px; font-weight: 900; line-height: 1.2; margin: 8px 0; }
+  .lpf-offer-math { font-size: 14.5px; color: #445248; line-height: 1.5; margin: 0 0 14px; }
+  .lpf-offer-math strong { color: #2D6A4F; font-size: 17px; }
+  .lpf-offer-math s { color: #98a49b; }
+  .lpf-offer-flavors { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+  .lpf-flavor-btn { display: block; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 15px; color: #fff; text-decoration: none; transition: transform 0.12s; }
+  .lpf-flavor-btn:hover { transform: translateY(-1px); }
+  .lpf-blue { background: #3B6FF0; }
+  .lpf-mango { background: #F5A623; }
+  .lpf-water { background: #E84C6B; }
+  .lpf-offer-cta { display: block; background: #6260AE; color: #fff; font-weight: 800; padding: 14px; border-radius: 12px; text-decoration: none; margin-top: auto; transition: transform 0.12s; }
+  .lpf-offer-cta:hover { transform: translateY(-1px); }
+  .lpf-cta-green { background: linear-gradient(135deg, #2D6A4F, #1B4332); }
+  .lpf-offer-note { font-size: 12px; color: #7b877e; margin: 10px 0 0; }
+
+  /* Pain points */
+  .lpf-pain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 26px; }
+  .lpf-pain-card { background: #fff; border-radius: 16px; padding: 22px; box-shadow: 0 4px 16px rgba(31,42,34,0.05); }
+  .lpf-pain-emoji { font-size: 28px; }
+  .lpf-pain-card h3 { font-size: 17px; font-weight: 800; margin: 10px 0 6px; }
+  .lpf-pain-card p { font-size: 14px; color: #5A6B5E; line-height: 1.55; margin: 0; }
+
+  /* Benefits */
+  .lpf-benefit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 26px 0 18px; }
+  .lpf-benefit { background: #2D6A4F; color: #fff; border-radius: 14px; padding: 18px 14px; text-align: center; display: flex; flex-direction: column; gap: 4px; }
+  .lpf-benefit strong { font-size: 16px; font-weight: 900; }
+  .lpf-benefit span { font-size: 12.5px; opacity: 0.85; }
+  .lpf-benefit-strip { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; font-size: 13.5px; font-weight: 700; color: #445248; }
+
+  /* Reviews */
+  .lpf-reviews-head { text-align: center; margin-bottom: 24px; }
+  .lpf-review-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .lpf-review { background: #fff; border-radius: 16px; padding: 18px; margin: 0; box-shadow: 0 4px 14px rgba(31,42,34,0.05); display: flex; flex-direction: column; gap: 8px; }
+  .lpf-review span { color: #F5A623; letter-spacing: 2px; font-size: 13px; }
+  .lpf-review blockquote { margin: 0; font-weight: 700; font-size: 14.5px; line-height: 1.45; }
+  .lpf-review figcaption { font-size: 12px; color: #5A6B5E; font-weight: 600; }
+
+  /* FAQ */
+  .lpf-faq { max-width: 720px; }
+  .lpf-faq-item { background: #fff; border-radius: 14px; margin-top: 12px; box-shadow: 0 3px 12px rgba(31,42,34,0.05); overflow: hidden; }
+  .lpf-faq-item summary { cursor: pointer; padding: 16px 18px; font-weight: 800; font-size: 15.5px; list-style: none; position: relative; padding-right: 40px; }
+  .lpf-faq-item summary::-webkit-details-marker { display: none; }
+  .lpf-faq-item summary::after { content: "+"; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 20px; font-weight: 900; color: #2D6A4F; }
+  .lpf-faq-item[open] summary::after { content: "−"; }
+  .lpf-faq-item p { padding: 0 18px 16px; margin: 0; font-size: 14px; color: #445248; line-height: 1.6; }
+
+  /* Final */
+  .lpf-final { text-align: center; }
+  .lpf-final h2 { font-size: clamp(26px, 5vw, 38px); font-weight: 900; margin: 0 0 8px; }
+  .lpf-final p { color: #5A6B5E; font-weight: 600; margin: 0 0 22px; }
+
+  /* Sticky */
+  .lpf-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: #1F2A22; color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); }
+  .lpf-sticky-txt { display: flex; flex-direction: column; font-size: 12.5px; line-height: 1.3; }
+  .lpf-sticky-txt strong { font-size: 13.5px; }
+  .lpf-sticky-btn { background: #F5A623; color: #1F2A22; font-weight: 900; padding: 11px 22px; border-radius: 11px; text-decoration: none; white-space: nowrap; }
+
+  @media (max-width: 900px) {
+    .lpf-offer-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+    .lpf-benefit-grid { grid-template-columns: repeat(2, 1fr); }
+    .lpf-review-track { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .lpf section { padding: 40px 16px; }
+    .lpf-pain-grid { grid-template-columns: 1fr; }
+    .lpf-review-track { grid-template-columns: 1fr; }
+    .lpf { padding-bottom: 64px; }
+  }
+</style>
+
+<script>
+  // Hide sticky bar while the offers section is in view
+  (function() {
+    var sticky = document.getElementById('lpf-sticky');
+    var offers = document.getElementById('lpf-offers');
+    if (!sticky || !offers || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function(entries) {
+      sticky.style.display = entries[0].isIntersecting ? 'none' : 'flex';
+    }, { threshold: 0.15 }).observe(offers);
+  })();
+</script>
