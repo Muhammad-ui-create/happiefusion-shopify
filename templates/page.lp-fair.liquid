@@ -13,8 +13,8 @@
 {%- assign p_var   = all_products['happie-fungi-fusion-mushroom-drink-variety-pack'] -%}
 {%- assign p_byo   = all_products['build-your-own-fungi-fusion-18-pack'] -%}
 {%- assign six_price = p_blue.price -%}
-{%- assign bogo_pair = six_price | times: 150 | divided_by: 100 -%}
 {%- assign bogo_save = six_price | divided_by: 2 -%}
+{%- assign bogo_pair = six_price | times: 2 | minus: bogo_save -%}
 {%- assign var_price = p_var.price -%}
 {%- assign var_disc  = var_price | times: 85 | divided_by: 100 -%}
 {%- assign var_save  = var_price | minus: var_disc -%}
