@@ -309,8 +309,9 @@
     }, { threshold: 0.15 }).observe(offers);
   })();
 
-  // Direct add-to-cart: add the variant(s), then land on the cart with the
-  // offer code attached via /discount/ so checkout applies it automatically.
+  // Direct add-to-cart: add the variant(s), attach the offer code via a
+  // background /discount/ fetch (sets the checkout cookie without leaving
+  // the page), then slide the cart drawer open.
   (function() {
     document.querySelectorAll('[data-lpf-add]').forEach(function(btn) {
       btn.addEventListener('click', function() {
@@ -324,8 +325,14 @@
           body: JSON.stringify({ id: parseInt(btn.dataset.variant, 10), quantity: parseInt(btn.dataset.qty, 10) })
         }).then(function(r) {
           if (!r.ok) throw new Error('add failed');
+          // Register the offer code for checkout without navigating away
+          return fetch('/discount/' + btn.dataset.code, { credentials: 'same-origin' }).catch(function() {});
+        }).then(function() {
           btn.textContent = '✓ Added!';
-          window.location.href = '/discount/' + btn.dataset.code + '?redirect=/cart';
+          var trigger = document.getElementById('cart-trigger');
+          if (trigger) { trigger.click(); }
+          else { window.location.href = '/discount/' + btn.dataset.code + '?redirect=/cart'; }
+          setTimeout(function() { btn.disabled = false; btn.textContent = original; }, 2500);
         }).catch(function() {
           btn.disabled = false;
           btn.textContent = original;
