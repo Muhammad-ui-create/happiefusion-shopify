@@ -58,11 +58,11 @@
         <h3>6-Packs: Buy One,<br>Get One 50% Off</h3>
         <p class="lpf-offer-math">Two 6-packs (12 cans) for <strong>{{ bogo_pair | money }}</strong> <s>{{ six_price | times: 2 | money }}</s> — save {{ bogo_save | money }}. Mix any flavors.</p>
         <div class="lpf-offer-flavors">
-          <a href="/discount/FAIRBOGO?redirect=/products/blue-razzberry-fungi-powered-seltzer" class="lpf-flavor-btn lpf-blue">Blue Razzberry</a>
-          <a href="/discount/FAIRBOGO?redirect=/products/mango-mimosa-fungi-powered-seltzer" class="lpf-flavor-btn lpf-mango">Mango Mimosa</a>
-          <a href="/discount/FAIRBOGO?redirect=/products/watermelon-fungi-powered-seltzer" class="lpf-flavor-btn lpf-water">Watermelon</a>
+          <button type="button" class="lpf-flavor-btn lpf-blue" data-lpf-add data-variant="{{ p_blue.selected_or_first_available_variant.id }}" data-qty="2" data-code="FAIRBOGO">Blue Razzberry ×2 — Add to Cart</button>
+          <button type="button" class="lpf-flavor-btn lpf-mango" data-lpf-add data-variant="{{ p_mango.selected_or_first_available_variant.id }}" data-qty="2" data-code="FAIRBOGO">Mango Mimosa ×2 — Add to Cart</button>
+          <button type="button" class="lpf-flavor-btn lpf-water" data-lpf-add data-variant="{{ p_water.selected_or_first_available_variant.id }}" data-qty="2" data-code="FAIRBOGO">Watermelon ×2 — Add to Cart</button>
         </div>
-        <p class="lpf-offer-note">Add any 2 six-packs — the second rings up half price automatically.</p>
+        <p class="lpf-offer-note">Each button adds a pair — the second 6-pack rings up half price at checkout. Want mixed flavors? Tap two different buttons, then remove the extras in your cart.</p>
       </div>
 
       <!-- Offer 2: Variety pack WELCOME15 -->
@@ -73,7 +73,7 @@
         </div>
         <h3>Variety 12-Pack:<br>15% Off</h3>
         <p class="lpf-offer-math"><strong>{{ var_disc | money }}</strong> <s>{{ var_price | money }}</s> with code WELCOME15 — save {{ var_save | money }}. Four cans of each flavor.</p>
-        <a href="/discount/WELCOME15?redirect=/products/happie-fungi-fusion-mushroom-drink-variety-pack" class="lpf-offer-cta">Get the Variety Pack →</a>
+        <button type="button" class="lpf-offer-cta" data-lpf-add data-variant="{{ p_var.selected_or_first_available_variant.id }}" data-qty="1" data-code="WELCOME15">Add Variety Pack to Cart</button>
         <p class="lpf-offer-note">New customers only · code applies automatically</p>
       </div>
 
@@ -232,12 +232,13 @@
   .lpf-offer-math strong { color: #2D6A4F; font-size: 17px; }
   .lpf-offer-math s { color: #98a49b; }
   .lpf-offer-flavors { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-  .lpf-flavor-btn { display: block; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 15px; color: #fff; text-decoration: none; transition: transform 0.12s; }
+  .lpf-flavor-btn { display: block; width: 100%; padding: 12px; border: none; cursor: pointer; font-family: inherit; border-radius: 12px; font-weight: 800; font-size: 15px; color: #fff; text-decoration: none; transition: transform 0.12s; }
+  .lpf-flavor-btn:disabled, .lpf-offer-cta:disabled { opacity: 0.65; cursor: wait; }
   .lpf-flavor-btn:hover { transform: translateY(-1px); }
   .lpf-blue { background: #3B6FF0; }
   .lpf-mango { background: #F5A623; }
   .lpf-water { background: #E84C6B; }
-  .lpf-offer-cta { display: block; background: #6260AE; color: #fff; font-weight: 800; padding: 14px; border-radius: 12px; text-decoration: none; margin-top: auto; transition: transform 0.12s; }
+  .lpf-offer-cta { display: block; width: 100%; border: none; cursor: pointer; font-family: inherit; font-size: 15px; background: #6260AE; color: #fff; font-weight: 800; padding: 14px; border-radius: 12px; text-decoration: none; margin-top: auto; transition: transform 0.12s; }
   .lpf-offer-cta:hover { transform: translateY(-1px); }
   .lpf-cta-green { background: linear-gradient(135deg, #2D6A4F, #1B4332); }
   .lpf-offer-note { font-size: 12px; color: #7b877e; margin: 10px 0 0; }
@@ -306,5 +307,31 @@
     new IntersectionObserver(function(entries) {
       sticky.style.display = entries[0].isIntersecting ? 'none' : 'flex';
     }, { threshold: 0.15 }).observe(offers);
+  })();
+
+  // Direct add-to-cart: add the variant(s), then land on the cart with the
+  // offer code attached via /discount/ so checkout applies it automatically.
+  (function() {
+    document.querySelectorAll('[data-lpf-add]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (btn.disabled) return;
+        var original = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Adding…';
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: parseInt(btn.dataset.variant, 10), quantity: parseInt(btn.dataset.qty, 10) })
+        }).then(function(r) {
+          if (!r.ok) throw new Error('add failed');
+          btn.textContent = '✓ Added!';
+          window.location.href = '/discount/' + btn.dataset.code + '?redirect=/cart';
+        }).catch(function() {
+          btn.disabled = false;
+          btn.textContent = original;
+          alert("Couldn't add to cart. Please try again.");
+        });
+      });
+    });
   })();
 </script>
