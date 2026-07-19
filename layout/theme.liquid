@@ -17,7 +17,7 @@
 
   {%- comment -%} ── SEO: META DESCRIPTIONS ── {%- endcomment -%}
   {%- if template.name == 'index' -%}
-    <meta name="description" content="Happie Fungi Fusion — functional mushroom seltzers with 900mg Lion's Mane, 700mg Cordyceps & 400mg Reishi per can. No alcohol. No caffeine. Real adaptogenic results. Free shipping over $41.99.">
+    <meta name="description" content="Happie Fungi Fusion — functional mushroom seltzers with 900mg Lion's Mane, 700mg Cordyceps & 400mg Reishi per can. No alcohol. No caffeine. Real adaptogenic results. Free shipping, no minimum.">
   {%- elsif template.name == 'product' -%}
     {%- comment -%} Prefer the Shopify-managed SEO description; fall back to body if not set. {%- endcomment -%}
     {%- assign seo_meta = product.metafields.global.description_tag -%}
@@ -28,7 +28,7 @@
   {%- elsif template.name == 'collection' -%}
     {%- assign seo_meta = collection.metafields.global.description_tag -%}
     {%- if seo_meta == blank -%}
-      {%- assign seo_meta = 'Shop ' | append: collection.title | append: ' — functional mushroom seltzers with dual-extracted Lion''s Mane (900mg), Cordyceps (700mg) & Reishi (400mg). Zero caffeine, zero alcohol. From $23.99. Free shipping over $41.99.' -%}
+      {%- assign seo_meta = 'Shop ' | append: collection.title | append: ' — functional mushroom seltzers with dual-extracted Lion''s Mane (900mg), Cordyceps (700mg) & Reishi (400mg). Zero caffeine, zero alcohol. From $23.99. Free shipping, no minimum.' -%}
     {%- endif -%}
     <meta name="description" content="{{ seo_meta | escape }}">
   {%- else -%}
@@ -277,7 +277,7 @@
             "name": "How much does Happie Fungi Fusion cost?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A 6-pack costs $23.99. A 12-can Variety Pack costs $41.99. Subscribe and Save members get 15% off every order. New customers get 15% off their first order with code WELCOME15. Free shipping on orders of $41.99 or more; smaller orders ship for a flat $7."
+              "text": "A 6-pack costs $23.99. A 12-can Variety Pack costs $41.99. Subscribe and Save members get 15% off every order. New customers get 15% off their first order with code WELCOME15. Free shipping on every order — no minimum."
             }
           },
           {
@@ -293,7 +293,7 @@
             "name": "Where can I buy Happie Fungi Fusion?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Happie Fungi Fusion is available directly at happiefusion.com — shipping to all 50 US states, free on orders over $41.99 — and on Amazon. New customers get 15% off their first order with code WELCOME15."
+              "text": "Happie Fungi Fusion is available directly at happiefusion.com — shipping to all 50 US states, free on every order — and on Amazon. New customers get 15% off their first order with code WELCOME15."
             }
           }
         ]
@@ -347,7 +347,7 @@
         "seller": { "@type": "Organization", "name": "Happie Fusion" },
         "shippingDetails": {
           "@type": "OfferShippingDetails",
-          "shippingRate": { "@type": "MonetaryAmount", "value": "{% if variant.price >= 4199 %}0.00{% else %}7.00{% endif %}", "currency": "USD" },
+          "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
           "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" },
           "deliveryTime": {
             "@type": "ShippingDeliveryTime",
@@ -437,7 +437,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:6px;vertical-align:-2px;">
             <rect x="1" y="6" width="15" height="11" rx="2"/><path d="M16 10h4l3 3v4h-7"/><circle cx="5.5" cy="19.5" r="1.5"/><circle cx="20.5" cy="19.5" r="1.5"/>
           </svg>
-          Free shipping on orders over $41.99
+          Free shipping on every order, no minimum
         </p>
         <a href="/checkout" class="btn-cart-checkout">Secure Checkout →</a>
         <a href="/cart" class="btn-cart-view">View Cart</a>
