@@ -260,6 +260,26 @@
         </div>
       {% endform %}
 
+      {% comment %} Build Your Own cross-sell — hidden on the BYO product itself (it uses its own template) {% endcomment %}
+      {%- assign byo = all_products['build-your-own-fungi-fusion-18-pack'] -%}
+      {%- if byo and byo.available and product.handle != byo.handle -%}
+        <a href="/products/build-your-own-fungi-fusion-18-pack" class="pdp-byo-card">
+          <div class="pdp-byo-img">
+            {%- if byo.featured_image -%}
+              <img src="{{ byo.featured_image | image_url: width: 240 }}" alt="Build Your Own Fungi Fusion pack" width="120" height="120" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div class="pdp-byo-body">
+            <span class="pdp-byo-tag">CUSTOM PACK BUILDER</span>
+            <strong class="pdp-byo-title">Build Your Own 18 or 24-Can Box</strong>
+            <span class="pdp-byo-sub">Mix all three flavors your way — from {{ byo.price_min | money }} <s>{{ byo.compare_at_price_max | money }}</s> · as low as $3.00 a can</span>
+          </div>
+          <span class="pdp-byo-arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+      {%- endif -%}
+
       <!-- Accordions -->
       <div class="accordions">
         <div class="accordion">

@@ -1574,6 +1574,49 @@ body.subscription-selected #shopify-buyer-consent {
   margin-top: 10px;
 }
 
+/* ── Build Your Own cross-sell card on PDPs ── */
+.pdp-byo-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0 6px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(45,106,79,0.07), rgba(98,96,174,0.07));
+  border: 1.5px solid rgba(45,106,79,0.22);
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--ink, #1F2A22);
+  transition: transform 0.12s, box-shadow 0.15s, border-color 0.15s;
+}
+.pdp-byo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(45,106,79,0.14);
+  border-color: rgba(45,106,79,0.45);
+}
+.pdp-byo-img { flex: 0 0 auto; }
+.pdp-byo-img img { width: 84px; height: 84px; object-fit: contain; display: block; }
+.pdp-byo-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.pdp-byo-tag { font-size: 10.5px; font-weight: 800; letter-spacing: 0.09em; color: var(--green, #2D6A4F); }
+.pdp-byo-title { font-size: 16px; font-weight: 800; line-height: 1.25; }
+.pdp-byo-sub { font-size: 13px; color: var(--gray, #5A6B5E); font-weight: 600; line-height: 1.4; }
+.pdp-byo-sub s { color: #9aa79e; }
+.pdp-byo-arrow {
+  margin-left: auto;
+  flex: 0 0 auto;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--green, #2D6A4F);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+@media (max-width: 640px) {
+  .pdp-byo-card { padding: 12px 14px; gap: 11px; }
+  .pdp-byo-img img { width: 64px; height: 64px; }
+  .pdp-byo-title { font-size: 14.5px; }
+  .pdp-byo-sub { font-size: 12px; }
+  .pdp-byo-arrow { width: 32px; height: 32px; }
+}
+
 /* ── Sticky mobile ATC bar ── */
 .pdp-sticky-atc {
   position: fixed;
