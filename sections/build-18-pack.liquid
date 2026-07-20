@@ -1,16 +1,20 @@
 {% comment %}
-  Build Your Own pack — custom bundle builder with two sizes:
-  18-Pack = 3 six-packs ($43.99, compare $71.97) · 24-Pack = 4 six-packs ($57.99, compare $95.96).
+  Build Your Own pack — custom bundle builder with three sizes:
+  12-Pack = 3 four-packs ($41.99, compare $47.98) · 18-Pack = 3 six-packs ($56.99, compare $71.97) · 24-Pack = 4 six-packs ($71.99, compare $95.96).
   Assign template "product.build-18" to the Build Your Own product.
-  Flavors are picked as whole 6-packs; the hard cap tracks the selected size so the
-  can count can never exceed the box. The mix is stored as line item properties on
-  the selected size variant, so it rides cart -> checkout -> order for fulfillment.
+  Flavors are picked as whole sub-packs (4-can for the 12-pack, 6-can for 18/24); the hard
+  cap tracks the selected size's unit count so the can total can never exceed the box.
+  The mix is stored as line item properties on the selected size variant, so it rides
+  cart -> checkout -> order for fulfillment.
 {% endcomment %}
 
+{%- assign v12 = blank -%}
 {%- assign v18 = blank -%}
 {%- assign v24 = blank -%}
 {%- for v in product.variants -%}
-  {%- if v.title contains '24' -%}{%- assign v24 = v -%}{%- else -%}{%- assign v18 = v -%}{%- endif -%}
+  {%- if v.title contains '12' -%}{%- assign v12 = v -%}
+  {%- elsif v.title contains '24' -%}{%- assign v24 = v -%}
+  {%- else -%}{%- assign v18 = v -%}{%- endif -%}
 {%- endfor -%}
 {%- assign p_blue  = all_products['blue-razzberry-fungi-powered-seltzer'] -%}
 {%- assign p_mango = all_products['mango-mimosa-fungi-powered-seltzer'] -%}
@@ -36,10 +40,15 @@
         <span class="byo-topseller">TOP SELLER</span>
       </div>
 
-      <p class="byo-sub">Pick your box size, then fill it with any mix of our three flavors in 6-packs.</p>
+      <p class="byo-sub" id="byo-sub">Pick your box size, then fill it with any mix of our three flavors.</p>
 
       <!-- Size switcher -->
       <div class="byo-sizes" role="radiogroup" aria-label="Pack size">
+        <button type="button" class="byo-size" data-size="12" aria-pressed="false">
+          <span class="byo-size-cans">12 Cans</span>
+          <span class="byo-size-packs">3 four-packs</span>
+          <span class="byo-size-price">{{ v12.price | money }} <s>{{ v12.compare_at_price | money }}</s></span>
+        </button>
         <button type="button" class="byo-size is-active" data-size="18" aria-pressed="true">
           <span class="byo-size-cans">18 Cans</span>
           <span class="byo-size-packs">3 six-packs</span>
@@ -72,7 +81,7 @@
     <!-- Progress: pack slots (4th slot only in 24-can mode) -->
     <div class="byo-progress-wrap" aria-live="polite">
       <div class="byo-progress-label">
-        <span class="byo-progress-count"><strong id="byo-count">0</strong>&nbsp;/ <span id="byo-target">3</span> six-packs <em id="byo-cans">(18 cans)</em></span>
+        <span class="byo-progress-count"><strong id="byo-count">0</strong>&nbsp;/ <span id="byo-target">3</span> <span id="byo-unit-label-plural">six-packs</span> <em id="byo-cans">(18 cans)</em></span>
         <span id="byo-progress-hint">Pick your 6-packs below</span>
       </div>
       <div class="byo-progress-bar" id="byo-progress-bar">
@@ -98,7 +107,7 @@
         </div>
         <div class="byo-card-name">Blue Razzberry</div>
         <div class="byo-card-note">Tart &amp; candy-bright</div>
-        <div class="byo-card-unit">6-pack · 6 cans</div>
+        <div class="byo-card-unit" data-unit-label>6-pack · 6 cans</div>
         <div class="byo-stepper">
           <button type="button" class="byo-btn byo-minus" aria-label="Remove one Blue Razzberry 6-pack">−</button>
           <span class="byo-qty" data-count>0</span>
@@ -115,7 +124,7 @@
         </div>
         <div class="byo-card-name">Mango Mimosa</div>
         <div class="byo-card-note">Tropical &amp; lightly sweet</div>
-        <div class="byo-card-unit">6-pack · 6 cans</div>
+        <div class="byo-card-unit" data-unit-label>6-pack · 6 cans</div>
         <div class="byo-stepper">
           <button type="button" class="byo-btn byo-minus" aria-label="Remove one Mango Mimosa 6-pack">−</button>
           <span class="byo-qty" data-count>0</span>
@@ -132,7 +141,7 @@
         </div>
         <div class="byo-card-name">Watermelon</div>
         <div class="byo-card-note">Crisp, clean &amp; juicy</div>
-        <div class="byo-card-unit">6-pack · 6 cans</div>
+        <div class="byo-card-unit" data-unit-label>6-pack · 6 cans</div>
         <div class="byo-stepper">
           <button type="button" class="byo-btn byo-minus" aria-label="Remove one Watermelon 6-pack">−</button>
           <span class="byo-qty" data-count>0</span>
@@ -210,7 +219,7 @@
           <span class="byo-feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
           </span>
-          <strong>18 or 24 Cans, Your Way</strong>
+          <strong>12, 18, or 24 Cans, Your Way</strong>
           <p>Any mix of three flavors — and our best per-can prices, from $3.00 a can on the 24-pack.</p>
         </div>
 
@@ -241,7 +250,7 @@
               <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
             </summary>
             <div class="pdp-faq-a">
-              <p><strong>Pick your box size, then fill it with 6-packs.</strong> The 18-pack holds three 6-packs ($56.99); the 24-pack holds four ($71.99). All one flavor, one of each, or any combo — one price, one box, and your exact mix is printed on your order confirmation so you know exactly what's coming.</p>
+              <p><strong>Pick your box size, then fill it with sub-packs.</strong> The 12-pack holds three 4-packs ($41.99); the 18-pack holds three 6-packs ($56.99); the 24-pack holds four 6-packs ($71.99). All one flavor, one of each, or any combo — one price, one box, and your exact mix is printed on your order confirmation so you know exactly what's coming.</p>
             </div>
           </details>
 
@@ -285,7 +294,7 @@
               <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
             </summary>
             <div class="pdp-faq-a">
-              <p><strong>Yes.</strong> Three 6-packs bought separately cost $71.97; the 18-pack is $56.99 (save $14.98, 21% off). Four 6-packs cost $95.96; the 24-pack is $71.99 (save $23.97, 25% off) — the best per-can price we offer at $3.00.</p>
+              <p><strong>Yes.</strong> Two 6-packs bought separately cost $47.98; the 12-pack is $41.99 (save $5.99). Three 6-packs cost $71.97; the 18-pack is $56.99 (save $14.98, 21% off). Four 6-packs cost $95.96; the 24-pack is $71.99 (save $23.97, 25% off) — the best per-can price we offer at $3.00.</p>
             </div>
           </details>
 
@@ -608,17 +617,25 @@
 
 <script>
 (function() {
-  /* Two box sizes; per-size config drives every label and the hard cap.
-     Money strings mirror the variant prices set in Shopify. */
+  /* Three box sizes; per-size config (including unit = cans per sub-pack)
+     drives every label and the hard cap. Money strings mirror the variant
+     prices set in Shopify. */
   var SIZES = {
-    "18": { target: 3, variantId: "{{ v18.id }}", cents: {{ v18.price }}, price: "{{ v18.price | money }}", compare: "{{ v18.compare_at_price | money }}", save: "SAVE {{ v18.compare_at_price | minus: v18.price | money }}", percan: "$3.17 per can", pct: "21% off vs three 6-packs",
+    "12": { target: 3, unit: 4, unitLabel: "4-pack", variantId: "{{ v12.id }}", cents: {{ v12.price }}, price: "{{ v12.price | money }}", compare: "{{ v12.compare_at_price | money }}", save: "SAVE {{ v12.compare_at_price | minus: v12.price | money }}", percan: "$3.50 per can", pct: "12% off vs two 6-packs",
       presets: [
         { mix: [1,1,1], label: "Even Mix · 1 of each", dots: ["#3B6FF0","#F5A623","#E84C6B"] },
         { mix: [3,0,0], label: "All Blue Razz", dots: ["#3B6FF0"] },
         { mix: [0,3,0], label: "All Mango", dots: ["#F5A623"] },
         { mix: [0,0,3], label: "All Watermelon", dots: ["#E84C6B"] }
       ] },
-    "24": { target: 4, variantId: "{{ v24.id }}", cents: {{ v24.price }}, price: "{{ v24.price | money }}", compare: "{{ v24.compare_at_price | money }}", save: "SAVE {{ v24.compare_at_price | minus: v24.price | money }}", percan: "$3.00 per can", pct: "25% off vs four 6-packs",
+    "18": { target: 3, unit: 6, unitLabel: "6-pack", variantId: "{{ v18.id }}", cents: {{ v18.price }}, price: "{{ v18.price | money }}", compare: "{{ v18.compare_at_price | money }}", save: "SAVE {{ v18.compare_at_price | minus: v18.price | money }}", percan: "$3.17 per can", pct: "21% off vs three 6-packs",
+      presets: [
+        { mix: [1,1,1], label: "Even Mix · 1 of each", dots: ["#3B6FF0","#F5A623","#E84C6B"] },
+        { mix: [3,0,0], label: "All Blue Razz", dots: ["#3B6FF0"] },
+        { mix: [0,3,0], label: "All Mango", dots: ["#F5A623"] },
+        { mix: [0,0,3], label: "All Watermelon", dots: ["#E84C6B"] }
+      ] },
+    "24": { target: 4, unit: 6, unitLabel: "6-pack", variantId: "{{ v24.id }}", cents: {{ v24.price }}, price: "{{ v24.price | money }}", compare: "{{ v24.compare_at_price | money }}", save: "SAVE {{ v24.compare_at_price | minus: v24.price | money }}", percan: "$3.00 per can", pct: "25% off vs four 6-packs",
       presets: [
         { mix: [2,1,1], label: "Blue-Heavy Mix", dots: ["#3B6FF0","#3B6FF0","#F5A623","#E84C6B"] },
         { mix: [1,1,2], label: "Melon-Heavy Mix", dots: ["#E84C6B","#E84C6B","#3B6FF0","#F5A623"] },
@@ -644,6 +661,8 @@
   var saveEl   = document.getElementById('byo-save');
   var percanEl = document.getElementById('byo-percan');
   var pctEl    = document.getElementById('byo-pct');
+  var unitPluralEl = document.getElementById('byo-unit-label-plural');
+  var unitLabelEls = Array.prototype.slice.call(document.querySelectorAll('[data-unit-label]'));
   if (!cards.length || !atc) return;
 
   var counts = cards.map(function() { return 0; });
@@ -666,25 +685,31 @@
 
   function render() {
     var TARGET = cfg().target;
+    var UNIT   = cfg().unit;
+    var ULABEL = cfg().unitLabel;
     var t = total();
     cards.forEach(function(card, i) {
       card.querySelector('[data-count]').textContent = counts[i];
       card.classList.toggle('has-cans', counts[i] > 0);
       card.querySelector('.byo-minus').disabled = counts[i] === 0;
       card.querySelector('.byo-plus').disabled  = t >= TARGET;
+      card.querySelector('.byo-minus').setAttribute('aria-label', 'Remove one ' + card.dataset.flavor + ' ' + ULABEL);
+      card.querySelector('.byo-plus').setAttribute('aria-label', 'Add one ' + card.dataset.flavor + ' ' + ULABEL);
     });
+    unitLabelEls.forEach(function(el) { el.textContent = ULABEL + ' · ' + UNIT + ' cans'; });
+    unitPluralEl.textContent = ULABEL + 's';
     countEl.textContent = t;
     targetEl.textContent = TARGET;
-    cansEl.textContent = '(' + (TARGET * 6) + ' cans)';
-    barEl.classList.toggle('is-24', size === '24');
+    cansEl.textContent = '(' + (TARGET * UNIT) + ' cans)';
+    barEl.classList.toggle('is-24', TARGET === 4);
     segs.forEach(function(seg, i) { seg.classList.toggle('filled', i < t); });
-    if (t === 0)            hintEl.textContent = 'Pick your 6-packs below';
-    else if (t < TARGET)    hintEl.textContent = 'Add ' + (TARGET - t) + ' more 6-pack' + (TARGET - t === 1 ? '' : 's');
-    else                    hintEl.textContent = (TARGET * 6) + ' cans — pack complete! 🎉';
+    if (t === 0)            hintEl.textContent = 'Pick your ' + ULABEL + 's below';
+    else if (t < TARGET)    hintEl.textContent = 'Add ' + (TARGET - t) + ' more ' + ULABEL + (TARGET - t === 1 ? '' : 's');
+    else                    hintEl.textContent = (TARGET * UNIT) + ' cans — pack complete! 🎉';
     atc.disabled = t !== TARGET;
     atcText.textContent = t === TARGET
-      ? 'ADD MY ' + (TARGET * 6) + '-PACK — ' + cfg().price
-      : 'PICK ' + (TARGET - t) + ' MORE 6-PACK' + (TARGET - t === 1 ? '' : 'S') + ' TO CONTINUE';
+      ? 'ADD MY ' + (TARGET * UNIT) + '-PACK — ' + cfg().price
+      : 'PICK ' + (TARGET - t) + ' MORE ' + ULABEL.toUpperCase() + (TARGET - t === 1 ? '' : 'S') + ' TO CONTINUE';
     priceEl.textContent  = cfg().price;
     compEl.textContent   = cfg().compare;
     saveEl.textContent   = cfg().save;
@@ -725,8 +750,9 @@
     var TARGET = cfg().target;
     if (total() !== TARGET) return;
     var properties = {};
+    var UNIT = cfg().unit, ULABEL = cfg().unitLabel;
     cards.forEach(function(card, i) {
-      if (counts[i] > 0) properties[card.dataset.flavor] = counts[i] + ' × 6-pack (' + (counts[i] * 6) + ' cans)';
+      if (counts[i] > 0) properties[card.dataset.flavor] = counts[i] + ' × ' + ULABEL + ' (' + (counts[i] * UNIT) + ' cans)';
     });
     atc.disabled = true;
     atcText.textContent = 'Adding…';
@@ -745,7 +771,7 @@
             content_ids: [String(cfg().variantId)],
             content_type: 'product',
             content_name: {{ product.title | json }},
-            value: cfg().cents / 100,
+            value: cfg().cents,
             currency: 'USD',
             num_items: 1
           });
