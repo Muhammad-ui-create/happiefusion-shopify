@@ -7,7 +7,7 @@
   --green-dark:  #1B4332;
   --green-light: #D8F3DC;
   --green-mid:   #52B788;
-  --cream:       #FFE6CB;
+  --cream:       #FFFFFF;
   --black:       #111111;
   --gray:        #6B6B6B;
   --white:       #ffffff;
@@ -92,9 +92,19 @@ input, select { font-family: var(--font); }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--cream);
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: linear-gradient(120deg, #E3F1EA, #E1F5F7, #FDF0D9, #FCE4EA, #EAE9F7, #E3F1EA);
+  background-size: 400% 400%;
+  animation: navAurora 18s ease infinite;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
   height: var(--nav-h);
+}
+@keyframes navAurora {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav { animation: none; background-position: 0% 50%; }
 }
 .nav-inner {
   max-width: 1200px;
@@ -442,7 +452,7 @@ input, select { font-family: var(--font); }
 .rating-summary { font-size: 15px; color: var(--gray); }
 .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 .review-card {
-  background: var(--cream);
+  background: #F7F7F5;
   border-radius: 20px;
   padding: 28px;
   border: 1px solid rgba(0,0,0,0.06);
@@ -961,7 +971,7 @@ input, select { font-family: var(--font); }
 
 /* ── Comparison Section ── */
 .comparison-section {
-  background: var(--cream);
+  background: #F7F7F5;
   border-radius: 28px;
   margin: 0 0 80px;
   overflow: hidden;
@@ -1342,7 +1352,7 @@ input, select { font-family: var(--font); }
 ══════════════════════════════════════════ */
 .pdp-faq {
   padding: 80px 24px;
-  background: linear-gradient(180deg, var(--cream, #FFE6CB) 0%, #FDF3E0 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #F7F7F5 100%);
   margin: 56px -24px 0;
   border-radius: 32px 32px 0 0;
 }
