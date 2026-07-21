@@ -25,7 +25,22 @@ html { scroll-behavior: smooth; }
 /* overflow-x clip: no element may create sideways page scroll on mobile —
    clip (not hidden) so position:sticky and programmatic scrolling keep working */
 html, body { overflow-x: clip; }
-body { font-family: var(--font); background: var(--cream); color: var(--black); line-height: 1.6; }
+body {
+  font-family: var(--font);
+  color: var(--black);
+  line-height: 1.6;
+  background: linear-gradient(135deg, #EAFAF1, #E3F5F7, #FDF6E3, #FDEEF2, #EEECFA, #EAFAF1);
+  background-size: 400% 400%;
+  animation: bodyAurora 40s ease infinite;
+}
+@keyframes bodyAurora {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; background-position: 0% 50%; }
+}
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
@@ -92,9 +107,9 @@ input, select { font-family: var(--font); }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: linear-gradient(120deg, #E3F1EA, #E1F5F7, #FDF0D9, #FCE4EA, #EAE9F7, #E3F1EA);
+  background: linear-gradient(120deg, #7EDCB0, #63D3DE, #FFD27A, #FF9EB0, #B9AEEF, #7EDCB0);
   background-size: 400% 400%;
-  animation: navAurora 18s ease infinite;
+  animation: navAurora 14s ease infinite;
   border-bottom: 1px solid rgba(0,0,0,0.06);
   height: var(--nav-h);
 }
