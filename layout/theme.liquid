@@ -17,7 +17,7 @@
 
   {%- comment -%} ── SEO: META DESCRIPTIONS ── {%- endcomment -%}
   {%- if template.name == 'index' -%}
-    <meta name="description" content="Happie Fungi Fusion — functional mushroom seltzers with 900mg Lion's Mane, 700mg Cordyceps & 400mg Reishi per can. No alcohol. No caffeine. Real adaptogenic results. Free shipping, no minimum.">
+    <meta name="description" content="Happie Fungi Fusion — clean, caffeine-free energy for any occasion. All-natural mushroom seltzer, zero alcohol, zero crash. Free shipping, no minimum.">
   {%- elsif template.name == 'product' -%}
     {%- comment -%} Prefer the Shopify-managed SEO description; fall back to body if not set. {%- endcomment -%}
     {%- assign seo_meta = product.metafields.global.description_tag -%}
@@ -32,7 +32,7 @@
     {%- endif -%}
     <meta name="description" content="{{ seo_meta | escape }}">
   {%- else -%}
-    <meta name="description" content="{{ page_description | default: "Happie Fusion — functional mushroom seltzers with Lion's Mane, Cordyceps & Reishi. No alcohol, no caffeine. Real adaptogenic results." | escape }}">
+    <meta name="description" content="{{ page_description | default: "Happie Fusion — clean, caffeine-free energy for any occasion. All-natural mushroom seltzer, zero alcohol, zero crash." | escape }}">
   {%- endif -%}
 
   {%- comment -%} ── FAVICON ── {%- endcomment -%}
@@ -123,13 +123,13 @@
     <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
   {%- elsif template.name == 'index' -%}
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Functional Mushroom Drinks | Lion's Mane, Cordyceps & Reishi Seltzer – Happie Fusion">
-    <meta property="og:description" content="Functional mushroom seltzers with 900mg Lion's Mane, 700mg Cordyceps & 400mg Reishi per can. No alcohol. No caffeine. Real results.">
+    <meta property="og:title" content="Clean Energy for Any Occasion | Happie Fusion">
+    <meta property="og:description" content="We Put the Fun in Functional — caffeine-free, all-natural mushroom seltzer that keeps you sharp without the crash. No alcohol. No jitters.">
     <meta property="og:image" content="{{ 'happie-logo.png' | asset_url }}">
   {%- else -%}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}">
-    <meta property="og:description" content="{{ page_description | default: "Happie Fusion — functional mushroom seltzers with Lion's Mane, Cordyceps & Reishi." | escape }}">
+    <meta property="og:description" content="{{ page_description | default: "Happie Fusion — clean, caffeine-free energy for any occasion. No alcohol, no crash." | escape }}">
     <meta property="og:image" content="{{ 'happie-logo.png' | asset_url }}">
   {%- endif -%}
 
@@ -144,7 +144,7 @@
     {%- endif -%}
   {%- else -%}
     <meta name="twitter:title" content="{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}">
-    <meta name="twitter:description" content="{{ page_description | default: 'Functional mushroom seltzers — no alcohol, no caffeine, real adaptogenic results.' | escape }}">
+    <meta name="twitter:description" content="{{ page_description | default: 'Clean, caffeine-free energy for any occasion. No alcohol, no crash.' | escape }}">
     <meta name="twitter:image" content="{{ 'happie-logo.png' | asset_url }}">
   {%- endif -%}
 
