@@ -25,22 +25,7 @@ html { scroll-behavior: smooth; }
 /* overflow-x clip: no element may create sideways page scroll on mobile —
    clip (not hidden) so position:sticky and programmatic scrolling keep working */
 html, body { overflow-x: clip; }
-body {
-  font-family: var(--font);
-  color: var(--black);
-  line-height: 1.6;
-  background: linear-gradient(135deg, #EAFAF1, #E3F5F7, #FDF6E3, #FDEEF2, #EEECFA, #EAFAF1);
-  background-size: 400% 400%;
-  animation: bodyAurora 40s ease infinite;
-}
-@keyframes bodyAurora {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-@media (prefers-reduced-motion: reduce) {
-  body { animation: none; background-position: 0% 50%; }
-}
+body { font-family: var(--font); background: var(--cream); color: var(--black); line-height: 1.6; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
@@ -193,7 +178,7 @@ input, select { font-family: var(--font); }
 
 /* ── Hero ── */
 .hero {
-  background: linear-gradient(135deg, #f5f0e8 0%, #d8f3dc 100%);
+  background: #ffffff;
   min-height: calc(100vh - var(--nav-h));
   display: flex;
   align-items: center;
