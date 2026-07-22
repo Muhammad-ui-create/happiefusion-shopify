@@ -1267,11 +1267,34 @@ input, select { font-family: var(--font); }
   font-size: 11.5px; line-height: 1.6; color: var(--gray);
 }
 
+/* Comparison — the strongest "why us" block on the page, so it reads as a
+   feature panel rather than another grey band: tinted with the product's own
+   flavour, ringed in that colour, and carrying the shared water layers. */
 .comparison-section {
+  position: relative;
+  isolation: isolate;
   background: #F7F7F5;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--pdp-accent, #6260AE) 8%, #fff) 0%,
+      color-mix(in srgb, var(--pdp-accent, #6260AE) 15%, #fff) 100%);
   border-radius: 28px;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-color: color-mix(in srgb, var(--pdp-accent, #6260AE) 22%, #fff);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.07);
   margin: 0 0 80px;
   overflow: hidden;
+  --wave-color: var(--pdp-accent, #6260AE);
+}
+.comparison-section .wave-field { opacity: 0.55; }
+.comparison-inner { position: relative; z-index: 1; }
+.comparison-eyebrow {
+  display: inline-block;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--pdp-accent, #6260AE);
+  background: rgba(255,255,255,0.75);
+  border: 1px solid color-mix(in srgb, var(--pdp-accent, #6260AE) 25%, #fff);
+  padding: 7px 15px; border-radius: 50px; margin-bottom: 16px;
 }
 .comparison-inner {
   max-width: 1100px;
@@ -1299,6 +1322,7 @@ input, select { font-family: var(--font); }
 .btn-comparison {
   display: inline-block;
   background: var(--teal);
+  background: color-mix(in srgb, var(--pdp-accent, #50B2BD) 88%, #000);
   color: #fff;
   border-radius: 50px;
   padding: 14px 30px;
@@ -1306,7 +1330,7 @@ input, select { font-family: var(--font); }
   font-weight: 800;
   transition: background 0.15s, transform 0.1s;
 }
-.btn-comparison:hover { background: #3a9aa6; transform: translateY(-1px); }
+.btn-comparison:hover { background: color-mix(in srgb, var(--pdp-accent, #50B2BD) 72%, #000); transform: translateY(-1px); }
 
 /* Comparison Table */
 .comparison-table {
@@ -1315,11 +1339,11 @@ input, select { font-family: var(--font); }
   border-radius: 18px;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+  box-shadow: 0 14px 44px rgba(0,0,0,0.13);
 }
 .comp-feature-head { width: 55%; padding: 18px 20px; }
 .comp-happie-head {
-  background: var(--purple);
+  background: var(--pdp-accent, var(--purple));
   color: #fff;
   text-align: center;
   padding: 18px 20px;
@@ -1356,6 +1380,8 @@ input, select { font-family: var(--font); }
   text-align: center;
   padding: 14px;
   background: rgba(98,96,174,0.06);
+  background: color-mix(in srgb, var(--pdp-accent, #6260AE) 7%, #fff);
+  color: var(--pdp-accent, #6260AE); /* the tick circles inherit this */
 }
 .comp-x {
   text-align: center;
