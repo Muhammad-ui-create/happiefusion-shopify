@@ -92,19 +92,30 @@ input, select { font-family: var(--font); }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: linear-gradient(120deg, #7EDCB0, #63D3DE, #FFD27A, #FF9EB0, #B9AEEF, #7EDCB0);
-  background-size: 400% 400%;
-  animation: navAurora 14s ease infinite;
+  /* Silky mesh gradient — overlapping soft colour fields in the Happie palette,
+     each layer drifting at its own rate so the blend never repeats visibly. */
+  background-color: #F2EEF9;
+  background-image:
+    radial-gradient(62% 130% at 12% 25%, rgba(98,96,174,0.58) 0%, rgba(98,96,174,0) 62%),
+    radial-gradient(58% 125% at 38% 85%, rgba(164,35,132,0.34) 0%, rgba(164,35,132,0) 64%),
+    radial-gradient(60% 130% at 62% 12%, rgba(80,178,189,0.48) 0%, rgba(80,178,189,0) 62%),
+    radial-gradient(58% 125% at 86% 72%, rgba(82,183,136,0.42) 0%, rgba(82,183,136,0) 64%),
+    radial-gradient(48% 110% at 97% 22%, rgba(255,203,5,0.28) 0%, rgba(255,203,5,0) 60%);
+  background-size: 210% 210%, 230% 230%, 195% 195%, 220% 220%, 185% 185%;
+  background-repeat: no-repeat;
+  animation: navSilk 30s ease-in-out infinite;
   border-bottom: 1px solid rgba(0,0,0,0.06);
   height: var(--nav-h);
 }
-@keyframes navAurora {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@keyframes navSilk {
+  0%   { background-position:   0% 50%,  100% 30%,   50% 80%,   20% 20%,  90% 60%; }
+  25%  { background-position:  40% 20%,   60% 70%,   90% 40%,   70% 80%,  30% 20%; }
+  50%  { background-position: 100% 60%,   10% 40%,   20% 10%,  100% 30%,   0% 80%; }
+  75%  { background-position:  60% 90%,   80% 10%,   70% 90%,   40% 60%,  60% 30%; }
+  100% { background-position:   0% 50%,  100% 30%,   50% 80%,   20% 20%,  90% 60%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .nav { animation: none; background-position: 0% 50%; }
+  .nav { animation: none; }
 }
 .nav-inner {
   max-width: 1200px;
