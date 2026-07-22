@@ -778,12 +778,42 @@ input, select { font-family: var(--font); }
   margin-bottom: 10px;
   transition: border-color 0.15s;
 }
-.purchase-option input[type="radio"] { margin-top: 3px; accent-color: var(--green); }
+.purchase-option input[type="radio"] { margin-top: 3px; accent-color: var(--pdp-accent, var(--green)); }
 .purchase-option.active, .purchase-option:has(input:checked) { border-color: var(--green); }
-/* Plain-white options get a green wash when selected; the subscribe option keeps
-   its mesh gradient instead, so exclude it here. */
+
+/* ── 3D purchase options ──
+   Both options sit on a hard bottom edge and press down when clicked. The
+   one-time option is tinted with the flavour's own colour (--pdp-accent, set
+   per product in main-product.liquid); the subscribe option keeps its mesh.
+   Each colour-mix line is preceded by a plain fallback for older browsers. */
+.purchase-option {
+  box-shadow: 0 4px 0 rgba(0,0,0,0.13), 0 6px 16px rgba(0,0,0,0.07);
+}
+.purchase-option:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.06); }
+
+.purchase-option:not(.subscribe-opt) {
+  background: #FAFAF8;
+  background: color-mix(in srgb, var(--pdp-accent, #2D6A4F) 9%, #fff);
+  border-color: rgba(0,0,0,0.12);
+  border-color: color-mix(in srgb, var(--pdp-accent, #2D6A4F) 42%, #fff);
+  box-shadow: 0 4px 0 rgba(0,0,0,0.16), 0 6px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--pdp-accent, #2D6A4F) 62%, #000),
+              0 6px 16px rgba(0,0,0,0.12);
+}
 .purchase-option:not(.subscribe-opt).active,
-.purchase-option:not(.subscribe-opt):has(input:checked) { background: #f0faf3; }
+.purchase-option:not(.subscribe-opt):has(input:checked) {
+  background: #f0faf3;
+  background: color-mix(in srgb, var(--pdp-accent, #2D6A4F) 18%, #fff);
+  border-color: var(--pdp-accent, #2D6A4F);
+}
+.purchase-option:not(.subscribe-opt):active {
+  box-shadow: 0 1px 0 rgba(0,0,0,0.16), 0 2px 6px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--pdp-accent, #2D6A4F) 62%, #000),
+              0 2px 6px rgba(0,0,0,0.10);
+}
+@media (prefers-reduced-motion: reduce) {
+  .purchase-option:active { transform: none; }
+}
 .opt-title { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
 .opt-price { font-size: 15px; font-weight: 800; margin-top: 2px; }
 .price-discounted { color: var(--green); }
@@ -1976,10 +2006,12 @@ body.subscription-selected #shopify-buyer-consent {
   will-change: transform;
 }
 
-/* Purchase option smooth border */
+/* Purchase option smooth border + 3D press */
 .purchase-option {
   transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+              background 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.12s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.12s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 /* Smooth nav */

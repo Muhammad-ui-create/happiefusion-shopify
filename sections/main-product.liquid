@@ -1,6 +1,19 @@
 {% comment %} Flavor → swatch color map {% endcomment %}
 {% assign flavor_colors = 'Blue Razzberry:#3B6FF0,Mango Mimosa:#F5A623,Watermelon:#E84C6B,Variety Pack:#6260AE' | split: ',' %}
 
+{% comment %}
+  Accent for this product, matched off the title against the same map above.
+  Drives the 3D one-time purchase option. Falls back to brand green for any
+  product whose title doesn't match a known flavour (e.g. the BYO pack).
+{% endcomment %}
+{% assign product_accent = '#2D6A4F' %}
+{% for entry in flavor_colors %}
+  {% assign pair = entry | split: ':' %}
+  {% if product.title contains pair[0] %}
+    {% assign product_accent = pair[1] %}
+  {% endif %}
+{% endfor %}
+
 <div class="product-page">
   <div class="breadcrumb">
     <a href="/">Home</a> /
@@ -164,7 +177,7 @@
 
         <!-- Purchase Options: One-time vs Subscribe -->
         {% if product.selling_plan_groups.size > 0 %}
-          <div class="purchase-options">
+          <div class="purchase-options" style="--pdp-accent: {{ product_accent }};">
             <div class="purchase-label">Purchase Options</div>
             {% for group in product.selling_plan_groups %}
               {% for plan in group.selling_plans %}
