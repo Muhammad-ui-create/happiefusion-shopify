@@ -576,7 +576,15 @@ input, select { font-family: var(--font); }
   box-shadow: 0 8px 40px rgba(0,0,0,0.10);
   margin-bottom: 16px;
 }
-.gallery-main-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s; }
+.gallery-main-img {
+  width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s;
+  /* Swipe target: stop the browser's own image-drag ghost and text selection
+     from competing with the gesture. pan-y keeps vertical page scroll native. */
+  -webkit-user-drag: none;
+  user-select: none;
+  touch-action: pan-y;
+}
+.gallery-main:focus-visible { outline: 2px solid var(--pdp-accent, var(--green)); outline-offset: 3px; }
 .gallery-arrow {
   position: absolute;
   top: 50%;

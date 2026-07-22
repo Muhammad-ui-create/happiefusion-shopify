@@ -293,16 +293,25 @@
       setTimeout(function() { mainImg.src = src; mainImg.style.opacity = '1'; }, fadeMs);
     }
 
-    /* Gallery thumbnails */
+    /* Gallery thumbnails (rendered as dots on mobile — same elements either way) */
     var thumbs = document.querySelectorAll('.gallery-thumb');
     var allSrcs = [];
-    thumbs.forEach(function(t) {
+    var currentImgIdx = 0;
+
+    /* Single entry point for every navigation route — thumbs, arrows and swipe.
+       Previously the thumbs set the image without touching the arrow index, so
+       tapping a thumb then an arrow jumped back to wherever the arrows had left
+       off instead of advancing from what you were looking at. */
+    function goToImage(idx, fadeMs) {
+      if (!allSrcs.length) return;
+      currentImgIdx = (idx + allSrcs.length) % allSrcs.length;
+      setMainImg(allSrcs[currentImgIdx], fadeMs);
+      thumbs.forEach(function(t, i) { t.classList.toggle('active', i === currentImgIdx); });
+    }
+
+    thumbs.forEach(function(t, i) {
       allSrcs.push(t.dataset.src);
-      t.addEventListener('click', function() {
-        setMainImg(t.dataset.src, 80);
-        thumbs.forEach(function(x) { x.classList.remove('active'); });
-        t.classList.add('active');
-      });
+      t.addEventListener('click', function() { goToImage(i, 80); });
     });
 
     /* Preload full-size gallery images so thumbnail clicks swap instantly.
@@ -336,21 +345,45 @@
     }
 
     /* Gallery arrows */
-    var currentImgIdx = 0;
     var prevBtn = document.getElementById('gallery-prev');
     var nextBtn = document.getElementById('gallery-next');
-    if (prevBtn) {
-      prevBtn.addEventListener('click', function() {
-        currentImgIdx = (currentImgIdx - 1 + allSrcs.length) % allSrcs.length;
-        setMainImg(allSrcs[currentImgIdx], 150);
-        thumbs.forEach(function(t,i) { t.classList.toggle('active', i === currentImgIdx); });
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener('click', function() {
-        currentImgIdx = (currentImgIdx + 1) % allSrcs.length;
-        setMainImg(allSrcs[currentImgIdx], 150);
-        thumbs.forEach(function(t,i) { t.classList.toggle('active', i === currentImgIdx); });
+    if (prevBtn) prevBtn.addEventListener('click', function() { goToImage(currentImgIdx - 1, 150); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { goToImage(currentImgIdx + 1, 150); });
+
+    /* Swipe to change image.
+       Listeners stay passive so vertical page scrolling is never blocked; the
+       gesture is only claimed once horizontal travel clearly beats vertical,
+       which stops a diagonal scroll from flicking the carousel by accident. */
+    var galleryMain = document.querySelector('.gallery-main');
+    if (galleryMain && allSrcs.length > 1) {
+      var swipeX = 0, swipeY = 0, swipeTracking = false;
+      var SWIPE_MIN = 40;
+
+      galleryMain.addEventListener('touchstart', function(e) {
+        if (e.touches.length !== 1) { swipeTracking = false; return; }
+        swipeX = e.touches[0].clientX;
+        swipeY = e.touches[0].clientY;
+        swipeTracking = true;
+      }, { passive: true });
+
+      galleryMain.addEventListener('touchend', function(e) {
+        if (!swipeTracking) return;
+        swipeTracking = false;
+        var t = e.changedTouches && e.changedTouches[0];
+        if (!t) return;
+        var dx = t.clientX - swipeX;
+        var dy = t.clientY - swipeY;
+        if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) <= Math.abs(dy)) return;
+        goToImage(currentImgIdx + (dx < 0 ? 1 : -1), 120);
+      }, { passive: true });
+
+      galleryMain.addEventListener('touchcancel', function() { swipeTracking = false; }, { passive: true });
+
+      /* Keyboard parity for anyone tabbing the gallery */
+      galleryMain.setAttribute('tabindex', '0');
+      galleryMain.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft')  { goToImage(currentImgIdx - 1, 150); e.preventDefault(); }
+        if (e.key === 'ArrowRight') { goToImage(currentImgIdx + 1, 150); e.preventDefault(); }
       });
     }
 
