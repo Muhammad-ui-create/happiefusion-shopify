@@ -92,33 +92,58 @@ input, select { font-family: var(--font); }
   position: sticky;
   top: 0;
   z-index: 100;
-  /* Silky mesh gradient — overlapping soft colour fields in the Happie palette,
-     each layer drifting at its own rate so the blend never repeats visibly. */
-  background-color: #FBF7F2;
+  /* Iridescent mesh gradient — a full psychedelic spectrum of luminous jewel tones
+     drifting independently, with a slow light-sweep across the top for shimmer.
+     Colours stay high-luminance so the black logo and nav links remain legible. */
+  background-color: #FCF9F4;
   background-image:
-    radial-gradient(55% 120% at  8% 30%, rgba(80,178,189,0.62) 0%, rgba(80,178,189,0) 60%),
-    radial-gradient(52% 118% at 28% 78%, rgba(82,183,136,0.60) 0%, rgba(82,183,136,0) 60%),
-    radial-gradient(50% 115% at 46% 18%, rgba(255,203,5,0.58) 0%, rgba(255,203,5,0) 58%),
-    radial-gradient(52% 118% at 64% 82%, rgba(244,122,90,0.52) 0%, rgba(244,122,90,0) 60%),
-    radial-gradient(54% 120% at 82% 24%, rgba(164,35,132,0.50) 0%, rgba(164,35,132,0) 60%),
-    radial-gradient(56% 122% at 97% 74%, rgba(98,96,174,0.56) 0%, rgba(98,96,174,0) 62%);
-  background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 205% 205%, 235% 235%;
+    radial-gradient(56% 125% at  6% 34%, rgba(45,200,214,0.62)  0%, rgba(45,200,214,0)  60%),
+    radial-gradient(52% 120% at 22% 80%, rgba(82,205,150,0.58)  0%, rgba(82,205,150,0)  60%),
+    radial-gradient(50% 118% at 38% 16%, rgba(255,190,60,0.60)  0%, rgba(255,190,60,0)  58%),
+    radial-gradient(52% 120% at 55% 84%, rgba(255,122,138,0.56) 0%, rgba(255,122,138,0) 60%),
+    radial-gradient(54% 122% at 71% 22%, rgba(214,72,178,0.54)  0%, rgba(214,72,178,0)  60%),
+    radial-gradient(56% 125% at 87% 78%, rgba(138,96,232,0.58)  0%, rgba(138,96,232,0)  62%),
+    radial-gradient(58% 128% at 99% 30%, rgba(86,110,226,0.52)  0%, rgba(86,110,226,0)  62%);
+  background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 205% 205%, 235% 235%, 220% 220%;
   background-repeat: no-repeat;
-  animation: navSilk 32s ease-in-out infinite;
+  animation: navSilk 34s ease-in-out infinite;
+  overflow-x: clip;
   border-bottom: 1px solid rgba(0,0,0,0.06);
   height: var(--nav-h);
 }
 @keyframes navSilk {
-  0%   { background-position:   0% 50%,  100% 30%,   50% 80%,   20% 20%,  90% 60%,  35% 15%; }
-  25%  { background-position:  40% 20%,   60% 70%,   90% 40%,   70% 80%,  30% 20%,  80% 75%; }
-  50%  { background-position: 100% 60%,   10% 40%,   20% 10%,  100% 30%,   0% 80%,  15% 45%; }
-  75%  { background-position:  60% 90%,   80% 10%,   70% 90%,   40% 60%,  60% 30%,  95% 20%; }
-  100% { background-position:   0% 50%,  100% 30%,   50% 80%,   20% 20%,  90% 60%,  35% 15%; }
+  0%   { background-position:   0% 50%,  100% 30%,   50% 80%,   20% 20%,  90% 60%,  35% 15%,  70% 90%; }
+  25%  { background-position:  40% 20%,   60% 70%,   90% 40%,   70% 80%,  30% 20%,  80% 75%,  10% 35%; }
+  50%  { background-position: 100% 60%,   10% 40%,   20% 10%,  100% 30%,   0% 80%,  15% 45%,  55% 70%; }
+  75%  { background-position:  60% 90%,   80% 10%,   70% 90%,   40% 60%,  60% 30%,  95% 20%,  85% 15%; }
+  100% { background-position:   0% 50%,  100% 30%,   50% 80%,   20% 20%,  90% 60%,  35% 15%,  70% 90%; }
+}
+/* Slow light-sweep across the bar — reads as a shimmer travelling over the colour.
+   Starts and ends off-screen so the loop restart is never visible. */
+.nav::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+  animation: navSheen 9s ease-in-out infinite;
+}
+@keyframes navSheen {
+  0%   { transform: translateX(-120%); }
+  60%  { transform: translateX(300%); }
+  100% { transform: translateX(300%); }
 }
 @media (prefers-reduced-motion: reduce) {
   .nav { animation: none; }
+  .nav::after { animation: none; opacity: 0; }
 }
 .nav-inner {
+  position: relative;
+  z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
