@@ -2054,7 +2054,55 @@ body.subscription-selected #shopify-buyer-consent {
   /* Product page */
   .product-page  { padding: 0 16px 60px; }
   .product-layout { grid-template-columns: 1fr; gap: 32px; margin-bottom: 48px; }
-  .gallery-thumbs { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+
+  /* ── Mobile gallery: full-bleed carousel ──
+     The image breaks the page gutter to sit edge-to-edge, the arrows drop to a
+     single pill at the bottom, and the thumbnail strip collapses into dots.
+     The dots are the same .gallery-thumb elements restyled, so the existing
+     click handlers keep working — no JS change needed. Desktop is untouched. */
+  .product-gallery {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+  .gallery-main {
+    border-radius: 0;
+    margin-bottom: 0;
+    box-shadow: none;
+    aspect-ratio: 1/1;
+  }
+  .gallery-arrow {
+    top: auto;
+    bottom: 14px;
+    transform: none;
+    width: 38px;
+    height: 38px;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
+  .gallery-prev { left: 50%; margin-left: -46px; }
+  .gallery-next { right: 50%; margin-right: -46px; }
+
+  .gallery-thumbs {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin: 14px 0 0;
+  }
+  .gallery-thumb {
+    width: 7px;
+    height: 7px;
+    aspect-ratio: auto;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.18);
+    transition: background-color 0.18s, transform 0.18s;
+  }
+  .gallery-thumb img { display: none; }
+  .gallery-thumb.active {
+    background: var(--pdp-accent, var(--purple));
+    transform: scale(1.35);
+  }
   .product-title { font-size: clamp(26px, 6vw, 40px); }
   .product-trust-pills { gap: 6px; }
   .trust-pill    { font-size: 11px; padding: 6px 10px; }
