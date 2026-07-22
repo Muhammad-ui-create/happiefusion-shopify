@@ -1,18 +1,23 @@
 <div class="collection-page" itemscope itemtype="https://schema.org/CollectionPage">
   <div class="collection-banner">
+    <div class="wave-field" aria-hidden="true">
+      <span class="wave wave--back"></span>
+      <span class="wave wave--mid"></span>
+      <span class="wave wave--front"></span>
+    </div>
     <div class="section-eyebrow">Functional Mushroom Seltzers · No Alcohol · No Caffeine</div>
     <h1 itemprop="name">{{ collection.title }}</h1>
     {%- if collection.description != blank -%}
       <p itemprop="description">{{ collection.description }}</p>
     {%- else -%}
-      <p>Shop Happie Fungi Fusion functional mushroom seltzers — 900mg Lion's Mane, 700mg Cordyceps &amp; 400mg Reishi per can. The best alcohol-free, caffeine-free adaptogenic drink. Free shipping on every order, no minimum.</p>
+      <p>Caffeine-free sparkling drinks made with Lion's Mane, Cordyceps and Red Reishi mushrooms, plus magnesium and calcium from ocean minerals. No alcohol, no crash, no artificial sweeteners. Free shipping on every order, no minimum.</p>
     {%- endif -%}
-    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:16px;">
-      <span style="background:rgba(82,183,136,0.12);color:var(--green);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;">🍄 2,000mg Per Can</span>
-      <span style="background:rgba(82,183,136,0.12);color:var(--green);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;">✅ 0% Alcohol</span>
-      <span style="background:rgba(82,183,136,0.12);color:var(--green);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;">⚡ 0mg Caffeine</span>
-      <span style="background:rgba(82,183,136,0.12);color:var(--green);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;">🧪 Third-Party Lab Tested</span>
-      <span style="background:rgba(82,183,136,0.12);color:var(--green);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;">🌿 Vegan &amp; Non-GMO</span>
+    <div class="coll-banner-chips">
+      <span>🍄 100% Fruiting Body</span>
+      <span>✅ 0% Alcohol</span>
+      <span>⚡ Caffeine-Free</span>
+      <span>🧪 Third-Party Lab Tested</span>
+      <span>🌿 Vegan &amp; Non-GMO</span>
     </div>
   </div>
   <div class="section-inner">
@@ -39,8 +44,8 @@
       <!-- Two-col: text + mushroom cards -->
       <div class="coll-seo-grid">
         <div class="coll-seo-text">
-          <p>Most functional mushroom supplements bury ineffective doses in capsules made from mycelium grown on grain — more grain starch than active compounds. Happie Fungi Fusion is different: we use only <strong>fruiting body extracts</strong>, dual-extracted (hot water + ethanol) for the full spectrum of beta-glucans and triterpenes.</p>
-          <p>Each 12oz can delivers a complete adaptogenic stack — totaling <strong>2,000mg of active mushroom extract</strong>. Zero alcohol. Zero caffeine. ~40 calories. Available in <a href="/products/watermelon-fungi-powered-seltzer">Watermelon</a>, <a href="/products/mango-mimosa-fungi-powered-seltzer">Mango Mimosa</a>, <a href="/products/blue-razzberry-fungi-powered-seltzer">Blue Razzberry</a>, and a <a href="/products/happie-fungi-fusion-mushroom-drink-variety-pack">12-can Variety Pack</a>.</p>
+          <p>Most mushroom supplements come as capsules made from mycelium grown on grain — which can end up more grain starch than mushroom. Happie Fungi Fusion is different: we use only <strong>fruiting body extracts</strong>, dual-extracted (hot water + ethanol) for the full spectrum of beta-glucans and triterpenes.</p>
+          <p>Every 12oz can is <strong>zero alcohol, zero caffeine, 40 calories, 9g sugar and no artificial sweeteners</strong>. Something good to hold at work, before the gym, or when everyone else is holding something. Available in <a href="/products/watermelon-fungi-powered-seltzer">Watermelon</a>, <a href="/products/mango-mimosa-fungi-powered-seltzer">Mango Mimosa</a>, <a href="/products/blue-razzberry-fungi-powered-seltzer">Blue Razzberry</a>, and a <a href="/products/happie-fungi-fusion-mushroom-drink-variety-pack">12-can Variety Pack</a>.</p>
           <!-- Link pills -->
           <div class="coll-seo-links">
             <a href="/pages/the-science" class="coll-seo-link">
@@ -61,22 +66,22 @@
         <!-- Mushroom stat cards -->
         <div class="coll-seo-cards">
           <div class="coll-mush-card coll-mush-lion">
-            <div class="coll-mush-dose">900mg</div>
-            <div class="coll-mush-name">Lion's Mane</div>
-            <div class="coll-mush-benefit">Focus &amp; Cognition</div>
-            <p class="coll-mush-desc">Stimulates Nerve Growth Factor (NGF) for sharper focus and mental clarity. Dual-extracted fruiting body.</p>
+            <div class="coll-mush-dose">Lion's Mane</div>
+            <div class="coll-mush-name">Hericium erinaceus</div>
+            <div class="coll-mush-benefit">At work</div>
+            <p class="coll-mush-desc">The one people know by sight — the shaggy white mushroom. Dual-extracted fruiting body, never mycelium on grain.</p>
           </div>
           <div class="coll-mush-card coll-mush-cord">
-            <div class="coll-mush-dose">700mg</div>
-            <div class="coll-mush-name">Cordyceps</div>
-            <div class="coll-mush-benefit">Natural Energy</div>
-            <p class="coll-mush-desc">Supports ATP production for sustained energy — no caffeine, no crash. Pure cellular fuel.</p>
+            <div class="coll-mush-dose">Cordyceps</div>
+            <div class="coll-mush-name">Cordyceps militaris</div>
+            <div class="coll-mush-benefit">Before the gym</div>
+            <p class="coll-mush-desc">An athlete's favourite, and the mushroom behind cordycepin. No caffeine and no stimulants of any kind.</p>
           </div>
           <div class="coll-mush-card coll-mush-rei">
-            <div class="coll-mush-dose">400mg</div>
-            <div class="coll-mush-name">Reishi</div>
-            <div class="coll-mush-benefit">Calm &amp; Stress</div>
-            <p class="coll-mush-desc">The queen of mushrooms. Triterpenes support the body's stress response for deep calm without sedation.</p>
+            <div class="coll-mush-dose">Red Reishi</div>
+            <div class="coll-mush-name">Ganoderma lucidum</div>
+            <div class="coll-mush-benefit">Instead of a beer</div>
+            <p class="coll-mush-desc">Centuries of use in Asian wellness traditions, and the richest of the three in triterpenes — which only an alcohol extraction releases.</p>
           </div>
         </div>
       </div>
@@ -86,7 +91,7 @@
 
   <style>
   .coll-seo-section {
-    background: linear-gradient(180deg, #fff 0%, var(--cream, #F5F0E8) 100%);
+    background: linear-gradient(180deg, #fff 0%, #F6F8F7 100%);
     padding: 80px 24px;
     border-top: 1px solid rgba(0,0,0,0.06);
   }
@@ -188,9 +193,10 @@
   .coll-mush-cord .coll-mush-dose { color: #B45309; }
   .coll-mush-rei .coll-mush-dose { color: #4C3B9A; }
 
+  .coll-mush-dose { font-size: 24px; letter-spacing: -0.01em; }
   .coll-mush-name {
-    font-size: 13px; font-weight: 800; text-transform: uppercase;
-    letter-spacing: 0.1em; margin-bottom: 6px;
+    font-size: 12.5px; font-weight: 600; font-style: italic;
+    letter-spacing: 0.01em; margin-bottom: 8px; opacity: 0.85;
   }
   .coll-mush-lion .coll-mush-name { color: var(--green, #52B788); }
   .coll-mush-cord .coll-mush-name { color: #D97706; }
@@ -224,7 +230,7 @@
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": "Happie Fungi Fusion Functional Mushroom Seltzers",
-  "description": "Functional mushroom seltzers with 900mg Lion's Mane, 700mg Cordyceps, and 400mg Reishi per can. Zero alcohol, zero caffeine.",
+  "description": "Caffeine-free sparkling drinks made with Lion's Mane, Cordyceps and Red Reishi mushrooms. Zero alcohol, 40 calories, no artificial sweeteners.",
   "itemListElement": [
     {% for product in collection.products %}
     {

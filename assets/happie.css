@@ -1305,9 +1305,40 @@ input, select { font-family: var(--font); }
 
 /* ── Collection Page ── */
 .collection-page { padding-top: 0; }
-.collection-banner { background: linear-gradient(135deg,#f5f0e8,#d8f3dc); text-align: center; padding: 60px 24px 40px; }
-.collection-banner h1 { font-size: 46px; font-weight: 900; margin-bottom: 12px; }
-.collection-banner p { font-size: 16px; color: var(--gray); }
+/* Collection banner — the site's iridescent mesh, softened, with the shared
+   water layers rolling along the base. */
+.collection-banner {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  text-align: center;
+  padding: 76px 24px 92px;
+  --wave-color: #2D6A4F;
+  background-color: #FCF9F4;
+  background-image:
+    radial-gradient(56% 125% at  8% 30%, rgba(45,200,214,0.42)  0%, rgba(45,200,214,0)  62%),
+    radial-gradient(52% 120% at 30% 82%, rgba(82,205,150,0.40)  0%, rgba(82,205,150,0)  62%),
+    radial-gradient(50% 118% at 52% 14%, rgba(255,190,60,0.36)  0%, rgba(255,190,60,0)  60%),
+    radial-gradient(54% 122% at 74% 80%, rgba(255,122,138,0.34) 0%, rgba(255,122,138,0) 62%),
+    radial-gradient(56% 125% at 95% 26%, rgba(138,96,232,0.38)  0%, rgba(138,96,232,0)  62%);
+  background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 235% 235%;
+  background-repeat: no-repeat;
+  animation: navSilk 26s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) { .collection-banner { animation: none; } }
+.collection-banner > *:not(.wave-field) { position: relative; z-index: 1; }
+.collection-banner h1 { font-size: clamp(32px,5vw,52px); font-weight: 900; margin-bottom: 14px; letter-spacing: -0.02em; }
+.collection-banner p { font-size: 16.5px; color: #3F4A43; line-height: 1.65; max-width: 640px; margin: 0 auto; }
+.collection-banner .section-eyebrow { color: var(--green-dark); }
+.coll-banner-chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.coll-banner-chips span {
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(45,106,79,0.16);
+  color: var(--green-dark);
+  border-radius: 50px; padding: 8px 16px;
+  font-size: 12px; font-weight: 700;
+  backdrop-filter: blur(3px);
+}
 
 /* ── Inner Pages (Mushrooms, Science, About, Reviews, FAQ) ── */
 .inner-page { }
