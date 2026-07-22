@@ -14,7 +14,7 @@
   {% endif %}
 {% endfor %}
 
-<div class="product-page">
+<div class="product-page" style="--pdp-accent: {{ product_accent }};">
   <div class="breadcrumb">
     <a href="/">Home</a> /
     <a href="/collections/all">Our Complete Collection</a> /
@@ -177,7 +177,7 @@
 
         <!-- Purchase Options: One-time vs Subscribe -->
         {% if product.selling_plan_groups.size > 0 %}
-          <div class="purchase-options" style="--pdp-accent: {{ product_accent }};">
+          <div class="purchase-options">
             <div class="purchase-label">Purchase Options</div>
             {% for group in product.selling_plan_groups %}
               {% for plan in group.selling_plans %}
@@ -754,7 +754,7 @@
 
 {%- if product.available -%}
 <!-- ── Sticky mobile ATC bar — appears once the buy box scrolls out of view ── -->
-<div class="pdp-sticky-atc" id="pdp-sticky-atc">
+<div class="pdp-sticky-atc" id="pdp-sticky-atc" style="--pdp-accent: {{ product_accent }};">
   <div class="pdp-sticky-info">
     <span class="pdp-sticky-title">{{ product.title | split: ' — ' | first | escape }}</span>
     <span class="pdp-sticky-price" id="pdp-sticky-price">{{ product.selected_or_first_available_variant.price | money }}</span>
