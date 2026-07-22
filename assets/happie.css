@@ -613,6 +613,7 @@ input, select { font-family: var(--font); }
 .btn-atc-soldout,
 .btn-atc-soldout:hover {
   background: #9aa39c !important;
+  color: #fff !important;
   cursor: not-allowed !important;
   transform: none !important;
   box-shadow: none !important;
@@ -796,9 +797,9 @@ input, select { font-family: var(--font); }
   background: color-mix(in srgb, var(--pdp-accent, #2D6A4F) 9%, #fff);
   border-color: rgba(0,0,0,0.12);
   border-color: color-mix(in srgb, var(--pdp-accent, #2D6A4F) 42%, #fff);
-  box-shadow: 0 4px 0 rgba(0,0,0,0.16), 0 6px 16px rgba(0,0,0,0.08);
-  box-shadow: 0 4px 0 color-mix(in srgb, var(--pdp-accent, #2D6A4F) 62%, #000),
-              0 6px 16px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 0 rgba(45,106,79,0.5), 0 6px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--pdp-accent, #2D6A4F) 78%, #fff),
+              0 6px 16px rgba(0,0,0,0.10);
 }
 .purchase-option:not(.subscribe-opt).active,
 .purchase-option:not(.subscribe-opt):has(input:checked) {
@@ -807,8 +808,8 @@ input, select { font-family: var(--font); }
   border-color: var(--pdp-accent, #2D6A4F);
 }
 .purchase-option:not(.subscribe-opt):active {
-  box-shadow: 0 1px 0 rgba(0,0,0,0.16), 0 2px 6px rgba(0,0,0,0.08);
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--pdp-accent, #2D6A4F) 62%, #000),
+  box-shadow: 0 1px 0 rgba(45,106,79,0.5), 0 2px 6px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--pdp-accent, #2D6A4F) 78%, #fff),
               0 2px 6px rgba(0,0,0,0.10);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -901,48 +902,45 @@ input, select { font-family: var(--font); }
 .qty-input:focus { outline: none; }
 /* Brand green — the old purple sat directly above Shop Pay's purple button and
    the two read as duplicates. Green differentiates + matches the LP ATC. */
-/* Add to cart — 3D slab in the product's own flavour colour.
-   The accent is mixed heavily with black (62%/48%) rather than used raw: the
-   lightest flavour (Mango amber) only clears 4.5:1 against white text at that
-   depth, and every button has to pass, so the darkest-safe mix governs all four. */
+/* Add to cart — 3D slab in a light tint of the product's flavour colour.
+   Face is the accent mixed into white (~34-48%) so it stays soft on the eye;
+   legibility comes from near-black text rather than from darkening the button.
+   The raised edge is the raw accent, which is naturally darker than the tinted
+   face and so reads as depth without going murky. */
 .btn-atc {
   display: block;
   width: 100%;
-  background: linear-gradient(135deg, var(--green, #2D6A4F), var(--green-dark, #1B4332));
+  background: linear-gradient(135deg, #E7F0EA, #D6E7DC);
   background: linear-gradient(135deg,
-              color-mix(in srgb, var(--pdp-accent, #2D6A4F) 62%, #000),
-              color-mix(in srgb, var(--pdp-accent, #2D6A4F) 48%, #000));
-  color: #fff;
+              color-mix(in srgb, var(--pdp-accent, #2D6A4F) 34%, #fff),
+              color-mix(in srgb, var(--pdp-accent, #2D6A4F) 48%, #fff));
+  color: #15181B;
   border-radius: 14px;
   padding: 18px;
   font-size: 17px;
   font-weight: 800;
   text-align: center;
   letter-spacing: 0.02em;
-  box-shadow: 0 6px 0 rgba(0,0,0,0.30), 0 12px 26px rgba(0,0,0,0.20),
-              inset 0 1px 0 rgba(255,255,255,0.20);
-  box-shadow: 0 6px 0 color-mix(in srgb, var(--pdp-accent, #2D6A4F) 26%, #000),
-              0 12px 26px rgba(0,0,0,0.22),
-              inset 0 1px 0 rgba(255,255,255,0.20);
+  box-shadow: 0 6px 0 rgba(45,106,79,0.55), 0 12px 24px rgba(0,0,0,0.12),
+              inset 0 1px 0 rgba(255,255,255,0.55);
+  box-shadow: 0 6px 0 var(--pdp-accent, #2D6A4F),
+              0 12px 24px rgba(0,0,0,0.13),
+              inset 0 1px 0 rgba(255,255,255,0.55);
   transition: background 0.15s, transform 0.1s, box-shadow 0.2s;
   margin-bottom: 20px;
   cursor: pointer;
 }
 .btn-atc:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 0 rgba(0,0,0,0.30), 0 16px 32px rgba(0,0,0,0.26),
-              inset 0 1px 0 rgba(255,255,255,0.20);
-  box-shadow: 0 8px 0 color-mix(in srgb, var(--pdp-accent, #2D6A4F) 26%, #000),
-              0 16px 32px rgba(0,0,0,0.28),
-              inset 0 1px 0 rgba(255,255,255,0.20);
+  box-shadow: 0 8px 0 var(--pdp-accent, #2D6A4F),
+              0 16px 30px rgba(0,0,0,0.18),
+              inset 0 1px 0 rgba(255,255,255,0.55);
 }
 .btn-atc:active {
   transform: translateY(4px);
-  box-shadow: 0 2px 0 rgba(0,0,0,0.30), 0 4px 10px rgba(0,0,0,0.18),
-              inset 0 1px 0 rgba(255,255,255,0.16);
-  box-shadow: 0 2px 0 color-mix(in srgb, var(--pdp-accent, #2D6A4F) 26%, #000),
-              0 4px 10px rgba(0,0,0,0.20),
-              inset 0 1px 0 rgba(255,255,255,0.16);
+  box-shadow: 0 2px 0 var(--pdp-accent, #2D6A4F),
+              0 4px 10px rgba(0,0,0,0.12),
+              inset 0 1px 0 rgba(255,255,255,0.5);
 }
 @media (prefers-reduced-motion: reduce) {
   .btn-atc:hover, .btn-atc:active { transform: none; }
@@ -1816,25 +1814,22 @@ body.subscription-selected #shopify-buyer-consent {
 .pdp-sticky-price { font-size: 15px; font-weight: 900; color: var(--green, #2D6A4F); }
 .pdp-sticky-btn {
   flex: 1;
-  background: linear-gradient(135deg, var(--green, #2D6A4F), var(--green-dark, #1B4332));
+  background: linear-gradient(135deg, #E7F0EA, #D6E7DC);
   background: linear-gradient(135deg,
-              color-mix(in srgb, var(--pdp-accent, #2D6A4F) 62%, #000),
-              color-mix(in srgb, var(--pdp-accent, #2D6A4F) 48%, #000));
-  color: #fff;
+              color-mix(in srgb, var(--pdp-accent, #2D6A4F) 34%, #fff),
+              color-mix(in srgb, var(--pdp-accent, #2D6A4F) 48%, #fff));
+  color: #15181B;
   border: none; border-radius: 12px;
   padding: 14px 16px;
   font-size: 15px; font-weight: 800; letter-spacing: 0.02em;
   cursor: pointer;
-  box-shadow: 0 4px 0 rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.18);
-  box-shadow: 0 4px 0 color-mix(in srgb, var(--pdp-accent, #2D6A4F) 26%, #000),
-              inset 0 1px 0 rgba(255,255,255,0.18);
+  box-shadow: 0 4px 0 rgba(45,106,79,0.55), inset 0 1px 0 rgba(255,255,255,0.5);
+  box-shadow: 0 4px 0 var(--pdp-accent, #2D6A4F), inset 0 1px 0 rgba(255,255,255,0.5);
   transition: transform 0.1s, box-shadow 0.15s;
 }
 .pdp-sticky-btn:active {
   transform: translateY(3px);
-  box-shadow: 0 1px 0 rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.16);
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--pdp-accent, #2D6A4F) 26%, #000),
-              inset 0 1px 0 rgba(255,255,255,0.16);
+  box-shadow: 0 1px 0 var(--pdp-accent, #2D6A4F), inset 0 1px 0 rgba(255,255,255,0.45);
 }
 @media (prefers-reduced-motion: reduce) {
   .pdp-sticky-btn:active { transform: none; }
