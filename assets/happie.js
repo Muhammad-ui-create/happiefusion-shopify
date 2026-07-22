@@ -282,15 +282,24 @@
 
     var selectedSellingPlanId = null;
 
-    /* Swap the main gallery image. Must drop srcset/sizes first — while they're
-       present the browser keeps re-resolving the responsive source and ignores
-       the src we assign, so thumbnail/arrow swaps silently do nothing. */
+    var galleryTrack = document.getElementById('gallery-track');
+
+    /* Fallback for galleries that still swap a single <img> rather than sliding
+       a track. Must drop srcset/sizes first — while they're present the browser
+       keeps re-resolving the responsive source and ignores the src we assign,
+       so the swap silently does nothing. */
     function setMainImg(src, fadeMs) {
       if (!mainImg) return;
       mainImg.removeAttribute('srcset');
       mainImg.removeAttribute('sizes');
       mainImg.style.opacity = '0';
       setTimeout(function() { mainImg.src = src; mainImg.style.opacity = '1'; }, fadeMs);
+    }
+
+    function moveTrack(idx, dragPercent) {
+      if (!galleryTrack) return;
+      var offset = -(idx * 100) + (dragPercent || 0);
+      galleryTrack.style.transform = 'translate3d(' + offset + '%,0,0)';
     }
 
     /* Gallery thumbnails (rendered as dots on mobile — same elements either way) */
@@ -305,7 +314,12 @@
     function goToImage(idx, fadeMs) {
       if (!allSrcs.length) return;
       currentImgIdx = (idx + allSrcs.length) % allSrcs.length;
-      setMainImg(allSrcs[currentImgIdx], fadeMs);
+      if (galleryTrack) {
+        galleryTrack.classList.remove('is-dragging');
+        moveTrack(currentImgIdx, 0);
+      } else {
+        setMainImg(allSrcs[currentImgIdx], fadeMs);
+      }
       thumbs.forEach(function(t, i) { t.classList.toggle('active', i === currentImgIdx); });
     }
 
@@ -351,33 +365,59 @@
     if (nextBtn) nextBtn.addEventListener('click', function() { goToImage(currentImgIdx + 1, 150); });
 
     /* Swipe to change image.
-       Listeners stay passive so vertical page scrolling is never blocked; the
-       gesture is only claimed once horizontal travel clearly beats vertical,
-       which stops a diagonal scroll from flicking the carousel by accident. */
+       The track follows the finger in real time, then settles on the nearest
+       slide when you let go. touch-action: pan-y on the track means the browser
+       keeps vertical scrolling and hands us the horizontal axis, so nothing here
+       needs preventDefault and every listener can stay passive. */
     var galleryMain = document.querySelector('.gallery-main');
     if (galleryMain && allSrcs.length > 1) {
-      var swipeX = 0, swipeY = 0, swipeTracking = false;
+      var swipeX = 0, swipeY = 0, swipeTracking = false, swipeLocked = false, swipeDx = 0;
       var SWIPE_MIN = 40;
 
       galleryMain.addEventListener('touchstart', function(e) {
         if (e.touches.length !== 1) { swipeTracking = false; return; }
         swipeX = e.touches[0].clientX;
         swipeY = e.touches[0].clientY;
+        swipeDx = 0;
         swipeTracking = true;
+        swipeLocked = false;
       }, { passive: true });
 
-      galleryMain.addEventListener('touchend', function(e) {
-        if (!swipeTracking) return;
-        swipeTracking = false;
-        var t = e.changedTouches && e.changedTouches[0];
-        if (!t) return;
+      galleryMain.addEventListener('touchmove', function(e) {
+        if (!swipeTracking || !galleryTrack) return;
+        var t = e.touches[0];
         var dx = t.clientX - swipeX;
         var dy = t.clientY - swipeY;
-        if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) <= Math.abs(dy)) return;
-        goToImage(currentImgIdx + (dx < 0 ? 1 : -1), 120);
+        /* Decide once, at 8px of travel, whether this is a horizontal gesture.
+           Without the lock a mostly-vertical scroll would jitter the track. */
+        if (!swipeLocked) {
+          if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+          if (Math.abs(dy) > Math.abs(dx)) { swipeTracking = false; return; }
+          swipeLocked = true;
+          galleryTrack.classList.add('is-dragging');
+        }
+        swipeDx = dx;
+        var pct = (dx / galleryMain.offsetWidth) * 100;
+        /* Resist at the ends so the first and last slide feel like edges */
+        if ((currentImgIdx === 0 && pct > 0) || (currentImgIdx === allSrcs.length - 1 && pct < 0)) pct *= 0.35;
+        moveTrack(currentImgIdx, pct);
       }, { passive: true });
 
-      galleryMain.addEventListener('touchcancel', function() { swipeTracking = false; }, { passive: true });
+      function endSwipe() {
+        if (!swipeTracking) { if (galleryTrack) galleryTrack.classList.remove('is-dragging'); return; }
+        swipeTracking = false;
+        if (galleryTrack) galleryTrack.classList.remove('is-dragging');
+        if (!swipeLocked || Math.abs(swipeDx) < SWIPE_MIN) { goToImage(currentImgIdx, 0); return; }
+        /* Swipe stops at the ends rather than wrapping — the rubber-band above
+           has already signalled an edge, so jumping to the far slide would
+           contradict it. The arrows still cycle, as they always have. */
+        var target = currentImgIdx + (swipeDx < 0 ? 1 : -1);
+        if (target < 0 || target > allSrcs.length - 1) { goToImage(currentImgIdx, 0); return; }
+        goToImage(target, 120);
+      }
+
+      galleryMain.addEventListener('touchend', endSwipe, { passive: true });
+      galleryMain.addEventListener('touchcancel', endSwipe, { passive: true });
 
       /* Keyboard parity for anyone tabbing the gallery */
       galleryMain.setAttribute('tabindex', '0');

@@ -26,19 +26,28 @@
     <!-- ======= LEFT: Image Gallery ======= -->
     <div class="product-gallery">
       <div class="gallery-main">
-        {% assign first_image = product.images | first %}
-        <img
-          id="gallery-main-img"
-          src="{{ first_image | image_url: width: 900 }}"
-          srcset="{{ first_image | image_url: width: 360 }} 360w, {{ first_image | image_url: width: 540 }} 540w, {{ first_image | image_url: width: 720 }} 720w, {{ first_image | image_url: width: 900 }} 900w"
-          sizes="(max-width: 768px) 92vw, 600px"
-          alt="{{ first_image.alt | default: product.title }}"
-          class="gallery-main-img"
-          width="900" height="900"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
+        {%- comment -%}
+          All images render as slides on one track so the gallery can actually
+          slide under a finger. Only the first is eager/high-priority; the rest
+          are lazy so this doesn't cost more on load than the old single image.
+        {%- endcomment -%}
+        <div class="gallery-track" id="gallery-track">
+          {% for image in product.images %}
+            <img
+              {% if forloop.first %}id="gallery-main-img"{% endif %}
+              src="{{ image | image_url: width: 900 }}"
+              {% if forloop.first %}srcset="{{ image | image_url: width: 360 }} 360w, {{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 720 }} 720w, {{ image | image_url: width: 900 }} 900w"
+              sizes="(max-width: 768px) 100vw, 600px"{% endif %}
+              alt="{{ image.alt | default: product.title }}"
+              class="gallery-slide{% if forloop.first %} gallery-main-img{% endif %}"
+              width="900" height="900"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              {% if forloop.first %}fetchpriority="high"{% endif %}
+              decoding="async"
+              draggable="false"
+            />
+          {% endfor %}
+        </div>
         {% if product.images.size > 1 %}
           <button class="gallery-arrow gallery-prev" id="gallery-prev" aria-label="Previous image">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>

@@ -576,14 +576,29 @@ input, select { font-family: var(--font); }
   box-shadow: 0 8px 40px rgba(0,0,0,0.10);
   margin-bottom: 16px;
 }
-.gallery-main-img {
-  width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s;
-  /* Swipe target: stop the browser's own image-drag ghost and text selection
-     from competing with the gesture. pan-y keeps vertical page scroll native. */
-  -webkit-user-drag: none;
-  user-select: none;
+/* Slide track — every image sits side by side and the track translates, so the
+   gallery moves with the finger instead of cross-fading. */
+.gallery-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  /* pan-y hands vertical scrolling to the browser and horizontal drags to us */
   touch-action: pan-y;
 }
+.gallery-track.is-dragging { transition: none; }
+.gallery-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+/* Standalone galleries that still use a single swapped image (landing pages) */
+.gallery-main-img:not(.gallery-slide) { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s; }
 .gallery-main:focus-visible { outline: 2px solid var(--pdp-accent, var(--green)); outline-offset: 3px; }
 .gallery-arrow {
   position: absolute;
