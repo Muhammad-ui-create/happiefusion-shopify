@@ -1090,8 +1090,66 @@ input, select { font-family: var(--font); }
 
 /* ── Comparison Section ── */
 /* ── PDP occasions — positioning block for cold traffic landing on a product ── */
-.pdp-occasions { margin: 0 0 72px; }
-.pdp-occ-inner { max-width: 1100px; margin: 0 auto; }
+.pdp-occasions {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: 56px 24px 72px;
+  margin: 0 0 72px;
+  background: #FBFCFB;
+  background: linear-gradient(180deg, #fff 0%, color-mix(in srgb, var(--pdp-accent, #2D6A4F) 9%, #fff) 100%);
+}
+
+/* Water: three masked bands of the accent colour, each drifting at its own
+   speed. The shape lives in the mask so the fill can stay a CSS variable and
+   follow the product's flavour. Each band is 200% wide with a 50%-wide
+   repeating tile, so translating exactly -50% loops seamlessly. */
+.pdp-occ-waves { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.pdp-occ-wave {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  background-color: var(--pdp-accent, #2D6A4F);
+  -webkit-mask-repeat: repeat-x;
+          mask-repeat: repeat-x;
+  -webkit-mask-position: bottom left;
+          mask-position: bottom left;
+  -webkit-mask-size: 50% 100%;
+          mask-size: 50% 100%;
+  will-change: transform;
+}
+.pdp-occ-wave--back {
+  bottom: 0; height: 46%; opacity: 0.13;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20120'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0,64C150,104,350,24,600,64C850,104,1050,24,1200,64L1200,120L0,120Z'%20fill='%23000'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20120'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0,64C150,104,350,24,600,64C850,104,1050,24,1200,64L1200,120L0,120Z'%20fill='%23000'/%3E%3C/svg%3E");
+  animation: occWave 19s linear infinite;
+}
+.pdp-occ-wave--mid {
+  bottom: 0; height: 34%; opacity: 0.18;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20120'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0,72C200,32,400,112,600,72C800,32,1000,112,1200,72L1200,120L0,120Z'%20fill='%23000'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20120'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0,72C200,32,400,112,600,72C800,32,1000,112,1200,72L1200,120L0,120Z'%20fill='%23000'/%3E%3C/svg%3E");
+  animation: occWaveReverse 13s linear infinite;
+}
+.pdp-occ-wave--front {
+  bottom: 0; height: 22%; opacity: 0.26;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20120'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0,58C120,92,300,26,480,58C700,96,900,22,1200,58L1200,120L0,120Z'%20fill='%23000'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20120'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0,58C120,92,300,26,480,58C700,96,900,22,1200,58L1200,120L0,120Z'%20fill='%23000'/%3E%3C/svg%3E");
+  animation: occWave 9s linear infinite;
+}
+@keyframes occWave {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes occWaveReverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pdp-occ-wave { animation: none; }
+}
+
+.pdp-occ-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
 .pdp-occ-head { text-align: center; margin-bottom: 36px; }
 .pdp-occ-eyebrow {
   display: inline-block;
@@ -1899,6 +1957,7 @@ body.subscription-selected #shopify-buyer-consent {
 
   /* Benefits */
   .benefits-grid { grid-template-columns: 1fr; }
+  .pdp-occasions { padding: 40px 16px 56px; border-radius: 20px; }
   .pdp-occ-grid  { grid-template-columns: 1fr; gap: 14px; }
   .pdp-occ-card  { padding: 22px 18px; }
   .benefit-card  { padding: 24px 20px; }
