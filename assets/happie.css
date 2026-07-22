@@ -852,6 +852,47 @@ input, select { font-family: var(--font); }
   .subscribe-opt { animation: none; }
 }
 
+/* ── Flavour cross-links, above the quantity stepper ── */
+.pdp-flavor-jump { margin-bottom: 22px; }
+.pdp-flavor-jump-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--green-dark);
+  margin-bottom: 10px;
+}
+.pdp-flavor-jump-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.pdp-flavor-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 150px;
+  min-width: 0;
+  padding: 8px 14px 8px 8px;
+  border-radius: 50px;
+  background: #fff;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-color: color-mix(in srgb, var(--chip, #6260AE) 30%, #fff);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s cubic-bezier(0.16,1,0.3,1), box-shadow 0.15s, border-color 0.15s;
+}
+.pdp-flavor-chip img {
+  width: 46px; height: 46px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  background: #F5F5F3;
+}
+.pdp-flavor-chip-text { display: flex; flex-direction: column; min-width: 0; }
+.pdp-flavor-chip-name {
+  font-size: 13.5px; font-weight: 800; line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pdp-flavor-chip-price { font-size: 12px; font-weight: 600; color: var(--gray); }
+.pdp-flavor-chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--chip, #6260AE);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+}
+@media (prefers-reduced-motion: reduce) { .pdp-flavor-chip:hover { transform: none; } }
+
 /* Qty + ATC */
 /* ── Quantity stepper: premium pill with green hover ── */
 .qty-row {
