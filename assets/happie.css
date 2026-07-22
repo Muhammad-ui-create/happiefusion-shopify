@@ -1032,6 +1032,50 @@ input, select { font-family: var(--font); }
 }
 
 /* ── Comparison Section ── */
+/* ── PDP occasions — positioning block for cold traffic landing on a product ── */
+.pdp-occasions { margin: 0 0 72px; }
+.pdp-occ-inner { max-width: 1100px; margin: 0 auto; }
+.pdp-occ-head { text-align: center; margin-bottom: 36px; }
+.pdp-occ-eyebrow {
+  display: inline-block;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--green); margin-bottom: 10px;
+}
+.pdp-occ-title { font-size: clamp(26px,3.4vw,38px); font-weight: 900; line-height: 1.1; margin-bottom: 12px; }
+.pdp-occ-sub { font-size: 16px; color: var(--gray); max-width: 620px; margin: 0 auto; line-height: 1.6; }
+.pdp-occ-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.pdp-occ-card {
+  background: #fff;
+  border: 1.5px solid rgba(0,0,0,0.07);
+  border-radius: 20px;
+  padding: 26px 22px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+}
+.pdp-occ-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: #F1F0FA; color: var(--purple);
+  margin-bottom: 14px;
+}
+.pdp-occ-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+.pdp-occ-card p { font-size: 14px; color: #555; line-height: 1.65; }
+.pdp-occ-proof {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  margin-top: 28px;
+}
+.pdp-occ-proof li {
+  font-size: 12px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--green-dark);
+  background: #EEF7F1;
+  border: 1px solid rgba(45,106,79,0.14);
+  border-radius: 50px;
+  padding: 7px 15px;
+}
+.pdp-occ-disclaimer {
+  margin: 20px auto 0; max-width: 640px; text-align: center;
+  font-size: 11.5px; line-height: 1.6; color: var(--gray);
+}
+
 .comparison-section {
   background: #F7F7F5;
   border-radius: 28px;
@@ -1733,6 +1777,7 @@ body.subscription-selected #shopify-buyer-consent {
 @media (max-width: 1024px) {
   .products-grid  { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
   .benefits-grid  { grid-template-columns: repeat(2, 1fr); }
+  .pdp-occ-grid   { grid-template-columns: repeat(2, 1fr); }
   .hero-ring-wrap { width: 380px; height: 380px; }
   .hero-can-img   { height: 340px; }
   .comparison-inner { gap: 40px; padding: 60px 36px; }
@@ -1784,6 +1829,8 @@ body.subscription-selected #shopify-buyer-consent {
 
   /* Benefits */
   .benefits-grid { grid-template-columns: 1fr; }
+  .pdp-occ-grid  { grid-template-columns: 1fr; gap: 14px; }
+  .pdp-occ-card  { padding: 22px 18px; }
   .benefit-card  { padding: 24px 20px; }
 
   /* Mushroom page */
