@@ -779,14 +779,37 @@ input, select { font-family: var(--font); }
   transition: border-color 0.15s;
 }
 .purchase-option input[type="radio"] { margin-top: 3px; accent-color: var(--green); }
-.purchase-option.active, .purchase-option:has(input:checked) { border-color: var(--green); background: #f0faf3; }
+.purchase-option.active, .purchase-option:has(input:checked) { border-color: var(--green); }
+/* Plain-white options get a green wash when selected; the subscribe option keeps
+   its mesh gradient instead, so exclude it here. */
+.purchase-option:not(.subscribe-opt).active,
+.purchase-option:not(.subscribe-opt):has(input:checked) { background: #f0faf3; }
 .opt-title { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
 .opt-price { font-size: 15px; font-weight: 800; margin-top: 2px; }
 .price-discounted { color: var(--green); }
 .price-original-crossed { font-size: 13px; color: var(--gray); text-decoration: line-through; margin-left: 6px; }
 .opt-sub { font-size: 12px; color: var(--gray); margin-top: 2px; }
 .save-badge { background: var(--green); color: #fff; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 800; }
-.subscribe-opt { position: relative; }
+/* Subscribe & Save option carries the same iridescent mesh as the header,
+   held a little softer so the black label and green price stay readable. */
+.subscribe-opt {
+  position: relative;
+  background-color: #FCF9F4;
+  background-image:
+    radial-gradient(56% 125% at  6% 34%, rgba(45,200,214,0.48)  0%, rgba(45,200,214,0)  60%),
+    radial-gradient(52% 120% at 22% 80%, rgba(82,205,150,0.44)  0%, rgba(82,205,150,0)  60%),
+    radial-gradient(50% 118% at 38% 16%, rgba(255,190,60,0.46)  0%, rgba(255,190,60,0)  58%),
+    radial-gradient(52% 120% at 55% 84%, rgba(255,122,138,0.42) 0%, rgba(255,122,138,0) 60%),
+    radial-gradient(54% 122% at 71% 22%, rgba(214,72,178,0.40)  0%, rgba(214,72,178,0)  60%),
+    radial-gradient(56% 125% at 87% 78%, rgba(138,96,232,0.44)  0%, rgba(138,96,232,0)  62%),
+    radial-gradient(58% 128% at 99% 30%, rgba(86,110,226,0.40)  0%, rgba(86,110,226,0)  62%);
+  background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 205% 205%, 235% 235%, 220% 220%;
+  background-repeat: no-repeat;
+  animation: navSilk 34s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .subscribe-opt { animation: none; }
+}
 
 /* Qty + ATC */
 /* ── Quantity stepper: premium pill with green hover ── */
