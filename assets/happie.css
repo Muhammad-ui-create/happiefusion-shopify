@@ -536,7 +536,26 @@ input, select { font-family: var(--font); }
 .cta-sub { font-size: 13px; opacity: 0.75; }
 
 /* ── Footer ── */
-.site-footer { background: var(--purple-dark); color: rgba(255,255,255,0.85); padding: 60px 24px 0; }
+/* Footer — dark twin of the header mesh: same seven brand hues and the same
+   navSilk drift, but glowing over a deep plum-ink base so the white footer text
+   stays legible where the header's pale version would wash it out. */
+.site-footer {
+  color: rgba(255,255,255,0.85);
+  padding: 60px 24px 0;
+  background-color: #250C33;
+  background-image:
+    radial-gradient(58% 130% at  6% 30%, rgba(45,200,214,0.55)  0%, rgba(45,200,214,0)  60%),
+    radial-gradient(54% 122% at 26% 88%, rgba(82,205,150,0.48)  0%, rgba(82,205,150,0)  60%),
+    radial-gradient(52% 120% at 44% 12%, rgba(255,170,60,0.42)  0%, rgba(255,170,60,0)  58%),
+    radial-gradient(54% 122% at 60% 90%, rgba(255,90,120,0.48)  0%, rgba(255,90,120,0)  60%),
+    radial-gradient(56% 124% at 76% 18%, rgba(214,72,178,0.55)  0%, rgba(214,72,178,0)  60%),
+    radial-gradient(58% 126% at 90% 82%, rgba(138,96,232,0.60)  0%, rgba(138,96,232,0)  62%),
+    radial-gradient(60% 130% at 99% 26%, rgba(86,110,226,0.55)  0%, rgba(86,110,226,0)  62%);
+  background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 205% 205%, 235% 235%, 220% 220%;
+  background-repeat: no-repeat;
+  animation: navSilk 30s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) { .site-footer { animation: none; } }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 .footer-logo { height: 80px; width: auto; object-fit: contain; margin-bottom: 16px; filter: brightness(0) invert(1); }
 .footer-brand p { font-size: 14px; line-height: 1.65; opacity: 0.7; max-width: 280px; }
