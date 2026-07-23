@@ -526,15 +526,21 @@ input, select { font-family: var(--font); }
 .reviewer-tag { font-size: 12px; color: var(--gray); }
 
 /* ── CTA Banner ── */
-/* Closing CTA — a deep, living finale rather than a flat green slab. Keeps a
-   pine-green base so it still reads as "the green section", but the brand's full
-   spectrum drifts across it (navSilk), a soft vignette adds depth, and the top
-   edge fades up from the white body so it no longer slams in as a hard band. */
+/* Closing CTA — a deep, living finale, now a floating card. Keeps a pine-green
+   base so it still reads as "the green section", but the brand's full spectrum
+   drifts across it (navSilk), water waves roll along the bottom, and a vignette
+   adds depth. The card sits on the white body with breathing room around it. */
+.cta-banner-wrap { padding: 8px 24px 72px; }
 .cta-banner {
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-radius: 34px;
+  box-shadow: 0 30px 70px rgba(16,53,40,0.28);
   color: #fff;
+  --wave-color: #BFF3DC;
   background-color: #103528;
   background-image:
     radial-gradient(55% 130% at  8% 28%, rgba(45,200,214,0.50)  0%, rgba(45,200,214,0)  60%),
@@ -556,7 +562,14 @@ input, select { font-family: var(--font); }
     linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 14%),
     radial-gradient(120% 80% at 50% 50%, transparent 55%, rgba(0,0,0,0.28) 100%);
 }
-.cta-banner-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 96px 24px; text-align: center; }
+/* Waves sit above the base but below the vignette + copy. Slightly stronger
+   than the default so they carry as motion graphics on the dark card. */
+.cta-waves { z-index: 0; }
+.cta-banner .wave--back  { opacity: 0.16; }
+.cta-banner .wave--mid   { opacity: 0.22; }
+.cta-banner .wave--front { opacity: 0.30; }
+.cta-banner::before { z-index: 1; }
+.cta-banner-inner { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 96px 24px; text-align: center; }
 .cta-banner h2 { font-size: clamp(30px,4.2vw,50px); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 14px; text-shadow: 0 2px 24px rgba(0,0,0,0.22); }
 .cta-banner p { font-size: 17px; color: rgba(255,255,255,0.9); margin-bottom: 36px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 .cta-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
@@ -2236,6 +2249,9 @@ body.subscription-selected #shopify-buyer-consent {
   .footer-inner  { grid-template-columns: 1fr 1fr; gap: 32px; }
   .site-footer   { padding: 48px 20px 0; }
   .footer-logo   { height: 96px; }
+  .cta-banner-wrap { padding: 0 14px 56px; }
+  .cta-banner    { border-radius: 26px; }
+  .cta-banner-inner { padding: 64px 22px; }
   .footer-bottom { padding: 20px 0; }
 
   /* Inner pages (Shipping / Terms / Contact) */
