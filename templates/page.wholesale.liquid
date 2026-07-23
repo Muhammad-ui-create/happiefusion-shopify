@@ -55,40 +55,61 @@
     </div>
   </div>
 
-  <!-- ── ORDERING WIDGET (Airgoods) ── -->
+  <!-- ── ORDERING CARD (links out to Airgoods) ── -->
   <div class="whl-section whl-order-section" id="order">
-    <div class="whl-inner whl-inner--narrow">
-      <div class="whl-section-head">
-        <div class="whl-section-eyebrow">Wholesale Ordering</div>
-        <h2 class="whl-section-title">Browse & order below</h2>
-        <p class="whl-order-note">New account? Registering takes a minute. Approved buyers see wholesale pricing, minimums and lead times right in the catalog.</p>
-      </div>
+    <div class="whl-inner">
 
-      <div class="whl-widget">
-        {%- comment -%}
-          The Airgoods wholesale catalog renders here.
+      {%- comment -%}
+        Set airgoods_url to the Happie Fusion Airgoods store URL. We link OUT to
+        Airgoods rather than embedding its widget: the embed pulls the connected
+        catalog, which is not what we sell on this site. Until the URL is set,
+        the button falls back to an email order so the page never ships a dead
+        link. To go live, replace PASTE_AIRGOODS_URL with the real link.
+      {%- endcomment -%}
+      {%- assign airgoods_url = 'PASTE_AIRGOODS_URL' -%}
+      {%- assign ag_ready = false -%}
+      {%- if airgoods_url != 'PASTE_AIRGOODS_URL' and airgoods_url != blank -%}{%- assign ag_ready = true -%}{%- endif -%}
 
-          PREFERRED: paste the Airgoods embed into this Page's body content in
-          Shopify admin (Online Store → Pages → Wholesale → Content, in HTML/<>
-          mode). It prints below via {{ page.content }}.
-
-          IF Shopify strips the Airgoods <script> from the page body, paste the
-          embed markup directly between the two markers below instead and it will
-          load from the theme.
-        {%- endcomment -%}
-
-        {%- if page.content != blank -%}
-          {{ page.content }}
-        {%- else -%}
-          {%- comment -%} ===== AIRGOODS EMBED — paste widget code here ===== {%- endcomment -%}
-          {%- comment -%} ===== /AIRGOODS EMBED ===== {%- endcomment -%}
-
-          <div class="whl-widget-placeholder">
-            <strong>Wholesale catalog loads here.</strong>
-            <span>The Airgoods ordering widget hasn't been added yet. Until then, reach us directly to place a wholesale order.</span>
-            <a href="mailto:{{ shop.email }}?subject=Wholesale%20order%20—%20Happie%20Fusion" class="btn-ghost">Email us to order →</a>
+      <div class="ag-card">
+        <div class="ag-card-body">
+          <div class="ag-lockup">
+            <img src="{{ 'happie-logo.png' | asset_url }}" alt="Happie" class="ag-lockup-logo" width="120" height="36" loading="lazy" />
+            <span class="ag-lockup-x">&times;</span>
+            <span class="ag-lockup-partner">airgoods</span>
           </div>
-        {%- endif -%}
+          <h3 class="ag-card-title">Order wholesale from us today</h3>
+          <p class="ag-card-partner">We've partnered with <strong>Airgoods</strong> — the wholesale marketplace for specialty food &amp; beverage stores — to make stocking Happie easy.</p>
+
+          <div class="ag-perks">
+            <div class="ag-perk">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              <span>Buy now, pay 60 days later*</span>
+            </div>
+            <div class="ag-perk">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              <span>Free shipping for 3 months*</span>
+            </div>
+            <div class="ag-perk">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>
+              <span>$50 to spend on your first order*</span>
+            </div>
+          </div>
+          <p class="ag-fine">*For buyers new to Airgoods.</p>
+
+          {%- if ag_ready -%}
+            <a href="{{ airgoods_url }}" class="btn-primary btn-lg ag-btn" target="_blank" rel="noopener">Shop Wholesale on Airgoods →</a>
+          {%- else -%}
+            <a href="mailto:{{ shop.email }}?subject=Wholesale%20order%20—%20Happie%20Fusion" class="btn-primary btn-lg ag-btn">Contact Us to Order →</a>
+          {%- endif -%}
+        </div>
+
+        <div class="ag-card-media" aria-hidden="true">
+          {%- assign ag_img = all_products['happie-fungi-fusion-mushroom-drink-variety-pack'].featured_image -%}
+          {%- unless ag_img -%}{%- assign ag_img = all_products['blue-razzberry-fungi-powered-seltzer'].featured_image -%}{%- endunless -%}
+          {% if ag_img %}
+            <img src="{{ ag_img | image_url: width: 720 }}" alt="Happie Fungi Fusion lineup" width="720" height="720" loading="lazy" />
+          {% endif %}
+        </div>
       </div>
 
       <p class="whl-contact">Questions before you order? <a href="mailto:{{ shop.email }}?subject=Wholesale%20inquiry%20—%20Happie%20Fusion">{{ shop.email }}</a></p>
@@ -139,22 +160,55 @@
 .whl-card p { font-size: 14px; color: #555; line-height: 1.65; }
 
 .whl-order-section { background: #F6F8F7; }
-.whl-order-note { font-size: 15px; color: var(--gray, #6B6B6B); max-width: 560px; margin: 12px auto 0; line-height: 1.6; }
-.whl-widget { background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 22px; box-shadow: 0 14px 40px rgba(0,0,0,0.07); padding: 8px; min-height: 320px; overflow: hidden; }
-.whl-widget-placeholder {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-  text-align: center; padding: 72px 28px; color: #555;
-}
-.whl-widget-placeholder strong { font-size: 18px; color: #16181B; }
-.whl-widget-placeholder span { font-size: 14px; max-width: 420px; line-height: 1.6; }
-.whl-contact { text-align: center; margin-top: 22px; font-size: 14px; color: var(--gray, #6B6B6B); }
-.whl-contact a, .whl-widget-placeholder a.btn-ghost { color: var(--green-dark, #2D6A4F); }
-.whl-contact a { text-decoration: underline; text-underline-offset: 3px; }
 
-@media (max-width: 900px) { .whl-grid { grid-template-columns: repeat(2, 1fr); } }
+/* Airgoods CTA card */
+.ag-card {
+  display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: stretch;
+  background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 26px;
+  box-shadow: 0 20px 54px rgba(0,0,0,0.10); overflow: hidden;
+}
+.ag-card-body { padding: 44px 44px 40px; }
+.ag-lockup { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.ag-lockup-logo { height: 30px; width: auto; }
+.ag-lockup-x { font-size: 16px; color: var(--gray, #6B6B6B); }
+.ag-lockup-partner {
+  font-weight: 800; font-size: 17px; letter-spacing: -0.01em; color: #6C4BF0;
+}
+.ag-card-title { font-size: clamp(24px,2.6vw,32px); font-weight: 900; letter-spacing: -0.01em; margin-bottom: 12px; color: #16181B; }
+.ag-card-partner { font-size: 15px; color: #555; line-height: 1.65; margin-bottom: 24px; max-width: 460px; }
+.ag-perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
+.ag-perk {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 16px 14px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px;
+  background: #FBFCFB; color: var(--green-dark, #2D6A4F);
+}
+.ag-perk span { font-size: 12.5px; font-weight: 600; color: #333; line-height: 1.4; }
+.ag-fine { font-size: 12px; color: var(--gray, #6B6B6B); margin-bottom: 26px; }
+.ag-btn { display: inline-block; }
+
+.ag-card-media {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 50% 40%, rgba(138,96,232,0.16), transparent 60%),
+    linear-gradient(160deg, #EAF6F0 0%, #F3EEFB 100%);
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+}
+.ag-card-media img { width: 100%; max-width: 360px; height: auto; object-fit: contain; filter: drop-shadow(0 18px 30px rgba(0,0,0,0.16)); }
+
+.whl-contact { text-align: center; margin-top: 22px; font-size: 14px; color: var(--gray, #6B6B6B); }
+.whl-contact a { color: var(--green-dark, #2D6A4F); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 900px) {
+  .whl-grid { grid-template-columns: repeat(2, 1fr); }
+  .ag-card { grid-template-columns: 1fr; }
+  .ag-card-media { order: -1; min-height: 240px; }
+}
 @media (max-width: 768px) {
   .whl-hero { padding: 60px 18px 72px; }
   .whl-section { padding: 48px 16px; }
   .whl-grid { grid-template-columns: 1fr; gap: 14px; }
+  .ag-card-body { padding: 30px 24px 34px; }
+  .ag-perks { grid-template-columns: 1fr; }
+  .ag-perk { flex-direction: row; align-items: center; }
 }
 </style>
