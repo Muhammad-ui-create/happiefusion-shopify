@@ -16,9 +16,10 @@
           {% assign shown = shown | append: handle | append: ',' %}
         {% endif %}
       {% endfor %}
+      {% comment %} Only drinks belong on the homepage — merch (any non-Beverage type) is excluded {% endcomment %}
       {% for product in collections['all'].products %}
         {% unless shown contains product.handle %}
-          {% if product.available %}
+          {% if product.available and product.type == 'Beverage' %}
             {% render 'product-card', product: product %}
           {% endif %}
         {% endunless %}

@@ -1,0 +1,136 @@
+<div class="merch-page">
+
+  <!-- Banner -->
+  <div class="merch-banner">
+    <div class="wave-field" aria-hidden="true">
+      <span class="wave wave--back"></span>
+      <span class="wave wave--mid"></span>
+      <span class="wave wave--front"></span>
+    </div>
+    <div class="merch-banner-inner">
+      <div class="merch-eyebrow">Wear the Fun</div>
+      <h1>{{ collection.title | default: 'Merch' }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="merch-banner-sub">{{ collection.description }}</div>
+      {%- else -%}
+        <p class="merch-banner-sub">Tees, hoodies, totes and mugs for the people who put the fun in functional.</p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="merch-inner">
+    {%- assign merch_count = 0 -%}
+    <div class="merch-grid">
+      {% for product in collection.products %}
+        {% if product.available %}
+          {%- assign merch_count = merch_count | plus: 1 -%}
+          <a href="{{ product.url }}" class="merch-card">
+            <div class="merch-card-img">
+              {% if product.featured_image %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  srcset="{{ product.featured_image | image_url: width: 300 }} 300w, {{ product.featured_image | image_url: width: 600 }} 600w"
+                  sizes="(max-width: 768px) 45vw, 300px"
+                  alt="{{ product.featured_image.alt | default: product.title }}"
+                  width="600" height="600"
+                  loading="lazy"
+                />
+              {% endif %}
+              {% if product.compare_at_price_max > product.price_min %}
+                <span class="merch-card-sale">Sale</span>
+              {% endif %}
+            </div>
+            <div class="merch-card-body">
+              <h3 class="merch-card-title">{{ product.title }}</h3>
+              <div class="merch-card-price">
+                {% if product.price_varies %}<span class="merch-from">From</span> {% endif %}{{ product.price_min | money }}
+                {% if product.compare_at_price_max > product.price_min %}
+                  <span class="merch-card-was">{{ product.compare_at_price_max | money }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {%- if merch_count == 0 -%}
+      <p class="merch-empty">New drops landing soon. Check back shortly.</p>
+    {%- endif -%}
+
+    <div class="merch-back">
+      <a href="/collections/all" class="btn-ghost">← Back to the drinks</a>
+    </div>
+  </div>
+</div>
+
+<style>
+.merch-banner {
+  position: relative; isolation: isolate; overflow: hidden;
+  text-align: center; padding: 72px 24px 84px;
+  --wave-color: #2D6A4F;
+  background-color: #FCF9F4;
+  background-image:
+    radial-gradient(56% 125% at  8% 30%, rgba(45,200,214,0.42)  0%, rgba(45,200,214,0)  62%),
+    radial-gradient(52% 120% at 30% 82%, rgba(82,205,150,0.40)  0%, rgba(82,205,150,0)  62%),
+    radial-gradient(50% 118% at 52% 14%, rgba(255,190,60,0.36)  0%, rgba(255,190,60,0)  60%),
+    radial-gradient(54% 122% at 74% 80%, rgba(255,122,138,0.34) 0%, rgba(255,122,138,0) 62%),
+    radial-gradient(56% 125% at 95% 26%, rgba(138,96,232,0.38)  0%, rgba(138,96,232,0)  62%);
+  background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 235% 235%;
+  background-repeat: no-repeat;
+  animation: navSilk 26s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) { .merch-banner { animation: none; } }
+.merch-banner > *:not(.wave-field) { position: relative; z-index: 1; }
+.merch-banner-inner { max-width: 640px; margin: 0 auto; }
+.merch-eyebrow {
+  display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--green-dark, #2D6A4F);
+  background: rgba(255,255,255,0.72); border: 1px solid rgba(45,106,79,0.16);
+  padding: 7px 15px; border-radius: 50px; margin-bottom: 14px;
+}
+.merch-banner h1 { font-size: clamp(32px,5vw,52px); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 12px; color: #16181B; }
+.merch-banner-sub { font-size: 16.5px; color: #3F4A43; line-height: 1.6; }
+.merch-banner-sub p { margin: 0; }
+
+.merch-inner { max-width: 1160px; margin: 0 auto; padding: 56px 24px 88px; }
+.merch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.merch-card {
+  display: flex; flex-direction: column;
+  background: #fff; border-radius: 20px; overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+  text-decoration: none; color: inherit;
+  transition: transform 0.18s cubic-bezier(0.16,1,0.3,1), box-shadow 0.18s;
+}
+.merch-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(0,0,0,0.12); }
+.merch-card-img { position: relative; aspect-ratio: 1/1; background: #F4F4F2; }
+.merch-card-img img { width: 100%; height: 100%; object-fit: cover; }
+.merch-card-sale {
+  position: absolute; top: 12px; left: 12px;
+  background: #E84C6B; color: #fff; font-size: 11px; font-weight: 800;
+  letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 50px;
+}
+.merch-card-body { padding: 16px 18px 20px; }
+.merch-card-title { font-size: 15px; font-weight: 700; line-height: 1.35; margin-bottom: 8px; }
+.merch-card-price { font-size: 15px; font-weight: 800; color: #16181B; }
+.merch-from { font-size: 12px; font-weight: 600; color: var(--gray, #6B6B6B); }
+.merch-card-was { font-size: 13px; font-weight: 600; color: var(--gray, #6B6B6B); text-decoration: line-through; margin-left: 6px; }
+
+.merch-empty { text-align: center; color: var(--gray, #6B6B6B); font-size: 16px; padding: 40px 0; }
+.merch-back { text-align: center; margin-top: 48px; }
+
+@media (max-width: 900px) { .merch-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) {
+  .merch-banner { padding: 52px 18px 64px; }
+  .merch-inner { padding: 36px 16px 64px; }
+  .merch-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Merch Collection",
+  "settings": []
+}
+{% endschema %}

@@ -726,10 +726,10 @@
     <div class="related-products">
       <h2 class="related-title">You Might Also Like</h2>
       <div class="products-grid">
-        {% comment %} Skip the current product and anything sold out; cap at 4 rendered cards {% endcomment %}
+        {% comment %} Skip the current product, sold-out, and merch (non-Beverage); cap at 4 cards {% endcomment %}
         {% assign rendered = 0 %}
         {% for p in related %}
-          {% if p.id != product.id and p.available and rendered < 4 %}
+          {% if p.id != product.id and p.available and p.type == 'Beverage' and rendered < 4 %}
             {% render 'product-card', product: p %}
             {% assign rendered = rendered | plus: 1 %}
           {% endif %}

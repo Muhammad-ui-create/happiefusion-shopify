@@ -20,11 +20,20 @@
       <span>🌿 Vegan &amp; Non-GMO</span>
     </div>
   </div>
+  {%- comment -%}
+    On the catch-all drink listings (/collections/all and the front page) we hide
+    merch — any non-Beverage product. Real drink collections and the dedicated
+    merch collection show their own products untouched.
+  {%- endcomment -%}
+  {%- assign drinks_only = false -%}
+  {%- if collection.handle == 'all' or collection.handle == 'frontpage' -%}
+    {%- assign drinks_only = true -%}
+  {%- endif -%}
   <div class="section-inner">
     <div class="products-grid">
       {% comment %} Sold-out products are skipped so the grid stays one clean row {% endcomment %}
       {% for product in collection.products %}
-        {% if product.available %}
+        {% if product.available and drinks_only == false or product.available and product.type == 'Beverage' %}
           {% render 'product-card', product: product %}
         {% endif %}
       {% endfor %}
@@ -232,7 +241,7 @@
   "name": "Happie Fungi Fusion Functional Mushroom Seltzers",
   "description": "Caffeine-free sparkling drinks made with Lion's Mane, Cordyceps and Red Reishi mushrooms. Zero alcohol, 40 calories, no artificial sweeteners.",
   "itemListElement": [
-    {% for product in collection.products %}
+    {% for product in collection.products %}{% if drinks_only == false or product.type == 'Beverage' %}
     {
       "@type": "ListItem",
       "position": {{ forloop.index }},
@@ -240,7 +249,7 @@
       "url": "https://happiefusion.com/products/{{ product.handle }}",
       "image": "https:{{ product.featured_image | image_url: width: 600 }}",
       "description": {{ product.description | strip_html | truncate: 200 | json }}
-    }{% unless forloop.last %},{% endunless %}
+    }{% unless forloop.last %},{% endunless %}{% endif %}
     {% endfor %}
   ]
 }
