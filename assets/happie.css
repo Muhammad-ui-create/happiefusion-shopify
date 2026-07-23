@@ -536,29 +536,27 @@ input, select { font-family: var(--font); }
 .cta-sub { font-size: 13px; opacity: 0.75; }
 
 /* ── Footer ── */
-/* Footer — dark twin of the header mesh: same seven brand hues and the same
-   navSilk drift, but glowing over a deep plum-ink base so the white footer text
-   stays legible where the header's pale version would wash it out. */
+/* Footer — the header's own light iridescent mesh, with dark text. */
 .site-footer {
-  color: rgba(255,255,255,0.85);
+  color: #1A1A1A;
   padding: 60px 24px 0;
-  background-color: #250C33;
+  background-color: #FCF9F4;
   background-image:
-    radial-gradient(58% 130% at  6% 30%, rgba(45,200,214,0.55)  0%, rgba(45,200,214,0)  60%),
-    radial-gradient(54% 122% at 26% 88%, rgba(82,205,150,0.48)  0%, rgba(82,205,150,0)  60%),
-    radial-gradient(52% 120% at 44% 12%, rgba(255,170,60,0.42)  0%, rgba(255,170,60,0)  58%),
-    radial-gradient(54% 122% at 60% 90%, rgba(255,90,120,0.48)  0%, rgba(255,90,120,0)  60%),
-    radial-gradient(56% 124% at 76% 18%, rgba(214,72,178,0.55)  0%, rgba(214,72,178,0)  60%),
-    radial-gradient(58% 126% at 90% 82%, rgba(138,96,232,0.60)  0%, rgba(138,96,232,0)  62%),
-    radial-gradient(60% 130% at 99% 26%, rgba(86,110,226,0.55)  0%, rgba(86,110,226,0)  62%);
+    radial-gradient(56% 125% at  6% 34%, rgba(45,200,214,0.62)  0%, rgba(45,200,214,0)  60%),
+    radial-gradient(52% 120% at 22% 80%, rgba(82,205,150,0.58)  0%, rgba(82,205,150,0)  60%),
+    radial-gradient(50% 118% at 38% 16%, rgba(255,190,60,0.60)  0%, rgba(255,190,60,0)  58%),
+    radial-gradient(52% 120% at 55% 84%, rgba(255,122,138,0.56) 0%, rgba(255,122,138,0) 60%),
+    radial-gradient(54% 122% at 71% 22%, rgba(214,72,178,0.54)  0%, rgba(214,72,178,0)  60%),
+    radial-gradient(56% 125% at 87% 78%, rgba(138,96,232,0.58)  0%, rgba(138,96,232,0)  62%),
+    radial-gradient(58% 128% at 99% 30%, rgba(86,110,226,0.52)  0%, rgba(86,110,226,0)  62%);
   background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 205% 205%, 235% 235%, 220% 220%;
   background-repeat: no-repeat;
-  animation: navSilk 30s ease-in-out infinite;
+  animation: navSilk 34s ease-in-out infinite;
 }
 @media (prefers-reduced-motion: reduce) { .site-footer { animation: none; } }
-.footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.footer-logo { height: 80px; width: auto; object-fit: contain; margin-bottom: 16px; filter: brightness(0) invert(1); }
-.footer-brand p { font-size: 14px; line-height: 1.65; opacity: 0.7; max-width: 280px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(0,0,0,0.12); }
+.footer-logo { height: 120px; width: auto; object-fit: contain; margin-bottom: 16px; }
+.footer-brand p { font-size: 14px; line-height: 1.65; color: rgba(0,0,0,0.72); max-width: 280px; }
 .footer-socials { display: flex; gap: 12px; margin-top: 16px; }
 .footer-socials a {
   display: flex;
@@ -566,17 +564,18 @@ input, select { font-family: var(--font); }
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 10px;
-  color: #fff;
+  color: #1A1A1A;
   transition: background 0.15s, transform 0.1s;
 }
-.footer-socials a:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
-.footer-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+.footer-socials a:hover { background: rgba(0,0,0,0.12); transform: translateY(-2px); }
+.footer-col h3, .footer-col h4 { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(0,0,0,0.55); margin-bottom: 16px; }
 .footer-col li { margin-bottom: 10px; }
-.footer-col a { font-size: 14px; opacity: 0.8; transition: opacity 0.15s; }
-.footer-col a:hover { opacity: 1; }
-.footer-bottom { max-width: 1200px; margin: 0 auto; padding: 24px 0; font-size: 12px; opacity: 0.5; }
+.footer-col a { font-size: 14px; color: rgba(0,0,0,0.78); transition: color 0.15s; }
+.footer-col a:hover { color: #000; }
+.footer-bottom { max-width: 1200px; margin: 0 auto; padding: 24px 0; font-size: 12px; color: rgba(0,0,0,0.5); border-top: 1px solid rgba(0,0,0,0.08); }
 
 /* ── PRODUCT PAGE ── */
 .product-page { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
@@ -2204,6 +2203,7 @@ body.subscription-selected #shopify-buyer-consent {
   /* Footer */
   .footer-inner  { grid-template-columns: 1fr 1fr; gap: 32px; }
   .site-footer   { padding: 48px 20px 0; }
+  .footer-logo   { height: 96px; }
   .footer-bottom { padding: 20px 0; }
 
   /* Inner pages (Shipping / Terms / Contact) */
