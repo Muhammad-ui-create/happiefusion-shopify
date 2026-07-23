@@ -526,14 +526,46 @@ input, select { font-family: var(--font); }
 .reviewer-tag { font-size: 12px; color: var(--gray); }
 
 /* ── CTA Banner ── */
-.cta-banner { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%); color: #fff; }
-.cta-banner-inner { max-width: 900px; margin: 0 auto; padding: 80px 24px; text-align: center; }
-.cta-banner h2 { font-size: clamp(28px,4vw,46px); font-weight: 900; margin-bottom: 14px; }
-.cta-banner p { font-size: 17px; opacity: 0.85; margin-bottom: 36px; }
+/* Closing CTA — a deep, living finale rather than a flat green slab. Keeps a
+   pine-green base so it still reads as "the green section", but the brand's full
+   spectrum drifts across it (navSilk), a soft vignette adds depth, and the top
+   edge fades up from the white body so it no longer slams in as a hard band. */
+.cta-banner {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  background-color: #103528;
+  background-image:
+    radial-gradient(55% 130% at  8% 28%, rgba(45,200,214,0.50)  0%, rgba(45,200,214,0)  60%),
+    radial-gradient(52% 120% at 30% 88%, rgba(82,205,150,0.48)  0%, rgba(82,205,150,0)  60%),
+    radial-gradient(50% 118% at 52% 12%, rgba(255,190,60,0.30)  0%, rgba(255,190,60,0)  58%),
+    radial-gradient(54% 122% at 70% 90%, rgba(255,110,140,0.34) 0%, rgba(255,110,140,0) 60%),
+    radial-gradient(56% 124% at 86% 20%, rgba(214,72,178,0.42)  0%, rgba(214,72,178,0)  60%),
+    radial-gradient(58% 128% at 99% 74%, rgba(138,96,232,0.48)  0%, rgba(138,96,232,0)  62%);
+  background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 205% 205%, 235% 235%;
+  background-repeat: no-repeat;
+  animation: navSilk 26s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) { .cta-banner { animation: none; } }
+/* Vignette for depth + a soft lead-in from the white body above */
+.cta-banner::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 14%),
+    radial-gradient(120% 80% at 50% 50%, transparent 55%, rgba(0,0,0,0.28) 100%);
+}
+.cta-banner-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 96px 24px; text-align: center; }
+.cta-banner h2 { font-size: clamp(30px,4.2vw,50px); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 14px; text-shadow: 0 2px 24px rgba(0,0,0,0.22); }
+.cta-banner p { font-size: 17px; color: rgba(255,255,255,0.9); margin-bottom: 36px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 .cta-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.cta-banner .btn-primary { background: var(--yellow); color: #000; }
-.cta-banner .btn-primary:hover { background: #e6b800; }
-.cta-sub { font-size: 13px; opacity: 0.75; }
+.cta-banner .btn-primary {
+  background: var(--yellow); color: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.28), 0 0 0 6px rgba(255,203,5,0.14);
+}
+.cta-banner .btn-primary:hover { background: #ffd633; transform: translateY(-2px); }
+.cta-sub { font-size: 13px; color: rgba(255,255,255,0.78); }
 
 /* ── Footer ── */
 /* Footer — the header's own light iridescent mesh, with dark text. */
