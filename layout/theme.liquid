@@ -28,7 +28,7 @@
   {%- elsif template.name == 'collection' -%}
     {%- assign seo_meta = collection.metafields.global.description_tag -%}
     {%- if seo_meta == blank -%}
-      {%- assign seo_meta = 'Shop ' | append: collection.title | append: ' — functional mushroom seltzers with dual-extracted Lion''s Mane (900mg), Cordyceps (700mg) & Reishi (400mg). Zero caffeine, zero alcohol. From $24.99. Free shipping, no minimum.' -%}
+      {%- assign seo_meta = 'Shop ' | append: collection.title | append: ' — functional mushroom seltzers with dual-extracted Lion''s Mane (900mg), Cordyceps (700mg) & Reishi (400mg). Zero caffeine, zero alcohol. From $23.99. Free shipping, no minimum.' -%}
     {%- endif -%}
     <meta name="description" content="{{ seo_meta | escape }}">
   {%- else -%}
@@ -277,7 +277,7 @@
             "name": "How much does Happie Fungi Fusion cost?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A 6-pack costs $24.99. A 12-can Variety Pack costs $41.99. Subscribe and Save members get 15% off every order. New customers get 15% off their first order with code WELCOME15. Free shipping on every order — no minimum."
+              "text": "A 6-pack costs $23.99. A 12-can Variety Pack costs $41.99. Subscribe and Save members get 15% off every order. New customers get 15% off their first order with code WELCOME15. Free shipping on every order — no minimum."
             }
           },
           {
