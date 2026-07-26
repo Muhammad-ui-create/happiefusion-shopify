@@ -19,8 +19,26 @@
   <div class="arf-wrap">
     <div class="arf-grid">
 
-      <!-- Visual stage -->
-      <div class="arf-stage"><div class="arf-cans" id="arf-cans"></div></div>
+      <!-- Image gallery -->
+      <div class="arf-stage">
+        {%- if product.images.size > 0 -%}
+          <div class="arf-gmain">
+            {%- assign first_img = product.images | first -%}
+            <img id="arf-gmain-img" src="{{ first_img | image_url: width: 900 }}" alt="{{ product.title }}" loading="eager" />
+          </div>
+          {%- if product.images.size > 1 -%}
+            <div class="arf-thumbs" id="arf-thumbs">
+              {%- for image in product.images -%}
+                <button type="button" class="arf-thumb{% if forloop.first %} is-on{% endif %}" data-full="{{ image | image_url: width: 900 }}" aria-label="View image {{ forloop.index }}">
+                  <img src="{{ image | image_url: width: 200 }}" alt="" loading="lazy" />
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          <div class="arf-cans" id="arf-cans"></div>
+        {%- endif -%}
+      </div>
 
       <!-- Info / builder -->
       <div class="arf-info">
@@ -89,7 +107,14 @@
 .arf{ --green:#2D6A4F;--green-dark:#1B4332;--yellow:#FFCB05;--ink:#16181B;--gray:#6B6B6B;--blue:#3B6FF0;--mango:#F5A623;--water:#E84C6B; }
 .arf-wrap{max-width:1080px;margin:0 auto;padding:34px 22px 72px;}
 .arf-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
-.arf-stage{background:linear-gradient(160deg,#F3F8F5,#F6EEFB);border-radius:26px;padding:34px 24px;position:sticky;top:20px;}
+.arf-stage{position:sticky;top:20px;}
+/* Image gallery — sized for portrait lifestyle shots (fills the card, no letterboxing) */
+.arf-gmain{border-radius:22px;overflow:hidden;background:#F3F3F1;aspect-ratio:4/5;box-shadow:0 14px 40px rgba(0,0,0,.08);}
+.arf-gmain img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .18s;}
+.arf-thumbs{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
+.arf-thumb{width:64px;height:80px;border-radius:12px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;background:#F3F3F1;transition:border-color .15s;}
+.arf-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.arf-thumb.is-on{border-color:var(--green);}
 .arf-cans{display:flex;justify-content:center;align-items:flex-end;gap:8px;min-height:300px;flex-wrap:wrap;}
 .arf-can{position:relative;text-align:center;}
 .arf-can img{height:262px;width:auto;filter:drop-shadow(0 16px 22px rgba(0,0,0,.16));}
@@ -173,12 +198,16 @@
       pel.innerHTML=html;
     } else { pel.textContent=""; }
     document.getElementById("arf-comp").textContent=c.map(function(x){return x.n+" × "+NAME[x.f];}).join("  ·  ");
-    var cans=document.getElementById("arf-cans");cans.innerHTML="";
-    c.forEach(function(x){
-      var d=document.createElement("div");d.className="arf-can";
-      d.innerHTML='<b class="arf-cbadge">×'+x.n+'</b><img src="'+IMG[x.f]+'" alt="'+NAME[x.f]+'"/><small>'+NAME[x.f]+'</small>';
-      cans.appendChild(d);
-    });
+    // Fallback can visual only renders when the product has no gallery images
+    var cans=document.getElementById("arf-cans");
+    if(cans){
+      cans.innerHTML="";
+      c.forEach(function(x){
+        var d=document.createElement("div");d.className="arf-can";
+        d.innerHTML='<b class="arf-cbadge">×'+x.n+'</b><img src="'+IMG[x.f]+'" alt="'+NAME[x.f]+'"/><small>'+NAME[x.f]+'</small>';
+        cans.appendChild(d);
+      });
+    }
     var atc=document.getElementById("arf-atc");
     if(atc && !atc.disabled){ atc.textContent="Subscribe & Auto-Refill — "+(v?v.pstr:"")+" →"; }
   }
@@ -196,6 +225,15 @@
   });
   Array.prototype.forEach.call(document.querySelectorAll("#arf-sizes .arf-opt"),function(o){
     o.onclick=function(){state.size=o.getAttribute("data-size");Array.prototype.forEach.call(document.querySelectorAll("#arf-sizes .arf-opt"),function(x){x.classList.toggle("is-on",x===o);});render();};
+  });
+
+  // Gallery thumbnails -> swap the main image
+  var gmain=document.getElementById("arf-gmain-img");
+  Array.prototype.forEach.call(document.querySelectorAll("#arf-thumbs .arf-thumb"),function(t){
+    t.onclick=function(){
+      if(gmain){gmain.style.opacity="0";var s=t.getAttribute("data-full");setTimeout(function(){gmain.src=s;gmain.style.opacity="1";},120);}
+      Array.prototype.forEach.call(document.querySelectorAll("#arf-thumbs .arf-thumb"),function(x){x.classList.toggle("is-on",x===t);});
+    };
   });
 
   var atc=document.getElementById("arf-atc");
