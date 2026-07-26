@@ -99,17 +99,11 @@
           propsHtml += '<div class="cart-item-variant">' + k + ': ' + item.properties[k] + '</div>';
         });
       }
-      /* Custom pack: surface the built-in bundle discount right on the line.
-         Compare-at = the equivalent number of standalone 6-packs (12 cans -> two 6-packs,
-         18 cans -> three, 24 cans -> four). */
-      if (item.handle === 'build-your-own-fungi-fusion-18-pack') {
-        var vt = item.variant_title || '';
-        var byoCompare, byoPacks;
-        if (vt.indexOf('24') !== -1)      { byoCompare = 9596; byoPacks = 'four'; }
-        else if (vt.indexOf('12') !== -1) { byoCompare = 4798; byoPacks = 'two'; }
-        else                               { byoCompare = 7197; byoPacks = 'three'; }
-        propsHtml += '<div class="cart-item-variant" style="color:#2D6A4F;font-weight:800;">'
-          + 'You\'re saving ' + formatMoney(byoCompare - item.price) + ' vs ' + byoPacks + ' 6-packs 🎉</div>';
+      /* Custom pack is one-time / full price — nudge them to subscribe for up to 25% off. */
+      if (item.handle === 'build-your-own-fungi-fusion-18-pack' && !item.selling_plan_allocation) {
+        propsHtml += '<div class="cart-item-variant"><a href="/products/fungi-fusion-auto-refill" '
+          + 'style="color:#2D6A4F;font-weight:800;text-decoration:underline;">'
+          + 'Subscribe & save up to 25% →</a></div>';
       }
       html += '<div class="cart-item">'
         + '<img src="' + item.image + '" alt="" class="cart-item-img" />'
@@ -140,7 +134,7 @@
     if (existing) existing.remove();
     // Catalog of suggestion candidates — the custom 18-pack is the AOV win, singles fill gaps.
     var candidates = [
-      { handle: 'build-your-own-fungi-fusion-18-pack', title: 'Build Your Own Pack — 12, 18 or 24 Cans', price: 4199, compare: 4798, save: 'Save up to $23.97', img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/hf_20260707_185319_dd3ac4cb-1de8-44cc-89ee-8c2692763dca.png?v=1783450693&width=200', tag: 'BEST VALUE' },
+      { handle: 'fungi-fusion-auto-refill', title: 'Auto-Refill — Subscribe & Save', price: 7199, compare: 9596, save: 'Up to 25% off', img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/hf_20260726_122639_b89da14a-89b9-4aef-8b1a-0bd686304284.png?v=1785085484&width=200', tag: 'SUBSCRIBE · UP TO 25% OFF' },
       { handle: 'blue-razzberry-fungi-powered-seltzer', title: 'Blue Razzberry — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main.webp?v=1778542878&width=200', tag: 'TOP SELLER' },
       { handle: 'mango-mimosa-fungi-powered-seltzer', title: 'Mango Mimosa — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main_1.webp?v=1778543565&width=200', tag: 'TROPICAL' },
       { handle: 'watermelon-fungi-powered-seltzer', title: 'Watermelon — 6-Pack', price: 2399, img: 'https://cdn.shopify.com/s/files/1/0725/4946/6177/files/Main_1_336f10d5-6961-4495-ba14-55ab4fb89e12.webp?v=1778544523&width=200', tag: 'SUMMER' }

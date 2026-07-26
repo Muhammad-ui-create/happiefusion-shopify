@@ -273,7 +273,11 @@
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
       .then(function(res){
         if(!res.ok){throw new Error(res.j&&res.j.description?res.j.description:"Could not add to cart");}
-        window.location.href="/cart";
+        atc.textContent="✓ Added!";
+        // Open the theme's side cart drawer instead of redirecting
+        var ct=document.getElementById("cart-trigger");
+        if(ct){ ct.click(); setTimeout(function(){atc.disabled=false;render();},900); }
+        else { window.location.href="/cart"; }
       })
       .catch(function(e){err.textContent=e.message||"Something went wrong. Please try again.";atc.disabled=false;render();});
     });
