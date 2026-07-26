@@ -31,10 +31,13 @@
   {%- endif -%}
   <div class="section-inner">
     <div class="products-grid">
-      {% comment %} Sold-out products are skipped so the grid stays one clean row {% endcomment %}
+      {% comment %} Sold-out skipped; on the catch-all views also hide merch and the subscribe-only Auto-Refill pack (it lives on its own page) {% endcomment %}
       {% for product in collection.products %}
-        {% if product.available and drinks_only == false or product.available and product.type == 'Beverage' %}
-          {% render 'product-card', product: product %}
+        {% if product.available %}
+          {% assign _show = true %}
+          {% if drinks_only and product.type != 'Beverage' %}{% assign _show = false %}{% endif %}
+          {% if drinks_only and product.handle == 'fungi-fusion-auto-refill' %}{% assign _show = false %}{% endif %}
+          {% if _show %}{% render 'product-card', product: product %}{% endif %}
         {% endif %}
       {% endfor %}
     </div>

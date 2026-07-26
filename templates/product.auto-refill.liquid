@@ -1,0 +1,209 @@
+{%- comment -%}
+  Fungi Fusion Auto-Refill Pack — subscribe-only builder.
+  Size (option1) × Mix (option2) -> one of 21 real variants. Every add-to-cart
+  carries the native Subscriptions selling plan (no one-time option), so the
+  price never changes and the order becomes a managed subscription.
+  Flavor cans are pulled from the individual flavor products.
+{%- endcomment -%}
+
+{%- assign p_blue  = all_products['blue-razzberry-fungi-powered-seltzer'] -%}
+{%- assign p_mango = all_products['mango-mimosa-fungi-powered-seltzer'] -%}
+{%- assign p_water = all_products['watermelon-fungi-powered-seltzer'] -%}
+{%- assign img_blue  = p_blue.featured_image  | image_url: width: 520 -%}
+{%- assign img_mango = p_mango.featured_image | image_url: width: 520 -%}
+{%- assign img_water = p_water.featured_image | image_url: width: 520 -%}
+
+{%- assign sp_group = product.selling_plan_groups | first -%}
+
+<div class="arf" data-product-url="{{ product.url }}">
+  <div class="arf-wrap">
+    <div class="arf-grid">
+
+      <!-- Visual stage -->
+      <div class="arf-stage"><div class="arf-cans" id="arf-cans"></div></div>
+
+      <!-- Info / builder -->
+      <div class="arf-info">
+        <span class="arf-eyebrow">Auto-Refill Pack</span>
+        <h1 class="arf-title">{{ product.title }}</h1>
+        <p class="arf-sub">Your mix, delivered on repeat. Same price, never run out.</p>
+        <div class="arf-rating"><span class="arf-stars">★★★★★</span><span class="arf-rev">4.9 · Amazon-verified reviews</span></div>
+
+        <div class="arf-price" id="arf-price"></div>
+        <div class="arf-comp" id="arf-comp"></div>
+
+        <p class="arf-lbl">Pack size</p>
+        <div class="arf-row" id="arf-sizes">
+          <button type="button" class="arf-opt" data-size="12 Cans"><span>12 Cans</span></button>
+          <button type="button" class="arf-opt" data-size="18 Cans"><span>18 Cans</span></button>
+          <button type="button" class="arf-opt is-on" data-size="24 Cans"><span>24 Cans</span></button>
+        </div>
+
+        <p class="arf-lbl">Choose your mix</p>
+        <div class="arf-row" id="arf-mixes"></div>
+
+        {%- if sp_group.selling_plans.size > 1 -%}
+          <p class="arf-lbl">Delivery</p>
+          <select class="arf-freq" id="arf-freq">
+            {%- for plan in sp_group.selling_plans -%}
+              <option value="{{ plan.id }}">{{ plan.name }}</option>
+            {%- endfor -%}
+          </select>
+        {%- else -%}
+          {%- assign only_plan = sp_group.selling_plans | first -%}
+          <input type="hidden" id="arf-freq" value="{{ only_plan.id }}">
+          <p class="arf-freq-note">🔁 {{ only_plan.name | default: 'Delivered on a regular schedule' }} · cancel or skip anytime</p>
+        {%- endif -%}
+
+        <div class="arf-purchase">
+          <div class="arf-pbox">
+            <span class="arf-pt">Auto-Refill <span class="arf-badge0">SAME PRICE</span></span>
+            <span class="arf-pd">Delivered automatically. Cancel, skip or pause anytime. No extra discount — this pack is already at our best per-can price.</span>
+          </div>
+        </div>
+
+        {%- if sp_group -%}
+          <button type="button" class="arf-atc" id="arf-atc">Subscribe &amp; Auto-Refill →</button>
+        {%- else -%}
+          <button type="button" class="arf-atc" disabled style="opacity:.5;cursor:not-allowed;">Subscription plan not attached yet</button>
+        {%- endif -%}
+        <div class="arf-trust"><span>✓ Caffeine-free</span><span>✓ Free shipping</span><span>✓ Cancel anytime</span></div>
+        <p class="arf-err" id="arf-err"></p>
+      </div>
+    </div>
+
+    <!-- How it works -->
+    <div class="arf-how">
+      <h2>How Auto-Refill works</h2>
+      <div class="arf-steps">
+        <div class="arf-step"><b>1 · Pick your pack</b><p>Choose your size and flavor mix — the same options as Build Your Own.</p></div>
+        <div class="arf-step"><b>2 · We deliver on repeat</b><p>Your exact mix ships on your schedule. Same price every time.</p></div>
+        <div class="arf-step"><b>3 · You stay in control</b><p>Skip, pause, or cancel anytime from your account. No lock-in.</p></div>
+      </div>
+      <p class="arf-note">Auto-Refill adds no extra discount — this pack is already at our lowest per-can price. It's convenience, not a coupon.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.arf{ --green:#2D6A4F;--green-dark:#1B4332;--yellow:#FFCB05;--ink:#16181B;--gray:#6B6B6B;--blue:#3B6FF0;--mango:#F5A623;--water:#E84C6B; }
+.arf-wrap{max-width:1080px;margin:0 auto;padding:34px 22px 72px;}
+.arf-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.arf-stage{background:linear-gradient(160deg,#F3F8F5,#F6EEFB);border-radius:26px;padding:34px 24px;position:sticky;top:20px;}
+.arf-cans{display:flex;justify-content:center;align-items:flex-end;gap:8px;min-height:300px;flex-wrap:wrap;}
+.arf-can{position:relative;text-align:center;}
+.arf-can img{height:262px;width:auto;filter:drop-shadow(0 16px 22px rgba(0,0,0,.16));}
+.arf-can small{display:block;margin-top:8px;font-weight:800;font-size:13px;color:#333;}
+.arf-can .arf-cbadge{position:absolute;top:6px;right:-4px;background:var(--ink);color:#fff;font-size:12px;font-weight:900;border-radius:50px;padding:3px 10px;}
+.arf-eyebrow{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green);background:rgba(45,106,79,.08);border:1px solid rgba(45,106,79,.18);padding:6px 13px;border-radius:50px;margin-bottom:12px;}
+.arf-title{font-size:clamp(28px,3.4vw,36px);font-weight:900;letter-spacing:-.02em;line-height:1.08;margin-bottom:6px;}
+.arf-sub{color:var(--gray);font-size:15px;margin-bottom:12px;}
+.arf-stars{color:#F5A623;font-size:15px;letter-spacing:1px;}
+.arf-rev{color:var(--gray);font-size:13px;margin-left:6px;}
+.arf-price{font-size:30px;font-weight:900;margin:16px 0 4px;}
+.arf-comp{font-size:14px;color:#444;font-weight:600;margin-bottom:22px;}
+.arf-lbl{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green-dark);margin:0 0 10px;}
+.arf-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;}
+.arf-opt{border:2px solid rgba(0,0,0,.12);border-radius:14px;padding:12px 16px;cursor:pointer;font-weight:800;font-size:14px;background:#fff;transition:.15s;text-align:left;}
+.arf-opt.is-on{border-color:var(--green);background:#f0faf3;}
+.arf-opt.arf-mix{flex:1 1 46%;}
+.arf-mixdot{display:inline-flex;gap:3px;vertical-align:middle;margin-right:7px;}
+.arf-mixdot i{width:9px;height:9px;border-radius:50%;display:inline-block;}
+.arf-freq{padding:11px 14px;border-radius:12px;border:1.5px solid #ddd;font-size:14px;font-weight:600;margin-bottom:16px;width:100%;max-width:320px;}
+.arf-freq-note{font-size:13px;color:var(--green-dark);font-weight:600;margin-bottom:16px;}
+.arf-purchase{border:2px solid var(--green);background:#f0faf3;border-radius:14px;padding:14px 16px;margin-bottom:18px;}
+.arf-pt{font-weight:800;font-size:15px;}
+.arf-pd{display:block;font-size:13px;color:#4a5a50;margin-top:3px;}
+.arf-badge0{display:inline-block;background:var(--green-dark);color:#fff;font-size:11px;font-weight:800;border-radius:50px;padding:2px 9px;margin-left:6px;}
+.arf-atc{display:block;width:100%;text-align:center;background:var(--yellow);color:#000;border:none;border-radius:14px;padding:17px;font-size:16px;font-weight:900;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.14);transition:transform .1s;}
+.arf-atc:hover{transform:translateY(-1px);}
+.arf-trust{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:12.5px;color:var(--gray);font-weight:600;}
+.arf-err{color:#c0392b;font-size:13px;text-align:center;margin-top:10px;min-height:16px;}
+.arf-how{max-width:1080px;margin:6px auto 0;padding:12px 0;}
+.arf-how h2{text-align:center;font-size:26px;font-weight:900;margin-bottom:24px;}
+.arf-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.arf-step{background:#F6F8F7;border-radius:18px;padding:24px;}
+.arf-step b{display:block;font-size:16px;margin-bottom:6px;}
+.arf-step p{font-size:14px;color:#555;}
+.arf-note{text-align:center;font-size:12.5px;color:var(--gray);margin-top:22px;}
+@media(max-width:820px){.arf-grid{grid-template-columns:1fr;gap:26px;}.arf-stage{position:static;}.arf-steps{grid-template-columns:1fr;}.arf-opt.arf-mix{flex:1 1 100%;}}
+</style>
+
+<script>
+(function(){
+  var IMG={blue:{{ img_blue | json }},mango:{{ img_mango | json }},water:{{ img_water | json }}};
+  var NAME={blue:"Blue Razzberry",mango:"Mango Mimosa",water:"Watermelon"};
+  var DOT={blue:"#3B6FF0",mango:"#F5A623",water:"#E84C6B"};
+  var MIXES=[
+    {id:"All Blue Razzberry",label:"All Blue Razzberry",f:["blue"]},
+    {id:"All Mango Mimosa",label:"All Mango Mimosa",f:["mango"]},
+    {id:"All Watermelon",label:"All Watermelon",f:["water"]},
+    {id:"Even Split",label:"Even Split (all three)",f:["blue","mango","water"]},
+    {id:"Blue + Mango",label:"Blue + Mango  (Mike's mix)",f:["blue","mango"]},
+    {id:"Blue + Watermelon",label:"Blue + Watermelon",f:["blue","water"]},
+    {id:"Mango + Watermelon",label:"Mango + Watermelon",f:["mango","water"]}
+  ];
+  // Size|Mix -> {id, price}
+  var VMAP={
+  {% for v in product.variants %}"{{ v.option1 }}|{{ v.option2 }}":{id:{{ v.id }},price:{{ v.price | json }},pstr:{{ v.price | money | json }}}{% unless forloop.last %},{% endunless %}
+  {% endfor %}};
+  var state={size:"24 Cans",mix:"Blue + Mango"};
+
+  function sizeNum(s){return parseInt(s,10);}
+  function comp(){
+    var m=MIXES.filter(function(x){return x.id===state.mix;})[0];
+    var per=sizeNum(state.size)/m.f.length;
+    return m.f.map(function(k){return {f:k,n:Math.round(per)};});
+  }
+  function variant(){return VMAP[state.size+"|"+state.mix];}
+
+  function render(){
+    var v=variant(), c=comp();
+    document.getElementById("arf-price").textContent=v?v.pstr:"";
+    document.getElementById("arf-comp").textContent=c.map(function(x){return x.n+" × "+NAME[x.f];}).join("  ·  ");
+    var cans=document.getElementById("arf-cans");cans.innerHTML="";
+    c.forEach(function(x){
+      var d=document.createElement("div");d.className="arf-can";
+      d.innerHTML='<b class="arf-cbadge">×'+x.n+'</b><img src="'+IMG[x.f]+'" alt="'+NAME[x.f]+'"/><small>'+NAME[x.f]+'</small>';
+      cans.appendChild(d);
+    });
+    var atc=document.getElementById("arf-atc");
+    if(atc && !atc.disabled){ atc.textContent="Subscribe & Auto-Refill — "+(v?v.pstr:"")+" →"; }
+  }
+
+  // build mix buttons
+  var mx=document.getElementById("arf-mixes");
+  MIXES.forEach(function(m){
+    var dots=m.f.map(function(k){return '<i style="background:'+DOT[k]+'"></i>';}).join("");
+    var b=document.createElement("button");b.type="button";
+    b.className="arf-opt arf-mix"+(m.id===state.mix?" is-on":"");
+    b.setAttribute("data-mix",m.id);
+    b.innerHTML='<span class="arf-mixdot">'+dots+'</span>'+m.label;
+    b.onclick=function(){state.mix=m.id;Array.prototype.forEach.call(mx.children,function(o){o.classList.toggle("is-on",o.getAttribute("data-mix")===m.id);});render();};
+    mx.appendChild(b);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("#arf-sizes .arf-opt"),function(o){
+    o.onclick=function(){state.size=o.getAttribute("data-size");Array.prototype.forEach.call(document.querySelectorAll("#arf-sizes .arf-opt"),function(x){x.classList.toggle("is-on",x===o);});render();};
+  });
+
+  var atc=document.getElementById("arf-atc");
+  if(atc && !atc.disabled){
+    atc.addEventListener("click",function(){
+      var v=variant(); var err=document.getElementById("arf-err"); err.textContent="";
+      if(!v){err.textContent="That combination isn't available.";return;}
+      var freqEl=document.getElementById("arf-freq");
+      var planId=freqEl?(freqEl.value||freqEl.getAttribute("value")):null;
+      atc.disabled=true;atc.textContent="Adding…";
+      fetch("/cart/add.js",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({items:[{id:v.id,quantity:1,selling_plan:planId}]})})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
+      .then(function(res){
+        if(!res.ok){throw new Error(res.j&&res.j.description?res.j.description:"Could not add to cart");}
+        window.location.href="/cart";
+      })
+      .catch(function(e){err.textContent=e.message||"Something went wrong. Please try again.";atc.disabled=false;render();});
+    });
+  }
+  render();
+})();
+</script>
