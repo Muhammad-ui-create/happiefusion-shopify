@@ -84,9 +84,9 @@
           {%- if p_byo.featured_image -%}<img src="{{ p_byo.featured_image | image_url: width: 340 }}" alt="Build Your Own pack" width="170" height="170" loading="lazy">{%- endif -%}
         </div>
         <h3>Build Your Own<br>12, 18 or 24-Can Box</h3>
-        <p class="lpf-offer-math">Your flavors, your ratios. From <strong>{{ p_byo.price_min | money }}</strong> <s>{{ p_byo.compare_at_price_max | money }}</s> — bundle savings built in, free shipping included.</p>
+        <p class="lpf-offer-math">Your flavors, your ratios. From <strong>{{ p_byo.price_min | money }}</strong> — or subscribe &amp; save up to 25%. Free shipping included.</p>
         <a href="/products/build-your-own-fungi-fusion-18-pack" class="lpf-offer-cta lpf-cta-green">Build My Pack →</a>
-        <p class="lpf-offer-note">18-pack $3.17/can · 24-pack $3.00/can — our best rates</p>
+        <p class="lpf-offer-note">From $3.50 a can · subscribe &amp; save up to 25%</p>
       </div>
 
     </div>
@@ -235,10 +235,10 @@
   .lpf-flavor-btn { display: block; width: 100%; padding: 12px; border: none; cursor: pointer; font-family: inherit; border-radius: 12px; font-weight: 800; font-size: 15px; color: #fff; text-decoration: none; transition: transform 0.12s; }
   .lpf-flavor-btn:disabled, .lpf-offer-cta:disabled { opacity: 0.65; cursor: wait; }
   .lpf-flavor-btn:hover { transform: translateY(-1px); }
-  .lpf-blue { background: #3B6FF0; }
-  .lpf-mango { background: #F5A623; }
-  .lpf-water { background: #E84C6B; }
-  .lpf-offer-cta { display: block; width: 100%; border: none; cursor: pointer; font-family: inherit; font-size: 15px; background: #6260AE; color: #fff; font-weight: 800; padding: 14px; border-radius: 12px; text-decoration: none; margin-top: auto; transition: transform 0.12s; }
+  .lpf-blue { background: linear-gradient(135deg, #4C7BF5, #2647C9); }
+  .lpf-mango { background: linear-gradient(135deg, #FBB63A, #E07C0E); }
+  .lpf-water { background: linear-gradient(135deg, #F26385, #D22E55); }
+  .lpf-offer-cta { display: block; width: 100%; border: none; cursor: pointer; font-family: inherit; font-size: 15px; background: linear-gradient(135deg, #7370C6, #4E4B9C); color: #fff; font-weight: 800; padding: 14px; border-radius: 12px; text-decoration: none; margin-top: auto; transition: transform 0.12s; }
   .lpf-offer-cta:hover { transform: translateY(-1px); }
   .lpf-cta-green { background: linear-gradient(135deg, #2D6A4F, #1B4332); }
   .lpf-offer-note { font-size: 12px; color: #7b877e; margin: 10px 0 0; }
@@ -283,7 +283,7 @@
   .lpf-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: #1F2A22; color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); }
   .lpf-sticky-txt { display: flex; flex-direction: column; font-size: 12.5px; line-height: 1.3; }
   .lpf-sticky-txt strong { font-size: 13.5px; }
-  .lpf-sticky-btn { background: #F5A623; color: #1F2A22; font-weight: 900; padding: 11px 22px; border-radius: 11px; text-decoration: none; white-space: nowrap; }
+  .lpf-sticky-btn { background: linear-gradient(135deg, #FBB63A, #E07C0E); color: #1F2A22; font-weight: 900; padding: 11px 22px; border-radius: 11px; text-decoration: none; white-space: nowrap; }
 
   @media (max-width: 900px) {
     .lpf-offer-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
