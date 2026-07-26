@@ -547,16 +547,34 @@
   }
   .byo-atc:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(45,106,79,0.42); }
   .byo-atc:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: 0 6px 18px rgba(45,106,79,0.15); }
+  /* Prominent subscribe CTA — the site's animated iridescent mesh, held mid-
+     saturation so the dark text stays readable across the whole sweep. */
   .byo-subscribe-cta {
-    display: flex; align-items: center; gap: 12px;
-    margin-top: 12px; padding: 12px 16px;
-    border: 1.5px dashed rgba(45,106,79,0.4); border-radius: 14px;
-    background: #F1F8F3; text-decoration: none; color: var(--green-dark, #1B4332);
-    transition: background 0.15s, border-color 0.15s;
+    display: flex; align-items: center; gap: 14px;
+    margin-top: 14px; padding: 17px 22px;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.08);
+    text-decoration: none; color: #14181B;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.14);
+    background-color: #FCF9F4;
+    background-image:
+      radial-gradient(56% 125% at  6% 34%, rgba(45,200,214,0.55)  0%, rgba(45,200,214,0)  60%),
+      radial-gradient(52% 120% at 22% 80%, rgba(82,205,150,0.52)  0%, rgba(82,205,150,0)  60%),
+      radial-gradient(50% 118% at 38% 16%, rgba(255,190,60,0.54)  0%, rgba(255,190,60,0)  58%),
+      radial-gradient(52% 120% at 55% 84%, rgba(255,122,138,0.50) 0%, rgba(255,122,138,0) 60%),
+      radial-gradient(54% 122% at 71% 22%, rgba(214,72,178,0.48)  0%, rgba(214,72,178,0)  60%),
+      radial-gradient(56% 125% at 87% 78%, rgba(138,96,232,0.52)  0%, rgba(138,96,232,0)  62%),
+      radial-gradient(58% 128% at 99% 30%, rgba(86,110,226,0.48)  0%, rgba(86,110,226,0)  62%);
+    background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 205% 205%, 235% 235%, 220% 220%;
+    background-repeat: no-repeat;
+    animation: navSilk 13s ease-in-out infinite;
+    transition: transform 0.15s cubic-bezier(0.16,1,0.3,1), box-shadow 0.15s;
   }
-  .byo-subscribe-cta:hover { background: #E7F3EB; border-color: var(--green, #2D6A4F); }
-  .byo-sub-badge { flex-shrink: 0; background: var(--green-dark, #1B4332); color: #fff; font-size: 10px; font-weight: 900; letter-spacing: 0.08em; padding: 5px 10px; border-radius: 50px; }
-  .byo-sub-text { font-size: 13.5px; line-height: 1.4; }
+  .byo-subscribe-cta:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(0,0,0,0.18); }
+  @media (prefers-reduced-motion: reduce) { .byo-subscribe-cta { animation: none; } }
+  .byo-sub-badge { flex-shrink: 0; background: var(--green-dark, #1B4332); color: #fff; font-size: 11px; font-weight: 900; letter-spacing: 0.08em; padding: 7px 13px; border-radius: 50px; }
+  .byo-sub-text { font-size: 14.5px; line-height: 1.4; font-weight: 600; }
+  .byo-sub-text strong { font-weight: 800; }
   .byo-atc-note { text-align: center; font-size: 12px; color: var(--gray, #5A6B5E); margin-bottom: 20px; }
 
   .byo-pills { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
