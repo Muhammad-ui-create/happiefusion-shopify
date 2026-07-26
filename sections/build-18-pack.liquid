@@ -550,8 +550,9 @@
   /* Prominent subscribe CTA — the site's animated iridescent mesh, held mid-
      saturation so the dark text stays readable across the whole sweep. */
   .byo-subscribe-cta {
-    display: flex; align-items: center; gap: 14px;
-    margin-top: 14px; padding: 17px 22px;
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    width: 100%; max-width: 520px; margin: 14px auto 0;
+    padding: 22px 24px;
     border-radius: 16px;
     border: 1px solid rgba(0,0,0,0.08);
     text-decoration: none; color: #14181B;
@@ -572,8 +573,8 @@
   }
   .byo-subscribe-cta:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(0,0,0,0.18); }
   @media (prefers-reduced-motion: reduce) { .byo-subscribe-cta { animation: none; } }
-  .byo-sub-badge { flex-shrink: 0; background: var(--green-dark, #1B4332); color: #fff; font-size: 11px; font-weight: 900; letter-spacing: 0.08em; padding: 7px 13px; border-radius: 50px; }
-  .byo-sub-text { font-size: 14.5px; line-height: 1.4; font-weight: 600; }
+  .byo-sub-badge { flex-shrink: 0; background: var(--green-dark, #1B4332); color: #fff; font-size: 12px; font-weight: 900; letter-spacing: 0.08em; padding: 8px 15px; border-radius: 50px; }
+  .byo-sub-text { font-size: 15.5px; line-height: 1.35; font-weight: 600; }
   .byo-sub-text strong { font-weight: 800; }
   .byo-atc-note { text-align: center; font-size: 12px; color: var(--gray, #5A6B5E); margin-bottom: 20px; }
 
