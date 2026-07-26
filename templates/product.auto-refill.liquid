@@ -100,7 +100,10 @@
 .arf-sub{color:var(--gray);font-size:15px;margin-bottom:12px;}
 .arf-stars{color:#F5A623;font-size:15px;letter-spacing:1px;}
 .arf-rev{color:var(--gray);font-size:13px;margin-left:6px;}
-.arf-price{font-size:30px;font-weight:900;margin:16px 0 4px;}
+.arf-price{margin:16px 0 4px;display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;}
+.arf-now{font-size:30px;font-weight:900;}
+.arf-was{font-size:17px;color:var(--gray);font-weight:600;}
+.arf-save{display:inline-block;background:#FDECEC;color:#C0392B;font-size:12.5px;font-weight:800;border-radius:50px;padding:3px 11px;}
 .arf-comp{font-size:14px;color:#444;font-weight:600;margin-bottom:22px;}
 .arf-lbl{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green-dark);margin:0 0 10px;}
 .arf-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;}
@@ -139,13 +142,13 @@
     {id:"All Mango Mimosa",label:"All Mango Mimosa",f:["mango"]},
     {id:"All Watermelon",label:"All Watermelon",f:["water"]},
     {id:"Even Split",label:"Even Split (all three)",f:["blue","mango","water"]},
-    {id:"Blue + Mango",label:"Blue + Mango  (Mike's mix)",f:["blue","mango"]},
+    {id:"Blue + Mango",label:"Blue + Mango",f:["blue","mango"]},
     {id:"Blue + Watermelon",label:"Blue + Watermelon",f:["blue","water"]},
     {id:"Mango + Watermelon",label:"Mango + Watermelon",f:["mango","water"]}
   ];
   // Size|Mix -> {id, price}
   var VMAP={
-  {% for v in product.variants %}"{{ v.option1 }}|{{ v.option2 }}":{id:{{ v.id }},price:{{ v.price | json }},pstr:{{ v.price | money | json }}}{% unless forloop.last %},{% endunless %}
+  {% for v in product.variants %}"{{ v.option1 }}|{{ v.option2 }}":{id:{{ v.id }},price:{{ v.price | json }},pstr:{{ v.price | money | json }},cprice:{{ v.compare_at_price | default: 0 | json }},cpstr:{{ v.compare_at_price | money | json }}}{% unless forloop.last %},{% endunless %}
   {% endfor %}};
   var state={size:"24 Cans",mix:"Blue + Mango"};
 
@@ -159,7 +162,16 @@
 
   function render(){
     var v=variant(), c=comp();
-    document.getElementById("arf-price").textContent=v?v.pstr:"";
+    var pel=document.getElementById("arf-price");
+    if(v){
+      var html='<span class="arf-now">'+v.pstr+'</span>';
+      if(v.cprice && v.cprice>v.price){
+        var saveC=v.cprice-v.price, pct=Math.round(saveC/v.cprice*100), saveD=(saveC/100).toFixed(2);
+        html+=' <s class="arf-was">'+v.cpstr+'</s>'
+             +'<span class="arf-save">Save $'+saveD+' ('+pct+'% off)</span>';
+      }
+      pel.innerHTML=html;
+    } else { pel.textContent=""; }
     document.getElementById("arf-comp").textContent=c.map(function(x){return x.n+" × "+NAME[x.f];}).join("  ·  ");
     var cans=document.getElementById("arf-cans");cans.innerHTML="";
     c.forEach(function(x){
