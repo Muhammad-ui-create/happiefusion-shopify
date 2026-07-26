@@ -109,8 +109,8 @@
 .arf-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
 .arf-stage{position:sticky;top:20px;}
 /* Image gallery — sized for portrait lifestyle shots (fills the card, no letterboxing) */
-.arf-gmain{border-radius:22px;overflow:hidden;background:#F3F3F1;aspect-ratio:4/5;box-shadow:0 14px 40px rgba(0,0,0,.08);}
-.arf-gmain img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .18s;}
+.arf-gmain{border-radius:22px;overflow:hidden;background:#F3F3F1;aspect-ratio:4/5;box-shadow:0 14px 40px rgba(0,0,0,.08);touch-action:pan-y;}
+.arf-gmain img{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;}
 .arf-thumbs{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
 .arf-thumb{width:64px;height:80px;border-radius:12px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;background:#F3F3F1;transition:border-color .15s;}
 .arf-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -177,6 +177,23 @@
   {% endfor %}};
   var state={size:"24 Cans",mix:"Blue + Mango"};
 
+  // ── Gallery: route each mix to its photo, preloaded for instant switching ──
+  var GIMGS=[{% for image in product.images %}{{ image | image_url: width: 1000 | json }}{% unless forloop.last %},{% endunless %}{% endfor %}];
+  // mix -> gallery image index (0-based, matches the product's image order)
+  var MIX_IMG={"All Blue Razzberry":5,"All Mango Mimosa":1,"All Watermelon":2,"Even Split":6,"Blue + Mango":3,"Blue + Watermelon":0,"Mango + Watermelon":4};
+  var gmain=document.getElementById("arf-gmain-img");
+  var thumbs=document.querySelectorAll("#arf-thumbs .arf-thumb");
+  var curImg=0;
+  // Preload every full-size image up front so clicks/swipes swap instantly
+  GIMGS.forEach(function(u){var im=new Image();im.decoding="async";im.src=u;});
+  function setImage(i){
+    if(!gmain||!GIMGS.length) return;
+    i=((i%GIMGS.length)+GIMGS.length)%GIMGS.length; curImg=i;
+    gmain.src=GIMGS[i];
+    Array.prototype.forEach.call(thumbs,function(t,ix){t.classList.toggle("is-on",ix===i);});
+  }
+  function routeImage(){ var i=MIX_IMG[state.mix]; if(typeof i==="number") setImage(i); }
+
   function sizeNum(s){return parseInt(s,10);}
   function comp(){
     var m=MIXES.filter(function(x){return x.id===state.mix;})[0];
@@ -220,21 +237,28 @@
     b.className="arf-opt arf-mix"+(m.id===state.mix?" is-on":"");
     b.setAttribute("data-mix",m.id);
     b.innerHTML='<span class="arf-mixdot">'+dots+'</span>'+m.label;
-    b.onclick=function(){state.mix=m.id;Array.prototype.forEach.call(mx.children,function(o){o.classList.toggle("is-on",o.getAttribute("data-mix")===m.id);});render();};
+    b.onclick=function(){state.mix=m.id;Array.prototype.forEach.call(mx.children,function(o){o.classList.toggle("is-on",o.getAttribute("data-mix")===m.id);});routeImage();render();};
     mx.appendChild(b);
   });
   Array.prototype.forEach.call(document.querySelectorAll("#arf-sizes .arf-opt"),function(o){
     o.onclick=function(){state.size=o.getAttribute("data-size");Array.prototype.forEach.call(document.querySelectorAll("#arf-sizes .arf-opt"),function(x){x.classList.toggle("is-on",x===o);});render();};
   });
 
-  // Gallery thumbnails -> swap the main image
-  var gmain=document.getElementById("arf-gmain-img");
-  Array.prototype.forEach.call(document.querySelectorAll("#arf-thumbs .arf-thumb"),function(t){
-    t.onclick=function(){
-      if(gmain){gmain.style.opacity="0";var s=t.getAttribute("data-full");setTimeout(function(){gmain.src=s;gmain.style.opacity="1";},120);}
-      Array.prototype.forEach.call(document.querySelectorAll("#arf-thumbs .arf-thumb"),function(x){x.classList.toggle("is-on",x===t);});
-    };
-  });
+  // Thumbnails -> instant swap (images are preloaded)
+  Array.prototype.forEach.call(thumbs,function(t,ix){ t.onclick=function(){ setImage(ix); }; });
+
+  // Swipe the main image on touch (mobile). Passive listeners; only claims the
+  // gesture once horizontal travel clearly beats vertical, so page scroll is safe.
+  if(gmain && GIMGS.length>1){
+    var stage=gmain.closest(".arf-gmain")||gmain, sx=0, sy=0, sTrack=false;
+    stage.addEventListener("touchstart",function(e){if(e.touches.length!==1){sTrack=false;return;}sx=e.touches[0].clientX;sy=e.touches[0].clientY;sTrack=true;},{passive:true});
+    stage.addEventListener("touchend",function(e){
+      if(!sTrack)return; sTrack=false; var t=e.changedTouches&&e.changedTouches[0]; if(!t)return;
+      var dx=t.clientX-sx, dy=t.clientY-sy;
+      if(Math.abs(dx)<40 || Math.abs(dx)<=Math.abs(dy)) return;
+      setImage(curImg + (dx<0?1:-1));
+    },{passive:true});
+  }
 
   var atc=document.getElementById("arf-atc");
   if(atc && !atc.disabled){
@@ -254,6 +278,7 @@
       .catch(function(e){err.textContent=e.message||"Something went wrong. Please try again.";atc.disabled=false;render();});
     });
   }
+  routeImage();
   render();
 })();
 </script>
