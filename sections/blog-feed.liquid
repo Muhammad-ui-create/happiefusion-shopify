@@ -5,7 +5,6 @@
 
 {%- assign feed = blogs.news -%}
 {%- assign limit = section.settings.post_limit | default: 3 -%}
-<div id="bfdebug" data-count="{{ feed.articles_count }}" data-size="{{ feed.articles.size }}">BFDEBUG size={{ feed.articles.size }} count={{ feed.articles_count }}</div>
 
 {%- if feed.articles.size > 0 -%}
 <section class="blogfeed">
