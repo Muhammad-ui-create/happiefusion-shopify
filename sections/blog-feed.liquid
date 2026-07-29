@@ -3,12 +3,11 @@
   Pulls the newest articles from the chosen blog (defaults to "news").
 {%- endcomment -%}
 
-{%- comment -%} The blog setting may resolve to a handle OR a blog object — cover both, then hard-fall-back to "news". {%- endcomment -%}
-{%- assign feed = blogs[section.settings.blog] | default: section.settings.blog | default: blogs['news'] -%}
+{%- assign feed = blogs.news -%}
 {%- assign limit = section.settings.post_limit | default: 3 -%}
-<!-- BLOGFEED-DEBUG setting="{{ section.settings.blog }}" feedtitle="{{ feed.title }}" count="{{ feed.articles_count }}" size="{{ feed.articles.size }}" newscount="{{ blogs['news'].articles_count }}" -->
+<!-- BLOGFEED-DEBUG v2 count="{{ feed.articles_count }}" size="{{ feed.articles.size }}" -->
 
-{%- if feed.articles_count > 0 -%}
+{%- if feed.articles.size > 0 -%}
 <section class="blogfeed">
   <div class="blogfeed-inner">
     <div class="blogfeed-head">
