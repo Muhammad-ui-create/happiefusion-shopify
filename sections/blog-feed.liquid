@@ -3,8 +3,8 @@
   Pulls the newest articles from the chosen blog (defaults to "news").
 {%- endcomment -%}
 
-{%- assign blog_handle = section.settings.blog | default: 'news' -%}
-{%- assign feed = blogs[blog_handle] -%}
+{%- comment -%} The blog setting may resolve to a handle OR a blog object — cover both, then hard-fall-back to "news". {%- endcomment -%}
+{%- assign feed = blogs[section.settings.blog] | default: section.settings.blog | default: blogs['news'] -%}
 {%- assign limit = section.settings.post_limit | default: 3 -%}
 
 {%- if feed.articles_count > 0 -%}
