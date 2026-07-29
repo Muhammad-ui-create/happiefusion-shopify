@@ -1,0 +1,81 @@
+{%- comment -%} Blog listing page — /blogs/<handle> {%- endcomment -%}
+<div class="blogpage">
+  <div class="blogpage-hero">
+    <div class="blogpage-eyebrow">The Happie Journal</div>
+    <h1 class="blogpage-title">{{ blog.title }}</h1>
+    <p class="blogpage-sub">Functional-mushroom deep dives, drink-swap ideas, and the science behind the can.</p>
+  </div>
+
+  <div class="blogpage-inner">
+    {%- paginate blog.articles by 12 -%}
+      {%- if blog.articles.size > 0 -%}
+        <div class="blogpage-grid">
+          {%- for article in blog.articles -%}
+            <a href="{{ article.url }}" class="bp-card">
+              <div class="bp-card-img">
+                {%- if article.image -%}
+                  <img src="{{ article.image | image_url: width: 700 }}"
+                       srcset="{{ article.image | image_url: width: 350 }} 350w, {{ article.image | image_url: width: 700 }} 700w"
+                       sizes="(max-width: 768px) 92vw, 360px"
+                       alt="{{ article.image.alt | default: article.title }}" width="700" height="440" loading="lazy" />
+                {%- else -%}
+                  <div class="bp-card-noimg" aria-hidden="true">🍄</div>
+                {%- endif -%}
+              </div>
+              <div class="bp-card-body">
+                <div class="bp-card-meta">{{ article.published_at | date: '%b %d, %Y' }}{% if article.tags.size > 0 %} · {{ article.tags.first }}{% endif %}</div>
+                <h2 class="bp-card-title">{{ article.title }}</h2>
+                <p class="bp-card-excerpt">{{ article.excerpt_or_content | strip_html | truncate: 140 }}</p>
+                <span class="bp-card-link">Read more →</span>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <div class="bp-pagination">
+            {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="bp-page">← Newer</a>{%- endif -%}
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}<a href="{{ part.url }}" class="bp-page">{{ part.title }}</a>
+              {%- else -%}<span class="bp-page bp-page-current">{{ part.title }}</span>{%- endif -%}
+            {%- endfor -%}
+            {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="bp-page">Older →</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        <p class="bp-empty">No posts yet — check back soon.</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+<style>
+.blogpage { background: #fff; }
+.blogpage-hero { text-align: center; padding: 64px 24px 20px; max-width: 640px; margin: 0 auto; }
+.blogpage-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green, #2D6A4F); margin-bottom: 12px; }
+.blogpage-title { font-size: clamp(32px,5vw,52px); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 12px; }
+.blogpage-sub { font-size: 16px; color: var(--gray, #6B6B6B); line-height: 1.6; }
+.blogpage-inner { max-width: 1200px; margin: 0 auto; padding: 32px 24px 88px; }
+.blogpage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.bp-card { display: flex; flex-direction: column; background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 20px; overflow: hidden; text-decoration: none; color: inherit; box-shadow: 0 2px 14px rgba(0,0,0,0.05); transition: transform 0.18s cubic-bezier(0.16,1,0.3,1), box-shadow 0.18s; }
+.bp-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,0,0,0.12); }
+.bp-card-img { aspect-ratio: 16/10; background: #F3F4F2; overflow: hidden; }
+.bp-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+.bp-card:hover .bp-card-img img { transform: scale(1.04); }
+.bp-card-noimg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 54px; background: linear-gradient(135deg, #EAF6F0, #F3EEFB); }
+.bp-card-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+.bp-card-meta { font-size: 12px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--green, #2D6A4F); margin-bottom: 10px; }
+.bp-card-title { font-size: 20px; font-weight: 800; line-height: 1.26; margin-bottom: 10px; color: #16181B; }
+.bp-card-excerpt { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 16px; flex: 1; }
+.bp-card-link { font-size: 14px; font-weight: 800; color: var(--green-dark, #2D6A4F); }
+.bp-pagination { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 48px; }
+.bp-page { padding: 9px 15px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); font-size: 14px; font-weight: 700; color: #333; text-decoration: none; }
+.bp-page-current { background: var(--green, #2D6A4F); color: #fff; border-color: var(--green, #2D6A4F); }
+.bp-empty { text-align: center; color: var(--gray, #6B6B6B); font-size: 16px; padding: 60px 0; }
+@media (max-width: 900px) { .blogpage-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .blogpage-grid { grid-template-columns: 1fr; } .blogpage-inner { padding: 24px 16px 64px; } }
+</style>
+
+{% schema %}
+{ "name": "Blog", "settings": [] }
+{% endschema %}
