@@ -832,14 +832,24 @@
       mainBtn.click();
       bar.classList.remove('is-visible');
     });
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function(entries) {
-        var e = entries[0];
-        // Show only after the buy box has scrolled up out of view (not while it's still below the fold)
-        var passed = !e.isIntersecting && e.boundingClientRect.top < 0;
-        bar.classList.toggle('is-visible', passed);
-      }, { threshold: 0 }).observe(mainBtn);
-    }
+    // Reveal the pinned price + buy button as soon as the visitor scrolls past the
+    // hero image — the inline buy box sits far down the page, so waiting for it to
+    // scroll out of view left mobile shoppers with no visible price/CTA for ~2 screens.
+    // Hide it only while the real buy box is actually on screen (avoids a double CTA).
+    var syncBar = function() {
+      var r = mainBtn.getBoundingClientRect();
+      var inlineVisible = r.top < window.innerHeight && r.bottom > 0;
+      bar.classList.toggle('is-visible', window.scrollY > 320 && !inlineVisible);
+    };
+    var ticking = false;
+    var onScroll = function() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function() { syncBar(); ticking = false; });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    syncBar();
     // Keep the sticky price in sync with the main price (variant/plan changes rewrite #atc-price)
     var priceSrc = document.getElementById('atc-price');
     var priceDst = document.getElementById('pdp-sticky-price');
