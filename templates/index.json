@@ -6,7 +6,8 @@
     "mushrooms": { "type": "mushroom-benefits", "settings": {} },
     "subscribe-save": { "type": "subscribe-save", "settings": {} },
     "reviews": { "type": "reviews-section", "settings": {} },
-    "cta": { "type": "cta-banner", "settings": {} }
+    "cta": { "type": "cta-banner", "settings": {} },
+    "blog": { "type": "blog-feed", "settings": { "blog": "news" } }
   },
-  "order": ["hero", "trust-bar", "featured", "mushrooms", "subscribe-save", "reviews", "cta"]
+  "order": ["hero", "trust-bar", "featured", "mushrooms", "subscribe-save", "reviews", "cta", "blog"]
 }
