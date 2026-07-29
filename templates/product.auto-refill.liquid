@@ -26,15 +26,19 @@
             {%- assign first_img = product.images | first -%}
             <img id="arf-gmain-img" src="{{ first_img | image_url: width: 900 }}" alt="{{ product.title }}" loading="eager" />
           </div>
-          {%- if product.images.size > 1 -%}
-            <div class="arf-thumbs" id="arf-thumbs">
-              {%- for image in product.images -%}
-                <button type="button" class="arf-thumb{% if forloop.first %} is-on{% endif %}" data-full="{{ image | image_url: width: 900 }}" aria-label="View image {{ forloop.index }}">
-                  <img src="{{ image | image_url: width: 200 }}" alt="" loading="lazy" />
+          {%- comment -%} Thumbnails show the benefit/lifestyle images only (alt tagged "BENEFIT").
+              The flavor image is driven by the Mix selector, so per-mix shots aren't repeated here.
+              data-idx is the image's real index so it stays aligned with the JS gallery array. {%- endcomment -%}
+          <div class="arf-thumbs" id="arf-thumbs">
+            {%- for image in product.images -%}
+              {%- if image.alt contains 'BENEFIT' -%}
+                {%- assign thumb_label = image.alt | remove: 'BENEFIT: ' | remove: 'BENEFIT:' | strip | escape -%}
+                <button type="button" class="arf-thumb" data-idx="{{ forloop.index0 }}" aria-label="{{ thumb_label }}">
+                  <img src="{{ image | image_url: width: 200 }}" alt="{{ thumb_label }}" loading="lazy" />
                 </button>
-              {%- endfor -%}
-            </div>
-          {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
         {%- else -%}
           <div class="arf-cans" id="arf-cans"></div>
         {%- endif -%}
@@ -190,7 +194,7 @@
     if(!gmain||!GIMGS.length) return;
     i=((i%GIMGS.length)+GIMGS.length)%GIMGS.length; curImg=i;
     gmain.src=GIMGS[i];
-    Array.prototype.forEach.call(thumbs,function(t,ix){t.classList.toggle("is-on",ix===i);});
+    Array.prototype.forEach.call(thumbs,function(t){t.classList.toggle("is-on",parseInt(t.getAttribute("data-idx"),10)===i);});
   }
   function routeImage(){ var i=MIX_IMG[state.mix]; if(typeof i==="number") setImage(i); }
 
@@ -244,8 +248,8 @@
     o.onclick=function(){state.size=o.getAttribute("data-size");Array.prototype.forEach.call(document.querySelectorAll("#arf-sizes .arf-opt"),function(x){x.classList.toggle("is-on",x===o);});render();};
   });
 
-  // Thumbnails -> instant swap (images are preloaded)
-  Array.prototype.forEach.call(thumbs,function(t,ix){ t.onclick=function(){ setImage(ix); }; });
+  // Thumbnails -> instant swap (images are preloaded). data-idx maps to the real gallery index.
+  Array.prototype.forEach.call(thumbs,function(t){ t.onclick=function(){ setImage(parseInt(t.getAttribute("data-idx"),10)); }; });
 
   // Swipe the main image on touch (mobile). Passive listeners; only claims the
   // gesture once horizontal travel clearly beats vertical, so page scroll is safe.
