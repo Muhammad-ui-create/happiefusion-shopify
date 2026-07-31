@@ -150,12 +150,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, bottom 0.25s ease;
   }
 
   .happie-chat__bubble:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  /* When the PDP sticky Add-to-Cart bar is visible (mobile/tablet), lift the chat
+     bubble above it so the two never overlap. body.pdp-atc-visible is toggled by
+     the sticky-bar script in main-product.liquid. */
+  @media (max-width: 768px) {
+    body.pdp-atc-visible .happie-chat__bubble { bottom: calc(80px + env(safe-area-inset-bottom)); }
   }
 
   .happie-chat__bubble img {

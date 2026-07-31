@@ -839,7 +839,10 @@
     var syncBar = function() {
       var r = mainBtn.getBoundingClientRect();
       var inlineVisible = r.top < window.innerHeight && r.bottom > 0;
-      bar.classList.toggle('is-visible', window.scrollY > 320 && !inlineVisible);
+      var showing = window.scrollY > 320 && !inlineVisible;
+      bar.classList.toggle('is-visible', showing);
+      // Lift the floating chat bubble above the bar while it's visible (see happie-chatbot.liquid)
+      document.body.classList.toggle('pdp-atc-visible', showing);
     };
     var ticking = false;
     var onScroll = function() {

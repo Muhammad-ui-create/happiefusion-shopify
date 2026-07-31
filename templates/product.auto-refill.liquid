@@ -115,9 +115,11 @@
 /* Image gallery — sized for portrait lifestyle shots (fills the card, no letterboxing) */
 .arf-gmain{border-radius:22px;overflow:hidden;background:#F3F3F1;aspect-ratio:4/5;box-shadow:0 14px 40px rgba(0,0,0,.08);touch-action:pan-y;}
 .arf-gmain img{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;}
+/* Benefit/lifestyle images are square with edge callouts — show them whole, no crop */
+.arf-gmain img.is-contain{object-fit:contain;background:#fff;}
 .arf-thumbs{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
-.arf-thumb{width:64px;height:80px;border-radius:12px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;background:#F3F3F1;transition:border-color .15s;}
-.arf-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.arf-thumb{width:64px;height:80px;border-radius:12px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;background:#fff;transition:border-color .15s;}
+.arf-thumb img{width:100%;height:100%;object-fit:contain;display:block;}
 .arf-thumb.is-on{border-color:var(--green);}
 .arf-cans{display:flex;justify-content:center;align-items:flex-end;gap:8px;min-height:300px;flex-wrap:wrap;}
 .arf-can{position:relative;text-align:center;}
@@ -185,6 +187,8 @@
   var GIMGS=[{% for image in product.images %}{{ image | image_url: width: 1000 | json }}{% unless forloop.last %},{% endunless %}{% endfor %}];
   // mix -> gallery image index (0-based, matches the product's image order)
   var MIX_IMG={"All Blue Razzberry":7,"All Mango Mimosa":1,"All Watermelon":2,"Even Split":6,"Blue + Mango":3,"Blue + Watermelon":0,"Mango + Watermelon":4};
+  // Square benefit/lifestyle images — shown "contain" (whole) instead of cropped like the 4:5 cans
+  var BENEFIT_IDX=[{% assign _bf=true %}{% for image in product.images %}{% if image.alt contains 'BENEFIT' %}{% unless _bf %},{% endunless %}{{ forloop.index0 }}{% assign _bf=false %}{% endif %}{% endfor %}];
   var gmain=document.getElementById("arf-gmain-img");
   var thumbs=document.querySelectorAll("#arf-thumbs .arf-thumb");
   var curImg=0;
@@ -194,6 +198,7 @@
     if(!gmain||!GIMGS.length) return;
     i=((i%GIMGS.length)+GIMGS.length)%GIMGS.length; curImg=i;
     gmain.src=GIMGS[i];
+    gmain.classList.toggle("is-contain", BENEFIT_IDX.indexOf(i)>=0);
     Array.prototype.forEach.call(thumbs,function(t){t.classList.toggle("is-on",parseInt(t.getAttribute("data-idx"),10)===i);});
   }
   function routeImage(){ var i=MIX_IMG[state.mix]; if(typeof i==="number") setImage(i); }
