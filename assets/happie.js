@@ -82,6 +82,38 @@
       });
   }
 
+  /* Track applied discount so we only celebrate when it NEWLY appears (not on every open) */
+  var lastDiscount = (typeof window.cartTotalDiscount === 'number') ? window.cartTotalDiscount : 0;
+
+  /* ── Confetti burst when a discount (e.g. Buy 2 Get 1) is applied ── */
+  function celebrate() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var c = document.createElement('canvas');
+    c.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99999';
+    document.body.appendChild(c);
+    var ctx = c.getContext('2d'), W = c.width = window.innerWidth, H = c.height = window.innerHeight;
+    var colors = ['#50B2BD','#52B788','#FFCB05','#FF7A8A','#A42384','#6260AE','#566EE2','#2D6A4F'];
+    var P = [];
+    for (var i = 0; i < 150; i++) P.push({
+      x: W/2 + (Math.random()-0.5)*260, y: H*0.30,
+      vx: (Math.random()-0.5)*12, vy: Math.random()*-14 - 4,
+      g: 0.34 + Math.random()*0.22, s: 6 + Math.random()*7,
+      rot: Math.random()*6.28, vr: (Math.random()-0.5)*0.4, col: colors[i % colors.length]
+    });
+    var t0 = Date.now();
+    (function frame() {
+      var el = Date.now() - t0; ctx.clearRect(0,0,W,H);
+      for (var j = 0; j < P.length; j++) {
+        var p = P[j]; p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+        ctx.globalAlpha = Math.max(0, 1 - el/2600); ctx.fillStyle = p.col;
+        ctx.fillRect(-p.s/2, -p.s/2, p.s, p.s*0.62); ctx.restore();
+      }
+      if (el < 2600) requestAnimationFrame(frame); else c.remove();
+    })();
+  }
+  window.happieCelebrate = celebrate;
+
   function renderCartDrawer(cart) {
     if (!cartBody) return;
     if (cart.item_count === 0) {
@@ -119,11 +151,19 @@
         + '<button type="button" class="cart-item-remove" onclick="changeCartQty(\'' + item.key + '\',0)" aria-label="Remove item" title="Remove">×</button>'
         + '</div>'
         + '</div>'
-        + '<div class="cart-item-price">' + formatMoney(item.line_price) + '</div>'
+        + (item.total_discount > 0
+            ? '<div class="cart-item-price cart-item-price-cut"><s>' + formatMoney(item.original_line_price) + '</s><span class="cart-item-price-now">' + formatMoney(item.final_line_price) + '</span></div>'
+            : '<div class="cart-item-price">' + formatMoney(item.line_price) + '</div>')
         + '</div>';
     });
-    cartBody.innerHTML = html;
+    var banner = '';
+    if (cart.total_discount > 0) {
+      banner = '<div class="cart-savings-banner">🎉 You saved ' + formatMoney(cart.total_discount) + ' — your 3rd is 50% off!</div>';
+    }
+    cartBody.innerHTML = banner + html;
     if (cartSubtotal) cartSubtotal.textContent = formatMoney(cart.total_price);
+    if (cart.total_discount > lastDiscount) celebrate();
+    lastDiscount = cart.total_discount || 0;
     renderCartUpsell(cart);
   }
 

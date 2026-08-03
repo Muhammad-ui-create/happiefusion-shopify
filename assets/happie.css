@@ -1570,6 +1570,11 @@ input, select { font-family: var(--font); }
 .cart-item-qty { font-weight: 700; }
 .remove-link { font-size: 12px; color: var(--gray); text-decoration: underline; margin-left: 8px; }
 .cart-item-price { font-size: 16px; font-weight: 800; flex-shrink: 0; }
+/* Discounted line (e.g. Buy 2 Get 1) — original struck through, discounted price highlighted */
+.cart-item-price-cut { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.15; gap: 1px; }
+.cart-item-price-cut s { color: #A0A0A0; font-size: 12px; font-weight: 600; }
+.cart-item-price-cut .cart-item-price-now { color: var(--green, #2D6A4F); font-weight: 800; }
+.cart-savings-banner { background: linear-gradient(90deg, #D8F3DC, #EAF6F0); color: var(--green-dark, #1B4332); font-weight: 800; font-size: 13px; text-align: center; padding: 10px 12px; border-radius: 12px; margin-bottom: 12px; border: 1px solid rgba(45,106,79,0.22); }
 .cart-summary { background: #fff; border-radius: 20px; padding: 28px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); position: sticky; top: calc(var(--nav-h) + 20px); }
 .cart-summary-row { display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; margin-bottom: 12px; }
 .free-ship-msg { font-size: 13px; color: var(--gray); margin-bottom: 20px; }

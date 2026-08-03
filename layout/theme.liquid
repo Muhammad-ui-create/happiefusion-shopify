@@ -528,7 +528,7 @@
       </div>
     </div>
   </div>
-  <script>window.cartItemCount = {{ cart.item_count }};</script>
+  <script>window.cartItemCount = {{ cart.item_count }}; window.cartTotalDiscount = {{ cart.total_discount | default: 0 }};</script>
   {{ 'happie.js' | asset_url | script_tag }}
   {% section 'happie-chatbot' %}
 </body>
