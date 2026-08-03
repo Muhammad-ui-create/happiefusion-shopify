@@ -1615,14 +1615,19 @@ input, select { font-family: var(--font); }
 }
 .btn-cart-checkout {
   display: flex; align-items: center; justify-content: center; gap: 8px;
-  background: var(--green-dark, #2D6A4F); color: #fff;
+  background: linear-gradient(100deg, #1B4332, #2D6A4F, #52B788, #50B2BD, #2D6A4F, #1B4332);
+  background-size: 300% 100%;
+  animation: cartCheckoutFlow 5s linear infinite;
+  color: #fff;
   text-align: center; border-radius: 14px;
   padding: 17px 16px; font-size: 16px; font-weight: 800;
   margin-bottom: 10px; letter-spacing: 0.02em;
-  box-shadow: 0 10px 24px rgba(45,106,79,0.25);
-  transition: transform .2s, box-shadow .2s, background .2s;
+  box-shadow: 0 10px 24px rgba(45,106,79,0.28);
+  transition: transform .2s, box-shadow .2s;
 }
-.btn-cart-checkout:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(45,106,79,0.35); background: #1B4332; }
+@keyframes cartCheckoutFlow { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
+.btn-cart-checkout:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(45,106,79,0.4); }
+@media (prefers-reduced-motion: reduce) { .btn-cart-checkout { animation: none; } }
 .btn-cart-view { display: block; text-align: center; font-size: 13px; color: var(--gray); text-decoration: underline; margin-bottom: 14px; }
 .cart-trust-row {
   display: flex; justify-content: center; align-items: center;
@@ -1750,6 +1755,17 @@ input, select { font-family: var(--font); }
   transition: border-color .2s, box-shadow .2s;
 }
 .cart-upsell-card:hover { border-color: var(--green-mid, #52B788); box-shadow: 0 6px 20px rgba(45,106,79,0.12); }
+/* Featured upsell (Auto-Refill) — moving iridescent gradient border to make it pop */
+.cart-upsell-card.cart-upsell-featured {
+  border: 2px solid transparent;
+  background: linear-gradient(135deg, #F2FBF6, #fff) padding-box,
+             linear-gradient(120deg, #50B2BD, #52B788, #FFCB05, #FF7A8A, #A42384, #6260AE, #566EE2, #50B2BD) border-box;
+  background-size: auto, 300% 100%;
+  animation: upsellFlow 6s linear infinite;
+  box-shadow: 0 8px 26px rgba(45,106,79,0.16);
+}
+@keyframes upsellFlow { 0% { background-position: 0 0, 0% 50%; } 100% { background-position: 0 0, 300% 50%; } }
+@media (prefers-reduced-motion: reduce) { .cart-upsell-card.cart-upsell-featured { animation: none; } }
 .cart-upsell-img { width: 56px; height: 56px; object-fit: contain; border-radius: 10px; background: #fff; flex-shrink: 0; }
 .cart-upsell-info { flex: 1; min-width: 0; }
 .cart-upsell-tag {

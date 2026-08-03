@@ -199,7 +199,7 @@
     /* Whole card is the link — not just the + button */
     up.innerHTML =
       '<div class="cart-upsell-label">You might also like</div>' +
-      '<a href="/products/' + suggestion.handle + '" class="cart-upsell-card" aria-label="View ' + suggestion.title + '">' +
+      '<a href="/products/' + suggestion.handle + '" class="cart-upsell-card' + (suggestion.handle === 'fungi-fusion-auto-refill' ? ' cart-upsell-featured' : '') + '" aria-label="View ' + suggestion.title + '">' +
         '<img src="' + suggestion.img + '" alt="" class="cart-upsell-img" />' +
         '<div class="cart-upsell-info">' +
           '<span class="cart-upsell-tag">' + suggestion.tag + '</span>' +
