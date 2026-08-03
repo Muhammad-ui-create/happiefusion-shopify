@@ -322,6 +322,50 @@
         </div>
       {% endform %}
 
+      {% comment %} Buy 2 Get 1 Half Off — the three 6-packs only. The 50% is a native automatic
+         BXGY discount ("Buy 2, Get 1 Half Off — Fungi Fusion 6-Packs"); this button just adds 3. {% endcomment %}
+      {%- assign b2g1_handles = "blue-razzberry-fungi-powered-seltzer,mango-mimosa-fungi-powered-seltzer,watermelon-fungi-powered-seltzer" | split: "," -%}
+      {%- if b2g1_handles contains product.handle and product.available -%}
+        {%- assign b2g1_unit = product.selected_or_first_available_variant.price -%}
+        {%- assign b2g1_save = b2g1_unit | divided_by: 2 -%}
+        {%- assign b2g1_flavor = product.title | split: ' Functional' | first -%}
+        <div class="pdp-b2g1">
+          <div class="pdp-b2g1-top">
+            <span class="pdp-b2g1-badge">◆ Stock up &amp; save</span>
+            <span class="pdp-b2g1-off">3rd is 50% off</span>
+          </div>
+          <strong class="pdp-b2g1-title">Buy 2, get your 3rd half&nbsp;off</strong>
+          <span class="pdp-b2g1-sub">Grab 3 six-packs of {{ b2g1_flavor }} — that's 18 cans, and your third is 50% off (about {{ b2g1_save | money }} back).</span>
+          <button type="button" class="pdp-b2g1-btn" id="pdp-b2g1-btn" data-vid="{{ product.selected_or_first_available_variant.id }}">Add 3 to cart</button>
+          <span class="pdp-b2g1-note">50% off your 3rd applies automatically at checkout.</span>
+        </div>
+        <style>
+          .pdp-b2g1{margin-top:16px;border:1.5px solid var(--green,#2D6A4F);background:linear-gradient(180deg,#F2FBF6,#fff);border-radius:18px;padding:18px 20px;}
+          .pdp-b2g1-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px;}
+          .pdp-b2g1-badge{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--green,#2D6A4F);}
+          .pdp-b2g1-off{font-size:12px;font-weight:800;background:var(--green,#2D6A4F);color:#fff;border-radius:50px;padding:4px 12px;white-space:nowrap;}
+          .pdp-b2g1-title{display:block;font-size:20px;font-weight:900;letter-spacing:-.01em;color:#16181B;}
+          .pdp-b2g1-sub{display:block;font-size:14px;color:#555;line-height:1.5;margin:6px 0 14px;}
+          .pdp-b2g1-btn{width:100%;background:var(--yellow,#FFCB05);color:#000;border:none;border-radius:50px;padding:15px 24px;font-size:16px;font-weight:800;cursor:pointer;transition:background .15s,transform .1s;}
+          .pdp-b2g1-btn:hover{background:#e6b800;transform:translateY(-1px);}
+          .pdp-b2g1-btn:disabled{opacity:.7;cursor:default;}
+          .pdp-b2g1-note{display:block;text-align:center;font-size:12px;color:#777;margin-top:9px;}
+        </style>
+        <script>
+          (function(){
+            var b=document.getElementById('pdp-b2g1-btn'); if(!b) return;
+            b.addEventListener('click',function(){
+              var vid=parseInt(b.getAttribute('data-vid'),10), orig=b.textContent;
+              b.disabled=true; b.textContent='Adding…';
+              fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:vid,quantity:3}]})})
+                .then(function(r){return r.json();})
+                .then(function(){ b.textContent='✓ Added 3 to cart'; var ct=document.getElementById('cart-trigger'); if(ct){ct.click();} setTimeout(function(){b.disabled=false;b.textContent=orig;},1400); })
+                .catch(function(){ b.disabled=false; b.textContent=orig; });
+            });
+          })();
+        </script>
+      {%- endif -%}
+
       {% comment %} Build Your Own cross-sell — hidden on the BYO product itself (it uses its own template) {% endcomment %}
       {%- assign byo = all_products['build-your-own-fungi-fusion-18-pack'] -%}
       {%- if byo and byo.available and product.handle != byo.handle -%}
