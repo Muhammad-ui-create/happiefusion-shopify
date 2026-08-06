@@ -245,9 +245,11 @@
           .pdp-b2g1-off{font-size:12px;font-weight:800;background:var(--green,#2D6A4F);color:#fff;border-radius:50px;padding:4px 12px;white-space:nowrap;}
           .pdp-b2g1-title{display:block;font-size:20px;font-weight:900;letter-spacing:-.01em;color:#16181B;}
           .pdp-b2g1-sub{display:block;font-size:14px;color:#555;line-height:1.5;margin:6px 0 14px;}
-          .pdp-b2g1-btn{width:100%;background:var(--yellow,#FFCB05);color:#000;border:none;border-radius:50px;padding:15px 24px;font-size:16px;font-weight:800;cursor:pointer;transition:background .15s,transform .1s;}
-          .pdp-b2g1-btn:hover{background:#e6b800;transform:translateY(-1px);}
+          .pdp-b2g1-btn{width:100%;background:linear-gradient(100deg,#FFCB05,#FFE14D,#FFB300,#FF8A3D,#FFD93D,#FFCB05);background-size:300% 100%;background-position:0% 50%;color:#000;border:none;border-radius:50px;padding:15px 24px;font-size:16px;font-weight:800;cursor:pointer;transition:transform .1s,box-shadow .2s;box-shadow:0 6px 20px rgba(255,178,0,.4);}
+          .pdp-b2g1-btn:hover,.pdp-b2g1-btn.is-tapped{animation:b2g1BtnFlow 2.4s linear infinite;transform:translateY(-1px);box-shadow:0 12px 30px rgba(255,138,61,.5);}
+          @keyframes b2g1BtnFlow{0%{background-position:0% 50%}100%{background-position:300% 50%}}
           .pdp-b2g1-btn:disabled{opacity:.7;cursor:default;}
+          @media(prefers-reduced-motion:reduce){.pdp-b2g1-btn:hover,.pdp-b2g1-btn.is-tapped{animation:none}}
           .pdp-b2g1-note{display:block;text-align:center;font-size:12px;color:#777;margin-top:9px;}
         </style>
         <script>
@@ -261,6 +263,7 @@
                 .then(function(){ b.textContent='✓ Added 3 to cart'; var ct=document.getElementById('cart-trigger'); if(ct){ct.click();} setTimeout(function(){b.disabled=false;b.textContent=orig;},1400); })
                 .catch(function(){ b.disabled=false; b.textContent=orig; });
             });
+            b.addEventListener('touchstart',function(){ b.classList.add('is-tapped'); },{passive:true});
           })();
         </script>
       {%- endif -%}
