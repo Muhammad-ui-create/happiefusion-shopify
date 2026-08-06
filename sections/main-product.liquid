@@ -232,25 +232,24 @@
           <span class="pdp-b2g1-note">50% off your 3rd applies automatically at checkout.</span>
         </div>
         <style>
-          .pdp-b2g1{position:relative;margin-top:16px;margin-bottom:26px;border:2px solid transparent;border-radius:18px;padding:18px 20px;
-            background:linear-gradient(180deg,#F2FBF6,#fff) padding-box,
-                       linear-gradient(120deg,#50B2BD,#52B788,#FFCB05,#FF7A8A,#A42384,#6260AE,#566EE2,#50B2BD) border-box;
-            background-size:auto, 300% 100%;
-            animation:b2g1Flow 6s linear infinite;
-            box-shadow:0 10px 32px rgba(45,106,79,.16);}
-          @keyframes b2g1Flow{0%{background-position:0 0, 0% 50%}100%{background-position:0 0, 300% 50%}}
+          .pdp-b2g1{position:relative;margin-top:16px;margin-bottom:26px;border:none;border-radius:18px;padding:20px 22px;overflow:hidden;
+            background:linear-gradient(130deg,#FF7A3D,#FFB300,#2DB39A,#6C4BD8,#F2A81E,#FF7A3D);
+            background-size:300% 300%;
+            animation:b2g1Mesh 15s ease-in-out infinite;
+            box-shadow:0 14px 38px rgba(0,0,0,.20);}
+          @keyframes b2g1Mesh{0%{background-position:0% 25%}50%{background-position:100% 75%}100%{background-position:0% 25%}}
           @media(prefers-reduced-motion:reduce){.pdp-b2g1{animation:none}}
           .pdp-b2g1-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px;}
-          .pdp-b2g1-badge{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--green,#2D6A4F);}
-          .pdp-b2g1-off{font-size:12px;font-weight:800;background:var(--green,#2D6A4F);color:#fff;border-radius:50px;padding:4px 12px;white-space:nowrap;}
-          .pdp-b2g1-title{display:block;font-size:20px;font-weight:900;letter-spacing:-.01em;color:#16181B;}
-          .pdp-b2g1-sub{display:block;font-size:14px;color:#555;line-height:1.5;margin:6px 0 14px;}
+          .pdp-b2g1-badge{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35);}
+          .pdp-b2g1-off{font-size:12px;font-weight:800;background:rgba(0,0,0,.30);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff;border-radius:50px;padding:4px 12px;white-space:nowrap;}
+          .pdp-b2g1-title{display:block;font-size:21px;font-weight:900;letter-spacing:-.01em;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.4);}
+          .pdp-b2g1-sub{display:block;font-size:14px;color:rgba(255,255,255,.96);line-height:1.5;margin:6px 0 14px;text-shadow:0 1px 8px rgba(0,0,0,.35);}
           .pdp-b2g1-btn{width:100%;background:linear-gradient(100deg,#FFCB05,#FFE14D,#FFB300,#FF8A3D,#FFD93D,#FFCB05);background-size:300% 100%;background-position:0% 50%;color:#000;border:none;border-radius:50px;padding:15px 24px;font-size:16px;font-weight:800;cursor:pointer;transition:transform .1s,box-shadow .2s;box-shadow:0 6px 20px rgba(255,178,0,.4);}
           .pdp-b2g1-btn:hover,.pdp-b2g1-btn.is-tapped{animation:b2g1BtnFlow 2.4s linear infinite;transform:translateY(-1px);box-shadow:0 12px 30px rgba(255,138,61,.5);}
           @keyframes b2g1BtnFlow{0%{background-position:0% 50%}100%{background-position:300% 50%}}
           .pdp-b2g1-btn:disabled{opacity:.7;cursor:default;}
           @media(prefers-reduced-motion:reduce){.pdp-b2g1-btn:hover,.pdp-b2g1-btn.is-tapped{animation:none}}
-          .pdp-b2g1-note{display:block;text-align:center;font-size:12px;color:#777;margin-top:9px;}
+          .pdp-b2g1-note{display:block;text-align:center;font-size:12px;color:rgba(255,255,255,.92);margin-top:9px;text-shadow:0 1px 6px rgba(0,0,0,.3);}
         </style>
         <script>
           (function(){
