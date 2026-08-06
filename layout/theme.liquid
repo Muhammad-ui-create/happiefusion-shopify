@@ -17,7 +17,7 @@
 
   {%- comment -%} ── SEO: META DESCRIPTIONS ── {%- endcomment -%}
   {%- if template.name == 'index' -%}
-    <meta name="description" content="Happie Fungi Fusion — clean, caffeine-free energy for any occasion. All-natural mushroom seltzer, zero alcohol, zero crash. Free shipping, no minimum.">
+    <meta name="description" content="Happie Fungi Fusion — 2,000mg of functional mushrooms (900mg Lion’s Mane, 700mg Cordyceps, 400mg Reishi) per can. Caffeine-free, zero crash, for any occasion. Free shipping, no minimum.">
   {%- elsif template.name == 'product' -%}
     {%- comment -%} Prefer the Shopify-managed SEO description; fall back to body if not set. {%- endcomment -%}
     {%- assign seo_meta = product.metafields.global.description_tag -%}
@@ -123,8 +123,8 @@
     <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
   {%- elsif template.name == 'index' -%}
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Clean Energy for Any Occasion | Happie Fusion">
-    <meta property="og:description" content="We Put the Fun in Functional — caffeine-free, all-natural mushroom seltzer that keeps you sharp without the crash. No alcohol. No jitters.">
+    <meta property="og:title" content="2,000mg of Real Mushrooms, Zero Caffeine | Happie Fusion">
+    <meta property="og:description" content="We put the fun in functional — 900mg Lion’s Mane, 700mg Cordyceps & 400mg Reishi per can. Caffeine-free, zero crash, for any occasion.">
     <meta property="og:image" content="{{ 'happie-logo.png' | asset_url }}">
   {%- else -%}
     <meta property="og:type" content="website">
