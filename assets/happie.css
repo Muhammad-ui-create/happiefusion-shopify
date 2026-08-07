@@ -596,14 +596,18 @@ input, select { font-family: var(--font); }
     radial-gradient(58% 128% at 99% 30%, rgba(86,110,226,0.52)  0%, rgba(86,110,226,0)  62%);
   background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 205% 205%, 235% 235%, 220% 220%;
   background-repeat: no-repeat;
-  animation: navSilk 34s ease-in-out infinite;
-  /* Wave-shaped top edge (matches the PDP wave bands) */
+  animation: navSilk 34s ease-in-out infinite, footerWave 10s linear infinite;
+  /* Wave-shaped top edge (matches the PDP wave bands), drifting sideways */
   -webkit-mask:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 30 300 30 400 20 500 10 700 10 800 20 900 30 1100 30 1200 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 40px no-repeat,
-    linear-gradient(#000, #000) bottom / 100% calc(100% - 40px) no-repeat;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C20 30 60 30 80 20 100 10 140 10 160 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") left top / 160px 40px repeat-x,
+    linear-gradient(#000, #000) center bottom / 100% calc(100% - 40px) no-repeat;
           mask:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 30 300 30 400 20 500 10 700 10 800 20 900 30 1100 30 1200 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 40px no-repeat,
-    linear-gradient(#000, #000) bottom / 100% calc(100% - 40px) no-repeat;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C20 30 60 30 80 20 100 10 140 10 160 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") left top / 160px 40px repeat-x,
+    linear-gradient(#000, #000) center bottom / 100% calc(100% - 40px) no-repeat;
+}
+@keyframes footerWave {
+  from { -webkit-mask-position: 0 top, center bottom;     mask-position: 0 top, center bottom; }
+  to   { -webkit-mask-position: 160px top, center bottom; mask-position: 160px top, center bottom; }
 }
 @media (prefers-reduced-motion: reduce) { .site-footer { animation: none; } }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(0,0,0,0.12); }
@@ -654,28 +658,41 @@ input, select { font-family: var(--font); }
       var(--pdp-accent, #2D6A4F) 100%);
   opacity: .34;
 }
-/* Symmetric, low-amplitude 3-hump waves at a fixed 40px height. Symmetric
-   about center + gentle amplitude so they read as a clean ripple at any
-   width — no lopsided squeeze on mobile. */
+/* Gentle ripple tiled at 160px, drifting sideways in a seamless loop.
+   Fixed pixel tile so the wave never distorts vertically or squeezes on
+   mobile; animating mask-position by exactly one tile loops seamlessly. */
 .product-layout::before {
   top: -72px; bottom: -74px;
   -webkit-mask:
-    linear-gradient(#000, #000) top / 100% calc(100% - 40px) no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 10 300 10 400 20 500 30 700 30 800 20 900 10 1100 10 1200 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 40px no-repeat;
+    linear-gradient(#000, #000) center top / 100% calc(100% - 40px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C20 10 60 10 80 20 100 30 140 30 160 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") left bottom / 160px 40px repeat-x;
           mask:
-    linear-gradient(#000, #000) top / 100% calc(100% - 40px) no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 10 300 10 400 20 500 30 700 30 800 20 900 10 1100 10 1200 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 40px no-repeat;
+    linear-gradient(#000, #000) center top / 100% calc(100% - 40px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C20 10 60 10 80 20 100 30 140 30 160 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") left bottom / 160px 40px repeat-x;
+  animation: pdpWaveBottom 9s linear infinite;
 }
 .pdp-lower::before {
   top: -54px; bottom: -44px;
   -webkit-mask:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 30 300 30 400 20 500 10 700 10 800 20 900 30 1100 30 1200 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 40px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C20 30 60 30 80 20 100 10 140 10 160 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") left top / 160px 40px repeat-x,
     linear-gradient(#000, #000) center / 100% calc(100% - 80px) no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 10 300 10 400 20 500 30 700 30 800 20 900 10 1100 10 1200 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 40px no-repeat;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C20 10 60 10 80 20 100 30 140 30 160 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") left bottom / 160px 40px repeat-x;
           mask:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 30 300 30 400 20 500 10 700 10 800 20 900 30 1100 30 1200 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 40px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C20 30 60 30 80 20 100 10 140 10 160 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") left top / 160px 40px repeat-x,
     linear-gradient(#000, #000) center / 100% calc(100% - 80px) no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 10 300 10 400 20 500 30 700 30 800 20 900 10 1100 10 1200 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 40px no-repeat;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C20 10 60 10 80 20 100 30 140 30 160 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") left bottom / 160px 40px repeat-x;
+  animation: pdpWaveBoth 12s linear infinite;
+}
+@keyframes pdpWaveBottom {
+  from { -webkit-mask-position: center top, 0 bottom;     mask-position: center top, 0 bottom; }
+  to   { -webkit-mask-position: center top, 160px bottom; mask-position: center top, 160px bottom; }
+}
+@keyframes pdpWaveBoth {
+  from { -webkit-mask-position: 0 top, center, 0 bottom;         mask-position: 0 top, center, 0 bottom; }
+  to   { -webkit-mask-position: 160px top, center, -160px bottom; mask-position: 160px top, center, -160px bottom; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .product-layout::before, .pdp-lower::before { animation: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .product-layout::before,
