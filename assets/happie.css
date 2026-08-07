@@ -645,7 +645,7 @@ input, select { font-family: var(--font); }
       var(--pdp-accent, #2D6A4F) 0%,
       var(--pdp-accent, #2D6A4F) 82%,
       transparent 100%);
-  opacity: .24;
+  opacity: .34;
 }
 @media (prefers-reduced-motion: no-preference) {
   .product-layout::before { transition: opacity .4s ease; }
