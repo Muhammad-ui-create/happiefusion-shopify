@@ -632,16 +632,20 @@ input, select { font-family: var(--font); }
 .product-layout::before {
   content: "";
   position: absolute;
-  top: -72px; bottom: -48px;
+  top: -72px; bottom: -64px;
   left: 50%; transform: translateX(-50%);
   width: 100vw;
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(58% 60% at 14% 6%,  var(--pdp-accent, #2D6A4F) 0%, transparent 60%),
-    radial-gradient(52% 55% at 90% 20%, var(--pdp-accent, #2D6A4F) 0%, transparent 58%),
-    linear-gradient(180deg, var(--pdp-accent, #2D6A4F) 0%, transparent 72%);
-  opacity: .12;
+    radial-gradient(64% 52% at 12% 3%,  var(--pdp-accent, #2D6A4F) 0%, transparent 60%),
+    radial-gradient(58% 48% at 94% 14%, var(--pdp-accent, #2D6A4F) 0%, transparent 58%),
+    radial-gradient(70% 40% at 50% 92%, var(--pdp-accent, #2D6A4F) 0%, transparent 64%),
+    linear-gradient(180deg,
+      var(--pdp-accent, #2D6A4F) 0%,
+      var(--pdp-accent, #2D6A4F) 82%,
+      transparent 100%);
+  opacity: .24;
 }
 @media (prefers-reduced-motion: no-preference) {
   .product-layout::before { transition: opacity .4s ease; }
