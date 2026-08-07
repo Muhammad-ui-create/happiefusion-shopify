@@ -646,16 +646,29 @@ input, select { font-family: var(--font); }
       var(--pdp-accent, #2D6A4F) 0%,
       var(--pdp-accent, #2D6A4F) 100%);
   opacity: .34;
-  /* Wave-shaped bottom edge */
-  -webkit-mask:
-    linear-gradient(#000, #000) top / 100% calc(100% - 60px) no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1200V28C1050 54 900 6 750 26 600 46 450 4 300 24 180 40 90 18 0 34Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 60px no-repeat;
-          mask:
-    linear-gradient(#000, #000) top / 100% calc(100% - 60px) no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1200V28C1050 54 900 6 750 26 600 46 450 4 300 24 180 40 90 18 0 34Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 60px no-repeat;
 }
-.product-layout::before { top: -72px; bottom: -78px; }
-.pdp-lower::before      { top: 0;     bottom: -40px; }
+/* Gentle 2-hump waves, fixed 44px height so they only stretch horizontally
+   (never distort vertically) — reads clean on mobile and desktop alike. */
+.product-layout::before {
+  top: -72px; bottom: -78px;
+  -webkit-mask:
+    linear-gradient(#000, #000) top / 100% calc(100% - 44px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 44 500 44 600 22 700 0 900 0 1200 22V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 44px no-repeat;
+          mask:
+    linear-gradient(#000, #000) top / 100% calc(100% - 44px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 44 500 44 600 22 700 0 900 0 1200 22V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 44px no-repeat;
+}
+.pdp-lower::before {
+  top: -56px; bottom: -48px;
+  -webkit-mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 0 500 0 600 22 700 44 900 44 1200 22V44H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 44px no-repeat,
+    linear-gradient(#000, #000) center / 100% calc(100% - 88px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 44 500 44 600 22 700 0 900 0 1200 22V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 44px no-repeat;
+          mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 0 500 0 600 22 700 44 900 44 1200 22V44H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 44px no-repeat,
+    linear-gradient(#000, #000) center / 100% calc(100% - 88px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 44 500 44 600 22 700 0 900 0 1200 22V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 44px no-repeat;
+}
 @media (prefers-reduced-motion: no-preference) {
   .product-layout::before,
   .pdp-lower::before { transition: opacity .4s ease; }
