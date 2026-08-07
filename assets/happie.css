@@ -632,7 +632,7 @@ input, select { font-family: var(--font); }
 .product-layout::before {
   content: "";
   position: absolute;
-  top: -72px; bottom: -64px;
+  top: -72px; bottom: -78px;
   left: 50%; transform: translateX(-50%);
   width: 100vw;
   z-index: -1;
@@ -640,12 +640,18 @@ input, select { font-family: var(--font); }
   background:
     radial-gradient(64% 52% at 12% 3%,  var(--pdp-accent, #2D6A4F) 0%, transparent 60%),
     radial-gradient(58% 48% at 94% 14%, var(--pdp-accent, #2D6A4F) 0%, transparent 58%),
-    radial-gradient(70% 40% at 50% 92%, var(--pdp-accent, #2D6A4F) 0%, transparent 64%),
+    radial-gradient(72% 44% at 50% 90%, var(--pdp-accent, #2D6A4F) 0%, transparent 66%),
     linear-gradient(180deg,
       var(--pdp-accent, #2D6A4F) 0%,
-      var(--pdp-accent, #2D6A4F) 82%,
-      transparent 100%);
+      var(--pdp-accent, #2D6A4F) 100%);
   opacity: .34;
+  /* Wave-shaped bottom edge */
+  -webkit-mask:
+    linear-gradient(#000, #000) top / 100% calc(100% - 60px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1200V28C1050 54 900 6 750 26 600 46 450 4 300 24 180 40 90 18 0 34Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 60px no-repeat;
+          mask:
+    linear-gradient(#000, #000) top / 100% calc(100% - 60px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1200V28C1050 54 900 6 750 26 600 46 450 4 300 24 180 40 90 18 0 34Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 60px no-repeat;
 }
 @media (prefers-reduced-motion: no-preference) {
   .product-layout::before { transition: opacity .4s ease; }
