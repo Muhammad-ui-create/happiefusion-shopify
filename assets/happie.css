@@ -585,6 +585,11 @@ input, select { font-family: var(--font); }
 .site-footer {
   color: #1A1A1A;
   padding: 60px 24px 0;
+  /* Overlap the section above by the wave height so the wave troughs reveal
+     that section (any color) instead of a white body gap — seamless site-wide */
+  margin-top: -40px;
+  position: relative;
+  z-index: 1;
   background-color: #FCF9F4;
   background-image:
     radial-gradient(56% 125% at  6% 34%, rgba(45,200,214,0.62)  0%, rgba(45,200,214,0)  60%),
