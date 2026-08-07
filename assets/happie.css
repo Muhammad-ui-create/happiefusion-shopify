@@ -599,11 +599,11 @@ input, select { font-family: var(--font); }
   animation: navSilk 34s ease-in-out infinite;
   /* Wave-shaped top edge (matches the PDP wave bands) */
   -webkit-mask:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 0 500 0 600 22 700 44 900 44 1200 22V44H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 44px no-repeat,
-    linear-gradient(#000, #000) bottom / 100% calc(100% - 44px) no-repeat;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 30 300 30 400 20 500 10 700 10 800 20 900 30 1100 30 1200 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 40px no-repeat,
+    linear-gradient(#000, #000) bottom / 100% calc(100% - 40px) no-repeat;
           mask:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 0 500 0 600 22 700 44 900 44 1200 22V44H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 44px no-repeat,
-    linear-gradient(#000, #000) bottom / 100% calc(100% - 44px) no-repeat;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 30 300 30 400 20 500 10 700 10 800 20 900 30 1100 30 1200 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 40px no-repeat,
+    linear-gradient(#000, #000) bottom / 100% calc(100% - 40px) no-repeat;
 }
 @media (prefers-reduced-motion: reduce) { .site-footer { animation: none; } }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(0,0,0,0.12); }
@@ -654,27 +654,28 @@ input, select { font-family: var(--font); }
       var(--pdp-accent, #2D6A4F) 100%);
   opacity: .34;
 }
-/* Gentle 2-hump waves, fixed 44px height so they only stretch horizontally
-   (never distort vertically) — reads clean on mobile and desktop alike. */
+/* Symmetric, low-amplitude 3-hump waves at a fixed 40px height. Symmetric
+   about center + gentle amplitude so they read as a clean ripple at any
+   width — no lopsided squeeze on mobile. */
 .product-layout::before {
-  top: -72px; bottom: -78px;
+  top: -72px; bottom: -74px;
   -webkit-mask:
-    linear-gradient(#000, #000) top / 100% calc(100% - 44px) no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 44 500 44 600 22 700 0 900 0 1200 22V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 44px no-repeat;
+    linear-gradient(#000, #000) top / 100% calc(100% - 40px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 10 300 10 400 20 500 30 700 30 800 20 900 10 1100 10 1200 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 40px no-repeat;
           mask:
-    linear-gradient(#000, #000) top / 100% calc(100% - 44px) no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 44 500 44 600 22 700 0 900 0 1200 22V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 44px no-repeat;
+    linear-gradient(#000, #000) top / 100% calc(100% - 40px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 10 300 10 400 20 500 30 700 30 800 20 900 10 1100 10 1200 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 40px no-repeat;
 }
 .pdp-lower::before {
-  top: -56px; bottom: -48px;
+  top: -54px; bottom: -44px;
   -webkit-mask:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 0 500 0 600 22 700 44 900 44 1200 22V44H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 44px no-repeat,
-    linear-gradient(#000, #000) center / 100% calc(100% - 88px) no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 44 500 44 600 22 700 0 900 0 1200 22V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 44px no-repeat;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 30 300 30 400 20 500 10 700 10 800 20 900 30 1100 30 1200 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 40px no-repeat,
+    linear-gradient(#000, #000) center / 100% calc(100% - 80px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 10 300 10 400 20 500 30 700 30 800 20 900 10 1100 10 1200 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 40px no-repeat;
           mask:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 0 500 0 600 22 700 44 900 44 1200 22V44H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 44px no-repeat,
-    linear-gradient(#000, #000) center / 100% calc(100% - 88px) no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 44 500 44 600 22 700 0 900 0 1200 22V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 44px no-repeat;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 30 300 30 400 20 500 10 700 10 800 20 900 30 1100 30 1200 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 40px no-repeat,
+    linear-gradient(#000, #000) center / 100% calc(100% - 80px) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 10 300 10 400 20 500 30 700 30 800 20 900 10 1100 10 1200 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 40px no-repeat;
 }
 @media (prefers-reduced-motion: no-preference) {
   .product-layout::before,
