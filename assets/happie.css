@@ -597,6 +597,13 @@ input, select { font-family: var(--font); }
   background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 205% 205%, 235% 235%, 220% 220%;
   background-repeat: no-repeat;
   animation: navSilk 34s ease-in-out infinite;
+  /* Wave-shaped top edge (matches the PDP wave bands) */
+  -webkit-mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 0 500 0 600 22 700 44 900 44 1200 22V44H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 44px no-repeat,
+    linear-gradient(#000, #000) bottom / 100% calc(100% - 44px) no-repeat;
+          mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 22C300 0 500 0 600 22 700 44 900 44 1200 22V44H0Z' fill='%23000'/%3E%3C/svg%3E") top / 100% 44px no-repeat,
+    linear-gradient(#000, #000) bottom / 100% calc(100% - 44px) no-repeat;
 }
 @media (prefers-reduced-motion: reduce) { .site-footer { animation: none; } }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(0,0,0,0.12); }
