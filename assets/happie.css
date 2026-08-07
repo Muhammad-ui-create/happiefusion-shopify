@@ -628,11 +628,12 @@ input, select { font-family: var(--font); }
 .breadcrumb a { opacity: 0.7; }
 .breadcrumb a:hover { opacity: 1; }
 .product-layout { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; margin-bottom: 80px; }
-/* Per-flavor gradient band behind the product section (tinted by --pdp-accent) */
-.product-layout::before {
+/* Per-flavor gradient band behind the product / reviews+FAQ sections (tinted by --pdp-accent) */
+.pdp-lower { position: relative; }
+.product-layout::before,
+.pdp-lower::before {
   content: "";
   position: absolute;
-  top: -72px; bottom: -78px;
   left: 50%; transform: translateX(-50%);
   width: 100vw;
   z-index: -1;
@@ -653,8 +654,11 @@ input, select { font-family: var(--font); }
     linear-gradient(#000, #000) top / 100% calc(100% - 60px) no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1200V28C1050 54 900 6 750 26 600 46 450 4 300 24 180 40 90 18 0 34Z' fill='%23000'/%3E%3C/svg%3E") bottom / 100% 60px no-repeat;
 }
+.product-layout::before { top: -72px; bottom: -78px; }
+.pdp-lower::before      { top: 0;     bottom: -40px; }
 @media (prefers-reduced-motion: no-preference) {
-  .product-layout::before { transition: opacity .4s ease; }
+  .product-layout::before,
+  .pdp-lower::before { transition: opacity .4s ease; }
 }
 
 /* Gallery */
@@ -1817,10 +1821,9 @@ input, select { font-family: var(--font); }
    PDP Trust FAQ — first-visitor friction killer
 ══════════════════════════════════════════ */
 .pdp-faq {
-  padding: 80px 24px;
-  background: linear-gradient(180deg, #ffffff 0%, #F7F7F5 100%);
-  margin: 56px -24px 0;
-  border-radius: 32px 32px 0 0;
+  padding: 40px 24px 80px;
+  background: transparent;
+  margin: 24px -24px 0;
 }
 .pdp-faq-inner { max-width: 880px; margin: 0 auto; }
 .pdp-faq-head { text-align: center; margin-bottom: 44px; }
