@@ -15,7 +15,10 @@
   {% endif %}
 {% endfor %}
 
-<div class="product-page" style="--pdp-accent: {{ product_accent }};">
+{%- comment -%} Variety Pack uses 1:1 box/lifestyle photography, so its gallery is square rather than the 4:5 used for the single cans. {%- endcomment -%}
+{%- assign pdp_media_class = '' -%}
+{%- if product.handle contains 'variety' or product.title contains 'Variety Pack' -%}{%- assign pdp_media_class = ' pdp-square-media' -%}{%- endif -%}
+<div class="product-page{{ pdp_media_class }}" style="--pdp-accent: {{ product_accent }};">
 
   <div class="product-layout">
 

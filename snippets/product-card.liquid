@@ -10,6 +10,14 @@
   {% assign card_bg = '#52B788' %}
 {% endif %}
 
+{% comment %}
+  Single-can flavors are 4:5 photography and fill the card (cover). Packs
+  (Variety, Build Your Own, Auto-Refill) and merch are other ratios (e.g.
+  1:1 box shots), so they're shown in full with object-fit:contain.
+{% endcomment %}
+{% assign card_fit = '' %}
+{% unless product.handle contains 'fungi-powered-seltzer' %}{% assign card_fit = ' product-card-img--fit' %}{% endunless %}
+
 <div class="product-card">
 
   <!-- Colored image panel -->
@@ -24,7 +32,7 @@
         src="{{ product.featured_image | image_url: width: 600 }}"
         alt="{{ product.title }}"
         loading="lazy"
-        class="product-card-img"
+        class="product-card-img{{ card_fit }}"
       />
     {% endif %}
   </a>
