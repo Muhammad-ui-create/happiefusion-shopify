@@ -639,7 +639,7 @@ input, select { font-family: var(--font); }
 .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 24px 0; font-size: 12px; color: rgba(0,0,0,0.5); border-top: 1px solid rgba(0,0,0,0.08); }
 
 /* ── PRODUCT PAGE ── */
-.product-page { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+.product-page { max-width: 1200px; margin: 0 auto; padding: 36px 24px 80px; }
 .breadcrumb { padding: 20px 0; font-size: 13px; color: var(--gray); }
 .breadcrumb a { opacity: 0.7; }
 .breadcrumb a:hover { opacity: 1; }
@@ -667,7 +667,7 @@ input, select { font-family: var(--font); }
    Fixed pixel tile so the wave never distorts vertically or squeezes on
    mobile; animating mask-position by exactly one tile loops seamlessly. */
 .product-layout::before {
-  top: -72px; bottom: -74px;
+  top: -28px; bottom: -74px;
   -webkit-mask:
     linear-gradient(#000, #000) center top / 100% calc(100% - 40px) no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 6 300 6 400 20 500 34 700 34 800 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") left bottom / 800px 40px repeat-x;
@@ -2266,7 +2266,7 @@ body.subscription-selected #shopify-buyer-consent {
   .mush-icon-wrap { width: 140px; height: 140px; }
 
   /* Product page */
-  .product-page  { padding: 0 16px 60px; }
+  .product-page  { padding: 24px 16px 60px; }
   .product-layout { grid-template-columns: 1fr; gap: 32px; margin-bottom: 48px; }
 
   /* ── Mobile gallery: full-bleed carousel ──
