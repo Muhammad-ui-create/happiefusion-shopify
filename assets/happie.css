@@ -361,7 +361,7 @@ input, select { font-family: var(--font); }
 .product-card-img-wrap {
   display: block;
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 4/5;
   overflow: hidden;
   border-radius: 18px 18px 0 0;
   background: #fff;
@@ -369,7 +369,7 @@ input, select { font-family: var(--font); }
 .product-card-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: transform;
@@ -735,12 +735,13 @@ input, select { font-family: var(--font); }
   user-select: none;
   pointer-events: none;
 }
-/* New 4:5 product photography — frame the whole shot, never crop.
-   4:5 images fill the container exactly; any other ratio gets clean white
-   margins instead of being cut off. Scoped to the PDP gallery. */
+/* New 4:5 product photography — the gallery is 4:5 and fills with cover, so
+   4:5 shots sit edge-to-edge with no white margins and no crop. Scoped to
+   the PDP gallery. (Any non-4:5 image would crop slightly rather than show
+   white — re-export odd images at 4:5 for a perfect fit.) */
 .product-gallery .gallery-main { aspect-ratio: 4 / 5; }
-.product-gallery .gallery-slide { object-fit: contain; }
-.product-gallery .gallery-thumb img { object-fit: contain; }
+.product-gallery .gallery-slide { object-fit: cover; }
+.product-gallery .gallery-thumb img { object-fit: cover; }
 /* Standalone galleries that still use a single swapped image (landing pages) */
 .gallery-main-img:not(.gallery-slide) { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s; }
 .gallery-main:focus-visible { outline: 2px solid var(--pdp-accent, var(--green)); outline-offset: 3px; }
@@ -2384,7 +2385,7 @@ body.subscription-selected #shopify-buyer-consent {
 
   /* Comparison table — hide right column label on tiny screens */
   .comp-happie-head, .comp-other-head { font-size: 11px; padding: 14px 8px; }
-  .product-card-img-wrap { aspect-ratio: 1/1; }
+  .product-card-img-wrap { aspect-ratio: 4/5; }
 }
 
 /* ══════════════════════════════════════════
