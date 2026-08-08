@@ -1,5 +1,6 @@
 {% comment %} Flavor → swatch color map {% endcomment %}
-{% assign flavor_colors = 'Blue Razzberry:#3B6FF0,Mango Mimosa:#F5A623,Watermelon:#E84C6B,Variety Pack:#6260AE' | split: ',' %}
+{% comment %} Both "Raspberry" and "Razzberry" spellings map to the same blue so the accent never falls back to green. {% endcomment %}
+{% assign flavor_colors = 'Blue Raspberry:#3B6FF0,Blue Razzberry:#3B6FF0,Mango Mimosa:#F5A623,Watermelon:#E84C6B,Variety Pack:#6260AE' | split: ',' %}
 
 {% comment %}
   Accent for this product, matched off the title against the same map above.
@@ -15,11 +16,6 @@
 {% endfor %}
 
 <div class="product-page" style="--pdp-accent: {{ product_accent }};">
-  <div class="breadcrumb">
-    <a href="/">Home</a> /
-    <a href="/collections/all">Our Complete Collection</a> /
-    <span>{{ product.title }}</span>
-  </div>
 
   <div class="product-layout">
 
