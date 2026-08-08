@@ -670,7 +670,7 @@ input, select { font-family: var(--font); }
    Fixed pixel tile so the wave never distorts vertically or squeezes on
    mobile; animating mask-position by exactly one tile loops seamlessly. */
 .product-layout::before {
-  top: -28px; bottom: -74px;
+  top: -44px; bottom: -74px;
   -webkit-mask:
     linear-gradient(#000, #000) center top / 100% calc(100% - 40px) no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 6 300 6 400 20 500 34 700 34 800 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") left bottom / 800px 40px repeat-x;
@@ -2277,20 +2277,19 @@ body.subscription-selected #shopify-buyer-consent {
   .product-page  { padding: 24px 16px 60px; }
   .product-layout { grid-template-columns: 1fr; gap: 32px; margin-bottom: 48px; }
 
-  /* ── Mobile gallery: full-bleed carousel ──
-     The image breaks the page gutter to sit edge-to-edge, the arrows drop to a
-     single pill at the bottom, and the thumbnail strip collapses into dots.
-     The dots are the same .gallery-thumb elements restyled, so the existing
-     click handlers keep working — no JS change needed. Desktop is untouched. */
+  /* ── Mobile gallery: inset carousel with rounded corners ──
+     The image sits within the page gutter (centered, not edge-to-edge), the
+     arrows drop to a single pill at the bottom, and the thumbnail strip
+     collapses into dots. The dots are the same .gallery-thumb elements
+     restyled, so the existing click handlers keep working. */
   .product-gallery {
-    margin-left: -16px;
-    margin-right: -16px;
+    margin-left: 0;
+    margin-right: 0;
   }
   .gallery-main {
-    border-radius: 0;
-    margin-bottom: 0;
-    box-shadow: none;
-    aspect-ratio: 1/1;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.10);
   }
   .gallery-arrow {
     top: auto;
