@@ -479,9 +479,8 @@
     {%- endif -%}
   {%- endif -%}
   {% section 'footer' %}
-  {%- comment -%} Email popup (WELCOME15 / 15% off) hidden site-wide per merchant request.
-       To re-enable: uncomment the line below. Section template itself is untouched. {%- endcomment -%}
-  {%- comment -%} {% section 'email-popup' %} {%- endcomment -%}
+  {%- comment -%} Email popup — captures email + marketing opt-in, gives WELCOME15 (15% off first order). {%- endcomment -%}
+  {% section 'email-popup' %}
   <div id="cart-drawer" class="cart-drawer">
     <div class="cart-drawer-overlay"></div>
     <div class="cart-drawer-panel">
