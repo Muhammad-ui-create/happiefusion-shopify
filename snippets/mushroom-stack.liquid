@@ -91,12 +91,10 @@
 
   .mstack-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
 
-  /* Dose stack card — frosted glass so the mesh glows through */
+  /* Dose stack card — translucent white (no backdrop blur, for scroll perf) */
   .mstack-chart {
     position: relative;
-    background: rgba(255,255,255,0.66);
-    -webkit-backdrop-filter: blur(12px) saturate(1.1);
-    backdrop-filter: blur(12px) saturate(1.1);
+    background: rgba(255,255,255,0.82);
     border: 1px solid rgba(255,255,255,0.7);
     border-radius: 22px; padding: 26px 26px 20px;
     box-shadow: 0 18px 44px rgba(45,106,79,0.14), inset 0 1px 0 rgba(255,255,255,0.9);

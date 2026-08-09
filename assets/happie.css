@@ -481,7 +481,7 @@ input, select { font-family: var(--font); }
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 34 300 34 400 20 500 6 700 6 800 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") left top / 800px 40px repeat-x,
     linear-gradient(#000, #000) center / 100% calc(100% - 80px) no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 6 300 6 400 20 500 34 700 34 800 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") left bottom / 800px 40px repeat-x;
-  animation: pdpWaveBoth 12s linear infinite;
+  /* static waves — drift removed for scroll performance */
 }
 @media (prefers-reduced-motion: reduce) { .mushroom-benefits { animation: none; } }
 .mushroom-benefits .section-inner { position: relative; z-index: 1; }
@@ -615,7 +615,7 @@ input, select { font-family: var(--font); }
     radial-gradient(58% 128% at 99% 30%, rgba(86,110,226,0.52)  0%, rgba(86,110,226,0)  62%);
   background-size: 200% 200%, 215% 215%, 190% 190%, 225% 225%, 205% 205%, 235% 235%, 220% 220%;
   background-repeat: no-repeat;
-  animation: navSilk 34s ease-in-out infinite, footerWave 10s linear infinite;
+  animation: navSilk 34s ease-in-out infinite;
   /* Wave-shaped top edge (matches the PDP wave bands), drifting sideways */
   -webkit-mask:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 34 300 34 400 20 500 6 700 6 800 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") left top / 800px 40px repeat-x,
@@ -688,7 +688,7 @@ input, select { font-family: var(--font); }
           mask:
     linear-gradient(#000, #000) center top / 100% calc(100% - 40px) no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 6 300 6 400 20 500 34 700 34 800 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") left bottom / 800px 40px repeat-x;
-  animation: pdpWaveBottom 9s linear infinite;
+  /* static waves — drift removed for scroll performance */
 }
 .pdp-lower::before {
   top: -54px; bottom: -44px;
@@ -700,7 +700,7 @@ input, select { font-family: var(--font); }
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 34 300 34 400 20 500 6 700 6 800 20V40H0Z' fill='%23000'/%3E%3C/svg%3E") left top / 800px 40px repeat-x,
     linear-gradient(#000, #000) center / 100% calc(100% - 80px) no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C100 6 300 6 400 20 500 34 700 34 800 20V0H0Z' fill='%23000'/%3E%3C/svg%3E") left bottom / 800px 40px repeat-x;
-  animation: pdpWaveBoth 12s linear infinite;
+  /* static waves — drift removed for scroll performance */
 }
 @keyframes pdpWaveBottom {
   from { -webkit-mask-position: center top, 0 bottom;     mask-position: center top, 0 bottom; }
