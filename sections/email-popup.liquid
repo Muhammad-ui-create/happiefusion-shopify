@@ -284,6 +284,9 @@
   var form = document.getElementById('ep-email-form');
 
   function showPopup() {
+    // Never re-show once dismissed/subscribed (e.g. exit-intent firing after
+    // the user already closed the timed popup).
+    if (getCookie(COOKIE_KEY) || overlay.classList.contains('ep-visible')) return;
     overlay.classList.add('ep-visible');
     overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
