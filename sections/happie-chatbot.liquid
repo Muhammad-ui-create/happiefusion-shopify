@@ -660,8 +660,8 @@
         reply: "Once your order ships you'll get an **email with tracking info** automatically.\n\nIf you haven't received it within 2 business days of ordering:\n1. Check your spam folder\n2. Email us at **orders@livehappie.com** with your order number, we'll track it down\n3. Or click 'Talk to a human' below and we'll handle it"
       },
       {
-        match: /free shipping|when.*free.*ship|free delivery/i,
-        reply: "**Every order ships free, no minimum, no code needed.** Applied automatically at checkout.\n\nWhether you order a single 6-pack ($23.99) or the 12-pack Variety Pack ($41.99), shipping is on us. Standard delivery is 3–5 business days from our Northern California warehouse."
+        match: /free ship|ship\w* free|free deliver|when.*free.*ship|(minimum|threshold|qualify|spend|over \$?\d+|above \$?\d+|\$\s?\d+ (for|to)).*(ship|deliver|free)|(ship|deliver).*(minimum|threshold|over \$?\d+|no minimum)/i,
+        reply: "**Every order ships free, no minimum, no code needed.** There's no order threshold and no minimum spend, free shipping applies to every order automatically at checkout.\n\nWhether you order a single 6-pack ($23.99) or the 12-pack Variety Pack ($41.99), shipping is on us. Standard delivery is 3–5 business days from our Northern California warehouse."
       },
 
       // ── RETURNS ──
