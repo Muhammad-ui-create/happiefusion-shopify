@@ -17,7 +17,7 @@
 
   {%- comment -%} ── SEO: META DESCRIPTIONS ── {%- endcomment -%}
   {%- if template.name == 'index' -%}
-    <meta name="description" content="Happie Fungi Fusion — 2,000mg of functional mushrooms (900mg Lion’s Mane, 700mg Cordyceps, 400mg Reishi) per can. Caffeine-free, zero crash, for any occasion. Free shipping, no minimum.">
+    <meta name="description" content="Happie Fungi Fusion, 2,000mg of functional mushrooms (900mg Lion’s Mane, 700mg Cordyceps, 400mg Reishi) per can. Caffeine-free, zero crash, for any occasion. Free shipping, no minimum.">
   {%- elsif template.name == 'product' -%}
     {%- comment -%} Prefer the Shopify-managed SEO description; fall back to body if not set. {%- endcomment -%}
     {%- assign seo_meta = product.metafields.global.description_tag -%}
@@ -28,11 +28,11 @@
   {%- elsif template.name == 'collection' -%}
     {%- assign seo_meta = collection.metafields.global.description_tag -%}
     {%- if seo_meta == blank -%}
-      {%- assign seo_meta = 'Shop ' | append: collection.title | append: ' — functional mushroom seltzers with dual-extracted Lion''s Mane (900mg), Cordyceps (700mg) & Reishi (400mg). Zero caffeine, zero alcohol. From $23.99. Free shipping, no minimum.' -%}
+      {%- assign seo_meta = 'Shop ' | append: collection.title | append: ', functional mushroom seltzers with dual-extracted Lion''s Mane (900mg), Cordyceps (700mg) & Reishi (400mg). Zero caffeine, zero alcohol. From $23.99. Free shipping, no minimum.' -%}
     {%- endif -%}
     <meta name="description" content="{{ seo_meta | escape }}">
   {%- else -%}
-    <meta name="description" content="{{ page_description | default: "Happie Fusion — clean, caffeine-free energy for any occasion. All-natural mushroom seltzer, zero alcohol, zero crash." | escape }}">
+    <meta name="description" content="{{ page_description | default: "Happie Fusion, clean, caffeine-free energy for any occasion. All-natural mushroom seltzer, zero alcohol, zero crash." | escape }}">
   {%- endif -%}
 
   {%- comment -%} ── FAVICON ── {%- endcomment -%}
@@ -63,7 +63,7 @@
   <meta name="geo.placename" content="Northern California">
   <meta name="format-detection" content="telephone=yes">
 
-  {%- comment -%} ── GEO / AI SEARCH KEYWORDS — helps AI assistants understand the page ── {%- endcomment -%}
+  {%- comment -%} ── GEO / AI SEARCH KEYWORDS, helps AI assistants understand the page ── {%- endcomment -%}
   {%- if template.name == 'index' -%}
     <meta name="keywords" content="functional mushroom drinks, mushroom seltzer, Lion's Mane drink, Cordyceps drink, Reishi drink, adaptogen beverage, caffeine-free energy drink, alcohol alternative, sober curious drink, sparkling mushroom water, Happie Fungi Fusion">
   {%- elsif template.name == 'product' -%}
@@ -93,7 +93,7 @@
         fetchpriority="high">
     {%- endif -%}
   {%- elsif template.name == 'product' -%}
-    {%- comment -%} PDP: the gallery hero is the LCP element — imagesizes must match the img's sizes attr in main-product.liquid {%- endcomment -%}
+    {%- comment -%} PDP: the gallery hero is the LCP element, imagesizes must match the img's sizes attr in main-product.liquid {%- endcomment -%}
     {%- assign pdp_hero = product.images | first -%}
     {%- if pdp_hero != blank -%}
       <link rel="preload" as="image"
@@ -124,12 +124,12 @@
   {%- elsif template.name == 'index' -%}
     <meta property="og:type" content="website">
     <meta property="og:title" content="2,000mg of Real Mushrooms, Zero Caffeine | Happie Fusion">
-    <meta property="og:description" content="We put the fun in functional — 900mg Lion’s Mane, 700mg Cordyceps & 400mg Reishi per can. Caffeine-free, zero crash, for any occasion.">
+    <meta property="og:description" content="We put the fun in functional, 900mg Lion’s Mane, 700mg Cordyceps & 400mg Reishi per can. Caffeine-free, zero crash, for any occasion.">
     <meta property="og:image" content="{{ 'happie-logo.png' | asset_url }}">
   {%- else -%}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}">
-    <meta property="og:description" content="{{ page_description | default: "Happie Fusion — clean, caffeine-free energy for any occasion. No alcohol, no crash." | escape }}">
+    <meta property="og:description" content="{{ page_description | default: "Happie Fusion, clean, caffeine-free energy for any occasion. No alcohol, no crash." | escape }}">
     <meta property="og:image" content="{{ 'happie-logo.png' | asset_url }}">
   {%- endif -%}
 
@@ -165,7 +165,7 @@
           "width": 400,
           "height": 100
         },
-        "description": "Happie Fusion makes Fungi Fusion — functional mushroom seltzers with dual-extracted Lion's Mane (900mg), Cordyceps (700mg), and Reishi (400mg) per can. No alcohol, no caffeine, no jitters. Just real adaptogenic results.",
+        "description": "Happie Fusion makes Fungi Fusion, functional mushroom seltzers with dual-extracted Lion's Mane (900mg), Cordyceps (700mg), and Reishi (400mg) per can. No alcohol, no caffeine, no jitters. Just real adaptogenic results.",
         "foundingDate": "2024",
         "foundingLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressRegion": "California", "addressCountry": "US" } },
         "areaServed": { "@type": "Country", "name": "United States" },
@@ -261,7 +261,7 @@
             "name": "Does Happie Fungi Fusion have caffeine?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. Happie Fungi Fusion is 100% caffeine-free. The energy benefits come from Cordyceps mushroom, which supports cellular ATP production naturally — no stimulants, no crash."
+              "text": "No. Happie Fungi Fusion is 100% caffeine-free. The energy benefits come from Cordyceps mushroom, which supports cellular ATP production naturally, no stimulants, no crash."
             }
           },
           {
@@ -277,7 +277,7 @@
             "name": "How much does Happie Fungi Fusion cost?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A 6-pack costs $23.99. A 12-can Variety Pack costs $41.99. Subscribe and Save members get 15% off every order. New customers get 15% off their first order with code WELCOME15. Free shipping on every order — no minimum."
+              "text": "A 6-pack costs $23.99. A 12-can Variety Pack costs $41.99. Subscribe and Save members get 15% off every order. New customers get 15% off their first order with code WELCOME15. Free shipping on every order, no minimum."
             }
           },
           {
@@ -285,7 +285,7 @@
             "name": "Is Happie Fungi Fusion psychedelic?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. Happie Fungi Fusion contains only functional (adaptogenic) mushrooms — Lion's Mane, Cordyceps, and Reishi. These are completely different from psilocybin mushrooms. They are legal in all 50 US states, non-psychoactive, and backed by decades of peer-reviewed research."
+              "text": "No. Happie Fungi Fusion contains only functional (adaptogenic) mushrooms, Lion's Mane, Cordyceps, and Reishi. These are completely different from psilocybin mushrooms. They are legal in all 50 US states, non-psychoactive, and backed by decades of peer-reviewed research."
             }
           },
           {
@@ -293,7 +293,7 @@
             "name": "Where can I buy Happie Fungi Fusion?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Happie Fungi Fusion is available directly at happiefusion.com — shipping to all 50 US states, free on every order — and on Amazon. New customers get 15% off their first order with code WELCOME15."
+              "text": "Happie Fungi Fusion is available directly at happiefusion.com, shipping to all 50 US states, free on every order, and on Amazon. New customers get 15% off their first order with code WELCOME15."
             }
           }
         ]
@@ -377,8 +377,8 @@
       { "@type": "PropertyValue", "name": "Lion's Mane", "value": "900mg per can, dual-extracted fruiting body" },
       { "@type": "PropertyValue", "name": "Cordyceps", "value": "700mg per can, dual-extracted fruiting body" },
       { "@type": "PropertyValue", "name": "Reishi", "value": "400mg per can, dual-extracted fruiting body" },
-      { "@type": "PropertyValue", "name": "Caffeine", "value": "0mg — caffeine free" },
-      { "@type": "PropertyValue", "name": "Alcohol", "value": "0% — alcohol free" },
+      { "@type": "PropertyValue", "name": "Caffeine", "value": "0mg, caffeine free" },
+      { "@type": "PropertyValue", "name": "Alcohol", "value": "0%, alcohol free" },
       { "@type": "PropertyValue", "name": "Calories", "value": "~40 per can" },
       { "@type": "PropertyValue", "name": "Vegan", "value": "Yes" },
       { "@type": "PropertyValue", "name": "Non-GMO", "value": "Yes" }
@@ -414,7 +414,7 @@
   <main id="main-content">
     {{ content_for_layout }}
   </main>
-  {%- comment -%} Homepage blog feed — inlined here (a synced section wasn't being registered for {% section %} use). {%- endcomment -%}
+  {%- comment -%} Homepage blog feed, inlined here (a synced section wasn't being registered for {% section %} use). {%- endcomment -%}
   {%- if template.name == 'index' -%}
     {%- assign bf_feed = blogs.news -%}
     {%- if bf_feed.articles.size > 0 -%}
@@ -479,7 +479,7 @@
     {%- endif -%}
   {%- endif -%}
   {% section 'footer' %}
-  {%- comment -%} Email popup — captures email + marketing opt-in, gives WELCOME15 (15% off first order). {%- endcomment -%}
+  {%- comment -%} Email popup, captures email + marketing opt-in, gives WELCOME15 (15% off first order). {%- endcomment -%}
   {% section 'email-popup' %}
   <div id="cart-drawer" class="cart-drawer">
     <div class="cart-drawer-overlay"></div>

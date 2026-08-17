@@ -1,6 +1,6 @@
 {% comment %}
   Promo item only renders on the caffeine LP (WELCOME15, which that page auto-applies).
-  The site-wide USA10 promo was removed 2026-07-02 — the ads no longer carry a
+  The site-wide USA10 promo was removed 2026-07-02, the ads no longer carry a
   discount and the code expires Jul 6; an unfulfillable bar promise was hurting
   checkout trust.
 {% endcomment %}
@@ -12,7 +12,7 @@
   {%- assign promo_code = 'WELCOME15' -%}
 {%- endif -%}
 
-{% comment %} Single set of items — repeated via liquid to fill any screen width {% endcomment %}
+{% comment %} Single set of items, repeated via liquid to fill any screen width {% endcomment %}
 {% capture ann_items %}
   <span class="ann-item">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -46,7 +46,7 @@
       <path d="M12 2a9 9 0 0 1 9 9c0 4-2 7.5-5 9.5l-1-1.5c2-1.5 3.5-4 3.5-8C18.5 7.5 15.5 4.5 12 4.5S5.5 7.5 5.5 11c0 4 1.5 6.5 3.5 8L8 20.5C5 18.5 3 15 3 11a9 9 0 0 1 9-9z"/>
       <path d="M12 7v6l3 2"/>
     </svg>
-    Free Shipping — No Minimum
+    Free Shipping, No Minimum
   </span>
   <span class="ann-divider">✦</span>
   <span class="ann-item">
@@ -63,7 +63,7 @@
       <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
       <line x1="7" y1="7" x2="7.01" y2="7"/>
     </svg>
-    Buy 2, Get 1 Half Off — 6-Packs
+    Buy 2, Get 1 Half Off, 6-Packs
   </span>
   <span class="ann-divider">✦</span>
   {%- if show_promo -%}

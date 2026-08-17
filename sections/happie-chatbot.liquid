@@ -59,7 +59,7 @@
       <!-- Greeting populated by JS -->
     </div>
 
-    <!-- Suggested Replies — Category Menu -->
+    <!-- Suggested Replies, Category Menu -->
     <div class="happie-chat__suggestions" id="happie-chat-suggestions">
       <div class="happie-chat__cat-label">Popular topics</div>
       <button type="button" class="happie-chat__suggestion" data-suggest="What's in every can of Fungi Fusion?">🍄 What's inside</button>
@@ -100,7 +100,7 @@
         <input type="text" name="contact[name]" placeholder="Your name" required>
         <input type="email" name="contact[email]" placeholder="Your email" required>
         <textarea name="contact[body]" placeholder="How can we help?" rows="3" required></textarea>
-        <input type="hidden" name="contact[subject]" value="[Happie Chatbot] New customer message — route to orders@livehappie.com">
+        <input type="hidden" name="contact[subject]" value="[Happie Chatbot] New customer message, route to orders@livehappie.com">
         <input type="hidden" name="contact[source]" value="happie-chatbot">
         <input type="hidden" name="contact[recipient]" value="{{ section.settings.support_email }}">
         <div class="happie-chat__handoff-actions">
@@ -587,15 +587,15 @@
       },
       {
         match: /three mushrooms|3 mushrooms|tell me about (the |)(mushrooms|adaptogens|science)|how (does|do) (it|they|the mushrooms) work|the science/i,
-        reply: "Here's what's in the can:\n\n- **Lion's Mane** (*Hericium erinaceus*) — the shaggy white one, and the mushroom most functional-mushroom research is built on.\n- **Cordyceps** (*Cordyceps militaris*) — an athlete's favorite. Contains cordycepin. Not a stimulant, and no caffeine.\n- **Red Reishi** (*Ganoderma lucidum*) — centuries of use in Asian wellness traditions, and the richest of the three in triterpenes.\n\nWe use only **fruiting body extracts** (the real mushroom) — never mycelium grown on grain. Each batch is **dual-extracted** (hot water + ethanol) for the full spectrum of beta-glucans and triterpenes, then **third-party lab tested**.\n\nDeep dive: [The Science Behind Happie](/pages/the-science)"
+        reply: "Here's what's in the can:\n\n- **Lion's Mane** (*Hericium erinaceus*), the shaggy white one, and the mushroom most functional-mushroom research is built on.\n- **Cordyceps** (*Cordyceps militaris*), an athlete's favorite. Contains cordycepin. Not a stimulant, and no caffeine.\n- **Red Reishi** (*Ganoderma lucidum*), centuries of use in Asian wellness traditions, and the richest of the three in triterpenes.\n\nWe use only **fruiting body extracts** (the real mushroom), never mycelium grown on grain. Each batch is **dual-extracted** (hot water + ethanol) for the full spectrum of beta-glucans and triterpenes, then **third-party lab tested**.\n\nDeep dive: [The Science Behind Happie](/pages/the-science)"
       },
       {
         match: /flavors?|how many flavors|what flavors|which flavors|taste like/i,
-        reply: "We have **three flavors**, all available as 6-packs ($23.99) or a 12-pack Variety Pack ($41.99):\n\n- 🔵 [**Blue Razzberry**](/products/blue-razzberry-fungi-powered-seltzer) — tart, candy-bright\n- 🥭 [**Mango Mimosa**](/products/mango-mimosa-fungi-powered-seltzer) — tropical, lightly sweet\n- 🍉 [**Watermelon**](/products/watermelon-fungi-powered-seltzer) — clean, juicy, refreshing\n\nOr try all three with the [**Variety Pack**](/products/happie-fungi-fusion-mushroom-drink-variety-pack). None taste earthy or medicinal — that was non-negotiable for us."
+        reply: "We have **three flavors**, all available as 6-packs ($23.99) or a 12-pack Variety Pack ($41.99):\n\n- 🔵 [**Blue Razzberry**](/products/blue-razzberry-fungi-powered-seltzer), tart, candy-bright\n- 🥭 [**Mango Mimosa**](/products/mango-mimosa-fungi-powered-seltzer), tropical, lightly sweet\n- 🍉 [**Watermelon**](/products/watermelon-fungi-powered-seltzer), clean, juicy, refreshing\n\nOr try all three with the [**Variety Pack**](/products/happie-fungi-fusion-mushroom-drink-variety-pack). None taste earthy or medicinal, that was non-negotiable for us."
       },
       {
         match: /caffeine|alcohol|alcoholic|caffeinated|stimulant/i,
-        reply: "**Zero caffeine. Zero alcohol.** Always.\n\nThere are no stimulants of any kind in the can — which is why there's no crash and no jitters.\n\nDrink it any time of day: at work, before the gym, or in the evening as an **alcohol alternative** instead of a beer."
+        reply: "**Zero caffeine. Zero alcohol.** Always.\n\nThere are no stimulants of any kind in the can, which is why there's no crash and no jitters.\n\nDrink it any time of day: at work, before the gym, or in the evening as an **alcohol alternative** instead of a beer."
       },
       {
         match: /calories?|sugar|sweetener|nutrition/i,
@@ -603,17 +603,17 @@
       },
       {
         match: /vegan|gluten|gluten[- ]?free|non[- ]?gmo|allergen|dairy/i,
-        reply: "Yes to all of the above:\n\n- ✅ **100% Vegan** — no animal products\n- ✅ **Gluten-free**\n- ✅ **Non-GMO**\n- ✅ **No artificial flavors, colors, or preservatives**\n- ✅ Cultivated mushrooms (not wild-harvested)"
+        reply: "Yes to all of the above:\n\n- ✅ **100% Vegan**, no animal products\n- ✅ **Gluten-free**\n- ✅ **Non-GMO**\n- ✅ **No artificial flavors, colors, or preservatives**\n- ✅ Cultivated mushrooms (not wild-harvested)"
       },
       {
         match: /psychedelic|psilocybin|magic mushroom|trippy|hallucina/i,
-        reply: "**No — absolutely not.** Happie Fungi Fusion contains only **culinary and functional mushrooms** (Lion's Mane, Cordyceps, Red Reishi). These are completely different from psilocybin mushrooms.\n\n- Legal in all 50 US states ✓\n- Non-psychoactive ✓\n- Among the most-studied mushrooms in the category ✓\n\nYou can drink it any time and stay completely clear-headed."
+        reply: "**No, absolutely not.** Happie Fungi Fusion contains only **culinary and functional mushrooms** (Lion's Mane, Cordyceps, Red Reishi). These are completely different from psilocybin mushrooms.\n\n- Legal in all 50 US states ✓\n- Non-psychoactive ✓\n- Among the most-studied mushrooms in the category ✓\n\nYou can drink it any time and stay completely clear-headed."
       },
 
       // ── SAFETY / HEALTH ──
       {
         match: /safe.*daily|drink (every|each) day|can i (drink|have) (this|happie) (every|each) day/i,
-        reply: "**Yes — Happie is made for daily use.**\n\nIt's caffeine-free and alcohol-free, so there's no wrong time for one. Most people build it into a routine: the 2pm reset, the gym bag, or the evening can instead of a beer.\n\nOne can per day is the sweet spot."
+        reply: "**Yes, Happie is made for daily use.**\n\nIt's caffeine-free and alcohol-free, so there's no wrong time for one. Most people build it into a routine: the 2pm reset, the gym bag, or the evening can instead of a beer.\n\nOne can per day is the sweet spot."
       },
       {
         match: /pregnan|nurs|breastfeed|kids?|child(ren)?|teen/i,
@@ -621,53 +621,53 @@
       },
       {
         match: /medication|prescription|blood thinner|drug interaction|interact|warfarin/i,
-        reply: "Functional mushrooms are generally well-tolerated, but **please consult your doctor** if you're on:\n\n- Blood thinners (Reishi has mild blood-thinning effects)\n- Immunosuppressants\n- Diabetes medication\n\nWe're not medical professionals — always ask your healthcare provider about supplement interactions with prescriptions."
+        reply: "Functional mushrooms are generally well-tolerated, but **please consult your doctor** if you're on:\n\n- Blood thinners (Reishi has mild blood-thinning effects)\n- Immunosuppressants\n- Diabetes medication\n\nWe're not medical professionals, always ask your healthcare provider about supplement interactions with prescriptions."
       },
       {
         match: /lab test|third[- ]?party|coa|certificate of analysis|tested|purity/i,
-        reply: "**Every batch is third-party tested at [KCA Laboratories](https://kcalabs.com)** — an ISO/IEC 17025:2017 accredited lab in Nicholasville, KY.\n\n**What we test for:**\n- Heavy metals (As, Cd, Pb, Hg by ICP-MS)\n- 66 pesticides (LC-MS/MS + GC-MS/MS)\n- Microbials (E. coli, Salmonella, yeast/mold)\n- Mycotoxins (aflatoxins + ochratoxin A)\n- Foreign matter & residual solvents\n\n**📄 [Download the full COA for any flavor →](/pages/the-science#lab-results)**\n\nLatest batches: HAPMUSHBR825 (Blue Razz), HAPMUSHMM825 (Mango), HAPMUSHWM (Watermelon) — all tested Jul 31, 2025. All Pass ✓"
+        reply: "**Every batch is third-party tested at [KCA Laboratories](https://kcalabs.com)**, an ISO/IEC 17025:2017 accredited lab in Nicholasville, KY.\n\n**What we test for:**\n- Heavy metals (As, Cd, Pb, Hg by ICP-MS)\n- 66 pesticides (LC-MS/MS + GC-MS/MS)\n- Microbials (E. coli, Salmonella, yeast/mold)\n- Mycotoxins (aflatoxins + ochratoxin A)\n- Foreign matter & residual solvents\n\n**📄 [Download the full COA for any flavor →](/pages/the-science#lab-results)**\n\nLatest batches: HAPMUSHBR825 (Blue Razz), HAPMUSHMM825 (Mango), HAPMUSHWM (Watermelon), all tested Jul 31, 2025. All Pass ✓"
       },
 
       // ── PRICING / SUBSCRIPTION ──
       {
         match: /price|cost|how much|how expensive|pricing/i,
-        reply: "**Our pricing:**\n\n- **6-Pack (any single flavor)** — $23.99\n- **12-Pack Variety Pack** — $41.99 (all 3 flavors)\n- **Subscribe & Save** — 15% off every order + free shipping on every delivery\n\nNew customers also get **15% off their first order** with code `WELCOME15`. **Free shipping on every order — no minimum.**\n\n[Shop now →](/collections/all)"
+        reply: "**Our pricing:**\n\n- **6-Pack (any single flavor)**, $23.99\n- **12-Pack Variety Pack**, $41.99 (all 3 flavors)\n- **Subscribe & Save**, 15% off every order + free shipping on every delivery\n\nNew customers also get **15% off their first order** with code `WELCOME15`. **Free shipping on every order, no minimum.**\n\n[Shop now →](/collections/all)"
       },
       {
         match: /subscribe|subscription|subscribe.*save|recurring|monthly delivery/i,
-        reply: "**Subscribe & Save** is the best deal:\n\n- ✅ **15% off** every single order\n- ✅ **Free shipping** on every subscription delivery — no minimum\n- ✅ **Cancel anytime** — one click, no fees\n- ✅ **Skip or pause** a delivery from your account\n- ✅ Early access to new flavors\n\nDelivery is once per month (and you can skip a month anytime). Pick your flavor at checkout — switch flavors anytime from your account."
+        reply: "**Subscribe & Save** is the best deal:\n\n- ✅ **15% off** every single order\n- ✅ **Free shipping** on every subscription delivery, no minimum\n- ✅ **Cancel anytime**, one click, no fees\n- ✅ **Skip or pause** a delivery from your account\n- ✅ Early access to new flavors\n\nDelivery is once per month (and you can skip a month anytime). Pick your flavor at checkout, switch flavors anytime from your account."
       },
       {
         match: /discount|coupon|promo code|first[- ]?(order|time)|welcome.*code|new customer/i,
-        reply: "**For first-time buyers** we offer **15% off** with code `WELCOME15` at checkout — reserved for new customers.\n\nShipping is **free on every order** — no minimum, no code needed.\n\nAlready a customer? Subscribe & Save gets you **15% off every order**."
+        reply: "**For first-time buyers** we offer **15% off** with code `WELCOME15` at checkout, reserved for new customers.\n\nShipping is **free on every order**, no minimum, no code needed.\n\nAlready a customer? Subscribe & Save gets you **15% off every order**."
       },
       {
         match: /cancel.*subscription|stop subscription|cancel my (account|sub)/i,
-        reply: "You can **cancel anytime** — no fees, no questions asked.\n\n1. Log into your account at [happiefusion.com](/)\n2. Click **Subscriptions**\n3. Click **Cancel**\n\nThat's it. We'd rather earn your business each month than trap you into it. Need help? Email us at orders@livehappie.com."
+        reply: "You can **cancel anytime**, no fees, no questions asked.\n\n1. Log into your account at [happiefusion.com](/)\n2. Click **Subscriptions**\n3. Click **Cancel**\n\nThat's it. We'd rather earn your business each month than trap you into it. Need help? Email us at orders@livehappie.com."
       },
 
       // ── SHIPPING ──
       {
         match: /shipping (cost|rate|price|info|policy|time)|how (fast|long|much) (does )?(it )?(ship|take|cost)|when will (it|my order) arrive/i,
-        reply: "**Shipping breakdown:**\n\n- 📦 **Processing:** 1 business day from our Northern California warehouse\n- 🚚 **Standard delivery:** 3–5 business days — **always FREE, no minimum**\n- ⚡ **Express (2-day):** $15.00\n- 📬 **Subscribers:** FREE shipping on every recurring delivery, no minimum\n\nWe ship to **all 50 US states**. Full details: [Shipping Policy](/pages/shipping-policy)."
+        reply: "**Shipping breakdown:**\n\n- 📦 **Processing:** 1 business day from our Northern California warehouse\n- 🚚 **Standard delivery:** 3–5 business days, **always FREE, no minimum**\n- ⚡ **Express (2-day):** $15.00\n- 📬 **Subscribers:** FREE shipping on every recurring delivery, no minimum\n\nWe ship to **all 50 US states**. Full details: [Shipping Policy](/pages/shipping-policy)."
       },
       {
         match: /where (do you|are you|do they) ship|international|outside (us|usa)|countries|canada|uk/i,
-        reply: "We currently ship to **all 50 US states only** — free standard shipping, no minimum.\n\nWe're working on international shipping — sign up for our email list to be notified when your country is added."
+        reply: "We currently ship to **all 50 US states only**, free standard shipping, no minimum.\n\nWe're working on international shipping, sign up for our email list to be notified when your country is added."
       },
       {
         match: /tracking|track (my )?(order|package|shipment)|hasn'?t (arrived|shipped)|where('?s| is) my order/i,
-        reply: "Once your order ships you'll get an **email with tracking info** automatically.\n\nIf you haven't received it within 2 business days of ordering:\n1. Check your spam folder\n2. Email us at **orders@livehappie.com** with your order number — we'll track it down\n3. Or click 'Talk to a human' below and we'll handle it"
+        reply: "Once your order ships you'll get an **email with tracking info** automatically.\n\nIf you haven't received it within 2 business days of ordering:\n1. Check your spam folder\n2. Email us at **orders@livehappie.com** with your order number, we'll track it down\n3. Or click 'Talk to a human' below and we'll handle it"
       },
       {
         match: /free shipping|when.*free.*ship|free delivery/i,
-        reply: "**Every order ships free — no minimum, no code needed.** Applied automatically at checkout.\n\nWhether you order a single 6-pack ($23.99) or the 12-pack Variety Pack ($41.99), shipping is on us. Standard delivery is 3–5 business days from our Northern California warehouse."
+        reply: "**Every order ships free, no minimum, no code needed.** Applied automatically at checkout.\n\nWhether you order a single 6-pack ($23.99) or the 12-pack Variety Pack ($41.99), shipping is on us. Standard delivery is 3–5 business days from our Northern California warehouse."
       },
 
       // ── RETURNS ──
       {
         match: /return|refund|money back|guarantee|don'?t like it|not happy|unhappy/i,
-        reply: "**30-day satisfaction guarantee.**\n\nIf you're not happy for *any* reason within 30 days of delivery, just email **orders@livehappie.com** and we'll issue a **full refund** — no questions asked.\n\n**You don't even need to return the product.** We'd rather you keep it than deal with the hassle of shipping it back.\n\nFor damaged or wrong items, email us within 7 days with a photo and we'll send a replacement or refund immediately."
+        reply: "**30-day satisfaction guarantee.**\n\nIf you're not happy for *any* reason within 30 days of delivery, just email **orders@livehappie.com** and we'll issue a **full refund**, no questions asked.\n\n**You don't even need to return the product.** We'd rather you keep it than deal with the hassle of shipping it back.\n\nFor damaged or wrong items, email us within 7 days with a photo and we'll send a replacement or refund immediately."
       },
 
       // ── CHECKOUT / ORDER HELP ──
@@ -681,11 +681,11 @@
       },
       {
         match: /forgot password|reset password|can'?t log in|account access|locked out/i,
-        reply: "**To reset your password:**\n\n1. Go to the [account login page](/account/login)\n2. Click **Forgot password?**\n3. Enter your email — we'll send a reset link\n\nStill stuck? Email **orders@livehappie.com** and we'll get you back in within an hour."
+        reply: "**To reset your password:**\n\n1. Go to the [account login page](/account/login)\n2. Click **Forgot password?**\n3. Enter your email, we'll send a reset link\n\nStill stuck? Email **orders@livehappie.com** and we'll get you back in within an hour."
       },
       {
         match: /change.*address|update.*shipping|wrong address|moved/i,
-        reply: "**To change your shipping address:**\n\n- **For an unshipped order:** Email **orders@livehappie.com** ASAP with your order number — we'll update it before it ships.\n- **For a subscription:** Log into your account → Subscriptions → Update shipping address.\n- **For your account:** Log in → Addresses → Edit."
+        reply: "**To change your shipping address:**\n\n- **For an unshipped order:** Email **orders@livehappie.com** ASAP with your order number, we'll update it before it ships.\n- **For a subscription:** Log into your account → Subscriptions → Update shipping address.\n- **For your account:** Log in → Addresses → Edit."
       },
 
       // ── COMPANY / POLICIES ──
@@ -699,15 +699,15 @@
       },
       {
         match: /about|who (are|is) (you|happie)|company|founders?|story/i,
-        reply: "**Happie Fusion** is a small team based in **Northern California**. We started Happie because we wanted a functional drink that actually worked — fruiting body extracts, dual extraction, full transparency.\n\n- ★ 4.9 average across Amazon-verified reviews\n- Every batch lab tested\n- All ingredients sourced & made in the USA\n\nMore: [About Us](/pages/about)"
+        reply: "**Happie Fusion** is a small team based in **Northern California**. We started Happie because we wanted a functional drink that actually worked, fruiting body extracts, dual extraction, full transparency.\n\n- ★ 4.9 average across Amazon-verified reviews\n- Every batch lab tested\n- All ingredients sourced & made in the USA\n\nMore: [About Us](/pages/about)"
       },
       {
         match: /contact|email|phone|reach you|customer service/i,
-        reply: "**Reach our team:**\n\n- 📧 Email: **orders@livehappie.com**\n- 📞 Phone: **(463) 218-9646** (Mon–Fri 9am–5pm PST)\n- 💬 Or click **'Talk to a human'** below to send us a message right now\n\nWe respond within **1 business day** — usually faster."
+        reply: "**Reach our team:**\n\n- 📧 Email: **orders@livehappie.com**\n- 📞 Phone: **(463) 218-9646** (Mon–Fri 9am–5pm PST)\n- 💬 Or click **'Talk to a human'** below to send us a message right now\n\nWe respond within **1 business day**, usually faster."
       },
       {
         match: /reviews?|testimonials?|what (do|are) (customers|people) say/i,
-        reply: "**4.9 stars across Amazon-verified reviews.** Here's a sample:\n\n- ⭐⭐⭐⭐⭐ *\"Best adaptogen drink I've tried. Tastes great without being too sweet.\"* — Shannon B.\n- ⭐⭐⭐⭐⭐ *\"My wife and I replaced morning coffee with this. Smooth, no jitters.\"* — Nicole G.\n- ⭐⭐⭐⭐⭐ *\"Immediately after a few sips, you can feel the effects in your brain.\"* — Kristine M.\n\nRead them all: [Customer Reviews](/pages/reviews)"
+        reply: "**4.9 stars across Amazon-verified reviews.** Here's a sample:\n\n- ⭐⭐⭐⭐⭐ *\"Best adaptogen drink I've tried. Tastes great without being too sweet.\"*, Shannon B.\n- ⭐⭐⭐⭐⭐ *\"My wife and I replaced morning coffee with this. Smooth, no jitters.\"*, Nicole G.\n- ⭐⭐⭐⭐⭐ *\"Immediately after a few sips, you can feel the effects in your brain.\"*, Kristine M.\n\nRead them all: [Customer Reviews](/pages/reviews)"
       },
       {
         match: /wholesale|bulk|retail|stock.*store|carry.*store/i,
@@ -717,19 +717,19 @@
       // ── BENEFITS / USE CASES ──
       {
         match: /focus|concentrat|study|brain|mental clarity|productivity/i,
-        reply: "The mushroom you're thinking of is **Lion's Mane** (*Hericium erinaceus*), and it's in every can — dual-extracted from 100% fruiting bodies, never mycelium grown on grain.\n\nPeople reach for Happie at work, on a deadline, or for that 2pm stretch where a fourth coffee is a bad idea. Try **Mango Mimosa** or **Blue Razzberry**.\n\n[Shop all flavors →](/collections/all)"
+        reply: "The mushroom you're thinking of is **Lion's Mane** (*Hericium erinaceus*), and it's in every can, dual-extracted from 100% fruiting bodies, never mycelium grown on grain.\n\nPeople reach for Happie at work, on a deadline, or for that 2pm stretch where a fourth coffee is a bad idea. Try **Mango Mimosa** or **Blue Razzberry**.\n\n[Shop all flavors →](/collections/all)"
       },
       {
         match: /energy|tired|fatigue|coffee.*alternative|replace.*coffee|morning/i,
-        reply: "The mushroom associated with athletes is **Cordyceps**, and it's in every can. No caffeine and no stimulants — so there's nothing to spike, and nothing to crash from.\n\nIt's the one people drink before the gym, or instead of the third coffee.\n\nTry [Mango Mimosa](/products/mango-mimosa-fungi-powered-seltzer) — light, bright, perfect for mornings."
+        reply: "The mushroom associated with athletes is **Cordyceps**, and it's in every can. No caffeine and no stimulants, so there's nothing to spike, and nothing to crash from.\n\nIt's the one people drink before the gym, or instead of the third coffee.\n\nTry [Mango Mimosa](/products/mango-mimosa-fungi-powered-seltzer), light, bright, perfect for mornings."
       },
       {
         match: /stress|anxi|calm|relax|wind ?down|sleep|insomnia/i,
-        reply: "**Red Reishi** is in every can — the richest of the three mushrooms in triterpenes, which only come out under an alcohol extraction (the step most brands skip).\n\nIt's the can people reach for in the evening instead of a beer — the ritual, without the next morning.\n\nTry [Watermelon](/products/watermelon-fungi-powered-seltzer) for an evening ritual."
+        reply: "**Red Reishi** is in every can, the richest of the three mushrooms in triterpenes, which only come out under an alcohol extraction (the step most brands skip).\n\nIt's the can people reach for in the evening instead of a beer, the ritual, without the next morning.\n\nTry [Watermelon](/products/watermelon-fungi-powered-seltzer) for an evening ritual."
       },
       {
         match: /alcohol.*alternative|sober.*curious|replace.*wine|non[- ]?alcoholic/i,
-        reply: "Happie is one of the **best alcohol alternatives** for sober-curious people:\n\n- ✅ **0% alcohol**\n- ✅ **The ritual** — a cold can on the couch, no compromise\n- ✅ Made with **Lion's Mane, Cordyceps & Red Reishi**\n- ✅ **No alcohol, so no next morning**\n- ✅ Tastes like a real drink, not a kombucha or seltzer\n\nMost customers say [Watermelon](/products/watermelon-fungi-powered-seltzer) or [Mango Mimosa](/products/mango-mimosa-fungi-powered-seltzer) feel most cocktail-like."
+        reply: "Happie is one of the **best alcohol alternatives** for sober-curious people:\n\n- ✅ **0% alcohol**\n- ✅ **The ritual**, a cold can on the couch, no compromise\n- ✅ Made with **Lion's Mane, Cordyceps & Red Reishi**\n- ✅ **No alcohol, so no next morning**\n- ✅ Tastes like a real drink, not a kombucha or seltzer\n\nMost customers say [Watermelon](/products/watermelon-fungi-powered-seltzer) or [Mango Mimosa](/products/mango-mimosa-fungi-powered-seltzer) feel most cocktail-like."
       }
     ];
 
@@ -850,7 +850,7 @@
         return;
       }
 
-      // ── LOCAL KNOWLEDGE BASE — answer common questions instantly ──
+      // ── LOCAL KNOWLEDGE BASE, answer common questions instantly ──
       var localAnswer = findLocalAnswer(text);
       if (localAnswer) {
         // Brief typing delay for natural feel
@@ -974,7 +974,7 @@
       "type": "textarea",
       "id": "greeting",
       "label": "Greeting message",
-      "default": "Hey there! I'm the Happie Assistant — here to help with products, orders, and any questions about Fungi Fusion. You can also reach our team directly at orders@livehappie.com. What can I help with?"
+      "default": "Hey there! I'm the Happie Assistant, here to help with products, orders, and any questions about Fungi Fusion. You can also reach our team directly at orders@livehappie.com. What can I help with?"
     },
     {
       "type": "image_picker",

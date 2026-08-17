@@ -1,5 +1,5 @@
 {%- comment -%}
-  Landing page: Cali State Fair — QR code destination
+  Landing page: Cali State Fair, QR code destination
   Offers: 6-packs BOGO 50% (code FAIRBOGO, auto-applied by CTAs) ·
           Variety 12-pack 15% (WELCOME15, auto-applied) ·
           Build Your Own showcased (built-in bundle savings, no code)
@@ -26,7 +26,7 @@
     <div class="lpf-hero-inner">
       <div class="lpf-badge">🎡 CALI STATE FAIR EXCLUSIVE</div>
       <h1 class="lpf-title">You found us at the fair.<br><span>Here's your reward.</span></h1>
-      <p class="lpf-sub">Fungi Fusion — the functional mushroom seltzer with real doses of Lion's Mane, Cordyceps &amp; Reishi. No alcohol. No caffeine. No crash.</p>
+      <p class="lpf-sub">Fungi Fusion, the functional mushroom seltzer with real doses of Lion's Mane, Cordyceps &amp; Reishi. No alcohol. No caffeine. No crash.</p>
       <div class="lpf-stars-row">
         <span class="lpf-stars">★★★★★</span>
         <span class="lpf-stars-label"><strong>4.9</strong> · Amazon-verified reviews</span>
@@ -44,7 +44,7 @@
   <!-- ── OFFERS ── -->
   <section class="lpf-offers" id="lpf-offers">
     <h2 class="lpf-h2">Fair-only offers, straight from the QR code</h2>
-    <p class="lpf-h2sub">Discounts apply automatically at checkout — no typing codes.</p>
+    <p class="lpf-h2sub">Discounts apply automatically at checkout, no typing codes.</p>
 
     <div class="lpf-offer-grid">
 
@@ -56,23 +56,23 @@
           {%- if p_mango.featured_image -%}<img src="{{ p_mango.featured_image | image_url: width: 300 }}" alt="Mango Mimosa 6-pack" width="150" height="150" loading="lazy">{%- endif -%}
         </div>
         <h3>6-Packs: Buy One,<br>Get One 50% Off</h3>
-        <p class="lpf-offer-math">Two 6-packs (12 cans) for <strong>{{ bogo_pair | money }}</strong> <s>{{ six_price | times: 2 | money }}</s> — save {{ bogo_save | money }}. Mix any flavors.</p>
+        <p class="lpf-offer-math">Two 6-packs (12 cans) for <strong>{{ bogo_pair | money }}</strong> <s>{{ six_price | times: 2 | money }}</s>, save {{ bogo_save | money }}. Mix any flavors.</p>
         <div class="lpf-offer-flavors">
-          <button type="button" class="lpf-flavor-btn lpf-blue" data-lpf-add data-variant="{{ p_blue.selected_or_first_available_variant.id }}" data-qty="2" data-code="FAIRBOGO">Blue Razzberry ×2 — Add to Cart</button>
-          <button type="button" class="lpf-flavor-btn lpf-mango" data-lpf-add data-variant="{{ p_mango.selected_or_first_available_variant.id }}" data-qty="2" data-code="FAIRBOGO">Mango Mimosa ×2 — Add to Cart</button>
-          <button type="button" class="lpf-flavor-btn lpf-water" data-lpf-add data-variant="{{ p_water.selected_or_first_available_variant.id }}" data-qty="2" data-code="FAIRBOGO">Watermelon ×2 — Add to Cart</button>
+          <button type="button" class="lpf-flavor-btn lpf-blue" data-lpf-add data-variant="{{ p_blue.selected_or_first_available_variant.id }}" data-qty="2" data-code="FAIRBOGO">Blue Razzberry ×2, Add to Cart</button>
+          <button type="button" class="lpf-flavor-btn lpf-mango" data-lpf-add data-variant="{{ p_mango.selected_or_first_available_variant.id }}" data-qty="2" data-code="FAIRBOGO">Mango Mimosa ×2, Add to Cart</button>
+          <button type="button" class="lpf-flavor-btn lpf-water" data-lpf-add data-variant="{{ p_water.selected_or_first_available_variant.id }}" data-qty="2" data-code="FAIRBOGO">Watermelon ×2, Add to Cart</button>
         </div>
-        <p class="lpf-offer-note">Each button adds a pair — the second 6-pack rings up half price at checkout. Want mixed flavors? Tap two different buttons, then remove the extras in your cart.</p>
+        <p class="lpf-offer-note">Each button adds a pair, the second 6-pack rings up half price at checkout. Want mixed flavors? Tap two different buttons, then remove the extras in your cart.</p>
       </div>
 
       <!-- Offer 2: Variety pack WELCOME15 -->
       <div class="lpf-offer">
         <div class="lpf-offer-flag lpf-flag-purple">TRY ALL 3 FLAVORS</div>
         <div class="lpf-offer-imgs lpf-offer-imgs-one">
-          {%- if p_var.featured_image -%}<img src="{{ p_var.featured_image | image_url: width: 340 }}" alt="Variety Pack — 12 cans" width="170" height="170" loading="lazy">{%- endif -%}
+          {%- if p_var.featured_image -%}<img src="{{ p_var.featured_image | image_url: width: 340 }}" alt="Variety Pack, 12 cans" width="170" height="170" loading="lazy">{%- endif -%}
         </div>
         <h3>Variety 12-Pack:<br>15% Off</h3>
-        <p class="lpf-offer-math"><strong>{{ var_disc | money }}</strong> <s>{{ var_price | money }}</s> with code WELCOME15 — save {{ var_save | money }}. Four cans of each flavor.</p>
+        <p class="lpf-offer-math"><strong>{{ var_disc | money }}</strong> <s>{{ var_price | money }}</s> with code WELCOME15, save {{ var_save | money }}. Four cans of each flavor.</p>
         <button type="button" class="lpf-offer-cta" data-lpf-add data-variant="{{ p_var.selected_or_first_available_variant.id }}" data-qty="1" data-code="WELCOME15">Add Variety Pack to Cart</button>
         <p class="lpf-offer-note">New customers only · code applies automatically</p>
       </div>
@@ -84,7 +84,7 @@
           {%- if p_byo.featured_image -%}<img src="{{ p_byo.featured_image | image_url: width: 340 }}" alt="Build Your Own pack" width="170" height="170" loading="lazy">{%- endif -%}
         </div>
         <h3>Build Your Own<br>12, 18 or 24-Can Box</h3>
-        <p class="lpf-offer-math">Your flavors, your ratios. From <strong>{{ p_byo.price_min | money }}</strong> — or subscribe &amp; save up to 25%. Free shipping included.</p>
+        <p class="lpf-offer-math">Your flavors, your ratios. From <strong>{{ p_byo.price_min | money }}</strong>, or subscribe &amp; save up to 25%. Free shipping included.</p>
         <a href="/products/build-your-own-fungi-fusion-18-pack" class="lpf-offer-cta lpf-cta-green">Build My Pack →</a>
         <p class="lpf-offer-note">From $3.50 a can · subscribe &amp; save up to 25%</p>
       </div>
@@ -99,22 +99,22 @@
       <div class="lpf-pain-card">
         <span class="lpf-pain-emoji">🍺</span>
         <h3>The beer buzz that turns into a headache</h3>
-        <p>Fungi Fusion gives you something to sip with the same social ritual — zero alcohol, zero hangover, and you still drive home fine.</p>
+        <p>Fungi Fusion gives you something to sip with the same social ritual, zero alcohol, zero hangover, and you still drive home fine.</p>
       </div>
       <div class="lpf-pain-card">
         <span class="lpf-pain-emoji">⚡</span>
         <h3>The 2pm energy-drink crash</h3>
-        <p>Cordyceps supports natural ATP energy — no caffeine, no jitters, no crash an hour later while you're still standing in line.</p>
+        <p>Cordyceps supports natural ATP energy, no caffeine, no jitters, no crash an hour later while you're still standing in line.</p>
       </div>
       <div class="lpf-pain-card">
         <span class="lpf-pain-emoji">🧠</span>
         <h3>Brain fog by the end of the day</h3>
-        <p>900mg of dual-extracted Lion's Mane per can supports focus and mental clarity — the real dose, printed right on the label.</p>
+        <p>900mg of dual-extracted Lion's Mane per can supports focus and mental clarity, the real dose, printed right on the label.</p>
       </div>
       <div class="lpf-pain-card">
         <span class="lpf-pain-emoji">😮‍💨</span>
         <h3>Wired but exhausted</h3>
-        <p>Reishi supports calm without drowsiness. Steady, clear, relaxed — that's the Happie feeling people write reviews about.</p>
+        <p>Reishi supports calm without drowsiness. Steady, clear, relaxed, that's the Happie feeling people write reviews about.</p>
       </div>
     </div>
   </section>
@@ -133,7 +133,7 @@
       <span>✓ No artificial flavors</span>
       <span>✓ Vegan &amp; gluten-free</span>
       <span>✓ Third-party lab tested, every batch</span>
-      <span>✓ Tastes like sparkling juice — never earthy</span>
+      <span>✓ Tastes like sparkling juice, never earthy</span>
     </div>
   </section>
 
@@ -141,7 +141,7 @@
   <section class="lpf-reviews">
     <div class="lpf-reviews-head">
       <span class="lpf-stars lpf-stars-big">★★★★★</span>
-      <h2 class="lpf-h2">4.9 stars — what buyers say</h2>
+      <h2 class="lpf-h2">4.9 stars, what buyers say</h2>
     </div>
     <div class="lpf-review-track">
       <figure class="lpf-review"><span>★★★★★</span><blockquote>"Best adaptogen drink I've tried!"</blockquote><figcaption>Shannon B. · Verified buyer</figcaption></figure>
@@ -158,27 +158,27 @@
     <h2 class="lpf-h2">Quick questions, straight answers</h2>
     <details class="lpf-faq-item" open>
       <summary>How does the buy-one-get-one-half-off work?</summary>
-      <p>Tap any flavor above — the FAIRBOGO code attaches automatically. Add any two 6-packs to your cart (same flavor or mixed) and the second one rings up 50% off at checkout. No code typing needed.</p>
+      <p>Tap any flavor above, the FAIRBOGO code attaches automatically. Add any two 6-packs to your cart (same flavor or mixed) and the second one rings up 50% off at checkout. No code typing needed.</p>
     </details>
     <details class="lpf-faq-item">
       <summary>Will this make me feel "high" or trippy?</summary>
-      <p>No. These are functional mushrooms — Lion's Mane, Cordyceps, and Reishi — completely different from psilocybin. Legal in all 50 states, non-psychoactive, supported by decades of research.</p>
+      <p>No. These are functional mushrooms, Lion's Mane, Cordyceps, and Reishi, completely different from psilocybin. Legal in all 50 states, non-psychoactive, supported by decades of research.</p>
     </details>
     <details class="lpf-faq-item">
       <summary>What does it taste like?</summary>
-      <p>Like a premium sparkling juice. Blue Razzberry is tart and candy-bright, Mango Mimosa is tropical, Watermelon is crisp and clean. Zero earthy or "mushroomy" taste — that was non-negotiable.</p>
+      <p>Like a premium sparkling juice. Blue Razzberry is tart and candy-bright, Mango Mimosa is tropical, Watermelon is crisp and clean. Zero earthy or "mushroomy" taste, that was non-negotiable.</p>
     </details>
     <details class="lpf-faq-item">
       <summary>Does it have caffeine, alcohol, or sugar?</summary>
-      <p>Zero caffeine, zero alcohol. About 40 calories per can, sweetened with organic light agave — no refined sugar, no artificial sweeteners.</p>
+      <p>Zero caffeine, zero alcohol. About 40 calories per can, sweetened with organic light agave, no refined sugar, no artificial sweeteners.</p>
     </details>
     <details class="lpf-faq-item">
       <summary>Can I use WELCOME15 on the 6-packs too?</summary>
-      <p>The 6-packs already have the fair's buy-one-get-one-half-off deal, which is the bigger discount — codes don't stack. WELCOME15 is for the Variety 12-Pack (new customers).</p>
+      <p>The 6-packs already have the fair's buy-one-get-one-half-off deal, which is the bigger discount, codes don't stack. WELCOME15 is for the Variety 12-Pack (new customers).</p>
     </details>
     <details class="lpf-faq-item">
       <summary>When do I get it, and what if I don't like it?</summary>
-      <p>Ships within 1 business day from our Northern California warehouse, arrives in 3–5 — free shipping on every order, no minimum. And if it's not for you, email us within 30 days for a full refund. You keep the cans.</p>
+      <p>Ships within 1 business day from our Northern California warehouse, arrives in 3–5, free shipping on every order, no minimum. And if it's not for you, email us within 30 days for a full refund. You keep the cans.</p>
     </details>
   </section>
 

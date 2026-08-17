@@ -74,7 +74,7 @@
     <!-- ======= RIGHT: Product Info ======= -->
     <div class="product-info">
 
-      {% comment %} Low-stock urgency — real count when inventory is truly under 20; otherwise a stable per-product daily figure {% endcomment %}
+      {% comment %} Low-stock urgency, real count when inventory is truly under 20; otherwise a stable per-product daily figure {% endcomment %}
       {%- assign _inv = product.selected_or_first_available_variant.inventory_quantity -%}
       {%- if _inv and _inv > 0 and _inv <= 20 -%}
         {%- assign _shown = _inv -%}
@@ -88,7 +88,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
           </svg>
-          <span>Low stock — only <strong>{{ _shown }}</strong> packs left. Order soon</span>
+          <span>Low stock, only <strong>{{ _shown }}</strong> packs left. Order soon</span>
         </div>
       {%- endif -%}
 
@@ -175,7 +175,7 @@
 
         {%- comment -%}
           Cross-links to the other flavours. Each flavour is its own product, so
-          the variant swatches above never surface them — without this row a
+          the variant swatches above never surface them, without this row a
           visitor who wants a different flavour has to go back to the collection.
           Labels and colours come from the same flavour map used by the swatches.
         {%- endcomment -%}
@@ -213,8 +213,8 @@
           </div>
         {%- endif -%}
 
-      {% comment %} Buy 2 Get 1 Half Off — the three 6-packs only. The 50% is a native automatic
-         BXGY discount ("Buy 2, Get 1 Half Off — Fungi Fusion 6-Packs"); this button just adds 3. {% endcomment %}
+      {% comment %} Buy 2 Get 1 Half Off, the three 6-packs only. The 50% is a native automatic
+         BXGY discount ("Buy 2, Get 1 Half Off, Fungi Fusion 6-Packs"); this button just adds 3. {% endcomment %}
       {%- assign b2g1_handles = "blue-razzberry-fungi-powered-seltzer,mango-mimosa-fungi-powered-seltzer,watermelon-fungi-powered-seltzer" | split: "," -%}
       {%- if b2g1_handles contains product.handle and product.available -%}
         {%- assign b2g1_unit = product.selected_or_first_available_variant.price -%}
@@ -226,7 +226,7 @@
             <span class="pdp-b2g1-off">3rd is 50% off</span>
           </div>
           <strong class="pdp-b2g1-title">Buy 2, get your 3rd half&nbsp;off</strong>
-          <span class="pdp-b2g1-sub">Grab 3 six-packs of {{ b2g1_flavor }} — that's 18 cans, and your third is 50% off (about {{ b2g1_save | money }} back).</span>
+          <span class="pdp-b2g1-sub">Grab 3 six-packs of {{ b2g1_flavor }}, that's 18 cans, and your third is 50% off (about {{ b2g1_save | money }} back).</span>
           <button type="button" class="pdp-b2g1-btn" id="pdp-b2g1-btn" data-vid="{{ product.selected_or_first_available_variant.id }}">Add 3 to cart</button>
           <span class="pdp-b2g1-note">50% off your 3rd applies automatically at checkout.</span>
         </div>
@@ -317,11 +317,11 @@
           </div>
         {% endif %}
 
-        {% comment %} Social proof strip — real numbers only: Amazon review count + cumulative volume {% endcomment %}
+        {% comment %} Social proof strip, real numbers only: Amazon review count + cumulative volume {% endcomment %}
         <div class="pdp-proof-row" aria-label="Customer proof">
           <span class="pdp-proof-item"><span class="pdp-proof-star">★</span> <strong>4.9</strong> average on Amazon</span>
           <span class="pdp-proof-dot" aria-hidden="true">·</span>
-          <span class="pdp-proof-item">Amazon's Choice — Watermelon 6-Pack</span>
+          <span class="pdp-proof-item">Amazon's Choice, Watermelon 6-Pack</span>
         </div>
 
 
@@ -331,16 +331,16 @@
             <span id="atc-text">ADD TO CART – <span id="atc-price">{{ product.selected_or_first_available_variant.price | money }}</span></span>
           </button>
 
-          {% comment %} Express checkout — Shop Pay, Apple Pay, Google Pay (renders only the ones the buyer's browser supports) {% endcomment %}
+          {% comment %} Express checkout, Shop Pay, Apple Pay, Google Pay (renders only the ones the buyer's browser supports) {% endcomment %}
           {{ form | payment_button }}
         {%- else -%}
           <button type="button" class="btn-atc btn-atc-soldout" disabled>
-            <span>SOLD OUT — BACK SOON</span>
+            <span>SOLD OUT, BACK SOON</span>
           </button>
           <p class="lp-atc-note" style="text-align:center;">Want it back first? The 6-packs and the <a href="/products/build-your-own-fungi-fusion-18-pack" style="font-weight:700;text-decoration:underline;">Build Your Own 18-Pack</a> are in stock now.</p>
         {%- endif -%}
 
-        {% comment %} Accepted payment methods — same row as the cart drawer {% endcomment %}
+        {% comment %} Accepted payment methods, same row as the cart drawer {% endcomment %}
         <div class="cart-trust-row pdp-pay-row" aria-label="Accepted payment methods">
           <svg viewBox="0 0 34 22" width="34" height="22" role="img" aria-label="Visa"><rect width="34" height="22" rx="3" fill="#1A1F71"/><text x="17" y="15.5" font-family="Arial,sans-serif" font-weight="900" font-size="9" fill="#fff" text-anchor="middle" letter-spacing="0.5">VISA</text></svg>
           <svg viewBox="0 0 34 22" width="34" height="22" role="img" aria-label="Mastercard"><rect width="34" height="22" rx="3" fill="#fff" stroke="#e5e5e5"/><circle cx="13" cy="11" r="6" fill="#EB001B"/><circle cx="21" cy="11" r="6" fill="#F79E1B"/><path d="M17 6.5a6 6 0 0 0 0 9 6 6 0 0 0 0-9z" fill="#FF5F00"/></svg>
@@ -360,7 +360,7 @@
           </span>
           <span class="trust-pill">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 1 9 9c0 4-2 7.5-5 9.5l-1-1.5c2-1.5 3.5-4 3.5-8C18.5 7.5 15.5 4.5 12 4.5S5.5 7.5 5.5 11c0 4 1.5 6.5 3.5 8L8 20.5C5 18.5 3 15 3 11a9 9 0 0 1 9-9z"/><path d="M12 7v6l3 2"/></svg>
-            Free Shipping — No Minimum
+            Free Shipping, No Minimum
           </span>
           <span class="trust-pill">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg>
@@ -375,7 +375,7 @@
       {% endform %}
 
 
-      {% comment %} Build Your Own cross-sell — hidden on the BYO product itself (it uses its own template) {% endcomment %}
+      {% comment %} Build Your Own cross-sell, hidden on the BYO product itself (it uses its own template) {% endcomment %}
       {%- assign byo = all_products['build-your-own-fungi-fusion-18-pack'] -%}
       {%- if byo and byo.available and product.handle != byo.handle -%}
         <a href="/products/build-your-own-fungi-fusion-18-pack" class="pdp-byo-card">
@@ -387,7 +387,7 @@
           <div class="pdp-byo-body">
             <span class="pdp-byo-tag">CUSTOM PACK BUILDER</span>
             <strong class="pdp-byo-title">Build Your Own 12, 18 or 24-Can Box</strong>
-            <span class="pdp-byo-sub">Mix all three flavors your way — from {{ byo.price_min | money }}, $3.50 a can · or subscribe &amp; save up to 25%</span>
+            <span class="pdp-byo-sub">Mix all three flavors your way, from {{ byo.price_min | money }}, $3.50 a can · or subscribe &amp; save up to 25%</span>
           </div>
           <span class="pdp-byo-arrow" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -408,9 +408,9 @@
           <div class="accordion-body">
             <p><strong>Functional Mushroom Blend (2,000mg total):</strong></p>
             <ul>
-              <li>Lion's Mane Extract (fruiting body) — 900mg</li>
-              <li>Cordyceps militaris Extract (fruiting body) — 700mg</li>
-              <li>Reishi Extract (fruiting body) — 400mg</li>
+              <li>Lion's Mane Extract (fruiting body), 900mg</li>
+              <li>Cordyceps militaris Extract (fruiting body), 700mg</li>
+              <li>Reishi Extract (fruiting body), 400mg</li>
             </ul>
             <p><strong>Other Ingredients:</strong> Carbonated Water, Organic Light Blue Agave Nectar, Citric Acid, Natural Flavor, Ocean Derived Magnesium, Ocean Derived Calcium Citrate, Potassium Sorbate, Benzoic Acid.</p>
             <p>Vegan · Gluten-Free · Non-GMO · No Artificial Flavors</p>
@@ -426,8 +426,8 @@
             <svg class="acc-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="accordion-body">
-            <p>Dual-extraction pulls both water-soluble beta-glucans and fat-soluble triterpenes from each mushroom — the full spectrum of active compounds.</p>
-            <p>Most products use mycelium on grain (mostly starch, low actives). Happie uses <strong>fruiting body extracts</strong> — the real mushroom, standardized for potency.</p>
+            <p>Dual-extraction pulls both water-soluble beta-glucans and fat-soluble triterpenes from each mushroom, the full spectrum of active compounds.</p>
+            <p>Most products use mycelium on grain (mostly starch, low actives). Happie uses <strong>fruiting body extracts</strong>, the real mushroom, standardized for potency.</p>
             <p>Drink one daily. Most customers notice improved focus and energy within 1–2 weeks of consistent use.</p>
           </div>
         </div>
@@ -441,7 +441,7 @@
             <svg class="acc-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="accordion-body">
-            <p>Every batch is third-party tested at <strong>KCA Laboratories</strong> — an ISO/IEC 17025:2017 accredited lab in Nicholasville, KY.</p>
+            <p>Every batch is third-party tested at <strong>KCA Laboratories</strong>, an ISO/IEC 17025:2017 accredited lab in Nicholasville, KY.</p>
             <ul>
               <li>Heavy metals (As, Cd, Pb, Hg) by ICP-MS</li>
               <li>66 pesticides by LC-MS/MS and GC-MS/MS</li>
@@ -457,7 +457,7 @@
     </div><!-- /product-info -->
   </div><!-- /product-layout -->
 
-  <!-- ======= OCCASIONS — positioning for cold Meta traffic landing here ======= -->
+  <!-- ======= OCCASIONS, positioning for cold Meta traffic landing here ======= -->
   <section class="pdp-occasions" aria-labelledby="pdp-occasions-title">
     {%- comment -%} Rolling water layers, tinted by the product's own accent {%- endcomment -%}
     <div class="wave-field" aria-hidden="true">
@@ -468,8 +468,8 @@
     <div class="pdp-occ-inner">
       <div class="pdp-occ-head">
         <span class="pdp-occ-eyebrow">We Put the Fun in Functional</span>
-        <h2 class="pdp-occ-title" id="pdp-occasions-title">One layered system — for any part of your day.</h2>
-        <p class="pdp-occ-sub">Caffeine-free, all-natural, zero alcohol — so there's no wrong time to crack one. Here's when people reach for Happie.</p>
+        <h2 class="pdp-occ-title" id="pdp-occasions-title">One layered system for any part of your day.</h2>
+        <p class="pdp-occ-sub">Caffeine-free, all-natural, zero alcohol, so there's no wrong time to crack one. Here's when people reach for Happie.</p>
       </div>
 
       <div class="pdp-occ-grid">
@@ -478,7 +478,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
           </span>
           <h3>At work</h3>
-          <p>Sharp, steady attention through your longest block of the day — without the coffee jitters, the 11am spike, or the crash that follows it.</p>
+          <p>Sharp, steady attention through your longest block of the day, without the coffee jitters, the 11am spike, or the crash that follows it.</p>
         </div>
 
         <div class="pdp-occ-card">
@@ -502,7 +502,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           </span>
           <h3>The 2pm reset</h3>
-          <p>For the wall you hit after lunch. 40 calories, no caffeine — so you get the afternoon back without pushing your bedtime later.</p>
+          <p>For the wall you hit after lunch. 40 calories, no caffeine, so you get the afternoon back without pushing your bedtime later.</p>
         </div>
       </div>
 
@@ -609,11 +609,11 @@
   <!-- Reviews + FAQ share one per-flavor wave gradient band -->
   <div class="pdp-lower">
 
-  <!-- ── REVIEWS — real Amazon review excerpts ── -->
+  <!-- ── REVIEWS, real Amazon review excerpts ── -->
   <section class="pdp-reviews" aria-labelledby="pdp-reviews-title">
     <div class="pdp-reviews-head">
       <span class="pdp-reviews-stars" aria-hidden="true">★★★★★</span>
-      <h2 class="pdp-reviews-title" id="pdp-reviews-title">4.9 — what Amazon buyers say</h2>
+      <h2 class="pdp-reviews-title" id="pdp-reviews-title">4.9, what Amazon buyers say</h2>
       <p class="pdp-reviews-sub">From Verified reviews on Amazon</p>
     </div>
     <div class="pdp-reviews-track" role="list">
@@ -653,7 +653,7 @@
     </div>
   </section>
 
-  <!-- ── TRUST FAQ — first-visitor friction killers ── -->
+  <!-- ── TRUST FAQ, first-visitor friction killers ── -->
   <section class="pdp-faq" aria-labelledby="pdp-faq-title">
     <div class="pdp-faq-inner">
       <div class="pdp-faq-head">
@@ -675,7 +675,7 @@
             </span>
           </summary>
           <div class="pdp-faq-a">
-            <p><strong>Yes — formulated for daily use.</strong> Lion's Mane, Cordyceps, and Reishi have centuries of traditional use plus modern peer-reviewed research on daily supplementation. Most subscribers notice improved focus and steadier energy within 2–4 weeks of consistent daily use.</p>
+            <p><strong>Yes, formulated for daily use.</strong> Lion's Mane, Cordyceps, and Reishi have centuries of traditional use plus modern peer-reviewed research on daily supplementation. Most subscribers notice improved focus and steadier energy within 2–4 weeks of consistent daily use.</p>
           </div>
         </details>
 
@@ -688,7 +688,7 @@
             <span class="pdp-faq-chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
           </summary>
           <div class="pdp-faq-a">
-            <p><strong>Absolutely not.</strong> Lion's Mane, Cordyceps, and Reishi are <em>functional</em> mushrooms — completely different from psilocybin (psychedelic mushrooms). Zero psychoactive compounds. Legal in all 50 states. You'll feel focused and calm — not altered.</p>
+            <p><strong>Absolutely not.</strong> Lion's Mane, Cordyceps, and Reishi are <em>functional</em> mushrooms, completely different from psilocybin (psychedelic mushrooms). Zero psychoactive compounds. Legal in all 50 states. You'll feel focused and calm, not altered.</p>
           </div>
         </details>
 
@@ -701,7 +701,7 @@
             <span class="pdp-faq-chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
           </summary>
           <div class="pdp-faq-a">
-            <p><strong>Short-term: 20–40 minutes</strong> for a clear, calm focus from the Lion's Mane. <strong>Long-term: 2–4 weeks</strong> of daily use is when the adaptogenic benefits really stack — better sleep, less afternoon fog, steadier energy. Adaptogens build over time; they're not a stimulant hit.</p>
+            <p><strong>Short-term: 20–40 minutes</strong> for a clear, calm focus from the Lion's Mane. <strong>Long-term: 2–4 weeks</strong> of daily use is when the adaptogenic benefits really stack, better sleep, less afternoon fog, steadier energy. Adaptogens build over time; they're not a stimulant hit.</p>
           </div>
         </details>
 
@@ -714,7 +714,7 @@
             <span class="pdp-faq-chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
           </summary>
           <div class="pdp-faq-a">
-            <p><strong>Zero caffeine. Zero alcohol.</strong> Just 40 calories per can, lightly sweetened with organic agave. The energy is real — but it comes from Cordyceps supporting your body's natural ATP production, not from stimulants. No crash, no jitters, no disrupted sleep.</p>
+            <p><strong>Zero caffeine. Zero alcohol.</strong> Just 40 calories per can, lightly sweetened with organic agave. The energy is real, but it comes from Cordyceps supporting your body's natural ATP production, not from stimulants. No crash, no jitters, no disrupted sleep.</p>
           </div>
         </details>
 
@@ -727,7 +727,7 @@
             <span class="pdp-faq-chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
           </summary>
           <div class="pdp-faq-a">
-            <p><strong>Every single batch.</strong> Tested at <strong>KCA Laboratories</strong> in Nicholasville, KY — an ISO/IEC 17025:2017 accredited lab. We test for heavy metals, 66 pesticides, microbials, mycotoxins, and residual solvents. <a href="/pages/the-science#lab-results">Download the COA for your batch →</a></p>
+            <p><strong>Every single batch.</strong> Tested at <strong>KCA Laboratories</strong> in Nicholasville, KY, an ISO/IEC 17025:2017 accredited lab. We test for heavy metals, 66 pesticides, microbials, mycotoxins, and residual solvents. <a href="/pages/the-science#lab-results">Download the COA for your batch →</a></p>
           </div>
         </details>
 
@@ -753,7 +753,7 @@
             <span class="pdp-faq-chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
           </summary>
           <div class="pdp-faq-a">
-            <p><strong>Like a premium sparkling juice — not a supplement.</strong> Blue Razzberry is tart and candy-bright. Mango Mimosa is tropical and lightly sweet. Watermelon is crisp and refreshing. <strong>Nothing earthy. Nothing medicinal.</strong> If you've ever tried mushroom coffee or capsules and hated the dirt flavor — this isn't that.</p>
+            <p><strong>Like a premium sparkling juice, not a supplement.</strong> Blue Razzberry is tart and candy-bright. Mango Mimosa is tropical and lightly sweet. Watermelon is crisp and refreshing. <strong>Nothing earthy. Nothing medicinal.</strong> If you've ever tried mushroom coffee or capsules and hated the dirt flavor, this isn't that.</p>
           </div>
         </details>
 
@@ -766,7 +766,7 @@
             <span class="pdp-faq-chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
           </summary>
           <div class="pdp-faq-a">
-            <p>Functional mushrooms have a long safety record, but every body is different. <strong>If you're pregnant, nursing, take prescription medication (especially blood thinners or immunosuppressants), or have a medical condition — talk to your doctor first.</strong> We can't give medical advice, but our customer team can answer ingredient questions: <a href="mailto:orders@livehappie.com">orders@livehappie.com</a>.</p>
+            <p>Functional mushrooms have a long safety record, but every body is different. <strong>If you're pregnant, nursing, take prescription medication (especially blood thinners or immunosuppressants), or have a medical condition, talk to your doctor first.</strong> We can't give medical advice, but our customer team can answer ingredient questions: <a href="mailto:orders@livehappie.com">orders@livehappie.com</a>.</p>
           </div>
         </details>
 
@@ -799,19 +799,19 @@
   {% endif %}
 </div>
 
-<!-- PDP FAQ schema — helps Google + AI search surface these answers when someone googles "{{ product.title | escape }} safe" etc. -->
+<!-- PDP FAQ schema, helps Google + AI search surface these answers when someone googles "{{ product.title | escape }} safe" etc. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Is {{ product.title | escape }} safe to drink every day?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — formulated for daily use. Lion's Mane, Cordyceps, and Reishi have centuries of traditional use plus modern peer-reviewed research on daily supplementation. Most subscribers notice improved focus and steadier energy within 2–4 weeks of consistent daily use." } },
-    { "@type": "Question", "name": "Will Happie Fungi Fusion make me feel high or psychedelic?", "acceptedAnswer": { "@type": "Answer", "text": "No. Lion's Mane, Cordyceps, and Reishi are functional mushrooms — completely different from psilocybin (psychedelic mushrooms). Zero psychoactive compounds. Legal in all 50 states." } },
-    { "@type": "Question", "name": "How long until I feel the effects of Happie Fungi Fusion?", "acceptedAnswer": { "@type": "Answer", "text": "Short-term: 20–40 minutes for clear, calm focus from Lion's Mane. Long-term: 2–4 weeks of daily use is when the adaptogenic benefits stack — better sleep, less afternoon fog, steadier energy. Adaptogens build over time; they're not a stimulant hit." } },
+    { "@type": "Question", "name": "Is {{ product.title | escape }} safe to drink every day?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, formulated for daily use. Lion's Mane, Cordyceps, and Reishi have centuries of traditional use plus modern peer-reviewed research on daily supplementation. Most subscribers notice improved focus and steadier energy within 2–4 weeks of consistent daily use." } },
+    { "@type": "Question", "name": "Will Happie Fungi Fusion make me feel high or psychedelic?", "acceptedAnswer": { "@type": "Answer", "text": "No. Lion's Mane, Cordyceps, and Reishi are functional mushrooms, completely different from psilocybin (psychedelic mushrooms). Zero psychoactive compounds. Legal in all 50 states." } },
+    { "@type": "Question", "name": "How long until I feel the effects of Happie Fungi Fusion?", "acceptedAnswer": { "@type": "Answer", "text": "Short-term: 20–40 minutes for clear, calm focus from Lion's Mane. Long-term: 2–4 weeks of daily use is when the adaptogenic benefits stack, better sleep, less afternoon fog, steadier energy. Adaptogens build over time; they're not a stimulant hit." } },
     { "@type": "Question", "name": "Does Happie Fungi Fusion have caffeine or sugar?", "acceptedAnswer": { "@type": "Answer", "text": "Zero caffeine. Zero alcohol. Just 40 calories per can, lightly sweetened with organic agave. Energy comes from Cordyceps supporting natural ATP production, not stimulants. No crash, no jitters, no disrupted sleep." } },
-    { "@type": "Question", "name": "Is Happie Fungi Fusion third-party lab tested?", "acceptedAnswer": { "@type": "Answer", "text": "Every batch is tested at KCA Laboratories in Nicholasville, KY — an ISO/IEC 17025:2017 accredited lab. We test for heavy metals, 66 pesticides, microbials, mycotoxins, and residual solvents. Certificate of Analysis is downloadable for each batch." } },
+    { "@type": "Question", "name": "Is Happie Fungi Fusion third-party lab tested?", "acceptedAnswer": { "@type": "Answer", "text": "Every batch is tested at KCA Laboratories in Nicholasville, KY, an ISO/IEC 17025:2017 accredited lab. We test for heavy metals, 66 pesticides, microbials, mycotoxins, and residual solvents. Certificate of Analysis is downloadable for each batch." } },
     { "@type": "Question", "name": "What is Happie Fungi Fusion's return policy?", "acceptedAnswer": { "@type": "Answer", "text": "30-day full refund. Email orders@livehappie.com within 30 days for a full refund. You don't need to ship the product back." } },
-    { "@type": "Question", "name": "What does Happie Fungi Fusion taste like?", "acceptedAnswer": { "@type": "Answer", "text": "Like a premium sparkling juice — not a supplement. Blue Razzberry is tart and candy-bright. Mango Mimosa is tropical and lightly sweet. Watermelon is crisp and refreshing. Nothing earthy or medicinal." } },
+    { "@type": "Question", "name": "What does Happie Fungi Fusion taste like?", "acceptedAnswer": { "@type": "Answer", "text": "Like a premium sparkling juice, not a supplement. Blue Razzberry is tart and candy-bright. Mango Mimosa is tropical and lightly sweet. Watermelon is crisp and refreshing. Nothing earthy or medicinal." } },
     { "@type": "Question", "name": "Can I take Happie Fungi Fusion with medication or while pregnant?", "acceptedAnswer": { "@type": "Answer", "text": "Functional mushrooms have a long safety record, but if you're pregnant, nursing, take prescription medication (especially blood thinners or immunosuppressants), or have a medical condition, talk to your doctor first." } }
   ]
 }
@@ -844,7 +844,7 @@
     ]
   };
 
-  // Flavor swatch — update label on hover/click
+  // Flavor swatch, update label on hover/click
   document.querySelectorAll('.flavor-swatch').forEach(btn => {
     btn.addEventListener('mouseenter', () => {
       const label = document.getElementById('selected-flavor-label');
@@ -854,14 +854,14 @@
 
   /* ── Subscription policy disclosure toggle ──
      Shopify auto-injects "This item is a deferred, subscription, or recurring purchase…"
-     under the buy buttons whenever the product HAS selling plans — even when the buyer
+     under the buy buttons whenever the product HAS selling plans, even when the buyer
      has One Time Purchase selected. That reads as "I'm about to get auto-billed" to cold
      traffic. Hide it unless Subscribe & Save is actually selected; it must stay visible
      when a selling plan IS selected (required consent disclosure). */
   (function() {
     // Shopify renders the consent text as <small id="shopify-buyer-consent"> inside
     // .shopify-payment-button. CSS hides it by default (see happie.css); this toggle
-    // re-shows it whenever a selling plan is actually selected — required consent.
+    // re-shows it whenever a selling plan is actually selected, required consent.
     function applyVisibility() {
       var checked = document.querySelector('input[name="selling_plan"]:checked');
       document.body.classList.toggle('subscription-selected', !!(checked && checked.value));
@@ -874,7 +874,7 @@
 </script>
 
 {%- if product.available -%}
-<!-- ── Sticky mobile ATC bar — appears once the buy box scrolls out of view ── -->
+<!-- ── Sticky mobile ATC bar, appears once the buy box scrolls out of view ── -->
 <div class="pdp-sticky-atc" id="pdp-sticky-atc" style="--pdp-accent: {{ product_accent }};">
   <div class="pdp-sticky-info">
     <span class="pdp-sticky-title">{{ product.title | split: ' — ' | first | escape }}</span>
@@ -893,7 +893,7 @@
       bar.classList.remove('is-visible');
     });
     // Reveal the pinned price + buy button as soon as the visitor scrolls past the
-    // hero image — the inline buy box sits far down the page, so waiting for it to
+    // hero image, the inline buy box sits far down the page, so waiting for it to
     // scroll out of view left mobile shoppers with no visible price/CTA for ~2 screens.
     // Hide it only while the real buy box is actually on screen (avoids a double CTA).
     var syncBar = function() {

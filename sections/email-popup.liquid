@@ -35,13 +35,13 @@
     <div class="ep-form-panel">
       <div class="ep-eyebrow">First-Time Buyers Only</div>
       <h2 class="ep-headline">15% off your<br>first order. On us.</h2>
-      <p class="ep-sub">Sign up and get <strong>15% off your first order</strong> — plus <strong>free shipping</strong> on every order, no minimum. Discount reserved for new customers.</p>
+      <p class="ep-sub">Sign up and get <strong>15% off your first order</strong>, plus <strong>free shipping</strong> on every order, no minimum. Discount reserved for new customers.</p>
 
       {%- comment -%}
         Standard Shopify Dawn pattern for newsletter signup:
         {% form 'customer' %} renders the form with the proper authenticity_token,
         form_type=customer, and utf8 fields automatically.
-        Use ONLY contact[*] fields (not customer[*]) — that's the Shopify convention
+        Use ONLY contact[*] fields (not customer[*]), that's the Shopify convention
         for newsletter signups inside a 'customer' form_type.
       {%- endcomment -%}
       {% form 'customer', id: 'ep-email-form', class: 'ep-form' %}
@@ -89,7 +89,7 @@
       <div id="ep-success" class="ep-success" style="display:none;">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#52B788" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         <div>
-          <strong>You're in!</strong> Your code is <strong class="ep-code">WELCOME15</strong> — 15% off your first order. We've emailed it too.
+          <strong>You're in!</strong> Your code is <strong class="ep-code">WELCOME15</strong>, 15% off your first order. We've emailed it too.
         </div>
       </div>
 
@@ -341,12 +341,12 @@
       console.log('[Happie] Submitting newsletter signup (native submit) for:', firstName, email);
       // Set cookie so popup doesn't re-show after page reloads
       setCookie(COOKIE_KEY, COOKIE_DAYS);
-      // Show success state — visible for a split second before reload
+      // Show success state, visible for a split second before reload
       form.style.display = 'none';
       var successEl = document.getElementById('ep-success');
       successEl.querySelector('strong').textContent = "Nice to meet you, " + firstName + "!";
       successEl.style.display = 'flex';
-      // Let the form submit naturally (no preventDefault) — hCaptcha runs,
+      // Let the form submit naturally (no preventDefault), hCaptcha runs,
       // Shopify accepts the signup, automation fires, page redirects back
       // to homepage with ?subscribed=1
     });

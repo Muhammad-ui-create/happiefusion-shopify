@@ -1,5 +1,5 @@
 {%- comment -%}
-  Fungi Fusion Auto-Refill Pack — subscribe-only builder.
+  Fungi Fusion Auto-Refill Pack, subscribe-only builder.
   Size (option1) × Mix (option2) -> one of 21 real variants. Every add-to-cart
   carries the native Subscriptions selling plan (no one-time option), so the
   price never changes and the order becomes a managed subscription.
@@ -98,11 +98,11 @@
     <div class="arf-how">
       <h2>How Auto-Refill works</h2>
       <div class="arf-steps">
-        <div class="arf-step"><b>1 · Pick your pack</b><p>Choose your size and flavor mix — the same options as Build Your Own.</p></div>
+        <div class="arf-step"><b>1 · Pick your pack</b><p>Choose your size and flavor mix, the same options as Build Your Own.</p></div>
         <div class="arf-step"><b>2 · We deliver on repeat</b><p>Your exact mix ships on your schedule. Same price every time.</p></div>
         <div class="arf-step"><b>3 · You stay in control</b><p>Skip, pause, or cancel anytime from your account. No lock-in.</p></div>
       </div>
-      <p class="arf-note">Auto-Refill adds no extra discount — this pack is already at our lowest per-can price. It's convenience, not a coupon.</p>
+      <p class="arf-note">Auto-Refill adds no extra discount, this pack is already at our lowest per-can price. It's convenience, not a coupon.</p>
     </div>
   </div>
 </div>
@@ -112,10 +112,10 @@
 .arf-wrap{max-width:1080px;margin:0 auto;padding:34px 22px 72px;}
 .arf-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
 .arf-stage{position:sticky;top:20px;}
-/* Image gallery — sized for portrait lifestyle shots (fills the card, no letterboxing) */
+/* Image gallery, sized for portrait lifestyle shots (fills the card, no letterboxing) */
 .arf-gmain{border-radius:22px;overflow:hidden;background:#F3F3F1;aspect-ratio:4/5;box-shadow:0 14px 40px rgba(0,0,0,.08);touch-action:pan-y;}
 .arf-gmain img{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;}
-/* Benefit/lifestyle images are square with edge callouts — show them whole, no crop */
+/* Benefit/lifestyle images are square with edge callouts, show them whole, no crop */
 .arf-gmain img.is-contain{object-fit:contain;background:#fff;}
 .arf-thumbs{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
 .arf-thumb{width:64px;height:80px;border-radius:12px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;background:#fff;transition:border-color .15s;}
@@ -187,7 +187,7 @@
   var GIMGS=[{% for image in product.images %}{{ image | image_url: width: 1000 | json }}{% unless forloop.last %},{% endunless %}{% endfor %}];
   // mix -> gallery image index (0-based, matches the product's image order)
   var MIX_IMG={"All Blue Razzberry":7,"All Mango Mimosa":1,"All Watermelon":2,"Even Split":6,"Blue + Mango":3,"Blue + Watermelon":0,"Mango + Watermelon":4};
-  // Square benefit/lifestyle images — shown "contain" (whole) instead of cropped like the 4:5 cans
+  // Square benefit/lifestyle images, shown "contain" (whole) instead of cropped like the 4:5 cans
   var BENEFIT_IDX=[{% assign _bf=true %}{% for image in product.images %}{% if image.alt contains 'BENEFIT' %}{% unless _bf %},{% endunless %}{{ forloop.index0 }}{% assign _bf=false %}{% endif %}{% endfor %}];
   var gmain=document.getElementById("arf-gmain-img");
   var thumbs=document.querySelectorAll("#arf-thumbs .arf-thumb");
@@ -235,7 +235,7 @@
       });
     }
     var atc=document.getElementById("arf-atc");
-    if(atc && !atc.disabled){ atc.textContent="Subscribe & Auto-Refill — "+(v?v.pstr:"")+" →"; }
+    if(atc && !atc.disabled){ atc.textContent="Subscribe & Auto-Refill, "+(v?v.pstr:"")+" →"; }
   }
 
   // build mix buttons

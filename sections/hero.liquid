@@ -1,5 +1,5 @@
 {% comment %}
-  model-viewer (a full WebGL engine, ~1MB parsed JS) used to load eagerly here — it alone
+  model-viewer (a full WebGL engine, ~1MB parsed JS) used to load eagerly here, it alone
   cost ~25s of main-thread blocking on a mid-range phone (Lighthouse TBT 24,910ms).
   It is now lazy-injected by the facade script at the bottom of this section:
   a plain <img> poster paints instantly, and 3D boots on first touch/drag (mobile)
@@ -11,7 +11,7 @@
     <div class="hero-text">
       <div class="hero-eyebrow">We Put the Fun in Functional</div>
       <h1 class="hero-headline">Calm First.<br>Then Everything Works.</h1>
-      <p class="hero-sub">Fungi Fusion is three functional mushrooms working as one system — Reishi settles you, so Lion’s Mane can sharpen your focus and Cordyceps can fuel your day. Sparkling, caffeine-free, and made to feel as good as it tastes.</p>
+      <p class="hero-sub">Fungi Fusion is three functional mushrooms working as one system. Reishi settles you, so Lion’s Mane can sharpen your focus and Cordyceps can fuel your day. Sparkling, caffeine-free, and made to feel as good as it tastes.</p>
       <div class="hero-badges">
         <span class="no-alc-badge">Caffeine-Free</span>
         <span class="no-alc-badge">No Crash, No Jitters</span>
@@ -23,7 +23,7 @@
       </div>
       <p class="hero-support">Feel Good. Feel Happie.</p>
 
-      <!-- Reviews button — social proof right under the CTAs -->
+      <!-- Reviews button, social proof right under the CTAs -->
       <a href="/pages/reviews" class="hero-reviews-btn" aria-label="Read customer reviews">
         <span class="hero-reviews-stars" aria-hidden="true">★★★★★</span>
         <strong>4.9</strong>
@@ -48,7 +48,7 @@
         <img
           id="hero-can-facade"
           src="{{ 'can-hero-popup.webp' | asset_url }}"
-          alt="Happie Fungi Fusion Blue Raspberry — interactive 3D can. Tap to spin, or view in AR."
+          alt="Happie Fungi Fusion Blue Raspberry, interactive 3D can. Tap to spin, or view in AR."
           class="hero-can-3d"
           width="320" height="480"
           loading="eager"
@@ -61,7 +61,7 @@
         <template id="hero-can-3d-template">
           <model-viewer
             src="{{ 'happie-can-3d.glb' | asset_url }}"
-            alt="Happie Fungi Fusion Blue Raspberry — interactive 3D can. Drag to rotate, or tap to view in AR."
+            alt="Happie Fungi Fusion Blue Raspberry, interactive 3D can. Drag to rotate, or tap to view in AR."
             poster="{{ 'can-hero-popup.webp' | asset_url }}"
             class="hero-can-3d"
             auto-rotate
@@ -95,7 +95,7 @@
           </model-viewer>
         </template>
 
-        <!-- AR button — OUTSIDE the model-viewer so it can be positioned freely without overflow clipping -->
+        <!-- AR button, OUTSIDE the model-viewer so it can be positioned freely without overflow clipping -->
         <button class="hero-ar-btn" type="button" id="hero-ar-trigger">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
@@ -132,7 +132,7 @@
   </div>
 
   <style>
-    /* mg counts demoted to small print under the mushroom name — benefit label leads */
+    /* mg counts demoted to small print under the mushroom name, benefit label leads */
     .pill-mg { font-size: 9.5px; font-weight: 600; color: var(--gray, #5A6B5E); display: block; margin-top: 1px; }
 
     /* ── Hero reviews button ── */
@@ -164,7 +164,7 @@
       .hero-reviews-count { font-size: 12px; }
     }
 
-    /* 3D can — sized to match the previous <img> footprint */
+    /* 3D can, sized to match the previous <img> footprint */
     .hero-can-3d {
       width: 320px;
       height: 480px;
@@ -190,7 +190,7 @@
       }
       .hero-3d-hint svg { width: 10px !important; height: 10px !important; }
 
-      /* AR button — below the 3D can, with enough clearance from pills below */
+      /* AR button, below the 3D can, with enough clearance from pills below */
       .hero-ar-btn {
         font-size: 11px;
         padding: 8px 14px;
@@ -253,7 +253,7 @@
       opacity: 0; transition: opacity 0.4s; pointer-events: none;
     }
 
-    /* AR button — positioned BELOW the 3D viewer (outside can area, doesn't cover label) */
+    /* AR button, positioned BELOW the 3D viewer (outside can area, doesn't cover label) */
     .hero-ar-btn {
       position: absolute;
       bottom: -52px;
@@ -303,7 +303,7 @@
       var upgraded = false;
       var pendingAR = false;
 
-      // On mobile the AR button can show right away — tapping it boots 3D, then launches AR
+      // On mobile the AR button can show right away, tapping it boots 3D, then launches AR
       if (arBtn && isMobile) arBtn.style.display = 'inline-flex';
 
       function upgradeTo3D() {
@@ -348,7 +348,7 @@
         facade.addEventListener(evt, upgradeTo3D, { once: true, passive: true });
       });
 
-      // 2. AR button tap before 3D exists — boot 3D, then auto-launch AR when ready
+      // 2. AR button tap before 3D exists, boot 3D, then auto-launch AR when ready
       if (arBtn) {
         arBtn.addEventListener('click', function() {
           if (!upgraded) { pendingAR = true; upgradeTo3D(); }
@@ -356,7 +356,7 @@
       }
 
       // 3. Desktop only: auto-upgrade after full load + idle so the can spins
-      //    without interaction — but never during the initial-load metrics window.
+      //    without interaction, but never during the initial-load metrics window.
       //    Mobile stays poster-only until touched (keeps main thread free).
       var finePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
       if (finePointer) {
