@@ -574,7 +574,7 @@
     var workerUrl = widget.dataset.workerUrl || '';
     var supportEmail = widget.dataset.supportEmail || '';
     var botName = widget.dataset.botName || 'Happie Assistant';
-    var greeting = widget.dataset.greeting || "Hey! I'm the Happie Assistant. Reach our team at orders@livehappie.com or ask me anything below.";
+    var greeting = widget.dataset.greeting || "Hi! I'm the Happie Assistant 👋 Fungi Fusion is three functional mushrooms working as one system, calm first, then focus and fuel. Ask me about flavors, the science, shipping, or your order, or reach our team at orders@livehappie.com.";
 
     // ── LOCAL KNOWLEDGE BASE ──────────────────────────────────────────────
     // Answered instantly without backend calls. Pattern-matched by keyword regex.
@@ -587,7 +587,7 @@
       },
       {
         match: /three mushrooms|3 mushrooms|tell me about (the |)(mushrooms|adaptogens|science)|how (does|do) (it|they|the mushrooms) work|the science/i,
-        reply: "Here's what's in the can:\n\n- **Lion's Mane** (*Hericium erinaceus*), the shaggy white one, and the mushroom most functional-mushroom research is built on.\n- **Cordyceps** (*Cordyceps militaris*), an athlete's favorite. Contains cordycepin. Not a stimulant, and no caffeine.\n- **Red Reishi** (*Ganoderma lucidum*), centuries of use in Asian wellness traditions, and the richest of the three in triterpenes.\n\nWe use only **fruiting body extracts** (the real mushroom), never mycelium grown on grain. Each batch is **dual-extracted** (hot water + ethanol) for the full spectrum of beta-glucans and triterpenes, then **third-party lab tested**.\n\nDeep dive: [The Science Behind Happie](/pages/the-science)"
+        reply: "Fungi Fusion works as **one layered system**, calm first, then focus and fuel:\n\n- **Red Reishi** (*Ganoderma lucidum*), the foundation. Cherished for centuries as the mushroom of balance, it helps the body settle first.\n- **Lion's Mane** (*Hericium erinaceus*), the focus. Loved for supporting clear thinking and steady concentration.\n- **Cordyceps** (*Cordyceps militaris*), the fuel. Supports your body's natural energy, no caffeine, no crash.\n\nWe use only **fruiting body extracts** (the real mushroom), never mycelium grown on grain. Each batch is **dual-extracted** (hot water + ethanol) for the full spectrum of beta-glucans and triterpenes, then **third-party lab tested**.\n\nDeep dive: [The Science Behind Happie](/pages/the-science)"
       },
       {
         match: /flavors?|how many flavors|what flavors|which flavors|taste like/i,
@@ -621,7 +621,7 @@
       },
       {
         match: /medication|prescription|blood thinner|drug interaction|interact|warfarin/i,
-        reply: "Functional mushrooms are generally well-tolerated, but **please consult your doctor** if you're on:\n\n- Blood thinners (Reishi has mild blood-thinning effects)\n- Immunosuppressants\n- Diabetes medication\n\nWe're not medical professionals, always ask your healthcare provider about supplement interactions with prescriptions."
+        reply: "Functional mushrooms are generally well-tolerated, but **please consult your doctor first** if you're on:\n\n- Blood thinners\n- Immunosuppressants\n- Diabetes medication\n\nSome functional mushrooms may interact with certain prescriptions, so it's best to check if any of these apply to you. We're not medical professionals, always ask your healthcare provider."
       },
       {
         match: /lab test|third[- ]?party|coa|certificate of analysis|tested|purity/i,
@@ -974,7 +974,7 @@
       "type": "textarea",
       "id": "greeting",
       "label": "Greeting message",
-      "default": "Hey there! I'm the Happie Assistant, here to help with products, orders, and any questions about Fungi Fusion. You can also reach our team directly at orders@livehappie.com. What can I help with?"
+      "default": "Hi! I'm the Happie Assistant 👋 Fungi Fusion is three functional mushrooms working as one system, calm first, then focus and fuel. Ask me about flavors, the science, shipping, or your order, or reach our team at orders@livehappie.com. What can I help with?"
     },
     {
       "type": "image_picker",
