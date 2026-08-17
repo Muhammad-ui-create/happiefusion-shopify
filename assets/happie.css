@@ -505,8 +505,31 @@ input, select { font-family: var(--font); }
 .benefit-card h3 { font-size: 18px; font-weight: 800; color: #000; margin-bottom: 4px; }
 .benefit-dose { font-size: 11px; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
 .benefit-card p { font-size: 14px; color: #555; line-height: 1.65; }
+.benefit-role { font-size: 11px; font-weight: 800; color: var(--green-dark, #2D6A4F); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
 .mushroom-benefits .section-sub { color: #2E2A14; }
 .benefits-disclaimer { margin-top: 28px; text-align: center; font-size: 11.5px; line-height: 1.6; color: rgba(0,0,0,0.55); max-width: 640px; margin-left: auto; margin-right: auto; }
+
+/* Hero support line ("Feel Good. Feel Happie.") */
+.hero-support { font-size: 14px; font-weight: 800; color: var(--green-dark, #2D6A4F); letter-spacing: 0.01em; margin: -12px 0 28px; }
+
+/* "Built in the Right Order" story + layers + What's Inside (homepage system section) */
+.benefits-grid.benefits-grid--3 { grid-template-columns: repeat(3, 1fr); max-width: 1000px; margin-left: auto; margin-right: auto; }
+.system-story { max-width: 720px; margin: 0 auto 44px; text-align: center; }
+.system-story p { font-size: 16px; line-height: 1.7; color: #2E2A14; margin: 0 0 14px; }
+.system-story p:last-child { margin-bottom: 0; }
+.system-story strong { color: #000; font-weight: 800; }
+.system-layers-title { text-align: center; font-size: clamp(22px, 3vw, 30px); font-weight: 900; letter-spacing: -0.01em; color: #000; margin: 0 0 26px; }
+.system-synergy { max-width: 720px; margin: 26px auto 0; text-align: center; font-size: 16.5px; line-height: 1.65; font-weight: 700; color: #1A1A1A; }
+.whats-inside { max-width: 760px; margin: 48px auto 0; text-align: center; background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.06); border-radius: 22px; padding: 32px 30px; }
+.whats-inside-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-dark, #2D6A4F); margin-bottom: 8px; }
+.whats-inside-title { font-size: clamp(20px, 3vw, 26px); font-weight: 900; letter-spacing: -0.01em; color: #000; margin: 0 0 12px; }
+.whats-inside p { font-size: 15px; line-height: 1.65; color: #3A382E; margin: 0 auto; max-width: 620px; }
+.whats-inside-spec { margin-top: 16px !important; font-size: 12.5px !important; font-weight: 700; letter-spacing: 0.02em; color: rgba(0,0,0,0.55) !important; }
+.whats-inside-link { display: inline-block; margin-top: 16px; font-size: 14px; font-weight: 800; color: var(--green-dark, #2D6A4F); text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 2px; }
+@media (max-width: 900px) {
+  .benefits-grid.benefits-grid--3 { grid-template-columns: 1fr; }
+  .whats-inside { padding: 26px 20px; }
+}
 
 /* ── Reviews ── */
 .reviews-section { background: #fff; }

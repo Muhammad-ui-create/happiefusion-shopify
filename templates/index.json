@@ -8,5 +8,5 @@
     "reviews": { "type": "reviews-section", "settings": {} },
     "cta": { "type": "cta-banner", "settings": {} }
   },
-  "order": ["hero", "trust-bar", "featured", "mushrooms", "subscribe-save", "reviews", "cta"]
+  "order": ["hero", "trust-bar", "mushrooms", "featured", "subscribe-save", "reviews", "cta"]
 }
