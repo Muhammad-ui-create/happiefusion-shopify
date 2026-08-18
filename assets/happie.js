@@ -627,7 +627,7 @@
   /* ── Scroll Reveal ── */
   function initScrollReveal() {
     var selectors = [
-      '.product-card', '.benefit-card', '.review-card', '.section-header',
+      '.product-card', '.benefit-card', '.section-header',
       '.sci-stat', '.sci-compound-card', '.sci-extract-card',
       '.comparison-left', '.comparison-table', '.hero-pill', '.mush-benefit'
     ];

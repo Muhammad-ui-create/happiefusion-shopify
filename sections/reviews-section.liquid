@@ -127,8 +127,8 @@
       </div>
   {%- endcapture -%}
 
-  <div class="reviews-marquee">
-    <div class="reviews-track">{{ rev_cards }}{{ rev_cards }}</div>
+  <div class="reviews-marquee" id="reviews-marquee">
+    <div class="reviews-track">{{ rev_cards }}{{ rev_cards }}{{ rev_cards }}</div>
   </div>
 
   <div class="section-inner">
@@ -151,28 +151,63 @@
 .reviewer-tag { display:flex; align-items:center; gap:4px; font-size:11px; color:#888; margin-top:2px; }
 .reviewer-avatar { width:36px; height:36px; border-radius:50%; color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:var(--green-dark); }
 
-/* ── Full-width auto-scrolling marquee (right → left) ── */
+/* ── Full-width swipeable auto-scroll marquee (JS-driven, right → left) ── */
 .reviews-marquee {
-  position: relative; width: 100%; overflow: hidden;
+  position: relative; width: 100%;
+  overflow-x: auto; overflow-y: hidden;
   padding: 8px 0 26px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
   -webkit-mask: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
           mask: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
 }
-.reviews-track {
-  display: flex; width: max-content;
-  animation: reviewsMarquee 60s linear infinite;
-}
-.reviews-marquee:hover .reviews-track { animation-play-state: paused; }
+.reviews-marquee::-webkit-scrollbar { display: none; }
+.reviews-track { display: flex; width: max-content; }
 .reviews-track .review-card {
   flex: 0 0 340px; margin-right: 22px; white-space: normal;
 }
-@keyframes reviewsMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .reviews-track { animation: none; flex-wrap: nowrap; } }
 @media (max-width: 768px) {
-  .reviews-track { animation-duration: 40s; }
   .reviews-track .review-card { flex: 0 0 80vw; margin-right: 16px; }
 }
 </style>
+<script>
+(function(){
+  var scroller = document.getElementById('reviews-marquee');
+  if(!scroller) return;
+  var track = scroller.querySelector('.reviews-track');
+  if(!track) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var third = 0;
+  function measure(){ third = track.scrollWidth / 3; }
+  function norm(){
+    if(!third) return;
+    if(scroller.scrollLeft >= 2 * third) scroller.scrollLeft -= third;
+    else if(scroller.scrollLeft < third) scroller.scrollLeft += third;
+  }
+  measure();
+  /* start in the middle copy so you can swipe both ways seamlessly */
+  scroller.scrollLeft = third;
+  window.addEventListener('resize', function(){ var p = third ? scroller.scrollLeft / third : 1; measure(); scroller.scrollLeft = third * p; }, { passive: true });
+
+  var speed = 0.55, paused = false, resumeTimer;
+  function tick(){
+    if(!third){ measure(); scroller.scrollLeft = third; }
+    if(!paused && third){ scroller.scrollLeft += speed; norm(); }
+    requestAnimationFrame(tick);
+  }
+  if(!reduce) requestAnimationFrame(tick);
+
+  function pause(){ paused = true; clearTimeout(resumeTimer); }
+  function resume(ms){ clearTimeout(resumeTimer); resumeTimer = setTimeout(function(){ paused = false; }, ms || 0); }
+  scroller.addEventListener('mouseenter', pause);
+  scroller.addEventListener('mouseleave', function(){ resume(0); });
+  scroller.addEventListener('touchstart', pause, { passive: true });
+  scroller.addEventListener('touchend', function(){ resume(1800); }, { passive: true });
+  scroller.addEventListener('wheel', function(){ pause(); resume(1200); }, { passive: true });
+  scroller.addEventListener('scroll', norm, { passive: true });
+})();
+</script>
 
 {% schema %}
 {
