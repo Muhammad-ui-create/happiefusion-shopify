@@ -166,8 +166,10 @@
 .reviews-grid::-webkit-scrollbar { display: none; }
 .reviews-grid .review-card {
   flex: 0 0 clamp(280px, 30%, 360px);
-  scroll-snap-align: center;
+  scroll-snap-align: start;
 }
+/* start the carousel flush to the left */
+.reviews-grid { justify-content: flex-start; }
 .rev-arrow {
   position: absolute; top: 46%; transform: translateY(-50%);
   z-index: 4; width: 46px; height: 46px; border-radius: 50%;

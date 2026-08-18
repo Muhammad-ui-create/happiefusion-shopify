@@ -489,6 +489,30 @@ input, select { font-family: var(--font); }
   /* static waves — drift removed for scroll performance */
 }
 @media (prefers-reduced-motion: reduce) { .mushroom-benefits { animation: none; } }
+/* Mobile: stretch each section-edge wave to one full tile across the screen
+   (one inward + one outward hump) instead of a partial 800px-tiled wave. */
+@media (max-width: 768px) {
+  .mushroom-benefits {
+    -webkit-mask-size: 100% 40px, 100% calc(100% - 80px), 100% 40px;
+            mask-size: 100% 40px, 100% calc(100% - 80px), 100% 40px;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  }
+  .site-footer {
+    -webkit-mask-size: 100% 40px, 100% calc(100% - 40px);
+            mask-size: 100% 40px, 100% calc(100% - 40px);
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  }
+  .product-layout::before {
+    -webkit-mask-size: 100% calc(100% - 40px), 100% 40px;
+            mask-size: 100% calc(100% - 40px), 100% 40px;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  }
+  .pdp-lower::before {
+    -webkit-mask-size: 100% 40px, 100% calc(100% - 80px), 100% 40px;
+            mask-size: 100% 40px, 100% calc(100% - 80px), 100% 40px;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  }
+}
 .mushroom-benefits .section-inner { position: relative; z-index: 1; }
 .mushroom-benefits .section-eyebrow { color: var(--purple); }
 .mushroom-benefits .section-title { color: #000; }
@@ -652,7 +676,13 @@ input, select { font-family: var(--font); }
 }
 @media (prefers-reduced-motion: reduce) { .site-footer { animation: none; } }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(0,0,0,0.12); }
-.footer-logo { height: 84px; width: auto; object-fit: contain; margin-bottom: 16px; }
+.footer-logo { height: 56px; width: auto; object-fit: contain; margin-bottom: 16px; }
+/* Mobile: left-align the homepage blog feed (its base CSS is inline in the
+   stuck theme.liquid, so override here with higher specificity). */
+@media (max-width: 620px) {
+  .blogfeed .blogfeed-head { text-align: left; }
+  .blogfeed .blogfeed-sub { margin-left: 0; margin-right: 0; }
+}
 .footer-brand p { font-size: 14px; line-height: 1.65; color: rgba(0,0,0,0.72); max-width: 280px; }
 .footer-socials { display: flex; gap: 12px; margin-top: 16px; }
 .footer-socials a {
@@ -2429,7 +2459,7 @@ body.subscription-selected #shopify-buyer-consent {
   /* Footer */
   .footer-inner  { grid-template-columns: 1fr 1fr; gap: 32px; }
   .site-footer   { padding: 48px 20px 0; }
-  .footer-logo   { height: 64px; }
+  .footer-logo   { height: 44px; }
   .cta-banner-wrap { padding: 0 14px 56px; }
   .cta-banner    { border-radius: 26px; }
   .cta-banner-inner { padding: 64px 22px; }
