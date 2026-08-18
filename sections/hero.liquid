@@ -32,8 +32,8 @@
     </div>
 
     <!-- Wavy right edge of the panel, flows over the image -->
-    <svg class="hero-wave-edge" viewBox="0 0 26 1000" preserveAspectRatio="none" aria-hidden="true">
-      <path fill="currentColor" d="M0 0 L16 0 C26 120 6 240 16 360 C26 480 6 600 16 720 C26 840 9 1000 16 1000 L0 1000 Z"/>
+    <svg class="hero-wave-edge" viewBox="0 0 50 1000" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="currentColor" d="M0 0 L24 0 C50 250 4 500 24 750 C42 875 12 1000 24 1000 L0 1000 Z"/>
     </svg>
   </div>
 
@@ -61,7 +61,7 @@
 <style>
   .hero--split {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 44% 56%;
     min-height: min(88vh, 800px);
     padding: 0;
     background: var(--hero-bg);
@@ -80,7 +80,7 @@
   .hero--split .hero-left-content { max-width: 560px; width: 100%; }
   .hero-wave-edge {
     position: absolute; top: 0; bottom: 0; left: 100%;
-    height: 100%; width: clamp(12px, 1.8vw, 26px);
+    height: 100%; width: clamp(24px, 3.5vw, 50px);
     margin-left: -1px;
     color: var(--hero-bg);
     pointer-events: none;
@@ -122,14 +122,12 @@
   .hero-right {
     position: relative; overflow: hidden;
     background: var(--hero-bg);
-    height: min(74vh, 620px);
-    aspect-ratio: 4 / 5;
-    align-self: center;
+    min-height: min(88vh, 800px);
   }
   .hero-slides { position: absolute; inset: 0; }
   .hero-slide {
     position: absolute; inset: 0;
-    object-fit: contain; object-position: center;
+    object-fit: cover; object-position: center;
     opacity: 0; transition: opacity 1.1s ease;
     will-change: opacity;
   }
