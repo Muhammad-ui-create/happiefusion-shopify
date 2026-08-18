@@ -330,6 +330,10 @@ input, select { font-family: var(--font); }
 /* minmax(0,1fr) stops wide card content blowing the columns past the viewport */
 .products-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 20px; }
 .products-grid > * { min-width: 0; }
+/* Homepage flavors row: 5 across so the variety pack sits in one clean row. */
+@media (min-width: 900px) {
+  .featured-collection .products-grid { grid-template-columns: repeat(5, minmax(0,1fr)); gap: 16px; }
+}
 
 /* Product Card */
 .product-card {
