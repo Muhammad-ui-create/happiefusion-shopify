@@ -62,7 +62,7 @@
   .hero--split {
     display: grid;
     grid-template-columns: 1fr auto;
-    height: min(88vh, 800px);
+    min-height: min(88vh, 800px);
     padding: 0;
     background: var(--hero-bg);
     overflow: hidden;
@@ -92,15 +92,16 @@
   .hero--split .hero-support { color: #fff; margin: -8px 0 24px; }
   .hero--split .hero-trust { color: rgba(255,255,255,0.82); }
   .hero--split .no-alc-badge {
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.30);
-    color: #fff;
+    background: #1E3A8A;
+    border: 1px solid #1E3A8A;
+    color: #FFCB05;
+    font-weight: 800;
   }
   .hero--split .btn-primary {
-    background: #fff; color: var(--hero-bg);
+    background: #FFCB05; color: #1E3A8A;
     box-shadow: 0 8px 24px rgba(0,0,0,0.18);
   }
-  .hero--split .btn-primary:hover { background: rgba(255,255,255,0.90); transform: translateY(-2px); }
+  .hero--split .btn-primary:hover { background: #FFD84D; transform: translateY(-2px); }
 
   /* Reviews pill (self-contained, tuned for the dark panel) */
   .hero-reviews-btn {
@@ -122,8 +123,9 @@
   .hero-right {
     position: relative; overflow: hidden;
     background: var(--hero-bg);
-    height: 100%;
-    aspect-ratio: 4 / 5;
+    height: min(88vh, 800px);
+    width: calc(min(88vh, 800px) * 0.8);
+    align-self: center;
   }
   .hero-slides { position: absolute; inset: 0; }
   .hero-slide {
@@ -151,7 +153,7 @@
 
   @media (max-width: 900px) {
     .hero--split { grid-template-columns: 1fr; height: auto; min-height: auto; }
-    .hero--split .hero-right { order: -1; height: 56vh; min-height: 360px; }
+    .hero--split .hero-right { order: -1; height: 56vh; min-height: 360px; width: auto; }
     .hero--split .hero-left { padding: 40px 22px 48px; text-align: center; }
     .hero--split .hero-left-content { margin: 0 auto; }
     .hero-wave-edge { display: none; }
