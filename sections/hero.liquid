@@ -1,4 +1,4 @@
-{%- assign hero_bg = section.settings.hero_bg_color | default: '#6260AE' -%}
+{%- assign hero_bg = section.settings.hero_bg_color | default: '#50B2BD' -%}
 <section class="hero hero--split" style="--hero-bg: {{ hero_bg }};">
 
   <!-- LEFT: solid colour wave panel with the hero copy -->
@@ -127,7 +127,7 @@
   .hero-slides { position: absolute; inset: 0; }
   .hero-slide {
     position: absolute; inset: 0;
-    object-fit: cover;
+    object-fit: contain; object-position: center;
     opacity: 0; transition: opacity 1.1s ease;
     will-change: opacity;
   }
@@ -193,7 +193,7 @@
       "type": "color",
       "id": "hero_bg_color",
       "label": "Text panel background colour",
-      "default": "#6260AE"
+      "default": "#50B2BD"
     },
     {
       "type": "range",
