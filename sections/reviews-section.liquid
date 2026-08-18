@@ -8,10 +8,10 @@
         <span class="rating-summary">4.9 out of 5 on Amazon</span>
       </div>
     </div>
-    <div class="reviews-carousel">
-      <button type="button" class="rev-arrow rev-arrow-prev" aria-label="Previous reviews">‹</button>
-      <div class="reviews-grid" id="reviews-track">
+  </div>
 
+  {%- comment -%} Cards captured once, then output twice so the marquee loops seamlessly. {%- endcomment -%}
+  {%- capture rev_cards -%}
       <div class="review-card">
         <div class="review-card-top">
           <div class="review-stars">★★★★★</div>
@@ -125,19 +125,20 @@
           </div>
         </div>
       </div>
+  {%- endcapture -%}
 
-      </div>
-      <button type="button" class="rev-arrow rev-arrow-next" aria-label="Next reviews">›</button>
-    </div>
-    <div class="rev-dots" id="rev-dots"></div>
+  <div class="reviews-marquee">
+    <div class="reviews-track">{{ rev_cards }}{{ rev_cards }}</div>
+  </div>
 
-    <div style="text-align:center;margin-top:40px;">
+  <div class="section-inner">
+    <div style="text-align:center;margin-top:36px;">
       <a href="/pages/reviews" style="display:inline-flex;align-items:center;gap:8px;background:transparent;border:2px solid var(--green);color:var(--green);border-radius:50px;padding:13px 32px;font-size:14px;font-weight:700;text-decoration:none;transition:all 0.2s;">
         Read All Reviews →
       </a>
     </div>
-
   </div>
+
 </section>
 
 <style>
@@ -150,73 +151,28 @@
 .reviewer-tag { display:flex; align-items:center; gap:4px; font-size:11px; color:#888; margin-top:2px; }
 .reviewer-avatar { width:36px; height:36px; border-radius:50%; color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:var(--green-dark); }
 
-/* ── Reviews carousel (desktop + mobile) ── */
-.reviews-carousel { position: relative; }
-.reviews-grid {
-  display: flex !important;
-  grid-template-columns: none !important;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 22px;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  padding: 6px 2px 22px;
-  scrollbar-width: none;
+/* ── Full-width auto-scrolling marquee (right → left) ── */
+.reviews-marquee {
+  position: relative; width: 100%; overflow: hidden;
+  padding: 8px 0 26px;
+  -webkit-mask: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+          mask: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
 }
-.reviews-grid::-webkit-scrollbar { display: none; }
-.reviews-grid .review-card {
-  flex: 0 0 clamp(280px, 30%, 360px);
-  scroll-snap-align: start;
+.reviews-track {
+  display: flex; width: max-content;
+  animation: reviewsMarquee 60s linear infinite;
 }
-/* start the carousel flush to the left */
-.reviews-grid { justify-content: flex-start; }
-.rev-arrow {
-  position: absolute; top: 46%; transform: translateY(-50%);
-  z-index: 4; width: 46px; height: 46px; border-radius: 50%;
-  border: none; background: #fff; color: var(--green-dark, #1B4332);
-  box-shadow: 0 6px 22px rgba(0,0,0,0.16); cursor: pointer;
-  font-size: 28px; line-height: 1; display: flex; align-items: center; justify-content: center;
-  transition: transform .15s, background .15s, color .15s;
+.reviews-marquee:hover .reviews-track { animation-play-state: paused; }
+.reviews-track .review-card {
+  flex: 0 0 340px; margin-right: 22px; white-space: normal;
 }
-.rev-arrow:hover { background: var(--green, #2D6A4F); color: #fff; transform: translateY(-50%) scale(1.06); }
-.rev-arrow-prev { left: -10px; }
-.rev-arrow-next { right: -10px; }
-.rev-dots { display: flex; justify-content: center; gap: 8px; margin-top: 6px; }
-.rev-dots button { width: 8px; height: 8px; border-radius: 50%; border: none; background: rgba(0,0,0,0.18); padding: 0; cursor: pointer; transition: background .2s, transform .2s; }
-.rev-dots button.is-active { background: var(--green, #2D6A4F); transform: scale(1.35); }
+@keyframes reviewsMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .reviews-track { animation: none; flex-wrap: nowrap; } }
 @media (max-width: 768px) {
-  .reviews-grid .review-card { flex: 0 0 84%; }
-  .rev-arrow { display: none; }
+  .reviews-track { animation-duration: 40s; }
+  .reviews-track .review-card { flex: 0 0 80vw; margin-right: 16px; }
 }
 </style>
-<script>
-(function(){
-  var track = document.getElementById('reviews-track');
-  if(!track) return;
-  var cards = track.querySelectorAll('.review-card');
-  var dotsWrap = document.getElementById('rev-dots');
-  var prev = document.querySelector('.rev-arrow-prev');
-  var next = document.querySelector('.rev-arrow-next');
-  function step(){ var c = cards[0]; return c ? c.getBoundingClientRect().width + 22 : track.clientWidth; }
-  if(prev) prev.addEventListener('click', function(){ track.scrollBy({left:-step(), behavior:'smooth'}); });
-  if(next) next.addEventListener('click', function(){ track.scrollBy({left:step(), behavior:'smooth'}); });
-  if(dotsWrap){
-    cards.forEach(function(c,i){
-      var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Go to review '+(i+1));
-      b.addEventListener('click', function(){ track.scrollTo({left: c.offsetLeft - track.offsetLeft, behavior:'smooth'}); });
-      dotsWrap.appendChild(b);
-    });
-    var dots = dotsWrap.querySelectorAll('button');
-    function update(){
-      var center = track.scrollLeft + track.clientWidth/2, best=0, bestD=Infinity;
-      cards.forEach(function(c,i){ var cc=c.offsetLeft + c.clientWidth/2 - track.offsetLeft; var d=Math.abs(cc-center); if(d<bestD){bestD=d;best=i;} });
-      dots.forEach(function(d,i){ d.classList.toggle('is-active', i===best); });
-    }
-    track.addEventListener('scroll', function(){ window.requestAnimationFrame(update); }, {passive:true});
-    update();
-  }
-})();
-</script>
 
 {% schema %}
 {

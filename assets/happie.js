@@ -25,6 +25,20 @@
     window.addEventListener('scroll', onNavScroll, { passive: true });
   }
 
+  /* ── Homepage blog feed: duplicate cards so the mobile marquee loops seamlessly.
+     Clones are hidden on desktop via CSS (.blogfeed-card--clone). ── */
+  var blogGrid = document.querySelector('.blogfeed .blogfeed-grid');
+  if (blogGrid && !blogGrid.dataset.cloned) {
+    Array.prototype.slice.call(blogGrid.children).forEach(function(k) {
+      var c = k.cloneNode(true);
+      c.classList.add('blogfeed-card--clone');
+      c.setAttribute('aria-hidden', 'true');
+      c.setAttribute('tabindex', '-1');
+      blogGrid.appendChild(c);
+    });
+    blogGrid.dataset.cloned = '1';
+  }
+
   /* ── Mobile Nav: slide-in drawer from the left ── */
   var hamburger = document.getElementById('hamburger');
   var mobileNav = document.getElementById('mobile-nav');

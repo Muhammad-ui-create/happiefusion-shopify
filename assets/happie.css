@@ -677,12 +677,26 @@ input, select { font-family: var(--font); }
 @media (prefers-reduced-motion: reduce) { .site-footer { animation: none; } }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(0,0,0,0.12); }
 .footer-logo { height: 56px; width: auto; object-fit: contain; margin-bottom: 16px; }
-/* Mobile: left-align the homepage blog feed (its base CSS is inline in the
-   stuck theme.liquid, so override here with higher specificity). */
+/* Mobile: homepage blog feed becomes a right->left marquee (base rules are inline
+   in the stuck theme.liquid, so override here; clones added by happie.js). */
+.blogfeed-card--clone { display: none; }
 @media (max-width: 620px) {
   .blogfeed .blogfeed-head { text-align: left; }
   .blogfeed .blogfeed-sub { margin-left: 0; margin-right: 0; }
+  .blogfeed .blogfeed-inner { overflow: hidden; }
+  .blogfeed .blogfeed-grid {
+    display: flex !important;
+    grid-template-columns: none !important;
+    width: max-content;
+    gap: 0;
+    animation: blogMarquee 34s linear infinite;
+  }
+  .blogfeed .blogfeed-grid:hover { animation-play-state: paused; }
+  .blogfeed .blogfeed-grid > .blogfeed-card { flex: 0 0 74vw; margin-right: 16px; }
+  .blogfeed .blogfeed-grid > .blogfeed-card--clone { display: flex; }
 }
+@keyframes blogMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .blogfeed .blogfeed-grid { animation: none !important; } }
 .footer-brand p { font-size: 14px; line-height: 1.65; color: rgba(0,0,0,0.72); max-width: 280px; }
 .footer-socials { display: flex; gap: 12px; margin-top: 16px; }
 .footer-socials a {
