@@ -2244,23 +2244,53 @@ body.subscription-selected #shopify-buyer-consent {
 ══════════════════════════════════════════ */
 @media (max-width: 768px) {
 
-  /* Nav — compact floating pill: hamburger left, logo centre, cart right */
+  /* Nav — compact floating pill: hamburger left, logo dead-centre, cart right */
   :root { --nav-h: 72px; }
   .nav-inner {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    position: relative;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 0;
     height: 52px;
-    padding: 6px 16px;
+    padding: 6px 18px;
   }
   .nav-links     { display: none; }
   .nav-right .nav-signin { display: none; }
-  .hamburger     { display: flex; grid-column: 1; justify-self: start; padding: 6px; }
-  .nav-logo-link { grid-column: 2; justify-self: center; }
+  .hamburger     { display: flex; order: 0; padding: 6px; margin: 0; }
+  /* absolutely centred so it stays dead-centre regardless of the side widths */
+  .nav-logo-link { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); }
   .nav-logo-img  { height: 30px; }
-  .nav-right     { grid-column: 3; justify-self: end; margin-left: 0; gap: 0; }
+  .nav-right     { order: 2; margin-left: 0; gap: 0; }
   .cart-trigger  { padding: 8px 16px; font-size: 13px; }
+
+  /* Mobile menu — slide-in drawer from the LEFT with dimmed overlay */
+  .mobile-nav {
+    display: block;
+    position: fixed; top: 0; left: 0; bottom: 0;
+    width: min(82vw, 320px);
+    background: #fff;
+    border-top: none;
+    padding: 24px 22px 28px;
+    transform: translateX(-100%);
+    transition: transform .32s cubic-bezier(.4,0,.2,1);
+    z-index: 1001;
+    overflow-y: auto;
+    box-shadow: 6px 0 30px rgba(0,0,0,0.18);
+  }
+  .mobile-nav.open { transform: translateX(0); }
+  .mobile-nav-close {
+    display: block; margin: 0 0 10px auto;
+    font-size: 24px; line-height: 1; color: #16181B;
+    background: none; border: none; padding: 4px 6px; cursor: pointer;
+  }
+  .mobile-nav-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+    opacity: 0; visibility: hidden; transition: opacity .3s ease;
+    z-index: 1000;
+  }
+  .mobile-nav-overlay.open { opacity: 1; visibility: visible; }
+  body.mobile-nav-lock { overflow: hidden; }
 
   /* Announcement bar — ticker stays auto on mobile, just slightly smaller */
   .announcement-bar { padding: 8px 0; font-size: 12px; }

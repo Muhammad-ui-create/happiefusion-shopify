@@ -25,12 +25,29 @@
     window.addEventListener('scroll', onNavScroll, { passive: true });
   }
 
-  /* ── Mobile Nav ── */
+  /* ── Mobile Nav: slide-in drawer from the left ── */
   var hamburger = document.getElementById('hamburger');
   var mobileNav = document.getElementById('mobile-nav');
+  var mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+  var mobileNavClose = document.getElementById('mobile-nav-close');
+  function openMobileNav() {
+    mobileNav.classList.add('open');
+    if (mobileNavOverlay) mobileNavOverlay.classList.add('open');
+    document.body.classList.add('mobile-nav-lock');
+  }
+  function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    if (mobileNavOverlay) mobileNavOverlay.classList.remove('open');
+    document.body.classList.remove('mobile-nav-lock');
+  }
   if (hamburger && mobileNav) {
     hamburger.addEventListener('click', function() {
-      mobileNav.classList.toggle('open');
+      if (mobileNav.classList.contains('open')) closeMobileNav(); else openMobileNav();
+    });
+    if (mobileNavOverlay) mobileNavOverlay.addEventListener('click', closeMobileNav);
+    if (mobileNavClose) mobileNavClose.addEventListener('click', closeMobileNav);
+    mobileNav.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', closeMobileNav);
     });
   }
 
