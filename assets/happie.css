@@ -689,7 +689,7 @@ input, select { font-family: var(--font); }
 .footer-logo { height: 56px; width: auto; object-fit: contain; margin-bottom: 16px; }
 /* Mobile: homepage blog feed becomes a right->left marquee (base rules are inline
    in the stuck theme.liquid, so override here; clones added by happie.js). */
-.blogfeed-card--clone { display: none; }
+.blogfeed-card--clone { display: none !important; }
 @media (max-width: 620px) {
   .blogfeed .blogfeed-head { text-align: left; }
   .blogfeed .blogfeed-sub { margin-left: 0; margin-right: 0; }
@@ -703,7 +703,7 @@ input, select { font-family: var(--font); }
   }
   .blogfeed .blogfeed-grid:hover { animation-play-state: paused; }
   .blogfeed .blogfeed-grid > .blogfeed-card { flex: 0 0 74vw; margin-right: 16px; }
-  .blogfeed .blogfeed-grid > .blogfeed-card--clone { display: flex; }
+  .blogfeed .blogfeed-grid > .blogfeed-card--clone { display: flex !important; }
 }
 @keyframes blogMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .blogfeed .blogfeed-grid { animation: none !important; } }
