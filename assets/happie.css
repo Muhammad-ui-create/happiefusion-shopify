@@ -103,10 +103,22 @@ input, select { font-family: var(--font); }
   transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 .nav.nav--solid {
-  background: rgba(255,255,255,0.88);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+  /* stay transparent on scroll — the white pill floats over the content, no
+     full-width white band behind the header */
+  background: transparent;
+  box-shadow: none;
+}
+/* The below-hero announcement bar (index.json "trust-bar" instance). The JSON
+   template won't sync from GitHub, so hide that specific section here. The TOP
+   bar (shopify-section-announcement-bar, rendered from theme.liquid) stays. */
+#shopify-section-trust-bar { display: none !important; }
+
+/* Inner-page heroes bleed their colour up to the top, behind the floating pill,
+   so every page's hero reaches the announcement bar like the homepage does.
+   Extra top padding clears the pill; negative margin tucks the band up. */
+.about-hero, .sci-hero, .rev-hero, .faq-hero, .merch-banner, .mush-page-hero {
+  margin-top: calc(-1 * var(--nav-h)) !important;
+  padding-top: calc(var(--nav-h) + 46px) !important;
 }
 @keyframes offerFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 @keyframes navSilk {
