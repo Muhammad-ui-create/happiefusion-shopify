@@ -68,8 +68,8 @@
     background: var(--hero-bg);
     overflow: hidden;
     position: relative;
-    /* tuck the hero up so the image runs to the top, behind the floating pill */
-    margin-top: calc(-1 * var(--nav-h));
+    /* tuck the hero up behind the floating pill, but leave a slim gap at the very top */
+    margin-top: calc(-1 * var(--nav-h) + 22px);
   }
   /* LEFT panel */
   .hero--split .hero-left {
