@@ -15,6 +15,16 @@
     });
   }
 
+  /* ── Floating-pill nav: solid backdrop once scrolled ── */
+  var siteNav = document.getElementById('site-nav');
+  if (siteNav) {
+    var onNavScroll = function() {
+      siteNav.classList.toggle('nav--solid', window.scrollY > 24);
+    };
+    onNavScroll();
+    window.addEventListener('scroll', onNavScroll, { passive: true });
+  }
+
   /* ── Mobile Nav ── */
   var hamburger = document.getElementById('hamburger');
   var mobileNav = document.getElementById('mobile-nav');

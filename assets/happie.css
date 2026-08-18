@@ -92,18 +92,21 @@ input, select { font-family: var(--font); }
   position: sticky;
   top: 0;
   z-index: 100;
-  /* Iridescent mesh gradient — a full psychedelic spectrum of luminous jewel tones
-     drifting independently, with a slow light-sweep across the top for shimmer.
-     Colours stay high-luminance so the black logo and nav links remain legible. */
-  background-color: #FCF9F4;
-  /* Buy-2-Get-1 offer flowing gradient */
-  background-image: linear-gradient(120deg, #FF7A3D, #FFB300, #2DB39A, #6C4BD8, #F2A81E, #FF7A3D);
-  background-size: 300% 300%;
-  background-repeat: no-repeat;
-  animation: offerFlow 15s ease-in-out infinite;
+  /* Floating-pill header: the bar itself is transparent so the hero shows
+     through around the centred white pill (WYNK-style). A solid backdrop
+     fades in once the page is scrolled so content never bleeds behind it. */
+  background: transparent;
   overflow-x: clip;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
   height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+.nav.nav--solid {
+  background: rgba(255,255,255,0.88);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 14px rgba(0,0,0,0.06);
 }
 @keyframes offerFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 @keyframes navSilk {
@@ -115,18 +118,7 @@ input, select { font-family: var(--font); }
 }
 /* Slow light-sweep across the bar — reads as a shimmer travelling over the colour.
    Starts and ends off-screen so the loop restart is never visible. */
-.nav::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 45%;
-  pointer-events: none;
-  z-index: 0;
-  background: linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
-  animation: navSheen 9s ease-in-out infinite;
-}
+.nav::after { display: none; }
 @keyframes navSheen {
   0%   { transform: translateX(-120%); }
   60%  { transform: translateX(300%); }
@@ -139,16 +131,21 @@ input, select { font-family: var(--font); }
 .nav-inner {
   position: relative;
   z-index: 1;
-  max-width: 1200px;
+  max-width: 1180px;
+  width: calc(100% - 32px);
   margin: 0 auto;
-  padding: 0 24px;
-  height: 100%;
+  padding: 8px 14px 8px 26px;
+  height: 68px;
   display: flex;
   align-items: center;
   gap: 32px;
+  /* the pill */
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.06);
 }
 .nav-logo-link { display: flex; align-items: center; flex-shrink: 0; }
-.nav-logo-img { height: 112px; width: auto; object-fit: contain; }
+.nav-logo-img { height: 52px; width: auto; object-fit: contain; }
 .nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links a { font-size: 14px; font-weight: 600; opacity: 0.75; transition: opacity 0.15s; }
 .nav-links a:hover { opacity: 1; }

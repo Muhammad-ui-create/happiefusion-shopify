@@ -1,12 +1,40 @@
 {
   "sections": {
-    "hero": { "type": "hero", "settings": {} },
-    "trust-bar": { "type": "announcement-bar", "settings": {} },
-    "featured": { "type": "featured-collection", "settings": {} },
-    "mushrooms": { "type": "mushroom-benefits", "settings": {} },
-    "subscribe-save": { "type": "subscribe-save", "settings": {} },
-    "reviews": { "type": "reviews-section", "settings": {} },
-    "cta": { "type": "cta-banner", "settings": {} }
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "trust-bar": {
+      "type": "announcement-bar",
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {}
+    },
+    "mushrooms": {
+      "type": "mushroom-benefits",
+      "settings": {}
+    },
+    "subscribe-save": {
+      "type": "subscribe-save",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews-section",
+      "settings": {}
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {}
+    }
   },
-  "order": ["hero", "trust-bar", "mushrooms", "featured", "subscribe-save", "reviews", "cta"]
+  "order": [
+    "hero",
+    "mushrooms",
+    "featured",
+    "subscribe-save",
+    "reviews",
+    "cta"
+  ]
 }

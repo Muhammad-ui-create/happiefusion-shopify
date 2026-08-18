@@ -61,12 +61,14 @@
 <style>
   .hero--split {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 1fr;
     min-height: min(88vh, 800px);
     padding: 0;
     background: var(--hero-bg);
     overflow: hidden;
     position: relative;
+    /* tuck the hero up so the image runs to the top, behind the floating pill */
+    margin-top: calc(-1 * var(--nav-h));
   }
   /* LEFT panel */
   .hero--split .hero-left {
@@ -75,15 +77,17 @@
     background: var(--hero-bg);
     display: flex;
     align-items: center;
-    padding: 48px clamp(24px, 4.5vw, 72px);
+    /* extra top padding clears the floating nav pill */
+    padding: calc(var(--nav-h) + 24px) clamp(24px, 4vw, 60px) 48px;
   }
   .hero--split .hero-left-content { max-width: 560px; width: 100%; }
   .hero-wave-edge {
     position: absolute; top: 0; bottom: 0; left: 100%;
-    height: 100%; width: clamp(24px, 3.5vw, 50px);
+    height: 100%; width: clamp(30px, 4vw, 60px);
     margin-left: -1px;
     color: var(--hero-bg);
     pointer-events: none;
+    z-index: 2;
   }
   /* Copy colours on the solid panel */
   .hero--split .hero-eyebrow { color: rgba(255,255,255,0.78); }
@@ -123,9 +127,6 @@
   .hero-right {
     position: relative; overflow: hidden;
     background: var(--hero-bg);
-    height: min(88vh, 800px);
-    width: calc(min(88vh, 800px) * 0.8);
-    align-self: center;
   }
   .hero-slides { position: absolute; inset: 0; }
   .hero-slide {
