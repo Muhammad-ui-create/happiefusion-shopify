@@ -1,14 +1,9 @@
-{% comment %}
-  model-viewer (a full WebGL engine, ~1MB parsed JS) used to load eagerly here, it alone
-  cost ~25s of main-thread blocking on a mid-range phone (Lighthouse TBT 24,910ms).
-  It is now lazy-injected by the facade script at the bottom of this section:
-  a plain <img> poster paints instantly, and 3D boots on first touch/drag (mobile)
-  or after window.load + idle (desktop).
-{% endcomment %}
+{%- assign hero_bg = section.settings.hero_bg_color | default: '#6260AE' -%}
+<section class="hero hero--split" style="--hero-bg: {{ hero_bg }};">
 
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
+  <!-- LEFT: solid colour wave panel with the hero copy -->
+  <div class="hero-left">
+    <div class="hero-left-content">
       <div class="hero-eyebrow">We Put the Fun in Functional</div>
       <h1 class="hero-headline">Calm First.<br>Then Everything Works.</h1>
       <p class="hero-sub">Fungi Fusion is three functional mushrooms working as one system. Reishi settles you, so Lion’s Mane can sharpen your focus and Cordyceps can fuel your day. Sparkling, caffeine-free, and made to feel as good as it tastes.</p>
@@ -23,7 +18,6 @@
       </div>
       <p class="hero-support">Feel Good. Feel Happie.</p>
 
-      <!-- Reviews button, social proof right under the CTAs -->
       <a href="/pages/reviews" class="hero-reviews-btn" aria-label="Read customer reviews">
         <span class="hero-reviews-stars" aria-hidden="true">★★★★★</span>
         <strong>4.9</strong>
@@ -36,342 +30,174 @@
         <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="11" rx="2"/><path d="M16 10h4l3 3v4h-7"/><circle cx="5.5" cy="19.5" r="1.5"/><circle cx="20.5" cy="19.5" r="1.5"/></svg> Free shipping, no minimum</span>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hero-ring-wrap">
-        <div class="hero-glow"></div>
-        <div class="hero-ring-outer"></div>
-        <div class="hero-ring-mid"></div>
-        <div class="hero-ring-inner"></div>
 
-        <!-- Facade: instant poster image. Zero JS cost, becomes the LCP element.
-             The real 3D viewer swaps in from the <template> below on first interaction. -->
-        <img
-          id="hero-can-facade"
-          src="{{ 'can-hero-popup.webp' | asset_url }}"
-          alt="Happie Fungi Fusion Blue Raspberry, interactive 3D can. Tap to spin, or view in AR."
-          class="hero-can-3d"
-          width="320" height="480"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-          style="object-fit:contain;"
-        />
-
-        <!-- Inert until instantiated: nothing inside a <template> loads or executes -->
-        <template id="hero-can-3d-template">
-          <model-viewer
-            src="{{ 'happie-can-3d.glb' | asset_url }}"
-            alt="Happie Fungi Fusion Blue Raspberry, interactive 3D can. Drag to rotate, or tap to view in AR."
-            poster="{{ 'can-hero-popup.webp' | asset_url }}"
-            class="hero-can-3d"
-            auto-rotate
-            auto-rotate-delay="1200"
-            rotation-per-second="18deg"
-            camera-controls
-            camera-orbit="71deg 85deg 105%"
-            min-camera-orbit="auto 85deg 105%"
-            max-camera-orbit="auto 85deg 105%"
-            disable-zoom
-            disable-pan
-            touch-action="pan-y"
-            interaction-prompt="none"
-            shadow-intensity="1.0"
-            shadow-softness="0.8"
-            exposure="0.95"
-            tone-mapping="commerce"
-            environment-image="neutral"
-            loading="eager"
-            reveal="auto"
-            ar
-            ar-modes="webxr scene-viewer quick-look"
-            ar-scale="auto"
-            ar-placement="floor"
-            ios-src="{{ 'happie-can-3d.usdz' | asset_url }}"
-          >
-            <!-- Loading state -->
-            <div slot="progress-bar" class="hero-3d-loader">
-              <div class="hero-3d-loader-fill"></div>
-            </div>
-          </model-viewer>
-        </template>
-
-        <!-- AR button, OUTSIDE the model-viewer so it can be positioned freely without overflow clipping -->
-        <button class="hero-ar-btn" type="button" id="hero-ar-trigger">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-            <line x1="12" y1="22.08" x2="12" y2="12"/>
-          </svg>
-          View in your space
-        </button>
-
-        <!-- Drag hint -->
-        <div class="hero-3d-hint">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7 1 6.3 2.7M21 4v5h-5"/></svg>
-          Drag to spin
-        </div>
-      </div>
-      <div class="hero-pills">
-        <div class="hero-pill">
-          <span class="pill-label">THINK SHARP</span>
-          <span class="pill-val">Lion's Mane</span>
-          <span class="pill-mg">900mg</span>
-        </div>
-        <div class="hero-pill">
-          <span class="pill-label">NATURAL LIFT</span>
-          <span class="pill-val">Cordyceps</span>
-          <span class="pill-mg">700mg</span>
-        </div>
-        <div class="hero-pill">
-          <span class="pill-label">STAY STEADY</span>
-          <span class="pill-val">Reishi</span>
-          <span class="pill-mg">400mg</span>
-        </div>
-      </div>
-    </div>
+    <!-- Wavy right edge of the panel, flows over the image -->
+    <svg class="hero-wave-edge" viewBox="0 0 56 1000" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="currentColor" d="M0 0 L34 0 C58 120 10 240 34 360 C58 480 10 600 34 720 C58 840 20 1000 34 1000 L0 1000 Z"/>
+    </svg>
   </div>
 
-  <style>
-    /* mg counts demoted to small print under the mushroom name, benefit label leads */
-    .pill-mg { font-size: 9.5px; font-weight: 600; color: var(--gray, #5A6B5E); display: block; margin-top: 1px; }
-
-    /* ── Hero reviews button ── */
-    .hero-reviews-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      margin: 0 0 22px; /* CTAs above give 28px; this clears the trust row below */
-      background: rgba(245,166,35,0.10);
-      border: 1px solid rgba(245,166,35,0.30);
-      padding: 10px 18px; border-radius: 50px;
-      font-size: 14px; line-height: 1; color: var(--black, #1A1A1A);
-      text-decoration: none; cursor: pointer;
-      white-space: nowrap;
-      transition: background .2s, transform .15s, border-color .2s, box-shadow .2s;
-    }
-    .hero-reviews-btn:hover {
-      background: rgba(245,166,35,0.18);
-      border-color: rgba(245,166,35,0.55);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(245,166,35,0.18);
-    }
-    .hero-reviews-btn > * { line-height: 1; }
-    .hero-reviews-stars { color: #F5A623; font-size: 13px; letter-spacing: 3px; }
-    .hero-reviews-btn strong { font-weight: 900; font-size: 14px; }
-    .hero-reviews-count { color: var(--gray, #5A6B5E); font-weight: 600; font-size: 13px; }
-    .hero-reviews-btn svg { color: var(--green-dark, #2D6A4F); flex-shrink: 0; }
-    @media (max-width: 480px) {
-      .hero-reviews-btn { font-size: 12.5px; padding: 8px 14px; gap: 6px; }
-      .hero-reviews-stars { font-size: 11px; letter-spacing: 2px; }
-      .hero-reviews-count { font-size: 12px; }
-    }
-
-    /* 3D can, sized to match the previous <img> footprint */
-    .hero-can-3d {
-      width: 320px;
-      height: 480px;
-      max-width: 100%;
-      background: transparent;
-      --poster-color: transparent;
-      position: relative; z-index: 5;
-      cursor: grab;
-      display: block;
-    }
-    .hero-can-3d:active { cursor: grabbing; }
-
-    /* Mobile sizing */
-    @media (max-width: 768px) {
-      .hero-can-3d { width: 220px; height: 330px; }
-
-      /* Smaller "Drag to spin" pill on mobile */
-      .hero-3d-hint {
-        font-size: 8.5px !important;
-        padding: 4px 9px !important;
-        gap: 4px !important;
-        bottom: -4px !important;
-      }
-      .hero-3d-hint svg { width: 10px !important; height: 10px !important; }
-
-      /* AR button, below the 3D can, with enough clearance from pills below */
-      .hero-ar-btn {
-        font-size: 11px;
-        padding: 8px 14px;
-        gap: 5px;
-        bottom: -52px;
-      }
-      .hero-ar-btn svg { width: 12px; height: 12px; }
-
-      /* Push the pills section down to clear the AR button */
-      .hero-pills { margin-top: 72px !important; }
-    }
-    @media (max-width: 420px) {
-      .hero-can-3d { width: 180px; height: 270px; }
-      .hero-ar-btn {
-        font-size: 10px;
-        padding: 7px 12px;
-        gap: 4px;
-        bottom: -46px;
-      }
-      .hero-ar-btn svg { width: 11px; height: 11px; }
-      .hero-pills { margin-top: 64px !important; }
-    }
-
-    /* Custom progress loader */
-    .hero-3d-loader {
-      position: absolute; left: 50%; bottom: 24px;
-      transform: translateX(-50%);
-      width: 80px; height: 3px;
-      background: rgba(0,0,0,0.08);
-      border-radius: 3px; overflow: hidden;
-    }
-    .hero-3d-loader-fill {
-      width: 0%; height: 100%;
-      background: var(--green, #52B788);
-      transition: width 0.2s ease;
-    }
-
-    /* Drag hint pill */
-    .hero-3d-hint {
-      position: absolute; bottom: -8px; left: 50%;
-      transform: translateX(-50%);
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(45,106,79,0.92); color: #fff;
-      padding: 7px 14px; border-radius: 50px;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
-      text-transform: uppercase;
-      z-index: 10; pointer-events: none;
-      animation: hintPulse 3s ease-in-out infinite;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    }
-    @keyframes hintPulse {
-      0%, 100% { opacity: 0.55; transform: translateX(-50%) translateY(0); }
-      50% { opacity: 1; transform: translateX(-50%) translateY(-3px); }
-    }
-
-    /* Hide hint after first interaction */
-    .hero-can-3d:active ~ .hero-3d-hint,
-    .hero-can-3d.user-interacted ~ .hero-3d-hint {
-      opacity: 0; transition: opacity 0.4s; pointer-events: none;
-    }
-
-    /* AR button, positioned BELOW the 3D viewer (outside can area, doesn't cover label) */
-    .hero-ar-btn {
-      position: absolute;
-      bottom: -52px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(255,255,255,0.96);
-      color: var(--green-dark, #2D6A4F);
-      border: 1.5px solid rgba(45,106,79,0.25);
-      border-radius: 50px;
-      padding: 9px 18px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-      transition: all 0.2s;
-      backdrop-filter: blur(8px);
-      z-index: 20;
-      white-space: nowrap;
-    }
-    .hero-ar-btn:hover {
-      transform: translateX(-50%) translateY(-2px);
-    }
-    .hero-ar-btn:hover {
-      background: var(--green-dark, #2D6A4F);
-      color: #fff;
-      box-shadow: 0 12px 28px rgba(45,106,79,0.3);
-    }
-    .hero-ar-btn svg { flex-shrink: 0; }
-
-    /* AR button hidden by default; JS shows it on Android only */
-    .hero-ar-btn { display: none; }
-
-  </style>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var facade = document.getElementById('hero-can-facade');
-      var tpl = document.getElementById('hero-can-3d-template');
-      if (!facade || !tpl) return;
-
-      var MV_SRC = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js';
-      var arBtn = document.getElementById('hero-ar-trigger');
-      var ua = navigator.userAgent;
-      var isMobile = /Android|iPad|iPhone|iPod/i.test(ua);
-      var upgraded = false;
-      var pendingAR = false;
-
-      // On mobile the AR button can show right away, tapping it boots 3D, then launches AR
-      if (arBtn && isMobile) arBtn.style.display = 'inline-flex';
-
-      function upgradeTo3D() {
-        if (upgraded) return;
-        upgraded = true;
-
-        // Inject the model-viewer engine only now
-        if (!document.querySelector('script[data-mv-engine]')) {
-          var s = document.createElement('script');
-          s.type = 'module';
-          s.src = MV_SRC;
-          s.setAttribute('data-mv-engine', '');
-          document.head.appendChild(s);
-        }
-
-        // Swap facade for the real viewer
-        var mv = tpl.content.firstElementChild.cloneNode(true);
-        facade.replaceWith(mv);
-
-        var fill = mv.querySelector('.hero-3d-loader-fill');
-        mv.addEventListener('progress', function(e) {
-          if (fill) fill.style.width = (e.detail.totalProgress * 100) + '%';
-        });
-        mv.addEventListener('pointerdown', function() { mv.classList.add('user-interacted'); });
-
-        mv.addEventListener('load', function() {
-          if (!isMobile && arBtn) { arBtn.style.display = 'none'; }
-          if (pendingAR && mv.activateAR) { pendingAR = false; mv.activateAR(); }
-        });
-
-        if (arBtn) {
-          arBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (mv.activateAR) mv.activateAR();
-          });
-        }
-      }
-
-      // ── Upgrade triggers ──
-      // 1. Any touch/click/drag on the can facade (mobile + desktop)
-      ['pointerdown', 'touchstart'].forEach(function(evt) {
-        facade.addEventListener(evt, upgradeTo3D, { once: true, passive: true });
-      });
-
-      // 2. AR button tap before 3D exists, boot 3D, then auto-launch AR when ready
-      if (arBtn) {
-        arBtn.addEventListener('click', function() {
-          if (!upgraded) { pendingAR = true; upgradeTo3D(); }
-        });
-      }
-
-      // 3. Desktop only: auto-upgrade after full load + idle so the can spins
-      //    without interaction, but never during the initial-load metrics window.
-      //    Mobile stays poster-only until touched (keeps main thread free).
-      var finePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
-      if (finePointer) {
-        window.addEventListener('load', function() {
-          var kick = function() { setTimeout(upgradeTo3D, 2000); };
-          ('requestIdleCallback' in window) ? requestIdleCallback(kick, { timeout: 6000 }) : kick();
-        }, { once: true });
-      }
-    });
-  </script>
+  <!-- RIGHT: cross-fading lifestyle slideshow -->
+  <div class="hero-right">
+    <div class="hero-slides">
+      {%- for n in (1..5) -%}
+        <img
+          class="hero-slide{% if forloop.first %} is-active{% endif %}"
+          src="{{ 'hero-' | append: n | append: '.jpg' | asset_url }}"
+          alt="Happie Fungi Fusion lifestyle"
+          width="1200" height="1500"
+          {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+          decoding="async">
+      {%- endfor -%}
+    </div>
+    <div class="hero-dots" role="tablist" aria-label="Hero slides">
+      {%- for n in (1..5) -%}
+        <button type="button" class="hero-dot{% if forloop.first %} is-active{% endif %}" aria-label="Show slide {{ n }}"></button>
+      {%- endfor -%}
+    </div>
+  </div>
 </section>
+
+<style>
+  .hero--split {
+    display: grid;
+    grid-template-columns: 46% 54%;
+    min-height: min(88vh, 800px);
+    padding: 0;
+    background: var(--hero-bg);
+    overflow: hidden;
+    position: relative;
+  }
+  /* LEFT panel */
+  .hero--split .hero-left {
+    position: relative;
+    z-index: 2;
+    background: var(--hero-bg);
+    display: flex;
+    align-items: center;
+    padding: 64px clamp(24px, 4.5vw, 72px);
+  }
+  .hero--split .hero-left-content { max-width: 560px; margin-left: auto; width: 100%; }
+  .hero-wave-edge {
+    position: absolute; top: 0; bottom: 0; left: 100%;
+    height: 100%; width: clamp(26px, 4vw, 56px);
+    margin-left: -1px;
+    color: var(--hero-bg);
+    pointer-events: none;
+  }
+  /* Copy colours on the solid panel */
+  .hero--split .hero-eyebrow { color: rgba(255,255,255,0.78); }
+  .hero--split .hero-headline { color: #fff; }
+  .hero--split .hero-sub { color: rgba(255,255,255,0.92); }
+  .hero--split .hero-support { color: #fff; margin: -8px 0 24px; }
+  .hero--split .hero-trust { color: rgba(255,255,255,0.82); }
+  .hero--split .no-alc-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.30);
+    color: #fff;
+  }
+  .hero--split .btn-primary {
+    background: #fff; color: var(--hero-bg);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  }
+  .hero--split .btn-primary:hover { background: rgba(255,255,255,0.90); transform: translateY(-2px); }
+
+  /* Reviews pill (self-contained, tuned for the dark panel) */
+  .hero-reviews-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin: 0 0 22px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.28);
+    padding: 9px 16px; border-radius: 50px;
+    font-size: 14px; line-height: 1; color: #fff;
+    text-decoration: none; cursor: pointer; white-space: nowrap;
+    transition: background .2s, transform .15s;
+  }
+  .hero-reviews-btn:hover { background: rgba(255,255,255,0.24); transform: translateY(-1px); }
+  .hero-reviews-stars { color: #FFCB05; letter-spacing: 1px; }
+  .hero-reviews-btn strong { font-weight: 800; }
+  .hero-reviews-count { color: rgba(255,255,255,0.72); }
+
+  /* RIGHT slideshow */
+  .hero-right { position: relative; overflow: hidden; background: var(--hero-bg); }
+  .hero-slides { position: absolute; inset: 0; }
+  .hero-slide {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 0; transition: opacity 1.1s ease;
+    will-change: opacity;
+  }
+  .hero-slide.is-active { opacity: 1; }
+  .hero-dots {
+    position: absolute; z-index: 3;
+    bottom: 20px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 9px;
+  }
+  .hero-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    border: none; background: rgba(255,255,255,0.5);
+    cursor: pointer; padding: 0; transition: background .2s, transform .2s;
+  }
+  .hero-dot.is-active { background: #fff; transform: scale(1.25); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide { transition: none; }
+  }
+
+  @media (max-width: 900px) {
+    .hero--split { grid-template-columns: 1fr; min-height: auto; }
+    .hero--split .hero-right { order: -1; height: 56vh; min-height: 360px; }
+    .hero--split .hero-left { padding: 40px 22px 48px; text-align: center; }
+    .hero--split .hero-left-content { margin: 0 auto; }
+    .hero-wave-edge { display: none; }
+    .hero--split .hero-badges,
+    .hero--split .hero-ctas,
+    .hero--split .hero-trust { justify-content: center; }
+    .hero-reviews-btn { align-self: center; }
+  }
+</style>
+
+<script>
+  (function () {
+    var section = document.querySelector('.hero--split');
+    if (!section) return;
+    var slides = section.querySelectorAll('.hero-slide');
+    var dots = section.querySelectorAll('.hero-dot');
+    if (slides.length < 2) return;
+    var i = 0, timer;
+    var INTERVAL = {{ section.settings.slide_seconds | default: 5 | times: 1000 }};
+    function show(n) {
+      slides[i].classList.remove('is-active');
+      if (dots[i]) dots[i].classList.remove('is-active');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('is-active');
+      if (dots[i]) dots[i].classList.add('is-active');
+    }
+    function start() { timer = setInterval(function () { show(i + 1); }, INTERVAL); }
+    dots.forEach(function (d, idx) {
+      d.addEventListener('click', function () { clearInterval(timer); show(idx); start(); });
+    });
+    start();
+  })();
+</script>
 
 {% schema %}
 {
   "name": "Hero",
-  "settings": []
+  "settings": [
+    {
+      "type": "color",
+      "id": "hero_bg_color",
+      "label": "Text panel background colour",
+      "default": "#6260AE"
+    },
+    {
+      "type": "range",
+      "id": "slide_seconds",
+      "label": "Seconds per slide",
+      "min": 3, "max": 10, "step": 1, "unit": "s",
+      "default": 5
+    }
+  ]
 }
 {% endschema %}
