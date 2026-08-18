@@ -134,8 +134,8 @@ input, select { font-family: var(--font); }
   max-width: 1180px;
   width: calc(100% - 32px);
   margin: 0 auto;
-  padding: 6px 14px 6px 26px;
-  height: 84px;
+  padding: 8px 16px 8px 26px;
+  height: 62px;
   display: flex;
   align-items: center;
   gap: 32px;
@@ -145,7 +145,7 @@ input, select { font-family: var(--font); }
   box-shadow: 0 10px 30px rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.06);
 }
 .nav-logo-link { display: flex; align-items: center; flex-shrink: 0; }
-.nav-logo-img { height: 72px; width: auto; object-fit: contain; }
+.nav-logo-img { height: 34px; width: auto; object-fit: contain; }
 .nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links a { font-size: 14px; font-weight: 600; opacity: 0.75; transition: opacity 0.15s; }
 .nav-links a:hover { opacity: 1; }
@@ -2244,12 +2244,22 @@ body.subscription-selected #shopify-buyer-consent {
 ══════════════════════════════════════════ */
 @media (max-width: 768px) {
 
-  /* Nav */
-  :root { --nav-h: 68px; }
-  .nav-logo-img  { height: 80px; }
+  /* Nav — compact floating pill: hamburger left, logo centre, cart right */
+  :root { --nav-h: 72px; }
+  .nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0;
+    height: 52px;
+    padding: 6px 16px;
+  }
   .nav-links     { display: none; }
   .nav-right .nav-signin { display: none; }
-  .hamburger     { display: flex; }
+  .hamburger     { display: flex; grid-column: 1; justify-self: start; padding: 6px; }
+  .nav-logo-link { grid-column: 2; justify-self: center; }
+  .nav-logo-img  { height: 30px; }
+  .nav-right     { grid-column: 3; justify-self: end; margin-left: 0; gap: 0; }
   .cart-trigger  { padding: 8px 16px; font-size: 13px; }
 
   /* Announcement bar — ticker stays auto on mobile, just slightly smaller */
