@@ -27,7 +27,12 @@
   </div>
   <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
   <div class="mobile-nav" id="mobile-nav">
-    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
+    <div class="mobile-nav-head">
+      <a href="/" class="mobile-nav-logo-link">
+        <img src="{{ 'happie-logo-cropped.png' | asset_url }}" alt="{{ shop.name }}" class="mobile-nav-logo" width="150" height="34" />
+      </a>
+      <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
+    </div>
     <ul>
       <li><a href="/collections/all">Shop</a></li>
       <li><a href="/pages/mushrooms">Mushrooms</a></li>

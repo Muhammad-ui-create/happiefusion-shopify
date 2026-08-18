@@ -470,6 +470,7 @@ input, select { font-family: var(--font); }
 .mushroom-benefits {
   background: var(--yellow);
   color: #000;
+  margin-top: clamp(28px, 4vw, 52px);   /* breathing room below the hero */
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -651,7 +652,7 @@ input, select { font-family: var(--font); }
 }
 @media (prefers-reduced-motion: reduce) { .site-footer { animation: none; } }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(0,0,0,0.12); }
-.footer-logo { height: 120px; width: auto; object-fit: contain; margin-bottom: 16px; }
+.footer-logo { height: 84px; width: auto; object-fit: contain; margin-bottom: 16px; }
 .footer-brand p { font-size: 14px; line-height: 1.65; color: rgba(0,0,0,0.72); max-width: 280px; }
 .footer-socials { display: flex; gap: 12px; margin-top: 16px; }
 .footer-socials a {
@@ -2291,10 +2292,16 @@ body.subscription-selected #shopify-buyer-consent {
     box-shadow: 6px 0 30px rgba(0,0,0,0.18);
   }
   .mobile-nav.open { transform: translateX(0); }
+  .mobile-nav-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 18px; padding-bottom: 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .mobile-nav-logo-link { display: flex; align-items: center; }
+  .mobile-nav-logo { height: 32px; width: auto; display: block; }
   .mobile-nav-close {
-    display: block; margin: 0 0 10px auto;
     font-size: 24px; line-height: 1; color: #16181B;
-    background: none; border: none; padding: 4px 6px; cursor: pointer;
+    background: none; border: none; padding: 4px 6px; cursor: pointer; margin: 0;
   }
   .mobile-nav-overlay {
     position: fixed; inset: 0; background: rgba(0,0,0,0.45);
@@ -2422,7 +2429,7 @@ body.subscription-selected #shopify-buyer-consent {
   /* Footer */
   .footer-inner  { grid-template-columns: 1fr 1fr; gap: 32px; }
   .site-footer   { padding: 48px 20px 0; }
-  .footer-logo   { height: 96px; }
+  .footer-logo   { height: 64px; }
   .cta-banner-wrap { padding: 0 14px 56px; }
   .cta-banner    { border-radius: 26px; }
   .cta-banner-inner { padding: 64px 22px; }
