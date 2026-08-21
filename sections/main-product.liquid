@@ -34,14 +34,14 @@
           {% for image in product.images %}
             <img
               {% if forloop.first %}id="gallery-main-img"{% endif %}
-              src="{{ image | image_url: width: 900 }}"
-              {% if forloop.first %}srcset="{{ image | image_url: width: 360 }} 360w, {{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 720 }} 720w, {{ image | image_url: width: 900 }} 900w"
-              sizes="(max-width: 768px) 100vw, 600px"{% endif %}
+              src="{{ image | image_url: width: 720 }}"
+              srcset="{{ image | image_url: width: 360 }} 360w, {{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 720 }} 720w, {{ image | image_url: width: 900 }} 900w"
+              sizes="(max-width: 768px) 92vw, 600px"
               alt="{{ image.alt | default: product.title }}"
               class="gallery-slide{% if forloop.first %} gallery-main-img{% endif %}"
               width="900" height="900"
               loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-              {% if forloop.first %}fetchpriority="high"{% endif %}
+              {% if forloop.first %}fetchpriority="high"{% else %}fetchpriority="low"{% endif %}
               decoding="async"
               draggable="false"
             />
@@ -62,9 +62,9 @@
             <div
               class="gallery-thumb {% if forloop.first %}active{% endif %}"
               data-index="{{ forloop.index0 }}"
-              data-src="{{ image | image_url: width: 900 }}"
+              data-src="{{ image | image_url: width: 720 }}"
             >
-              <img src="{{ image | image_url: width: 160 }}" alt="{{ image.alt | default: product.title }}" loading="lazy" />
+              <img src="{{ image | image_url: width: 160 }}" alt="{{ image.alt | default: product.title }}" width="80" height="80" loading="lazy" decoding="async" />
             </div>
           {% endfor %}
         </div>
