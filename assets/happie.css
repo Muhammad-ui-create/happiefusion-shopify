@@ -179,6 +179,7 @@ input, select { font-family: var(--font); }
   transition: background 0.15s;
 }
 .cart-trigger:hover { background: var(--green-dark); }
+.cart-trigger .cart-icon { display: none; }   /* desktop shows the "Cart · N" text pill */
 .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
 .hamburger span { display: block; width: 22px; height: 2px; background: var(--black); border-radius: 2px; }
 .mobile-nav { display: none; background: var(--cream); border-top: 1px solid rgba(0,0,0,0.08); padding: 20px 24px; }
@@ -2342,7 +2343,28 @@ body.subscription-selected #shopify-buyer-consent {
   }
   .nav-logo-link img { pointer-events: auto; }
   .nav-logo-img  { height: 30px; }
-  .cart-trigger  { padding: 8px 16px; font-size: 13px; }
+  /* Mobile: cart shows as an icon with a count bubble instead of the text pill */
+  .cart-trigger {
+    background: transparent;
+    color: var(--black, #16181B);
+    padding: 5px;
+    border-radius: 50%;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cart-trigger:hover { background: rgba(0,0,0,0.06); }
+  .cart-trigger .cart-icon { display: block; width: 25px; height: 25px; }
+  .cart-trigger .cart-trigger-text { display: none; }
+  .cart-trigger .cart-count-badge {
+    position: absolute; top: -3px; right: -4px;
+    min-width: 17px; height: 17px; padding: 0 4px;
+    background: var(--green); color: #fff;
+    border-radius: 9px; font-size: 10px; font-weight: 800;
+    line-height: 1; display: flex; align-items: center; justify-content: center;
+  }
+  .cart-trigger .cart-count-badge.is-empty { display: none; }
 
   /* Mobile menu — slide-in drawer from the LEFT with dimmed overlay */
   .mobile-nav {

@@ -12,6 +12,7 @@
     cartCount = count;
     document.querySelectorAll('.cart-count-badge').forEach(function(el) {
       el.textContent = count;
+      el.classList.toggle('is-empty', !count);
     });
   }
 
