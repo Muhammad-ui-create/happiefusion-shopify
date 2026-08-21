@@ -166,6 +166,8 @@
 .reviews-track { display: flex; width: max-content; }
 .reviews-track .review-card {
   flex: 0 0 340px; margin-right: 22px; white-space: normal;
+  /* never let the scroll-reveal animation hide marquee cards */
+  opacity: 1 !important; transform: none !important;
 }
 @media (max-width: 768px) {
   .reviews-track .review-card { flex: 0 0 80vw; margin-right: 16px; }
@@ -180,15 +182,13 @@
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var third = 0;
   function measure(){ third = track.scrollWidth / 3; }
+  /* forward-only wrap; start at 0 so the first card always renders without
+     depending on JS timing (a mismeasured scrollLeft could otherwise blank it) */
   function norm(){
-    if(!third) return;
-    if(scroller.scrollLeft >= 2 * third) scroller.scrollLeft -= third;
-    else if(scroller.scrollLeft < third) scroller.scrollLeft += third;
+    if(third && scroller.scrollLeft >= 2 * third) scroller.scrollLeft -= third;
   }
   measure();
-  /* start in the middle copy so you can swipe both ways seamlessly */
-  scroller.scrollLeft = third;
-  window.addEventListener('resize', function(){ var p = third ? scroller.scrollLeft / third : 1; measure(); scroller.scrollLeft = third * p; }, { passive: true });
+  window.addEventListener('resize', measure, { passive: true });
 
   var speed = 0.55, paused = false, resumeTimer;
   function tick(){
