@@ -1,0 +1,40 @@
+<section class="home-founder">
+  <div class="home-founder-inner">
+    <span class="home-founder-eyebrow">From the founder</span>
+    <h2 class="home-founder-title">Why we made it</h2>
+    <div class="home-founder-slot" role="img" aria-label="Founder video coming soon">
+      <span class="home-founder-play" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="9 7 17 12 9 17 9 7" fill="currentColor" stroke="none"/></svg>
+      </span>
+      <span class="home-founder-note">Founder video &mdash; placeholder slot (~40s, 16:9)</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-founder { background: #F7FBF9; padding: clamp(48px, 7vw, 84px) 22px; }
+  .home-founder-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .home-founder-eyebrow {
+    display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--green, #2D6A4F); margin-bottom: 12px;
+  }
+  .home-founder-title { font-size: clamp(24px, 3.6vw, 36px); font-weight: 900; letter-spacing: -0.02em; color: var(--ink, #16181B); margin: 0 0 28px; }
+  .home-founder-slot {
+    position: relative; aspect-ratio: 16 / 9; width: 100%; border-radius: 22px;
+    background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+    border: 2px dashed rgba(255,255,255,0.35); color: #fff;
+  }
+  .home-founder-play {
+    width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,0.16);
+    display: flex; align-items: center; justify-content: center; color: #fff;
+  }
+  .home-founder-note { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.8); }
+</style>
+
+{% schema %}
+{
+  "name": "Home — Founder Video",
+  "settings": []
+}
+{% endschema %}

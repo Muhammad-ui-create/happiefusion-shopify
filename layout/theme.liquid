@@ -6,7 +6,7 @@
 
   {%- comment -%} ── SEO: TITLE TAGS ── {%- endcomment -%}
   {%- if template.name == 'index' -%}
-    <title>Functional Mushroom Drinks | Lion's Mane, Cordyceps & Reishi Seltzer – Happie Fusion</title>
+    <title>Happie Fungi Fusion | Three-Mushroom Functional Drink</title>
   {%- elsif template.name == 'product' -%}
     <title>{{ product.title }} | Functional Mushroom Seltzer – Happie Fusion</title>
   {%- elsif template.name == 'collection' -%}
@@ -17,7 +17,7 @@
 
   {%- comment -%} ── SEO: META DESCRIPTIONS ── {%- endcomment -%}
   {%- if template.name == 'index' -%}
-    <meta name="description" content="Happie Fungi Fusion, 2,000mg of functional mushrooms (900mg Lion’s Mane, 700mg Cordyceps, 400mg Reishi) per can. Caffeine-free, zero crash, for any occasion. Free shipping, no minimum.">
+    <meta name="description" content="A functional mushroom drink built as one arc — calm, energy, clarity. Reishi, Cordyceps and Lion’s Mane with ocean minerals. For the part of the day that still needs you.">
   {%- elsif template.name == 'product' -%}
     {%- comment -%} Prefer the Shopify-managed SEO description; fall back to body if not set. {%- endcomment -%}
     {%- assign seo_meta = product.metafields.global.description_tag -%}
@@ -123,8 +123,8 @@
     <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
   {%- elsif template.name == 'index' -%}
     <meta property="og:type" content="website">
-    <meta property="og:title" content="2,000mg of Real Mushrooms, Zero Caffeine | Happie Fusion">
-    <meta property="og:description" content="We put the fun in functional, 900mg Lion’s Mane, 700mg Cordyceps & 400mg Reishi per can. Caffeine-free, zero crash, for any occasion.">
+    <meta property="og:title" content="For the part of the day that still needs you.">
+    <meta property="og:description" content="Three mushrooms in one designed order, with ocean minerals. Happie Fungi Fusion.">
     <meta property="og:image" content="{{ 'happie-logo.png' | asset_url }}">
   {%- else -%}
     <meta property="og:type" content="website">

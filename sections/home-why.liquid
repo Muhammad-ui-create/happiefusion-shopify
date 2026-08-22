@@ -1,0 +1,42 @@
+<section class="home-why" id="the-why">
+  <div class="home-why-inner">
+    <span class="home-why-eyebrow">The Why</span>
+    <h2 class="home-why-title">Better tools, not fewer good nights</h2>
+    <div class="home-why-body">
+      <p>The things most of us reach for to take the edge off — a drink, a sugar hit, another hour of pushing through — tend to charge interest.</p>
+      <p>You don&rsquo;t notice it at twenty-five. It compounds. And one day the bill is impossible to ignore.</p>
+      <p>We didn&rsquo;t build Fungi Fusion to take anything away. We built it because the same afternoon can be handled with something that doesn&rsquo;t cost you the evening, or the decade.</p>
+      <p class="home-why-tagline">That&rsquo;s Happie. Same body, better tools, your choice.</p>
+    </div>
+    <a href="#the-arc" class="home-why-cta">See how it&rsquo;s built <span aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
+
+<style>
+  .home-why { background: #FFFFFF; padding: clamp(56px, 8vw, 96px) 22px; }
+  .home-why-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+  .home-why-eyebrow {
+    display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--green, #2D6A4F); margin-bottom: 16px;
+  }
+  .home-why-title {
+    font-size: clamp(28px, 4.4vw, 44px); font-weight: 900; letter-spacing: -0.02em;
+    line-height: 1.12; color: var(--ink, #16181B); margin: 0 0 26px;
+  }
+  .home-why-body p { font-size: clamp(16px, 1.6vw, 19px); line-height: 1.7; color: #40474A; margin: 0 0 18px; }
+  .home-why-tagline { font-weight: 800; color: var(--ink, #16181B) !important; }
+  .home-why-cta {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+    font-size: 15px; font-weight: 800; color: var(--green-dark, #1B4332);
+    text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 3px;
+    transition: gap 0.2s ease;
+  }
+  .home-why-cta:hover { gap: 13px; }
+</style>
+
+{% schema %}
+{
+  "name": "Home — The Why",
+  "settings": []
+}
+{% endschema %}

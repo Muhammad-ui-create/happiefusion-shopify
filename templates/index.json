@@ -1,40 +1,14 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero",
-      "settings": {}
-    },
-    "trust-bar": {
-      "type": "announcement-bar",
-      "settings": {}
-    },
-    "featured": {
-      "type": "featured-collection",
-      "settings": {}
-    },
-    "mushrooms": {
-      "type": "mushroom-benefits",
-      "settings": {}
-    },
-    "subscribe-save": {
-      "type": "subscribe-save",
-      "settings": {}
-    },
-    "reviews": {
-      "type": "reviews-section",
-      "settings": {}
-    },
-    "cta": {
-      "type": "cta-banner",
-      "settings": {}
-    }
+    "hero": { "type": "hero", "settings": {} },
+    "featured": { "type": "featured-collection", "settings": {} },
+    "home-why": { "type": "home-why", "settings": {} },
+    "home-founder": { "type": "home-founder", "settings": {} },
+    "home-arc": { "type": "home-arc", "settings": {} },
+    "home-cost": { "type": "home-cost", "settings": {} },
+    "reviews": { "type": "reviews-section", "settings": {} },
+    "subscribe-save": { "type": "subscribe-save", "settings": {} },
+    "home-retailer": { "type": "home-retailer", "settings": {} }
   },
-  "order": [
-    "hero",
-    "mushrooms",
-    "featured",
-    "subscribe-save",
-    "reviews",
-    "cta"
-  ]
+  "order": ["hero", "featured", "home-why", "home-founder", "home-arc", "home-cost", "reviews", "subscribe-save", "home-retailer"]
 }
