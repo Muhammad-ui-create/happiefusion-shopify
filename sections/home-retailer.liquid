@@ -1,4 +1,9 @@
 <section class="home-retailer">
+  <div class="wave-field" aria-hidden="true">
+    <span class="wave wave--back"></span>
+    <span class="wave wave--mid"></span>
+    <span class="wave wave--front"></span>
+  </div>
   <div class="home-retailer-inner">
     <div class="home-retailer-copy">
       <span class="home-retailer-eyebrow">Wholesale</span>
@@ -12,10 +17,16 @@
 
 <style>
   .home-retailer {
+    position: relative; overflow: hidden;
+    --wave-color: #8FD3AE;
     background: linear-gradient(135deg, #0B3D2E 0%, #1B5E42 55%, #2D6A4F 100%);
     padding: clamp(52px, 7vw, 88px) 22px;
   }
-  .home-retailer-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+  /* lift the mint waves a touch so they read on the dark green */
+  .home-retailer .wave--back  { opacity: 0.14; }
+  .home-retailer .wave--mid   { opacity: 0.20; }
+  .home-retailer .wave--front { opacity: 0.30; }
+  .home-retailer-inner { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; text-align: center; }
   .home-retailer-eyebrow {
     display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--green-mid, #7FD1A6); margin-bottom: 14px;
