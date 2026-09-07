@@ -10,20 +10,29 @@
       </div>
     </div>
 
-    {%- comment -%} Sequence only — no per-mushroom effect icons/badges, per spec. {%- endcomment -%}
+    {%- comment -%} Sequence with a photo of each mushroom; step number sits as a small badge on the photo. {%- endcomment -%}
     <ol class="home-arc-steps">
       <li class="home-arc-step">
-        <span class="home-arc-num">1</span>
+        <div class="home-arc-thumb">
+          <img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/mushroom-reishi.jpg?v=1788779101" alt="Reishi mushroom (Ganoderma lucidum)" width="112" height="112" loading="lazy">
+          <span class="home-arc-num">1</span>
+        </div>
         <span class="home-arc-word">Settle</span>
         <span class="home-arc-shroom">Reishi</span>
       </li>
       <li class="home-arc-step">
-        <span class="home-arc-num">2</span>
+        <div class="home-arc-thumb">
+          <img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/mushroom-cordyceps.jpg?v=1788779101" alt="Cordyceps mushroom (Cordyceps militaris)" width="112" height="112" loading="lazy">
+          <span class="home-arc-num">2</span>
+        </div>
         <span class="home-arc-word">Lift</span>
         <span class="home-arc-shroom">Cordyceps</span>
       </li>
       <li class="home-arc-step">
-        <span class="home-arc-num">3</span>
+        <div class="home-arc-thumb">
+          <img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/mushroom-lionsmane.jpg?v=1788779101" alt="Lion&rsquo;s Mane mushroom (Hericium erinaceus)" width="112" height="112" loading="lazy">
+          <span class="home-arc-num">3</span>
+        </div>
         <span class="home-arc-word">Sharpen</span>
         <span class="home-arc-shroom">Lion&rsquo;s Mane</span>
       </li>
@@ -52,20 +61,27 @@
     list-style: none; margin: 0 0 40px; padding: 0;
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative;
   }
-  /* the connecting arc line */
+  /* the connecting arc line, runs through the middle of the photos */
   .home-arc-steps::before {
-    content: ""; position: absolute; top: 26px; left: 16%; right: 16%; height: 3px;
+    content: ""; position: absolute; top: 56px; left: 18%; right: 18%; height: 3px;
     background: repeating-linear-gradient(90deg, var(--green-mid, #52B788) 0 14px, transparent 14px 24px);
     z-index: 0;
   }
   .home-arc-step { position: relative; z-index: 1; text-align: center; padding: 0 10px; }
-  .home-arc-num {
-    display: flex; align-items: center; justify-content: center;
-    width: 54px; height: 54px; margin: 0 auto 16px; border-radius: 50%;
-    background: var(--green, #2D6A4F); color: #fff; font-size: 20px; font-weight: 900;
-    box-shadow: 0 8px 20px rgba(45,106,79,0.28); border: 4px solid #EEF6F1;
+
+  .home-arc-thumb { position: relative; width: 112px; height: 112px; margin: 0 auto 16px; }
+  .home-arc-thumb img {
+    width: 112px; height: 112px; border-radius: 50%; object-fit: cover; display: block;
+    background: #EEF6F1; border: 4px solid #fff; box-shadow: 0 10px 26px rgba(27,67,50,0.16);
   }
-  .home-arc-word { display: block; font-size: 19px; font-weight: 900; color: var(--ink, #16181B); letter-spacing: -0.01em; }
+  .home-arc-num {
+    position: absolute; bottom: -4px; right: -2px;
+    display: flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--green, #2D6A4F); color: #fff; font-size: 15px; font-weight: 900;
+    border: 3px solid #fff; box-shadow: 0 4px 12px rgba(45,106,79,0.34);
+  }
+  .home-arc-word { display: block; margin-top: 2px; font-size: 19px; font-weight: 900; color: var(--ink, #16181B); letter-spacing: -0.01em; }
   .home-arc-shroom { display: block; margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--green, #2D6A4F); }
 
   .home-arc-close {
@@ -74,10 +90,13 @@
   }
 
   @media (max-width: 700px) {
-    .home-arc-steps { grid-template-columns: 1fr; gap: 22px; }
+    .home-arc-steps { grid-template-columns: 1fr; gap: 20px; }
     .home-arc-steps::before { display: none; }
-    .home-arc-step { display: flex; align-items: center; gap: 16px; text-align: left; }
-    .home-arc-num { margin: 0; flex-shrink: 0; }
+    .home-arc-step { display: flex; align-items: center; gap: 18px; text-align: left; padding: 0; }
+    .home-arc-thumb { margin: 0; flex-shrink: 0; width: 88px; height: 88px; }
+    .home-arc-thumb img { width: 88px; height: 88px; }
+    .home-arc-num { width: 30px; height: 30px; font-size: 14px; }
+    .home-arc-word { margin-top: 0; }
   }
 </style>
 
