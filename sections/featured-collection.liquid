@@ -30,10 +30,30 @@
         </a>
       </li>
     </ul>
+
+    {%- comment -%} Divider separates the editorial flavor cards above from the shoppable grid below {%- endcomment -%}
+    <div class="flavor-shop-divider">
+      <span class="flavor-shop-divider-line" aria-hidden="true"></span>
+      <span class="flavor-shop-divider-label">Shop the lineup</span>
+      <span class="flavor-shop-divider-line" aria-hidden="true"></span>
+    </div>
+
     <style>
       .flavor-descriptors {
         list-style: none; margin: 0 auto 34px; padding: 0; max-width: 1000px;
         display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+      }
+      .flavor-shop-divider {
+        display: flex; align-items: center; gap: 18px;
+        max-width: 620px; margin: 8px auto 40px;
+      }
+      .flavor-shop-divider-line {
+        flex: 1; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(45,106,79,0.28), transparent);
+      }
+      .flavor-shop-divider-label {
+        flex-shrink: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.16em;
+        text-transform: uppercase; color: var(--green, #2D6A4F);
       }
       .flavor-card {
         background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 16px;
