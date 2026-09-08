@@ -1,0 +1,50 @@
+<section class="home-cost">
+  <div class="home-cost-inner">
+    <div class="home-cost-head">
+      <h2 class="home-cost-title">Why a can costs what it costs</h2>
+    </div>
+    <div class="home-cost-grid">
+      <div class="home-cost-item">
+        <h3>Three species, not two.</h3>
+        <p>Most functional mushroom drinks run one or two. We run three, because the arc doesn&rsquo;t work without all of them &mdash; you can&rsquo;t skip a step in a sequence.</p>
+      </div>
+      <div class="home-cost-item">
+        <h3>Nothing hidden.</h3>
+        <p>Every species and every dose printed on the can. No proprietary blends, no &ldquo;mushroom complex,&rdquo; no guessing what you actually got.</p>
+      </div>
+      <div class="home-cost-item">
+        <h3>Ocean minerals.</h3>
+        <p>Trace minerals in every can &mdash; the reason it tastes like a drink and not a supplement.</p>
+      </div>
+      <div class="home-cost-item">
+        <h3>Nothing borrowed from tomorrow.</h3>
+        <p>No empty calories, no compounding cost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-cost { background: #FFFFFF; padding: clamp(52px, 7vw, 90px) 22px; }
+  .home-cost-inner { max-width: 980px; margin: 0 auto; }
+  .home-cost-head { text-align: center; margin: 0 auto 44px; }
+  .home-cost-title {
+    font-size: clamp(27px, 4.2vw, 42px); font-weight: 900; letter-spacing: -0.02em;
+    line-height: 1.14; color: var(--ink, #16181B); margin: 0;
+  }
+  .home-cost-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .home-cost-item {
+    background: #F7FBF9; border: 1px solid rgba(45,106,79,0.10); border-radius: 18px;
+    padding: 26px 26px; border-left: 4px solid var(--green-mid, #52B788);
+  }
+  .home-cost-item h3 { font-size: 18px; font-weight: 900; color: var(--ink, #16181B); margin: 0 0 8px; letter-spacing: -0.01em; }
+  .home-cost-item p { font-size: 15.5px; line-height: 1.62; color: #45504A; margin: 0; }
+  @media (max-width: 720px) { .home-cost-grid { grid-template-columns: 1fr; gap: 14px; } }
+</style>
+
+{% schema %}
+{
+  "name": "Home — Why It Costs",
+  "settings": []
+}
+{% endschema %}

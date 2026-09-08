@@ -5,8 +5,8 @@
   <div class="hero-left">
     <div class="hero-left-content">
       <div class="hero-eyebrow">We Put the Fun in Functional</div>
-      <h1 class="hero-headline">Calm First.<br>Then Everything Works.</h1>
-      <p class="hero-sub">Fungi Fusion is three functional mushrooms working as one system. Reishi settles you, so Lion’s Mane can sharpen your focus and Cordyceps can fuel your day. Sparkling, caffeine-free, and made to feel as good as it tastes.</p>
+      <h1 class="hero-headline">For the part of the day that still needs you.</h1>
+      <p class="hero-sub">The afternoon meeting. The drive home. The hours after the hours. Most of what we reach for to get through them quietly works against us. Fungi Fusion is built the other way.</p>
       <div class="hero-badges">
         <span class="no-alc-badge">Caffeine-Free</span>
         <span class="no-alc-badge">No Crash, No Jitters</span>
@@ -18,7 +18,8 @@
         <span class="hero-offer-text">Buy 2, Get 1 <strong>Half Off</strong> &nbsp;·&nbsp; Free Shipping, No Minimum</span>
       </div>
       <div class="hero-ctas">
-        <a href="/collections/all" class="btn-primary btn-hero-shop">Shop Fungi Fusion →</a>
+        <a href="/collections/all" class="btn-primary btn-hero-shop">Shop Fungi Fusion</a>
+        <a href="#the-why" class="btn-hero-secondary">Why we made it</a>
       </div>
       <p class="hero-support">Feel Good. Feel Happie.</p>
 
@@ -120,6 +121,15 @@
     50%      { box-shadow: 0 10px 30px rgba(255,203,5,0.6); }
   }
   @media (prefers-reduced-motion: reduce) { .hero--split .btn-primary { animation: none; } }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn-hero-secondary {
+    display: inline-flex; align-items: center;
+    color: #fff; font-weight: 800; font-size: 15px;
+    padding: 15px 26px; border-radius: 50px;
+    border: 2px solid rgba(255,255,255,0.55);
+    text-decoration: none; transition: background .15s, border-color .15s;
+  }
+  .btn-hero-secondary:hover { background: rgba(255,255,255,0.14); border-color: #fff; }
 
   /* Prominent offer callout above the CTA */
   .hero-offer {
