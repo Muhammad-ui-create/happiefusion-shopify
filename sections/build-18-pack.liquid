@@ -214,7 +214,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           </span>
           <strong>2,000mg Per Can</strong>
-          <p>Real functional doses, zero caffeine, zero alcohol, 40 calories. No crash, no jitters.</p>
+          <p>Real functional doses, zero caffeine, zero alcohol, 35 calories. No crash, no jitters.</p>
         </div>
 
         <div class="byo-feature">
@@ -325,7 +325,7 @@
       radial-gradient(ellipse 60% 40% at 15% 0%, rgba(82,183,136,0.10), transparent 65%),
       radial-gradient(ellipse 60% 40% at 85% 10%, rgba(245,166,35,0.10), transparent 65%);
   }
-  .byo-inner { max-width: 880px; margin: 0 auto; }
+  .byo-inner { max-width: 980px; margin: 0 auto; }
 
   /* ── Header ── */
   .byo-head { text-align: center; margin-bottom: 30px; }
@@ -460,17 +460,17 @@
   .byo-dots i { width: 8px; height: 8px; border-radius: 50%; display: block; }
 
   /* ── Flavor cards ── */
-  .byo-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-bottom: 30px; }
+  .byo-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 22px; margin-bottom: 30px; }
   .byo-card {
     position: relative;
-    background: #fff; border: 2px solid rgba(0,0,0,0.05); border-radius: 22px;
-    padding: 0 16px 22px; text-align: center;
+    background: #fff; border: 2px solid rgba(0,0,0,0.05); border-radius: 24px;
+    padding: 0 20px 28px; text-align: center;
     overflow: hidden;
     box-shadow: 0 4px 18px rgba(27,42,31,0.05);
     transition: border-color .25s, box-shadow .25s, transform .25s;
   }
   .byo-card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(27,42,31,0.11); }
-  .byo-card-accent { height: 6px; margin: 0 -16px 18px; }
+  .byo-card-accent { height: 6px; margin: 0 -20px 20px; }
   .byo-card-blue  .byo-card-accent { background: linear-gradient(90deg, #3B6FF0, #7EA0F7); }
   .byo-card-mango .byo-card-accent { background: linear-gradient(90deg, #F5A623, #FBCB77); }
   .byo-card-water .byo-card-accent { background: linear-gradient(90deg, #E84C6B, #F58CA1); }
@@ -480,18 +480,18 @@
   .byo-card-water.has-cans { border-color: #E84C6B; }
 
   .byo-card-img {
-    width: 152px; height: 152px; margin: 0 auto 12px;
+    width: 200px; height: 200px; margin: 4px auto 14px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
   }
   .byo-card-blue  .byo-card-img { background: radial-gradient(circle, rgba(59,111,240,0.12), transparent 72%); }
   .byo-card-mango .byo-card-img { background: radial-gradient(circle, rgba(245,166,35,0.14), transparent 72%); }
   .byo-card-water .byo-card-img { background: radial-gradient(circle, rgba(232,76,107,0.12), transparent 72%); }
-  .byo-card-img img { width: 140px; height: 140px; object-fit: contain; transition: transform .3s; }
+  .byo-card-img img { width: 186px; height: 186px; object-fit: contain; transition: transform .3s; }
   .byo-card:hover .byo-card-img img { transform: scale(1.06) rotate(-1.5deg); }
 
-  .byo-card-name { font-weight: 900; font-size: 16.5px; letter-spacing: -0.01em; margin-bottom: 3px; }
-  .byo-card-note { font-size: 12.5px; color: var(--gray, #5A6B5E); margin-bottom: 6px; }
+  .byo-card-name { font-weight: 900; font-size: 18.5px; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .byo-card-note { font-size: 13.5px; color: var(--gray, #5A6B5E); margin-bottom: 7px; }
   .byo-card-unit {
     display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--green, #2D6A4F); background: rgba(45,106,79,0.08);
