@@ -75,6 +75,225 @@
 </script>
 {%- endunless -%}
 
+{%- comment -%} Per-post FAQPage schema (name parity with visible Q&A). Guarded so a post that already embeds FAQPage inline never doubles up. {%- endcomment -%}
+{%- unless article.content contains 'FAQPage' -%}
+{%- case article.handle -%}
+{%- when 'how-long-does-lions-mane-take-to-work' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does it take for lion's mane to work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Human clinical trials measured statistically significant cognitive effects at 8 to 16 weeks of consistent daily intake. One 2023 pilot study found a same-day effect on processing speed 60 minutes after a single dose, but that measured speed rather than memory. Plan on two to four months of daily use before evaluating results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does lion's mane work immediately?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generally, no. The one documented acute finding — faster Stroop task performance 60 minutes after a 1.8g dose in the Docherty 2023 study — applies to speed of processing in a small sample of healthy young adults. The cognitive benefits reported in longer trials required 8 weeks or more, and researchers did not observe them at earlier checkpoints."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much lion's mane should you take daily?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The human trials showing cognitive effects used approximately 1.8g to 3.2g of lion's mane preparation per day. Mori's 2009 study used 3g daily of 96% dry powder; Docherty's 2023 study used 1.8g. Dose isn't directly comparable across studies because extraction methods and material quality differ substantially."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you need to cycle lion's mane?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no evidence in the trial literature supporting a cycling protocol. The relevant finding points the other way — in Mori 2009, cognitive scores declined significantly four weeks after participants stopped taking it, suggesting the measured effects were maintained by consistent intake rather than banked after a loading phase."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does lion's mane contain caffeine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Lion's mane is a mushroom and contains no caffeine. The confusion comes from mushroom coffee products, which blend functional mushrooms with actual coffee beans — the caffeine in those products comes entirely from the coffee, typically 45 to 70mg per cup versus roughly 95mg in standard coffee. A mushroom beverage without a coffee base is caffeine-free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a 900mg serving match the doses used in the studies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, and it's worth being direct about that. The trials discussed here used 1.8g to 3.2g of lion's mane preparation per day, which is more than a single 900mg serving. Those studies also used raw or minimally processed powder, while extracted material concentrates the active fraction differently — meaning gram-for-gram comparisons between a trial powder and an extract are not straightforward. Anyone who tells you their serving is \"clinically dosed\" without addressing that difference is skipping a real question."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do some people say lion's mane did nothing for them?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The most common reason is duration. In sampling conversations, most people who report no effect took it for under two weeks — well short of the 8-week mark where trials first measured significant differences. Dose, fruiting body versus mycelium sourcing, and extraction quality also vary enormously between products, and inconsistent daily intake undermines the cumulative pattern the research describes."
+      }
+    }
+  ]
+}
+</script>
+{%- when 'what-is-ergothioneine' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is ergothioneine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ergothioneine is a naturally occurring amino acid derivative (2-mercaptohistidine trimethylbetaine) that functions as a stable antioxidant. It is made only by fungi and certain bacteria, so humans obtain it entirely through diet — most abundantly from mushrooms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What foods contain the most ergothioneine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mushrooms are by far the richest dietary source of ergothioneine, with amounts varying widely by species and concentrated in the fruiting body. Smaller amounts are found in foods such as kidney beans, oat bran, and some other legumes and grains."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is ergothioneine called a \"longevity vitamin\"?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The term comes from biochemist Bruce Ames, who in 2018 proposed ergothioneine as a candidate \"longevity vitamin\" — a nutrient that may not be essential for short-term survival but could help protect against age-related disease over the long term. It's a research hypothesis, not a proven outcome; no human trial has shown ergothioneine extends lifespan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the human body produce ergothioneine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Humans cannot synthesize ergothioneine and must get it from food. Notably, the body has a dedicated transporter protein (OCTN1, encoded by the SLC22A4 gene) that selectively absorbs ergothioneine and concentrates it in tissues under high oxidative stress, such as the liver, kidneys, and red blood cells."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ergothioneine proven to improve health?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not conclusively. Observational studies consistently link lower blood ergothioneine to higher risks of cognitive decline, frailty, and cardiovascular mortality, and one 16-week randomized trial in older adults reported memory improvements. But these are early findings — the associations are correlational, the interventional evidence is limited, and no long-term human outcome trial exists."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ergothioneine safe and legal to add to drinks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the United States, fermentation-derived ergothioneine has GRAS status (e.g., FDA Notice GRN 734) and is permitted in certain beverages at a modest per-serving limit. In the European Union it is regulated as a Novel Food requiring prior authorization. Regulatory status varies by region."
+      }
+    }
+  ]
+}
+</script>
+{%- when 'caffeine-free-focus' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can you get focus without caffeine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Focus and stimulation are different things — caffeine mutes fatigue but doesn't add clarity. Non-stimulant approaches like lion's mane mushroom support steady attention without the jitters or crash, though the effect is calmer and more gradual than a caffeine hit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do mushroom drinks give you energy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the mushroom and whether caffeine was added. Caffeine-free functional mushroom drinks don't provide a stimulant \"buzz\"; instead, mushrooms like cordyceps are associated with steadier stamina over time, and lion's mane with mental clarity rather than a jolt."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is lion's mane a stimulant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Lion's mane is a functional mushroom associated with focus and mental clarity, not stimulation. Because it isn't a stimulant, it doesn't cause jitters or interfere with sleep, and it can be used at any time of day."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will a caffeine-free focus drink keep me awake at night?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A truly caffeine-free drink won't disrupt sleep the way a caffeinated one can, which is why it can be used in the evening. Always check the label to confirm there's no hidden caffeine source like green tea or guarana."
+      }
+    }
+  ]
+}
+</script>
+{%- when 'functional-mushroom-drinks' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are functional mushroom drinks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Functional mushroom drinks are ready-to-drink beverages made with concentrated extracts of functional mushrooms — usually lion's mane, cordyceps, or reishi — dosed for a specific outcome like focus, energy, or calm. The mushrooms are there to do a job, not to flavor the drink."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are functional mushroom drinks good for you?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Functional mushrooms are well tolerated by most healthy adults and are backed by a growing body of research, strongest for lion's mane and cognition. The evidence is promising but still early, and quality varies widely between products, so benefits depend heavily on dose and sourcing. This is general information, not medical advice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do functional mushroom drinks have caffeine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Some do and some don't — it depends entirely on the brand. Many mushroom \"energy\" drinks are heavily caffeinated, while caffeine-free lines like Fungi Fusion rely on the mushrooms rather than a stimulant. Always check the label if caffeine matters to you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which mushroom is best for focus?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lion's mane is the mushroom most associated with focus and mental clarity, and it has the most human cognitive research of the three common functional mushrooms. The effect is typically described as feeling less scattered rather than stimulated."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I know if a mushroom drink is high quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Check for caffeine content, per-mushroom milligram doses listed individually, and the words \"fruiting body\" rather than \"mycelium.\" Brands that invested in real extracts disclose their numbers; vague \"proprietary blend\" labels usually hide small doses."
+      }
+    }
+  ]
+}
+</script>
+{%- endcase -%}
+{%- endunless -%}
+
+
 <style>
 .art { max-width: 820px; margin: 0 auto; padding: 40px 24px 80px; }
 .art-head { text-align: center; margin-bottom: 28px; }
