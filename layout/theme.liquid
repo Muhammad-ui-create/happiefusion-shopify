@@ -17,7 +17,7 @@
 
   {%- comment -%} ── SEO: META DESCRIPTIONS ── {%- endcomment -%}
   {%- if template.name == 'index' -%}
-    <meta name="description" content="A functional mushroom drink built as one arc — calm, energy, clarity. Reishi, Cordyceps and Lion’s Mane with ocean minerals. For the part of the day that still needs you.">
+    <meta name="description" content="A caffeine-free functional mushroom drink built as one arc — calm, energy, clarity. Reishi, Cordyceps &amp; Lion’s Mane with ocean minerals.">
   {%- elsif template.name == 'product' -%}
     {%- comment -%} Prefer the Shopify-managed SEO description; fall back to body if not set. {%- endcomment -%}
     {%- assign seo_meta = product.metafields.global.description_tag -%}
@@ -65,9 +65,9 @@
 
   {%- comment -%} ── GEO / AI SEARCH KEYWORDS, helps AI assistants understand the page ── {%- endcomment -%}
   {%- if template.name == 'index' -%}
-    <meta name="keywords" content="functional mushroom drinks, mushroom seltzer, Lion's Mane drink, Cordyceps drink, Reishi drink, adaptogen beverage, caffeine-free energy drink, alcohol alternative, sober curious drink, sparkling mushroom water, Happie Fungi Fusion">
+    <meta name="keywords" content="functional mushroom drinks, mushroom seltzer, Lion's Mane drink, Cordyceps drink, Reishi drink, functional mushroom beverage, caffeine-free energy drink, alcohol alternative, sober curious drink, sparkling mushroom water, Happie Fungi Fusion">
   {%- elsif template.name == 'product' -%}
-    <meta name="keywords" content="{{ product.title }}, mushroom seltzer, functional beverage, Lion's Mane, Cordyceps, Reishi, adaptogen drink, Happie Fungi Fusion">
+    <meta name="keywords" content="{{ product.title }}, mushroom seltzer, functional beverage, Lion's Mane, Cordyceps, Reishi, functional mushroom drink, Happie Fungi Fusion">
   {%- endif -%}
 
   {%- comment -%} ── Performance hints for faster LCP ── {%- endcomment -%}
@@ -109,6 +109,13 @@
   <meta property="og:site_name" content="Happie Fusion">
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:locale" content="en_US">
+  {%- comment -%} Default social-share image: the 3-flavor variety pack, not the logo (better link previews on social, our #1 channel) {%- endcomment -%}
+  {%- assign og_share_product = all_products['happie-fungi-fusion-mushroom-drink-variety-pack'] -%}
+  {%- if og_share_product.featured_image -%}
+    {%- capture og_share_image -%}https:{{ og_share_product.featured_image | image_url: width: 1200 }}{%- endcapture -%}
+  {%- else -%}
+    {%- capture og_share_image -%}{{ 'happie-logo.png' | asset_url | prepend: 'https:' }}{%- endcapture -%}
+  {%- endif -%}
   {%- if template.name == 'product' -%}
     <meta property="og:type" content="product">
     <meta property="og:title" content="{{ product.title }} | Functional Mushroom Seltzer – Happie Fusion">
@@ -125,12 +132,17 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="For the part of the day that still needs you.">
     <meta property="og:description" content="Three mushrooms in one designed order, with ocean minerals. Happie Fungi Fusion.">
-    <meta property="og:image" content="{{ 'happie-logo.png' | asset_url }}">
+    <meta property="og:image" content="{{ og_share_image }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
+    <meta property="og:image:alt" content="Happie Fungi Fusion — Watermelon, Mango Mimosa and Blue Raspberry cans">
   {%- else -%}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}">
     <meta property="og:description" content="{{ page_description | default: "Happie Fusion, clean, caffeine-free energy for any occasion. No alcohol, no crash." | escape }}">
-    <meta property="og:image" content="{{ 'happie-logo.png' | asset_url }}">
+    <meta property="og:image" content="{{ og_share_image }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
   {%- endif -%}
 
   {%- comment -%} ── TWITTER CARD ── {%- endcomment -%}
@@ -145,7 +157,7 @@
   {%- else -%}
     <meta name="twitter:title" content="{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}">
     <meta name="twitter:description" content="{{ page_description | default: 'Clean, caffeine-free energy for any occasion. No alcohol, no crash.' | escape }}">
-    <meta name="twitter:image" content="{{ 'happie-logo.png' | asset_url }}">
+    <meta name="twitter:image" content="{{ og_share_image }}">
   {%- endif -%}
 
   {%- comment -%} ── STRUCTURED DATA: ORGANIZATION + WEBSITE (Homepage only) ── {%- endcomment -%}
