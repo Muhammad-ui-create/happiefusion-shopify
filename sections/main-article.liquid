@@ -19,6 +19,24 @@
     {{ article.content }}
   </div>
 
+{%- comment -%} Internal linking: curated "Keep reading" per post, weighted toward the two page-2 guides (pillar + lion's-mane timeline). {%- endcomment -%}
+{%- assign kr = '' -%}
+{%- case article.handle -%}
+{%- when 'what-is-ergothioneine' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>{%- endcapture -%}
+{%- when 'caffeine-free-focus' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>{%- endcapture -%}
+{%- when 'functional-mushroom-drinks' -%}{%- capture kr -%}<li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li><li><a href="/blogs/news/why-mushroom-coffee-doesnt-dissolve">Why mushroom coffee doesn&rsquo;t dissolve</a></li>{%- endcapture -%}
+{%- when 'how-long-does-lions-mane-take-to-work' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li><li><a href="/blogs/news/what-is-ergothioneine">What is ergothioneine?</a></li>{%- endcapture -%}
+{%- when 'why-mushroom-coffee-doesnt-dissolve' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li>{%- endcapture -%}
+{%- when 'mushroom-drink-vs-energy-drink' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>{%- endcapture -%}
+{%- when 'why-are-mushroom-drinks-so-expensive' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>{%- endcapture -%}
+{%- endcase -%}
+{%- if kr != blank -%}
+  <aside class="art-related">
+    <span class="art-related-eyebrow">Keep reading</span>
+    <ul class="art-related-list">{{ kr }}</ul>
+  </aside>
+{%- endif -%}
+
   <div class="art-footer">
     <a href="{{ blog.url }}" class="btn-ghost">← Back to all posts</a>
     <a href="/collections/all" class="btn-primary">Shop Fungi Fusion →</a>
@@ -318,6 +336,13 @@
 .art-body table { width: 100%; border-collapse: collapse; font-size: 15px; display: block; overflow-x: auto; }
 .art-body th, .art-body td { border: 1px solid rgba(0,0,0,0.1); padding: 10px 14px; text-align: left; }
 
+.art-related { margin: 44px 0 0; padding: 22px 24px; background: #F6F8F7; border: 1px solid rgba(0,0,0,0.06); border-radius: 16px; }
+.art-related-eyebrow { display: block; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green, #2D6A4F); margin-bottom: 6px; }
+.art-related-list { list-style: none; margin: 0; padding: 0; }
+.art-related-list li { margin: 0; padding: 11px 0; border-top: 1px solid rgba(0,0,0,0.07); }
+.art-related-list li:first-child { border-top: none; }
+.art-related-list a { color: var(--green-dark, #1B4332); font-weight: 700; text-decoration: none; font-size: 16px; }
+.art-related-list a:hover { text-decoration: underline; }
 .art-footer { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 56px; padding-top: 32px; border-top: 1px solid rgba(0,0,0,0.08); }
 @media (max-width: 620px) { .art { padding: 28px 18px 64px; } .art-body { font-size: 16.5px; } }
 </style>
