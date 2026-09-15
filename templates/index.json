@@ -6,8 +6,9 @@
     "home-arc": { "type": "home-arc", "settings": {} },
     "home-cost": { "type": "home-cost", "settings": {} },
     "reviews": { "type": "reviews-section", "settings": {} },
+    "home-blog-marquee": { "type": "home-blog-marquee", "settings": {} },
     "subscribe-save": { "type": "subscribe-save", "settings": {} },
     "home-retailer": { "type": "home-retailer", "settings": {} }
   },
-  "order": ["hero", "featured", "home-why-founder", "home-arc", "home-cost", "reviews", "subscribe-save", "home-retailer"]
+  "order": ["hero", "featured", "home-why-founder", "home-arc", "home-cost", "reviews", "home-blog-marquee", "subscribe-save", "home-retailer"]
 }
