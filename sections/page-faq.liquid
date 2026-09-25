@@ -378,6 +378,76 @@
     </div>
   </div>
 
+  <!-- ── COMPARISON TABLE ── -->
+  <section class="faq-compare">
+    <div class="faq-compare-inner">
+      <div class="faq-compare-head">
+        <div class="faq-eyebrow faq-eyebrow--dark">How it stacks up</div>
+        <h2 class="faq-compare-title">Happie Fungi Fusion vs. other functional drinks</h2>
+        <p class="faq-compare-sub">On sugar, caffeine, price, and vibe. Happie&rsquo;s edge: the caffeine-free, alcohol-free, ready-to-drink sparkling option made with real fruiting-body mushrooms &mdash; a lift with no jitters and no crash.</p>
+      </div>
+
+      <div class="faq-compare-scroll">
+        <table class="faq-compare-table">
+          <thead>
+            <tr>
+              <th scope="col">Brand</th>
+              <th scope="col">Sugar</th>
+              <th scope="col">Caffeine</th>
+              <th scope="col">Price (approx.)</th>
+              <th scope="col">Vibe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="is-happie">
+              <th scope="row">Happie Fungi Fusion</th>
+              <td>9g</td>
+              <td><strong>0 mg</strong> (caffeine-free)</td>
+              <td>~$4 / can</td>
+              <td>Sparkling, alcohol-free, made with Lion&rsquo;s Mane, Cordyceps &amp; Reishi fruiting body extract. A smooth lift, no jitters, no crash. Ready to drink.</td>
+            </tr>
+            <tr>
+              <th scope="row">Odyssey Elixir</th>
+              <td>~1&ndash;3g</td>
+              <td>~85&ndash;110 mg</td>
+              <td>~$3.50 / can</td>
+              <td>Sparkling mushroom energy (Lion&rsquo;s Mane + Cordyceps) &mdash; but caffeinated for a buzz.</td>
+            </tr>
+            <tr>
+              <th scope="row">Four Sigmatic</th>
+              <td>~0&ndash;1g</td>
+              <td>0 to coffee-level</td>
+              <td>~$1.50&ndash;2 / serving</td>
+              <td>Mushroom coffee &amp; elixir powders you mix yourself &mdash; not a ready-to-drink can.</td>
+            </tr>
+            <tr>
+              <th scope="row">Hiyo</th>
+              <td>~7g</td>
+              <td>0 mg</td>
+              <td>~$4 / can</td>
+              <td>Alcohol-free social tonic &mdash; botanicals &amp; nootropics, not functional mushrooms.</td>
+            </tr>
+            <tr>
+              <th scope="row">Recess (Mood)</th>
+              <td>~1&ndash;4g</td>
+              <td>0 mg</td>
+              <td>~$3 / can</td>
+              <td>Calm, de-stress sparkling water with magnesium &amp; botanicals &mdash; relaxation-focused.</td>
+            </tr>
+            <tr>
+              <th scope="row">Moment</th>
+              <td>~0g</td>
+              <td>0 mg</td>
+              <td>~$3 / can</td>
+              <td>Botanical sparkling water &mdash; calm and focus botanicals, no functional mushrooms.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="faq-compare-note">Draft for review. Competitor figures are approximate public values (Sept 2026) and vary by product line and flavor &mdash; verify each brand&rsquo;s current specs before publishing.</p>
+    </div>
+  </section>
+
   <!-- ── STILL HAVE QUESTIONS ── -->
   <section class="faq-contact">
     <div class="faq-contact-card">
@@ -639,6 +709,39 @@
   justify-content: center;
 }
 .howto-steps li strong { color: var(--ink, #1A1A1A); }
+
+/* ── Comparison table ── */
+.faq-compare { padding: 72px 24px; background: linear-gradient(180deg, #fff 0%, #F3F9F5 100%); }
+.faq-compare-inner { max-width: 940px; margin: 0 auto; }
+.faq-compare-head { text-align: center; margin-bottom: 34px; }
+.faq-eyebrow--dark {
+  background: rgba(45,106,79,0.1); border: 1px solid rgba(45,106,79,0.2);
+  color: var(--green-dark, #2D6A4F);
+}
+.faq-compare-title { font-size: clamp(24px, 4vw, 36px); font-weight: 900; color: #111; margin: 0 0 12px; line-height: 1.15; }
+.faq-compare-sub { font-size: 15.5px; color: #555; line-height: 1.7; max-width: 620px; margin: 0 auto; }
+
+.faq-compare-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 18px; box-shadow: 0 10px 40px rgba(27,67,50,0.1); }
+.faq-compare-table { width: 100%; min-width: 720px; border-collapse: collapse; background: #fff; font-size: 14.5px; }
+.faq-compare-table thead th {
+  background: var(--green-dark, #2D6A4F); color: #fff;
+  font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+  text-align: left; padding: 15px 18px;
+}
+.faq-compare-table tbody th, .faq-compare-table tbody td {
+  padding: 16px 18px; border-top: 1px solid #ECECEC; vertical-align: top; text-align: left;
+}
+.faq-compare-table tbody th { font-weight: 800; color: #111; white-space: nowrap; }
+.faq-compare-table tbody td { color: #555; line-height: 1.55; }
+.faq-compare-table tr.is-happie { background: #EAF6F0; }
+.faq-compare-table tr.is-happie th { color: var(--green-dark, #2D6A4F); }
+.faq-compare-table tr.is-happie td { color: #2f4a3d; }
+.faq-compare-note { font-size: 12.5px; color: #999; font-style: italic; text-align: center; margin: 18px auto 0; max-width: 640px; line-height: 1.5; }
+
+@media (max-width: 640px) {
+  .faq-compare { padding: 52px 16px; }
+  .faq-compare-table { font-size: 13.5px; }
+}
 </style>
 
 <script type="application/ld+json">
