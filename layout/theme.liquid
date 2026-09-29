@@ -11,6 +11,8 @@
     <title>{{ product.title }} | Functional Mushroom Seltzer – Happie Fusion</title>
   {%- elsif template.name == 'collection' -%}
     <title>{{ collection.title }} | Mushroom Seltzers – Happie Fusion</title>
+  {%- elsif page.handle == 'faq' -%}
+    <title>Mushroom Drink FAQ: Caffeine, Ingredients &amp; More | Happie Fusion</title>
   {%- else -%}
     <title>{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}</title>
   {%- endif -%}
@@ -31,6 +33,8 @@
       {%- assign seo_meta = 'Shop ' | append: collection.title | append: ', functional mushroom seltzers with dual-extracted Lion''s Mane (900mg), Cordyceps (700mg) & Reishi (400mg). Zero caffeine, zero alcohol. From $23.99. Free shipping, no minimum.' -%}
     {%- endif -%}
     <meta name="description" content="{{ seo_meta | escape }}">
+  {%- elsif page.handle == 'faq' -%}
+    <meta name="description" content="Common questions about Happie Fungi Fusion, answered — caffeine-free, alcohol-free, the mushrooms inside, calories, taste, and how it compares to other functional drinks.">
   {%- else -%}
     <meta name="description" content="{{ page_description | default: "Happie Fusion, clean, caffeine-free energy for any occasion. All-natural mushroom seltzer, zero alcohol, zero crash." | escape }}">
   {%- endif -%}
