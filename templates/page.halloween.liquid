@@ -18,10 +18,10 @@
   {%- elsif v.title contains '18' -%}{%- assign v18 = v -%}{%- endif -%}
 {%- endfor -%}
 
-{%- comment -%} 15% off, rounded the way Shopify rounds a percentage discount per line {%- endcomment -%}
-{%- assign off12 = v12.price | times: 0.15 | round -%}{%- assign now12 = v12.price | minus: off12 -%}
-{%- assign off18 = v18.price | times: 0.15 | round -%}{%- assign now18 = v18.price | minus: off18 -%}
-{%- assign off24 = v24.price | times: 0.15 | round -%}{%- assign now24 = v24.price | minus: off24 -%}
+{%- comment -%} 15% off. Shopify rounds the discount DOWN to the cent (checked in a live cart), so floor here to match what the cart charges. {%- endcomment -%}
+{%- assign off12 = v12.price | times: 0.15 | floor -%}{%- assign now12 = v12.price | minus: off12 -%}
+{%- assign off18 = v18.price | times: 0.15 | floor -%}{%- assign now18 = v18.price | minus: off18 -%}
+{%- assign off24 = v24.price | times: 0.15 | floor -%}{%- assign now24 = v24.price | minus: off24 -%}
 {%- assign can12 = now12 | divided_by: 12.0 | round -%}
 {%- assign can18 = now18 | divided_by: 18.0 | round -%}
 {%- assign can24 = now24 | divided_by: 24.0 | round -%}
@@ -316,11 +316,15 @@
   .hw-hero img { height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
   .hw-hero-fade { position: absolute; inset: 0; pointer-events: none;
                   background: linear-gradient(180deg, rgba(14,10,20,0.78) 0%, rgba(14,10,20,0.35) 30%, rgba(14,10,20,0) 52%, rgba(14,10,20,0) 80%, #0E0A14 100%); }
-  .hw-hero-copy { position: absolute; left: 0; right: 0; top: calc(var(--nav-h, 78px) + 14px); padding: 0 22px; }
-  .hw-pos-tc .hw-hero-copy { text-align: center; }
+  .hw-hero-copy { position: absolute; left: 0; right: 0; top: calc(var(--nav-h, 78px) + 14px); bottom: 26px; padding: 0 22px;
+                  display: flex; flex-direction: column; align-items: flex-start; }
+  .hw-hero-copy .hw-btn-hero { margin-top: auto; }
+  .hw-pos-tc .hw-hero-copy { text-align: center; align-items: center; }
+  .hw-hero[data-ad="boo"] .hw-sub { max-width: 54%; line-height: 1.7; }
   .hw-pos-tc .hw-rule { margin-left: auto; margin-right: auto; }
   .hw-hero[data-ad="boo"] .hw-hero-fade { background: linear-gradient(180deg, rgba(14,10,20,0.92) 0%, rgba(14,10,20,0.62) 28%, rgba(14,10,20,0) 55%, rgba(14,10,20,0) 80%, #0E0A14 100%); }
-  .hw-pos-bc .hw-hero-copy { top: auto; bottom: 26px; text-align: center; }
+  .hw-pos-bc .hw-hero-copy { text-align: center; align-items: center; justify-content: flex-end; }
+  .hw-pos-bc .hw-hero-copy .hw-btn-hero { margin-top: 22px; }
   .hw-pos-bc .hw-rule { margin-left: auto; margin-right: auto; }
   .hw-pos-bc .hw-hero-fade { background: linear-gradient(180deg, rgba(14,10,20,0.45) 0%, rgba(14,10,20,0) 22%, rgba(14,10,20,0) 42%, rgba(14,10,20,0.88) 78%, #0E0A14 100%); }
 
@@ -406,9 +410,11 @@
   @media (min-width: 750px) {
     .hw-section { padding: 80px 0; }
     .hw-hero img { aspect-ratio: 16 / 9; max-height: 82vh; }
-    .hw-hero-copy { top: calc(var(--nav-h, 78px) + 6vh); padding: 0 6vw; max-width: 760px; }
+    .hw-hero-copy { top: calc(var(--nav-h, 78px) + 6vh); bottom: auto; padding: 0 6vw; max-width: 760px; display: block; }
+    .hw-hero-copy .hw-btn-hero, .hw-pos-bc .hw-hero-copy .hw-btn-hero { margin-top: 22px; }
+    .hw-hero[data-ad="boo"] .hw-sub { max-width: none; }
     .hw-pos-tc .hw-hero-copy { left: 50%; right: auto; transform: translateX(-50%); width: 100%; }
-    .hw-pos-bc .hw-hero-copy { left: 50%; right: auto; transform: translateX(-50%); width: 100%; bottom: 7vh; }
+    .hw-pos-bc .hw-hero-copy { left: 50%; right: auto; top: auto; bottom: 7vh; transform: translateX(-50%); width: 100%; }
     .hw-sub { font-size: 13px; }
     .hw-picker-wrap { padding-top: 64px; }
     .hw-cards, .hw-reviews { grid-template-columns: repeat(3, 1fr); gap: 18px; }
