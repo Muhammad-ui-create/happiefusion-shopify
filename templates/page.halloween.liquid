@@ -1,0 +1,577 @@
+{%- comment -%}
+  Halloween landing page (/pages/halloween), destination for the five Halloween Meta ads.
+  Live until Oct 31 2026 (SPOOKY15 expires 11:59 pm Central).
+  - ?ad=cauldron|boo|treat|brew|dark swaps hero image, headline and default pack (falls back to cauldron).
+  - SPOOKY15 is applied in the background on load via /discount/SPOOKY15.
+  - 12 = Variety Pack; 18 / 24 = Build Your Own variants, using the same line-item
+    property format as sections/build-18-pack.liquid so fulfilment reads the mix the same way.
+  Prices are read from the product objects, never hard-coded.
+{%- endcomment -%}
+
+{%- comment -%} Order-by date for Halloween delivery, e.g. 'October 24'. Leave blank to hide the order-by lines. {%- endcomment -%}
+{%- assign hw_order_by = '' -%}
+
+{%- assign variety = all_products['happie-fungi-fusion-mushroom-drink-variety-pack'] -%}
+{%- assign byo = all_products['build-your-own-fungi-fusion-18-pack'] -%}
+{%- assign v12 = variety.variants.first -%}
+{%- assign v18 = blank -%}
+{%- assign v24 = blank -%}
+{%- for v in byo.variants -%}
+  {%- if v.title contains '24' -%}{%- assign v24 = v -%}
+  {%- elsif v.title contains '18' -%}{%- assign v18 = v -%}{%- endif -%}
+{%- endfor -%}
+
+{%- comment -%} 15% off. Shopify rounds the discount DOWN to the cent (checked in a live cart), so floor here to match what the cart charges. {%- endcomment -%}
+{%- assign off12 = v12.price | times: 0.15 | floor -%}{%- assign now12 = v12.price | minus: off12 -%}
+{%- assign off18 = v18.price | times: 0.15 | floor -%}{%- assign now18 = v18.price | minus: off18 -%}
+{%- assign off24 = v24.price | times: 0.15 | floor -%}{%- assign now24 = v24.price | minus: off24 -%}
+{%- assign can12 = now12 | divided_by: 12.0 | round -%}
+{%- assign can18 = now18 | divided_by: 18.0 | round -%}
+{%- assign can24 = now24 | divided_by: 24.0 | round -%}
+
+{%- assign p_blue  = all_products['blue-razzberry-fungi-powered-seltzer'] -%}
+{%- assign p_mango = all_products['mango-mimosa-fungi-powered-seltzer'] -%}
+{%- assign p_water = all_products['watermelon-fungi-powered-seltzer'] -%}
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+<div class="hw" id="hw">
+
+  {%- comment -%} 1. HERO (image + copy are set by the inline script below from ?ad=) {%- endcomment -%}
+  <section class="hw-hero hw-pos-tc" id="hw-hero" data-ad="cauldron">
+    <picture id="hw-hero-pic">
+      <source media="(max-width: 749px)" srcset="{{ 'halloween-cauldron-4x5.jpg' | asset_img_url: '720x' }} 720w, {{ 'halloween-cauldron-4x5.jpg' | asset_img_url: '1080x' }} 1080w" sizes="100vw">
+      <img src="{{ 'halloween-cauldron-16x9.jpg' | asset_img_url: '1920x' }}"
+           srcset="{{ 'halloween-cauldron-16x9.jpg' | asset_img_url: '1280x' }} 1280w, {{ 'halloween-cauldron-16x9.jpg' | asset_img_url: '1920x' }} 1920w" sizes="100vw"
+           alt="Cans of Happie Fungi Fusion on ice in a cauldron on a Halloween porch" width="1920" height="1072" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="hw-hero-fade" aria-hidden="true"></div>
+    <div class="hw-hero-copy">
+      <h1 class="hw-h1" id="hw-h1">Fill the <em>cauldron.</em></h1>
+      <span class="hw-rule" aria-hidden="true"></span>
+      <p class="hw-sub" id="hw-sub">Stock up for Halloween night.</p>
+      <a href="#hw-picker" class="hw-btn hw-btn-hero">Pick your pack</a>
+    </div>
+  </section>
+
+  <script>
+  /* Swap the hero before first paint so the visitor sees the ad they clicked. */
+  (function () {
+    var HERO = {
+      cauldron: { h: 'Fill the <em>cauldron.</em>', s: 'Stock up for Halloween night.', pack: '24', pos: 'tc',
+        alt: 'Cans of Happie Fungi Fusion on ice in a cauldron on a Halloween porch',
+        w: ['{{ 'halloween-cauldron-16x9.jpg' | asset_img_url: '1280x' }}', '{{ 'halloween-cauldron-16x9.jpg' | asset_img_url: '1920x' }}'],
+        m: ['{{ 'halloween-cauldron-4x5.jpg' | asset_img_url: '720x' }}', '{{ 'halloween-cauldron-4x5.jpg' | asset_img_url: '1080x' }}'] },
+      boo: { h: '<em>Boo.</em><br>No booze.', s: 'Halloween’s alcohol-free pour.', pack: '18', pos: 'tl',
+        alt: 'A hand holding a can of Happie Fungi Fusion Blue Raspberry at a Halloween party',
+        w: ['{{ 'halloween-boo-16x9.jpg' | asset_img_url: '1280x' }}', '{{ 'halloween-boo-16x9.jpg' | asset_img_url: '1920x' }}'],
+        m: ['{{ 'halloween-boo-4x5.jpg' | asset_img_url: '720x' }}', '{{ 'halloween-boo-4x5.jpg' | asset_img_url: '1080x' }}'] },
+      treat: { h: 'All treat. <em>No trick.</em>', s: 'Alcohol-free. Caffeine-free. 35 calories.', pack: '18', pos: 'bc',
+        alt: 'A can of Happie Fungi Fusion Mango Mimosa surrounded by Halloween candy',
+        w: ['{{ 'halloween-treat-16x9.jpg' | asset_img_url: '1280x' }}', '{{ 'halloween-treat-16x9.jpg' | asset_img_url: '1920x' }}'],
+        m: ['{{ 'halloween-treat-4x5.jpg' | asset_img_url: '720x' }}', '{{ 'halloween-treat-4x5.jpg' | asset_img_url: '1080x' }}'] },
+      brew: { h: 'The only <em>brew</em><br>you need.', s: 'Three mushrooms. Zero alcohol.', pack: '18', pos: 'tl',
+        alt: 'A can of Happie Fungi Fusion Watermelon beside a smoking cauldron, candles and pumpkins',
+        w: ['{{ 'halloween-brew-16x9.jpg' | asset_img_url: '1280x' }}', '{{ 'halloween-brew-16x9.jpg' | asset_img_url: '1920x' }}'],
+        m: ['{{ 'halloween-brew-4x5.jpg' | asset_img_url: '720x' }}', '{{ 'halloween-brew-4x5.jpg' | asset_img_url: '1080x' }}'] },
+      dark: { h: 'Something good grows in <em>the dark.</em>', s: 'Lion’s Mane · Cordyceps · Reishi', pack: '18', pos: 'tl',
+        alt: 'A can of Happie Fungi Fusion Watermelon in a misty forest among glowing mushrooms',
+        w: ['{{ 'halloween-dark-16x9.jpg' | asset_img_url: '1280x' }}', '{{ 'halloween-dark-16x9.jpg' | asset_img_url: '1920x' }}'],
+        m: ['{{ 'halloween-dark-4x5.jpg' | asset_img_url: '720x' }}', '{{ 'halloween-dark-4x5.jpg' | asset_img_url: '1080x' }}'] }
+    };
+    var ad = 'cauldron';
+    try { var q = new URLSearchParams(window.location.search).get('ad'); if (q && HERO[q.toLowerCase()]) ad = q.toLowerCase(); } catch (e) {}
+    var c = HERO[ad];
+    window.hwAd = ad;
+    window.hwDefaultPack = c.pack;
+    var hero = document.getElementById('hw-hero');
+    hero.setAttribute('data-ad', ad);
+    hero.className = 'hw-hero hw-pos-' + c.pos;
+    if (ad !== 'cauldron') {
+      document.getElementById('hw-hero-pic').innerHTML =
+        '<source media="(max-width: 749px)" srcset="' + c.m[0] + ' 720w, ' + c.m[1] + ' 1080w" sizes="100vw">' +
+        '<img src="' + c.w[1] + '" srcset="' + c.w[0] + ' 1280w, ' + c.w[1] + ' 1920w" sizes="100vw" alt="' + c.alt + '" width="1920" height="1072" fetchpriority="high" decoding="async">';
+      document.getElementById('hw-h1').innerHTML = c.h;
+      document.getElementById('hw-sub').textContent = c.s;
+    }
+  })();
+  </script>
+
+  {%- comment -%} 2. PACK PICKER {%- endcomment -%}
+  <section class="hw-section hw-picker-wrap" id="hw-picker">
+    <div class="hw-inner hw-inner-narrow">
+      <p class="hw-eyebrow">Halloween offer &middot; ends October 31</p>
+      <h2 class="hw-h2">Pick your pack</h2>
+      <p class="hw-lede">15% off is already applied. No code to type.</p>
+
+      <div class="hw-packs" role="radiogroup" aria-label="Pack size">
+        <button type="button" class="hw-pack" data-pack="12" role="radio" aria-checked="false">
+          <span class="hw-pack-main">
+            <span class="hw-pack-cans">12 cans</span>
+            <span class="hw-pack-mix">Variety pack &middot; 4 of each flavour</span>
+          </span>
+          <span class="hw-pack-price">
+            <span class="hw-now">{{ now12 | money }}</span>
+            <s class="hw-was">{{ v12.price | money }}</s>
+            <span class="hw-percan">{{ can12 | money }} per can</span>
+          </span>
+        </button>
+
+        <button type="button" class="hw-pack is-active" data-pack="18" role="radio" aria-checked="true">
+          <span class="hw-flag">Most popular</span>
+          <span class="hw-pack-main">
+            <span class="hw-pack-cans">18 cans</span>
+            <span class="hw-pack-mix" data-mix-label="18">6 of each flavour</span>
+          </span>
+          <span class="hw-pack-price">
+            <span class="hw-now">{{ now18 | money }}</span>
+            <s class="hw-was">{{ v18.price | money }}</s>
+            <span class="hw-percan">{{ can18 | money }} per can</span>
+          </span>
+        </button>
+
+        <button type="button" class="hw-pack" data-pack="24" role="radio" aria-checked="false">
+          <span class="hw-pack-main">
+            <span class="hw-pack-cans">24 cans</span>
+            <span class="hw-pack-mix" data-mix-label="24">12 Watermelon, 6 Mango Mimosa, 6 Blue Raspberry</span>
+          </span>
+          <span class="hw-pack-price">
+            <span class="hw-now">{{ now24 | money }}</span>
+            <s class="hw-was">{{ v24.price | money }}</s>
+            <span class="hw-percan">{{ can24 | money }} per can</span>
+          </span>
+        </button>
+      </div>
+
+      <button type="button" class="hw-customise" id="hw-customise" aria-expanded="false" aria-controls="hw-builder">Customise your mix</button>
+
+      {%- comment -%} Flavour builder: same counting rules and line-item format as the Build Your Own page {%- endcomment -%}
+      <div class="hw-builder" id="hw-builder" hidden>
+        <p class="hw-builder-status" aria-live="polite"><strong id="hw-count">3</strong> of <span id="hw-target">3</span> six-packs chosen</p>
+        <div class="hw-flavours">
+          <div class="hw-flavour" data-flavor="Blue Razzberry">
+            {%- if p_blue.featured_image -%}<img src="{{ p_blue.featured_image | image_url: width: 160 }}" alt="" width="80" height="80" loading="lazy">{%- endif -%}
+            <span class="hw-flavour-name">Blue Raspberry</span>
+            <span class="hw-stepper">
+              <button type="button" class="hw-step hw-minus" aria-label="Remove one Blue Raspberry six-pack">&minus;</button>
+              <span class="hw-qty" data-count>1</span>
+              <button type="button" class="hw-step hw-plus" aria-label="Add one Blue Raspberry six-pack">+</button>
+            </span>
+          </div>
+          <div class="hw-flavour" data-flavor="Mango Mimosa">
+            {%- if p_mango.featured_image -%}<img src="{{ p_mango.featured_image | image_url: width: 160 }}" alt="" width="80" height="80" loading="lazy">{%- endif -%}
+            <span class="hw-flavour-name">Mango Mimosa</span>
+            <span class="hw-stepper">
+              <button type="button" class="hw-step hw-minus" aria-label="Remove one Mango Mimosa six-pack">&minus;</button>
+              <span class="hw-qty" data-count>1</span>
+              <button type="button" class="hw-step hw-plus" aria-label="Add one Mango Mimosa six-pack">+</button>
+            </span>
+          </div>
+          <div class="hw-flavour" data-flavor="Watermelon">
+            {%- if p_water.featured_image -%}<img src="{{ p_water.featured_image | image_url: width: 160 }}" alt="" width="80" height="80" loading="lazy">{%- endif -%}
+            <span class="hw-flavour-name">Watermelon</span>
+            <span class="hw-stepper">
+              <button type="button" class="hw-step hw-minus" aria-label="Remove one Watermelon six-pack">&minus;</button>
+              <span class="hw-qty" data-count>1</span>
+              <button type="button" class="hw-step hw-plus" aria-label="Add one Watermelon six-pack">+</button>
+            </span>
+          </div>
+        </div>
+        <p class="hw-builder-hint" id="hw-builder-hint">Each step is one six-pack.</p>
+      </div>
+
+      <button type="button" class="hw-btn hw-atc" id="hw-atc">
+        <span id="hw-atc-text">Add 18 cans to cart &middot; {{ now18 | money }}</span>
+      </button>
+      <p class="hw-applied">15% off applied at checkout with SPOOKY15</p>
+      <p class="hw-error" id="hw-error" role="alert" hidden></p>
+    </div>
+  </section>
+
+  {%- comment -%} 3. FACTS STRIP {%- endcomment -%}
+  <section class="hw-facts" aria-label="Product facts">
+    <ul>
+      <li>Alcohol-free</li>
+      <li>Caffeine-free</li>
+      <li>35 calories</li>
+      <li>Lion's Mane, Cordyceps, Reishi</li>
+    </ul>
+  </section>
+
+  {%- comment -%} 4. WHAT'S INSIDE {%- endcomment -%}
+  <section class="hw-section">
+    <div class="hw-inner">
+      <p class="hw-eyebrow">What's inside</p>
+      <h2 class="hw-h2">Three mushrooms in every can</h2>
+      <div class="hw-cards">
+        <div class="hw-card">
+          <span class="hw-card-mg">900mg</span>
+          <h3>Lion's Mane</h3>
+          <p>Fruiting body extract. A shaggy white mushroom long used in cooking and tea.</p>
+        </div>
+        <div class="hw-card">
+          <span class="hw-card-mg">700mg</span>
+          <h3>Cordyceps</h3>
+          <p>Fruiting body extract. A slender orange mushroom with a long history of traditional use.</p>
+        </div>
+        <div class="hw-card">
+          <span class="hw-card-mg">400mg</span>
+          <h3>Reishi</h3>
+          <p>Fruiting body extract. A glossy red-brown mushroom traditionally brewed as tea.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} 5. REVIEWS: word for word from sections/reviews-section.liquid {%- endcomment -%}
+  <section class="hw-section hw-section-alt">
+    <div class="hw-inner">
+      <p class="hw-eyebrow">Verified reviews</p>
+      <h2 class="hw-h2">What buyers say</h2>
+      <div class="hw-reviews">
+        <figure class="hw-review">
+          <div class="hw-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>"Absolutely LOVE this product and the company. Customer service is top notch as well and I couldn't give them a bigger endorsement. Highly recommend giving them a try. Great products and carefully picked ingredients. These guys are doing it right, check them out!"</blockquote>
+          <figcaption><strong>Mike D.</strong><span>Verified Buyer &middot; Erie, CO</span></figcaption>
+        </figure>
+        <figure class="hw-review">
+          <div class="hw-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>"Taste amazing!!"</blockquote>
+          <figcaption><strong>Gracie Matley</strong><span>Verified Buyer &middot; Los Angeles, CA</span></figcaption>
+        </figure>
+        <figure class="hw-review">
+          <div class="hw-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>"So relaxing!"</blockquote>
+          <figcaption><strong>Kirstin Holland</strong><span>Verified Buyer &middot; Minneapolis, MN</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} 6. ORDER-BY LINE + 7. REPEAT BUTTON {%- endcomment -%}
+  <section class="hw-section hw-orderby">
+    <div class="hw-inner hw-inner-narrow">
+      {%- if hw_order_by != blank -%}
+      <p class="hw-orderby-line">Order by <strong>{{ hw_order_by }}</strong> for delivery before Halloween.</p>
+      {%- else -%}
+      <p class="hw-orderby-line">Halloween is <strong>October 31.</strong></p>
+      {%- endif -%}
+      <a href="#hw-picker" class="hw-btn">Pick your pack</a>
+    </div>
+  </section>
+
+  {%- comment -%} 8. FAQ {%- endcomment -%}
+  <section class="hw-section hw-section-alt">
+    <div class="hw-inner hw-inner-narrow">
+      <h2 class="hw-h2">Quick answers</h2>
+      <details class="hw-faq"><summary>Does it contain alcohol?</summary><p>No. Happie Fungi Fusion is alcohol-free.</p></details>
+      <details class="hw-faq"><summary>Does it have caffeine?</summary><p>No. It is caffeine-free.</p></details>
+      <details class="hw-faq"><summary>What does it taste like?</summary><p>Like a lightly sparkling fruit drink, not a supplement. Watermelon is clean and juicy, Mango Mimosa is tropical and lightly sweet, and Blue Raspberry is tart and bright. Each can has 9g of sugar and 35 calories.</p></details>
+      <details class="hw-faq"><summary>When will it arrive?</summary><p>{% if hw_order_by != blank %}Order by {{ hw_order_by }} for delivery before Halloween. {% endif %}Delivery options are shown at checkout.</p></details>
+    </div>
+  </section>
+
+  <p class="hw-smallprint">SPOOKY15 takes 15% off the Variety Pack and Build Your Own packs through October 31, 2026.</p>
+</div>
+
+{%- comment -%} Sticky add-to-cart bar (mobile), shown once the main button scrolls out of view {%- endcomment -%}
+<div class="hw-sticky" id="hw-sticky" hidden>
+  <span class="hw-sticky-info"><strong id="hw-sticky-cans">18 cans</strong><span id="hw-sticky-price">{{ now18 | money }}</span></span>
+  <button type="button" class="hw-btn hw-sticky-btn" id="hw-sticky-atc">Add to cart</button>
+</div>
+
+<style>
+  /* ── Strip the site chrome on this page: logo + cart only ── */
+  .announcement-bar, .site-footer, #email-popup-overlay, #happie-chatbot,
+  .nav-links, .nav-signin, .hamburger, .mobile-nav, .mobile-nav-overlay,
+  .cart-free-ship-note { display: none !important; }
+  body { background: #0E0A14; }
+  .nav-inner { max-width: 760px; }
+  .nav-right { margin-left: auto; }
+
+  .hw { --hw-bg: #0E0A14; --hw-cream: #FFF4E0; --hw-gold: #F9B040; --hw-purple: #2A1846; --hw-purple-2: #1A1028; --hw-orange: #F26B1D;
+        background: var(--hw-bg); color: var(--hw-cream); font-family: Inter, system-ui, sans-serif; }
+  .hw *, .hw *::before, .hw *::after { box-sizing: border-box; }
+  .hw-inner { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  .hw-inner-narrow { max-width: 620px; }
+  .hw-section { padding: 56px 0; }
+  .hw-section-alt { background: var(--hw-purple-2); }
+
+  /* Type */
+  .hw-h1, .hw-h2 { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; color: var(--hw-cream); margin: 0; }
+  .hw-h1 { font-size: clamp(38px, 9.5vw, 76px); line-height: 1.04; letter-spacing: -0.01em; text-shadow: 0 2px 24px rgba(0,0,0,0.55); }
+  .hw-h1 em { font-style: normal; color: var(--hw-gold); }
+  .hw-h2 { font-size: clamp(28px, 6vw, 40px); line-height: 1.12; text-align: center; }
+  .hw-rule { display: block; width: 56px; height: 2px; background: var(--hw-gold); margin: 18px 0 14px; }
+  .hw-sub, .hw-eyebrow { text-transform: uppercase; letter-spacing: 0.2em; font-size: 12px; font-weight: 600; margin: 0; }
+  .hw-sub { color: var(--hw-cream); text-shadow: 0 1px 12px rgba(0,0,0,0.7); }
+  .hw-eyebrow { color: var(--hw-gold); text-align: center; margin-bottom: 10px; }
+  .hw-lede { text-align: center; color: rgba(255,244,224,0.78); font-size: 15px; margin: 10px 0 24px; }
+
+  /* Buttons */
+  .hw-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 14px 30px; border: 0; border-radius: 50px;
+            background: var(--hw-gold); color: #17101F; font: 800 16px/1.2 Inter, system-ui, sans-serif; text-decoration: none; cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease; box-shadow: 0 10px 28px rgba(249,176,64,0.28); }
+  .hw-btn:hover { transform: translateY(-1px); background: #FFC060; }
+  .hw-btn:disabled { opacity: 0.7; cursor: default; transform: none; }
+  .hw-btn-hero { margin-top: 22px; }
+
+  /* 1. Hero */
+  .hw-hero { position: relative; margin-top: calc(-1 * var(--nav-h, 78px)); overflow: hidden; background: #0E0A14; }
+  .hw-hero picture, .hw-hero img { display: block; width: 100%; }
+  .hw-hero img { height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+  .hw-hero-fade { position: absolute; inset: 0; pointer-events: none;
+                  background: linear-gradient(180deg, rgba(14,10,20,0.78) 0%, rgba(14,10,20,0.35) 30%, rgba(14,10,20,0) 52%, rgba(14,10,20,0) 80%, #0E0A14 100%); }
+  .hw-hero-copy { position: absolute; left: 0; right: 0; top: calc(var(--nav-h, 78px) + 14px); bottom: 26px; padding: 0 22px;
+                  display: flex; flex-direction: column; align-items: flex-start; }
+  .hw-hero-copy .hw-btn-hero { margin-top: auto; }
+  .hw-pos-tc .hw-hero-copy { text-align: center; align-items: center; }
+  .hw-hero[data-ad="boo"] .hw-sub { max-width: 54%; line-height: 1.7; }
+  .hw-pos-tc .hw-rule { margin-left: auto; margin-right: auto; }
+  .hw-hero[data-ad="boo"] .hw-hero-fade { background: linear-gradient(180deg, rgba(14,10,20,0.92) 0%, rgba(14,10,20,0.62) 28%, rgba(14,10,20,0) 55%, rgba(14,10,20,0) 80%, #0E0A14 100%); }
+  .hw-pos-bc .hw-hero-copy { text-align: center; align-items: center; justify-content: flex-end; }
+  .hw-pos-bc .hw-hero-copy .hw-btn-hero { margin-top: 22px; }
+  .hw-pos-bc .hw-rule { margin-left: auto; margin-right: auto; }
+  .hw-pos-bc .hw-hero-fade { background: linear-gradient(180deg, rgba(14,10,20,0.45) 0%, rgba(14,10,20,0) 22%, rgba(14,10,20,0) 42%, rgba(14,10,20,0.88) 78%, #0E0A14 100%); }
+
+  /* 2. Picker */
+  .hw-picker-wrap { padding-top: 36px; scroll-margin-top: 84px; }
+  .hw-packs { display: grid; gap: 12px; }
+  .hw-pack { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; text-align: left;
+             padding: 18px 18px; border-radius: 18px; border: 2px solid rgba(255,244,224,0.16); background: rgba(255,244,224,0.04);
+             color: var(--hw-cream); font-family: inherit; cursor: pointer; transition: border-color 0.15s ease, background 0.15s ease; }
+  .hw-pack.is-active { border-color: var(--hw-gold); background: rgba(249,176,64,0.10); }
+  .hw-pack-main { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .hw-pack-cans { font-family: 'DM Serif Display', Georgia, serif; font-size: 24px; line-height: 1; }
+  .hw-pack-mix { font-size: 13px; color: rgba(255,244,224,0.72); line-height: 1.35; }
+  .hw-pack-price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; }
+  .hw-now { font-size: 21px; font-weight: 800; color: var(--hw-cream); line-height: 1.1; }
+  .hw-was { font-size: 13px; color: rgba(255,244,224,0.5); }
+  .hw-percan { font-size: 12px; color: var(--hw-gold); font-weight: 600; }
+  .hw-flag { position: absolute; top: -11px; left: 16px; background: var(--hw-orange); color: #fff; font-size: 10.5px; font-weight: 800;
+             letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 50px; }
+  .hw-customise { display: block; margin: 16px auto 0; background: none; border: 0; color: var(--hw-gold); font: 600 14px Inter, sans-serif;
+                  text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 8px; }
+  .hw-customise[hidden] { display: none; }
+  .hw-builder { margin-top: 10px; padding: 16px; border-radius: 18px; background: var(--hw-purple); border: 1px solid rgba(255,244,224,0.12); }
+  .hw-builder-status { margin: 0 0 12px; font-size: 14px; text-align: center; color: rgba(255,244,224,0.85); }
+  .hw-flavours { display: grid; gap: 10px; }
+  .hw-flavour { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 14px; background: rgba(14,10,20,0.45); }
+  .hw-flavour img { width: 46px; height: 46px; object-fit: contain; flex-shrink: 0; }
+  .hw-flavour-name { flex: 1; font-weight: 700; font-size: 15px; }
+  .hw-stepper { display: inline-flex; align-items: center; gap: 12px; }
+  .hw-step { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--hw-cream); color: #17101F; font-size: 22px; font-weight: 700; line-height: 1; cursor: pointer; }
+  .hw-step:disabled { opacity: 0.3; cursor: default; }
+  .hw-qty { min-width: 18px; text-align: center; font-weight: 800; font-size: 17px; }
+  .hw-builder-hint { margin: 12px 0 0; font-size: 12.5px; text-align: center; color: rgba(255,244,224,0.7); }
+  .hw-atc { width: 100%; margin-top: 20px; min-height: 60px; font-size: 17px; }
+  .hw-applied { text-align: center; font-size: 13px; color: rgba(255,244,224,0.72); margin: 12px 0 0; }
+  .hw-error { text-align: center; color: #FF9A8A; font-size: 14px; margin: 10px 0 0; }
+
+  /* 3. Facts */
+  .hw-facts { background: var(--hw-purple); border-top: 1px solid rgba(255,244,224,0.1); border-bottom: 1px solid rgba(255,244,224,0.1); padding: 18px 16px; }
+  .hw-facts ul { list-style: none; margin: 0 auto; padding: 0; max-width: 1040px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; }
+  .hw-facts li { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hw-cream); }
+
+  /* 4. Cards */
+  .hw-cards { display: grid; gap: 14px; margin-top: 28px; }
+  .hw-card { padding: 24px 22px; border-radius: 20px; background: var(--hw-purple-2); border: 1px solid rgba(255,244,224,0.1); }
+  .hw-card-mg { font-family: 'DM Serif Display', Georgia, serif; font-size: 34px; color: var(--hw-gold); line-height: 1; }
+  .hw-card h3 { margin: 8px 0 6px; font-size: 18px; font-weight: 800; color: var(--hw-cream); }
+  .hw-card p { margin: 0; font-size: 14.5px; line-height: 1.55; color: rgba(255,244,224,0.75); }
+
+  /* 5. Reviews */
+  .hw-reviews { display: grid; gap: 14px; margin-top: 28px; }
+  .hw-review { margin: 0; padding: 22px; border-radius: 20px; background: var(--hw-bg); border: 1px solid rgba(255,244,224,0.1); display: flex; flex-direction: column; gap: 12px; }
+  .hw-stars { color: var(--hw-gold); letter-spacing: 2px; font-size: 15px; }
+  .hw-review blockquote { margin: 0; font-size: 15px; line-height: 1.6; color: var(--hw-cream); }
+  .hw-review figcaption { margin-top: auto; display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: rgba(255,244,224,0.65); }
+  .hw-review figcaption strong { color: var(--hw-cream); font-size: 14px; }
+
+  /* 6-7. Order by */
+  .hw-orderby { text-align: center; }
+  .hw-orderby-line { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(22px, 5vw, 30px); line-height: 1.25; margin: 0 0 22px; }
+  .hw-orderby-line strong { color: var(--hw-gold); font-weight: 400; }
+
+  /* 8. FAQ */
+  .hw-faq { border-bottom: 1px solid rgba(255,244,224,0.14); }
+  .hw-faq:first-of-type { margin-top: 22px; border-top: 1px solid rgba(255,244,224,0.14); }
+  .hw-faq summary { list-style: none; cursor: pointer; padding: 18px 28px 18px 0; position: relative; font-weight: 700; font-size: 16px; color: var(--hw-cream); }
+  .hw-faq summary::-webkit-details-marker { display: none; }
+  .hw-faq summary::after { content: '+'; position: absolute; right: 2px; top: 14px; font-size: 22px; color: var(--hw-gold); font-weight: 400; }
+  .hw-faq[open] summary::after { content: '\2212'; }
+  .hw-faq p { margin: 0 0 18px; font-size: 15px; line-height: 1.6; color: rgba(255,244,224,0.78); }
+  .hw-smallprint { text-align: center; font-size: 12px; color: rgba(255,244,224,0.5); padding: 22px 20px 110px; margin: 0; background: var(--hw-purple-2); }
+
+  /* Sticky bar */
+  .hw-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; display: flex; align-items: center; justify-content: space-between; gap: 14px;
+               padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(14,10,20,0.96); border-top: 1px solid rgba(249,176,64,0.4);
+               backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .hw-sticky[hidden] { display: none; }
+  .hw-sticky-info { display: flex; flex-direction: column; color: #FFF4E0; font-family: Inter, sans-serif; font-size: 13px; line-height: 1.3; }
+  .hw-sticky-info strong { font-size: 15px; }
+  .hw-sticky-info span { color: #F9B040; font-weight: 700; }
+  .hw-sticky-btn { min-height: 48px; padding: 12px 26px; font-size: 15px; }
+
+  @media (min-width: 750px) {
+    .hw-section { padding: 80px 0; }
+    .hw-hero img { aspect-ratio: 16 / 9; max-height: 82vh; }
+    .hw-hero-copy { top: calc(var(--nav-h, 78px) + 6vh); bottom: auto; padding: 0 6vw; max-width: 760px; display: block; }
+    .hw-hero-copy .hw-btn-hero, .hw-pos-bc .hw-hero-copy .hw-btn-hero { margin-top: 22px; }
+    .hw-hero[data-ad="boo"] .hw-sub { max-width: none; }
+    .hw-pos-tc .hw-hero-copy { left: 50%; right: auto; transform: translateX(-50%); width: 100%; }
+    .hw-pos-bc .hw-hero-copy { left: 50%; right: auto; top: auto; bottom: 7vh; transform: translateX(-50%); width: 100%; }
+    .hw-sub { font-size: 13px; }
+    .hw-picker-wrap { padding-top: 64px; }
+    .hw-cards, .hw-reviews { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .hw-sticky { display: none !important; }
+    .hw-smallprint { padding-bottom: 32px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .hw-btn, .hw-pack { transition: none; } html { scroll-behavior: auto; } }
+</style>
+
+<script>
+(function () {
+  /* Same sizes, units and line-item wording as the Build Your Own builder. */
+  var PACKS = {
+    "12": { cans: 12, variantId: "{{ v12.id }}", cents: {{ now12 }}, price: "{{ now12 | money }}", fullCents: {{ v12.price }}, name: {{ variety.title | json }}, build: false },
+    "18": { cans: 18, variantId: "{{ v18.id }}", cents: {{ now18 }}, price: "{{ now18 | money }}", fullCents: {{ v18.price }}, name: {{ byo.title | json }}, build: true, target: 3, unit: 6, unitLabel: "6-pack", mix: [1, 1, 1] },
+    "24": { cans: 24, variantId: "{{ v24.id }}", cents: {{ now24 }}, price: "{{ now24 | money }}", fullCents: {{ v24.price }}, name: {{ byo.title | json }}, build: true, target: 4, unit: 6, unitLabel: "6-pack", mix: [1, 1, 2] }
+  };
+  var LABELS = ["Blue Raspberry", "Mango Mimosa", "Watermelon"];
+
+  var packBtns  = Array.prototype.slice.call(document.querySelectorAll('.hw-pack'));
+  var flavours  = Array.prototype.slice.call(document.querySelectorAll('.hw-flavour'));
+  var atc       = document.getElementById('hw-atc');
+  var atcText   = document.getElementById('hw-atc-text');
+  var custom    = document.getElementById('hw-customise');
+  var builder   = document.getElementById('hw-builder');
+  var countEl   = document.getElementById('hw-count');
+  var targetEl  = document.getElementById('hw-target');
+  var hintEl    = document.getElementById('hw-builder-hint');
+  var errEl     = document.getElementById('hw-error');
+  var sticky    = document.getElementById('hw-sticky');
+  var stickyBtn = document.getElementById('hw-sticky-atc');
+  if (!atc || !packBtns.length) return;
+
+  var size = PACKS[window.hwDefaultPack] ? window.hwDefaultPack : "18";
+  var counts = { "18": PACKS["18"].mix.slice(), "24": PACKS["24"].mix.slice() };
+  var busy = false;
+
+  /* Apply SPOOKY15 in the background; add-to-cart waits for it so the cart shows the discount. */
+  var discountReady = fetch('/discount/SPOOKY15?redirect=%2Fcart.js', { credentials: 'same-origin' }).catch(function () {});
+
+  /* Carry the ad and utm_ parameters onto the cart so they reach the order. */
+  try {
+    var attrs = { halloween_ad: window.hwAd || 'cauldron' };
+    new URLSearchParams(window.location.search).forEach(function (v, k) { if (k.indexOf('utm_') === 0 && v) attrs[k] = v.slice(0, 120); });
+    discountReady.then(function () {
+      fetch('/cart/update.js', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ attributes: attrs }) }).catch(function () {});
+    });
+  } catch (e) {}
+
+  function cfg() { return PACKS[size]; }
+  function total() { return counts[size].reduce(function (a, b) { return a + b; }, 0); }
+  function mixText(s) {
+    var c = counts[s], u = PACKS[s].unit, parts = [];
+    if (c[0] === c[1] && c[1] === c[2]) return (c[0] * u) + ' of each flavour';
+    [2, 1, 0].forEach(function (i) { if (c[i] > 0) parts.push((c[i] * u) + ' ' + LABELS[i]); });
+    return parts.join(', ');
+  }
+
+  function render() {
+    var c = cfg();
+    packBtns.forEach(function (b) {
+      var on = b.dataset.pack === size;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-checked', on ? 'true' : 'false');
+    });
+    ["18", "24"].forEach(function (s) {
+      var el = document.querySelector('[data-mix-label="' + s + '"]');
+      if (el) el.textContent = mixText(s);
+    });
+    custom.hidden = !c.build;
+    if (!c.build) { builder.hidden = true; custom.setAttribute('aria-expanded', 'false'); }
+    var complete = true;
+    if (c.build) {
+      var t = total();
+      complete = t === c.target;
+      countEl.textContent = t;
+      targetEl.textContent = c.target;
+      flavours.forEach(function (f, i) {
+        f.querySelector('[data-count]').textContent = counts[size][i];
+        f.querySelector('.hw-minus').disabled = counts[size][i] === 0;
+        f.querySelector('.hw-plus').disabled = t >= c.target;
+      });
+      hintEl.textContent = complete ? 'Each step is one six-pack.' : 'Add ' + (c.target - t) + ' more six-pack' + (c.target - t === 1 ? '' : 's') + ' to fill the box.';
+    }
+    if (!busy) {
+      atc.disabled = !complete;
+      stickyBtn.disabled = !complete;
+      atcText.innerHTML = complete ? 'Add ' + c.cans + ' cans to cart &middot; ' + c.price : 'Finish your mix to continue';
+    }
+    document.getElementById('hw-sticky-cans').textContent = c.cans + ' cans';
+    document.getElementById('hw-sticky-price').textContent = c.price;
+  }
+
+  packBtns.forEach(function (b) {
+    b.addEventListener('click', function () { size = b.dataset.pack; render(); });
+  });
+  custom.addEventListener('click', function () {
+    builder.hidden = !builder.hidden;
+    custom.setAttribute('aria-expanded', builder.hidden ? 'false' : 'true');
+    custom.textContent = builder.hidden ? 'Customise your mix' : 'Hide the flavour picker';
+  });
+  flavours.forEach(function (f, i) {
+    f.querySelector('.hw-plus').addEventListener('click', function () { if (total() < cfg().target) { counts[size][i]++; render(); } });
+    f.querySelector('.hw-minus').addEventListener('click', function () { if (counts[size][i] > 0) { counts[size][i]--; render(); } });
+  });
+
+  function addToCart() {
+    var c = cfg();
+    if (busy || (c.build && total() !== c.target)) return;
+    var body = { id: c.variantId, quantity: 1 };
+    if (c.build) {
+      var properties = {};
+      flavours.forEach(function (f, i) {
+        if (counts[size][i] > 0) properties[f.dataset.flavor] = counts[size][i] + ' × ' + c.unitLabel + ' (' + (counts[size][i] * c.unit) + ' cans)';
+      });
+      body.properties = properties;
+    }
+    busy = true; errEl.hidden = true;
+    atc.disabled = true; stickyBtn.disabled = true;
+    atcText.textContent = 'Adding…';
+    discountReady.then(function () {
+      return fetch('/cart/add.js', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body) });
+    }).then(function (r) {
+      if (!r.ok) throw new Error('add failed');
+      return r.json();
+    }).then(function () {
+      atcText.textContent = '✓ Added to cart';
+      try {
+        if (window.fbq) fbq('track', 'AddToCart', { content_ids: [String(c.variantId)], content_type: 'product', content_name: c.name, value: c.cents / 100, currency: 'USD', num_items: 1 });
+      } catch (e) {}
+      var trigger = document.getElementById('cart-trigger');
+      if (trigger) trigger.click();
+      setTimeout(function () { busy = false; render(); }, 1800);
+    }).catch(function () {
+      busy = false; render();
+      errEl.textContent = 'That did not go through. Please try again.';
+      errEl.hidden = false;
+    });
+  }
+  atc.addEventListener('click', addToCart);
+  stickyBtn.addEventListener('click', addToCart);
+
+  /* Sticky bar appears once the main button has scrolled out of view (mobile only via CSS). */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      var e = entries[0];
+      sticky.hidden = e.isIntersecting || e.boundingClientRect.top > 0;
+    }, { threshold: 0 }).observe(atc);
+  }
+
+  render();
+})();
+</script>
