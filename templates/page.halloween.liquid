@@ -216,19 +216,21 @@
     <div class="hw-inner">
       <p class="hw-eyebrow">What's inside</p>
       <h2 class="hw-h2">Three mushrooms in every can</h2>
-      <img class="hw-shrooms" src="{{ 'halloween-fx-mushrooms.jpg' | asset_img_url: '900x' }}" alt="" width="900" height="662" loading="lazy" decoding="async">
       <div class="hw-cards">
         <div class="hw-card">
+          <img class="hw-card-img" src="{{ 'halloween-shroom-lionsmane.jpg' | asset_img_url: '900x' }}" alt="Lion's Mane mushroom" width="900" height="672" loading="lazy" decoding="async">
           <span class="hw-card-mg">900mg</span>
           <h3>Lion's Mane</h3>
           <p>Fruiting body extract. A shaggy white mushroom long used in cooking and tea.</p>
         </div>
         <div class="hw-card">
+          <img class="hw-card-img" src="{{ 'halloween-shroom-cordyceps.jpg' | asset_img_url: '900x' }}" alt="Cordyceps mushrooms" width="900" height="672" loading="lazy" decoding="async">
           <span class="hw-card-mg">700mg</span>
           <h3>Cordyceps</h3>
           <p>Fruiting body extract. A slender orange mushroom with a long history of traditional use.</p>
         </div>
         <div class="hw-card">
+          <img class="hw-card-img" src="{{ 'halloween-shroom-reishi.jpg' | asset_img_url: '900x' }}" alt="Reishi mushroom" width="900" height="672" loading="lazy" decoding="async">
           <span class="hw-card-mg">400mg</span>
           <h3>Reishi</h3>
           <p>Fruiting body extract. A glossy red-brown mushroom traditionally brewed as tea.</p>
@@ -396,7 +398,9 @@
 
   /* 4. Cards */
   .hw-cards { display: grid; gap: 14px; margin-top: 28px; }
-  .hw-card { padding: 24px 22px; border-radius: 20px; background: var(--hw-purple-2); border: 1px solid rgba(255,244,224,0.1); }
+  .hw-card { padding: 24px 22px; border-radius: 20px; background: var(--hw-purple-2); border: 1px solid rgba(255,244,224,0.1); overflow: hidden; }
+  .hw-card-img { display: block; width: calc(100% + 44px); max-width: none; height: auto; aspect-ratio: 4 / 3; object-fit: cover; margin: -24px -22px 18px;
+                 -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%); mask-image: linear-gradient(180deg, #000 72%, transparent 100%); }
   .hw-card-mg { font-family: 'DM Serif Display', Georgia, serif; font-size: 34px; color: var(--hw-gold); line-height: 1; }
   .hw-card h3 { margin: 8px 0 6px; font-size: 18px; font-weight: 800; color: var(--hw-cream); }
   .hw-card p { margin: 0; font-size: 14.5px; line-height: 1.55; color: rgba(255,244,224,0.75); }
@@ -462,8 +466,6 @@
   .hw-web { position: absolute; z-index: 1; width: 150px; height: 150px; color: rgba(255,244,224,0.2); pointer-events: none; }
   .hw-web-tl { top: 0; left: 0; }
   .hw-web-tr { top: 0; right: 0; transform: scaleX(-1); }
-  .hw-shrooms { display: block; width: min(420px, 92%); height: auto; margin: -10px auto -40px; mix-blend-mode: screen; pointer-events: none;
-               -webkit-mask-image: radial-gradient(closest-side, #000 50%, transparent 100%); mask-image: radial-gradient(closest-side, #000 50%, transparent 100%); }
   .hw-pumpkins { position: absolute; left: 0; right: 0; bottom: 0; height: clamp(130px, 30vw, 300px); z-index: 0; pointer-events: none; mix-blend-mode: screen;
                  background: url({{ 'halloween-fx-pumpkins.jpg' | asset_img_url: '1920x' }}) center bottom / cover no-repeat;
                  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 34%); mask-image: linear-gradient(180deg, transparent 0%, #000 34%); }
