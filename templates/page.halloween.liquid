@@ -39,7 +39,7 @@
 <div class="hw" id="hw">
 
   {%- comment -%} 1. HERO (image + copy are set by the inline script below from ?ad=) {%- endcomment -%}
-  <section class="hw-hero hw-pos-tc" id="hw-hero" data-ad="cauldron">
+  <section class="hw-hero hw-pos-tc hw-dpos-tr" id="hw-hero" data-ad="cauldron">
     <picture id="hw-hero-pic">
       <source media="(max-width: 749px)" srcset="{{ 'halloween-cauldron-4x5.jpg' | asset_img_url: '720x' }} 720w, {{ 'halloween-cauldron-4x5.jpg' | asset_img_url: '1080x' }} 1080w" sizes="100vw">
       <img src="{{ 'halloween-cauldron-16x9.jpg' | asset_img_url: '1920x' }}"
@@ -47,10 +47,20 @@
            alt="Cans of Happie Fungi Fusion on ice in a cauldron on a Halloween porch" width="1920" height="1072" fetchpriority="high" decoding="async">
     </picture>
     <div class="hw-hero-fade" aria-hidden="true"></div>
+    <div class="hw-fog" aria-hidden="true"></div>
+    <div class="hw-bats" aria-hidden="true">
+      <span class="hw-bat hw-bat-1"><svg viewBox="0 0 64 32" aria-hidden="true"><path d="M32 12c2-4 3-6 3-9 1 2 2 3 4 3 5-4 13-5 25-2-6 1-9 4-10 9-3-2-6-2-8 0-1-2-3-3-5-2-1 4-4 8-9 12-5-4-8-8-9-12-2-1-4 0-5 2-2-2-5-2-8 0-1-5-4-8-10-9 12-3 20-2 25 2 2 0 3-1 4-3 0 3 1 5 3 9z"/></svg></span>
+      <span class="hw-bat hw-bat-2"><svg viewBox="0 0 64 32" aria-hidden="true"><path d="M32 12c2-4 3-6 3-9 1 2 2 3 4 3 5-4 13-5 25-2-6 1-9 4-10 9-3-2-6-2-8 0-1-2-3-3-5-2-1 4-4 8-9 12-5-4-8-8-9-12-2-1-4 0-5 2-2-2-5-2-8 0-1-5-4-8-10-9 12-3 20-2 25 2 2 0 3-1 4-3 0 3 1 5 3 9z"/></svg></span>
+      <span class="hw-bat hw-bat-3"><svg viewBox="0 0 64 32" aria-hidden="true"><path d="M32 12c2-4 3-6 3-9 1 2 2 3 4 3 5-4 13-5 25-2-6 1-9 4-10 9-3-2-6-2-8 0-1-2-3-3-5-2-1 4-4 8-9 12-5-4-8-8-9-12-2-1-4 0-5 2-2-2-5-2-8 0-1-5-4-8-10-9 12-3 20-2 25 2 2 0 3-1 4-3 0 3 1 5 3 9z"/></svg></span>
+      <span class="hw-bat hw-bat-4"><svg viewBox="0 0 64 32" aria-hidden="true"><path d="M32 12c2-4 3-6 3-9 1 2 2 3 4 3 5-4 13-5 25-2-6 1-9 4-10 9-3-2-6-2-8 0-1-2-3-3-5-2-1 4-4 8-9 12-5-4-8-8-9-12-2-1-4 0-5 2-2-2-5-2-8 0-1-5-4-8-10-9 12-3 20-2 25 2 2 0 3-1 4-3 0 3 1 5 3 9z"/></svg></span>
+    </div>
+    <div class="hw-embers" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <div class="hw-hero-copy">
-      <h1 class="hw-h1" id="hw-h1">Fill the <em>cauldron.</em></h1>
-      <span class="hw-rule" aria-hidden="true"></span>
-      <p class="hw-sub" id="hw-sub">Stock up for Halloween night.</p>
+      <div class="hw-hero-text">
+        <h1 class="hw-h1" id="hw-h1">Fill the <em>cauldron.</em></h1>
+        <span class="hw-rule" aria-hidden="true"></span>
+        <p class="hw-sub" id="hw-sub">Stock up for Halloween night.</p>
+      </div>
       <a href="#hw-picker" class="hw-btn hw-btn-hero">Pick your pack</a>
     </div>
   </section>
@@ -59,7 +69,7 @@
   /* Swap the hero before first paint so the visitor sees the ad they clicked. */
   (function () {
     var HERO = {
-      cauldron: { h: 'Fill the <em>cauldron.</em>', s: 'Stock up for Halloween night.', pack: '24', pos: 'tc',
+      cauldron: { h: 'Fill the <em>cauldron.</em>', s: 'Stock up for Halloween night.', pack: '24', pos: 'tc', dpos: 'tr',
         alt: 'Cans of Happie Fungi Fusion on ice in a cauldron on a Halloween porch',
         w: ['{{ 'halloween-cauldron-16x9.jpg' | asset_img_url: '1280x' }}', '{{ 'halloween-cauldron-16x9.jpg' | asset_img_url: '1920x' }}'],
         m: ['{{ 'halloween-cauldron-4x5.jpg' | asset_img_url: '720x' }}', '{{ 'halloween-cauldron-4x5.jpg' | asset_img_url: '1080x' }}'] },
@@ -87,7 +97,7 @@
     window.hwDefaultPack = c.pack;
     var hero = document.getElementById('hw-hero');
     hero.setAttribute('data-ad', ad);
-    hero.className = 'hw-hero hw-pos-' + c.pos;
+    hero.className = 'hw-hero hw-pos-' + c.pos + ' hw-dpos-' + (c.dpos || c.pos);
     if (ad !== 'cauldron') {
       document.getElementById('hw-hero-pic').innerHTML =
         '<source media="(max-width: 749px)" srcset="' + c.m[0] + ' 720w, ' + c.m[1] + ' 1080w" sizes="100vw">' +
@@ -100,6 +110,8 @@
 
   {%- comment -%} 2. PACK PICKER {%- endcomment -%}
   <section class="hw-section hw-picker-wrap" id="hw-picker">
+    <div class="hw-moon" aria-hidden="true"></div>
+    <svg class="hw-web hw-web-tl" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M0 0L200 14M0 0L196 78M0 0L150 150M0 0L78 196M0 0L14 200"/><path d="M50 3q4 10-2 17-2 9-12 12-3 10-14 12-4 8-19 6M100 7q6 18-6 32-5 18-24 25-8 19-28 23-9 14-35 13M150 10q8 28-8 49-8 27-36 37-12 28-42 34-13 20-54 20"/></svg>
     <div class="hw-inner hw-inner-narrow">
       <p class="hw-eyebrow">Halloween offer &middot; ends October 31</p>
       <h2 class="hw-h2">Pick your pack</h2>
@@ -204,6 +216,7 @@
     <div class="hw-inner">
       <p class="hw-eyebrow">What's inside</p>
       <h2 class="hw-h2">Three mushrooms in every can</h2>
+      <img class="hw-shrooms" src="{{ 'halloween-fx-mushrooms.jpg' | asset_img_url: '900x' }}" alt="" width="900" height="662" loading="lazy" decoding="async">
       <div class="hw-cards">
         <div class="hw-card">
           <span class="hw-card-mg">900mg</span>
@@ -225,7 +238,8 @@
   </section>
 
   {%- comment -%} 5. REVIEWS: word for word from sections/reviews-section.liquid {%- endcomment -%}
-  <section class="hw-section hw-section-alt">
+  <section class="hw-section hw-section-alt hw-rel">
+    <svg class="hw-web hw-web-tr" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M0 0L200 14M0 0L196 78M0 0L150 150M0 0L78 196M0 0L14 200"/><path d="M50 3q4 10-2 17-2 9-12 12-3 10-14 12-4 8-19 6M100 7q6 18-6 32-5 18-24 25-8 19-28 23-9 14-35 13M150 10q8 28-8 49-8 27-36 37-12 28-42 34-13 20-54 20"/></svg>
     <div class="hw-inner">
       <p class="hw-eyebrow">Verified reviews</p>
       <h2 class="hw-h2">What buyers say</h2>
@@ -251,6 +265,8 @@
 
   {%- comment -%} 6. ORDER-BY LINE + 7. REPEAT BUTTON {%- endcomment -%}
   <section class="hw-section hw-orderby">
+    <div class="hw-pumpkins" aria-hidden="true"></div>
+    <div class="hw-fog hw-fog-low" aria-hidden="true"></div>
     <div class="hw-inner hw-inner-narrow">
       {%- if hw_order_by != blank -%}
       <p class="hw-orderby-line">Order by <strong>{{ hw_order_by }}</strong> for delivery before Halloween.</p>
@@ -326,6 +342,10 @@
   .hw-hero-copy { position: absolute; left: 0; right: 0; top: calc(var(--nav-h, 78px) + 14px); bottom: 26px; padding: 0 22px;
                   display: flex; flex-direction: column; align-items: flex-start; }
   .hw-hero-copy .hw-btn-hero { margin-top: auto; }
+  .hw-hero-copy { z-index: 3; }
+  .hw-hero-text { position: relative; isolation: isolate; }
+  .hw-hero-text::before { content: ''; position: absolute; z-index: -1; inset: -34px -46px; border-radius: 50%;
+                          background: radial-gradient(closest-side, rgba(14,10,20,0.78), rgba(14,10,20,0.5) 55%, rgba(14,10,20,0)); filter: blur(10px); }
   .hw-pos-tc .hw-hero-copy { text-align: center; align-items: center; }
   .hw-hero[data-ad="boo"] .hw-sub { max-width: 54%; line-height: 1.7; }
   .hw-pos-tc .hw-rule { margin-left: auto; margin-right: auto; }
@@ -404,6 +424,54 @@
   .hw-faq p { margin: 0 0 18px; font-size: 15px; line-height: 1.6; color: rgba(255,244,224,0.78); }
   .hw-smallprint { text-align: center; font-size: 12px; color: rgba(255,244,224,0.5); padding: 22px 20px 110px; margin: 0; background: var(--hw-purple-2); }
 
+  /* Spooky layers (decorative, all aria-hidden) */
+  .hw-rel, .hw-picker-wrap, .hw-orderby { position: relative; overflow: hidden; }
+  .hw-rel > .hw-inner, .hw-picker-wrap > .hw-inner, .hw-orderby > .hw-inner { position: relative; z-index: 2; }
+  .hw-fog { position: absolute; left: 0; right: 0; bottom: 0; height: 34%; z-index: 1; pointer-events: none; opacity: 0.5; mix-blend-mode: screen;
+            background: url({{ 'halloween-fx-fog.jpg' | asset_url }}) repeat-x 0 100% / 1600px 100%; animation: hw-fog 70s linear infinite;
+            -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 70%); mask-image: linear-gradient(180deg, transparent 0%, #000 70%); }
+  .hw-fog-low { height: 150px; opacity: 0.4; }
+  @keyframes hw-fog { to { background-position-x: -1600px; } }
+  .hw-bats { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+  .hw-bat { position: absolute; left: 0; width: 34px; color: #0B0710; opacity: 0.9; animation: hw-fly 17s linear infinite; }
+  .hw-bat svg { display: block; width: 100%; fill: currentColor; transform-origin: 50% 40%; animation: hw-flap 0.32s ease-in-out infinite; }
+  .hw-bat-1 { top: 16%; animation-delay: -2s; }
+  .hw-bat-2 { top: 26%; width: 22px; animation-duration: 23s; animation-delay: -11s; }
+  .hw-bat-3 { top: 9%;  width: 26px; animation-duration: 20s; animation-delay: -6s; }
+  .hw-bat-4 { top: 34%; width: 18px; animation-duration: 27s; animation-delay: -18s; opacity: 0.7; }
+  @keyframes hw-fly { 0% { transform: translate(-12vw, 3vh); } 25% { transform: translate(22vw, -3vh); } 50% { transform: translate(55vw, 2vh); } 75% { transform: translate(84vw, -4vh); } 100% { transform: translate(114vw, 1vh); } }
+  @keyframes hw-flap { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.3); } }
+  .hw-embers { position: absolute; left: 0; right: 0; bottom: 0; height: 60%; z-index: 2; pointer-events: none; overflow: hidden; }
+  .hw-embers i { position: absolute; bottom: -8px; width: 4px; height: 4px; border-radius: 50%; background: #FFB347; box-shadow: 0 0 8px 2px rgba(255,150,40,0.8); opacity: 0; animation: hw-ember 7s ease-in infinite; }
+  .hw-embers i:nth-child(1) { left: 6%; animation-delay: 0s; }
+  .hw-embers i:nth-child(2) { left: 14%; animation-delay: 2.1s; animation-duration: 9s; }
+  .hw-embers i:nth-child(3) { left: 23%; animation-delay: 4.4s; }
+  .hw-embers i:nth-child(4) { left: 31%; animation-delay: 1.2s; animation-duration: 8s; width: 3px; height: 3px; }
+  .hw-embers i:nth-child(5) { left: 44%; animation-delay: 5.6s; }
+  .hw-embers i:nth-child(6) { left: 52%; animation-delay: 3.3s; animation-duration: 10s; }
+  .hw-embers i:nth-child(7) { left: 61%; animation-delay: 0.7s; width: 3px; height: 3px; }
+  .hw-embers i:nth-child(8) { left: 70%; animation-delay: 6.1s; animation-duration: 8.5s; }
+  .hw-embers i:nth-child(9) { left: 78%; animation-delay: 2.8s; }
+  .hw-embers i:nth-child(10) { left: 86%; animation-delay: 4.9s; animation-duration: 9.5s; }
+  .hw-embers i:nth-child(11) { left: 93%; animation-delay: 1.7s; width: 3px; height: 3px; }
+  .hw-embers i:nth-child(12) { left: 38%; animation-delay: 7.2s; animation-duration: 11s; }
+  @keyframes hw-ember { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 12% { opacity: 0.9; } 100% { transform: translate(26px, -52vh) scale(0.3); opacity: 0; } }
+  .hw-moon { position: absolute; left: 0; right: 0; top: 0; height: 460px; z-index: 0; pointer-events: none; opacity: 0.62;
+             background: url({{ 'halloween-fx-moon.jpg' | asset_img_url: '1920x' }}) 72% top / cover no-repeat;
+             -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 100%); mask-image: linear-gradient(180deg, #000 30%, transparent 100%); }
+  .hw-web { position: absolute; z-index: 1; width: 150px; height: 150px; color: rgba(255,244,224,0.2); pointer-events: none; }
+  .hw-web-tl { top: 0; left: 0; }
+  .hw-web-tr { top: 0; right: 0; transform: scaleX(-1); }
+  .hw-shrooms { display: block; width: min(420px, 92%); height: auto; margin: -10px auto -40px; mix-blend-mode: screen; pointer-events: none;
+               -webkit-mask-image: radial-gradient(closest-side, #000 50%, transparent 100%); mask-image: radial-gradient(closest-side, #000 50%, transparent 100%); }
+  .hw-pumpkins { position: absolute; left: 0; right: 0; bottom: 0; height: clamp(130px, 30vw, 300px); z-index: 0; pointer-events: none; mix-blend-mode: screen;
+                 background: url({{ 'halloween-fx-pumpkins.jpg' | asset_img_url: '1920x' }}) center bottom / cover no-repeat;
+                 -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 34%); mask-image: linear-gradient(180deg, transparent 0%, #000 34%); }
+  .hw-orderby { padding-bottom: clamp(150px, 31vw, 320px) !important; }
+  .hw-pack.is-active { box-shadow: 0 0 0 1px rgba(249,176,64,0.35), 0 14px 44px rgba(242,107,29,0.22); }
+  .hw-atc { animation: hw-glow 3.2s ease-in-out infinite; }
+  @keyframes hw-glow { 0%, 100% { box-shadow: 0 10px 28px rgba(249,176,64,0.28); } 50% { box-shadow: 0 10px 40px rgba(242,107,29,0.55); } }
+
   /* Sticky bar */
   .hw-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; display: flex; align-items: center; justify-content: space-between; gap: 14px;
                padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(14,10,20,0.96); border-top: 1px solid rgba(249,176,64,0.4);
@@ -417,18 +485,23 @@
   @media (min-width: 750px) {
     .hw-section { padding: 80px 0; }
     .hw-hero img { aspect-ratio: 16 / 9; max-height: 82vh; }
-    .hw-hero-copy { top: calc(var(--nav-h, 78px) + 6vh); bottom: auto; padding: 0 6vw; max-width: 760px; display: block; }
+    .hw-h1 { font-size: clamp(40px, 4.8vw, 76px); }
+    .hw-hero-copy { top: calc(var(--nav-h, 78px) + 6vh); bottom: auto; padding: 0 0 0 6vw; max-width: 40vw; display: block; }
     .hw-hero-copy .hw-btn-hero, .hw-pos-bc .hw-hero-copy .hw-btn-hero { margin-top: 22px; }
     .hw-hero[data-ad="boo"] .hw-sub { max-width: none; }
-    .hw-pos-tc .hw-hero-copy { left: 50%; right: auto; transform: translateX(-50%); width: 100%; }
-    .hw-pos-bc .hw-hero-copy { left: 50%; right: auto; top: auto; bottom: 7vh; transform: translateX(-50%); width: 100%; }
+    .hw-pos-tc .hw-hero-copy { left: 50%; right: auto; transform: translateX(-50%); width: 100%; max-width: 760px; padding: 0 24px; }
+    .hw-pos-bc .hw-hero-copy { left: 50%; right: auto; top: auto; bottom: 7vh; transform: translateX(-50%); width: 100%; max-width: 900px; padding: 0 24px; }
+    /* cauldron on desktop: copy sits in the open sky on the right, clear of the cans */
+    .hw-hero.hw-dpos-tr .hw-hero-copy { left: auto; right: 4vw; transform: none; width: auto; max-width: 24vw; padding: 0; text-align: left; }
+    .hw-hero.hw-dpos-tr .hw-rule { margin-left: 0; margin-right: 0; }
     .hw-sub { font-size: 13px; }
     .hw-picker-wrap { padding-top: 64px; }
     .hw-cards, .hw-reviews { grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .hw-sticky { display: none !important; }
     .hw-smallprint { padding-bottom: 32px; }
   }
-  @media (prefers-reduced-motion: reduce) { .hw-btn, .hw-pack { transition: none; } html { scroll-behavior: auto; } }
+  @media (prefers-reduced-motion: reduce) { .hw-btn, .hw-pack { transition: none; } html { scroll-behavior: auto; }
+    .hw-bats, .hw-embers { display: none; } .hw-fog, .hw-atc { animation: none; } }
 </style>
 
 <script>
