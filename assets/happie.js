@@ -200,7 +200,12 @@
     });
     var banner = '';
     if (cart.total_discount > 0) {
-      banner = '<div class="cart-savings-banner">🎉 You saved ' + formatMoney(cart.total_discount) + ' — your 3rd is 50% off!</div>';
+      /* A discount code (e.g. SPOOKY15 from the Halloween page) gets its own wording;
+         otherwise the saving comes from the automatic Buy 2 Get 1 offer. */
+      var appliedCode = (cart.discount_codes || []).filter(function(d) { return d && d.applicable; })[0];
+      banner = appliedCode
+        ? '<div class="cart-savings-banner">🎉 You saved ' + formatMoney(cart.total_discount) + ' with ' + appliedCode.code + '</div>'
+        : '<div class="cart-savings-banner">🎉 You saved ' + formatMoney(cart.total_discount) + ' — your 3rd is 50% off!</div>';
     }
     cartBody.innerHTML = banner + html;
     if (cartSubtotal) cartSubtotal.textContent = formatMoney(cart.total_price);
