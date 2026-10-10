@@ -428,7 +428,8 @@
   .hw-rel, .hw-picker-wrap, .hw-orderby { position: relative; overflow: hidden; }
   .hw-rel > .hw-inner, .hw-picker-wrap > .hw-inner, .hw-orderby > .hw-inner { position: relative; z-index: 2; }
   .hw-fog { position: absolute; left: 0; right: 0; bottom: 0; height: 34%; z-index: 1; pointer-events: none; opacity: 0.5; mix-blend-mode: screen;
-            background: url({{ 'halloween-fx-fog.jpg' | asset_url }}) repeat-x 0 100% / 1600px 100%; animation: hw-fog 70s linear infinite; }
+            background: url({{ 'halloween-fx-fog.jpg' | asset_url }}) repeat-x 0 100% / 1600px 100%; animation: hw-fog 70s linear infinite;
+            -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 70%); mask-image: linear-gradient(180deg, transparent 0%, #000 70%); }
   .hw-fog-low { height: 150px; opacity: 0.4; }
   @keyframes hw-fog { to { background-position-x: -1600px; } }
   .hw-bats { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
@@ -484,7 +485,7 @@
     .hw-section { padding: 80px 0; }
     .hw-hero img { aspect-ratio: 16 / 9; max-height: 82vh; }
     .hw-h1 { font-size: clamp(40px, 4.8vw, 76px); }
-    .hw-hero-copy { top: calc(var(--nav-h, 78px) + 6vh); bottom: auto; padding: 0 0 0 6vw; max-width: 44vw; display: block; }
+    .hw-hero-copy { top: calc(var(--nav-h, 78px) + 6vh); bottom: auto; padding: 0 0 0 6vw; max-width: 40vw; display: block; }
     .hw-hero-copy .hw-btn-hero, .hw-pos-bc .hw-hero-copy .hw-btn-hero { margin-top: 22px; }
     .hw-hero[data-ad="boo"] .hw-sub { max-width: none; }
     .hw-pos-tc .hw-hero-copy { left: 50%; right: auto; transform: translateX(-50%); width: 100%; max-width: 760px; padding: 0 24px; }
