@@ -8,6 +8,9 @@
   Prices are read from the product objects, never hard-coded.
 {%- endcomment -%}
 
+{%- comment -%} Order-by date for Halloween delivery, e.g. 'October 24'. Leave blank to hide the order-by lines. {%- endcomment -%}
+{%- assign hw_order_by = '' -%}
+
 {%- assign variety = all_products['happie-fungi-fusion-mushroom-drink-variety-pack'] -%}
 {%- assign byo = all_products['build-your-own-fungi-fusion-18-pack'] -%}
 {%- assign v12 = variety.variants.first -%}
@@ -249,7 +252,11 @@
   {%- comment -%} 6. ORDER-BY LINE + 7. REPEAT BUTTON {%- endcomment -%}
   <section class="hw-section hw-orderby">
     <div class="hw-inner hw-inner-narrow">
-      <p class="hw-orderby-line">Order by <strong>[DATE]</strong> for delivery before Halloween.</p>
+      {%- if hw_order_by != blank -%}
+      <p class="hw-orderby-line">Order by <strong>{{ hw_order_by }}</strong> for delivery before Halloween.</p>
+      {%- else -%}
+      <p class="hw-orderby-line">Halloween is <strong>October 31.</strong></p>
+      {%- endif -%}
       <a href="#hw-picker" class="hw-btn">Pick your pack</a>
     </div>
   </section>
@@ -261,7 +268,7 @@
       <details class="hw-faq"><summary>Does it contain alcohol?</summary><p>No. Happie Fungi Fusion is alcohol-free.</p></details>
       <details class="hw-faq"><summary>Does it have caffeine?</summary><p>No. It is caffeine-free.</p></details>
       <details class="hw-faq"><summary>What does it taste like?</summary><p>Like a lightly sparkling fruit drink, not a supplement. Watermelon is clean and juicy, Mango Mimosa is tropical and lightly sweet, and Blue Raspberry is tart and bright. Each can has 9g of sugar and 35 calories.</p></details>
-      <details class="hw-faq"><summary>When will it arrive?</summary><p>Order by [DATE] for delivery before Halloween. Delivery options are shown at checkout.</p></details>
+      <details class="hw-faq"><summary>When will it arrive?</summary><p>{% if hw_order_by != blank %}Order by {{ hw_order_by }} for delivery before Halloween. {% endif %}Delivery options are shown at checkout.</p></details>
     </div>
   </section>
 
