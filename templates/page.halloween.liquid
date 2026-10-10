@@ -216,7 +216,7 @@
     <div class="hw-inner">
       <p class="hw-eyebrow">What's inside</p>
       <h2 class="hw-h2">Three mushrooms in every can</h2>
-      <img class="hw-shrooms" src="{{ 'halloween-fx-mushrooms.jpg' | asset_img_url: '640x' }}" alt="" width="640" height="803" loading="lazy" decoding="async">
+      <img class="hw-shrooms" src="{{ 'halloween-fx-mushrooms.jpg' | asset_img_url: '900x' }}" alt="" width="900" height="662" loading="lazy" decoding="async">
       <div class="hw-cards">
         <div class="hw-card">
           <span class="hw-card-mg">900mg</span>
@@ -462,7 +462,7 @@
   .hw-web { position: absolute; z-index: 1; width: 150px; height: 150px; color: rgba(255,244,224,0.2); pointer-events: none; }
   .hw-web-tl { top: 0; left: 0; }
   .hw-web-tr { top: 0; right: 0; transform: scaleX(-1); }
-  .hw-shrooms { display: block; width: 230px; height: auto; margin: -6px auto -34px; mix-blend-mode: screen; pointer-events: none;
+  .hw-shrooms { display: block; width: min(420px, 92%); height: auto; margin: -10px auto -40px; mix-blend-mode: screen; pointer-events: none;
                -webkit-mask-image: radial-gradient(closest-side, #000 50%, transparent 100%); mask-image: radial-gradient(closest-side, #000 50%, transparent 100%); }
   .hw-pumpkins { position: absolute; left: 0; right: 0; bottom: 0; height: clamp(130px, 30vw, 300px); z-index: 0; pointer-events: none; mix-blend-mode: screen;
                  background: url({{ 'halloween-fx-pumpkins.jpg' | asset_img_url: '1920x' }}) center bottom / cover no-repeat;
