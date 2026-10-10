@@ -13,7 +13,17 @@
 {%- endif -%}
 
 {% comment %} Single set of items, repeated via liquid to fill any screen width {% endcomment %}
+{% comment %} Halloween promo (SPOOKY15, Variety Pack + Build Your Own only). Hides itself after Oct 31, 2026. {% endcomment %}
+{%- assign ann_today = 'now' | date: '%Y%m%d' | plus: 0 -%}
 {% capture ann_items %}
+  {%- if ann_today <= 20261031 -%}
+  <a class="ann-item ann-item--halloween" href="/pages/halloween">
+    <span aria-hidden="true">🎃</span>
+    <strong>Halloween:</strong>&nbsp;15% Off Variety &amp; Build Your Own Packs with Code <strong>SPOOKY15</strong>
+    <span class="ann-cta">Shop now</span>
+  </a>
+  <span class="ann-divider">✦</span>
+  {%- endif -%}
   <span class="ann-item">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
