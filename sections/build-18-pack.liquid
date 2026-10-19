@@ -99,7 +99,7 @@
         <div class="byo-card-accent" aria-hidden="true"></div>
         <div class="byo-card-img">
           {%- if p_blue.featured_image -%}
-            <img src="{{ p_blue.featured_image | image_url: width: 400 }}" alt="Blue Razzberry 6-pack" width="200" height="200" loading="lazy" />
+            <img src="{{ p_blue.featured_image | image_url: width: 700 }}" alt="Blue Razzberry 6-pack" width="400" height="400" loading="lazy" />
           {%- endif -%}
         </div>
         <div class="byo-card-name">Blue Razzberry</div>
@@ -116,7 +116,7 @@
         <div class="byo-card-accent" aria-hidden="true"></div>
         <div class="byo-card-img">
           {%- if p_mango.featured_image -%}
-            <img src="{{ p_mango.featured_image | image_url: width: 400 }}" alt="Mango Mimosa 6-pack" width="200" height="200" loading="lazy" />
+            <img src="{{ p_mango.featured_image | image_url: width: 700 }}" alt="Mango Mimosa 6-pack" width="400" height="400" loading="lazy" />
           {%- endif -%}
         </div>
         <div class="byo-card-name">Mango Mimosa</div>
@@ -133,7 +133,7 @@
         <div class="byo-card-accent" aria-hidden="true"></div>
         <div class="byo-card-img">
           {%- if p_water.featured_image -%}
-            <img src="{{ p_water.featured_image | image_url: width: 400 }}" alt="Watermelon 6-pack" width="200" height="200" loading="lazy" />
+            <img src="{{ p_water.featured_image | image_url: width: 700 }}" alt="Watermelon 6-pack" width="400" height="400" loading="lazy" />
           {%- endif -%}
         </div>
         <div class="byo-card-name">Watermelon</div>
@@ -470,7 +470,7 @@
     transition: border-color .25s, box-shadow .25s, transform .25s;
   }
   .byo-card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(27,42,31,0.11); }
-  .byo-card-accent { height: 6px; margin: 0 -20px 20px; }
+  .byo-card-accent { height: 6px; margin: 0 -20px; }
   .byo-card-blue  .byo-card-accent { background: linear-gradient(90deg, #3B6FF0, #7EA0F7); }
   .byo-card-mango .byo-card-accent { background: linear-gradient(90deg, #F5A623, #FBCB77); }
   .byo-card-water .byo-card-accent { background: linear-gradient(90deg, #E84C6B, #F58CA1); }
@@ -479,16 +479,12 @@
   .byo-card-mango.has-cans { border-color: #F5A623; }
   .byo-card-water.has-cans { border-color: #E84C6B; }
 
+  /* Flavor image fills the card edge to edge (1:1 product shots, Oct 2026) */
   .byo-card-img {
-    width: 200px; height: 200px; margin: 4px auto 14px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
+    margin: 0 -20px 18px; aspect-ratio: 1 / 1; overflow: hidden;
   }
-  .byo-card-blue  .byo-card-img { background: radial-gradient(circle, rgba(59,111,240,0.12), transparent 72%); }
-  .byo-card-mango .byo-card-img { background: radial-gradient(circle, rgba(245,166,35,0.14), transparent 72%); }
-  .byo-card-water .byo-card-img { background: radial-gradient(circle, rgba(232,76,107,0.12), transparent 72%); }
-  .byo-card-img img { width: 186px; height: 186px; object-fit: contain; transition: transform .3s; }
-  .byo-card:hover .byo-card-img img { transform: scale(1.06) rotate(-1.5deg); }
+  .byo-card-img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+  .byo-card:hover .byo-card-img img { transform: scale(1.04); }
 
   .byo-card-name { font-weight: 900; font-size: 18.5px; letter-spacing: -0.01em; margin-bottom: 4px; }
   .byo-card-note { font-size: 13.5px; color: var(--gray, #5A6B5E); margin-bottom: 7px; }
@@ -635,8 +631,7 @@
       text-align: left; gap: 2px 14px; padding: 14px 14px 14px 10px;
     }
     .byo-card-accent { grid-column: 1 / -1; margin: -14px -14px 10px -10px; }
-    .byo-card-img { width: 96px; height: 96px; margin: 0; grid-row: span 4; }
-    .byo-card-img img { width: 88px; height: 88px; }
+    .byo-card-img { width: 96px; height: 96px; margin: 0; grid-row: span 4; border-radius: 14px; }
     .byo-card-note { margin-bottom: 2px; }
     .byo-card-unit { margin-bottom: 0; justify-self: start; }
     .byo-stepper { grid-column: 3; grid-row: 2 / span 3; flex-direction: column; gap: 7px; }
