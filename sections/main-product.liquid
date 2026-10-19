@@ -15,9 +15,9 @@
   {% endif %}
 {% endfor %}
 
-{%- comment -%} Variety Pack uses 1:1 box/lifestyle photography, so its gallery is square rather than the 4:5 used for the single cans. {%- endcomment -%}
+{%- comment -%} Square gallery whenever the lead image is square (the Oct-2026 1:1 product sets); 4:5 otherwise. {%- endcomment -%}
 {%- assign pdp_media_class = '' -%}
-{%- if product.handle contains 'variety' or product.title contains 'Variety Pack' -%}{%- assign pdp_media_class = ' pdp-square-media' -%}{%- endif -%}
+{%- if product.featured_media.aspect_ratio >= 0.95 or product.handle contains 'variety' -%}{%- assign pdp_media_class = ' pdp-square-media' -%}{%- endif -%}
 <div class="product-page{{ pdp_media_class }}" style="--pdp-accent: {{ product_accent }};">
 
   <div class="product-layout">
