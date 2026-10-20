@@ -1,0 +1,72 @@
+{%- comment -%}
+  Shared "about the drink" blocks for pack pages (Build Your Own, Variety Pack).
+  Usage: {% render 'ff-drink-sections', show_mushrooms: true, show_flavors: true, flavors_title: 'Three flavors in every box' %}
+  Copy stays inside the approved claims: mushroom amounts, fruiting body extracts,
+  alcohol-free, caffeine-free, taste notes. No effect/health claims, no calorie number.
+{%- endcomment -%}
+<div class="ffd">
+  {%- if show_mushrooms -%}
+  <div class="ffd-sec">
+    <p class="ffd-kicker">What's inside</p>
+    <h2>Three mushrooms in every can</h2>
+    <p class="ffd-lead">Each 12 fl oz can is brewed with fruiting body extracts of three functional mushrooms, then built as a drink first: fruit flavor, light bubbles, nothing to mix.</p>
+    <div class="ffd-grid">
+      <div class="ffd-shroom">
+        <img src="{{ 'halloween-shroom-lionsmane.jpg' | asset_img_url: '600x' }}" alt="Lion's Mane mushroom" width="600" height="448" loading="lazy">
+        <div><span class="ffd-mg">900mg</span><b>Lion's Mane</b><p>A shaggy white mushroom long used in cooking and tea.</p></div>
+      </div>
+      <div class="ffd-shroom">
+        <img src="{{ 'halloween-shroom-cordyceps.jpg' | asset_img_url: '600x' }}" alt="Cordyceps mushrooms" width="600" height="448" loading="lazy">
+        <div><span class="ffd-mg">700mg</span><b>Cordyceps</b><p>A slender orange mushroom with a long history of traditional use.</p></div>
+      </div>
+      <div class="ffd-shroom">
+        <img src="{{ 'halloween-shroom-reishi.jpg' | asset_img_url: '600x' }}" alt="Reishi mushroom" width="600" height="448" loading="lazy">
+        <div><span class="ffd-mg">400mg</span><b>Reishi</b><p>A glossy red-brown mushroom traditionally brewed as tea.</p></div>
+      </div>
+    </div>
+  </div>
+  {%- endif -%}
+
+  {%- if show_flavors -%}
+  <div class="ffd-sec">
+    <p class="ffd-kicker">The flavors</p>
+    <h2>{{ flavors_title | default: 'Three flavors to mix and match' }}</h2>
+    <div class="ffd-grid">
+      {%- assign fl_names = 'Blue Raspberry|Mango Mimosa|Watermelon' | split: '|' -%}
+      {%- assign fl_notes = 'Tart, candy-bright blue raspberry.|Ripe mango with a bright, brunch-style citrus edge.|Crisp, clean and juicy, like the first slice of summer.' | split: '|' -%}
+      {%- assign fl_prods = 'blue-razzberry-fungi-powered-seltzer|mango-mimosa-fungi-powered-seltzer|watermelon-fungi-powered-seltzer' | split: '|' -%}
+      {%- for h in fl_prods -%}
+        {%- assign fp = all_products[h] -%}
+        <a class="ffd-flavor" href="{{ fp.url }}">
+          {%- if fp.featured_image -%}<img src="{{ fp.featured_image | image_url: width: 600 }}" alt="Happie Fungi Fusion {{ fl_names[forloop.index0] }}" width="600" height="600" loading="lazy">{%- endif -%}
+          <b>{{ fl_names[forloop.index0] }}</b>
+          <p>{{ fl_notes[forloop.index0] }}</p>
+          <span>See the flavor &rarr;</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+</div>
+
+<style>
+.ffd{--ffd-green:#2D6A4F;--ffd-yellow:#FFCB05;}
+.ffd-sec{max-width:1080px;margin:64px auto 0;padding:0 22px;}
+.ffd-sec h2{text-align:center;font-size:clamp(24px,3vw,30px);font-weight:900;letter-spacing:-.01em;margin:0 0 12px;color:#16181B;}
+.ffd-kicker{text-align:center;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ffd-green);margin:0 0 8px;}
+.ffd-lead{text-align:center;max-width:640px;margin:0 auto 28px;color:#555;font-size:15px;line-height:1.6;}
+.ffd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+.ffd-shroom{background:#16120f;color:#fff;border-radius:20px;overflow:hidden;}
+.ffd-shroom img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;}
+.ffd-shroom div{padding:18px 20px 22px;}
+.ffd-mg{display:block;font-size:26px;font-weight:900;color:var(--ffd-yellow);line-height:1;}
+.ffd-shroom b{display:block;font-size:17px;margin:6px 0 4px;}
+.ffd-shroom p{font-size:14px;color:rgba(255,255,255,.75);line-height:1.5;margin:0;}
+.ffd-flavor{display:block;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;overflow:hidden;text-decoration:none;color:inherit;box-shadow:0 4px 18px rgba(0,0,0,.05);transition:transform .2s,box-shadow .2s;}
+.ffd-flavor:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.1);}
+.ffd-flavor img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;}
+.ffd-flavor b{display:block;font-size:18px;font-weight:900;margin:16px 20px 4px;}
+.ffd-flavor p{font-size:14px;color:#555;margin:0 20px 10px;line-height:1.5;}
+.ffd-flavor span{display:block;font-size:13.5px;font-weight:800;color:var(--ffd-green);margin:0 20px 20px;}
+@media(max-width:820px){.ffd-grid{grid-template-columns:1fr;}.ffd-sec{margin-top:48px;}}
+</style>

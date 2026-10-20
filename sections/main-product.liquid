@@ -458,6 +458,8 @@
   </div><!-- /product-layout -->
 
   <!-- ======= OCCASIONS, positioning for cold Meta traffic landing here ======= -->
+  {%- if product.handle contains 'variety' -%}{% render 'ff-drink-sections', show_flavors: true, flavors_title: 'Three flavors, four of each' %}{%- endif -%}
+
   <section class="pdp-occasions" aria-labelledby="pdp-occasions-title">
     {%- comment -%} Rolling water layers, tinted by the product's own accent {%- endcomment -%}
     <div class="wave-field" aria-hidden="true">

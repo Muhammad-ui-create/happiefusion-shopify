@@ -205,16 +205,16 @@
           <span class="byo-feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg>
           </span>
-          <strong>Dual-Extracted Trio</strong>
-          <p>Lion's Mane, Cordyceps &amp; Reishi in every can, fruiting body only, never mycelium on grain.</p>
+          <strong>Three Mushrooms, Every Can</strong>
+          <p>900mg Lion's Mane, 700mg Cordyceps &amp; 400mg Reishi, all fruiting body extracts, never mycelium on grain.</p>
         </div>
 
         <div class="byo-feature">
           <span class="byo-feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           </span>
-          <strong>2,000mg Per Can</strong>
-          <p>Real functional doses, zero caffeine, zero alcohol, 35 calories. No crash, no jitters.</p>
+          <strong>Caffeine-Free &amp; Alcohol-Free</strong>
+          <p>A light, sparkling fruit drink you can reach for any time of day.</p>
         </div>
 
         <div class="byo-feature">
@@ -229,12 +229,14 @@
           <span class="byo-feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 4H8L9 3z"/><path d="M8 7v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7"/><path d="M12 11v3M11 13h2"/></svg>
           </span>
-          <strong>Lab Tested, Every Batch</strong>
-          <p>Third-party verified for heavy metals, pesticides, and microbials. COA available for every batch.</p>
+          <strong>Tastes Like Fruit</strong>
+          <p>Blue Raspberry, Mango Mimosa and Watermelon. The fruit comes first, so most people don't taste anything earthy.</p>
         </div>
 
       </div>
     </div>
+
+    {% render 'ff-drink-sections', show_mushrooms: true %}
 
     <!-- ── FAQ, builder-specific questions ── -->
     <section class="pdp-faq byo-faq" aria-labelledby="byo-faq-title">
@@ -302,12 +304,34 @@
 
           <details class="pdp-faq-item">
             <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg></span>
+              <span>What does it taste like?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>Like a light, sparkling fruit soda.</strong> The fruit comes first and the mushroom extracts sit underneath, so most people don't taste anything earthy. Try one of each if you can't decide.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
+              <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/></svg></span>
+              <span>Does it have caffeine or alcohol?</span>
+              <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="pdp-faq-a">
+              <p><strong>No.</strong> Every can is caffeine-free and alcohol-free, with 900mg Lion's Mane, 700mg Cordyceps and 400mg Reishi from fruiting body extracts.</p>
+            </div>
+          </details>
+
+          <details class="pdp-faq-item">
+            <summary class="pdp-faq-q">
               <span class="pdp-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.2v-2a4 4 0 0 1 4-4h12.8"/><path d="M7 21.9l-4-4 4-4"/><path d="M21 11.8v2a4 4 0 0 1-4 4H4.2"/></svg></span>
               <span>Can I subscribe to a custom pack?</span>
               <span class="pdp-faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
             </summary>
             <div class="pdp-faq-a">
-              <p><strong>Not yet, the custom packs are one-time purchase for now.</strong> If you want recurring delivery with 15% off, each of our individual 6-packs offers Subscribe &amp; Save. Custom pack subscriptions are on our roadmap.</p>
+              <p><strong>Yes, with Auto-Refill.</strong> <a href="/products/fungi-fusion-auto-refill">Auto-Refill</a> delivers the same custom mix on your schedule for up to 25% less. Skip, pause or cancel anytime from your account.</p>
             </div>
           </details>
 
