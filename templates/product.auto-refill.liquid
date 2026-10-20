@@ -49,6 +49,8 @@
         <span class="arf-eyebrow">Auto-Refill Pack</span>
         <h1 class="arf-title">{{ product.title }}</h1>
         <p class="arf-sub">Your mix, delivered on repeat. Subscribe &amp; save, never run out.</p>
+        <p class="arf-about">Happie Fungi Fusion is a lightly sparkling fruit drink made with <strong>900mg Lion's Mane, 700mg Cordyceps and 400mg Reishi</strong> in every can, all from fruiting body extracts. Alcohol-free, caffeine-free, and it tastes like fruit, not mushrooms.</p>
+        <div class="arf-chips"><span>Alcohol-free</span><span>Caffeine-free</span><span>3 functional mushrooms</span><span>12 fl oz cans</span></div>
         <div class="arf-rating"><span class="arf-stars">★★★★★</span><span class="arf-rev">4.9 · Amazon-verified reviews</span></div>
 
         <div class="arf-price" id="arf-price"></div>
@@ -103,6 +105,56 @@
         <div class="arf-step"><b>3 · You stay in control</b><p>Skip, pause, or cancel anytime from your account. No lock-in.</p></div>
       </div>
       <p class="arf-note">Auto-Refill adds no extra discount, this pack is already at our lowest per-can price. It's convenience, not a coupon.</p>
+    </div>
+
+    <!-- What's in every can -->
+    <div class="arf-sec">
+      <p class="arf-kicker">What's inside</p>
+      <h2>Three mushrooms in every can</h2>
+      <p class="arf-lead">Each 12 fl oz can is brewed with fruiting body extracts of three functional mushrooms, then built as a drink first: fruit flavor, light bubbles, nothing to mix.</p>
+      <div class="arf-shrooms">
+        <div class="arf-shroom">
+          <img src="{{ 'halloween-shroom-lionsmane.jpg' | asset_img_url: '600x' }}" alt="Lion's Mane mushroom" width="600" height="448" loading="lazy">
+          <div><span class="arf-mg">900mg</span><b>Lion's Mane</b><p>A shaggy white mushroom long used in cooking and tea.</p></div>
+        </div>
+        <div class="arf-shroom">
+          <img src="{{ 'halloween-shroom-cordyceps.jpg' | asset_img_url: '600x' }}" alt="Cordyceps mushrooms" width="600" height="448" loading="lazy">
+          <div><span class="arf-mg">700mg</span><b>Cordyceps</b><p>A slender orange mushroom with a long history of traditional use.</p></div>
+        </div>
+        <div class="arf-shroom">
+          <img src="{{ 'halloween-shroom-reishi.jpg' | asset_img_url: '600x' }}" alt="Reishi mushroom" width="600" height="448" loading="lazy">
+          <div><span class="arf-mg">400mg</span><b>Reishi</b><p>A glossy red-brown mushroom traditionally brewed as tea.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flavors -->
+    <div class="arf-sec">
+      <p class="arf-kicker">The flavors</p>
+      <h2>Three flavors to mix and match</h2>
+      <div class="arf-flavors">
+        {%- assign fl_names = 'Blue Raspberry|Mango Mimosa|Watermelon' | split: '|' -%}
+        {%- assign fl_notes = 'Tart, candy-bright blue raspberry.|Ripe mango with a bright, brunch-style citrus edge.|Crisp, clean and juicy, like the first slice of summer.' | split: '|' -%}
+        {%- assign fl_prods = 'blue-razzberry-fungi-powered-seltzer|mango-mimosa-fungi-powered-seltzer|watermelon-fungi-powered-seltzer' | split: '|' -%}
+        {%- for h in fl_prods -%}
+          {%- assign fp = all_products[h] -%}
+          <a class="arf-flavor" href="{{ fp.url }}">
+            {%- if fp.featured_image -%}<img src="{{ fp.featured_image | image_url: width: 600 }}" alt="Happie Fungi Fusion {{ fl_names[forloop.index0] }}" width="600" height="600" loading="lazy">{%- endif -%}
+            <b>{{ fl_names[forloop.index0] }}</b>
+            <p>{{ fl_notes[forloop.index0] }}</p>
+            <span>See the flavor &rarr;</span>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Quick answers -->
+    <div class="arf-sec arf-faq">
+      <h2>Good to know</h2>
+      <details><summary>What does it taste like?</summary><p>Like a light, sparkling fruit soda. The fruit comes first and the mushroom extracts sit underneath, so most people don't taste anything earthy.</p></details>
+      <details><summary>Does it have caffeine or alcohol?</summary><p>No. Every can is caffeine-free and alcohol-free, so it works any time of day.</p></details>
+      <details><summary>How much mushroom is in each can?</summary><p>900mg Lion's Mane, 700mg Cordyceps and 400mg Reishi, all fruiting body extracts. The amounts are printed on every can.</p></details>
+      <details><summary>Can I change my mix later?</summary><p>Yes. You can skip, pause or cancel from your account anytime, and pick a new mix whenever you like.</p></details>
     </div>
   </div>
 </div>
@@ -160,7 +212,36 @@
 .arf-step b{display:block;font-size:16px;margin-bottom:6px;}
 .arf-step p{font-size:14px;color:#555;}
 .arf-note{text-align:center;font-size:12.5px;color:var(--gray);margin-top:22px;}
-@media(max-width:820px){.arf-grid{grid-template-columns:1fr;gap:26px;}.arf-stage{position:static;}.arf-steps{grid-template-columns:1fr;}.arf-opt.arf-mix{flex:1 1 100%;}}
+.arf-about{font-size:15px;line-height:1.6;color:#333;margin:4px 0 12px;}
+.arf-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px;}
+.arf-chips span{font-size:12px;font-weight:800;color:var(--green-dark);background:rgba(45,106,79,.08);border-radius:50px;padding:5px 11px;}
+.arf-sec{max-width:1080px;margin:64px auto 0;}
+.arf-sec h2{text-align:center;font-size:clamp(24px,3vw,30px);font-weight:900;letter-spacing:-.01em;margin-bottom:12px;}
+.arf-kicker{text-align:center;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:8px;}
+.arf-lead{text-align:center;max-width:640px;margin:0 auto 28px;color:#555;font-size:15px;line-height:1.6;}
+.arf-shrooms{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.arf-shroom{background:#16120f;color:#fff;border-radius:20px;overflow:hidden;}
+.arf-shroom img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;}
+.arf-shroom div{padding:18px 20px 22px;}
+.arf-mg{display:block;font-size:26px;font-weight:900;color:var(--yellow);line-height:1;}
+.arf-shroom b{display:block;font-size:17px;margin:6px 0 4px;}
+.arf-shroom p{font-size:14px;color:rgba(255,255,255,.75);line-height:1.5;}
+.arf-flavors{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+.arf-flavor{display:block;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;overflow:hidden;text-decoration:none;color:inherit;box-shadow:0 4px 18px rgba(0,0,0,.05);transition:transform .2s,box-shadow .2s;}
+.arf-flavor:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.1);}
+.arf-flavor img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;}
+.arf-flavor b{display:block;font-size:18px;font-weight:900;margin:16px 20px 4px;}
+.arf-flavor p{font-size:14px;color:#555;margin:0 20px 10px;line-height:1.5;}
+.arf-flavor span{display:block;font-size:13.5px;font-weight:800;color:var(--green);margin:0 20px 20px;}
+.arf-faq{max-width:760px;}
+.arf-faq details{border-bottom:1px solid rgba(0,0,0,.1);}
+.arf-faq details:first-of-type{border-top:1px solid rgba(0,0,0,.1);margin-top:18px;}
+.arf-faq summary{list-style:none;cursor:pointer;padding:18px 32px 18px 0;position:relative;font-weight:800;font-size:16px;}
+.arf-faq summary::-webkit-details-marker{display:none;}
+.arf-faq summary::after{content:'+';position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:24px;font-weight:400;color:var(--green);}
+.arf-faq details[open] summary::after{content:'\2212';}
+.arf-faq p{font-size:15px;color:#555;line-height:1.6;margin:0 0 18px;}
+@media(max-width:820px){.arf-grid{grid-template-columns:1fr;gap:26px;}.arf-stage{position:static;}.arf-steps{grid-template-columns:1fr;}.arf-opt.arf-mix{flex:1 1 100%;}.arf-shrooms,.arf-flavors{grid-template-columns:1fr;}.arf-sec{margin-top:48px;}}
 </style>
 
 <script>
