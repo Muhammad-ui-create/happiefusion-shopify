@@ -288,10 +288,15 @@
 .rc-read-link{display:block;font-weight:800;font-size:14px;color:var(--rc-green);padding:0 20px 20px;}
 @media (max-width:980px){.rc-grid{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:1024px){
-  .rc-hero{min-height:0;flex-direction:column;align-items:stretch;}
+  /* same look as desktop, turned vertical: copy on cream up top, the photo fills the rest and fades up behind the buttons */
+  .rc-hero{min-height:0;flex-direction:column;align-items:stretch;background:var(--rc-cream);}
   .rc-hero::before{display:none;}
-  .rc-hero-copy{order:1;max-width:none;margin:0;padding:calc(var(--nav-h,72px) + 22px) max(20px,5vw) 26px;background:var(--rc-cream);}
-  .rc-hero-img{order:2;position:relative;inset:auto;height:auto;aspect-ratio:16/9;}
+  .rc-hero-copy{order:1;max-width:620px;margin:0;padding:calc(var(--nav-h,72px) + 22px) max(20px,5vw) 0;}
+  .rc-hero-img{order:2;position:relative;z-index:0;inset:auto;height:auto;aspect-ratio:16/10;margin-top:-110px;object-position:70% 50%;
+    -webkit-mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.55) 22%,#000 42%);mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.55) 22%,#000 42%);}
+}
+@media (max-width:640px){
+  .rc-hero-img{aspect-ratio:1/1.12;margin-top:-64px;object-position:78% 60%;}
 }
 @media (max-width:640px){
   .rc-grid,.rc-base-grid,.rc-reads-grid{grid-template-columns:1fr;}
