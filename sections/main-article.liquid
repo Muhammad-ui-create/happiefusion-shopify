@@ -29,6 +29,8 @@
 {%- when 'why-mushroom-coffee-doesnt-dissolve' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li>{%- endcapture -%}
 {%- when 'mushroom-drink-vs-energy-drink' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>{%- endcapture -%}
 {%- when 'why-are-mushroom-drinks-so-expensive' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>{%- endcapture -%}
+{%- when 'mushroom-mocktail-recipes' -%}{%- capture kr -%}<li><a href="/pages/recipes">Every Fungi Fusion mocktail recipe in one place</a></li><li><a href="/blogs/news/mushroom-mocktails">Mushroom mocktails: 5 more alcohol-free holiday recipes</a></li><li><a href="/blogs/news/what-do-mushroom-drinks-taste-like">What do mushroom drinks taste like?</a></li>{%- endcapture -%}
+{%- when 'mushroom-mocktails' -%}{%- capture kr -%}<li><a href="/pages/recipes">Every Fungi Fusion mocktail recipe in one place</a></li><li><a href="/blogs/news/mushroom-mocktail-recipes">Mushroom mocktail recipes for the holiday table</a></li><li><a href="/blogs/news/what-do-mushroom-drinks-taste-like">What do mushroom drinks taste like?</a></li>{%- endcapture -%}
 {%- endcase -%}
 {%- if kr != blank -%}
   <aside class="art-related">
@@ -36,6 +38,22 @@
     <ul class="art-related-list">{{ kr }}</ul>
   </aside>
 {%- endif -%}
+
+  {%- comment -%} Give every body heading an id (e.g. "3. Blue Raspberry Punch (serves 8)" -> blue-raspberry-punch) so the
+      recipes page and other links can deep-link into a post. Ids already written into the post are kept. {%- endcomment -%}
+  <script>
+  (function(){
+    var hs=document.querySelectorAll('.art-body h2, .art-body h3'),used={};
+    hs.forEach(function(h){
+      if(h.id){used[h.id]=1;return;}
+      var t=h.textContent.toLowerCase().replace(/\([^)]*\)/g,'').replace(/^\s*\d+[.)]\s*/,'').replace(/^the\s+/,'')
+        .replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+      if(!t||used[t])return; used[t]=1; h.id=t;
+    });
+    var id=location.hash&&decodeURIComponent(location.hash.slice(1)),el=id&&document.getElementById(id);
+    if(el)requestAnimationFrame(function(){el.scrollIntoView();});
+  })();
+  </script>
 
   <div class="art-footer">
     <a href="{{ blog.url }}" class="btn-ghost">← Back to all posts</a>
@@ -333,6 +351,7 @@
 .art-body img { max-width: 100%; height: auto; border-radius: 16px; margin: 12px 0; }
 .art-body blockquote { border-left: 4px solid var(--green, #2D6A4F); background: #F6F8F7; margin: 26px 0; padding: 18px 24px; border-radius: 0 12px 12px 0; font-style: italic; color: #333; }
 .art-body strong { color: #16181B; }
+.art-body h2, .art-body h3 { scroll-margin-top: calc(var(--nav-h, 96px) + 16px); }
 .art-body table { width: 100%; border-collapse: collapse; font-size: 15px; display: block; overflow-x: auto; }
 .art-body th, .art-body td { border: 1px solid rgba(0,0,0,0.1); padding: 10px 14px; text-align: left; }
 

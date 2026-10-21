@@ -1,0 +1,317 @@
+{%- comment -%}
+  Recipes page (/pages/recipes), linked from the header nav.
+  Generated from one recipe list (scratchpad build_recipes_page.py). Every card links to its full write-up
+  in the blog post via the anchor id on that post's heading. Copy stays within the FF claims rules:
+  taste and occasion only, no effect claims, no calorie numbers.
+{%- endcomment -%}
+{%- assign rc_flavors = 'watermelon-fungi-powered-seltzer|mango-mimosa-fungi-powered-seltzer|blue-razzberry-fungi-powered-seltzer' | split: '|' -%}
+{%- assign rc_names = 'Watermelon|Mango Mimosa|Blue Raspberry' | split: '|' -%}
+{%- assign rc_keys = 'watermelon|mango|blue' | split: '|' -%}
+{%- assign post_new = articles['news/mushroom-mocktail-recipes'] -%}
+{%- assign post_old = articles['news/mushroom-mocktails'] -%}
+
+<div class="rc">
+  <section class="rc-hero">
+    <img class="rc-hero-img" src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/fungi-fusion-recipes-banner.png?width=2000" srcset="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/fungi-fusion-recipes-banner.png?width=900 900w, https://cdn.shopify.com/s/files/1/0725/4946/6177/files/fungi-fusion-recipes-banner.png?width=1400 1400w, https://cdn.shopify.com/s/files/1/0725/4946/6177/files/fungi-fusion-recipes-banner.png?width=2000 2000w" sizes="100vw" alt="Mocktails and fresh garnishes on a kitchen counter with Happie Fungi Fusion Blue Raspberry, Mango Mimosa and Watermelon cans" width="2000" height="1116" fetchpriority="high">
+    <div class="rc-hero-copy">
+      <p class="rc-eyebrow">Fungi Fusion Recipes</p>
+      <h1>Mocktails that start with a cold can.</h1>
+      <p class="rc-sub">Easy alcohol-free drinks built on Happie Fungi Fusion. Fresh citrus, a garnish, plenty of ice, and you're done in about two minutes.</p>
+      <div class="rc-hero-ctas">
+        <a class="rc-btn rc-btn--solid" href="#rc-grid">Browse recipes</a>
+        <a class="rc-btn rc-btn--ghost" href="/products/happie-fungi-fusion-mushroom-drink-variety-pack">Shop the Variety Pack</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="rc-wrap" id="rc-grid">
+    <div class="rc-head">
+      <h2>All recipes</h2>
+      <div class="rc-filters" role="group" aria-label="Filter recipes">
+        <button type="button" class="rc-chip is-on" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="rc-chip" data-filter="watermelon" aria-pressed="false">Watermelon</button>
+        <button type="button" class="rc-chip" data-filter="mango" aria-pressed="false">Mango Mimosa</button>
+        <button type="button" class="rc-chip" data-filter="blue" aria-pressed="false">Blue Raspberry</button>
+        <button type="button" class="rc-chip" data-filter="batch" aria-pressed="false">Big batch</button>
+      </div>
+    </div>
+    <div class="rc-grid">
+      <article class="rc-card" id="watermelon-rosemary-spritz" data-flavor="watermelon">
+        <div class="rc-img"><img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/watermelon-rosemary-spritz-mocktail.png?width=700" alt="Watermelon Rosemary Spritz mocktail made with Happie Fungi Fusion Watermelon" width="700" height="869" loading="lazy"></div>
+        <div class="rc-body">
+          <span class="rc-flavor rc-flavor--watermelon">Watermelon</span>
+          <h3>Watermelon Rosemary Spritz</h3>
+          <p class="rc-meta"><span>Serves 1 drink</span><span>2 min</span></p>
+          <p class="rc-blurb">Pink, herbal and pretty enough to set at every place on the Thanksgiving table.</p>
+          <details class="rc-more">
+            <summary>See the recipe</summary>
+            <h4>You'll need</h4><ul><li>Ice</li><li>1/2 oz fresh lime juice</li><li>1 can Watermelon Fungi Fusion, chilled</li><li>1 sprig fresh rosemary</li></ul>
+            <h4>How to make it</h4><ol><li>Fill a wine glass with ice and add the lime juice.</li><li>Pour in the Watermelon Fungi Fusion and stir once.</li><li>Slap the rosemary sprig between your palms to wake up the oils, then tuck it into the glass.</li></ol>
+            <a class="rc-post" href="/blogs/news/mushroom-mocktail-recipes#watermelon-rosemary-spritz">Read the full post &rarr;</a>
+          </details>
+        </div>
+      </article>
+      <article class="rc-card" id="mango-mimosa-brunch-fizz" data-flavor="mango">
+        <div class="rc-img"><img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/mango-mimosa-brunch-fizz-mocktail.png?width=700" alt="Mango Mimosa Brunch Fizz mocktail made with Happie Fungi Fusion Mango Mimosa" width="700" height="869" loading="lazy"></div>
+        <div class="rc-body">
+          <span class="rc-flavor rc-flavor--mango">Mango Mimosa</span>
+          <h3>Mango Mimosa Brunch Fizz</h3>
+          <p class="rc-meta"><span>Serves 1 drink</span><span>2 min</span></p>
+          <p class="rc-blurb">The flute-in-hand brunch moment, without the sparkling wine.</p>
+          <details class="rc-more">
+            <summary>See the recipe</summary>
+            <h4>You'll need</h4><ul><li>2 oz fresh orange juice</li><li>Mango Mimosa Fungi Fusion, chilled, to top</li><li>Thin orange wheel</li></ul>
+            <h4>How to make it</h4><ol><li>Pour the orange juice into a champagne flute.</li><li>Top with chilled Mango Mimosa Fungi Fusion.</li><li>Garnish with a thin orange wheel.</li></ol>
+            <a class="rc-post" href="/blogs/news/mushroom-mocktail-recipes#mango-mimosa-brunch-fizz">Read the full post &rarr;</a>
+          </details>
+        </div>
+      </article>
+      <article class="rc-card" id="blue-raspberry-cranberry-smash" data-flavor="blue">
+        <div class="rc-img"><img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/blue-raspberry-cranberry-smash-mocktail.png?width=700" alt="Blue Raspberry Cranberry Smash mocktail made with Happie Fungi Fusion Blue Raspberry" width="700" height="869" loading="lazy"></div>
+        <div class="rc-body">
+          <span class="rc-flavor rc-flavor--blue">Blue Raspberry</span>
+          <h3>Blue Raspberry Cranberry Smash</h3>
+          <p class="rc-meta"><span>Serves 1 drink</span><span>3 min</span></p>
+          <p class="rc-blurb">Tart cranberry against Blue Raspberry. Deep ruby red and made for December parties.</p>
+          <details class="rc-more">
+            <summary>See the recipe</summary>
+            <h4>You'll need</h4><ul><li>Small handful fresh raspberries</li><li>1/2 oz fresh lemon juice</li><li>1 oz unsweetened cranberry juice</li><li>Ice</li><li>Blue Raspberry Fungi Fusion, chilled, to top</li><li>Whole raspberries and a lemon twist</li></ul>
+            <h4>How to make it</h4><ol><li>Muddle the raspberries with the lemon juice in a rocks glass.</li><li>Add the cranberry juice and fill with ice.</li><li>Top with Blue Raspberry Fungi Fusion.</li><li>Garnish with whole raspberries and a lemon twist.</li></ol>
+            <a class="rc-post" href="/blogs/news/mushroom-mocktail-recipes#blue-raspberry-cranberry-smash">Read the full post &rarr;</a>
+          </details>
+        </div>
+      </article>
+      <article class="rc-card" id="watermelon-pomegranate-punch" data-flavor="watermelon" data-batch="1">
+        <div class="rc-img"><img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/watermelon-pomegranate-punch-mocktail.png?width=700" alt="Watermelon Pomegranate Punch mocktail made with Happie Fungi Fusion Watermelon" width="700" height="869" loading="lazy"><span class="rc-tag rc-tag--batch">Big batch</span></div>
+        <div class="rc-body">
+          <span class="rc-flavor rc-flavor--watermelon">Watermelon</span>
+          <h3>Watermelon Pomegranate Punch</h3>
+          <p class="rc-meta"><span>Serves 8 to 10</span><span>5 min</span></p>
+          <p class="rc-blurb">One bowl, everyone serves themselves, and the whole thing is alcohol-free.</p>
+          <details class="rc-more">
+            <summary>See the recipe</summary>
+            <h4>You'll need</h4><ul><li>1 cup pomegranate juice</li><li>Juice of 2 limes</li><li>Handful of fresh pomegranate arils</li><li>4 cans Watermelon Fungi Fusion, chilled</li><li>A tray of ice</li><li>Thin lime and orange wheels</li></ul>
+            <h4>How to make it</h4><ol><li>Combine the pomegranate juice, lime juice and pomegranate arils in a large pitcher or punch bowl.</li><li>Just before guests arrive, add the Watermelon Fungi Fusion and the ice.</li><li>Float the lime and orange wheels on top.</li></ol>
+            <a class="rc-post" href="/blogs/news/mushroom-mocktail-recipes#watermelon-pomegranate-punch">Read the full post &rarr;</a>
+          </details>
+        </div>
+      </article>
+      <article class="rc-card" id="fresh-ginger-mango-mule" data-flavor="mango">
+        <div class="rc-img"><img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/fresh-ginger-mango-mule-mocktail.png?width=700" alt="Fresh Ginger Mango Mule mocktail made with Happie Fungi Fusion Mango Mimosa" width="700" height="869" loading="lazy"></div>
+        <div class="rc-body">
+          <span class="rc-flavor rc-flavor--mango">Mango Mimosa</span>
+          <h3>Fresh Ginger Mango Mule</h3>
+          <p class="rc-meta"><span>Serves 1 drink</span><span>3 min</span></p>
+          <p class="rc-blurb">For the guest who would have ordered a Moscow Mule. Fresh ginger brings the kick.</p>
+          <details class="rc-more">
+            <summary>See the recipe</summary>
+            <h4>You'll need</h4><ul><li>3 thin coins fresh ginger</li><li>1/2 oz fresh lime juice</li><li>Crushed ice</li><li>Mango Mimosa Fungi Fusion, chilled, to top</li><li>Lime wedge and a mint sprig</li></ul>
+            <h4>How to make it</h4><ol><li>Muddle the ginger with the lime juice in a copper mug or highball glass.</li><li>Fill with crushed ice.</li><li>Top with Mango Mimosa Fungi Fusion.</li><li>Garnish with a lime wedge and a sprig of mint.</li></ol>
+            <a class="rc-post" href="/blogs/news/mushroom-mocktail-recipes#fresh-ginger-mango-mule">Read the full post &rarr;</a>
+          </details>
+        </div>
+      </article>
+      <article class="rc-card" id="watermelon-mint-spritz" data-flavor="watermelon">
+        <div class="rc-img"><img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/watermelon-mint-spritz-mocktail.png?width=700" alt="Watermelon Mint Spritz mocktail made with Happie Fungi Fusion Watermelon" width="700" height="869" loading="lazy"></div>
+        <div class="rc-body">
+          <span class="rc-flavor rc-flavor--watermelon">Watermelon</span>
+          <h3>Watermelon Mint Spritz</h3>
+          <p class="rc-meta"><span>Serves 1 drink</span><span>2 min</span></p>
+          <p class="rc-blurb">Bright, cool and very pink. Light enough to sip between bites.</p>
+          <details class="rc-more">
+            <summary>See the recipe</summary>
+            <h4>You'll need</h4><ul><li>6 fresh mint leaves</li><li>1/2 oz fresh lime juice</li><li>Ice</li><li>1 can Watermelon Fungi Fusion, chilled</li><li>Lime wheel and a mint sprig</li></ul>
+            <h4>How to make it</h4><ol><li>Gently press the mint leaves with the lime juice in the bottom of a tall glass.</li><li>Fill with ice, top with Watermelon and stir once.</li><li>Garnish with the lime wheel and mint sprig.</li></ol>
+            <a class="rc-post" href="/blogs/news/mushroom-mocktails#watermelon-mint-spritz">Read the full post &rarr;</a>
+          </details>
+        </div>
+      </article>
+      <article class="rc-card" id="zero-proof-mango-mimosa" data-flavor="mango">
+        <div class="rc-img"><img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/zero-proof-mango-mimosa-mocktail.png?width=700" alt="The Zero-Proof Mango Mimosa mocktail made with Happie Fungi Fusion Mango Mimosa" width="700" height="869" loading="lazy"></div>
+        <div class="rc-body">
+          <span class="rc-flavor rc-flavor--mango">Mango Mimosa</span>
+          <h3>The Zero-Proof Mango Mimosa</h3>
+          <p class="rc-meta"><span>Serves 1 drink</span><span>1 min</span></p>
+          <p class="rc-blurb">The easiest drink on the list. Fungi Fusion Mango Mimosa was made for this.</p>
+          <details class="rc-more">
+            <summary>See the recipe</summary>
+            <h4>You'll need</h4><ul><li>2 oz chilled orange juice</li><li>About half a can Mango Mimosa Fungi Fusion, well chilled</li><li>Orange twist</li></ul>
+            <h4>How to make it</h4><ol><li>Pour the orange juice into a champagne flute.</li><li>Tilt the glass and slowly top with Mango Mimosa.</li><li>Twist the orange peel over the glass and drop it in.</li></ol>
+            <a class="rc-post" href="/blogs/news/mushroom-mocktails#zero-proof-mango-mimosa">Read the full post &rarr;</a>
+          </details>
+        </div>
+      </article>
+      <article class="rc-card" id="blue-raspberry-blueberry-holiday-punch" data-flavor="blue" data-batch="1">
+        <div class="rc-img"><img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/blue-raspberry-holiday-punch.png?width=700" alt="Blue Raspberry Holiday Punch mocktail made with Happie Fungi Fusion Blue Raspberry" width="700" height="869" loading="lazy"><span class="rc-tag rc-tag--batch">Big batch</span></div>
+        <div class="rc-body">
+          <span class="rc-flavor rc-flavor--blue">Blue Raspberry</span>
+          <h3>Blue Raspberry Holiday Punch</h3>
+          <p class="rc-meta"><span>Serves 8</span><span>5 min</span></p>
+          <p class="rc-blurb">A big-batch punch so you&#x27;re not playing bartender all night.</p>
+          <details class="rc-more">
+            <summary>See the recipe</summary>
+            <h4>You'll need</h4><ul><li>4 cans Blue Raspberry Fungi Fusion, chilled</li><li>2 cups white cranberry juice, chilled</li><li>1/4 cup fresh lemon juice</li><li>1 cup frozen blueberries</li><li>3 or 4 rosemary sprigs</li><li>Lemon slices</li></ul>
+            <h4>How to make it</h4><ol><li>Stir the white cranberry juice and lemon juice together in a punch bowl or large pitcher.</li><li>Add the frozen blueberries, rosemary and lemon slices.</li><li>Right before guests arrive, slowly pour in the Blue Raspberry so it stays fizzy. Serve over ice.</li></ol>
+            <a class="rc-post" href="/blogs/news/mushroom-mocktails#blue-raspberry-blueberry-holiday-punch">Read the full post &rarr;</a>
+          </details>
+        </div>
+      </article>
+      <article class="rc-card" id="watermelon-cranberry-rosemary-sparkler" data-flavor="watermelon">
+        <div class="rc-img"><img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/watermelon-cranberry-rosemary-sparkler.png?width=700" alt="Watermelon Cranberry Rosemary Sparkler mocktail made with Happie Fungi Fusion Watermelon" width="700" height="869" loading="lazy"></div>
+        <div class="rc-body">
+          <span class="rc-flavor rc-flavor--watermelon">Watermelon</span>
+          <h3>Watermelon Cranberry Rosemary Sparkler</h3>
+          <p class="rc-meta"><span>Serves 1 drink</span><span>2 min</span></p>
+          <p class="rc-blurb">Red, green and very holiday. Looks fancy, takes two minutes.</p>
+          <details class="rc-more">
+            <summary>See the recipe</summary>
+            <h4>You'll need</h4><ul><li>2 oz unsweetened cranberry juice</li><li>1/4 oz honey or simple syrup (optional)</li><li>Ice</li><li>About half a can Watermelon Fungi Fusion, chilled</li><li>Rosemary sprig and a few fresh cranberries</li></ul>
+            <h4>How to make it</h4><ol><li>Stir the cranberry juice and honey together in a wine glass until the honey dissolves.</li><li>Add ice and top with Watermelon.</li><li>Garnish with the rosemary sprig and cranberries.</li></ol>
+            <a class="rc-post" href="/blogs/news/mushroom-mocktails#watermelon-cranberry-rosemary-sparkler">Read the full post &rarr;</a>
+          </details>
+        </div>
+      </article>
+      <article class="rc-card" id="mango-ginger-mule" data-flavor="mango">
+        <div class="rc-img"><img src="https://cdn.shopify.com/s/files/1/0725/4946/6177/files/mango-ginger-mule-mocktail.png?width=700" alt="Mango Ginger Mule mocktail made with Happie Fungi Fusion Mango Mimosa" width="700" height="869" loading="lazy"></div>
+        <div class="rc-body">
+          <span class="rc-flavor rc-flavor--mango">Mango Mimosa</span>
+          <h3>Mango Ginger Mule</h3>
+          <p class="rc-meta"><span>Serves 1 drink</span><span>2 min</span></p>
+          <p class="rc-blurb">A holiday take on the classic mule, with ginger beer and tropical mango.</p>
+          <details class="rc-more">
+            <summary>See the recipe</summary>
+            <h4>You'll need</h4><ul><li>Crushed ice</li><li>1/2 oz fresh lime juice</li><li>2 oz non-alcoholic ginger beer</li><li>About half a can Mango Mimosa Fungi Fusion, chilled</li><li>Lime wedge and a slice of candied ginger</li></ul>
+            <h4>How to make it</h4><ol><li>Fill a copper mug or rocks glass with crushed ice.</li><li>Add the lime juice and ginger beer, then top with Mango Mimosa.</li><li>Stir gently and garnish. (Check the ginger beer label: a few brands sell an alcoholic version.)</li></ol>
+            <a class="rc-post" href="/blogs/news/mushroom-mocktails#mango-ginger-mule">Read the full post &rarr;</a>
+          </details>
+        </div>
+      </article>
+    </div>
+    <p class="rc-tip"><strong>Host tip:</strong> chill the cans overnight, build every drink over plenty of ice, and pour the Fungi Fusion last so it keeps its fizz.</p>
+  </section>
+
+  <section class="rc-wrap rc-base">
+    <p class="rc-eyebrow">The base</p>
+    <h2>Pick your flavor</h2>
+    <div class="rc-base-grid">
+      {%- for h in rc_flavors -%}
+        {%- assign fp = all_products[h] -%}
+        {%- if fp != blank -%}
+        <a class="rc-base-card rc-base-card--{{ rc_keys[forloop.index0] }}" href="{{ fp.url }}">
+          {%- if fp.featured_image -%}<img src="{{ fp.featured_image | image_url: width: 500 }}" alt="Happie Fungi Fusion {{ rc_names[forloop.index0] }}" width="500" height="500" loading="lazy">{%- endif -%}
+          <span class="rc-base-name">{{ rc_names[forloop.index0] }}</span>
+          <span class="rc-base-price">From {{ fp.price_min | money }}</span>
+        </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+  <section class="rc-wrap rc-reads">
+    <p class="rc-eyebrow">From the blog</p>
+    <h2>The full write-ups</h2>
+    <div class="rc-reads-grid">
+      {%- for a in (1..2) -%}
+        {%- if forloop.first -%}{%- assign p = post_new -%}{%- else -%}{%- assign p = post_old -%}{%- endif -%}
+        {%- if p != blank -%}
+        <a class="rc-read" href="{{ p.url }}">
+          {%- if p.image -%}<img src="{{ p.image | image_url: width: 900 }}" alt="{{ p.image.alt | default: p.title | escape }}" width="900" height="600" loading="lazy">{%- endif -%}
+          <span class="rc-read-title">{{ p.title }}</span>
+          <span class="rc-read-link">Read the post &rarr;</span>
+        </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Fungi Fusion mocktail recipes", "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@type": "Recipe", "name": "Watermelon Rosemary Spritz", "url": "https://happiefusion.com/pages/recipes#watermelon-rosemary-spritz", "image": "https://cdn.shopify.com/s/files/1/0725/4946/6177/files/watermelon-rosemary-spritz-mocktail.png", "description": "Pink, herbal and pretty enough to set at every place on the Thanksgiving table.", "recipeCategory": "Mocktail", "recipeCuisine": "American", "keywords": "mushroom mocktail, alcohol-free, Watermelon", "recipeYield": "1 drink", "totalTime": "PT2M", "author": {"@type": "Organization", "name": "Happie Fungi Fusion"}, "recipeIngredient": ["Ice", "1/2 oz fresh lime juice", "1 can Watermelon Fungi Fusion, chilled", "1 sprig fresh rosemary"], "recipeInstructions": [{"@type": "HowToStep", "text": "Fill a wine glass with ice and add the lime juice."}, {"@type": "HowToStep", "text": "Pour in the Watermelon Fungi Fusion and stir once."}, {"@type": "HowToStep", "text": "Slap the rosemary sprig between your palms to wake up the oils, then tuck it into the glass."}]}}, {"@type": "ListItem", "position": 2, "item": {"@type": "Recipe", "name": "Mango Mimosa Brunch Fizz", "url": "https://happiefusion.com/pages/recipes#mango-mimosa-brunch-fizz", "image": "https://cdn.shopify.com/s/files/1/0725/4946/6177/files/mango-mimosa-brunch-fizz-mocktail.png", "description": "The flute-in-hand brunch moment, without the sparkling wine.", "recipeCategory": "Mocktail", "recipeCuisine": "American", "keywords": "mushroom mocktail, alcohol-free, Mango Mimosa", "recipeYield": "1 drink", "totalTime": "PT2M", "author": {"@type": "Organization", "name": "Happie Fungi Fusion"}, "recipeIngredient": ["2 oz fresh orange juice", "Mango Mimosa Fungi Fusion, chilled, to top", "Thin orange wheel"], "recipeInstructions": [{"@type": "HowToStep", "text": "Pour the orange juice into a champagne flute."}, {"@type": "HowToStep", "text": "Top with chilled Mango Mimosa Fungi Fusion."}, {"@type": "HowToStep", "text": "Garnish with a thin orange wheel."}]}}, {"@type": "ListItem", "position": 3, "item": {"@type": "Recipe", "name": "Blue Raspberry Cranberry Smash", "url": "https://happiefusion.com/pages/recipes#blue-raspberry-cranberry-smash", "image": "https://cdn.shopify.com/s/files/1/0725/4946/6177/files/blue-raspberry-cranberry-smash-mocktail.png", "description": "Tart cranberry against Blue Raspberry. Deep ruby red and made for December parties.", "recipeCategory": "Mocktail", "recipeCuisine": "American", "keywords": "mushroom mocktail, alcohol-free, Blue Raspberry", "recipeYield": "1 drink", "totalTime": "PT3M", "author": {"@type": "Organization", "name": "Happie Fungi Fusion"}, "recipeIngredient": ["Small handful fresh raspberries", "1/2 oz fresh lemon juice", "1 oz unsweetened cranberry juice", "Ice", "Blue Raspberry Fungi Fusion, chilled, to top", "Whole raspberries and a lemon twist"], "recipeInstructions": [{"@type": "HowToStep", "text": "Muddle the raspberries with the lemon juice in a rocks glass."}, {"@type": "HowToStep", "text": "Add the cranberry juice and fill with ice."}, {"@type": "HowToStep", "text": "Top with Blue Raspberry Fungi Fusion."}, {"@type": "HowToStep", "text": "Garnish with whole raspberries and a lemon twist."}]}}, {"@type": "ListItem", "position": 4, "item": {"@type": "Recipe", "name": "Watermelon Pomegranate Punch", "url": "https://happiefusion.com/pages/recipes#watermelon-pomegranate-punch", "image": "https://cdn.shopify.com/s/files/1/0725/4946/6177/files/watermelon-pomegranate-punch-mocktail.png", "description": "One bowl, everyone serves themselves, and the whole thing is alcohol-free.", "recipeCategory": "Mocktail", "recipeCuisine": "American", "keywords": "mushroom mocktail, alcohol-free, Watermelon", "recipeYield": "8 to 10", "totalTime": "PT5M", "author": {"@type": "Organization", "name": "Happie Fungi Fusion"}, "recipeIngredient": ["1 cup pomegranate juice", "Juice of 2 limes", "Handful of fresh pomegranate arils", "4 cans Watermelon Fungi Fusion, chilled", "A tray of ice", "Thin lime and orange wheels"], "recipeInstructions": [{"@type": "HowToStep", "text": "Combine the pomegranate juice, lime juice and pomegranate arils in a large pitcher or punch bowl."}, {"@type": "HowToStep", "text": "Just before guests arrive, add the Watermelon Fungi Fusion and the ice."}, {"@type": "HowToStep", "text": "Float the lime and orange wheels on top."}]}}, {"@type": "ListItem", "position": 5, "item": {"@type": "Recipe", "name": "Fresh Ginger Mango Mule", "url": "https://happiefusion.com/pages/recipes#fresh-ginger-mango-mule", "image": "https://cdn.shopify.com/s/files/1/0725/4946/6177/files/fresh-ginger-mango-mule-mocktail.png", "description": "For the guest who would have ordered a Moscow Mule. Fresh ginger brings the kick.", "recipeCategory": "Mocktail", "recipeCuisine": "American", "keywords": "mushroom mocktail, alcohol-free, Mango Mimosa", "recipeYield": "1 drink", "totalTime": "PT3M", "author": {"@type": "Organization", "name": "Happie Fungi Fusion"}, "recipeIngredient": ["3 thin coins fresh ginger", "1/2 oz fresh lime juice", "Crushed ice", "Mango Mimosa Fungi Fusion, chilled, to top", "Lime wedge and a mint sprig"], "recipeInstructions": [{"@type": "HowToStep", "text": "Muddle the ginger with the lime juice in a copper mug or highball glass."}, {"@type": "HowToStep", "text": "Fill with crushed ice."}, {"@type": "HowToStep", "text": "Top with Mango Mimosa Fungi Fusion."}, {"@type": "HowToStep", "text": "Garnish with a lime wedge and a sprig of mint."}]}}, {"@type": "ListItem", "position": 6, "item": {"@type": "Recipe", "name": "Watermelon Mint Spritz", "url": "https://happiefusion.com/pages/recipes#watermelon-mint-spritz", "image": "https://cdn.shopify.com/s/files/1/0725/4946/6177/files/watermelon-mint-spritz-mocktail.png", "description": "Bright, cool and very pink. Light enough to sip between bites.", "recipeCategory": "Mocktail", "recipeCuisine": "American", "keywords": "mushroom mocktail, alcohol-free, Watermelon", "recipeYield": "1 drink", "totalTime": "PT2M", "author": {"@type": "Organization", "name": "Happie Fungi Fusion"}, "recipeIngredient": ["6 fresh mint leaves", "1/2 oz fresh lime juice", "Ice", "1 can Watermelon Fungi Fusion, chilled", "Lime wheel and a mint sprig"], "recipeInstructions": [{"@type": "HowToStep", "text": "Gently press the mint leaves with the lime juice in the bottom of a tall glass."}, {"@type": "HowToStep", "text": "Fill with ice, top with Watermelon and stir once."}, {"@type": "HowToStep", "text": "Garnish with the lime wheel and mint sprig."}]}}, {"@type": "ListItem", "position": 7, "item": {"@type": "Recipe", "name": "The Zero-Proof Mango Mimosa", "url": "https://happiefusion.com/pages/recipes#zero-proof-mango-mimosa", "image": "https://cdn.shopify.com/s/files/1/0725/4946/6177/files/zero-proof-mango-mimosa-mocktail.png", "description": "The easiest drink on the list. Fungi Fusion Mango Mimosa was made for this.", "recipeCategory": "Mocktail", "recipeCuisine": "American", "keywords": "mushroom mocktail, alcohol-free, Mango Mimosa", "recipeYield": "1 drink", "totalTime": "PT1M", "author": {"@type": "Organization", "name": "Happie Fungi Fusion"}, "recipeIngredient": ["2 oz chilled orange juice", "About half a can Mango Mimosa Fungi Fusion, well chilled", "Orange twist"], "recipeInstructions": [{"@type": "HowToStep", "text": "Pour the orange juice into a champagne flute."}, {"@type": "HowToStep", "text": "Tilt the glass and slowly top with Mango Mimosa."}, {"@type": "HowToStep", "text": "Twist the orange peel over the glass and drop it in."}]}}, {"@type": "ListItem", "position": 8, "item": {"@type": "Recipe", "name": "Blue Raspberry Holiday Punch", "url": "https://happiefusion.com/pages/recipes#blue-raspberry-blueberry-holiday-punch", "image": "https://cdn.shopify.com/s/files/1/0725/4946/6177/files/blue-raspberry-holiday-punch.png", "description": "A big-batch punch so you're not playing bartender all night.", "recipeCategory": "Mocktail", "recipeCuisine": "American", "keywords": "mushroom mocktail, alcohol-free, Blue Raspberry", "recipeYield": "8", "totalTime": "PT5M", "author": {"@type": "Organization", "name": "Happie Fungi Fusion"}, "recipeIngredient": ["4 cans Blue Raspberry Fungi Fusion, chilled", "2 cups white cranberry juice, chilled", "1/4 cup fresh lemon juice", "1 cup frozen blueberries", "3 or 4 rosemary sprigs", "Lemon slices"], "recipeInstructions": [{"@type": "HowToStep", "text": "Stir the white cranberry juice and lemon juice together in a punch bowl or large pitcher."}, {"@type": "HowToStep", "text": "Add the frozen blueberries, rosemary and lemon slices."}, {"@type": "HowToStep", "text": "Right before guests arrive, slowly pour in the Blue Raspberry so it stays fizzy. Serve over ice."}]}}, {"@type": "ListItem", "position": 9, "item": {"@type": "Recipe", "name": "Watermelon Cranberry Rosemary Sparkler", "url": "https://happiefusion.com/pages/recipes#watermelon-cranberry-rosemary-sparkler", "image": "https://cdn.shopify.com/s/files/1/0725/4946/6177/files/watermelon-cranberry-rosemary-sparkler.png", "description": "Red, green and very holiday. Looks fancy, takes two minutes.", "recipeCategory": "Mocktail", "recipeCuisine": "American", "keywords": "mushroom mocktail, alcohol-free, Watermelon", "recipeYield": "1 drink", "totalTime": "PT2M", "author": {"@type": "Organization", "name": "Happie Fungi Fusion"}, "recipeIngredient": ["2 oz unsweetened cranberry juice", "1/4 oz honey or simple syrup (optional)", "Ice", "About half a can Watermelon Fungi Fusion, chilled", "Rosemary sprig and a few fresh cranberries"], "recipeInstructions": [{"@type": "HowToStep", "text": "Stir the cranberry juice and honey together in a wine glass until the honey dissolves."}, {"@type": "HowToStep", "text": "Add ice and top with Watermelon."}, {"@type": "HowToStep", "text": "Garnish with the rosemary sprig and cranberries."}]}}, {"@type": "ListItem", "position": 10, "item": {"@type": "Recipe", "name": "Mango Ginger Mule", "url": "https://happiefusion.com/pages/recipes#mango-ginger-mule", "image": "https://cdn.shopify.com/s/files/1/0725/4946/6177/files/mango-ginger-mule-mocktail.png", "description": "A holiday take on the classic mule, with ginger beer and tropical mango.", "recipeCategory": "Mocktail", "recipeCuisine": "American", "keywords": "mushroom mocktail, alcohol-free, Mango Mimosa", "recipeYield": "1 drink", "totalTime": "PT2M", "author": {"@type": "Organization", "name": "Happie Fungi Fusion"}, "recipeIngredient": ["Crushed ice", "1/2 oz fresh lime juice", "2 oz non-alcoholic ginger beer", "About half a can Mango Mimosa Fungi Fusion, chilled", "Lime wedge and a slice of candied ginger"], "recipeInstructions": [{"@type": "HowToStep", "text": "Fill a copper mug or rocks glass with crushed ice."}, {"@type": "HowToStep", "text": "Add the lime juice and ginger beer, then top with Mango Mimosa."}, {"@type": "HowToStep", "text": "Stir gently and garnish. (Check the ginger beer label: a few brands sell an alcoholic version.)"}]}}]}</script>
+
+<style>
+.rc{--rc-ink:#16181B;--rc-green:#2D6A4F;--rc-blue:#2E3A9F;--rc-mango:#E07A10;--rc-melon:#2F8A57;--rc-cream:#FBF7EF;background:var(--rc-cream);color:var(--rc-ink);padding-bottom:80px;}
+.rc-hero{position:relative;margin-top:calc(-1 * var(--nav-h,96px));min-height:clamp(520px,62vw,760px);display:flex;align-items:center;overflow:hidden;background:#EDE6D8;}
+.rc-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 50%;}
+.rc-hero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(251,247,239,.96) 0%,rgba(251,247,239,.86) 34%,rgba(251,247,239,0) 62%);}
+.rc-hero-copy{position:relative;z-index:2;max-width:560px;padding:calc(var(--nav-h,96px) + 30px) 0 60px;margin-left:max(24px,6vw);}
+.rc-eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--rc-green);margin:0 0 10px;}
+.rc-hero h1{font-size:clamp(36px,4.6vw,62px);line-height:1.04;font-weight:900;letter-spacing:-.02em;margin:0 0 16px;}
+.rc-sub{font-size:clamp(16px,1.4vw,18px);line-height:1.6;color:#3d4440;margin:0 0 26px;max-width:470px;}
+.rc-hero-ctas{display:flex;flex-wrap:wrap;gap:12px;}
+.rc-btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:50px;font-weight:800;font-size:15px;transition:transform .2s,box-shadow .2s,background .2s;}
+.rc-btn--solid{background:var(--rc-green);color:#fff;}
+.rc-btn--solid:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(45,106,79,.3);}
+.rc-btn--ghost{border:2px solid var(--rc-green);color:var(--rc-green);background:rgba(255,255,255,.6);}
+.rc-btn--ghost:hover{background:var(--rc-green);color:#fff;}
+.rc-wrap{max-width:1180px;margin:0 auto;padding:64px 22px 0;}
+.rc-wrap h2{font-size:clamp(26px,3vw,36px);font-weight:900;letter-spacing:-.01em;margin:0;}
+.rc-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:26px;}
+.rc-filters{display:flex;flex-wrap:wrap;gap:8px;}
+.rc-chip{font:inherit;font-size:14px;font-weight:700;padding:10px 16px;min-height:44px;border-radius:50px;border:1.5px solid rgba(22,24,27,.14);background:#fff;color:var(--rc-ink);cursor:pointer;transition:background .15s,border-color .15s,color .15s;}
+.rc-chip:hover{border-color:var(--rc-green);}
+.rc-chip.is-on{background:var(--rc-ink);border-color:var(--rc-ink);color:#fff;}
+.rc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start;}
+.rc-card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.06);scroll-margin-top:110px;}
+.rc-card[hidden]{display:none;}
+.rc-img{position:relative;aspect-ratio:4/5;background:#EFE8DA;overflow:hidden;}
+.rc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+.rc-card:hover .rc-img img{transform:scale(1.03);}
+.rc-tag{position:absolute;top:14px;left:14px;font-size:12px;font-weight:800;letter-spacing:.04em;padding:6px 11px;border-radius:50px;background:rgba(255,255,255,.92);color:var(--rc-ink);}
+.rc-body{padding:18px 20px 20px;}
+.rc-flavor{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:50px;color:#fff;}
+.rc-flavor--watermelon{background:var(--rc-melon);} .rc-flavor--mango{background:var(--rc-mango);} .rc-flavor--blue{background:var(--rc-blue);}
+.rc-body h3{font-size:20px;line-height:1.25;font-weight:900;margin:10px 0 6px;}
+.rc-meta{display:flex;gap:14px;font-size:13px;font-weight:700;color:#6a706c;margin:0 0 8px;}
+.rc-meta span+span::before{content:'\00B7';margin-right:14px;}
+.rc-blurb{font-size:14.5px;line-height:1.55;color:#4a514d;margin:0 0 12px;}
+.rc-more summary{list-style:none;cursor:pointer;font-weight:800;font-size:14.5px;color:var(--rc-green);display:inline-flex;align-items:center;gap:6px;min-height:44px;}
+.rc-more summary::-webkit-details-marker{display:none;}
+.rc-more summary::after{content:'+';font-size:20px;font-weight:500;line-height:1;}
+.rc-more[open] summary::after{content:'\2212';}
+.rc-more h4{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6a706c;margin:10px 0 6px;}
+.rc-more ul,.rc-more ol{margin:0 0 6px;padding-left:20px;font-size:14.5px;line-height:1.55;}
+.rc-more li{margin:3px 0;}
+.rc-post{display:inline-block;margin-top:10px;font-weight:800;font-size:14px;color:var(--rc-green);}
+.rc-tip{margin:28px auto 0;max-width:760px;text-align:center;font-size:15px;color:#4a514d;}
+.rc-base-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+.rc-base-card{display:flex;flex-direction:column;align-items:center;background:#fff;border-radius:22px;padding:18px 18px 22px;border:1px solid rgba(0,0,0,.06);text-align:center;transition:transform .2s,box-shadow .2s;}
+.rc-base-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.08);}
+.rc-base-card img{width:100%;aspect-ratio:1/1;object-fit:contain;border-radius:14px;}
+.rc-base-name{font-weight:900;font-size:18px;margin-top:12px;}
+.rc-base-price{font-size:14px;font-weight:700;color:#6a706c;margin-top:2px;}
+.rc-reads-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:22px;}
+.rc-read{display:block;background:#fff;border-radius:22px;overflow:hidden;border:1px solid rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;}
+.rc-read:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.08);}
+.rc-read img{width:100%;aspect-ratio:3/2;object-fit:cover;}
+.rc-read-title{display:block;font-weight:900;font-size:19px;line-height:1.3;padding:16px 20px 4px;}
+.rc-read-link{display:block;font-weight:800;font-size:14px;color:var(--rc-green);padding:0 20px 20px;}
+@media (max-width:980px){.rc-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:640px){
+  .rc-hero{min-height:0;flex-direction:column;align-items:stretch;}
+  .rc-hero-img{position:relative;height:auto;aspect-ratio:16/10;order:2;object-position:60% 50%;}
+  .rc-hero::before{display:none;}
+  .rc-hero-copy{margin:0;padding:calc(var(--nav-h,72px) + 22px) 20px 26px;background:var(--rc-cream);}
+  .rc-grid,.rc-base-grid,.rc-reads-grid{grid-template-columns:1fr;}
+  .rc-base-grid{grid-template-columns:repeat(3,1fr);gap:10px;}
+  .rc-base-card{padding:10px 8px 14px;border-radius:16px;}
+  .rc-base-name{font-size:14px;} .rc-base-price{font-size:12px;}
+  .rc-wrap{padding-top:48px;}
+}
+@media (prefers-reduced-motion:reduce){.rc-card:hover .rc-img img,.rc-btn:hover,.rc-base-card:hover,.rc-read:hover{transform:none;}}
+</style>
+
+<script>
+(function(){
+  var chips=document.querySelectorAll('.rc-chip'),cards=document.querySelectorAll('.rc-card');
+  chips.forEach(function(c){c.addEventListener('click',function(){
+    var f=c.getAttribute('data-filter');
+    chips.forEach(function(x){var on=x===c;x.classList.toggle('is-on',on);x.setAttribute('aria-pressed',on?'true':'false');});
+    cards.forEach(function(k){
+      var show=f==='all'||(f==='batch'?k.hasAttribute('data-batch'):k.getAttribute('data-flavor')===f);
+      k.hidden=!show;
+    });
+  });});
+  // deep link (#recipe-id) opens that card's recipe
+  var h=location.hash&&document.getElementById(location.hash.slice(1));
+  if(h&&h.classList.contains('rc-card')){var d=h.querySelector('details');if(d)d.open=true;}
+})();
+</script>
