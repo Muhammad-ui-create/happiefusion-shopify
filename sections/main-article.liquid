@@ -20,18 +20,19 @@
   </div>
 
 {%- comment -%} Internal linking: curated "Keep reading" per post, weighted toward the two page-2 guides (pillar + lion's-mane timeline). {%- endcomment -%}
-{%- assign kr = '' -%}
+{%- capture kr -%}
 {%- case article.handle -%}
-{%- when 'what-is-ergothioneine' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>{%- endcapture -%}
-{%- when 'caffeine-free-focus' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>{%- endcapture -%}
-{%- when 'functional-mushroom-drinks' -%}{%- capture kr -%}<li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li><li><a href="/blogs/news/why-mushroom-coffee-doesnt-dissolve">Why mushroom coffee doesn&rsquo;t dissolve</a></li>{%- endcapture -%}
-{%- when 'how-long-does-lions-mane-take-to-work' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li><li><a href="/blogs/news/what-is-ergothioneine">What is ergothioneine?</a></li>{%- endcapture -%}
-{%- when 'why-mushroom-coffee-doesnt-dissolve' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li>{%- endcapture -%}
-{%- when 'mushroom-drink-vs-energy-drink' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>{%- endcapture -%}
-{%- when 'why-are-mushroom-drinks-so-expensive' -%}{%- capture kr -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>{%- endcapture -%}
-{%- when 'mushroom-mocktail-recipes' -%}{%- capture kr -%}<li><a href="/pages/recipes">Every Fungi Fusion mocktail recipe in one place</a></li><li><a href="/blogs/news/mushroom-mocktails">Mushroom mocktails: 5 more alcohol-free holiday recipes</a></li><li><a href="/blogs/news/what-do-mushroom-drinks-taste-like">What do mushroom drinks taste like?</a></li>{%- endcapture -%}
-{%- when 'mushroom-mocktails' -%}{%- capture kr -%}<li><a href="/pages/recipes">Every Fungi Fusion mocktail recipe in one place</a></li><li><a href="/blogs/news/mushroom-mocktail-recipes">Mushroom mocktail recipes for the holiday table</a></li><li><a href="/blogs/news/what-do-mushroom-drinks-taste-like">What do mushroom drinks taste like?</a></li>{%- endcapture -%}
+{%- when 'what-is-ergothioneine' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>
+{%- when 'caffeine-free-focus' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>
+{%- when 'functional-mushroom-drinks' -%}<li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li><li><a href="/blogs/news/why-mushroom-coffee-doesnt-dissolve">Why mushroom coffee doesn&rsquo;t dissolve</a></li>
+{%- when 'how-long-does-lions-mane-take-to-work' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li><li><a href="/blogs/news/what-is-ergothioneine">What is ergothioneine?</a></li>
+{%- when 'why-mushroom-coffee-doesnt-dissolve' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li>
+{%- when 'mushroom-drink-vs-energy-drink' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>
+{%- when 'why-are-mushroom-drinks-so-expensive' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>
+{%- when 'mushroom-mocktail-recipes' -%}<li><a href="/pages/recipes">Every Fungi Fusion mocktail recipe in one place</a></li><li><a href="/blogs/news/mushroom-mocktails">Mushroom mocktails: 5 more alcohol-free holiday recipes</a></li><li><a href="/blogs/news/what-do-mushroom-drinks-taste-like">What do mushroom drinks taste like?</a></li>
+{%- when 'mushroom-mocktails' -%}<li><a href="/pages/recipes">Every Fungi Fusion mocktail recipe in one place</a></li><li><a href="/blogs/news/mushroom-mocktail-recipes">Mushroom mocktail recipes for the holiday table</a></li><li><a href="/blogs/news/what-do-mushroom-drinks-taste-like">What do mushroom drinks taste like?</a></li>
 {%- endcase -%}
+{%- endcapture -%}
 {%- if kr != blank -%}
   <aside class="art-related">
     <span class="art-related-eyebrow">Keep reading</span>
@@ -51,7 +52,12 @@
       if(!t||used[t])return; used[t]=1; h.id=t;
     });
     var id=location.hash&&decodeURIComponent(location.hash.slice(1)),el=id&&document.getElementById(id);
-    if(el){requestAnimationFrame(function(){el.scrollIntoView();});window.addEventListener('load',function(){el.scrollIntoView();});}
+    if(el){
+      // keep the target lined up while lazy images above it load; stop as soon as the visitor scrolls
+      var stop=false,go=function(){if(!stop)el.scrollIntoView();};
+      ['wheel','touchstart','keydown'].forEach(function(e){window.addEventListener(e,function(){stop=true;},{once:true,passive:true});});
+      requestAnimationFrame(go);window.addEventListener('load',go);[600,1500,3000].forEach(function(t){setTimeout(go,t);});
+    }
   })();
   </script>
 
