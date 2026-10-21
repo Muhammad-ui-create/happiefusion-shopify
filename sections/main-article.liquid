@@ -20,8 +20,10 @@
   </div>
 
 {%- comment -%} Internal linking: curated "Keep reading" per post, weighted toward the two page-2 guides (pillar + lion's-mane timeline). {%- endcomment -%}
+{%- comment -%} article.handle comes back blog-prefixed here ("news/mushroom-mocktails"), so match on the last segment. {%- endcomment -%}
+{%- assign art_handle = article.handle | split: '/' | last -%}
 {%- capture kr -%}
-{%- case article.handle -%}
+{%- case art_handle -%}
 {%- when 'what-is-ergothioneine' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>
 {%- when 'caffeine-free-focus' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>
 {%- when 'functional-mushroom-drinks' -%}<li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li><li><a href="/blogs/news/why-mushroom-coffee-doesnt-dissolve">Why mushroom coffee doesn&rsquo;t dissolve</a></li>
@@ -119,7 +121,7 @@
 
 {%- comment -%} Per-post FAQPage schema (name parity with visible Q&A). Guarded so a post that already embeds FAQPage inline never doubles up. {%- endcomment -%}
 {%- unless article.content contains 'FAQPage' -%}
-{%- case article.handle -%}
+{%- case art_handle -%}
 {%- when 'how-long-does-lions-mane-take-to-work' -%}
 <script type="application/ld+json">
 {
