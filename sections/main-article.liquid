@@ -51,7 +51,7 @@
       if(!t||used[t])return; used[t]=1; h.id=t;
     });
     var id=location.hash&&decodeURIComponent(location.hash.slice(1)),el=id&&document.getElementById(id);
-    if(el)requestAnimationFrame(function(){el.scrollIntoView();});
+    if(el){requestAnimationFrame(function(){el.scrollIntoView();});window.addEventListener('load',function(){el.scrollIntoView();});}
   })();
   </script>
 
