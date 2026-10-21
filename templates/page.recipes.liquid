@@ -232,7 +232,7 @@
 .rc-hero{position:relative;margin-top:calc(-1 * var(--nav-h,96px));min-height:clamp(520px,62vw,760px);display:flex;align-items:center;overflow:hidden;background:#EDE6D8;}
 .rc-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 50%;}
 .rc-hero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(251,247,239,.96) 0%,rgba(251,247,239,.86) 34%,rgba(251,247,239,0) 62%);}
-.rc-hero-copy{position:relative;z-index:2;max-width:560px;padding:calc(var(--nav-h,96px) + 30px) 0 60px;margin-left:max(24px,6vw);}
+.rc-hero-copy{position:relative;z-index:2;max-width:min(560px,40vw);padding:calc(var(--nav-h,96px) + 30px) 0 60px;margin-left:max(24px,6vw);}
 .rc-eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--rc-green);margin:0 0 10px;}
 .rc-hero h1{font-size:clamp(36px,4.6vw,62px);line-height:1.04;font-weight:900;letter-spacing:-.02em;margin:0 0 16px;}
 .rc-sub{font-size:clamp(16px,1.4vw,18px);line-height:1.6;color:#3d4440;margin:0 0 26px;max-width:470px;}
