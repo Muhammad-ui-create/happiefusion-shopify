@@ -169,6 +169,10 @@ input, select { font-family: var(--font); }
 .nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links a { font-size: 14px; font-weight: 600; opacity: 0.75; transition: opacity 0.15s; }
 .nav-links a:hover { opacity: 1; }
+/* 8 nav links (Recipes added Oct 2026): keep every label on one line and tighten the gaps on laptop/tablet widths */
+.nav-links a, .nav-signin, .cart-trigger { white-space: nowrap; }
+@media (max-width: 1180px) { .nav-links { gap: 18px; } }
+@media (max-width: 960px)  { .nav-links { gap: 12px; } .nav-links a { font-size: 13px; } }
 .nav-right { margin-left: auto; display: flex; align-items: center; gap: 20px; }
 .nav-signin { font-size: 14px; font-weight: 600; opacity: 0.7; }
 .nav-signin:hover { opacity: 1; }
