@@ -198,9 +198,8 @@
         {%- assign fp = all_products[h] -%}
         {%- if fp != blank -%}
         <a class="rc-base-card rc-base-card--{{ rc_keys[forloop.index0] }}" href="{{ fp.url }}">
-          {%- if fp.featured_image -%}<img src="{{ fp.featured_image | image_url: width: 500 }}" alt="Happie Fungi Fusion {{ rc_names[forloop.index0] }}" width="500" height="500" loading="lazy">{%- endif -%}
-          <span class="rc-base-name">{{ rc_names[forloop.index0] }}</span>
-          <span class="rc-base-price">From {{ fp.price_min | money }}</span>
+          {%- if fp.featured_image -%}<img src="{{ fp.featured_image | image_url: width: 800 }}" alt="Happie Fungi Fusion {{ rc_names[forloop.index0] }}" width="800" height="800" loading="lazy">{%- endif -%}
+          <span class="rc-base-info"><span class="rc-base-name">{{ rc_names[forloop.index0] }}</span><span class="rc-base-price">6-pack from {{ fp.price_min | money }}</span><span class="rc-base-cta">Shop {{ rc_names[forloop.index0] }} &rarr;</span></span>
         </a>
         {%- endif -%}
       {%- endfor -%}
@@ -273,15 +272,18 @@
 .rc-post{display:inline-block;margin-top:10px;font-weight:800;font-size:14px;color:var(--rc-green);}
 .rc-tip{margin:28px auto 0;max-width:760px;text-align:center;font-size:15px;color:#4a514d;}
 .rc-base-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
-.rc-base-card{display:flex;flex-direction:column;align-items:center;background:#fff;border-radius:22px;padding:18px 18px 22px;border:1px solid rgba(0,0,0,.06);text-align:center;transition:transform .2s,box-shadow .2s;}
+.rc-base-card{display:flex;flex-direction:column;background:#fff;border-radius:22px;overflow:hidden;border:1px solid rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;}
 .rc-base-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.08);}
-.rc-base-card img{width:100%;aspect-ratio:1/1;object-fit:contain;border-radius:14px;}
-.rc-base-name{font-weight:900;font-size:18px;margin-top:12px;}
+.rc-base-card img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;}
+.rc-base-info{display:flex;flex-direction:column;gap:2px;padding:16px 20px 20px;}
+.rc-base-cta{font-size:14px;font-weight:800;color:var(--rc-green);margin-top:8px;}
+.rc-base-card--watermelon .rc-base-cta{color:var(--rc-melon);} .rc-base-card--mango .rc-base-cta{color:var(--rc-mango);} .rc-base-card--blue .rc-base-cta{color:var(--rc-blue);}
+.rc-base-name{font-weight:900;font-size:19px;}
 .rc-base-price{font-size:14px;font-weight:700;color:#6a706c;margin-top:2px;}
 .rc-reads-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:22px;}
 .rc-read{display:block;background:#fff;border-radius:22px;overflow:hidden;border:1px solid rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;}
 .rc-read:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.08);}
-.rc-read img{width:100%;aspect-ratio:3/2;object-fit:cover;}
+.rc-read img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;}
 .rc-read-title{display:block;font-weight:900;font-size:19px;line-height:1.3;padding:16px 20px 4px;}
 .rc-read-link{display:block;font-weight:800;font-size:14px;color:var(--rc-green);padding:0 20px 20px;}
 @media (max-width:980px){.rc-grid{grid-template-columns:repeat(2,1fr);}}
@@ -293,9 +295,10 @@
 }
 @media (max-width:640px){
   .rc-grid,.rc-base-grid,.rc-reads-grid{grid-template-columns:1fr;}
-  .rc-base-grid{grid-template-columns:repeat(3,1fr);gap:10px;}
-  .rc-base-card{padding:10px 8px 14px;border-radius:16px;}
-  .rc-base-name{font-size:14px;} .rc-base-price{font-size:12px;}
+  .rc-base-grid{gap:12px;}
+  .rc-base-card{flex-direction:row;align-items:center;border-radius:18px;}
+  .rc-base-card img{width:42%;flex:0 0 42%;}
+  .rc-base-info{padding:12px 16px;}
   .rc-wrap{padding-top:48px;}
 }
 @media (prefers-reduced-motion:reduce){.rc-card:hover .rc-img img,.rc-btn:hover,.rc-base-card:hover,.rc-read:hover{transform:none;}}
