@@ -1,7 +1,7 @@
 {%- comment -%}
   Shared "about the drink" blocks for pack pages (Build Your Own, Variety Pack).
   Usage: {% render 'ff-drink-sections', show_mushrooms: true, show_flavors: true, flavors_title: 'Three flavors in every box' %}
-  Copy stays inside the approved claims: mushroom names (no mg), fruiting body extracts,
+  Copy stays inside the approved claims: mushroom names and per-can amounts (label facts only), fruiting body extracts,
   alcohol-free, caffeine-free, taste notes. No effect/health claims, no calorie number.
 {%- endcomment -%}
 <div class="ffd">
@@ -13,15 +13,15 @@
     <div class="ffd-grid">
       <div class="ffd-shroom">
         <img src="{{ 'halloween-shroom-lionsmane.jpg' | asset_img_url: '600x' }}" alt="Lion's Mane mushroom" width="600" height="448" loading="lazy">
-        <div><span class="ffd-mg">Fruiting body</span><b>Lion's Mane</b><p>A shaggy white mushroom long used in cooking and tea.</p></div>
+        <div><span class="ffd-mg">900 mg</span><b>Lion's Mane</b><p>A shaggy white mushroom long used in cooking and tea.</p></div>
       </div>
       <div class="ffd-shroom">
         <img src="{{ 'halloween-shroom-cordyceps.jpg' | asset_img_url: '600x' }}" alt="Cordyceps mushrooms" width="600" height="448" loading="lazy">
-        <div><span class="ffd-mg">Fruiting body</span><b>Cordyceps</b><p>A slender orange mushroom with a long history of traditional use.</p></div>
+        <div><span class="ffd-mg">700 mg</span><b>Cordyceps</b><p>A slender orange mushroom with a long history of traditional use.</p></div>
       </div>
       <div class="ffd-shroom">
         <img src="{{ 'halloween-shroom-reishi.jpg' | asset_img_url: '600x' }}" alt="Reishi mushroom" width="600" height="448" loading="lazy">
-        <div><span class="ffd-mg">Fruiting body</span><b>Reishi</b><p>A glossy red-brown mushroom traditionally brewed as tea.</p></div>
+        <div><span class="ffd-mg">400 mg</span><b>Reishi</b><p>A glossy red-brown mushroom traditionally brewed as tea.</p></div>
       </div>
     </div>
   </div>
