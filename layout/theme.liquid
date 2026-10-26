@@ -69,8 +69,8 @@
   <meta name="theme-color" content="#2D6A4F">
   <meta name="author" content="Happie Fusion">
   <meta name="publisher" content="Happie Fusion">
-  <meta name="geo.region" content="US-CA">
-  <meta name="geo.placename" content="Northern California">
+  <meta name="geo.region" content="US-IL">
+  <meta name="geo.placename" content="Wheaton, Illinois">
   <meta name="format-detection" content="telephone=yes">
 
   {%- comment -%} ── GEO / AI SEARCH KEYWORDS, helps AI assistants understand the page ── {%- endcomment -%}
@@ -189,7 +189,7 @@
         },
         "description": "Happie Fusion makes Happie Fungi Fusion, sparkling mushroom drinks with Lion's Mane, Cordyceps and Reishi fruiting body extracts in every can. Caffeine-free and alcohol-free.",
         "foundingDate": "2024",
-        "foundingLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressRegion": "California", "addressCountry": "US" } },
+        "address": { "@type": "PostalAddress", "addressLocality": "Wheaton", "addressRegion": "IL", "addressCountry": "US" },
         "areaServed": { "@type": "Country", "name": "United States" },
         "knowsAbout": [
           "Functional mushrooms",
@@ -204,7 +204,6 @@
         ],
         "sameAs": [
           "https://www.instagram.com/happiefusion/",
-          "https://www.tiktok.com/@drinkhappie1",
           "https://www.amazon.com/stores/Happie-Fusion"
         ],
         "contactPoint": {
@@ -328,7 +327,7 @@
     ],
     {%- assign rv_rating = product.metafields.reviews.rating.value.rating -%}
     {%- assign rv_count = product.metafields.reviews.rating_count.value | plus: 0 -%}
-    {%- if rv_rating and rv_count > 0 %}
+    {%- if rv_rating and rv_count >= 10 %}
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "{{ rv_rating }}",
