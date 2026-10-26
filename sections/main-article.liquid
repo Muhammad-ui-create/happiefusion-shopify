@@ -24,13 +24,13 @@
 {%- assign art_handle = article.handle | split: '/' | last -%}
 {%- capture kr -%}
 {%- case art_handle -%}
-{%- when 'what-is-ergothioneine' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>
-{%- when 'caffeine-free-focus' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>
-{%- when 'functional-mushroom-drinks' -%}<li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li><li><a href="/blogs/news/why-mushroom-coffee-doesnt-dissolve">Why mushroom coffee doesn&rsquo;t dissolve</a></li>
-{%- when 'how-long-does-lions-mane-take-to-work' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li><li><a href="/blogs/news/what-is-ergothioneine">What is ergothioneine?</a></li>
-{%- when 'why-mushroom-coffee-doesnt-dissolve' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li>
-{%- when 'mushroom-drink-vs-energy-drink' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>
-{%- when 'why-are-mushroom-drinks-so-expensive' -%}<li><a href="/blogs/news/functional-mushroom-drinks">The complete guide to functional mushroom drinks</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>
+{%- when 'what-is-ergothioneine' -%}<li><a href="/blogs/news/functional-mushroom-drinks">Mushroom drinks: the complete guide</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>
+{%- when 'caffeine-free-focus' -%}<li><a href="/blogs/news/functional-mushroom-drinks">Mushroom drinks: the complete guide</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>
+{%- when 'functional-mushroom-drinks' -%}<li><a href="/blogs/news/are-functional-mushroom-drinks-safe">Are functional mushroom drinks safe?</a></li><li><a href="/blogs/news/what-do-mushroom-drinks-taste-like">What do mushroom drinks taste like?</a></li><li><a href="/pages/recipes">10 mushroom mocktail recipes</a></li>
+{%- when 'how-long-does-lions-mane-take-to-work' -%}<li><a href="/blogs/news/functional-mushroom-drinks">Mushroom drinks: the complete guide</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li><li><a href="/blogs/news/what-is-ergothioneine">What is ergothioneine?</a></li>
+{%- when 'why-mushroom-coffee-doesnt-dissolve' -%}<li><a href="/blogs/news/functional-mushroom-drinks">Mushroom drinks: the complete guide</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li>
+{%- when 'mushroom-drink-vs-energy-drink' -%}<li><a href="/blogs/news/functional-mushroom-drinks">Mushroom drinks: the complete guide</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/caffeine-free-focus">Getting focus without caffeine</a></li>
+{%- when 'why-are-mushroom-drinks-so-expensive' -%}<li><a href="/blogs/news/functional-mushroom-drinks">Mushroom drinks: the complete guide</a></li><li><a href="/blogs/news/how-long-does-lions-mane-take-to-work">How long does lion&rsquo;s mane take to work?</a></li><li><a href="/blogs/news/mushroom-drink-vs-energy-drink">Mushroom drink vs. energy drink</a></li>
 {%- when 'mushroom-mocktail-recipes' -%}<li><a href="/pages/recipes">Every Fungi Fusion mocktail recipe in one place</a></li><li><a href="/blogs/news/mushroom-mocktails">Mushroom mocktails: 5 more alcohol-free holiday recipes</a></li><li><a href="/blogs/news/what-do-mushroom-drinks-taste-like">What do mushroom drinks taste like?</a></li>
 {%- when 'mushroom-mocktails' -%}<li><a href="/pages/recipes">Every Fungi Fusion mocktail recipe in one place</a></li><li><a href="/blogs/news/mushroom-mocktail-recipes">Mushroom mocktail recipes for the holiday table</a></li><li><a href="/blogs/news/what-do-mushroom-drinks-taste-like">What do mushroom drinks taste like?</a></li>
 {%- endcase -%}
@@ -95,7 +95,7 @@
   "image": [{{ article.image | image_url: width: 1400 | prepend: 'https:' | json }}],
   {%- endif %}
   "datePublished": {{ _art_iso | json }},
-  "dateModified": {{ _art_iso | json }},
+  "dateModified": {{ article.updated_at | default: article.published_at | date: "%Y-%m-%dT%H:%M:%S%z" | json }},
   "author": { "@type": {% if article.author != blank %}"Person", "name": {{ article.author | json }}{% else %}"Organization", "name": "Happie Fungi Fusion"{% endif %} },
   "publisher": {
     "@type": "Organization",
@@ -293,34 +293,42 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What are functional mushroom drinks?",
+      "name": "What are mushroom drinks?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Functional mushroom drinks are ready-to-drink beverages made with concentrated extracts of functional mushrooms — usually lion's mane, cordyceps, or reishi — dosed for a specific outcome like focus, energy, or calm. The mushrooms are there to do a job, not to flavor the drink."
+        "text": "Mushroom drinks are beverages made with extracts of functional mushrooms, usually lion's mane, cordyceps and reishi. They come as ready-to-drink cans, mushroom coffee, teas and powder blends, and small shots. The mushrooms are a working ingredient, not a flavor."
       }
     },
     {
       "@type": "Question",
-      "name": "Are functional mushroom drinks good for you?",
+      "name": "Are there ready-to-drink beverages with functional mushrooms?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Functional mushrooms are well tolerated by most healthy adults and are backed by a growing body of research, strongest for lion's mane and cognition. The evidence is promising but still early, and quality varies widely between products, so benefits depend heavily on dose and sourcing. This is general information, not medical advice."
+        "text": "Yes. Ready-to-drink mushroom beverages include sparkling cans, still tonics and bottled teas you drink straight from the fridge. Happie Fungi Fusion, for example, is a caffeine-free sparkling drink with 900 mg lion's mane, 700 mg cordyceps and 400 mg reishi in every can."
       }
     },
     {
       "@type": "Question",
-      "name": "Do functional mushroom drinks have caffeine?",
+      "name": "Do mushroom drinks give you a buzz?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Some do and some don't — it depends entirely on the brand. Many mushroom \"energy\" drinks are heavily caffeinated, while caffeine-free lines like Fungi Fusion rely on the mushrooms rather than a stimulant. Always check the label if caffeine matters to you."
+        "text": "No. Functional mushrooms like lion's mane, cordyceps and reishi are not psilocybin mushrooms and are non-psychoactive. If a mushroom drink feels stimulating, it most likely contains added caffeine."
       }
     },
     {
       "@type": "Question",
-      "name": "Which mushroom is best for focus?",
+      "name": "Do mushroom drinks have caffeine?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Lion's mane is the mushroom most associated with focus and mental clarity, and it has the most human cognitive research of the three common functional mushrooms. The effect is typically described as feeling less scattered rather than stimulated."
+        "text": "Some do and some don't. Mushrooms don't contain caffeine, but many mushroom coffees and mushroom energy drinks add it. Caffeine-free options like Happie Fungi Fusion contain none, so check the label if caffeine matters to you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are mushroom drinks safe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Functional mushrooms are well tolerated by most healthy adults, but quality varies between products. Check the dose and the full ingredient list, and talk to your doctor if you're pregnant, nursing, on medication or managing a health condition. This is general information, not medical advice."
       }
     },
     {
