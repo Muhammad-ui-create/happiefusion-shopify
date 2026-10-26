@@ -21,7 +21,7 @@
 
   {%- comment -%} ── SEO: META DESCRIPTIONS ── {%- endcomment -%}
   {%- if template.name == 'index' -%}
-    <meta name="description" content="A sparkling, caffeine-free mushroom drink with 900mg Lion’s Mane, 700mg Cordyceps and 400mg Reishi in every can. Blue Raspberry, Mango Mimosa and Watermelon.">
+    <meta name="description" content="A sparkling, caffeine-free mushroom drink with Lion’s Mane, Cordyceps and Reishi in every can. Blue Raspberry, Mango Mimosa and Watermelon.">
   {%- elsif template.name == 'product' -%}
     {%- comment -%} Prefer the Shopify-managed SEO description; fall back to body if not set. {%- endcomment -%}
     {%- assign seo_meta = product.metafields.global.description_tag -%}
@@ -141,7 +141,7 @@
   {%- elsif template.name == 'index' -%}
     <meta property="og:type" content="website">
     <meta property="og:title" content="For the part of the day that still needs you.">
-    <meta property="og:description" content="900mg Lion’s Mane, 700mg Cordyceps and 400mg Reishi in a sparkling, caffeine-free, alcohol-free can. Happie Fungi Fusion.">
+    <meta property="og:description" content="Lion’s Mane, Cordyceps and Reishi in a sparkling, caffeine-free, alcohol-free can. Happie Fungi Fusion.">
     <meta property="og:image" content="{{ og_share_image }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="1200">
@@ -187,7 +187,7 @@
           "width": 400,
           "height": 100
         },
-        "description": "Happie Fusion makes Happie Fungi Fusion, sparkling mushroom drinks with Lion's Mane (900mg), Cordyceps (700mg) and Reishi (400mg) fruiting body extracts in every can. Caffeine-free and alcohol-free.",
+        "description": "Happie Fusion makes Happie Fungi Fusion, sparkling mushroom drinks with Lion's Mane, Cordyceps and Reishi fruiting body extracts in every can. Caffeine-free and alcohol-free.",
         "foundingDate": "2024",
         "foundingLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressRegion": "California", "addressCountry": "US" } },
         "areaServed": { "@type": "Country", "name": "United States" },
@@ -339,12 +339,12 @@
     {%- endif %}
     {%- if product.title contains 'Fungi' or product.title contains 'Mushroom' %}
     "additionalProperty": [
-      { "@type": "PropertyValue", "name": "Lion's Mane", "value": "900mg per can, fruiting body extract" },
-      { "@type": "PropertyValue", "name": "Cordyceps", "value": "700mg per can, fruiting body extract" },
-      { "@type": "PropertyValue", "name": "Reishi", "value": "400mg per can, fruiting body extract" },
+      { "@type": "PropertyValue", "name": "Lion's Mane", "value": "Fruiting body extract" },
+      { "@type": "PropertyValue", "name": "Cordyceps", "value": "Fruiting body extract" },
+      { "@type": "PropertyValue", "name": "Reishi", "value": "Fruiting body extract" },
       { "@type": "PropertyValue", "name": "Caffeine", "value": "0mg, caffeine free" },
       { "@type": "PropertyValue", "name": "Alcohol", "value": "0%, alcohol free" },
-      { "@type": "PropertyValue", "name": "Calories", "value": "~40 per can" },
+      { "@type": "PropertyValue", "name": "Calories", "value": "40 per can" },
       { "@type": "PropertyValue", "name": "Vegan", "value": "Yes" },
       { "@type": "PropertyValue", "name": "Non-GMO", "value": "Yes" }
     ],
@@ -411,10 +411,7 @@
         <div class="cart-mini-review" id="cart-mini-review" aria-label="Customer reviews">
           <span class="cart-mini-review-stars" aria-hidden="true">★★★★★</span>
           <span class="cart-mini-review-track">
-            <span class="cart-mini-slide is-active">"Best functional mushroom drink I've tried!" <span class="cart-mini-attr">Shannon B. · Verified Amazon buyer</span></span>
-            <span class="cart-mini-slide">"Excellent! Couldn't taste mushrooms. Better than Brez!" <span class="cart-mini-attr">Verified Amazon buyer</span></span>
-            <span class="cart-mini-slide">"Improved my mood and energy almost immediately." <span class="cart-mini-attr">Juju K. · Verified Amazon buyer</span></span>
-            <span class="cart-mini-slide">"My favorite flavor. You can feel the effects." <span class="cart-mini-attr">Kristine M. · Verified Amazon buyer</span></span>
+            <span class="cart-mini-slide is-active">"Excellent! Couldn't taste mushrooms. Better than Brez!" <span class="cart-mini-attr">Verified Amazon buyer</span></span>
             <span class="cart-mini-slide">"We replaced morning coffee with this drink. Loving it!" <span class="cart-mini-attr">Nicole G. · Verified Amazon buyer</span></span>
             <span class="cart-mini-slide">"Tastes like a carbonated mango drink. Really good!" <span class="cart-mini-attr">Shanice A. · Verified Amazon buyer</span></span>
           </span>

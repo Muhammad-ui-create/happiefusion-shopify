@@ -77,7 +77,7 @@
         alt: 'A hand holding a can of Happie Fungi Fusion Blue Raspberry at a Halloween party',
         w: ['{{ 'halloween-boo-16x9.jpg' | asset_img_url: '1280x' }}', '{{ 'halloween-boo-16x9.jpg' | asset_img_url: '1920x' }}'],
         m: ['{{ 'halloween-boo-4x5.jpg' | asset_img_url: '720x' }}', '{{ 'halloween-boo-4x5.jpg' | asset_img_url: '1080x' }}'] },
-      treat: { h: 'All treat. <em>No trick.</em>', s: 'Alcohol-free. Caffeine-free. 35 calories.', pack: '18', pos: 'bc',
+      treat: { h: 'All treat. <em>No trick.</em>', s: 'Alcohol-free. Caffeine-free. 40 calories.', pack: '18', pos: 'bc',
         alt: 'A can of Happie Fungi Fusion Mango Mimosa surrounded by Halloween candy',
         w: ['{{ 'halloween-treat-16x9.jpg' | asset_img_url: '1280x' }}', '{{ 'halloween-treat-16x9.jpg' | asset_img_url: '1920x' }}'],
         m: ['{{ 'halloween-treat-4x5.jpg' | asset_img_url: '720x' }}', '{{ 'halloween-treat-4x5.jpg' | asset_img_url: '1080x' }}'] },
@@ -206,7 +206,7 @@
     <ul>
       <li>Alcohol-free</li>
       <li>Caffeine-free</li>
-      <li>35 calories</li>
+      <li>40 calories</li>
       <li>Lion's Mane, Cordyceps, Reishi</li>
     </ul>
   </section>
@@ -219,19 +219,19 @@
       <div class="hw-cards">
         <div class="hw-card">
           <img class="hw-card-img" src="{{ 'halloween-shroom-lionsmane.jpg' | asset_img_url: '900x' }}" alt="Lion's Mane mushroom" width="900" height="672" loading="lazy" decoding="async">
-          <span class="hw-card-mg">900mg</span>
+          <span class="hw-card-mg"><em>Hericium erinaceus</em></span>
           <h3>Lion's Mane</h3>
           <p>Fruiting body extract. A shaggy white mushroom long used in cooking and tea.</p>
         </div>
         <div class="hw-card">
           <img class="hw-card-img" src="{{ 'halloween-shroom-cordyceps.jpg' | asset_img_url: '900x' }}" alt="Cordyceps mushrooms" width="900" height="672" loading="lazy" decoding="async">
-          <span class="hw-card-mg">700mg</span>
+          <span class="hw-card-mg"><em>Cordyceps militaris</em></span>
           <h3>Cordyceps</h3>
           <p>Fruiting body extract. A slender orange mushroom with a long history of traditional use.</p>
         </div>
         <div class="hw-card">
           <img class="hw-card-img" src="{{ 'halloween-shroom-reishi.jpg' | asset_img_url: '900x' }}" alt="Reishi mushroom" width="900" height="672" loading="lazy" decoding="async">
-          <span class="hw-card-mg">400mg</span>
+          <span class="hw-card-mg"><em>Ganoderma lucidum</em></span>
           <h3>Reishi</h3>
           <p>Fruiting body extract. A glossy red-brown mushroom traditionally brewed as tea.</p>
         </div>
@@ -239,7 +239,7 @@
     </div>
   </section>
 
-  {%- comment -%} 5. REVIEWS: word for word from sections/reviews-section.liquid {%- endcomment -%}
+  {%- comment -%} 5. REVIEWS: word for word from real reviews (Pete-approved KEEP list, 2026-10-27) {%- endcomment -%}
   <section class="hw-section hw-section-alt hw-rel">
     <svg class="hw-web hw-web-tr" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M0 0L200 14M0 0L196 78M0 0L150 150M0 0L78 196M0 0L14 200"/><path d="M50 3q4 10-2 17-2 9-12 12-3 10-14 12-4 8-19 6M100 7q6 18-6 32-5 18-24 25-8 19-28 23-9 14-35 13M150 10q8 28-8 49-8 27-36 37-12 28-42 34-13 20-54 20"/></svg>
     <div class="hw-inner">
@@ -258,8 +258,8 @@
         </figure>
         <figure class="hw-review">
           <div class="hw-stars" aria-label="5 out of 5 stars">★★★★★</div>
-          <blockquote>"So relaxing!"</blockquote>
-          <figcaption><strong>Kirstin Holland</strong><span>Verified Buyer &middot; Minneapolis, MN</span></figcaption>
+          <blockquote>"We replaced morning coffee with this drink. Loving it!"</blockquote>
+          <figcaption><strong>Nicole G.</strong><span>Verified Amazon buyer</span></figcaption>
         </figure>
       </div>
     </div>
@@ -285,7 +285,7 @@
       <h2 class="hw-h2">Quick answers</h2>
       <details class="hw-faq"><summary>Does it contain alcohol?</summary><p>No. Happie Fungi Fusion is alcohol-free.</p></details>
       <details class="hw-faq"><summary>Does it have caffeine?</summary><p>No. It is caffeine-free.</p></details>
-      <details class="hw-faq"><summary>What does it taste like?</summary><p>Like a lightly sparkling fruit drink, not a supplement. Watermelon is clean and juicy, Mango Mimosa is tropical and lightly sweet, and Blue Raspberry is tart and bright. Each can has 9g of sugar and 35 calories.</p></details>
+      <details class="hw-faq"><summary>What does it taste like?</summary><p>Like a lightly sparkling fruit drink, not a supplement. Watermelon is clean and juicy, Mango Mimosa is tropical and lightly sweet, and Blue Raspberry is tart and bright. Each can has 9g of sugar and 40 calories.</p></details>
       <details class="hw-faq"><summary>When will it arrive?</summary><p>{% if hw_order_by != blank %}Order by {{ hw_order_by }} for delivery before Halloween. {% endif %}Delivery options are shown at checkout.</p></details>
     </div>
   </section>
@@ -401,7 +401,7 @@
   .hw-card { padding: 24px 22px; border-radius: 20px; background: var(--hw-purple-2); border: 1px solid rgba(255,244,224,0.1); overflow: hidden; }
   .hw-card-img { display: block; width: calc(100% + 44px); max-width: none; height: auto; aspect-ratio: 4 / 3; object-fit: cover; margin: -24px -22px 18px;
                  -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%); mask-image: linear-gradient(180deg, #000 72%, transparent 100%); }
-  .hw-card-mg { font-family: 'DM Serif Display', Georgia, serif; font-size: 34px; color: var(--hw-gold); line-height: 1; }
+  .hw-card-mg { font-family: 'DM Serif Display', Georgia, serif; font-size: 26px; color: var(--hw-gold); line-height: 1.1; }
   .hw-card h3 { margin: 8px 0 6px; font-size: 18px; font-weight: 800; color: var(--hw-cream); }
   .hw-card p { margin: 0; font-size: 14.5px; line-height: 1.55; color: rgba(255,244,224,0.75); }
 

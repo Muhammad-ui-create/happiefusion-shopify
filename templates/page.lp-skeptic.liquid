@@ -506,12 +506,6 @@
       display: flex; justify-content: center; gap: 16px;
       flex-wrap: wrap; align-items: center;
     }
-    .disclaimer {
-      font-size: 11px; color: var(--ink-4);
-      max-width: 560px; margin: 40px auto 0;
-      line-height: 1.6;
-    }
-
     /* ── FOOTER ── */
     .lp-footer {
       padding: 28px 32px;
@@ -612,8 +606,8 @@
     <div class="skep-inner">
       <div class="skep-eyebrow">Real talk</div>
       <h2 class="skep-title">If mushroom coffee burned you, <em>we get it.</em></h2>
-      <p class="skep-body">The first wave of mushroom drinks set the bar low. Bitter blends. Mycelium grown on grain. "Sprinkle" doses that looked good on the label and tasted worse in the mug. <strong>Most people who try one bad mushroom drink swear off the whole category.</strong></p>
-      <p class="skep-body" style="margin-top:18px;">We built Happie to be the opposite, <strong>real fruiting body extracts, real doses, real fruit flavor</strong>. The "wait, what?" reaction is exactly the point.</p>
+      <p class="skep-body">The first wave of mushroom drinks set the bar low. Bitter blends. Mycelium grown on grain. Labels that looked good on the shelf and tasted worse in the mug. <strong>Most people who try one bad mushroom drink swear off the whole category.</strong></p>
+      <p class="skep-body" style="margin-top:18px;">We built Happie to be the opposite, <strong>real fruiting body extracts, real fruit flavor</strong>. The "wait, what?" reaction is exactly the point.</p>
     </div>
   </section>
 
@@ -622,26 +616,26 @@
     <div class="proof-inner">
       <div class="proof-header">
         <div class="skep-eyebrow">What's actually inside</div>
-        <h2 class="proof-title">Three real mushrooms.<br><em>Dosed for real.</em></h2>
+        <h2 class="proof-title">Three real mushrooms.<br><em>All in one can.</em></h2>
       </div>
       <div class="proof-grid">
         <div class="proof-card">
-          <div class="proof-num">900<span class="mg">mg</span></div>
+          <div class="proof-num">01</div>
           <div class="proof-mushroom">Lion's Mane</div>
-          <h3>The big dose</h3>
-          <p>900mg of Lion's Mane fruiting body extract, the largest dose in the can. Fruiting body, not mycelium-on-grain.</p>
+          <h3>The shaggy one</h3>
+          <p>Lion's Mane fruiting body extract. Fruiting body, not mycelium-on-grain.</p>
         </div>
         <div class="proof-card">
-          <div class="proof-num">700<span class="mg">mg</span></div>
+          <div class="proof-num">02</div>
           <div class="proof-mushroom">Cordyceps</div>
           <h3>The real mushroom</h3>
-          <p>700mg of Cordyceps fruiting body extract. Treasured in traditional practices for generations, now in a can that tastes like blue raspberry.</p>
+          <p>Cordyceps fruiting body extract. Treasured in traditional practices for generations, now in a can that tastes like blue raspberry.</p>
         </div>
         <div class="proof-card">
-          <div class="proof-num">400<span class="mg">mg</span></div>
+          <div class="proof-num">03</div>
           <div class="proof-mushroom">Reishi</div>
           <h3>The old classic</h3>
-          <p>The queen of mushrooms, used in traditional practices for centuries. 400mg of fruiting body extract, and it still tastes like fruit, not mushroom.</p>
+          <p>The queen of mushrooms, used in traditional practices for centuries. Fruiting body extract, and it still tastes like fruit, not mushroom.</p>
         </div>
       </div>
     </div>
@@ -651,8 +645,8 @@
   <section class="quote-section">
     <div class="quote-inner">
       <div class="quote-mark">"</div>
-      <h2 class="quote-text">"I'd written off mushroom drinks. This one <em>actually tastes like a drink</em>, came back for the 12-pack."</h2>
-      <div class="quote-author">— Former skeptic · Verified Amazon Buyer</div>
+      <h2 class="quote-text">"Excellent! Couldn't taste mushrooms. <em>Better than Brez!</em>"</h2>
+      <div class="quote-author">— Verified Amazon buyer</div>
     </div>
   </section>
 
@@ -682,7 +676,7 @@
             </li>
             <li>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-              "Sprinkle" doses, trace amounts only
+              Earthy aftertaste that lingers
             </li>
             <li>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
@@ -708,7 +702,7 @@
             </li>
             <li>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              2,000mg total, a real dose, right on the label
+              Lion's Mane, Cordyceps and Reishi in every can
             </li>
             <li>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -732,6 +726,8 @@
         </div>
       </div>
       <div class="reviews-grid">
+        {%- comment -%} Hidden 2026-10-27 (Pete compliance pass): real reviews that make effect/adaptogen claims. {%- endcomment -%}
+        {%- comment -%}
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <div class="review-title">Tastes great</div>
@@ -743,6 +739,18 @@
         </div>
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
+          <div class="review-title">Really nice for mood</div>
+          <p class="review-body">"Very refreshing taste. I could tell it improved my mood and energy almost immediately, felt like a cleaner energy drink."</p>
+          <div class="review-by">
+            <svg width="11" height="11" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+            jujuklasek · Verified
+          </div>
+        </div>
+        {%- endcomment -%}
+        {%- comment -%} Brez review moved up to the big quote (KEEP wording). Original long version kept here, not rendered. {%- endcomment -%}
+        {%- comment -%}
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
           <div class="review-title">Better than Brez!</div>
           <p class="review-body">"Excellent! Couldn't taste mushrooms and loved the feel of this drink! Perfect. Better than Brez!"</p>
           <div class="review-by">
@@ -750,13 +758,31 @@
             Anonymous · Verified
           </div>
         </div>
+        {%- endcomment -%}
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
-          <div class="review-title">Really nice for mood</div>
-          <p class="review-body">"Very refreshing taste. I could tell it improved my mood and energy almost immediately, felt like a cleaner energy drink."</p>
+          <div class="review-title">Love it, replaced morning coffee</div>
+          <p class="review-body">"My wife and I have replaced morning coffee with this drink and we are loving it."</p>
           <div class="review-by">
             <svg width="11" height="11" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-            jujuklasek · Verified
+            Nicole G. · Verified Amazon buyer
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★☆</div>
+          <div class="review-title">Happie refresher, great for mocktails</div>
+          <p class="review-body">"Tastes like a carbonated mango drink. Really good!"</p>
+          <div class="review-by">
+            <svg width="11" height="11" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+            Shanice A. · Verified Amazon buyer
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">"Taste amazing!!"</p>
+          <div class="review-by">
+            <svg width="11" height="11" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+            Gracie Matley · Verified Buyer
           </div>
         </div>
       </div>
@@ -798,7 +824,6 @@
         <a href="{{ cta_url }}" class="btn-primary">Try Blue Razzberry, 15% Off →</a>
         <div class="hero-code-row">Code <strong>WELCOME15</strong> auto-applies</div>
       </div>
-      <div class="disclaimer">These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary.</div>
     </div>
   </section>
 

@@ -406,13 +406,12 @@
             <svg class="acc-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="accordion-body">
-            <p><strong>Functional Mushroom Blend (2,000mg total):</strong></p>
-            <ul>
-              <li>Lion's Mane Extract (fruiting body), 900mg</li>
-              <li>Cordyceps militaris Extract (fruiting body), 700mg</li>
-              <li>Reishi Extract (fruiting body), 400mg</li>
-            </ul>
-            <p><strong>Other Ingredients:</strong> Carbonated Water, Organic Light Blue Agave Nectar, Citric Acid, Natural Flavor, Ocean Derived Magnesium, Ocean Derived Calcium Citrate, Potassium Sorbate, Benzoic Acid.</p>
+            {%- comment -%} Canonical ingredient statement (Pete, 2026-10-27). Flavor swaps per product; variety/other packs use plain "Natural Flavor". {%- endcomment -%}
+            {%- assign ing_flavor = 'Natural Flavor' -%}
+            {%- if product.handle contains 'blue-razz' -%}{%- assign ing_flavor = 'Natural Blue Raspberry Flavor' -%}
+            {%- elsif product.handle contains 'mango' -%}{%- assign ing_flavor = 'Natural Mango Flavor' -%}
+            {%- elsif product.handle contains 'watermelon' -%}{%- assign ing_flavor = 'Natural Watermelon Flavor' -%}{%- endif -%}
+            <p><strong>Ingredients:</strong> Carbonated Water, Organic Light Blue Agave Nectar, Citric Acid, {{ ing_flavor }}, Lion's Mane Extract, Cordyceps Extract, Red Reishi Extract, Ocean Derived Magnesium, Ocean Derived Calcium Citrate, Potassium Sorbate, Mushroom Fiber Extract (to preserve freshness)</p>
             <p>Vegan · Gluten-Free · Non-GMO · No Artificial Flavors</p>
           </div>
         </div>
@@ -426,8 +425,8 @@
             <svg class="acc-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="accordion-body">
-            <p>Every can carries 900mg Lion's Mane, 700mg Cordyceps, and 400mg Reishi, all <strong>fruiting body extracts</strong>.</p>
-            <p>Most products use mycelium on grain (mostly starch, low actives). Happie uses <strong>fruiting body extracts</strong>, the real mushroom, standardized for potency.</p>
+            <p>Every can carries Lion's Mane, Cordyceps, and Reishi, all <strong>fruiting body extracts</strong>.</p>
+            <p>Most products use mycelium on grain (mostly starch). Happie uses <strong>fruiting body extracts</strong>, the real mushroom.</p>
             <p>Then it all goes into a cold, sparkling can, lightly sweetened with organic agave. Caffeine-free and alcohol-free, so you can crack one whenever you like.</p>
           </div>
         </div>
@@ -516,7 +515,6 @@
         <li>Vegan &amp; Non-GMO</li>
         <li>40 Calories</li>
       </ul>
-      <p class="pdp-occ-disclaimer">† These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
     </div>
   </section>
 
@@ -621,23 +619,8 @@
     <div class="pdp-reviews-track" role="list">
       <figure class="pdp-review-card" role="listitem">
         <span class="pdp-review-stars" aria-hidden="true">★★★★★</span>
-        <blockquote>"Best adaptogen drink I've tried!"</blockquote>
-        <figcaption>Shannon B. · <span>Verified Amazon buyer</span></figcaption>
-      </figure>
-      <figure class="pdp-review-card" role="listitem">
-        <span class="pdp-review-stars" aria-hidden="true">★★★★★</span>
         <blockquote>"Excellent! Couldn't taste mushrooms. Better than Brez!"</blockquote>
         <figcaption><span>Verified Amazon buyer</span></figcaption>
-      </figure>
-      <figure class="pdp-review-card" role="listitem">
-        <span class="pdp-review-stars" aria-hidden="true">★★★★★</span>
-        <blockquote>"Improved my mood and energy almost immediately."</blockquote>
-        <figcaption>Juju K. · <span>Verified Amazon buyer</span></figcaption>
-      </figure>
-      <figure class="pdp-review-card" role="listitem">
-        <span class="pdp-review-stars" aria-hidden="true">★★★★★</span>
-        <blockquote>"My favorite flavor. You can feel the effects."</blockquote>
-        <figcaption>Kristine M. · <span>Verified Amazon buyer</span></figcaption>
       </figure>
       <figure class="pdp-review-card" role="listitem">
         <span class="pdp-review-stars" aria-hidden="true">★★★★★</span>
@@ -677,7 +660,7 @@
             </span>
           </summary>
           <div class="pdp-faq-a">
-            <p><strong>Yes, formulated for daily use.</strong> Lion's Mane, Cordyceps, and Reishi have been used in traditional practices for centuries. Every can carries 900mg Lion's Mane, 700mg Cordyceps, and 400mg Reishi, all fruiting body extracts, with no caffeine and no alcohol, and every batch is third-party lab tested.</p>
+            <p><strong>Yes, formulated for daily use.</strong> Lion's Mane, Cordyceps, and Reishi have been used in traditional practices for centuries. Every can carries all three as fruiting body extracts, with no caffeine and no alcohol, and every batch is third-party lab tested.</p>
           </div>
         </details>
 
@@ -686,11 +669,11 @@
             <span class="pdp-faq-icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
             </span>
-            <span>Will this make me feel "high" or trippy?</span>
+            <span>Will Happie Fungi Fusion make me feel high?</span>
             <span class="pdp-faq-chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
           </summary>
           <div class="pdp-faq-a">
-            <p><strong>Absolutely not.</strong> Lion's Mane, Cordyceps, and Reishi are <em>functional</em> mushrooms, completely different from psilocybin (psychedelic mushrooms). Zero psychoactive compounds. Legal in all 50 states. It's a sparkling drink, not a trip.</p>
+            <p><strong>No.</strong> Fungi Fusion is made with Lion's Mane, Cordyceps and Reishi, which are non-intoxicating functional mushrooms. Zero alcohol, zero caffeine.</p>
           </div>
         </details>
 
@@ -807,8 +790,8 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Is {{ product.title | escape }} safe to drink every day?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, formulated for daily use. Lion's Mane, Cordyceps, and Reishi have been used in traditional practices for centuries. Every can carries 900mg Lion's Mane, 700mg Cordyceps, and 400mg Reishi, all fruiting body extracts, with no caffeine and no alcohol, and every batch is third-party lab tested." } },
-    { "@type": "Question", "name": "Will Happie Fungi Fusion make me feel high or psychedelic?", "acceptedAnswer": { "@type": "Answer", "text": "No. Lion's Mane, Cordyceps, and Reishi are functional mushrooms, completely different from psilocybin (psychedelic mushrooms). Zero psychoactive compounds. Legal in all 50 states. It's a sparkling drink, not a trip." } },
+    { "@type": "Question", "name": "Is {{ product.title | escape }} safe to drink every day?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, formulated for daily use. Lion's Mane, Cordyceps, and Reishi have been used in traditional practices for centuries. Every can carries all three as fruiting body extracts, with no caffeine and no alcohol, and every batch is third-party lab tested." } },
+    { "@type": "Question", "name": "Will Happie Fungi Fusion make me feel high?", "acceptedAnswer": { "@type": "Answer", "text": "No. Fungi Fusion is made with Lion's Mane, Cordyceps and Reishi, which are non-intoxicating functional mushrooms. Zero alcohol, zero caffeine." } },
     { "@type": "Question", "name": "When's a good time to drink Happie Fungi Fusion?", "acceptedAnswer": { "@type": "Answer", "text": "Whenever you want a cold can. It's caffeine-free and alcohol-free, so it works as the 2pm can at your desk, a swap for your third coffee, or something to sip at the party that isn't a cocktail." } },
     { "@type": "Question", "name": "Does Happie Fungi Fusion have caffeine or sugar?", "acceptedAnswer": { "@type": "Answer", "text": "Zero caffeine. Zero alcohol. Just 40 calories per can, lightly sweetened with organic agave. That's 9g of sugar per can, all from the agave. With no caffeine, it fits any hour of the day, afternoons and evenings included." } },
     { "@type": "Question", "name": "Is Happie Fungi Fusion third-party lab tested?", "acceptedAnswer": { "@type": "Answer", "text": "Every batch is tested at KCA Laboratories in Nicholasville, KY, an ISO/IEC 17025:2017 accredited lab. We test for heavy metals, 66 pesticides, microbials, mycotoxins, and residual solvents. Certificate of Analysis is downloadable for each batch." } },

@@ -1,15 +1,14 @@
 {%- comment -%}
-  The Mushroom Stack, the three functional mushrooms and why they work
-  together. Reusable across homepage, collection, and product pages so the
-  "stack + synergy" story is consistent everywhere. Doses are factual
-  (900/700/400 = 2,000mg); copy stays lifestyle/traditional-use only.
+  The Mushroom Stack, the three functional mushrooms in every can.
+  Reusable across homepage, collection, and product pages so the story is
+  consistent everywhere. No dose numbers; copy stays lifestyle/traditional-use only.
 {%- endcomment -%}
 <section class="mstack">
   <div class="mstack-inner">
     <div class="mstack-head">
       <span class="mstack-eyebrow">The Blend</span>
       <h2 class="mstack-title">Three mushrooms. One can.</h2>
-      <p class="mstack-sub">Every can carries 2,000mg of fruiting body extracts: 900mg Lion&rsquo;s Mane, 700mg Cordyceps and 400mg Reishi. Sparkling, caffeine-free, and it tastes like a fruit soda, not a mushroom.</p>
+      <p class="mstack-sub">Every can carries fruiting body extracts of Lion&rsquo;s Mane, Cordyceps and Reishi. Sparkling, caffeine-free, and it tastes like a fruit soda, not a mushroom.</p>
     </div>
 
     <div class="mstack-grid">
@@ -17,32 +16,32 @@
       <div class="mstack-chart">
         <div class="mstack-row">
           <div class="mstack-label"><span class="mstack-name">Red Reishi</span><span class="mstack-role">Fruiting body</span></div>
-          <div class="mstack-track"><span class="mstack-bar mstack-bar-rei" style="width:44%"><em>400mg</em></span></div>
+          <div class="mstack-track"><span class="mstack-bar mstack-bar-rei" style="width:100%"><em>In every can</em></span></div>
         </div>
         <div class="mstack-row">
           <div class="mstack-label"><span class="mstack-name">Lion&rsquo;s Mane</span><span class="mstack-role">Fruiting body</span></div>
-          <div class="mstack-track"><span class="mstack-bar mstack-bar-lion" style="width:100%"><em>900mg</em></span></div>
+          <div class="mstack-track"><span class="mstack-bar mstack-bar-lion" style="width:100%"><em>In every can</em></span></div>
         </div>
         <div class="mstack-row">
           <div class="mstack-label"><span class="mstack-name">Cordyceps</span><span class="mstack-role">Fruiting body</span></div>
-          <div class="mstack-track"><span class="mstack-bar mstack-bar-cord" style="width:78%"><em>700mg</em></span></div>
+          <div class="mstack-track"><span class="mstack-bar mstack-bar-cord" style="width:100%"><em>In every can</em></span></div>
         </div>
-        <div class="mstack-total"><span>Full blend</span><strong>2,000mg per can</strong></div>
+        <div class="mstack-total"><span>Full blend</span><strong>3 mushrooms per can</strong></div>
       </div>
 
       <!-- The three layers, in order -->
       <ul class="mstack-why">
         <li>
           <span class="mstack-dot mstack-dot-rei" aria-hidden="true"></span>
-          <p><strong>Reishi, 400mg.</strong> The deep-red one, used in traditional practices for centuries. Here as a fruiting body extract.</p>
+          <p><strong>Reishi.</strong> The deep-red one, used in traditional practices for centuries. Here as a fruiting body extract.</p>
         </li>
         <li>
           <span class="mstack-dot mstack-dot-lion" aria-hidden="true"></span>
-          <p><strong>Lion&rsquo;s Mane, 900mg.</strong> The shaggy white one, and the biggest dose in the can, extracted from 100% fruiting bodies.</p>
+          <p><strong>Lion&rsquo;s Mane.</strong> The shaggy white one, extracted from 100% fruiting bodies.</p>
         </li>
         <li>
           <span class="mstack-dot mstack-dot-cord" aria-hidden="true"></span>
-          <p><strong>Cordyceps, 700mg.</strong> The bright-orange one, Cordyceps militaris, also as a fruiting body extract. Caffeine-free, like everything else in the can.</p>
+          <p><strong>Cordyceps.</strong> The bright-orange one, Cordyceps militaris, also as a fruiting body extract. Caffeine-free, like everything else in the can.</p>
         </li>
         <li class="mstack-cta-row">
           <a href="/pages/the-science" class="mstack-cta">See the science
@@ -51,7 +50,6 @@
         </li>
       </ul>
     </div>
-    <p class="mstack-disclaimer">&dagger; These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
   </div>
 </section>
 
@@ -91,7 +89,7 @@
 
   .mstack-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
 
-  /* Dose stack card, translucent white (no backdrop blur, for scroll perf) */
+  /* Blend card, translucent white (no backdrop blur, for scroll perf) */
   .mstack-chart {
     position: relative;
     background: rgba(255,255,255,0.82);
@@ -142,8 +140,6 @@
     transition: gap 0.2s ease;
   }
   .mstack-cta:hover { gap: 11px; }
-
-  .mstack-disclaimer { text-align: center; font-size: 11.5px; color: var(--gray, #98A19B); margin: 34px auto 0; max-width: 640px; line-height: 1.5; }
 
   @media (max-width: 820px) {
     .mstack { padding: 48px 18px; }

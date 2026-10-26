@@ -129,9 +129,9 @@
     }
     .hero-dose + .hero-dose { border-left: 1px solid rgba(42,31,13,0.1); }
     .hero-dose-num {
-      font-size: 22px; font-weight: 900;
+      font-size: clamp(15px, 4vw, 20px); font-weight: 900;
       color: var(--ink); display: block;
-      line-height: 1;
+      line-height: 1.1;
     }
     .hero-dose-name {
       font-size: 10px; letter-spacing: 0.12em;
@@ -524,16 +524,16 @@
         <p class="hero-sub">Keep the 2pm can. <strong>Change what's in it.</strong> Mango Mimosa brings three real mushrooms, <strong>zero caffeine</strong>, <strong>zero alcohol</strong> and a flavor that tastes like a tropical brunch drink.</p>
         <div class="hero-doses">
           <div class="hero-dose">
-            <span class="hero-dose-num">900mg</span>
-            <div class="hero-dose-name">Lion's Mane</div>
+            <span class="hero-dose-num">Lion's Mane</span>
+            <div class="hero-dose-name">Fruiting body</div>
           </div>
           <div class="hero-dose">
-            <span class="hero-dose-num">700mg</span>
-            <div class="hero-dose-name">Cordyceps</div>
+            <span class="hero-dose-num">Cordyceps</span>
+            <div class="hero-dose-name">Fruiting body</div>
           </div>
           <div class="hero-dose">
-            <span class="hero-dose-num">400mg</span>
-            <div class="hero-dose-name">Reishi</div>
+            <span class="hero-dose-num">Reishi</span>
+            <div class="hero-dose-name">Fruiting body</div>
           </div>
         </div>
         <div class="hero-cta-stack">
@@ -613,7 +613,7 @@
             </li>
             <li>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              900mg Lion's Mane, 700mg Cordyceps, 400mg Reishi
+              Lion's Mane, Cordyceps and Reishi fruiting body extracts
             </li>
             <li>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -673,18 +673,18 @@
       </div>
       <div class="reviews-grid">
         <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <div class="review-title">Happie Fungi!</div>
-          <p class="review-body">"Refreshing mango flavor with light fizz. Not overly sweet, and I felt a smooth boost in focus without caffeine jitters. Great afternoon alternative to soda."</p>
+          <div class="review-stars">★★★★☆</div>
+          <div class="review-title">Happie refresher, great for mocktails</div>
+          <p class="review-body">"Tastes like a carbonated mango drink. Really good!"</p>
           <div class="review-by">
             <svg width="11" height="11" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-            Natalie Cesare · Verified
+            Shanice A. · Verified
           </div>
         </div>
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <div class="review-title">Replaced morning coffee</div>
-          <p class="review-body">"My wife and I have replaced morning coffee with this drink and we are loving it. Big fan of mango."</p>
+          <p class="review-body">"My wife and I have replaced morning coffee with this drink and we are loving it."</p>
           <div class="review-by">
             <svg width="11" height="11" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
             Nicole G · Verified
@@ -738,7 +738,6 @@
         <a href="{{ cta_url }}" class="btn-primary">Try Mango Mimosa, 15% Off →</a>
         <div class="hero-code-row">Code <strong>WELCOME15</strong> auto-applies</div>
       </div>
-      <div class="disclaimer">These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary.</div>
     </div>
   </section>
 
