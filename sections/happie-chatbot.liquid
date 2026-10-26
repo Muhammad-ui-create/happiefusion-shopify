@@ -574,7 +574,7 @@
     var workerUrl = widget.dataset.workerUrl || '';
     var supportEmail = widget.dataset.supportEmail || '';
     var botName = widget.dataset.botName || 'Happie Assistant';
-    var greeting = widget.dataset.greeting || "Hi! I'm the Happie Assistant 👋 Fungi Fusion is three functional mushrooms working as one system, calm first, then focus and fuel. Ask me about flavors, the science, shipping, or your order, or reach our team at orders@livehappie.com.";
+    var greeting = widget.dataset.greeting || "Hi! I'm the Happie Assistant 👋 Fungi Fusion is a caffeine-free, alcohol-free sparkling drink made with Lion's Mane, Cordyceps and Reishi. Ask me about flavors, the mushrooms, shipping, or your order, or reach our team at orders@livehappie.com.";
 
     // ── LOCAL KNOWLEDGE BASE ──────────────────────────────────────────────
     // Answered instantly without backend calls. Pattern-matched by keyword regex.
@@ -583,11 +583,11 @@
       // ── PRODUCT BASICS ──
       {
         match: /what.*(in|inside|is in|contain).*(can|fungi|happie|drink|product)|ingredients|whats? in/i,
-        reply: "**Every can of Happie Fungi Fusion is made with dual-extracted, fruiting-body mushroom extract:**\n\n- **Lion's Mane**\n- **Cordyceps**\n- **Red Reishi**\n\nPlus: Carbonated water, organic light agave nectar, citric acid, natural flavor, ocean-derived magnesium & calcium citrate. **Zero alcohol. Zero caffeine. ~40 calories. Vegan, non-GMO, gluten-free.**\n\nWant the full story? Check out our [Science page](/pages/the-science)."
+        reply: "**Every can of Happie Fungi Fusion is made with fruiting body mushroom extracts:**\n\n- **Lion's Mane**, 900mg\n- **Cordyceps**, 700mg\n- **Red Reishi**, 400mg\n\nPlus: Carbonated water, organic light agave nectar, citric acid, natural flavor, and ocean-sourced trace minerals. **Zero alcohol. Zero caffeine. ~40 calories. Vegan, non-GMO, gluten-free.**\n\nWant the full story? Check out our [Science page](/pages/the-science)."
       },
       {
         match: /three mushrooms|3 mushrooms|tell me about (the |)(mushrooms|adaptogens|science)|how (does|do) (it|they|the mushrooms) work|the science/i,
-        reply: "Fungi Fusion works as **one layered system**, calm first, then focus and fuel:\n\n- **Red Reishi** (*Ganoderma lucidum*), the foundation. Cherished for centuries as the mushroom of balance, it helps the body settle first.\n- **Lion's Mane** (*Hericium erinaceus*), the focus. Loved for supporting clear thinking and steady concentration.\n- **Cordyceps** (*Cordyceps militaris*), the fuel. Supports your body's natural energy, no caffeine, no crash.\n\nWe use only **fruiting body extracts** (the real mushroom), never mycelium grown on grain. Each batch is **dual-extracted** (hot water + ethanol) for the full spectrum of beta-glucans and triterpenes, then **third-party lab tested**.\n\nDeep dive: [The Science Behind Happie](/pages/the-science)"
+        reply: "Every can has **three functional mushrooms**, all as **fruiting body extracts**:\n\n- **Lion's Mane** (*Hericium erinaceus*), 900mg. The shaggy white one that looks like a lion's mane (or a pom-pom), and a longtime culinary mushroom.\n- **Cordyceps** (*Cordyceps militaris*), 700mg. Bright orange and finger-shaped, with a long history in traditional Chinese and Tibetan practices.\n- **Red Reishi** (*Ganoderma lucidum*), 400mg. Glossy, red-brown and woody, used in traditional practices across East Asia for centuries.\n\nWe use only **fruiting body extracts** (the real mushroom), never mycelium grown on grain, and every batch is **third-party lab tested**.\n\nDeep dive: [The Science Behind Happie](/pages/the-science)"
       },
       {
         match: /flavors?|how many flavors|what flavors|which flavors|taste like/i,
@@ -595,11 +595,11 @@
       },
       {
         match: /caffeine|alcohol|alcoholic|caffeinated|stimulant/i,
-        reply: "**Zero caffeine. Zero alcohol.** Always.\n\nThere are no stimulants of any kind in the can, which is why there's no crash and no jitters.\n\nDrink it any time of day: at work, before the gym, or in the evening as an **alcohol alternative** instead of a beer."
+        reply: "**Zero caffeine. Zero alcohol.** Always.\n\nThere are no stimulants of any kind in the can, just sparkling water, fruit flavor, a touch of organic agave, and 2,000mg of fruiting body mushroom extracts.\n\nDrink it any time of day: at work, before the gym, or in the evening as an **alcohol alternative** instead of a beer."
       },
       {
         match: /calories?|sugar|sweetener|nutrition/i,
-        reply: "**~40 calories per can.**\n\nSweetened with a small amount of **organic light agave nectar**. No refined sugar, no artificial sweeteners, no sugar alcohols (which cause digestive issues for many people)."
+        reply: "**~40 calories per can.**\n\n**9g of sugar**, all from a small amount of **organic light agave nectar**, so it's lightly sweetened, not sugar-free. No artificial sweeteners and no sugar alcohols."
       },
       {
         match: /vegan|gluten|gluten[- ]?free|non[- ]?gmo|allergen|dairy/i,
@@ -607,13 +607,13 @@
       },
       {
         match: /psychedelic|psilocybin|magic mushroom|trippy|hallucina/i,
-        reply: "**No, absolutely not.** Happie Fungi Fusion contains only **culinary and functional mushrooms** (Lion's Mane, Cordyceps, Red Reishi). These are completely different from psilocybin mushrooms.\n\n- Legal in all 50 US states ✓\n- Non-psychoactive ✓\n- Among the most-studied mushrooms in the category ✓\n\nYou can drink it any time and stay completely clear-headed."
+        reply: "**No, absolutely not.** Happie Fungi Fusion contains only **culinary and functional mushrooms** (Lion's Mane, Cordyceps, Red Reishi). These are completely different from psilocybin mushrooms.\n\n- Legal in all 50 US states ✓\n- Non-psychoactive ✓\n- Used in traditional practices for centuries ✓\n\nNothing psychoactive, ever. It's a sparkling drink you can have any time."
       },
 
       // ── SAFETY / HEALTH ──
       {
         match: /safe.*daily|drink (every|each) day|can i (drink|have) (this|happie) (every|each) day/i,
-        reply: "**Yes, Happie is made for daily use.**\n\nIt's caffeine-free and alcohol-free, so there's no wrong time for one. Most people build it into a routine: the 2pm reset, the gym bag, or the evening can instead of a beer.\n\nOne can per day is the sweet spot."
+        reply: "**Yes, Happie is made for daily use.**\n\nIt's caffeine-free and alcohol-free, so there's no wrong time for one. Most people build it into a routine: the 2pm can, the gym bag, or the evening can instead of a beer.\n\nOne can per day is the sweet spot."
       },
       {
         match: /pregnan|nurs|breastfeed|kids?|child(ren)?|teen/i,
@@ -699,7 +699,7 @@
       },
       {
         match: /about|who (are|is) (you|happie)|company|founders?|story/i,
-        reply: "**Happie Fusion** is a small team based in **Northern California**. We started Happie because we wanted a functional drink that actually worked, fruiting body extracts, dual extraction, full transparency.\n\n- ★ 4.9 average across Amazon-verified reviews\n- Every batch lab tested\n- All ingredients sourced & made in the USA\n\nMore: [About Us](/pages/about)"
+        reply: "**Happie Fusion** is a small team based in **Northern California**. We started Happie because we wanted a mushroom drink that actually tasted great: fruiting body extracts, real fruit flavor, full transparency.\n\n- ★ 4.9 average across Amazon-verified reviews\n- Every batch lab tested\n- All ingredients sourced & made in the USA\n\nMore: [About Us](/pages/about)"
       },
       {
         match: /contact|email|phone|reach you|customer service/i,
@@ -717,15 +717,15 @@
       // ── BENEFITS / USE CASES ──
       {
         match: /focus|concentrat|study|brain|mental clarity|productivity/i,
-        reply: "The mushroom you're thinking of is **Lion's Mane** (*Hericium erinaceus*), and it's in every can, dual-extracted from 100% fruiting bodies, never mycelium grown on grain.\n\nPeople reach for Happie at work, on a deadline, or for that 2pm stretch where a fourth coffee is a bad idea. Try **Mango Mimosa** or **Blue Razzberry**.\n\n[Shop all flavors →](/collections/all)"
+        reply: "**Lion's Mane** (*Hericium erinaceus*) is in every can, 900mg of fruiting body extract. Happie is a caffeine-free sparkling drink, not a focus supplement, so we don't make promises about concentration.\n\nWhat people do love: a cold can at their desk for that 2pm stretch, as a caffeine-free swap for another coffee. Try **Mango Mimosa** or **Blue Razzberry**.\n\n[Shop all flavors →](/collections/all)"
       },
       {
         match: /energy|tired|fatigue|coffee.*alternative|replace.*coffee|morning/i,
-        reply: "The mushroom associated with athletes is **Cordyceps**, and it's in every can. No caffeine and no stimulants, so there's nothing to spike, and nothing to crash from.\n\nIt's the one people drink before the gym, or instead of the third coffee.\n\nTry [Mango Mimosa](/products/mango-mimosa-fungi-powered-seltzer), light, bright, perfect for mornings."
+        reply: "**Cordyceps** (*Cordyceps militaris*) is in every can, 700mg of fruiting body extract. To be upfront: there's no caffeine and no stimulants in Happie, so it isn't an energy drink.\n\nIt's the can people grab on the way to the gym, or instead of a third coffee.\n\nTry [Mango Mimosa](/products/mango-mimosa-fungi-powered-seltzer), light, bright, perfect for mornings."
       },
       {
         match: /stress|anxi|calm|relax|wind ?down|sleep|insomnia/i,
-        reply: "**Red Reishi** is in every can, the richest of the three mushrooms in triterpenes, which only come out under an alcohol extraction (the step most brands skip).\n\nIt's the can people reach for in the evening instead of a beer, the ritual, without the next morning.\n\nTry [Watermelon](/products/watermelon-fungi-powered-seltzer) for an evening ritual."
+        reply: "**Red Reishi** (*Ganoderma lucidum*) is in every can, 400mg of fruiting body extract, and it's been part of traditional practices in East Asia for centuries. Happie isn't a sleep aid or a stress supplement, it's a caffeine-free, alcohol-free sparkling drink.\n\nThat's why it's the can people reach for in the evening instead of a beer, the ritual, without the next morning.\n\nTry [Watermelon](/products/watermelon-fungi-powered-seltzer) for an evening ritual."
       },
       {
         match: /alcohol.*alternative|sober.*curious|replace.*wine|non[- ]?alcoholic/i,
@@ -974,7 +974,7 @@
       "type": "textarea",
       "id": "greeting",
       "label": "Greeting message",
-      "default": "Hi! I'm the Happie Assistant 👋 Fungi Fusion is three functional mushrooms working as one system, calm first, then focus and fuel. Ask me about flavors, the science, shipping, or your order, or reach our team at orders@livehappie.com. What can I help with?"
+      "default": "Hi! I'm the Happie Assistant 👋 Fungi Fusion is a caffeine-free, alcohol-free sparkling drink made with Lion's Mane, Cordyceps and Reishi. Ask me about flavors, the mushrooms, shipping, or your order, or reach our team at orders@livehappie.com. What can I help with?"
     },
     {
       "type": "image_picker",
