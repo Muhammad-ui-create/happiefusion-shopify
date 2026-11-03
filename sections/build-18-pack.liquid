@@ -95,20 +95,20 @@
     <!-- Flavor cards -->
     <div class="byo-grid">
 
-      <div class="byo-card byo-card-blue" data-flavor="Blue Razzberry">
+      <div class="byo-card byo-card-blue" data-flavor="Blue Raspberry">
         <div class="byo-card-accent" aria-hidden="true"></div>
         <div class="byo-card-img">
           {%- if p_blue.featured_image -%}
-            <img src="{{ p_blue.featured_image | image_url: width: 700 }}" alt="Blue Razzberry 6-pack" width="400" height="400" loading="lazy" />
+            <img src="{{ p_blue.featured_image | image_url: width: 700 }}" alt="Blue Raspberry 6-pack" width="400" height="400" loading="lazy" />
           {%- endif -%}
         </div>
-        <div class="byo-card-name">Blue Razzberry</div>
+        <div class="byo-card-name">Blue Raspberry</div>
         <div class="byo-card-note">Tart &amp; candy-bright</div>
         <div class="byo-card-unit" data-unit-label>6-pack · 6 cans</div>
         <div class="byo-stepper">
-          <button type="button" class="byo-btn byo-minus" aria-label="Remove one Blue Razzberry 6-pack">−</button>
+          <button type="button" class="byo-btn byo-minus" aria-label="Remove one Blue Raspberry 6-pack">−</button>
           <span class="byo-qty" data-count>0</span>
-          <button type="button" class="byo-btn byo-plus" aria-label="Add one Blue Razzberry 6-pack">+</button>
+          <button type="button" class="byo-btn byo-plus" aria-label="Add one Blue Raspberry 6-pack">+</button>
         </div>
       </div>
 
@@ -674,14 +674,14 @@
     "12": { target: 3, unit: 4, unitLabel: "4-pack", variantId: "{{ v12.id }}", cents: {{ v12.price }}, price: "{{ v12.price | money }}", compare: "{{ v12.compare_at_price | money }}", save: "SAVE {{ v12.compare_at_price | minus: v12.price | money }}", percan: "$3.50 per can", pct: "",
       presets: [
         { mix: [1,1,1], label: "Even Mix · 1 of each", dots: ["#3B6FF0","#F5A623","#E84C6B"] },
-        { mix: [3,0,0], label: "All Blue Razz", dots: ["#3B6FF0"] },
+        { mix: [3,0,0], label: "All Blue Raspberry", dots: ["#3B6FF0"] },
         { mix: [0,3,0], label: "All Mango", dots: ["#F5A623"] },
         { mix: [0,0,3], label: "All Watermelon", dots: ["#E84C6B"] }
       ] },
     "18": { target: 3, unit: 6, unitLabel: "6-pack", variantId: "{{ v18.id }}", cents: {{ v18.price }}, price: "{{ v18.price | money }}", compare: "{{ v18.compare_at_price | money }}", save: "SAVE {{ v18.compare_at_price | minus: v18.price | money }}", percan: "$4.00 per can", pct: "",
       presets: [
         { mix: [1,1,1], label: "Even Mix · 1 of each", dots: ["#3B6FF0","#F5A623","#E84C6B"] },
-        { mix: [3,0,0], label: "All Blue Razz", dots: ["#3B6FF0"] },
+        { mix: [3,0,0], label: "All Blue Raspberry", dots: ["#3B6FF0"] },
         { mix: [0,3,0], label: "All Mango", dots: ["#F5A623"] },
         { mix: [0,0,3], label: "All Watermelon", dots: ["#E84C6B"] }
       ] },
@@ -689,7 +689,7 @@
       presets: [
         { mix: [2,1,1], label: "Blue-Heavy Mix", dots: ["#3B6FF0","#3B6FF0","#F5A623","#E84C6B"] },
         { mix: [1,1,2], label: "Melon-Heavy Mix", dots: ["#E84C6B","#E84C6B","#3B6FF0","#F5A623"] },
-        { mix: [4,0,0], label: "All Blue Razz", dots: ["#3B6FF0"] },
+        { mix: [4,0,0], label: "All Blue Raspberry", dots: ["#3B6FF0"] },
         { mix: [0,4,0], label: "All Mango", dots: ["#F5A623"] },
         { mix: [0,0,4], label: "All Watermelon", dots: ["#E84C6B"] }
       ] }
