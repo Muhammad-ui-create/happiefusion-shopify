@@ -400,33 +400,13 @@
         <div class="accordion">
           <button class="accordion-trigger" type="button">
             <span class="acc-label">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 6 6c3 0 6 2 6 6z"/><path d="M12 12c0 0 5-2 6-6-3 0-6 2-6 6z"/></svg>
-              What's Inside?
-            </span>
-            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-          </button>
-          <div class="accordion-body">
-            {%- comment -%} Canonical ingredient statement (Pete, 2026-10-27). Flavor swaps per product; variety/other packs use plain "Natural Flavor". {%- endcomment -%}
-            {%- assign ing_flavor = 'Natural Flavor' -%}
-            {%- if product.handle contains 'blue-razz' -%}{%- assign ing_flavor = 'Natural Blue Raspberry Flavor' -%}
-            {%- elsif product.handle contains 'mango' -%}{%- assign ing_flavor = 'Natural Mango Flavor' -%}
-            {%- elsif product.handle contains 'watermelon' -%}{%- assign ing_flavor = 'Natural Watermelon Flavor' -%}{%- endif -%}
-            <p><strong>Ingredients:</strong> Carbonated Water, Organic Light Blue Agave Nectar, Citric Acid, {{ ing_flavor }}, Lion's Mane Extract, Cordyceps Extract, Red Reishi Extract, Ocean Derived Magnesium, Ocean Derived Calcium Citrate, Potassium Sorbate, Mushroom Fiber Extract (to preserve freshness)</p>
-            <p><strong>Mushrooms per can:</strong> 900 mg Lion's Mane, 700 mg Cordyceps, 400 mg Reishi (fruiting body extracts)</p>
-            <p>Vegan · Gluten-Free · Non-GMO · No Artificial Flavors</p>
-          </div>
-        </div>
-
-        <div class="accordion">
-          <button class="accordion-trigger" type="button">
-            <span class="acc-label">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11L10 22l9.5-11.5H13L13 2z"/></svg>
               How It's Made
             </span>
             <svg class="acc-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="accordion-body">
-            <p>Every can carries 900 mg Lion's Mane, 700 mg Cordyceps, and 400 mg Reishi, all <strong>fruiting body extracts</strong>.</p>
+            <p>Every can carries Lion's Mane, Cordyceps, and Reishi, all <strong>fruiting body extracts</strong>.</p>
             <p>Most products use mycelium on grain (mostly starch). Happie uses <strong>fruiting body extracts</strong>, the real mushroom.</p>
             <p>Then it all goes into a cold, sparkling can, lightly sweetened with organic agave. Caffeine-free and alcohol-free, so you can crack one whenever you like.</p>
           </div>
@@ -661,7 +641,7 @@
             </span>
           </summary>
           <div class="pdp-faq-a">
-            <p><strong>Yes, formulated for daily use.</strong> Lion's Mane, Cordyceps, and Reishi have been used in traditional practices for centuries. Every can carries 900 mg Lion's Mane, 700 mg Cordyceps, and 400 mg Reishi, all fruiting body extracts, with no caffeine and no alcohol, and every batch is third-party lab tested.</p>
+            <p><strong>Yes, formulated for daily use.</strong> Lion's Mane, Cordyceps, and Reishi have been used in traditional practices for centuries. Every can carries Lion's Mane, Cordyceps, and Reishi, all fruiting body extracts, with no caffeine and no alcohol, and every batch is third-party lab tested.</p>
           </div>
         </details>
 
@@ -791,7 +771,7 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Is {{ product.title | escape }} safe to drink every day?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, formulated for daily use. Lion's Mane, Cordyceps, and Reishi have been used in traditional practices for centuries. Every can carries 900 mg Lion's Mane, 700 mg Cordyceps, and 400 mg Reishi, all fruiting body extracts, with no caffeine and no alcohol, and every batch is third-party lab tested." } },
+    { "@type": "Question", "name": "Is {{ product.title | escape }} safe to drink every day?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, formulated for daily use. Lion's Mane, Cordyceps, and Reishi have been used in traditional practices for centuries. Every can carries Lion's Mane, Cordyceps, and Reishi, all fruiting body extracts, with no caffeine and no alcohol, and every batch is third-party lab tested." } },
     { "@type": "Question", "name": "Will Happie Fungi Fusion make me feel high?", "acceptedAnswer": { "@type": "Answer", "text": "No. Fungi Fusion is made with Lion's Mane, Cordyceps and Reishi, which are non-intoxicating functional mushrooms. Zero alcohol, zero caffeine." } },
     { "@type": "Question", "name": "When's a good time to drink Happie Fungi Fusion?", "acceptedAnswer": { "@type": "Answer", "text": "Whenever you want a cold can. It's caffeine-free and alcohol-free, so it works as the 2pm can at your desk, a swap for your third coffee, or something to sip at the party that isn't a cocktail." } },
     { "@type": "Question", "name": "Does Happie Fungi Fusion have caffeine or sugar?", "acceptedAnswer": { "@type": "Answer", "text": "Zero caffeine. Zero alcohol. Just 40 calories per can, lightly sweetened with organic agave. That's 9g of sugar per can, all from the agave. With no caffeine, it fits any hour of the day, afternoons and evenings included." } },
