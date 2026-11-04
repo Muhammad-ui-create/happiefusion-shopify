@@ -186,22 +186,6 @@
               <span class="lp-rev-stars">★★★★★</span>
               <span class="lp-rev-flavor lp-rev-flavor-mango">Mango Mimosa</span>
             </div>
-            <div class="lp-rev-title">Bright, juicy, and clean</div>
-            <blockquote class="lp-rev-body">"Refreshing mango flavor with light fizz. Not overly sweet, and I felt a smooth boost in focus without caffeine jitters. Great afternoon alternative to soda."</blockquote>
-            <div class="lp-rev-foot">
-              <div class="lp-rev-avatar" style="background:#F5A623;color:#1A1A1A;">NC</div>
-              <div class="lp-rev-author">
-                <strong>Natalie Cesare</strong>
-                <span class="lp-rev-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>Verified Amazon Purchase</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="lp-rev">
-            <div class="lp-rev-top">
-              <span class="lp-rev-stars">★★★★★</span>
-              <span class="lp-rev-flavor lp-rev-flavor-mango">Mango Mimosa</span>
-            </div>
             <div class="lp-rev-title">Love it, replaced morning coffee</div>
             <blockquote class="lp-rev-body">"My wife and I have replaced morning coffee with this drink and we are loving it. Big fan of mango and blueberry flavors."</blockquote>
             <div class="lp-rev-foot">
@@ -488,6 +472,7 @@
     display: grid; grid-template-columns: repeat(2, 1fr);
     gap: 22px; margin-bottom: 40px;
   }
+  .lp-reviews-grid > .lp-rev:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 11px); }
   .lp-rev {
     background: #fff;
     border: 0;
@@ -576,6 +561,7 @@
   @media (max-width: 768px) {
     .lp-reviews { padding: 56px 16px; }
     .lp-reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+    .lp-reviews-grid > .lp-rev:last-child:nth-child(odd) { width: auto; justify-self: stretch; }
     .lp-video-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .lp-video { border-radius: 12px; }
     .lp-rev { padding: 24px 22px 20px; }

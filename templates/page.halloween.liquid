@@ -77,7 +77,7 @@
         alt: 'A hand holding a can of Happie Fungi Fusion Blue Raspberry at a Halloween party',
         w: ['{{ 'halloween-boo-16x9.jpg' | asset_img_url: '1280x' }}', '{{ 'halloween-boo-16x9.jpg' | asset_img_url: '1920x' }}'],
         m: ['{{ 'halloween-boo-4x5.jpg' | asset_img_url: '720x' }}', '{{ 'halloween-boo-4x5.jpg' | asset_img_url: '1080x' }}'] },
-      treat: { h: 'All treat. <em>No trick.</em>', s: 'Alcohol-free. Caffeine-free. 35 calories.', pack: '18', pos: 'bc',
+      treat: { h: 'All treat. <em>No trick.</em>', s: 'Alcohol-free. Caffeine-free. 40 calories.', pack: '18', pos: 'bc',
         alt: 'A can of Happie Fungi Fusion Mango Mimosa surrounded by Halloween candy',
         w: ['{{ 'halloween-treat-16x9.jpg' | asset_img_url: '1280x' }}', '{{ 'halloween-treat-16x9.jpg' | asset_img_url: '1920x' }}'],
         m: ['{{ 'halloween-treat-4x5.jpg' | asset_img_url: '720x' }}', '{{ 'halloween-treat-4x5.jpg' | asset_img_url: '1080x' }}'] },
@@ -206,7 +206,7 @@
     <ul>
       <li>Alcohol-free</li>
       <li>Caffeine-free</li>
-      <li>35 calories</li>
+      <li>40 calories</li>
       <li>Lion's Mane, Cordyceps, Reishi</li>
     </ul>
   </section>
@@ -253,11 +253,6 @@
           <blockquote>"Taste amazing!!"</blockquote>
           <figcaption><strong>Gracie Matley</strong><span>Verified Buyer &middot; Los Angeles, CA</span></figcaption>
         </figure>
-        <figure class="hw-review">
-          <div class="hw-stars" aria-label="5 out of 5 stars">★★★★★</div>
-          <blockquote>"So relaxing!"</blockquote>
-          <figcaption><strong>Kirstin Holland</strong><span>Verified Buyer &middot; Minneapolis, MN</span></figcaption>
-        </figure>
       </div>
     </div>
   </section>
@@ -282,7 +277,7 @@
       <h2 class="hw-h2">Quick answers</h2>
       <details class="hw-faq"><summary>Does it contain alcohol?</summary><p>No. Happie Fungi Fusion is alcohol-free.</p></details>
       <details class="hw-faq"><summary>Does it have caffeine?</summary><p>No. It is caffeine-free.</p></details>
-      <details class="hw-faq"><summary>What does it taste like?</summary><p>Like a lightly sparkling fruit drink, not a supplement. Watermelon is clean and juicy, Mango Mimosa is tropical and lightly sweet, and Blue Raspberry is tart and bright. Each can has 9g of sugar and 35 calories.</p></details>
+      <details class="hw-faq"><summary>What does it taste like?</summary><p>Like a lightly sparkling fruit drink, not a supplement. Watermelon is clean and juicy, Mango Mimosa is tropical and lightly sweet, and Blue Raspberry is tart and bright. Each can has 9g of sugar and 40 calories.</p></details>
       <details class="hw-faq"><summary>When will it arrive?</summary><p>{% if hw_order_by != blank %}Order by {{ hw_order_by }} for delivery before Halloween. {% endif %}Delivery options are shown at checkout.</p></details>
     </div>
   </section>
@@ -499,7 +494,8 @@
     .hw-hero.hw-dpos-tr .hw-rule { margin-left: 0; margin-right: 0; }
     .hw-sub { font-size: 13px; }
     .hw-picker-wrap { padding-top: 64px; }
-    .hw-cards, .hw-reviews { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .hw-cards { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .hw-reviews { grid-template-columns: repeat(2, 1fr); gap: 18px; }
     .hw-sticky { display: none !important; }
     .hw-smallprint { padding-bottom: 32px; }
   }

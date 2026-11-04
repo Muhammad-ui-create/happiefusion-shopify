@@ -424,7 +424,7 @@
     }
     .reviews-rating .stars { color: var(--gold); font-size: 16px; }
     .reviews-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+      display: grid; grid-template-columns: minmax(0, 460px); justify-content: center; gap: 20px;
       margin-top: 24px;
     }
     .review-card {
@@ -731,29 +731,11 @@
       <div class="reviews-grid">
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
-          <div class="review-title">Tastes great</div>
-          <p class="review-body">"Best adaptogen drink I've tried! Love the mild relaxed feeling. Tastes great without being too sweet or having a fake sugar/stevia taste."</p>
-          <div class="review-by">
-            <svg width="11" height="11" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-            Shannon B. · Verified
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
           <div class="review-title">Better than Brez!</div>
           <p class="review-body">"Excellent! Couldn't taste mushrooms and loved the feel of this drink! Perfect. Better than Brez!"</p>
           <div class="review-by">
             <svg width="11" height="11" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
             Anonymous · Verified
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <div class="review-title">Really nice for mood</div>
-          <p class="review-body">"Very refreshing taste. I could tell it improved my mood and energy almost immediately, felt like a cleaner energy drink."</p>
-          <div class="review-by">
-            <svg width="11" height="11" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-            jujuklasek · Verified
           </div>
         </div>
       </div>

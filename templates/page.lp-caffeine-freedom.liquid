@@ -323,117 +323,74 @@
       line-height: 1.7;
     }
 
-    /* ── 3PM CRASH SECTION ── */
-    .crash-section {
+    /* ── 3PM BREAK SECTION ── */
+    .pm3-section {
       padding: 110px 32px;
       background:
         linear-gradient(180deg, var(--cream-lt) 0%, var(--moss-pale) 100%);
     }
-    .crash-inner {
+    .pm3-inner {
       max-width: 1000px; margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 64px; align-items: center;
     }
-    .crash-text h2 {
+    .pm3-text h2 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(34px, 4.5vw, 52px);
       font-style: italic; font-weight: 500;
       color: var(--forest); line-height: 1.1;
       margin-bottom: 24px;
     }
-    .crash-text p {
+    .pm3-text p {
       font-size: 16px; color: var(--brown-md);
       line-height: 1.85; margin-bottom: 14px;
     }
-    .crash-pill-row {
+    .pm3-pill-row {
       display: flex; gap: 8px; flex-wrap: wrap;
       margin-top: 24px;
     }
-    .crash-pill {
+    .pm3-pill {
       font-size: 11px; font-weight: 600;
       letter-spacing: 0.14em; text-transform: uppercase;
       padding: 7px 14px; border-radius: 50px;
       background: var(--cream-lt); border: 1px solid var(--forest);
       color: var(--forest);
     }
-    .crash-pill.cross {
+    .pm3-pill.cross {
       background: transparent; border-style: dashed;
       color: var(--brown-lt); border-color: var(--brown-lt);
       text-decoration: line-through;
     }
 
-    .crash-visual {
+    .pm3-visual {
       background: var(--cream-lt);
       border-radius: 4px;
       padding: 48px 36px;
       border: 1px solid rgba(43,74,52,0.12);
       text-align: center;
     }
-    .crash-clock {
+    .pm3-clock {
       font-family: 'Cormorant Garamond', serif;
       font-size: 110px; font-style: italic; font-weight: 500;
       color: var(--watermelon); line-height: 1;
       margin-bottom: 6px;
     }
-    .crash-clock-label {
+    .pm3-clock-label {
       font-size: 11px; letter-spacing: 0.22em;
       text-transform: uppercase; color: var(--brown-md);
       font-weight: 600; margin-bottom: 32px;
     }
-    .crash-divider {
+    .pm3-divider {
       width: 40px; height: 1px;
       background: var(--brown-md); margin: 0 auto 28px;
     }
-    .crash-quote {
+    .pm3-quote {
       font-family: 'Cormorant Garamond', serif;
       font-size: 18px; font-style: italic;
       color: var(--brown-md); line-height: 1.55;
       max-width: 320px; margin: 0 auto;
     }
-    .crash-quote strong { color: var(--forest); font-style: normal; font-weight: 600; }
-
-    /* ── REVIEWS ── */
-    .reviews-section {
-      padding: 110px 32px;
-      background: var(--cream-paper);
-    }
-    .reviews-inner { max-width: 1100px; margin: 0 auto; }
-    .reviews-header { text-align: center; margin-bottom: 56px; }
-    .reviews-eyebrow {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--moss); margin-bottom: 12px;
-    }
-    .reviews-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(32px, 4.5vw, 46px);
-      font-style: italic; font-weight: 500;
-      color: var(--forest);
-    }
-    .reviews-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;
-    }
-    .review-card {
-      background: var(--cream-lt);
-      border: 1px solid rgba(43,74,52,0.1);
-      border-radius: 4px;
-      padding: 32px 28px;
-    }
-    .review-stars {
-      color: var(--watermelon); font-size: 14px; letter-spacing: 1px;
-      margin-bottom: 14px;
-    }
-    .review-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px; font-style: italic;
-      color: var(--brown-md); line-height: 1.6;
-      margin-bottom: 20px;
-    }
-    .review-by {
-      font-size: 11px; color: var(--moss);
-      font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
+    .pm3-quote strong { color: var(--forest); font-style: normal; font-weight: 600; }
 
     /* ── TRUST BAR ── */
     .trust-section {
@@ -518,8 +475,7 @@
       .hero-mushrooms { display: none; }
       .hero-badges { grid-template-columns: repeat(2,1fr); }
       .stack-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-      .crash-inner { grid-template-columns: 1fr; gap: 48px; }
-      .reviews-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+      .pm3-inner { grid-template-columns: 1fr; gap: 48px; }
       .trust-inner { grid-template-columns: repeat(2,1fr); gap: 32px; }
       .trust-item + .trust-item { border-left: none; }
       .trust-item:nth-child(odd) { border-right: 1px solid rgba(244,236,221,0.15); }
@@ -658,58 +614,31 @@
     </div>
   </section>
 
-  <!-- 3PM CRASH -->
-  <section class="crash-section">
-    <div class="crash-inner">
-      <div class="crash-text">
+  <!-- 3PM BREAK -->
+  <section class="pm3-section">
+    <div class="pm3-inner">
+      <div class="pm3-text">
         <div class="editorial-eyebrow" style="color:var(--moss);">The 3pm Conversation</div>
         <h2 class="editorial">The 3pm break, minus the caffeine.</h2>
         <p>For a lot of us, the 3pm coffee is pure habit: the break, the walk to the kitchen, something to hold. We kept all of that and left the caffeine out.</p>
         <p>Fungi Fusion is 0mg caffeine and 0% alcohol, with Lion's Mane, Cordyceps and Reishi in every can. Lightly sweetened with organic agave, and it tastes like watermelon, not a mushroom.</p>
-        <div class="crash-pill-row">
-          <span class="crash-pill cross">Caffeine</span>
-          <span class="crash-pill cross">Alcohol</span>
-          <span class="crash-pill cross">Earthy aftertaste</span>
-          <span class="crash-pill">Fruiting body</span>
-          <span class="crash-pill">Sparkling</span>
-          <span class="crash-pill">Free shipping</span>
+        <div class="pm3-pill-row">
+          <span class="pm3-pill cross">Caffeine</span>
+          <span class="pm3-pill cross">Alcohol</span>
+          <span class="pm3-pill cross">Earthy aftertaste</span>
+          <span class="pm3-pill">Fruiting body</span>
+          <span class="pm3-pill">Sparkling</span>
+          <span class="pm3-pill">Free shipping</span>
         </div>
       </div>
-      <div class="crash-visual">
-        <div class="crash-clock editorial">3<span style="font-size:60px;">:00</span></div>
-        <div class="crash-clock-label">Your New 3pm</div>
-        <div class="crash-divider"></div>
-        <p class="crash-quote">
+      <div class="pm3-visual">
+        <div class="pm3-clock editorial">3<span style="font-size:60px;">:00</span></div>
+        <div class="pm3-clock-label">Your New 3pm</div>
+        <div class="pm3-divider"></div>
+        <p class="pm3-quote">
           Keep the <strong>3pm break</strong>.<br>
           Lose the <strong>caffeine</strong>.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section class="reviews-section">
-    <div class="reviews-inner">
-      <div class="reviews-header">
-        <div class="reviews-eyebrow">Verified Amazon Reviews</div>
-        <h2 class="reviews-title editorial">Real readers. Real reviews.</h2>
-      </div>
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text editorial">"Refreshing watermelon flavor with light fizz. I feel clear, focused, and with smooth energy throughout the day."</p>
-          <div class="review-by">— wendolin reyes</div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text editorial">"This is my favorite flavor. Immediately after a few sips, you can feel the effects. I believe this is the only drink that does this."</p>
-          <div class="review-by">— Kristine M.</div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text editorial">"Tastes great and gives a clean boost of focus and energy without the crash. Light, refreshing, and easy to drink."</p>
-          <div class="review-by">— Misoi</div>
-        </div>
       </div>
     </div>
   </section>

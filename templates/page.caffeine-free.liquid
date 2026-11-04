@@ -205,7 +205,7 @@
     }
     .hidden-card-foot .green { color: var(--green-dark); }
 
-    /* FOCUS STACK */
+    /* INGREDIENT STACK */
     .stack { padding: 96px 32px; background: var(--cream); }
     .stack-grid {
       max-width: 1100px; margin: 0 auto;
@@ -248,40 +248,6 @@
       padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.06);
     }
 
-    /* CRASH CURVE */
-    .curve { padding: 96px 32px; background: var(--green-darker); color: var(--cream); }
-    .curve-head { text-align: center; max-width: 760px; margin: 0 auto 48px; }
-    .curve-eyebrow {
-      font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--green); margin-bottom: 14px;
-    }
-    .curve-title {
-      font-size: clamp(28px, 3.6vw, 44px); font-weight: 900;
-      letter-spacing: -0.02em; line-height: 1.1; color: var(--cream); font-style: italic;
-    }
-    .curve-sub { font-size: 16px; color: rgba(245,239,224,0.7); margin-top: 14px; line-height: 1.6; }
-    .curve-chart {
-      max-width: 920px; margin: 0 auto;
-      background: rgba(255,255,255,0.02); border-radius: 24px;
-      padding: 36px 32px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .curve-chart svg { width: 100%; height: auto; display: block; }
-    .curve-legend {
-      display: flex; justify-content: center; gap: 36px; margin-top: 24px;
-      flex-wrap: wrap;
-    }
-    .curve-legend-item {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
-      color: rgba(245,239,224,0.92);
-    }
-    .legend-line {
-      width: 32px; height: 3px; border-radius: 2px;
-    }
-    .legend-line.crash { background: var(--amber); }
-    .legend-line.steady { background: var(--cream); }
-
     /* COMPARISON TABLE */
     .compare { padding: 96px 32px; background: var(--white); }
     .compare-inner { max-width: 980px; margin: 0 auto; }
@@ -312,44 +278,6 @@
     }
     .check { color: var(--green); font-weight: 900; margin-right: 8px; }
     .cross { color: var(--red); font-weight: 900; margin-right: 8px; }
-
-    /* REVIEWS */
-    .reviews { padding: 96px 32px; background: var(--cream); }
-    .reviews-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
-    .reviews-stars { font-size: 22px; color: #F5B82E; letter-spacing: 4px; margin-bottom: 14px; }
-    .reviews-title {
-      font-size: clamp(28px, 3.4vw, 42px); font-weight: 900;
-      letter-spacing: -0.02em; line-height: 1.15;
-    }
-    .reviews-sub { font-size: 15px; color: var(--gray); margin-top: 10px; }
-    .reviews-grid {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-    }
-    .review-card {
-      background: var(--white); border-radius: 20px;
-      padding: 28px;
-      border: 1px solid rgba(0,0,0,0.05);
-    }
-    .review-stars { font-size: 14px; color: #F5B82E; letter-spacing: 2px; margin-bottom: 12px; }
-    .review-quote {
-      font-size: 15px; color: var(--ink); line-height: 1.6;
-      margin-bottom: 18px;
-    }
-    .review-quote em { background: var(--tan); padding: 1px 6px; border-radius: 4px; font-style: normal; font-weight: 600; }
-    .review-author {
-      display: flex; align-items: center; gap: 12px;
-      padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.06);
-    }
-    .review-avatar {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: var(--green-soft); color: var(--green-dark);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 13px;
-    }
-    .review-name { font-size: 13px; font-weight: 700; color: var(--ink); }
-    .review-verified { font-size: 11px; color: var(--green); font-weight: 700; }
-    .review-verified::before { content: '✓ '; }
 
     /* SUBSCRIBE & SAVE */
     .ss { padding: 96px 32px; background: linear-gradient(135deg, var(--green-soft), var(--tan-soft)); }
@@ -417,13 +345,12 @@
     }
 
     @media (max-width: 860px) {
-      .hero-inner, .stack-grid, .reviews-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-inner, .stack-grid { grid-template-columns: 1fr; gap: 40px; }
       .hero { padding: 56px 20px 72px; }
-      .hidden, .stack, .curve, .compare, .reviews, .ss { padding: 64px 20px; }
+      .hidden, .stack, .compare, .ss { padding: 64px 20px; }
       .hidden-card { padding: 36px 24px; }
       .compare-cell { padding: 14px 12px; font-size: 13.5px; }
       .compare-row.head .compare-cell { font-size: 11px; padding: 14px 12px; }
-      .curve-chart { padding: 22px 16px; }
       .ss-inner { padding: 44px 24px; }
       .ss-perks { flex-direction: column; gap: 8px; }
       .lp-nav { padding: 12px 18px; }
@@ -503,7 +430,7 @@
     </div>
   </section>
 
-  <!-- FOCUS STACK -->
+  <!-- INGREDIENT STACK -->
   <section class="stack">
     <div class="section-head">
       <div class="section-eyebrow">What's in the can</div>
@@ -529,62 +456,6 @@
         <p class="stack-disclaimer">† These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
       </div>
 
-    </div>
-  </section>
-
-  <!-- CRASH CURVE -->
-  <section class="curve">
-    <div class="curve-head">
-      <div class="curve-eyebrow">The Curve</div>
-      <h2 class="curve-title">Caffeine sticks around.<br>Ours stays at zero.</h2>
-      <p class="curve-sub">Caffeine has a half-life of 5&ndash;6 hours, so a morning coffee is still in your system mid-afternoon. Fungi Fusion starts at 0mg and stays there.</p>
-    </div>
-    <div class="curve-chart">
-      <svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-        <!-- Grid lines -->
-        <g stroke="rgba(245,239,224,0.08)" stroke-width="1">
-          <line x1="60" y1="60"  x2="780" y2="60"/>
-          <line x1="60" y1="130" x2="780" y2="130"/>
-          <line x1="60" y1="200" x2="780" y2="200"/>
-          <line x1="60" y1="270" x2="780" y2="270"/>
-        </g>
-        <!-- Y-axis label -->
-        <text x="20" y="160" fill="rgba(245,239,224,0.5)" font-family="Poppins" font-size="11" font-weight="700" letter-spacing="0.14em" transform="rotate(-90 20 160)">CAFFEINE</text>
-        <!-- X-axis -->
-        <line x1="60" y1="290" x2="780" y2="290" stroke="rgba(245,239,224,0.3)" stroke-width="1.5"/>
-        <!-- X-axis labels -->
-        <g fill="rgba(245,239,224,0.55)" font-family="Poppins" font-size="11" font-weight="600" text-anchor="middle">
-          <text x="120" y="312">9 AM</text>
-          <text x="270" y="312">11 AM</text>
-          <text x="420" y="312">1 PM</text>
-          <text x="570" y="312">3 PM</text>
-          <text x="720" y="312">5 PM</text>
-        </g>
-        <!-- Caffeine curve: peak then slow half-life decay -->
-        <path
-          d="M 100 284 C 130 250, 150 90, 175 70 C 230 75, 300 110, 400 139 C 500 165, 600 183, 760 208"
-          stroke="#E89B3B" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-          stroke-dasharray="6 4"
-        />
-        <!-- Fungi Fusion line: flat at 0mg caffeine -->
-        <path
-          d="M 80 282 L 760 282"
-          stroke="#FAF7F0" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-        />
-        <!-- Spike marker -->
-        <circle cx="175" cy="70" r="5" fill="#E89B3B"/>
-        <text x="185" y="57" fill="#E89B3B" font-family="Poppins" font-size="11" font-weight="700">Caffeine peak</text>
-        <!-- Half-life marker -->
-        <circle cx="570" cy="177" r="5" fill="#E89B3B"/>
-        <text x="580" y="166" fill="#E89B3B" font-family="Poppins" font-size="11" font-weight="700">Still around at 3 PM</text>
-        <!-- Zero marker -->
-        <circle cx="420" cy="282" r="5" fill="#FAF7F0"/>
-        <text x="432" y="272" fill="#FAF7F0" font-family="Poppins" font-size="11" font-weight="700">0 mg, all day</text>
-      </svg>
-      <div class="curve-legend">
-        <span class="curve-legend-item"><span class="legend-line crash"></span>Caffeinated functional mushroom drink</span>
-        <span class="curve-legend-item"><span class="legend-line steady"></span>Fungi Fusion</span>
-      </div>
     </div>
   </section>
 
@@ -617,54 +488,6 @@
           <div class="compare-cell cell-us"><span class="check">✓</span> 0mg caffeine, any time of day</div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section class="reviews">
-    <div class="reviews-head">
-      <div class="reviews-stars">★★★★★</div>
-      <h2 class="reviews-title">4.9 average on Amazon</h2>
-      <p class="reviews-sub">Reviews from people who made the caffeine-free switch.</p>
-    </div>
-    <div class="reviews-grid">
-
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">"I switched from a 'natural energy' drink that was secretly stacked with green tea extract. Happie gives me <em>steady focus</em> and I sleep fine that night. Game changer."</p>
-        <div class="review-author">
-          <div class="review-avatar">AS</div>
-          <div>
-            <div class="review-name">Alex S.</div>
-            <div class="review-verified">Verified buyer</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">"What sold me was the <em>no crash</em>. I'd drink a can at 1pm and I wouldn't hit that 3pm wall. The energy is real, it's just from the mushrooms, not from hidden caffeine."</p>
-        <div class="review-author">
-          <div class="review-avatar">PR</div>
-          <div>
-            <div class="review-name">Priya R.</div>
-            <div class="review-verified">Verified buyer</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">"I'm caffeine-sensitive, even green tea wrecks me. Happie is the first 'energy' drink I can actually have without <em>jitters</em>. The Lion's Mane focus is no joke."</p>
-        <div class="review-author">
-          <div class="review-avatar">MN</div>
-          <div>
-            <div class="review-name">Maya N.</div>
-            <div class="review-verified">Verified buyer</div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 
